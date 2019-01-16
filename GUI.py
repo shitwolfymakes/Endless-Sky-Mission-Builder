@@ -4,7 +4,6 @@ Created by wolfy
 This handles the GUI for ESMB
 
 '''
-
 from tkinter import *
 from tkinter import ttk
 from menuactions import *
@@ -13,13 +12,15 @@ class GUI(object):
 
     def __init__(self):
         print("Building GUI...")
-        self.missionList = [Mission("Default")]       #TODO: Initialize with template mission on launch
+        self.missionList   = [Mission("Default")]       #TODO: Initialize with template mission on launch
+        self.missionNames  = []
+
         # Build the application window
         self.gui = Tk()
 
         # Set the attributes of the main window
-        windowWidth = 140 * 5
-        windowHeight = 80 * 5
+        windowWidth = 140 * 10
+        windowHeight = 80 * 10
 
         sWidth = self.gui.winfo_screenwidth()
         sHeight = self.gui.winfo_screenheight()
@@ -30,6 +31,12 @@ class GUI(object):
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
         self.gui.geometry("%dx%d+%d+%d" % (windowWidth, windowHeight, x, y))
+
+        self.ofWidth = None
+        self.cfWidth = None
+        self.mfWidth = None
+
+        self.missionComboBox = None
 
         # Build the different parts of the main window
         self.buildMenu(self.gui)
@@ -71,16 +78,19 @@ class GUI(object):
     #COMPLETE, WORKING
     def buildMainView(self, window, windowWidth, windowHeight):
         # build the Options bar on the far left
-        ofWidth = str(windowWidth * .2)
-        optionFrame = ttk.Frame(window, width=ofWidth, height=windowHeight, relief="raised")#, background="black")
+        self.ofWidth = str(windowWidth * .2)
+        optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight, relief="raised")#, background="black")
+        optionFrame.grid_propagate(0)
 
         # build used component list
-        cfWidth = str(windowWidth * .4)
-        centerFrame = ttk.Frame(window, width=cfWidth, height=windowHeight, relief="raised")#, background="green")
+        self.cfWidth = str(windowWidth * .4)
+        centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight, relief="raised")#, background="green")
+        centerFrame.grid_propagate(0)
 
         # build the mission text box on the far right
-        mfWidth = str(windowWidth * .4)
-        missionFrame = ttk.Frame(window, width=mfWidth, height=windowHeight, relief="raised")#, background="grey")
+        self.mfWidth = str(windowWidth * .4)
+        missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight, relief="raised")#, background="grey")
+        missionFrame.grid_propagate(0)
 
         # set up each of the frames
         self.buildOptionFrame(optionFrame)
@@ -97,8 +107,18 @@ class GUI(object):
         optionFrame.grid(row=0, column=0)
 
         # build default values here
+        label1 = ttk.Label(optionFrame, text="Mission")
+        label1.grid(row=0, column=0)
 
-        # declare the combobox here
+        # create missionNames list from missionList
+        for m in self.missionList:
+            self.missionNames.append(m.missionName)
+            print(m.missionName)
+
+        # declare the combobox here, fill with missionNames
+        self.missionComboBox = ttk.Combobox(optionFrame, state="readonly", values=self.missionNames)
+        self.missionComboBox.grid(row=1, column=0)
+        self.missionComboBox.current(0)
 
         # set default values here
 
@@ -106,14 +126,22 @@ class GUI(object):
     #end buildOptionFrame
 
 
-    def updateOptionFrame(self, ml):
-        #TODO: Implement this - ~25% Completed
-        #print("\nUpdating optionFrame...")
-        #ml = self.getMissionList()
-        missionNames = []
+    def updateOptionFrame(self):
+        #TODO: Implement this - ~50% Completed
+        print("\nUpdating optionFrame...")
+        ml = self.missionList
+        self.missionNames = []
         for m in ml:
-            missionNames.append(m.missionName)
-        print(missionNames)
+            self.missionNames.append(m.missionName)
+        print(self.missionNames)
+
+        # update options in the combobox
+        self.missionComboBox['values'] = self.missionNames
+        self.missionComboBox.current(0)
+
+        #TODO: Update the other two frames to reflect the current mission
+        #updateCenterFrame()
+        #updateMissionFrame()
     #end updateOptionFrame
 
 

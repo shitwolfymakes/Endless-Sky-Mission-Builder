@@ -63,8 +63,7 @@ def openFile(app):
     #TODO: Store all the little pieces of the Mission in bespoke variables
 
     #TODO: Update the optionFrame in the gui
-    print("Updating optionFrame...")
-    app.updateOptionFrame(app.missionList)
+    app.updateOptionFrame()
 
     # close the file
     missionfile.close()
