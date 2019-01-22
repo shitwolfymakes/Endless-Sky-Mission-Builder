@@ -79,18 +79,18 @@ class GUI(object):
     def buildMainView(self, window, windowWidth, windowHeight):
         # build the Options bar on the far left
         self.ofWidth = str(windowWidth * .2)
-        optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight, relief="raised")#, background="black")
-        optionFrame.grid_propagate(0)
+        optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight)#, relief="raised")#, background="black")
+        #optionFrame.grid_propagate(0)
 
         # build used component list
         self.cfWidth = str(windowWidth * .4)
-        centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight, relief="raised")#, background="green")
-        centerFrame.grid_propagate(0)
+        centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight)#, relief="raised")#, background="green")
+        #centerFrame.grid_propagate(0)
 
         # build the mission text box on the far right
         self.mfWidth = str(windowWidth * .4)
-        missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight, relief="raised")#, background="grey")
-        missionFrame.grid_propagate(0)
+        missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight)#, relief="raised")#, background="grey")
+        #missionFrame.grid_propagate(0)
 
         # set up each of the frames
         self.buildOptionFrame(optionFrame)
@@ -101,6 +101,9 @@ class GUI(object):
     #end buildMainView
 
 
+    ### BUILDING FRAMES ###
+
+
     def buildOptionFrame(self, optionFrame):
         print("Building optionFrame...", end="\t\t")
         #TODO: Add combobox to list missions - DO THIS SECOND
@@ -108,7 +111,8 @@ class GUI(object):
 
         # build default values here
         label1 = ttk.Label(optionFrame, text="Mission")
-        label1.grid(row=0, column=0)
+        #label1.grid(row=0, column=0)
+        label1.pack()
 
         # create missionNames list from missionList
         for m in self.missionList:
@@ -117,32 +121,15 @@ class GUI(object):
 
         # declare the combobox here, fill with missionNames
         self.missionComboBox = ttk.Combobox(optionFrame, state="readonly", values=self.missionNames)
-        self.missionComboBox.grid(row=1, column=0)
+        self.missionComboBox.bind("<<ComboboxSelected>>", self.missionSelected)
+        #self.missionComboBox.grid(row=1, column=0)
+        self.missionComboBox.pack()
         self.missionComboBox.current(0)
 
         # set default values here
 
         print("Done.")
     #end buildOptionFrame
-
-
-    def updateOptionFrame(self):
-        #TODO: Implement this - ~50% Completed
-        print("\nUpdating optionFrame...")
-        ml = self.missionList
-        self.missionNames = []
-        for m in ml:
-            self.missionNames.append(m.missionName)
-        print(self.missionNames)
-
-        # update options in the combobox
-        self.missionComboBox['values'] = self.missionNames
-        self.missionComboBox.current(0)
-
-        #TODO: Update the other two frames to reflect the current mission
-        #updateCenterFrame()
-        #updateMissionFrame()
-    #end updateOptionFrame
 
 
     def buildCenterFrame(self, centerFrame):
@@ -167,5 +154,47 @@ class GUI(object):
 
         print("Done.")
     #end buildMissionFrame
+
+
+    ### UPDATING FRAMES ###
+
+
+    def updateOptionFrame(self):
+        #TODO: Implement this - ~50% Completed
+        print("\nUpdating optionFrame...")
+        ml = self.missionList
+        self.missionNames = []
+        for m in ml:
+            self.missionNames.append(m.missionName)
+        print(self.missionNames)
+
+        # update options in the combobox
+        self.missionComboBox['values'] = self.missionNames
+        self.missionComboBox.current(0)
+
+        #Update the other two frames to reflect the current mission
+        self.updateCenterFrame()
+        self.updateMissionFrame()
+    #end updateOptionFrame
+
+
+    def updateCenterFrame(self):
+        #TODO: Implement this
+        print("Updating centerFrame...")
+    #end updateCenterFrame
+
+
+    def updateMissionFrame(self):
+        #TODO: Implement this
+        print("Updating missionFrame")
+    #end updateMissionFrame
+
+
+    ### MISC METHODS ###
+
+
+    def missionSelected(self, event):
+        print('Opening mission "%s"' % self.missionComboBox.get())
+    #end missionSelected
 
 #end class GUI
