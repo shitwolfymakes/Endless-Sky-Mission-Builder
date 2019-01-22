@@ -19,8 +19,8 @@ class GUI(object):
         self.gui = Tk()
 
         # Set the attributes of the main window
-        windowWidth = 140 * 10
-        windowHeight = 80 * 10
+        windowWidth = 140 * 6
+        windowHeight = 80 * 6
 
         sWidth = self.gui.winfo_screenwidth()
         sHeight = self.gui.winfo_screenheight()
@@ -162,8 +162,11 @@ class GUI(object):
     def updateOptionFrame(self):
         #TODO: Implement this - ~50% Completed
         print("\nUpdating optionFrame...")
+
+        ### Start updating combobox
         ml = self.missionList
         self.missionNames = []
+        print("New mission options:", end=" ")
         for m in ml:
             self.missionNames.append(m.missionName)
         print(self.missionNames)
@@ -171,22 +174,31 @@ class GUI(object):
         # update options in the combobox
         self.missionComboBox['values'] = self.missionNames
         self.missionComboBox.current(0)
+        ### Finish updating combobox
 
-        #Update the other two frames to reflect the current mission
-        self.updateCenterFrame()
-        self.updateMissionFrame()
+        # update the other two frames to reflect the current mission
+        self.updateCenterFrame(self.missionList[0])
+        self.updateMissionFrame(self.missionList[0])
     #end updateOptionFrame
 
 
-    def updateCenterFrame(self):
+    def updateCenterFrame(self, activeM):
         #TODO: Implement this
         print("Updating centerFrame...")
+        labelCF1 = ttk.Label(self.centerFrame, text=activeM.missionName)
+        labelCF1.pack()
+        print("Done.")
     #end updateCenterFrame
 
 
-    def updateMissionFrame(self):
+    def updateMissionFrame(self, activeM):
         #TODO: Implement this
         print("Updating missionFrame")
+        labelMF1 = ttk.Label(self.missionFrame, text=activeM.missionName)
+        labelMF1.pack()
+        labelMF2 = ttk.Label(self.missionFrame, text=activeM.missionLines)
+        labelMF2.pack()
+        print("Done.")
     #end updateMissionFrame
 
 
