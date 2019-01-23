@@ -114,10 +114,7 @@ class GUI(object):
         #label1.grid(row=0, column=0)
         label1.pack()
 
-        # create missionNames list from missionList
-        for m in self.missionList:
-            self.missionNames.append(m.missionName)
-            print(m.missionName)
+        self.missionNames.append("Default")
 
         # declare the combobox here, fill with missionNames
         self.missionComboBox = ttk.Combobox(optionFrame, state="readonly", values=self.missionNames)
