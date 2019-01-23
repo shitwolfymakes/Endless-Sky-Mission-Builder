@@ -13,7 +13,7 @@ class Mission(object):
             # TODO: Build a parse Mission Script
             self.parseMission()
         else:
-            self.setDefaultValues(self, missionName)
+            self.setDefaultValues(missionName)
             self.parseMission()
     #end init
 
