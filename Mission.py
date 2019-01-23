@@ -7,7 +7,7 @@ class Mission(object):
             print("Loading mission:", missionName)
             self.missionLines = []              # List of the mission text
             self.convoList    = []              # List of lists containing one
-                                            # conversation section per element
+                                                # conversation section per element
             self.missionName  = missionName
 
             # TODO: Build a parse Mission Script
