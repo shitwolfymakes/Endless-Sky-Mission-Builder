@@ -203,6 +203,7 @@ class GUI(object):
 
 
     def missionSelected(self, event):
+        #TODO: Implement this
         print('Opening mission "%s"' % self.missionComboBox.get())
     #end missionSelected
 
