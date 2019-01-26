@@ -193,6 +193,7 @@ class GUI(object):
         print("Updating missionFrame")
         labelMF1 = ttk.Label(self.missionFrame, text=activeM.missionName)
         labelMF1.pack()
+        #TODO: convert to Text
         labelMF2 = ttk.Label(self.missionFrame, text=activeM.missionLines)
         labelMF2.pack()
         print("Done.")

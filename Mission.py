@@ -54,6 +54,7 @@ class Mission(object):
     def declareKeywords(self):
         #TODO: Implement this
 
+        #TODO: convert the multipart keywords to bespoke objects
         ### DECLARE MISSION KEYWORDS ###
         missionDisplayName  = None                          # mission <name>
         description         = None                          # description <text>
