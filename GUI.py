@@ -192,10 +192,15 @@ class GUI(object):
         #TODO: Implement this
         print("Updating missionFrame")
         labelMF1 = ttk.Label(self.missionFrame, text=activeM.missionName)
-        labelMF1.pack()
-        #TODO: convert to Text
-        labelMF2 = ttk.Label(self.missionFrame, text=activeM.missionLines)
-        labelMF2.pack()
+        labelMF1.grid(row=0, column=0)
+
+        #TODO: make this pretty
+        missionTextBox = Canvas(self.missionFrame)
+        missionTextBox.create_text(0, 0, anchor='nw', text=activeM.missionLines, width=1500, state=DISABLED)
+        missionTextBoxScroll = ttk.Scrollbar(self.missionFrame, orient='vertical', command=missionTextBox.xview)
+        missionTextBox.config(xscrollcommand=missionTextBoxScroll.set)
+        missionTextBox.grid(row=1, column=0, sticky='ns')
+        missionTextBoxScroll.grid(row=1, column=1, sticky='ns')
         print("Done.")
     #end updateMissionFrame
 
