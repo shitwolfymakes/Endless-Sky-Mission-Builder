@@ -79,18 +79,15 @@ class GUI(object):
     def buildMainView(self, window, windowWidth, windowHeight):
         # build the Options bar on the far left
         self.ofWidth = str(windowWidth * .2)
-        optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight)#, relief="raised")#, background="black")
-        #optionFrame.grid_propagate(0)
+        optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight)
 
         # build used component list
         self.cfWidth = str(windowWidth * .4)
-        centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight)#, relief="raised")#, background="green")
-        #centerFrame.grid_propagate(0)
+        centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight)
 
         # build the mission text box on the far right
         self.mfWidth = str(windowWidth * .4)
-        missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight)#, relief="raised")#, background="grey")
-        #missionFrame.grid_propagate(0)
+        missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight)
 
         # set up each of the frames
         self.buildOptionFrame(optionFrame)
@@ -111,7 +108,6 @@ class GUI(object):
 
         # build default values here
         label1 = ttk.Label(optionFrame, text="Mission")
-        #label1.grid(row=0, column=0)
         label1.pack()
 
         self.missionNames.append("Default")
@@ -119,7 +115,6 @@ class GUI(object):
         # declare the combobox here, fill with missionNames
         self.missionComboBox = ttk.Combobox(optionFrame, state="readonly", values=self.missionNames)
         self.missionComboBox.bind("<<ComboboxSelected>>", self.missionSelected)
-        #self.missionComboBox.grid(row=1, column=0)
         self.missionComboBox.pack()
         self.missionComboBox.current(0)
 
@@ -192,15 +187,26 @@ class GUI(object):
         #TODO: Implement this
         print("Updating missionFrame")
         labelMF1 = ttk.Label(self.missionFrame, text=activeM.missionName)
-        labelMF1.grid(row=0, column=0)
+        labelMF1.pack()
 
+        # print mission text to a Canvas in the missionFrame
         #TODO: make this pretty
-        missionTextBox = Canvas(self.missionFrame)
-        missionTextBox.create_text(0, 0, anchor='nw', text=activeM.missionLines, width=1500, state=DISABLED)
-        missionTextBoxScroll = ttk.Scrollbar(self.missionFrame, orient='vertical', command=missionTextBox.xview)
-        missionTextBox.config(xscrollcommand=missionTextBoxScroll.set)
-        missionTextBox.grid(row=1, column=0, sticky='ns')
-        missionTextBoxScroll.grid(row=1, column=1, sticky='ns')
+        missionTextBox = Canvas(self.missionFrame, bg='#FFFFFF',
+                                width=self.mfWidth,
+                                height=self.missionFrame.winfo_height(),
+                                scrollregion=(0, 0, 500, 500) )
+        missionTextBox.create_text(0, 0, anchor='nw', text=activeM.missionLines, state=DISABLED, justify=LEFT)
+
+        # add scrollbars
+        hbar = Scrollbar(self.missionFrame, orient=HORIZONTAL)
+        hbar.pack(side=BOTTOM, fill=X)
+        hbar.config(command=missionTextBox.xview)
+        vbar = Scrollbar(self.missionFrame, orient=VERTICAL)
+        vbar.pack(side=RIGHT, fill=Y)
+        vbar.config(command=missionTextBox.yview)
+        missionTextBox.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
+        missionTextBox.pack(side=LEFT, expand=True, fill=BOTH)
+
         print("Done.")
     #end updateMissionFrame
 
