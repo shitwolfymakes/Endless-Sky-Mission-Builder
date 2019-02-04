@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="196" column="31" selection-start-line="196" selection-start-column="31" selection-end-line="196" selection-end-column="31" />
+            <state relative-caret-position="248">
+              <caret line="140" column="87" lean-forward="true" selection-start-line="140" selection-start-column="87" selection-end-line="140" selection-end-column="87" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
               </folding>
@@ -40,8 +40,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menuactions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="708">
-              <caret line="64" column="44" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
+            <state relative-caret-position="90">
+              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+              <folding>
+                <element signature="e#196#1765#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -277,7 +280,21 @@
       <option name="project" value="LOCAL" />
       <updated>1548546080226</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implemented displaying of missionLines in the missionFrame">
+      <created>1548805974138</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1548805974138</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Cleaned up and overhauled missionTextBox">
+      <created>1548884861742</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1548884861742</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -341,7 +358,9 @@
     <MESSAGE value="Set a default, because looping for just one thing is stupid" />
     <MESSAGE value="Began implementing mission variables" />
     <MESSAGE value="Added TODO items" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added TODO items" />
+    <MESSAGE value="Implemented displaying of missionLines in the missionFrame" />
+    <MESSAGE value="Cleaned up and overhauled missionTextBox" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up and overhauled missionTextBox" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -389,13 +408,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/menuactions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="708">
-          <caret line="64" column="44" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ESMB.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -403,10 +415,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/menuactions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding>
+            <element signature="e#196#1765#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="196" column="31" selection-start-line="196" selection-start-column="31" selection-end-line="196" selection-end-column="31" />
+        <state relative-caret-position="248">
+          <caret line="140" column="87" lean-forward="true" selection-start-line="140" selection-start-column="87" selection-end-line="140" selection-end-column="87" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
           </folding>

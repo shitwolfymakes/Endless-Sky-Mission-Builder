@@ -5,7 +5,7 @@ This handles the GUI for ESMB
 
 '''
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, StringVar
 from menuactions import *
 
 class GUI(object):
@@ -30,16 +30,29 @@ class GUI(object):
 
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
-        self.gui.geometry("%dx%d+%d+%d" % (windowWidth, windowHeight, x, y))
+        #self.gui.geometry("%dx%d+%d+%d" % (windowWidth, windowHeight, x, y))
 
         self.ofWidth = None
         self.cfWidth = None
         self.mfWidth = None
 
+
+
+        # declare optionFrame components
         self.missionComboBox = None
 
+        # declare centerFrame components
+        self.cfTitle     = ""
+        self.cfTitleText = StringVar()
+
+        # declare missionFrame components
+        self.mfTitle        = ""
+        self.missionTextBox = None
+        self.hbar           = None
+        self.vbar           = None
+
         # Build the different parts of the main window
-        self.buildMenu(self.gui)
+        #self.buildMenu(self.gui)
         self.optionFrame, self.centerFrame, self.missionFrame = self.buildMainView(self.gui,
                                                                                    windowWidth,
                                                                                    str(windowHeight))
@@ -48,7 +61,7 @@ class GUI(object):
         self.gui.mainloop()
     #end init
 
-
+    '''
     # COMPLETE, WORKING
     def buildMenu(self, window):
         # creating a menu instance
@@ -60,6 +73,7 @@ class GUI(object):
         edit = Menu(menu)
 
         # adds a command to the menu option, names it, and set the command to run
+        file.add_command(label="New", command=lambda: newFile(self))
         file.add_command(label="Open", command=lambda: openFile(self))
         file.add_command(label="Save", command=lambda: saveFile(self))
         file.add_command(label="Exit", command=exit)
@@ -73,21 +87,24 @@ class GUI(object):
         # added "Edit" to our menu
         menu.add_cascade(label="Edit", menu=edit)
     #end buildMenu
-
+    '''
 
     #COMPLETE, WORKING
     def buildMainView(self, window, windowWidth, windowHeight):
         # build the Options bar on the far left
         self.ofWidth = str(windowWidth * .2)
-        optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight)
+        #optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight)
+        optionFrame = ttk.Frame(window)
 
         # build used component list
         self.cfWidth = str(windowWidth * .4)
-        centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight)
+        #centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight)
+        centerFrame = ttk.Frame(window)
 
         # build the mission text box on the far right
         self.mfWidth = str(windowWidth * .4)
-        missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight)
+        #missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight)
+        missionFrame = ttk.Frame(window)
 
         # set up each of the frames
         self.buildOptionFrame(optionFrame)
@@ -120,6 +137,18 @@ class GUI(object):
 
         # set default values here
 
+        #TODO: add new mission button
+        newMission = ttk.Button(optionFrame, text="New Mission", command=lambda: newFile(self))
+        newMission.pack(expand=1, fill='x')
+
+        #TODO: add save mission button
+        saveMission = ttk.Button(optionFrame, text="Save Mission", command=lambda: saveFile(self))
+        saveMission.pack(expand=1, fill='x')
+
+        #TODO: add open mission button
+        openMission = ttk.Button(optionFrame, text="Open Mission", command=lambda: openFile(self))
+        openMission.pack(expand=1, fill='x')
+
         print("Done.")
     #end buildOptionFrame
 
@@ -129,20 +158,39 @@ class GUI(object):
         #TODO: Populate frame
         centerFrame.grid(row=0, column=1)
 
+        # Print the default mission name
+        self.cfTitleText.set("Default")
+        self.cfTitle = ttk.Label(centerFrame, text=self.cfTitleText.get())
+        self.cfTitle.pack()
+
         print("Done.")
     #end buildCenterFrame
 
 
     def buildMissionFrame(self, missionFrame):
+        #TODO: Implement this - ~75% Completed
         print("Building missionFrame...", end="\t")
+
         #TODO: Display a default mission template on launch
         missionFrame.grid(row=0, column=2)
+        self.mfTitle = Label(missionFrame, text="Mission Text")
+        self.mfTitle.pack(expand=1, fill='x')
 
-        # create a label to print the mission text
+        #TODO: Populate the canvas with a mission template
 
-        # make the label fill the frame
+        # build the missionTexBox that will display the missionLens in a fancy format
+        self.missionTextBox = Canvas(missionFrame, bg='#FFFFFF', scrollregion=(0, 0, 500, 500))
+        self.missionTextBox.create_text(5, 5, anchor='nw', text="TEMP FILLER TEXT", state=DISABLED, justify=LEFT)
 
-        #TODO: Temp printing the mission from missionLines, replace with formatted output(toString?) from Mission obj
+        # add scrollbars
+        self.hbar = Scrollbar(missionFrame, orient=HORIZONTAL)
+        self.hbar.pack(side=BOTTOM, fill=X)
+        self.hbar.config(command=self.missionTextBox.xview)
+        self.vbar = Scrollbar(missionFrame, orient=VERTICAL)
+        self.vbar.pack(side=RIGHT, fill=Y)
+        self.vbar.config(command=self.missionTextBox.yview)
+        self.missionTextBox.config(xscrollcommand=self.hbar.set, yscrollcommand=self.vbar.set)
+        self.missionTextBox.pack(side=LEFT, expand=True, fill=BOTH)
 
         print("Done.")
     #end buildMissionFrame
@@ -177,35 +225,34 @@ class GUI(object):
     def updateCenterFrame(self, activeM):
         #TODO: Implement this
         print("Updating centerFrame...")
-        labelCF1 = ttk.Label(self.centerFrame, text=activeM.missionName)
-        labelCF1.pack()
+        self.cfTitleText.set(str(activeM.missionName))
         print("Done.")
     #end updateCenterFrame
 
 
     def updateMissionFrame(self, activeM):
-        #TODO: Implement this
+        #TODO: Implement this - ~75% Completed
         print("Updating missionFrame")
-        labelMF1 = ttk.Label(self.missionFrame, text=activeM.missionName)
-        labelMF1.pack()
+
+        # delete the old Canvas and ScrollBars
+        self.missionTextBox.pack_forget()
+        self.vbar.pack_forget()
+        self.hbar.pack_forget()
 
         # print mission text to a Canvas in the missionFrame
         #TODO: make this pretty
-        missionTextBox = Canvas(self.missionFrame, bg='#FFFFFF',
-                                width=self.mfWidth,
-                                height=self.missionFrame.winfo_height(),
-                                scrollregion=(0, 0, 500, 500) )
-        missionTextBox.create_text(0, 0, anchor='nw', text=activeM.missionLines, state=DISABLED, justify=LEFT)
+        self.missionTextBox = Canvas(self.missionFrame, bg='#FFFFFF', scrollregion=(0, 0, 500, 500) )
+        self.missionTextBox.create_text(0, 0, anchor='nw', text=activeM.missionLines, state=DISABLED, justify=LEFT)
 
         # add scrollbars
-        hbar = Scrollbar(self.missionFrame, orient=HORIZONTAL)
-        hbar.pack(side=BOTTOM, fill=X)
-        hbar.config(command=missionTextBox.xview)
-        vbar = Scrollbar(self.missionFrame, orient=VERTICAL)
-        vbar.pack(side=RIGHT, fill=Y)
-        vbar.config(command=missionTextBox.yview)
-        missionTextBox.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
-        missionTextBox.pack(side=LEFT, expand=True, fill=BOTH)
+        self.hbar = Scrollbar(self.missionFrame, orient=HORIZONTAL)
+        self.hbar.pack(side=BOTTOM, fill=X)
+        self.hbar.config(command=self.missionTextBox.xview)
+        self.vbar = Scrollbar(self.missionFrame, orient=VERTICAL)
+        self.vbar.pack(side=RIGHT, fill=Y)
+        self.vbar.config(command=self.missionTextBox.yview)
+        self.missionTextBox.config(xscrollcommand=self.hbar.set, yscrollcommand=self.vbar.set)
+        self.missionTextBox.pack(side=LEFT, expand=True, fill=BOTH)
 
         print("Done.")
     #end updateMissionFrame
