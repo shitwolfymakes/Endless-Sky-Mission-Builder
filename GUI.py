@@ -121,7 +121,7 @@ class GUI(object):
     def buildOptionFrame(self, optionFrame):
         #TODO: Implement this - ~50% Completed
         print("Building optionFrame...", end="\t\t")
-        optionFrame.grid(row=0, column=0)
+        optionFrame.grid(row=0, column=0, sticky="ns")
 
         # build default values here
         label1 = ttk.Label(optionFrame, text="Mission")
@@ -139,15 +139,15 @@ class GUI(object):
 
         #add "new mission" button
         newMission = ttk.Button(optionFrame, text="New Mission", command=lambda: newFile(self))
-        newMission.pack(expand=1, fill='x')
+        newMission.pack(fill='x')
 
         #add "save mission" button
         saveMission = ttk.Button(optionFrame, text="Save Mission", command=lambda: saveFile(self))
-        saveMission.pack(expand=1, fill='x')
+        saveMission.pack(fill='x')
 
         #add "open mission" button
         openMission = ttk.Button(optionFrame, text="Open Mission", command=lambda: openFile(self))
-        openMission.pack(expand=1, fill='x')
+        openMission.pack(fill='x')
 
         print("Done.")
     #end buildOptionFrame
@@ -156,7 +156,7 @@ class GUI(object):
     def buildCenterFrame(self, centerFrame):
         print("Building centerFrame...", end="\t\t")
         #TODO: Populate frame
-        centerFrame.grid(row=0, column=1)
+        centerFrame.grid(row=0, column=1, sticky="ns")
 
         # Print the default mission name
         self.cfTitleText.set("Default")
@@ -172,7 +172,7 @@ class GUI(object):
         print("Building missionFrame...", end="\t")
 
         #TODO: Display a default mission template on launch
-        missionFrame.grid(row=0, column=2)
+        missionFrame.grid(row=0, column=2, sticky="nsew")
         self.mfTitle = Label(missionFrame, text="Mission Text")
         self.mfTitle.pack(expand=1, fill='x')
 
