@@ -119,8 +119,8 @@ class GUI(object):
 
 
     def buildOptionFrame(self, optionFrame):
+        #TODO: Implement this - ~50% Completed
         print("Building optionFrame...", end="\t\t")
-        #TODO: Add combobox to list missions - DO THIS SECOND
         optionFrame.grid(row=0, column=0)
 
         # build default values here
@@ -137,15 +137,15 @@ class GUI(object):
 
         # set default values here
 
-        #TODO: add new mission button
+        #add "new mission" button
         newMission = ttk.Button(optionFrame, text="New Mission", command=lambda: newFile(self))
         newMission.pack(expand=1, fill='x')
 
-        #TODO: add save mission button
+        #add "save mission" button
         saveMission = ttk.Button(optionFrame, text="Save Mission", command=lambda: saveFile(self))
         saveMission.pack(expand=1, fill='x')
 
-        #TODO: add open mission button
+        #add "open mission" button
         openMission = ttk.Button(optionFrame, text="Open Mission", command=lambda: openFile(self))
         openMission.pack(expand=1, fill='x')
 

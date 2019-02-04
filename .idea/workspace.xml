@@ -28,10 +28,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="140" column="87" lean-forward="true" selection-start-line="140" selection-start-column="87" selection-end-line="140" selection-end-column="87" />
+            <state relative-caret-position="101">
+              <caret line="124" column="44" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
+                <element signature="e#1793#2727#1" />
               </folding>
             </state>
           </provider>
@@ -294,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548884861742</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Replaced original cascading menu with buttons in optionPane">
+      <created>1549319244667</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1549319244667</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -360,7 +368,8 @@
     <MESSAGE value="Added TODO items" />
     <MESSAGE value="Implemented displaying of missionLines in the missionFrame" />
     <MESSAGE value="Cleaned up and overhauled missionTextBox" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up and overhauled missionTextBox" />
+    <MESSAGE value="Replaced original cascading menu with buttons in optionPane" />
+    <option name="LAST_COMMIT_MESSAGE" value="Replaced original cascading menu with buttons in optionPane" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -427,10 +436,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="140" column="87" lean-forward="true" selection-start-line="140" selection-start-column="87" selection-end-line="140" selection-end-column="87" />
+        <state relative-caret-position="101">
+          <caret line="124" column="44" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
+            <element signature="e#1793#2727#1" />
           </folding>
         </state>
       </provider>
