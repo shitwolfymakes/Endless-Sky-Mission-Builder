@@ -159,9 +159,9 @@ class GUI(object):
         centerFrame.grid(row=0, column=1, sticky="ns")
 
         # Print the default mission name
-        self.cfTitleText.set("Default")
+        self.cfTitleText.set("Mission Options")
         self.cfTitle = ttk.Label(centerFrame, text=self.cfTitleText.get())
-        self.cfTitle.pack()
+        self.cfTitle.pack(fill='x')
 
         print("Done.")
     #end buildCenterFrame

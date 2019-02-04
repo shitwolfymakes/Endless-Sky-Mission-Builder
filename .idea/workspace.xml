@@ -28,11 +28,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="124" column="44" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
+            <state relative-caret-position="-1364">
+              <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
-                <element signature="e#1793#2727#1" />
+                <element signature="e#1800#2738#1" />
               </folding>
             </state>
           </provider>
@@ -302,7 +302,21 @@
       <option name="project" value="LOCAL" />
       <updated>1549319244667</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Removed TODOs that have been completed">
+      <created>1549319504377</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1549319504377</updated>
+    </task>
+    <task id="LOCAL-00013" summary="FINALLY GOT THE FUCKING FRAMES TO EXPAND RIGHT">
+      <created>1549319756981</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1549319756981</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -369,7 +383,9 @@
     <MESSAGE value="Implemented displaying of missionLines in the missionFrame" />
     <MESSAGE value="Cleaned up and overhauled missionTextBox" />
     <MESSAGE value="Replaced original cascading menu with buttons in optionPane" />
-    <option name="LAST_COMMIT_MESSAGE" value="Replaced original cascading menu with buttons in optionPane" />
+    <MESSAGE value="Removed TODOs that have been completed" />
+    <MESSAGE value="FINALLY GOT THE FUCKING FRAMES TO EXPAND RIGHT" />
+    <option name="LAST_COMMIT_MESSAGE" value="FINALLY GOT THE FUCKING FRAMES TO EXPAND RIGHT" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -436,11 +452,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="124" column="44" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
+        <state relative-caret-position="-1364">
+          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
-            <element signature="e#1793#2727#1" />
+            <element signature="e#1800#2738#1" />
           </folding>
         </state>
       </provider>
