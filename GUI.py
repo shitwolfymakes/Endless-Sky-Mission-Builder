@@ -12,8 +12,9 @@ class GUI(object):
 
     def __init__(self):
         print("Building GUI...")
-        self.missionList   = [Mission("Default")]       #TODO: Initialize with template mission on launch
-        self.missionNames  = []
+        self.missionList             = [Mission("Default")]       #TODO: Initialize with template mission on launch
+        self.missionNameToObjectDict: Dict[Any, Any] = {"Default" : self.missionList[0]}
+        self.missionNames            = []
 
         # Build the application window
         self.gui = Tk()
@@ -161,7 +162,7 @@ class GUI(object):
         # Print the default mission name
         self.cfTitleText.set("Mission Options")
         self.cfTitle = ttk.Label(centerFrame, text=self.cfTitleText.get())
-        self.cfTitle.pack(fill='x')
+        self.cfTitle.grid(row=0, column=0, sticky="ew")
 
         print("Done.")
     #end buildCenterFrame
@@ -263,7 +264,12 @@ class GUI(object):
 
     def missionSelected(self, event):
         #TODO: Implement this
-        print('Opening mission "%s"' % self.missionComboBox.get())
+        selectedMissionName = self.missionComboBox.get()
+        print('Opening mission "%s"' % selectedMissionName)
+
+        newActiveMission = self.missionNameToObjectDict.get(selectedMissionName)
+        self.updateCenterFrame(newActiveMission)
+        self.updateMissionFrame(newActiveMission)
     #end missionSelected
 
 #end class GUI

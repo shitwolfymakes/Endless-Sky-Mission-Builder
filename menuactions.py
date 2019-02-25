@@ -5,13 +5,18 @@
 import re, shlex
 
 from tkinter import filedialog
+from typing import Dict, Any, List
+
 from Mission import *
+from Mission import Mission
+
 
 def openFile(app):
     #TODO: IMPLEMENT THIS FIRST - ~50% completed
 
     # empty the missionList
-    app.missionList = []
+    app.missionList             = []
+    app.missionNameToObjectDict = {}
 
     print("Selecting mission file...")
     f = filedialog.askopenfile()
@@ -43,8 +48,10 @@ def openFile(app):
 
         if re.search(match, line):
             # print(line, end="")
-            tokens = shlex.split(line)
-            app.missionList.append(Mission(tokens[1]))
+            tokens     = shlex.split(line)
+            newMission = Mission(tokens[1])
+            app.missionList.append(newMission)
+            app.missionNameToObjectDict.update({newMission.missionName : newMission})
             i += 1
             continue
         else:
