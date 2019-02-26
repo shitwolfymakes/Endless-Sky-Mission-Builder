@@ -1,7 +1,14 @@
-''' Components.py
+''' MissionComponents.py
     This file contains the classes defining some components of a mission
 '''
 
+class MissionComponents(object):
+
+    def __init__(self):
+        print("component %s initialized", self.__class__)
+    #end init
+
+#end class MissionComponents
 
 class Cargo(object):
     '''
