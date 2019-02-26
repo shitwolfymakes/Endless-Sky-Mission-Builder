@@ -5,14 +5,12 @@
 import re, shlex
 
 from tkinter import filedialog
-from typing import Dict, Any, List
 
 from Mission import *
-from Mission import Mission
 
 
 def openFile(app):
-    #TODO: IMPLEMENT THIS FIRST - ~50% completed
+    #TODO: IMPLEMENT THIS - ~99% completed (may need changes)
 
     # empty the missionList
     app.missionList             = []
