@@ -13,31 +13,17 @@ class GUI(object):
     def __init__(self):
         print("Building GUI...")
         self.missionList             = [Mission("Default")]       #TODO: Initialize with template mission on launch
-        self.missionNameToObjectDict: Dict[Any, Any] = {"Default" : self.missionList[0]}
+        self.missionNameToObjectDict = {"Default" : self.missionList[0]}
         self.missionNames            = []
 
         # Build the application window
         self.gui = Tk()
-
-        # Set the attributes of the main window
-        windowWidth = 140 * 6
-        windowHeight = 80 * 6
-
-        sWidth = self.gui.winfo_screenwidth()
-        sHeight = self.gui.winfo_screenheight()
-
-        x = (sWidth / 2) - (windowWidth / 2)
-        y = (sHeight / 2) - (windowHeight / 2)
-
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
-        #self.gui.geometry("%dx%d+%d+%d" % (windowWidth, windowHeight, x, y))
 
         self.ofWidth = None
         self.cfWidth = None
         self.mfWidth = None
-
-
 
         # declare optionFrame components
         self.missionComboBox = None
@@ -54,15 +40,13 @@ class GUI(object):
 
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
-        self.optionFrame, self.centerFrame, self.missionFrame = self.buildMainView(self.gui,
-                                                                                   windowWidth,
-                                                                                   str(windowHeight))
+        self.optionFrame, self.centerFrame, self.missionFrame = self.buildMainView(self.gui)
 
         # Run the program
         self.gui.mainloop()
     #end init
 
-    '''
+    ''' This may be used later, after shortcuts are introduced
     # COMPLETE, WORKING
     def buildMenu(self, window):
         # creating a menu instance
@@ -91,20 +75,10 @@ class GUI(object):
     '''
 
     #COMPLETE, WORKING
-    def buildMainView(self, window, windowWidth, windowHeight):
-        # build the Options bar on the far left
-        self.ofWidth = str(windowWidth * .2)
-        #optionFrame = ttk.Frame(window, width=self.ofWidth, height=windowHeight)
+    def buildMainView(self, window):
+
         optionFrame = ttk.Frame(window)
-
-        # build used component list
-        self.cfWidth = str(windowWidth * .4)
-        #centerFrame = ttk.Frame(window, width=self.cfWidth, height=windowHeight)
         centerFrame = ttk.Frame(window)
-
-        # build the mission text box on the far right
-        self.mfWidth = str(windowWidth * .4)
-        #missionFrame = ttk.Frame(window, width=self.mfWidth, height=windowHeight)
         missionFrame = ttk.Frame(window)
 
         # set up each of the frames
@@ -262,7 +236,7 @@ class GUI(object):
     ### MISC METHODS ###
 
 
-    def missionSelected(self, event):
+    def missionSelected(self):
         #TODO: Implement this
         selectedMissionName = self.missionComboBox.get()
         print('Opening mission "%s"' % selectedMissionName)
