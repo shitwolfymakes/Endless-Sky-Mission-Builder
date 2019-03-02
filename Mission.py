@@ -1,8 +1,11 @@
 #TODO: add a data structure to contain conversations
 
+import MissionComponents
+
 class Mission(object):
 
     def __init__(self, missionName, default=False):
+        #TODO: set up MissionComponents at launch
         print("Loading mission:", missionName)
         self.declareKeywords()
 
@@ -13,9 +16,9 @@ class Mission(object):
                                                 # conversation section per element
         else:
             self.setDefaultValues(missionName)
-            self.parseMission()
+            #self.parseMission()
 
-        # TODO: Build a parse Mission Script
+        # TODO: Build a parseMission thing
         self.parseMission()
     #end init
 
@@ -35,16 +38,19 @@ class Mission(object):
 
 
     def addLine(self, line):
+        #TODO: IMPLEMENT THIS
         self.missionLines.append(line)
     #end addLine
 
 
     def printMission(self):
+        #TODO: IMPLEMENT THIS
         print(self.missionLines)
     #end printMission
 
 
     def parseMission(self):
+        #TODO: IMPLEMENT THIS
         print("Parsing mission...", end="\t\t")
 
         print("Done.")

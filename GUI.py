@@ -138,8 +138,23 @@ class GUI(object):
         self.cfTitle = ttk.Label(centerFrame, text=self.cfTitleText.get())
         self.cfTitle.grid(row=0, column=0, sticky="ew")
 
+        self.buildComponentsOnCenterFrame()
+
         print("Done.")
     #end buildCenterFrame
+
+
+    def buildComponentsOnCenterFrame(self):
+        print("Testing buildComponentsOnCenterFrame")
+
+        self.populateComponentSelections()
+    #end buildComponentsOnCenterFrame
+
+
+    def populateComponentSelections(self):
+        print("Testing populateComponentSelections")
+
+    #end populateComponentSelections
 
 
     def buildMissionFrame(self, missionFrame):
