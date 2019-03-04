@@ -170,7 +170,18 @@ class GUI(object):
         #TODO: Populate the canvas with a mission template
 
         # build the missionTexBox that will display the missionLens in a fancy format
-        self.updateTextCanvas(["TEMP FILTER TEXT"])
+        self.missionTextBox = Canvas(missionFrame, bg='#FFFFFF', scrollregion=(0, 0, 500, 500))
+        self.missionTextBox.create_text(0, 0, anchor='nw', text="TEMP FILTER TEXT", state=DISABLED, justify=LEFT)
+
+        # add scrollbars
+        self.hbar = Scrollbar(missionFrame, orient=HORIZONTAL)
+        self.hbar.pack(side=BOTTOM, fill=X)
+        self.hbar.config(command=self.missionTextBox.xview)
+        self.vbar = Scrollbar(missionFrame, orient=VERTICAL)
+        self.vbar.pack(side=RIGHT, fill=Y)
+        self.vbar.config(command=self.missionTextBox.yview)
+        self.missionTextBox.config(xscrollcommand=self.hbar.set, yscrollcommand=self.vbar.set)
+        self.missionTextBox.pack(side=LEFT, expand=True, fill=BOTH)
 
         print("Done.")
     #end buildMissionFrame
