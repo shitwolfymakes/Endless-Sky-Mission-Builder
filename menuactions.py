@@ -65,9 +65,6 @@ def openFile(app):
         #mission.printMission()
     # end for
 
-    #TODO: Store all the little pieces of the Mission in bespoke variables
-
-    #TODO: Update the optionFrame in the gui
     app.updateOptionFrame()
 
     # close the file
