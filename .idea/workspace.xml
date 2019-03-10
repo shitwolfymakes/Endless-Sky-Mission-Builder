@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ESMB.py" beforeDir="false" afterPath="$PROJECT_DIR$/ESMB.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,23 +16,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ESMB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="165">
+              <caret line="11" column="87" selection-start-line="11" selection-start-column="87" selection-end-line="11" selection-end-column="87" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="314">
               <caret line="179" column="30" selection-start-line="179" selection-start-column="30" selection-end-line="179" selection-end-column="30" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
-                <element signature="e#1315#2308#1" />
               </folding>
             </state>
           </provider>
@@ -50,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
+            <state relative-caret-position="300">
               <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
             </state>
           </provider>
@@ -96,11 +95,11 @@
         <option value="$PROJECT_DIR$/opensave.py" />
         <option value="$PROJECT_DIR$/open.py" />
         <option value="$PROJECT_DIR$/save.py" />
-        <option value="$PROJECT_DIR$/ESMB.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/Components.py" />
         <option value="$PROJECT_DIR$/Mission.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
+        <option value="$PROJECT_DIR$/ESMB.py" />
       </list>
     </option>
   </component>
@@ -115,6 +114,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -135,7 +135,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -369,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1551739915699</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Turned canvas code into a singleton - fixed bug">
+      <created>1551740520286</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1551740520286</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView">
@@ -388,7 +394,6 @@
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.24947146" />
       <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.24947146" />
       <window_info id="Favorites" order="2" sideWeight="0.50190115" side_tool="true" weight="0.24947146" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.3299363" />
@@ -400,6 +405,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3299363" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3299363" />
+      <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -479,7 +485,8 @@
     <MESSAGE value="Renamed from Components.py, along with adding a class" />
     <MESSAGE value="Began implementation of components" />
     <MESSAGE value="Turned canvas code into a singleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="Turned canvas code into a singleton" />
+    <MESSAGE value="Turned canvas code into a singleton - fixed bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Turned canvas code into a singleton - fixed bug" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -517,6 +524,20 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/menuactions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -527,35 +548,20 @@
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menuactions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ESMB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="314">
           <caret line="179" column="30" selection-start-line="179" selection-start-column="30" selection-end-line="179" selection-end-column="30" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
-            <element signature="e#1315#2308#1" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ESMB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="87" selection-start-line="11" selection-start-column="87" selection-end-line="11" selection-end-column="87" />
         </state>
       </provider>
     </entry>

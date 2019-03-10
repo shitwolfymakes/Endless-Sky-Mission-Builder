@@ -9,6 +9,7 @@ Endless Sky is made by Michael Zahniser.
 My Github: https://github.com/shitwolfymakes
 '''
 
+#TODO: Build a Directed Acyclic Graph library to store the conversation data (Version 2)
 from GUI import *
 
 class ESMB(object):
