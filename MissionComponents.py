@@ -5,7 +5,7 @@
 class MissionComponents(object):
 
     def __init__(self):
-        print("component %s initialized", self.__class__)
+        print("component %s initialized" % self.__class__)
     #end init
 
 #end class MissionComponents
@@ -18,7 +18,7 @@ class Cargo(object):
     '''
 
     def __init__(self):
-        print("component %s initialized", self.__class__)
+        print("component %s initialized" % self.__class__)
     #end init
 
 #end class Cargo
@@ -27,25 +27,34 @@ class Cargo(object):
 class Passengers(object):
 
     def __init__(self):
-        print("component %s initialized", self.__class__)
+        print("component %s initialized" % self.__class__)
     # end init
 
-# end class
+# end class Passengers
 
 
 class Clearance(object):
 
     def __init__(self):
-        print("component %s initialized", self.__class__)
+        print("component %s initialized" % self.__class__)
     # end init
 
-# end class
+# end class Clearance
 
 
 class Stopover(object):
 
     def __init__(self):
-        print("component %s initialized", self.__class__)
+        print("component %s initialized" % self.__class__)
     # end init
 
-# end class
+# end class Conversations
+
+class Conversations(object):
+    #TODO: Implement this in full in Version 2
+
+    def __init__(self):
+        print("component %s initialized" % self.__class__)
+    # end init
+
+# end class Conversations
