@@ -8,6 +8,7 @@ class Mission(object):
         #TODO: set up MissionComponents at launch
         print("Loading mission:", missionName)
         self.declareKeywords()
+        self.components = MissionComponents.MissionComponents()
 
         if default is False:
             self.missionName  = missionName
