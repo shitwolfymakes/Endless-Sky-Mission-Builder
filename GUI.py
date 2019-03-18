@@ -38,9 +38,13 @@ class GUI(object):
         self.hbar           = None
         self.vbar           = None
 
+        self.optionFrame  = None
+        self.centerFrame  = None
+        self.missionFrame = None
+
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
-        self.optionFrame, self.centerFrame, self.missionFrame = self.buildMainView(self.gui)
+        self.buildMainView(self.gui)
 
         # Run the program
         self.gui.mainloop()
@@ -82,31 +86,33 @@ class GUI(object):
         centerFrame = ttk.Frame(window)
         missionFrame = ttk.Frame(window)
 
-        # set up each of the frames
-        self.buildOptionFrame(optionFrame)
-        self.buildCenterFrame(centerFrame)
-        self.buildMissionFrame(missionFrame)
+        self.optionFrame  = optionFrame
+        self.centerFrame  = centerFrame
+        self.missionFrame = missionFrame
 
-        return optionFrame, centerFrame, missionFrame
+        # set up each of the frames
+        self.buildOptionFrame()
+        self.buildCenterFrame()
+        self.buildMissionFrame()
     #end buildMainView
 
 
     ### BUILDING FRAMES ###
 
 
-    def buildOptionFrame(self, optionFrame):
+    def buildOptionFrame(self):
         #TODO: Implement this - ~50% Completed
         print("Building optionFrame...", end="\t\t")
-        optionFrame.grid(row=0, column=0, sticky="ns")
+        self.optionFrame.grid(row=0, column=0, sticky="ns")
 
         # build default values here
-        label1 = ttk.Label(optionFrame, text="Mission")
+        label1 = ttk.Label(self.optionFrame, text="Mission")
         label1.pack()
 
         self.missionNames.append("Default")
 
         # declare the combobox here, fill with missionNames
-        self.missionComboBox = ttk.Combobox(optionFrame, state="readonly", values=self.missionNames)
+        self.missionComboBox = ttk.Combobox(self.optionFrame, state="readonly", values=self.missionNames)
         self.missionComboBox.bind("<<ComboboxSelected>>", self.missionSelected)
         self.missionComboBox.pack()
         self.missionComboBox.current(0)
@@ -114,30 +120,25 @@ class GUI(object):
         # set default values here
 
         #add "new mission" button
-        newMission = ttk.Button(optionFrame, text="New Mission", command=lambda: newFile(self))
+        newMission = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newFile(self))
         newMission.pack(fill='x')
 
         #add "save mission" button
-        saveMission = ttk.Button(optionFrame, text="Save Mission", command=lambda: saveFile(self))
+        saveMission = ttk.Button(self.optionFrame, text="Save Mission", command=lambda: saveFile(self))
         saveMission.pack(fill='x')
 
         #add "open mission" button
-        openMission = ttk.Button(optionFrame, text="Open Mission", command=lambda: openFile(self))
+        openMission = ttk.Button(self.optionFrame, text="Open Mission", command=lambda: openFile(self))
         openMission.pack(fill='x')
 
         print("Done.")
     #end buildOptionFrame
 
 
-    def buildCenterFrame(self, centerFrame):
+    def buildCenterFrame(self):
         print("Building centerFrame...", end="\t\t")
         #TODO: Populate frame
-        centerFrame.grid(row=0, column=1, sticky="ns")
-
-        # Print the default mission name
-        self.cfTitleText.set("Mission Options")
-        self.cfTitle = ttk.Label(centerFrame, text=self.cfTitleText.get())
-        self.cfTitle.grid(row=0, column=0, sticky="ew")
+        self.centerFrame.grid(row=0, column=1, sticky="ns")
 
         self.buildComponentsOnCenterFrame()
 
@@ -147,6 +148,11 @@ class GUI(object):
 
     def buildComponentsOnCenterFrame(self):
         print("Testing buildComponentsOnCenterFrame")
+
+        # Print the default mission name
+        self.cfTitleText.set("Mission Options")
+        self.cfTitle = ttk.Label(self.centerFrame, text=self.cfTitleText.get(), justify="center")
+        self.cfTitle.grid(row=0, column=0, sticky="ew")
 
         self.populateComponentSelections()
     #end buildComponentsOnCenterFrame
@@ -158,26 +164,26 @@ class GUI(object):
     #end populateComponentSelections
 
 
-    def buildMissionFrame(self, missionFrame):
+    def buildMissionFrame(self):
         #TODO: Implement this - ~75% Completed
         print("Building missionFrame...", end="\t")
 
         #TODO: Display a default mission template on launch
-        missionFrame.grid(row=0, column=2, sticky="nsew")
-        self.mfTitle = Label(missionFrame, text="Mission Text")
+        self.missionFrame.grid(row=0, column=2, sticky="nsew")
+        self.mfTitle = Label(self.missionFrame, text="Mission Text")
         self.mfTitle.pack(expand=1, fill='x')
 
         #TODO: Populate the canvas with a mission template
 
         # build the missionTexBox that will display the missionLens in a fancy format
-        self.missionTextBox = Canvas(missionFrame, bg='#FFFFFF', scrollregion=(0, 0, 500, 500))
+        self.missionTextBox = Canvas(self.missionFrame, bg='#FFFFFF', scrollregion=(0, 0, 500, 500))
         self.missionTextBox.create_text(0, 0, anchor='nw', text="TEMP FILTER TEXT", state=DISABLED, justify=LEFT)
 
         # add scrollbars
-        self.hbar = Scrollbar(missionFrame, orient=HORIZONTAL)
+        self.hbar = Scrollbar(self.missionFrame, orient=HORIZONTAL)
         self.hbar.pack(side=BOTTOM, fill=X)
         self.hbar.config(command=self.missionTextBox.xview)
-        self.vbar = Scrollbar(missionFrame, orient=VERTICAL)
+        self.vbar = Scrollbar(self.missionFrame, orient=VERTICAL)
         self.vbar.pack(side=RIGHT, fill=Y)
         self.vbar.config(command=self.missionTextBox.yview)
         self.missionTextBox.config(xscrollcommand=self.hbar.set, yscrollcommand=self.vbar.set)
