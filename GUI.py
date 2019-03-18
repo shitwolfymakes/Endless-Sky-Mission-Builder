@@ -137,9 +137,9 @@ class GUI(object):
 
     def buildCenterFrame(self):
         print("Building centerFrame...", end="\t\t")
-        #TODO: Populate frame
         self.centerFrame.grid(row=0, column=1, sticky="ns")
 
+        # TODO: Populate frame
         self.buildComponentsOnCenterFrame()
 
         print("Done.")
