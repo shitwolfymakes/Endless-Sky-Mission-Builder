@@ -147,20 +147,30 @@ class GUI(object):
 
 
     def buildComponentsOnCenterFrame(self):
-        print("Testing buildComponentsOnCenterFrame")
+        print()
+        print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
         # Print the default mission name
         self.cfTitleText.set("Mission Options")
-        self.cfTitle = ttk.Label(self.centerFrame, text=self.cfTitleText.get(), justify="center")
+        self.cfTitle = ttk.Label(self.centerFrame, text=self.cfTitleText.get())
         self.cfTitle.grid(row=0, column=0, sticky="ew")
 
+        displayNameLabel = ttk.Label(self.centerFrame, text="Mission Display Name")
+        displayNameLabel.grid(row=1, column=0, sticky="ew")
+
+        displayName = StringVar()
+        displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName)
+        displayNameEntry.grid(row=2, column=0, sticky="ew")
+
+        print("Done.")
         self.populateComponentSelections()
     #end buildComponentsOnCenterFrame
 
 
     def populateComponentSelections(self):
-        print("Testing populateComponentSelections")
+        print("\tTesting populateComponentSelections...", end="\t\t")
 
+        print("Done.")
     #end populateComponentSelections
 
 
