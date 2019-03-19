@@ -150,17 +150,46 @@ class GUI(object):
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
+        indent = 10
+
         # Print the default mission name
         self.cfTitleText.set("Mission Options")
         self.cfTitle = ttk.Label(self.centerFrame, text=self.cfTitleText.get())
         self.cfTitle.grid(row=0, column=0, sticky="ew")
 
+        #TODO: break these of into separate functions once everything's working
+
+        # Display name
+
         displayNameLabel = ttk.Label(self.centerFrame, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
 
+        displayNameCheckbox = ttk.Checkbutton(self.centerFrame)# , variable=isBlocked)
+        displayNameCheckbox.grid(row=1, column=1)
+
         displayName = StringVar()
         displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName)
-        displayNameEntry.grid(row=2, column=0, sticky="ew")
+        displayNameEntry.grid(row=2, column=0, sticky="ew", padx=indent)
+
+        # Description label
+
+        descriptionLabel = ttk.Label(self.centerFrame, text="Description")
+        descriptionLabel.grid(row=3, column=0, sticky="ew")
+
+        descriptionCheckbox = ttk.Checkbutton(self.centerFrame)  # , variable=isBlocked)
+        descriptionCheckbox.grid(row=3, column=1)
+
+        description = StringVar()
+        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=description)
+        descriptionEntry.grid(row=4, column=0, sticky="ew", padx=indent)
+
+        # isBlocked label
+
+        isBlockedLabel = ttk.Label(self.centerFrame, text="Blocked")
+        isBlockedLabel.grid(row=5, column=0, sticky="ew")
+
+        isBlockedCheckbox = ttk.Checkbutton(self.centerFrame)#, variable=isBlocked)
+        isBlockedCheckbox.grid(row=5, column=1)
 
         print("Done.")
         self.populateComponentSelections()
