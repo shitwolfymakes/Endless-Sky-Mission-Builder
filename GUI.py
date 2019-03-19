@@ -164,7 +164,7 @@ class GUI(object):
         displayNameLabel = ttk.Label(self.centerFrame, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
 
-        displayNameCheckbox = ttk.Checkbutton(self.centerFrame)# , variable=isBlocked)
+        displayNameCheckbox = ttk.Checkbutton(self.centerFrame)
         displayNameCheckbox.grid(row=1, column=1)
 
         displayName = StringVar()
@@ -176,7 +176,7 @@ class GUI(object):
         descriptionLabel = ttk.Label(self.centerFrame, text="Description")
         descriptionLabel.grid(row=3, column=0, sticky="ew")
 
-        descriptionCheckbox = ttk.Checkbutton(self.centerFrame)  # , variable=isBlocked)
+        descriptionCheckbox = ttk.Checkbutton(self.centerFrame)
         descriptionCheckbox.grid(row=3, column=1)
 
         description = StringVar()
@@ -188,8 +188,15 @@ class GUI(object):
         isBlockedLabel = ttk.Label(self.centerFrame, text="Blocked")
         isBlockedLabel.grid(row=5, column=0, sticky="ew")
 
-        isBlockedCheckbox = ttk.Checkbutton(self.centerFrame)#, variable=isBlocked)
+        isBlockedCheckbox = ttk.Checkbutton(self.centerFrame)
         isBlockedCheckbox.grid(row=5, column=1)
+
+        isBlockedMessage = StringVar()
+        isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage)
+        isBlockedMessageEntry.grid(row=6, column=0, sticky="ew")
+
+        isBlockedMessageCheckbox = ttk.Checkbutton(self.centerFrame)
+        isBlockedMessageCheckbox.grid(row=6, column=1)
 
         print("Done.")
         self.populateComponentSelections()
