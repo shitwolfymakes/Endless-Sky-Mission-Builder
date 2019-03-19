@@ -193,7 +193,7 @@ class GUI(object):
 
         isBlockedMessage = StringVar()
         isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage)
-        isBlockedMessageEntry.grid(row=6, column=0, sticky="ew")
+        isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=indent)
 
         isBlockedMessageCheckbox = ttk.Checkbutton(self.centerFrame)
         isBlockedMessageCheckbox.grid(row=6, column=1)
