@@ -271,7 +271,7 @@ class GUI(object):
     ### MISC METHODS ###
 
 
-    def missionSelected(self):
+    def missionSelected(self, event):
         #TODO: Implement this
         selectedMissionName = self.missionComboBox.get()
         print('Opening mission "%s"' % selectedMissionName)

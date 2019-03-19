@@ -37,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="162" column="59" selection-start-line="162" selection-start-column="59" selection-end-line="162" selection-end-column="59" />
+            <state relative-caret-position="239">
+              <caret line="273" column="37" selection-start-line="273" selection-start-column="37" selection-end-line="273" selection-end-column="37" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#1376#2314#1" />
@@ -413,7 +413,28 @@
       <option name="project" value="LOCAL" />
       <updated>1552943386594</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Added GUI component to centerFrame">
+      <created>1552945358961</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1552945358962</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Minor changes">
+      <created>1552945410649</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1552945410649</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Minor changes">
+      <created>1552945718860</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1552945718860</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -501,7 +522,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed comments" />
     <MESSAGE value="fixed bad function call" />
     <MESSAGE value="Set a default, because looping for just one thing is stupid" />
     <MESSAGE value="Began implementing mission variables" />
@@ -516,7 +536,6 @@
     <MESSAGE value="Missions now properly load when selected from the combobox" />
     <MESSAGE value="Removed deprecated code from GUI.py" />
     <MESSAGE value="Removed deprecated code from ESMB.py" />
-    <MESSAGE value="Minor changes" />
     <MESSAGE value="Renamed from Components.py, along with adding a class" />
     <MESSAGE value="Began implementation of components" />
     <MESSAGE value="Turned canvas code into a singleton" />
@@ -526,7 +545,9 @@
     <MESSAGE value="Added a class and a TODO" />
     <MESSAGE value="Added instantiation of MissionComponent class" />
     <MESSAGE value="Completely overhauled how the three frames are built" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completely overhauled how the three frames are built" />
+    <MESSAGE value="Added GUI component to centerFrame" />
+    <MESSAGE value="Minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor changes" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -597,8 +618,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="162" column="59" selection-start-line="162" selection-start-column="59" selection-end-line="162" selection-end-column="59" />
+        <state relative-caret-position="239">
+          <caret line="273" column="37" selection-start-line="273" selection-start-column="37" selection-end-line="273" selection-end-column="37" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#1376#2314#1" />
