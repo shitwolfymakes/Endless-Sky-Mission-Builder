@@ -169,8 +169,8 @@ class GUI(object):
         displayNameLabel = ttk.Label(self.centerFrame, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
 
-        displayNameCheckbox = ttk.Checkbutton(self.centerFrame)
-        displayNameCheckbox.grid(row=1, column=1)
+        displayNameCheckbutton = ttk.Checkbutton(self.centerFrame)
+        displayNameCheckbutton.grid(row=1, column=1)
 
         displayName = StringVar()
         displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName, state="disabled")
@@ -181,8 +181,8 @@ class GUI(object):
         descriptionLabel = ttk.Label(self.centerFrame, text="Description")
         descriptionLabel.grid(row=3, column=0, sticky="ew")
 
-        descriptionCheckbox = ttk.Checkbutton(self.centerFrame)
-        descriptionCheckbox.grid(row=3, column=1)
+        descriptionCheckbutton = ttk.Checkbutton(self.centerFrame)
+        descriptionCheckbutton.grid(row=3, column=1)
 
         self.description = StringVar()          # GOTTA KEEP DESCRIPTION AS AN INSTANCE VARIABLE,
         self.description.set("<description>")   #     BECAUSE FUCK YOU, GARBAGE COLLECTION.
@@ -194,15 +194,15 @@ class GUI(object):
         isBlockedLabel = ttk.Label(self.centerFrame, text="Blocked")
         isBlockedLabel.grid(row=5, column=0, sticky="ew")
 
-        isBlockedCheckbox = ttk.Checkbutton(self.centerFrame)
-        isBlockedCheckbox.grid(row=5, column=1)
+        isBlockedCheckbutton = ttk.Checkbutton(self.centerFrame)
+        isBlockedCheckbutton.grid(row=5, column=1)
 
         isBlockedMessage = StringVar()
         isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage, state="disabled")
         isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
 
-        isBlockedMessageCheckbox = ttk.Checkbutton(self.centerFrame)
-        isBlockedMessageCheckbox.grid(row=6, column=1)
+        isBlockedMessageCheckbutton = ttk.Checkbutton(self.centerFrame)
+        isBlockedMessageCheckbutton.grid(row=6, column=1)
 
         # Deadline label
         deadlineLabel = ttk.Label(self.centerFrame, text="Deadline")
