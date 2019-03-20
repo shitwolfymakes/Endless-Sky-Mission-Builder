@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menuactions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-30">
-              <caret line="66" selection-start-line="66" selection-end-line="66" />
+            <state relative-caret-position="404">
+              <caret line="98" column="22" selection-start-line="98" selection-start-column="22" selection-end-line="98" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -37,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-186">
-              <caret line="166" column="63" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
+            <state relative-caret-position="290">
+              <caret line="187" column="91" selection-start-line="187" selection-start-column="91" selection-end-line="187" selection-end-column="91" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#1376#2314#1" />
@@ -99,9 +99,9 @@
         <option value="$PROJECT_DIR$/save.py" />
         <option value="$PROJECT_DIR$/Components.py" />
         <option value="$PROJECT_DIR$/ESMB.py" />
-        <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/Mission.py" />
         <option value="$PROJECT_DIR$/MissionComponents.py" />
+        <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
       </list>
     </option>
@@ -448,7 +448,28 @@
       <option name="project" value="LOCAL" />
       <updated>1553032179423</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Minor changes">
+      <created>1553032438733</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1553032438733</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Minor changes">
+      <created>1553032500915</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1553032500915</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Added compileMission Button, and other minor changes">
+      <created>1553116520017</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1553116520017</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView">
@@ -536,7 +557,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Began implementing mission variables" />
     <MESSAGE value="Added TODO items" />
     <MESSAGE value="Implemented displaying of missionLines in the missionFrame" />
     <MESSAGE value="Cleaned up and overhauled missionTextBox" />
@@ -558,10 +578,11 @@
     <MESSAGE value="Added instantiation of MissionComponent class" />
     <MESSAGE value="Completely overhauled how the three frames are built" />
     <MESSAGE value="Added GUI component to centerFrame" />
-    <MESSAGE value="Minor changes" />
     <MESSAGE value="Fixed missionSelected. Apparently you have to have the event as a parameter for it to work" />
     <MESSAGE value="Added more components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more components" />
+    <MESSAGE value="Minor changes" />
+    <MESSAGE value="Added compileMission Button, and other minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added compileMission Button, and other minor changes" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -599,6 +620,16 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/defaultMission.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="16" lean-forward="true" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ESMB.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -606,20 +637,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/defaultMission.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/menuactions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="16" lean-forward="true" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+        <state relative-caret-position="404">
+          <caret line="98" column="22" selection-start-line="98" selection-start-column="22" selection-end-line="98" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -632,8 +653,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-186">
-          <caret line="166" column="63" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
+        <state relative-caret-position="290">
+          <caret line="187" column="91" selection-start-line="187" selection-start-column="91" selection-end-line="187" selection-end-column="91" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#1376#2314#1" />

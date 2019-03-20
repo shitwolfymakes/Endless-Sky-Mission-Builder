@@ -42,6 +42,8 @@ class GUI(object):
         self.centerFrame  = None
         self.missionFrame = None
 
+        self.description = ""
+
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
         self.buildMainView(self.gui)
@@ -182,8 +184,9 @@ class GUI(object):
         descriptionCheckbox = ttk.Checkbutton(self.centerFrame)
         descriptionCheckbox.grid(row=3, column=1)
 
-        description = StringVar()
-        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=description, state="disabled")
+        self.description = StringVar()          # GOTTA KEEP DESCRIPTION AS AN INSTANCE VARIABLE,
+        self.description.set("<description>")   #     BECAUSE FUCK YOU, GARBAGE COLLECTION.
+        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=self.description, state="disabled")
         descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
         # isBlocked label
@@ -200,6 +203,8 @@ class GUI(object):
 
         isBlockedMessageCheckbox = ttk.Checkbutton(self.centerFrame)
         isBlockedMessageCheckbox.grid(row=6, column=1)
+
+        # Deadline label
 
         print("Done.")
         self.populateComponentSelections()
