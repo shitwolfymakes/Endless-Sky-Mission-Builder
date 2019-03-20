@@ -205,6 +205,11 @@ class GUI(object):
         isBlockedMessageCheckbox.grid(row=6, column=1)
 
         # Deadline label
+        deadlineLabel = ttk.Label(self.centerFrame, text="Deadline")
+        deadlineLabel.grid(row=7, column=0, sticky="ew")
+
+        deadlineCheckbutton = ttk.Checkbutton(self.centerFrame)
+        deadlineCheckbutton.grid(row=7, column=1)
 
         print("Done.")
         self.populateComponentSelections()
