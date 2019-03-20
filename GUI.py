@@ -156,6 +156,7 @@ class GUI(object):
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
         indent = 20
+        off = "disabled"
 
         # Print the default mission name
         self.cfTitleText.set("Mission Options")
@@ -165,7 +166,6 @@ class GUI(object):
         #TODO: break these of into separate functions once everything's working
 
         # Display name
-
         displayNameLabel = ttk.Label(self.centerFrame, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
 
@@ -173,11 +173,10 @@ class GUI(object):
         displayNameCheckbutton.grid(row=1, column=1)
 
         displayName = StringVar()
-        displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName, state="disabled")
+        displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName, state=off)
         displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
-        # Description label
-
+        # Description
         descriptionLabel = ttk.Label(self.centerFrame, text="Description")
         descriptionLabel.grid(row=3, column=0, sticky="ew")
 
@@ -186,11 +185,10 @@ class GUI(object):
 
         self.description = StringVar()          # GOTTA KEEP DESCRIPTION AS AN INSTANCE VARIABLE,
         self.description.set("<description>")   #     BECAUSE FUCK YOU, GARBAGE COLLECTION.
-        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=self.description, state="disabled")
+        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=self.description, state=off)
         descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
-        # isBlocked label
-
+        # isBlocked
         isBlockedLabel = ttk.Label(self.centerFrame, text="Blocked")
         isBlockedLabel.grid(row=5, column=0, sticky="ew")
 
@@ -198,18 +196,32 @@ class GUI(object):
         isBlockedCheckbutton.grid(row=5, column=1)
 
         isBlockedMessage = StringVar()
-        isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage, state="disabled")
+        isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage, state=off)
         isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
 
         isBlockedMessageCheckbutton = ttk.Checkbutton(self.centerFrame)
         isBlockedMessageCheckbutton.grid(row=6, column=1)
 
-        # Deadline label
+        # Deadline
         deadlineLabel = ttk.Label(self.centerFrame, text="Deadline")
         deadlineLabel.grid(row=7, column=0, sticky="ew")
 
         deadlineCheckbutton = ttk.Checkbutton(self.centerFrame)
         deadlineCheckbutton.grid(row=7, column=1)
+
+        deadlineDays = StringVar()
+        deadlineDaysEntry = ttk.Entry(self.centerFrame, textvariable=deadlineDays, state=off)
+        deadlineDaysEntry.grid(row=8, column=0, sticky="ew", padx=(indent, 0))
+
+        deadlineDaysCheckbutton = ttk.Checkbutton(self.centerFrame)
+        deadlineDaysCheckbutton.grid(row=8, column=1)
+
+        deadlineMultiplier = StringVar()
+        deadlineMultiplierEntry = ttk.Entry(self.centerFrame, textvariable=deadlineMultiplier, state=off)
+        deadlineMultiplierEntry.grid(row=9, column=0, sticky="ew", padx=(indent, 0))
+
+        deadlineMultiplierCheckbutton = ttk.Checkbutton(self.centerFrame)
+        deadlineMultiplierCheckbutton.grid(row=9, column=1)
 
         print("Done.")
         self.populateComponentSelections()
