@@ -71,11 +71,13 @@ def openFile(app):
     missionfile.close()
 # end openFile
 
+
 def printMissionFile(missionfile):
     for line in missionfile:
         print(line, end="")
     #end for
 #end printMissionFile
+
 
 def saveFile(app):
     #TODO: Implement this
@@ -88,7 +90,13 @@ def newFile(app):
     print("Creating new mission...")
 # end newFile
 
+
 def undoAction(app):
     #TODO: Implement this
     print("Undoing last action...")
 # end undoAction
+
+def compileMissionFile(app):
+    #TODO: Implement this
+    print("Compiling mission file...")
+# end compileMission

@@ -82,8 +82,8 @@ class GUI(object):
     #COMPLETE, WORKING
     def buildMainView(self, window):
 
-        optionFrame = ttk.Frame(window)
-        centerFrame = ttk.Frame(window)
+        optionFrame  = ttk.Frame(window)
+        centerFrame  = ttk.Frame(window)
         missionFrame = ttk.Frame(window)
 
         self.optionFrame  = optionFrame
@@ -131,6 +131,9 @@ class GUI(object):
         openMission = ttk.Button(self.optionFrame, text="Open Mission", command=lambda: openFile(self))
         openMission.pack(fill='x')
 
+        compileMission = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMissionFile(self))
+        compileMission.pack(fill='x')
+
         print("Done.")
     #end buildOptionFrame
 
@@ -150,7 +153,7 @@ class GUI(object):
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
-        indent = 10
+        indent = 20
 
         # Print the default mission name
         self.cfTitleText.set("Mission Options")
@@ -168,8 +171,8 @@ class GUI(object):
         displayNameCheckbox.grid(row=1, column=1)
 
         displayName = StringVar()
-        displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName)
-        displayNameEntry.grid(row=2, column=0, sticky="ew", padx=indent)
+        displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName, state="disabled")
+        displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
         # Description label
 
@@ -180,8 +183,8 @@ class GUI(object):
         descriptionCheckbox.grid(row=3, column=1)
 
         description = StringVar()
-        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=description)
-        descriptionEntry.grid(row=4, column=0, sticky="ew", padx=indent)
+        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=description, state="disabled")
+        descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
         # isBlocked label
 
@@ -192,8 +195,8 @@ class GUI(object):
         isBlockedCheckbox.grid(row=5, column=1)
 
         isBlockedMessage = StringVar()
-        isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage)
-        isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=indent)
+        isBlockedMessageEntry = ttk.Entry(self.centerFrame, textvariable=isBlockedMessage, state="disabled")
+        isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
 
         isBlockedMessageCheckbox = ttk.Checkbutton(self.centerFrame)
         isBlockedMessageCheckbox.grid(row=6, column=1)
