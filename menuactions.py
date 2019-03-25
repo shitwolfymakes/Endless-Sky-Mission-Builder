@@ -82,6 +82,13 @@ def printMissionFile(missionfile):
 def saveFile(app):
     #TODO: Implement this
     print("Saving selected file...")
+    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+        return
+    for mission in app.missionList:
+        for line in mission.missionLines:
+            f.write(line)
+    f.close()
 
     print("Done.")
 # end saveFile
