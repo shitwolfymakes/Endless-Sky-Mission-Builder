@@ -18,8 +18,8 @@ def openFile(app):
 
     print("Selecting mission file...")
     f = filedialog.askopenfile()
-    if not f:
-        print("No file selected...")
+    if f is None:  # askopenasfile return `None` if dialog closed with "cancel".
+        return
     print("Opening file: %s\n" % f.name)
 
     with open(f.name) as missionfile:
@@ -82,6 +82,8 @@ def printMissionFile(missionfile):
 def saveFile(app):
     #TODO: Implement this
     print("Saving selected file...")
+
+    print("Done.")
 # end saveFile
 
 
