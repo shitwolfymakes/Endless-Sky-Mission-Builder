@@ -223,6 +223,14 @@ class GUI(object):
         deadlineMultiplierCheckbutton = ttk.Checkbutton(self.centerFrame)
         deadlineMultiplierCheckbutton.grid(row=9, column=1)
 
+        # cargo
+        '''
+        cargoLabel = ttk.Label(self.centerFrame, text="Cargo")
+        cargoLabel.grid(row=10, column=0, sticky="ew")
+
+        cargoCheckbutton = ttk.Checkbutton(self.centerFrame)
+        cargoCheckbutton.grid(row=10, column=1)
+        '''
         print("Done.")
         self.populateComponentSelections()
     #end buildComponentsOnCenterFrame

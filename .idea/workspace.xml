@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,12 +37,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="211" column="48" selection-start-line="211" selection-start-column="48" selection-end-line="211" selection-end-column="48" />
+            <state relative-caret-position="383">
+              <caret line="232" column="11" selection-start-line="232" selection-start-column="11" selection-end-line="232" selection-end-column="11" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#1376#2314#1" />
-                <element signature="e#4920#6140#0" />
               </folding>
             </state>
           </provider>
@@ -475,7 +475,28 @@
       <option name="project" value="LOCAL" />
       <updated>1553117404019</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Added deadline checkbutton">
+      <created>1553117797841</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1553117797841</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Fixed variable names to better reflect what they are">
+      <created>1553117896093</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1553117896093</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added deadline component">
+      <created>1553118844852</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1553118844852</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
@@ -563,9 +584,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Implemented displaying of missionLines in the missionFrame" />
-    <MESSAGE value="Cleaned up and overhauled missionTextBox" />
-    <MESSAGE value="Replaced original cascading menu with buttons in optionPane" />
     <MESSAGE value="Removed TODOs that have been completed" />
     <MESSAGE value="FINALLY GOT THE FUCKING FRAMES TO EXPAND RIGHT" />
     <MESSAGE value="Edited centerFrame label text to be more descriptive" />
@@ -588,7 +606,10 @@
     <MESSAGE value="Minor changes" />
     <MESSAGE value="Added compileMission Button, and other minor changes" />
     <MESSAGE value="Finally figured out how to set default Entry text" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finally figured out how to set default Entry text" />
+    <MESSAGE value="Added deadline checkbutton" />
+    <MESSAGE value="Fixed variable names to better reflect what they are" />
+    <MESSAGE value="Added deadline component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added deadline component" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -659,12 +680,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="211" column="48" selection-start-line="211" selection-start-column="48" selection-end-line="211" selection-end-column="48" />
+        <state relative-caret-position="383">
+          <caret line="232" column="11" selection-start-line="232" selection-start-column="11" selection-end-line="232" selection-end-column="11" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#1376#2314#1" />
-            <element signature="e#4920#6140#0" />
           </folding>
         </state>
       </provider>
