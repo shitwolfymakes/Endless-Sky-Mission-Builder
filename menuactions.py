@@ -12,6 +12,11 @@ from Mission import *
 def openFile(app):
     #TODO: IMPLEMENT THIS - ~99% completed (may need changes)
 
+    #TODO: add handling for "event" items inside missionfile
+    #    NOTE: EVENTS ARE STORED IN THE MISSION FILE, BUT ARE
+    #    COMPLETELY SEPARATE FROM MISSIONS. SAVE HANDLING
+    #    THESE FOR VERSION 3
+
     # empty the missionList
     app.missionList             = []
     app.missionNameToObjectDict = {}
@@ -29,7 +34,9 @@ def openFile(app):
 
     # populate the missionList object
     i = 0
-    match = re.compile(r'^ *mission')
+    eventLine = False
+    matchMission = re.compile(r'^ *mission')
+    matchEvent = re.compile(r'^ *event')
     for line in missionLines:
         # print(line, end="")
         # quick and dirty, may need validation later
@@ -44,7 +51,11 @@ def openFile(app):
             continue
         # end if
 
-        if re.search(match, line):
+        # EVENTLINE SENTINEL IS NECESSARY TO KEEP EVENT OBJECTS FROM BEING ADDED TO
+        #     MISSIONFILE ERRONEOUSLY
+
+        if re.search(matchMission, line):
+            eventLine = False
             # print(line, end="")
             tokens     = shlex.split(line)
             newMission = Mission(tokens[1])
@@ -52,7 +63,13 @@ def openFile(app):
             app.missionNameToObjectDict.update({newMission.missionName : newMission})
             i += 1
             continue
+        elif re.search(matchEvent, line):
+            print("EVENT FOUND IN FILE")
+            eventLine = True
+            continue
         else:
+            if eventLine is True:
+                continue
             app.missionList[i - 1].addLine(line)
         # end if/else
 
@@ -88,6 +105,7 @@ def saveFile(app):
     for mission in app.missionList:
         for line in mission.missionLines:
             f.write(line)
+        f.write("\n\n\n")       # add whitespace between missions
     f.close()
 
     print("Done.")
