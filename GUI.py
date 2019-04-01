@@ -247,7 +247,7 @@ class GUI(object):
     #end buildComponentsOnCenterFrame
 
     def cbValueChanged(self, modifiedEntrybox):
-        print("test, value of %s is:" % modifiedEntrybox.__str__(), end="  ")
+        print("test, value of %s is:" % modifiedEntrybox.__str__(), end="\t\t")
         print(self.entryState.get())
         if self.entryState.get() is True:
             modifiedEntrybox.config(state='enabled')
@@ -320,7 +320,7 @@ class GUI(object):
 
     def updateCenterFrame(self, activeM):
         #TODO: Implement this
-        print("Updating centerFrame...")
+        print("Updating centerFrame...", end="\t\t")
         self.cfTitleText.set(str(activeM.missionName))
         print("Done.")
     #end updateCenterFrame
@@ -328,7 +328,7 @@ class GUI(object):
 
     def updateMissionFrame(self, activeM):
         #TODO: Implement this - ~75% Completed
-        print("Updating missionFrame")
+        print("Updating missionFrame...", end="\t\t")
 
         # delete the old Canvas and ScrollBars
         self.missionTextBox.pack_forget()
