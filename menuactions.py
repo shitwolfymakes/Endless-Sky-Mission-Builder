@@ -7,6 +7,7 @@ import re, shlex
 from tkinter import filedialog
 
 from Mission import *
+from popupWindow import popupWindow
 
 
 def openFile(app):
@@ -115,6 +116,8 @@ def saveFile(app):
 def newFile(app):
     #TODO: Implement this
     print("Creating new mission...")
+    popupWindow(app.gui, "Enter new nission name:")
+
 # end newFile
 
 
