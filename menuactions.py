@@ -98,7 +98,7 @@ def printMissionFile(missionfile):
 
 
 def saveFile(app):
-    #TODO: Implement this
+    #TODO: Implement this - ~75% completed
     print("Saving selected file...")
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
@@ -114,7 +114,7 @@ def saveFile(app):
 
 
 def newFile(app):
-    #TODO: Implement this
+    #TODO: Implement this - ~50% completed
     print("Creating new mission...")
     popupWindow(app.gui, "Enter new nission name:")
 
