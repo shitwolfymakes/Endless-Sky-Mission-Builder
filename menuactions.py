@@ -62,6 +62,7 @@ def openFile(app):
             newMission = Mission(tokens[1])
             app.missionList.append(newMission)
             app.missionNameToObjectDict.update({newMission.missionName : newMission})
+            app.missionList[i].addLine(line)
             i += 1
             continue
         elif re.search(matchEvent, line):
