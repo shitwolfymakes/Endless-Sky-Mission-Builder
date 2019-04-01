@@ -28,9 +28,19 @@ class GUI(object):
         # declare optionFrame components
         self.missionComboBox = None
 
+
         # declare centerFrame components
         self.cfTitle     = ""
         self.cfTitleText = StringVar()
+
+        self.entryState = BooleanVar()
+
+        self.displayNameCheckbutton = None
+        self.displayName            = None
+        self.displayNameEntry       = None
+
+        self.description = ""
+
 
         # declare missionFrame components
         self.mfTitle        = ""
@@ -42,7 +52,6 @@ class GUI(object):
         self.centerFrame  = None
         self.missionFrame = None
 
-        self.description = ""
 
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
@@ -169,12 +178,14 @@ class GUI(object):
         displayNameLabel = ttk.Label(self.centerFrame, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
 
-        displayNameCheckbutton = ttk.Checkbutton(self.centerFrame)
-        displayNameCheckbutton.grid(row=1, column=1)
+        self.displayNameCheckbutton = ttk.Checkbutton(self.centerFrame,
+                                                      command=lambda: self.cbValueChanged(self.displayNameEntry),
+                                                      variable=self.entryState, onvalue=1, offvalue=0)
+        self.displayNameCheckbutton.grid(row=1, column=1)
 
-        displayName = StringVar()
-        displayNameEntry = ttk.Entry(self.centerFrame, textvariable=displayName, state=off)
-        displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
+        self.displayName = StringVar()
+        self.displayNameEntry = ttk.Entry(self.centerFrame, textvariable=self.displayName, state=off)
+        self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
         # Description
         descriptionLabel = ttk.Label(self.centerFrame, text="Description")
@@ -234,6 +245,15 @@ class GUI(object):
         print("Done.")
         self.populateComponentSelections()
     #end buildComponentsOnCenterFrame
+
+    def cbValueChanged(self, modifiedEntrybox):
+        print("test, value of %s is:" % modifiedEntrybox.__str__(), end="  ")
+        print(self.entryState.get())
+        if self.entryState.get() is True:
+            modifiedEntrybox.config(state='enabled')
+        if self.entryState.get() is False:
+            modifiedEntrybox.config(state='disabled')
+    #end cbValueChanged
 
 
     def populateComponentSelections(self):
