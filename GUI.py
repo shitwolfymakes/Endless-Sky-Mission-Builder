@@ -337,34 +337,20 @@ class GUI(object):
         self.missionTextBox.insert(END, activeM.printMissionLinesToText())
 
         # add scrollbars
-        #self.addScrollbars(self.missionFrame)
     #end updateTextCanvas
 
 
     ### MISC METHODS ###
 
-    # COMPLETE, BUGGY
+    # COMPLETE, WORKING
     def missionSelected(self, event):
         #TODO: Fix Bug!
         selectedMissionName = self.missionComboBox.get()
-        print('Opening mission "%s"' % selectedMissionName)
+        print('\nOpening mission "%s"' % selectedMissionName)
 
         newActiveMission = self.missionNameToObjectDict.get(selectedMissionName)
         self.updateCenterFrame(newActiveMission)
         self.updateMissionFrame(newActiveMission)
     #end missionSelected
-
-
-    def addScrollbars(self, missionFrame):
-        #TODO: Implement this
-        self.hbar = Scrollbar(missionFrame, orient=HORIZONTAL)
-        self.hbar.pack(side=BOTTOM, fill=X)
-        self.hbar.config(command=self.missionTextBox.xview)
-        self.vbar = Scrollbar(missionFrame, orient=VERTICAL)
-        self.vbar.pack(side=RIGHT, fill=Y)
-        self.vbar.config(command=self.missionTextBox.yview)
-        self.missionTextBox.config(xscrollcommand=self.hbar.set, yscrollcommand=self.vbar.set)
-        self.missionTextBox.pack(side=LEFT, expand=True, fill=BOTH)
-    #end addScrollbars
 
 #end class GUI
