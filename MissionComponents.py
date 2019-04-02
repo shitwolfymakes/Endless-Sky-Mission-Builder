@@ -6,6 +6,22 @@ class MissionComponents(object):
 
     def __init__(self):
         print("component %s initialized" % self.__class__)
+
+        self.missionDisplayName = None                          # mission <name>
+        self.description        = None                          # description <text>
+        self.blocked            = None                          # blocked <message>
+        self.deadline           = [None, None]                  # deadline [<days> [<multiplier>]]
+
+        self.isInvisible        = False                         # invisible
+        self.priorityMinor      = None                          # (priority | minor)
+        self.whereShown         = None                          # (job | landing | assisting | boarding)
+        self.repeat             = None                          # repeat [<number>]
+
+        self.isInfiltrating     = False                         # infiltrating
+        self.waypoint           = None                          # waypoint <system>
+        self.stopover           = [[None, None],                # stopover [<planet>]
+                                   [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###
+
     #end init
 
 #end class MissionComponents
@@ -25,6 +41,9 @@ class Cargo(object):
 
 
 class Passengers(object):
+    '''
+    self.passengers = [None, None, None]   # passengers <number> [<number> [<probability>]]
+    '''
 
     def __init__(self):
         print("component %s initialized" % self.__class__)
@@ -34,7 +53,10 @@ class Passengers(object):
 
 
 class Clearance(object):
-
+    '''
+    self.clearance = [[None, None],                # clearance [<message>]
+                      [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###
+    '''
     def __init__(self):
         print("component %s initialized" % self.__class__)
     # end init
@@ -43,7 +65,10 @@ class Clearance(object):
 
 
 class Stopover(object):
-
+    '''
+    self.stopover = [[None, None],                # stopover [<planet>]
+                     [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###
+    '''
     def __init__(self):
         print("component %s initialized" % self.__class__)
     # end init

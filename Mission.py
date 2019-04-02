@@ -65,32 +65,4 @@ class Mission(object):
         print("Done.")
     #end parseMission
 
-
-    def declareKeywords(self):
-        #TODO: Implement this
-
-        #TODO: convert the multipart keywords to bespoke objects
-        ### DECLARE MISSION KEYWORDS ###
-        missionDisplayName  = None                          # mission <name>
-        description         = None                          # description <text>
-        blocked             = None                          # blocked <message>
-        deadline            = [ None, None ]                # deadline [<days> [<multiplier>]]
-        cargo               = [ [None, None, [None, None]], # cargo (random | <name>) <number> [<number> [<probability>]]
-                                [None, None, None],         #     illegal <fine> [<message>]
-                                None ]                      #     stealth
-        passengers          = [ None, None, None ]          # passengers <number> [<number> [<probability>]]
-        isInvisible         = False                         # invisible
-        priorityMinor       = None                          # (priority | minor)
-        whereShown          = None                          # (job | landing | assisting | boarding)
-        repeat              = None                          # repeat [<number>]
-        clearance           = [ [None, None],               # clearance [<message>]
-                                [None, None] ]              # attributes ...        ### THIS MAY NEED WORK ###
-        isInfiltrating      = False                         # infiltrating
-        waypoint            = None                          # waypoint <system>
-        stopover            = [ [None, None],               # stopover [<planet>]
-                                [None, None] ]              # attributes ...        ### THIS MAY NEED WORK ###
-
-
-    #end declareKeywords
-
 #end class Mission
