@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mission.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MissionComponents.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionComponents.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,10 +38,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
+            <state relative-caret-position="597">
               <caret line="249" column="66" selection-start-line="249" selection-start-column="66" selection-end-line="249" selection-end-column="66" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
@@ -62,17 +63,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
+            <state relative-caret-position="329">
+              <caret line="61" column="49" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+            <state relative-caret-position="339">
+              <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -110,12 +111,12 @@
         <option value="$PROJECT_DIR$/save.py" />
         <option value="$PROJECT_DIR$/Components.py" />
         <option value="$PROJECT_DIR$/ESMB.py" />
-        <option value="$PROJECT_DIR$/MissionComponents.py" />
         <option value="$PROJECT_DIR$/venv/popupWindow.py" />
         <option value="$PROJECT_DIR$/popupWindow.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
-        <option value="$PROJECT_DIR$/Mission.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
+        <option value="$PROJECT_DIR$/Mission.py" />
+        <option value="$PROJECT_DIR$/MissionComponents.py" />
       </list>
     </option>
   </component>
@@ -225,20 +226,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Mission combobox updates properly when new mission file is opened">
-      <created>1548177463819</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1548177463819</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Implemented basic updateCenterFrame/updateMissionFrame functionality">
-      <created>1548181518304</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1548181518304</updated>
     </task>
     <task id="LOCAL-00004" summary="fixed comments">
       <created>1548263474864</created>
@@ -569,7 +556,21 @@
       <option name="project" value="LOCAL" />
       <updated>1554224680708</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Bug magically vanished. No idea how.">
+      <created>1554225446132</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1554225446132</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Did some work on MissionComponents">
+      <created>1554226068804</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1554226068805</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView">
@@ -657,8 +658,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Turned canvas code into a singleton" />
-    <MESSAGE value="Turned canvas code into a singleton - fixed bug" />
     <MESSAGE value="Added TODO" />
     <MESSAGE value="Removed completed TODOs" />
     <MESSAGE value="Added a class and a TODO" />
@@ -682,7 +681,9 @@
     <MESSAGE value="Bug fix" />
     <MESSAGE value="Minor changes" />
     <MESSAGE value="Converted missionTextBox from a Canvas to a Text widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Converted missionTextBox from a Canvas to a Text widget" />
+    <MESSAGE value="Bug magically vanished. No idea how." />
+    <MESSAGE value="Did some work on MissionComponents" />
+    <option name="LAST_COMMIT_MESSAGE" value="Did some work on MissionComponents" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -724,17 +725,10 @@
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+    <entry file="file://$PROJECT_DIR$/ESMB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/popupWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        <state relative-caret-position="300">
+          <caret line="20" column="15" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -748,28 +742,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ESMB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="15" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
+        <state relative-caret-position="597">
           <caret line="249" column="66" selection-start-line="249" selection-start-column="66" selection-end-line="249" selection-end-column="66" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#1624#2562#1" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popupWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="61" column="49" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
         </state>
       </provider>
     </entry>

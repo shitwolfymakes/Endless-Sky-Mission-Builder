@@ -7,7 +7,6 @@ class Mission(object):
     def __init__(self, missionName, default=False):
         #TODO: set up MissionComponents at launch
         print("Loading mission:", missionName)
-        self.declareKeywords()
         self.components = MissionComponents.MissionComponents()
 
         if default is False:
@@ -60,8 +59,7 @@ class Mission(object):
 
     def parseMission(self):
         #TODO: IMPLEMENT THIS
-        print("Parsing mission...", end="\t\t")
-
+        print("Parsing mission...", end="\t\t\t")
         print("Done.")
     #end parseMission
 
