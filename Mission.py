@@ -44,10 +44,18 @@ class Mission(object):
     #end addLine
 
 
-    def printMission(self):
+    def printMissionToConsole(self):
         #TODO: IMPLEMENT THIS
         print(self.missionLines)
     #end printMission
+
+
+    def printMissionLinesToText(self):
+        missionText = ""
+        for line in self.missionLines:
+            missionText+=str(line)
+        return missionText
+    #end printMissionLinesToText
 
 
     def parseMission(self):
