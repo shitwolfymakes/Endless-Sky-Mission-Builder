@@ -17,7 +17,9 @@ class Mission(object):
             self.missionName  = missionName
         else:
             self.setDefaultValues(missionName)
-            self.missionLines.append("THIS IS A NEWLY CREATED DEFAULT MISSION")
+            self.missionLines.append("mission \"%s\"\n" % missionName)
+            self.missionLines.append("-THIS IS A NEWLY CREATED DEFAULT MISSION\n")
+            self.missionLines.append("-REMOVE THIS AFTER PARSER IS DONE\n")
             #self.parseMission()
 
         # TODO: Build a parseMission thing
