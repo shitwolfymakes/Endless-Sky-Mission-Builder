@@ -7,13 +7,14 @@ class Mission(object):
     def __init__(self, missionName, default=False):
         #TODO: set up MissionComponents at launch
         print("Loading mission:", missionName)
-        self.components = MissionComponents.MissionComponents()
+
+        self.components   = MissionComponents.MissionComponents()
+        self.missionLines = []  # List of the mission text
+        self.convoList    = []  # List of lists containing one
+                                # conversation section per element
 
         if default is False:
             self.missionName  = missionName
-            self.missionLines = []              # List of the mission text
-            self.convoList    = []              # List of lists containing one
-                                                # conversation section per element
         else:
             self.setDefaultValues(missionName)
             #self.parseMission()
@@ -24,16 +25,12 @@ class Mission(object):
 
 
     def setDefaultValues(self, missionName):
-        #print("Loading Mission:", missionName)
         #TODO: Implement this
-
-        #TODO: Fill this from default mission
-        self.missionLines = []      # List of the mission text
-
-        # TODO: Fill this from default mission
-        self.convoList = []         # List of lists containing one
-                                    # conversation section per element
         self.missionName = missionName
+
+        #TODO: Fill missionLines from default mission
+
+        #TODO: Fill convoList from default mission
     #end setDefaultValues
 
 
