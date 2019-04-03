@@ -38,13 +38,15 @@ class GUI(object):
         self.cfTitle     = ""
         self.cfTitleText = StringVar()
 
-        self.entryState = BooleanVar()
-
+        self.displayNameEntryState  = BooleanVar()
         self.displayNameCheckbutton = None
         self.displayName            = None
         self.displayNameEntry       = None
 
-        self.description = ""
+        self.descriptionEntryState  = BooleanVar()
+        self.descriptionCheckbutton = None
+        self.description            = StringVar()
+        self.descriptionEntry       = None
 
 
         # declare missionFrame components
@@ -131,19 +133,19 @@ class GUI(object):
         # set default values here
 
         #add "new mission" button
-        newMission = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newFile(self))
-        newMission.pack(fill='x')
+        newMissionButton = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newMission(self))
+        newMissionButton.pack(fill='x')
 
         #add "save mission" button
-        saveMission = ttk.Button(self.optionFrame, text="Save Mission", command=lambda: saveFile(self))
-        saveMission.pack(fill='x')
+        saveMissionFileButton = ttk.Button(self.optionFrame, text="Save Mission", command=lambda: saveFile(self))
+        saveMissionFileButton.pack(fill='x')
 
         #add "open mission" button
-        openMission = ttk.Button(self.optionFrame, text="Open Mission", command=lambda: openFile(self))
-        openMission.pack(fill='x')
+        openMissionFileButton = ttk.Button(self.optionFrame, text="Open Mission", command=lambda: openFile(self))
+        openMissionFileButton.pack(fill='x')
 
-        compileMission = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMissionFile(self))
-        compileMission.pack(fill='x')
+        compileMissionFileButton = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMissionFile(self))
+        compileMissionFileButton.pack(fill='x')
 
         print("Done.")
     #end buildOptionFrame
@@ -179,8 +181,9 @@ class GUI(object):
         displayNameLabel.grid(row=1, column=0, sticky="ew")
 
         self.displayNameCheckbutton = ttk.Checkbutton(self.centerFrame,
-                                                      command=lambda: self.cbValueChanged(self.displayNameEntry),
-                                                      variable=self.entryState, onvalue=1, offvalue=0)
+                                                      command=lambda: self.cbValueChanged(self.displayNameEntry,
+                                                                                          self.displayNameEntryState),
+                                                      variable=self.displayNameEntryState, onvalue=1, offvalue=0)
         self.displayNameCheckbutton.grid(row=1, column=1)
 
         self.displayName = StringVar()
@@ -191,13 +194,16 @@ class GUI(object):
         descriptionLabel = ttk.Label(self.centerFrame, text="Description")
         descriptionLabel.grid(row=3, column=0, sticky="ew")
 
-        descriptionCheckbutton = ttk.Checkbutton(self.centerFrame)
-        descriptionCheckbutton.grid(row=3, column=1)
+        self.descriptionCheckbutton = ttk.Checkbutton(self.centerFrame,
+                                                      command=lambda: self.cbValueChanged(self.descriptionEntry,
+                                                                                          self.descriptionEntryState),
+                                                      variable=self.descriptionEntryState, onvalue=1, offvalue=0)
+        self.descriptionCheckbutton.grid(row=3, column=1)
 
         self.description = StringVar()          # GOTTA KEEP DESCRIPTION AS AN INSTANCE VARIABLE,
         self.description.set("<description>")   #     BECAUSE FUCK YOU, GARBAGE COLLECTION.
-        descriptionEntry = ttk.Entry(self.centerFrame, textvariable=self.description, state=off)
-        descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
+        self.descriptionEntry = ttk.Entry(self.centerFrame, textvariable=self.description, state=off)
+        self.descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
         # isBlocked
         isBlockedLabel = ttk.Label(self.centerFrame, text="Blocked")
@@ -246,12 +252,12 @@ class GUI(object):
         self.populateComponentSelections()
     #end buildComponentsOnCenterFrame
 
-    def cbValueChanged(self, modifiedEntrybox):
+    def cbValueChanged(self, modifiedEntrybox, entryState):
         print("test, value of %s is:" % modifiedEntrybox.__str__(), end="\t\t")
-        print(self.entryState.get())
-        if self.entryState.get() is True:
+        print(entryState.get())
+        if entryState.get() is True:
             modifiedEntrybox.config(state='enabled')
-        if self.entryState.get() is False:
+        if entryState.get() is False:
             modifiedEntrybox.config(state='disabled')
     #end cbValueChanged
 
@@ -312,7 +318,7 @@ class GUI(object):
     def updateCenterFrame(self, activeM):
         #TODO: Implement this
         print("Updating centerFrame...", end="\t\t")
-        self.cfTitleText.set(str(activeM.missionName))
+        #self.cfTitleText.set(str(activeM.missionName))
         print("Done.")
     #end updateCenterFrame
 
@@ -353,4 +359,9 @@ class GUI(object):
         self.updateMissionFrame(newActiveMission)
     #end missionSelected
 
+    def addMission(self, mission):
+        print("Adding Mission: %s..." %mission.missionName, end="\t\t")
+        self.missionList.append(mission)
+        print("Done")
+        self.updateOptionFrame()
 #end class GUI

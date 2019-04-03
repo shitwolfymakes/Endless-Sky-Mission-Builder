@@ -1,9 +1,10 @@
 from tkinter import *
+from Mission import *
 
 class popupWindow(object):
-    def __init__(self, master, text):
+    def __init__(self, app, master, text):
+        self.app = app
         top = self.top = Toplevel(master)
-        self.value = ""
         self.l = Label(top, text=text, bg='white')
         self.l.pack()
         self.e = Entry(top)
@@ -14,7 +15,9 @@ class popupWindow(object):
 
 
     def cleanup(self):
-        self.value = self.e.get()
+        value = str(self.e.get())
+        newMission = Mission(value, default=True)
+        self.app.addMission(newMission)
         self.top.destroy()
 
     #end cleanup

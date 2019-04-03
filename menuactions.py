@@ -114,11 +114,10 @@ def saveFile(app):
 # end saveFile
 
 
-def newFile(app):
+def newMission(app):
     #TODO: Implement this - ~50% completed
     print("Creating new mission...")
-    popupWindow(app.gui, "Enter new nission name:")
-
+    popupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
 
@@ -129,5 +128,7 @@ def undoAction(app):
 
 def compileMissionFile(app):
     #TODO: Implement this
-    print("Compiling mission file...")
+    print("THIS IS NOT IMPLEMENTED YET")
+    print("Compiling mission file...", end="\t\t")
+    print("Done.")
 # end compileMission

@@ -6,7 +6,7 @@ class Mission(object):
 
     def __init__(self, missionName, default=False):
         #TODO: set up MissionComponents at launch
-        print("Loading mission:", missionName)
+        print("Building mission:", missionName)
 
         self.components   = MissionComponents.MissionComponents()
         self.missionLines = []  # List of the mission text
@@ -31,6 +31,7 @@ class Mission(object):
         #TODO: Fill missionLines from default mission
 
         #TODO: Fill convoList from default mission
+        self.convoList.append("THIS IS A NEWLY CREATED MISSION")
     #end setDefaultValues
 
 
