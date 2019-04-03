@@ -318,7 +318,7 @@ class GUI(object):
     def updateCenterFrame(self, activeM):
         #TODO: Implement this
         print("Updating centerFrame...", end="\t\t")
-        #self.cfTitleText.set(str(activeM.missionName))
+        self.cfTitleText.set(str(activeM.missionName))
         print("Done.")
     #end updateCenterFrame
 
@@ -359,9 +359,12 @@ class GUI(object):
         self.updateMissionFrame(newActiveMission)
     #end missionSelected
 
-    def addMission(self, mission):
-        print("Adding Mission: %s..." %mission.missionName, end="\t\t")
+    def addMission(self, newMissionName):
+        print(self.missionNameToObjectDict)
+        print("Adding mission: \"%s\"..." % newMissionName, end="\t\t")
+        mission = Mission(newMissionName, default=True)
         self.missionList.append(mission)
-        print("Done")
+        self.missionNameToObjectDict.update({mission.missionName: mission})
+        print("Done.")
         self.updateOptionFrame()
 #end class GUI

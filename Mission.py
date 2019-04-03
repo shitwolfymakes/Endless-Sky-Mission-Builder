@@ -17,6 +17,7 @@ class Mission(object):
             self.missionName  = missionName
         else:
             self.setDefaultValues(missionName)
+            self.missionLines.append("THIS IS A NEWLY CREATED DEFAULT MISSION")
             #self.parseMission()
 
         # TODO: Build a parseMission thing
@@ -31,7 +32,7 @@ class Mission(object):
         #TODO: Fill missionLines from default mission
 
         #TODO: Fill convoList from default mission
-        self.convoList.append("THIS IS A NEWLY CREATED MISSION")
+
     #end setDefaultValues
 
 

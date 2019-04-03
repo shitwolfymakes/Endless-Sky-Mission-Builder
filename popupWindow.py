@@ -1,5 +1,4 @@
 from tkinter import *
-from Mission import *
 
 class popupWindow(object):
     def __init__(self, app, master, text):
@@ -15,9 +14,8 @@ class popupWindow(object):
 
 
     def cleanup(self):
-        value = str(self.e.get())
-        newMission = Mission(value, default=True)
-        self.app.addMission(newMission)
+        value = self.e.get()
+        self.app.addMission(value)
         self.top.destroy()
 
     #end cleanup
