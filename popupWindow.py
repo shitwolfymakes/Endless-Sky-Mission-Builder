@@ -6,6 +6,8 @@ class popupWindow(object):
         self.top = Toplevel(master)
         self.top.title("New Mission")
         self.top.grab_set()             # freezes the app until the user enters or cancels
+
+        # build the widgets
         self.l = Label(self.top, text=text, bg='white')
         self.l.pack()
         self.e = Entry(self.top)

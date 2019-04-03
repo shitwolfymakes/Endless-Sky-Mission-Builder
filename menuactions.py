@@ -11,7 +11,7 @@ from popupWindow import popupWindow
 
 
 def openFile(app):
-    #TODO: IMPLEMENT THIS - ~99% completed (may need changes)
+    #TODO: IMPLEMENT THIS - ~99% completed (Won't be done until events are handled in version 3)
 
     #TODO: add handling for "event" items inside missionfile
     #    NOTE: EVENTS ARE STORED IN THE MISSION FILE, BUT ARE
@@ -91,15 +91,15 @@ def openFile(app):
 # end openFile
 
 
-def printMissionFile(missionfile):
-    for line in missionfile:
+def printMissionFile(missionFile):
+    for line in missionFile:
         print(line, end="")
     #end for
 #end printMissionFile
 
 
 def saveFile(app):
-    #TODO: Implement this - ~75% completed
+    #TODO: Implement this - ~99% completed
     print("Saving selected file...")
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
@@ -115,20 +115,14 @@ def saveFile(app):
 
 
 def newMission(app):
-    #TODO: Implement this - ~50% completed
     print("Creating new mission...")
     popupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
 
-def undoAction(app):
-    #TODO: Implement this
-    print("Undoing last action...")
-# end undoAction
-
-def compileMissionFile(app):
+def compileMission(app):
     #TODO: Implement this
     print("THIS IS NOT IMPLEMENTED YET")
-    print("Compiling mission file...", end="\t\t")
+    print("Compiling mission...", end="\t\t")
     print("Done.")
 # end compileMission

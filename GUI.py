@@ -65,8 +65,8 @@ class GUI(object):
 
     # This may be used later, after shortcuts are introduced
     '''
-    # COMPLETE, WORKING
     def buildMenu(self, window):
+        #TODO: IMPLEMENT THIS
         # creating a menu instance
         menu = Menu()
         window.config(menu=menu)
@@ -92,9 +92,7 @@ class GUI(object):
     #end buildMenu
     '''
 
-    #COMPLETE, WORKING
     def buildMainView(self, window):
-
         optionFrame  = ttk.Frame(window)
         centerFrame  = ttk.Frame(window)
         missionFrame = ttk.Frame(window)
@@ -114,7 +112,6 @@ class GUI(object):
 
 
     def buildOptionFrame(self):
-        #TODO: Implement this - ~50% Completed
         print("Building optionFrame...", end="\t\t")
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
@@ -137,14 +134,14 @@ class GUI(object):
         newMissionButton.pack(fill='x')
 
         #add "save mission" button
-        saveMissionFileButton = ttk.Button(self.optionFrame, text="Save Mission", command=lambda: saveFile(self))
+        saveMissionFileButton = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: saveFile(self))
         saveMissionFileButton.pack(fill='x')
 
         #add "open mission" button
-        openMissionFileButton = ttk.Button(self.optionFrame, text="Open Mission", command=lambda: openFile(self))
+        openMissionFileButton = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: openFile(self))
         openMissionFileButton.pack(fill='x')
 
-        compileMissionFileButton = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMissionFile(self))
+        compileMissionFileButton = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMission(self))
         compileMissionFileButton.pack(fill='x')
 
         print("Done.")
@@ -153,9 +150,8 @@ class GUI(object):
 
     def buildCenterFrame(self):
         print("Building centerFrame...", end="\t\t")
-        self.centerFrame.grid(row=0, column=1, sticky="ns")
 
-        # TODO: Populate frame
+        self.centerFrame.grid(row=0, column=1, sticky="ns")
         self.buildComponentsOnCenterFrame()
 
         print("Done.")
@@ -163,6 +159,7 @@ class GUI(object):
 
 
     def buildComponentsOnCenterFrame(self):
+        #TODO: Implement this - ~25% completed
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
@@ -291,7 +288,6 @@ class GUI(object):
 
 
     def updateOptionFrame(self):
-        #TODO: Implement this - ~50% Completed
         print("\nUpdating optionFrame...")
 
         ### Start updating combobox
@@ -318,31 +314,27 @@ class GUI(object):
     def updateCenterFrame(self, activeM):
         #TODO: Implement this
         print("Updating centerFrame...", end="\t\t")
+
         self.cfTitleText.set(str(activeM.missionName))
+
         print("Done.")
     #end updateCenterFrame
 
 
     def updateMissionFrame(self, activeM):
-        #TODO: Implement this - ~75% Completed
         print("Updating missionFrame...", end="\t")
 
-        # delete the old Canvas and ScrollBars
         self.missionTextBox.forget()
-
-        # print mission text to a Canvas in the missionFrame
-        self.updateTextCanvas(activeM)
+        self.updateMissionTextBox(activeM)
 
         print("Done.")
     #end updateMissionFrame
 
-    def updateTextCanvas(self, activeM):
-        #TODO: Implement this
+
+    def updateMissionTextBox(self, activeM):
         self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
         self.missionTextBox.pack()
         self.missionTextBox.insert(END, activeM.printMissionLinesToText())
-
-        # add scrollbars
     #end updateTextCanvas
 
 
@@ -350,7 +342,6 @@ class GUI(object):
 
     # COMPLETE, WORKING
     def missionSelected(self, event):
-        #TODO: Fix Bug!
         selectedMissionName = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selectedMissionName)
 
@@ -360,11 +351,13 @@ class GUI(object):
     #end missionSelected
 
     def addMission(self, newMissionName):
-        print(self.missionNameToObjectDict)
         print("Adding mission: \"%s\"..." % newMissionName, end="\t\t")
+
         mission = Mission(newMissionName, default=True)
         self.missionList.append(mission)
         self.missionNameToObjectDict.update({mission.missionName: mission})
-        print("Done.")
         self.updateOptionFrame()
+    #end addMission
+
+
 #end class GUI
