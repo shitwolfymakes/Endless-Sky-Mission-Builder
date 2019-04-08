@@ -18,6 +18,8 @@ def openFile(app):
     #    COMPLETELY SEPARATE FROM MISSIONS. SAVE HANDLING
     #    THESE FOR VERSION 3
 
+    #TODO: Add handling for mission preamble
+
     # empty the missionList
     app.missionList             = []
     app.missionNameToObjectDict = {}
