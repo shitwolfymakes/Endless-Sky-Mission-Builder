@@ -144,6 +144,8 @@ class GUI(object):
         compileMissionFileButton = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMission(self))
         compileMissionFileButton.pack(fill='x')
 
+        #TODO: Add functions to change missionName and delete mission. Also, update button grouping to reflect
+
         print("Done.")
     #end buildOptionFrame
 
@@ -165,6 +167,9 @@ class GUI(object):
 
         indent = 20
         off = "disabled"
+        numRow = 0
+
+        #TODO: convert row used to place to a variable, and increment after new things are added
 
         # Print the default mission name
         self.cfTitleText.set("Mission Options")
