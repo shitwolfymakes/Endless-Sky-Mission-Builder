@@ -32,7 +32,7 @@ class GUI(object):
 
         # declare optionFrame components
         self.missionComboBox = None
-
+        self.activeMission   = None
 
         # declare centerFrame components
         self.cfTitle     = ""
@@ -326,38 +326,40 @@ class GUI(object):
         self.missionComboBox.current(0)
         ### Finish updating combobox
 
+        self.activeMission = self.missionList[0]
+
         # update the other two frames to reflect the current mission
-        self.updateCenterFrame(self.missionList[0])
-        self.updateMissionFrame(self.missionList[0])
+        self.updateCenterFrame()
+        self.updateMissionFrame()
 
         print("Done.")
     #end updateOptionFrame
 
 
-    def updateCenterFrame(self, activeM):
+    def updateCenterFrame(self):
         #TODO: Implement this
         print("Updating centerFrame...", end="\t\t")
 
-        self.cfTitleText.set(str(activeM.missionName))
+        self.cfTitleText.set(str(self.activeMission.missionName))
 
         print("Done.")
     #end updateCenterFrame
 
 
-    def updateMissionFrame(self, activeM):
+    def updateMissionFrame(self):
         print("Updating missionFrame...", end="\t")
 
         self.missionTextBox.forget()
-        self.updateMissionTextBox(activeM)
+        self.updateMissionTextBox()
 
         print("Done.")
     #end updateMissionFrame
 
 
-    def updateMissionTextBox(self, activeM):
+    def updateMissionTextBox(self):
         self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
         self.missionTextBox.pack()
-        self.missionTextBox.insert(END, activeM.printMissionLinesToText())
+        self.missionTextBox.insert(END, self.activeMission.printMissionLinesToText())
     #end updateTextCanvas
 
 
@@ -367,10 +369,9 @@ class GUI(object):
     def missionSelected(self, event):
         selectedMissionName = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selectedMissionName)
-
-        newActiveMission = self.missionNameToObjectDict.get(selectedMissionName)
-        self.updateCenterFrame(newActiveMission)
-        self.updateMissionFrame(newActiveMission)
+        self.activeMission = self.missionNameToObjectDict.get(selectedMissionName)
+        self.updateCenterFrame()
+        self.updateMissionFrame()
     #end missionSelected
 
     def addMission(self, newMissionName):
