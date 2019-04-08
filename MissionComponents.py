@@ -13,7 +13,7 @@ class MissionComponents(object):
         self.cargo              = Cargo()
         self.passengers         = Passengers()
         self.isInvisible        = False                         # invisible
-        self.priorityMinor      = None                          # (priority | minor)
+        self.priorityLevel      = None                          # (priority | minor)
         self.whereShown         = None                          # (job | landing | assisting | boarding)
         self.repeat             = None                          # repeat [<number>]
         self.clearance          = Clearance()

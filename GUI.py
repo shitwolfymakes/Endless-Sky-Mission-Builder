@@ -237,7 +237,7 @@ class GUI(object):
         deadlineMultiplierCheckbutton = ttk.Checkbutton(self.centerFrame)
         deadlineMultiplierCheckbutton.grid(row=9, column=1)
 
-        # cargo
+        #TODO: Cargo
         '''
         cargoLabel = ttk.Label(self.centerFrame, text="Cargo")
         cargoLabel.grid(row=10, column=0, sticky="ew")
@@ -245,6 +245,24 @@ class GUI(object):
         cargoCheckbutton = ttk.Checkbutton(self.centerFrame)
         cargoCheckbutton.grid(row=10, column=1)
         '''
+
+        #TODO: Passengers
+
+        #TODO: isInvisible
+
+        #TODO: priorityLevel
+
+        #TODO: whereShown
+
+        #TODO: repeat
+
+        #TODO: Clearance
+
+        #TODO: isInfiltrating
+
+        #TODO: waypoint
+
+        #TODO: stopover
         print("Done.")
         self.populateComponentSelections()
     #end buildComponentsOnCenterFrame
