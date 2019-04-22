@@ -352,7 +352,7 @@ class GUI(object):
         self.cargoStealthCheckbutton.grid(row=15, column=1)
 
 
-        #TODO: Passengers
+        #Passengers
         passengersLabel = ttk.Label(cf, text="Passengers")
         passengersLabel.grid(row=16, column=0, sticky="ew")
         self.passengersCheckbutton = ttk.Checkbutton(cf,

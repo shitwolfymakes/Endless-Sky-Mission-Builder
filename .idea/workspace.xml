@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="Made the active mission an instance variable of the GUI object">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-320">
-              <caret line="321" column="86" selection-start-line="321" selection-start-column="86" selection-end-line="321" selection-end-column="86" />
+            <state relative-caret-position="363">
+              <caret line="420" column="21" selection-start-line="420" selection-start-column="21" selection-end-line="420" selection-end-column="21" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#3031#3975#1" />
@@ -230,13 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Missions now properly load when selected from the combobox">
-      <created>1551132970950</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1551132970950</updated>
     </task>
     <task id="LOCAL-00017" summary="Removed deprecated code from GUI.py">
       <created>1551200350622</created>
@@ -574,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1554735589607</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Added lots more gui items">
+      <created>1555929532311</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1555929532311</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TodoView">
@@ -662,7 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added deadline component" />
     <MESSAGE value="Added initial cargo component" />
     <MESSAGE value="Fixed a bug in openFile" />
     <MESSAGE value="Saves most of the missionfile(still needs preamble and mission names)" />
@@ -687,7 +685,8 @@
     <MESSAGE value="Added TODOs for new functionality" />
     <MESSAGE value="Added TODO for new functionality" />
     <MESSAGE value="Made the active mission an instance variable of the GUI object" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made the active mission an instance variable of the GUI object" />
+    <MESSAGE value="Added lots more gui items" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added lots more gui items" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -757,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -771,10 +763,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-320">
-          <caret line="321" column="86" selection-start-line="321" selection-start-column="86" selection-end-line="321" selection-end-column="86" />
+        <state relative-caret-position="363">
+          <caret line="420" column="21" selection-start-line="420" selection-start-column="21" selection-end-line="420" selection-end-column="21" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#3031#3975#1" />
