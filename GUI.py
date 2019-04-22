@@ -12,7 +12,7 @@ class GUI(object):
 
     def __init__(self):
         print("Building GUI...")
-        self.missionList             = [Mission("Default")]       #TODO: Initialize with template mission on launch
+        self.missionList             = [Mission("Default", default=True)]
         self.missionNameToObjectDict = {"Default" : self.missionList[0]}
         self.missionNames            = []
 
@@ -423,7 +423,7 @@ class GUI(object):
         #TODO: Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
         self.missionTextBox.pack(expand=1, fill='x')
-        self.missionTextBox.insert(END, "TEMP FILTER TEXT")
+        self.missionTextBox.insert(END, self.missionList[0].printMissionLinesToText())
 
         print("Done.")
     #end buildMissionFrame
@@ -462,7 +462,7 @@ class GUI(object):
         #TODO: Implement this
         print("Updating centerFrame...", end="\t\t")
 
-        self.cfTitleText.set(str(self.activeMission.missionName))
+        #self.cfTitleText.set(str(self.activeMission.missionName))
 
         print("Done.")
     #end updateCenterFrame
