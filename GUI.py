@@ -174,7 +174,6 @@ class GUI(object):
         print("Building optionFrame...", end="\t\t")
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
-        # build default values here
         ofTitle = ttk.Label(self.optionFrame, text="Mission")
         ofTitle.pack()
 
@@ -186,17 +185,13 @@ class GUI(object):
         self.missionComboBox.pack()
         self.missionComboBox.current(0)
 
-        # set default values here
-
-        #add "new mission" button
+        # add function buttons
         newMissionButton = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newMission(self))
         newMissionButton.pack(fill='x')
 
-        #add "save mission" button
         saveMissionFileButton = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: saveFile(self))
         saveMissionFileButton.pack(fill='x')
 
-        #add "open mission" button
         openMissionFileButton = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: openFile(self))
         openMissionFileButton.pack(fill='x')
 
@@ -214,6 +209,7 @@ class GUI(object):
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
         self.buildComponentsOnCenterFrame()
+        self.populateComponentSelections()
 
         print("Done.")
     #end buildCenterFrame
@@ -337,9 +333,9 @@ class GUI(object):
         self.cargoFineMessageEntry = ttk.Entry(cf, textvariable=self.cargoFineMessage, state=off)
         self.cargoFineMessageEntry.grid(row=14, column=0, sticky="ew", padx=(indent*2, 0))
         self.cargoFineMessageCheckbutton = ttk.Checkbutton(cf,
-                                                    command=lambda: self.cbValueChanged(self.cargoFineMessageEntryState,
-                                                                                        self.cargoFineMessageEntry),
-                                                    variable=self.cargoFineMessageEntryState, onvalue=1, offvalue=0)
+                                                           command=lambda: self.cbValueChanged(self.cargoFineMessageEntryState,
+                                                                                               self.cargoFineMessageEntry),
+                                                           variable=self.cargoFineMessageEntryState, onvalue=1, offvalue=0)
         self.cargoFineMessageCheckbutton.grid(row=14, column=1)
 
 
@@ -352,7 +348,7 @@ class GUI(object):
         self.cargoStealthCheckbutton.grid(row=15, column=1)
 
 
-        #Passengers
+        # Passengers
         passengersLabel = ttk.Label(cf, text="Passengers")
         passengersLabel.grid(row=16, column=0, sticky="ew")
         self.passengersCheckbutton = ttk.Checkbutton(cf,
@@ -390,7 +386,6 @@ class GUI(object):
 
         #TODO: stopover
         print("Done.")
-        self.populateComponentSelections()
     #end buildComponentsOnCenterFrame
 
 
@@ -410,17 +405,16 @@ class GUI(object):
         print("Done.")
     #end populateComponentSelections
 
-
+    # COMPLETE, WORKING
     def buildMissionFrame(self):
-        #TODO: Implement this - ~75% Completed
         print("Building missionFrame...", end="\t")
 
-        #TODO: Display a default mission template on launch
+        #Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
         mfTitle = ttk.Label(self.missionFrame, text="Mission Text")
         mfTitle.pack()
 
-        #TODO: Populate the Text with a mission template
+        #Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
         self.missionTextBox.pack(expand=1, fill='x')
         self.missionTextBox.insert(END, self.missionList[0].printMissionLinesToText())
@@ -495,6 +489,7 @@ class GUI(object):
         self.updateCenterFrame()
         self.updateMissionFrame()
     #end missionSelected
+
 
     def addMission(self, newMissionName):
         print("Adding mission: \"%s\"..." % newMissionName, end="\t\t")
