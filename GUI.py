@@ -35,8 +35,6 @@ class GUI(object):
         self.activeMission   = None
 
         # declare centerFrame components
-        self.cfTitle     = ""
-        self.cfTitleText = StringVar()
 
         ## displayName
         self.displayNameEntryState  = BooleanVar()
@@ -114,10 +112,7 @@ class GUI(object):
 
 
         # declare missionFrame components
-        self.mfTitle        = ""
         self.missionTextBox = None
-        self.hbar           = None
-        self.vbar           = None
 
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
@@ -180,8 +175,8 @@ class GUI(object):
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
         # build default values here
-        label1 = ttk.Label(self.optionFrame, text="Mission")
-        label1.pack()
+        ofTitle = ttk.Label(self.optionFrame, text="Mission")
+        ofTitle.pack()
 
         self.missionNames.append("Default")
 
@@ -235,9 +230,8 @@ class GUI(object):
         cf = self.centerFrame
 
         # Print the default mission name
-        self.cfTitleText.set("Mission Options")
-        self.cfTitle = ttk.Label(cf, text=self.cfTitleText.get())
-        self.cfTitle.grid(row=0, column=0, sticky="ew")
+        cfTitle = Label(cf, text="Mission Options", bg="#ededed")
+        cfTitle.grid(row=0, column=0, columnspan=2, sticky="ew")
 
         # Display name
         displayNameLabel = ttk.Label(cf, text="Mission Display Name")
@@ -423,8 +417,8 @@ class GUI(object):
 
         #TODO: Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
-        self.mfTitle = Label(self.missionFrame, text="Mission Text")
-        self.mfTitle.pack(expand=1, fill='x')
+        mfTitle = ttk.Label(self.missionFrame, text="Mission Text")
+        mfTitle.pack()
 
         #TODO: Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
