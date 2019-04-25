@@ -28,16 +28,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state relative-caret-position="392">
+              <caret line="499" column="36" selection-start-line="499" selection-start-column="36" selection-end-line="499" selection-end-column="36" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#3031#3975#1" />
-                <element signature="e#7256#17661#0" />
-                <element signature="e#16266#16545#0" />
                 <element signature="e#14435#14520#0" />
-                <element signature="e#15313#15989#0" />
-                <element signature="e#16060#16225#0" />
+                <element signature="e#18001#18723#0" />
               </folding>
             </state>
           </provider>
@@ -73,7 +70,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menuactions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
+            <state relative-caret-position="32">
               <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
               <folding>
                 <element signature="e#101#117#0" expanded="true" />
@@ -232,20 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Minor changes">
-      <created>1551200583016</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1551200583016</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Renamed from Components.py, along with adding a class">
-      <created>1551201275157</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1551201275157</updated>
     </task>
     <task id="LOCAL-00021" summary="Began implementation of components">
       <created>1551498546822</created>
@@ -576,7 +559,21 @@
       <option name="project" value="LOCAL" />
       <updated>1555930735595</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Default mission text now properly displays on launch">
+      <created>1555932571528</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1555932571528</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Cleaned up some stuff">
+      <created>1555933186164</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1555933186164</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TodoView">
@@ -664,8 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Saves most of the missionfile(still needs preamble and mission names)" />
-    <MESSAGE value="Fixed a bug where event text was being added to mission objects" />
     <MESSAGE value="Implemented popup window to input new mission names" />
     <MESSAGE value="Implemented singleton to enabled/disable Entries by modifying corresponding Checkbuttons" />
     <MESSAGE value="Updated TODOs" />
@@ -689,7 +684,9 @@
     <MESSAGE value="Added lots more gui items" />
     <MESSAGE value="Prettied up the UI a bit" />
     <MESSAGE value="Checked off a TODO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Checked off a TODO" />
+    <MESSAGE value="Default mission text now properly displays on launch" />
+    <MESSAGE value="Cleaned up some stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up some stuff" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -756,9 +753,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/menuactions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
+        <state relative-caret-position="32">
           <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
           <folding>
             <element signature="e#101#117#0" expanded="true" />
@@ -767,25 +771,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+        <state relative-caret-position="392">
+          <caret line="499" column="36" selection-start-line="499" selection-start-column="36" selection-end-line="499" selection-end-column="36" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#3031#3975#1" />
-            <element signature="e#7256#17661#0" />
-            <element signature="e#16266#16545#0" />
             <element signature="e#14435#14520#0" />
-            <element signature="e#15313#15989#0" />
-            <element signature="e#16060#16225#0" />
+            <element signature="e#18001#18723#0" />
           </folding>
         </state>
       </provider>

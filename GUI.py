@@ -442,8 +442,6 @@ class GUI(object):
         self.missionComboBox.current(0)
         ### Finish updating combobox
 
-        self.activeMission = self.missionList[0]
-
         # update the other two frames to reflect the current mission
         self.updateCenterFrame()
         self.updateMissionFrame()
@@ -497,6 +495,7 @@ class GUI(object):
         mission = Mission(newMissionName, default=True)
         self.missionList.append(mission)
         self.missionNameToObjectDict.update({mission.missionName: mission})
+        self.activeMission = mission
         self.updateOptionFrame()
     #end addMission
 

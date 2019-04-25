@@ -86,6 +86,8 @@ def openFile(app):
         #mission.printMission()
     # end for
 
+    app.activeMission = app.missionList[0]
+
     app.updateOptionFrame()
 
     # close the file
