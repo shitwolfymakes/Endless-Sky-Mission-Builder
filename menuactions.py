@@ -7,6 +7,7 @@ import re, shlex
 from tkinter import filedialog
 
 from Mission import *
+from MissionCompiler import *
 from popupWindow import popupWindow
 
 
@@ -24,7 +25,7 @@ def openFile(app):
     app.missionList             = []
     app.missionNameToObjectDict = {}
 
-    print("Selecting mission file...")
+    print("\nSelecting mission file...")
     f = filedialog.askopenfile()
     if f is None:  # askopenasfile return `None` if dialog closed with "cancel".
         return
@@ -104,7 +105,7 @@ def printMissionFile(missionFile):
 
 def saveFile(app):
     #TODO: Implement this - ~99% completed
-    print("Saving selected file...")
+    print("\nSaving selected file...")
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
@@ -119,14 +120,14 @@ def saveFile(app):
 
 
 def newMission(app):
-    print("Creating new mission...")
+    print("\nCreating new mission...")
     popupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
 
 def compileMission(app):
     #TODO: Implement this
-    print("THIS IS NOT IMPLEMENTED YET")
-    print("Compiling mission...", end="\t\t")
-    print("Done.")
+    print("\nTHIS IS NOT IMPLEMENTED YET")
+    compiler = MissionCompiler(app)
+    compiler.run()
 # end compileMission
