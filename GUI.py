@@ -111,7 +111,13 @@ class GUI(object):
         self.isInvisibleEntryState = BooleanVar()
         self.isInvisibleCheckbutton = None
 
+        ## priorityLevel
+        self.priorityLevelEntryState = BooleanVar()
+        self.rbPriorityValue         = StringVar()
 
+        self.priorityLevelCheckbutton = None
+        self.rbPriority               = None
+        self.rbMinor                  = None
 
         # declare missionFrame components
         self.missionTextBox = None
@@ -383,6 +389,20 @@ class GUI(object):
 
 
         #TODO: priorityLevel
+        priorityLevelLabel = ttk.Label(cf, text="Priority Level")
+        priorityLevelLabel.grid(row=20, column=0, sticky="ew")
+        self.priorityLevelCheckbutton = ttk.Checkbutton(cf,
+                                                        command=lambda: self.cbValueChanged(self.priorityLevelEntryState,
+                                                                                            "priorityLevelCheckbutton"),
+                                                        variable=self.priorityLevelEntryState, onvalue=1, offvalue=0)
+        self.priorityLevelCheckbutton.grid(row=20, column=1)
+        self.rbPriority = ttk.Radiobutton(cf, text="Priority", variable=self.rbPriorityValue, value="priority",
+                                          command=lambda: self.rbValueChanged(self.rbPriorityValue, self.rbPriority))
+        self.rbPriority.grid(row=21, column=0, sticky="w", padx=(indent, 0))
+        self.rbMinor = ttk.Radiobutton(cf, text="Minor", variable=self.rbPriorityValue, value="minor",
+                                       command=lambda: self.rbValueChanged(self.rbPriorityValue, self.rbMinor))
+        self.rbMinor.grid(row=22, column=0, sticky="w", padx=(indent, 0))
+
 
         #TODO: whereShown
 
@@ -409,6 +429,11 @@ class GUI(object):
         elif entryState.get() is False:
             modifiedWidget.config(state='disabled')
     #end cbValueChanged
+
+    def rbValueChanged(self, radioValue, modifiedWidget):
+        print("The value of %s is:" % radioValue.__str__(), end="\t\t")
+        print(modifiedWidget.cget("value"))
+    #end rbValueChanged
 
 
     def populateComponentSelections(self):
