@@ -7,9 +7,9 @@ so anyone can jump in and start making missions.
 Endless Sky is made by Michael Zahniser.
 
 My Github: https://github.com/shitwolfymakes
+Endless Sky Github: https://github.com/endless-sky/endless-sky
 '''
 
-#TODO: Build a Directed Acyclic Graph library to store the conversation data (Version 2)
 from GUI import *
 
 class ESMB(object):
