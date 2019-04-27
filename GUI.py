@@ -107,7 +107,9 @@ class GUI(object):
         self.passengersOptionalsEntry       = None
         self.passengersOptionalsCheckbutton = None
 
-
+        ## isInvisible
+        self.isInvisibleEntryState = BooleanVar()
+        self.isInvisibleCheckbutton = None
 
 
 
@@ -294,6 +296,7 @@ class GUI(object):
                                                             variable=self.deadlineOptionalsEntryState, onvalue=1, offvalue=0)
         self.deadlineOptionalsCheckbutton.grid(row=8, column=1)
 
+
         #TODO: Cargo - needs some work
         cargoLabel = ttk.Label(cf, text="Cargo")
         cargoLabel.grid(row=9, column=0, sticky="ew")
@@ -328,7 +331,6 @@ class GUI(object):
         self.cargoFineEntry = ttk.Entry(cf, textvariable=self.cargoFine, state=off)
         self.cargoFineEntry.grid(row=13, column=0, sticky="ew", padx=(indent*2, 0))
 
-
         self.cargoFineMessage.set("[<message>]")
         self.cargoFineMessageEntry = ttk.Entry(cf, textvariable=self.cargoFineMessage, state=off)
         self.cargoFineMessageEntry.grid(row=14, column=0, sticky="ew", padx=(indent*2, 0))
@@ -338,12 +340,11 @@ class GUI(object):
                                                            variable=self.cargoFineMessageEntryState, onvalue=1, offvalue=0)
         self.cargoFineMessageCheckbutton.grid(row=14, column=1)
 
-
         cargoStealthLabel = ttk.Label(cf, text="Stealth")
         cargoStealthLabel.grid(row=15, column=0, sticky="ew", padx=(indent, 0))
         self.cargoStealthCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda:self.cbValueChanged(self.cargoStealthEntryState,
-                                                                                          "cargoStealthCheckButton"),
+                                                       command=lambda: self.cbValueChanged(self.cargoStealthEntryState,
+                                                                                           "cargoStealthCheckButton"),
                                                        variable=self.cargoStealthEntryState, onvalue=1, offvalue=0)
         self.cargoStealthCheckbutton.grid(row=15, column=1)
 
@@ -370,7 +371,16 @@ class GUI(object):
                                                               variable=self.passengersOptionalsEntryState, onvalue=1, offvalue=0)
         self.passengersOptionalsCheckbutton.grid(row=18, column=1)
 
-        #TODO: isInvisible
+
+        # isInvisible
+        isInvisibleLabel = ttk.Label(cf, text="Invisible")
+        isInvisibleLabel.grid(row=19, column=0, sticky="ew")
+        self.isInvisibleCheckbutton = ttk.Checkbutton(cf,
+                                                      command=lambda: self.cbValueChanged(self.isInvisibleEntryState,
+                                                                                          "isInvisibleCheckbutton"),
+                                                      variable=self.isInvisibleEntryState, onvalue=1, offvalue=0)
+        self.isInvisibleCheckbutton.grid(row=19, column=1)
+
 
         #TODO: priorityLevel
 
@@ -392,9 +402,11 @@ class GUI(object):
     def cbValueChanged(self, entryState, modifiedWidget):
         print("test, value of %s is:" % modifiedWidget.__str__(), end="\t\t")
         print(entryState.get())
-        if entryState.get() is True:
+        if type(modifiedWidget) is str:
+            print(modifiedWidget + " has no subcomponents")
+        elif entryState.get() is True:
             modifiedWidget.config(state='enabled')
-        if entryState.get() is False:
+        elif entryState.get() is False:
             modifiedWidget.config(state='disabled')
     #end cbValueChanged
 
