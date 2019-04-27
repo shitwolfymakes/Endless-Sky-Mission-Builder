@@ -107,9 +107,11 @@ class GUI(object):
         self.passengersOptionalsEntry       = None
         self.passengersOptionalsCheckbutton = None
 
+
         ## isInvisible
         self.isInvisibleEntryState = BooleanVar()
         self.isInvisibleCheckbutton = None
+
 
         ## priorityLevel
         self.priorityLevelEntryState = BooleanVar()
@@ -118,6 +120,17 @@ class GUI(object):
         self.priorityLevelCheckbutton = None
         self.rbPriority               = None
         self.rbMinor                  = None
+
+        ## whereShown
+        self.whereShownEntryState  = BooleanVar()
+        self.rbWhereShownValue     = StringVar()
+        self.whereShownCheckbutton = None
+
+        self.rbJob       = None
+        self.rbLanding   = None
+        self.rbAssisting = None
+        self.rbBoarding  = None
+
 
         # declare missionFrame components
         self.missionTextBox = None
@@ -388,7 +401,7 @@ class GUI(object):
         self.isInvisibleCheckbutton.grid(row=19, column=1)
 
 
-        #TODO: priorityLevel
+        # priorityLevel
         priorityLevelLabel = ttk.Label(cf, text="Priority Level")
         priorityLevelLabel.grid(row=20, column=0, sticky="ew")
         self.priorityLevelCheckbutton = ttk.Checkbutton(cf,
@@ -404,7 +417,27 @@ class GUI(object):
         self.rbMinor.grid(row=22, column=0, sticky="w", padx=(indent, 0))
 
 
-        #TODO: whereShown
+        # whereShown
+        whereShownLabel = ttk.Label(cf, text="Where to show")
+        whereShownLabel.grid(row=23, column=0, sticky="ew")
+        self.whereShownCheckbutton = ttk.Checkbutton(cf,
+                                                     command=lambda: self.cbValueChanged(self.whereShownEntryState,
+                                                                                         "whereShownCheckbutton"),
+                                                     variable=self.whereShownEntryState, onvalue=1, offvalue=0)
+        self.whereShownCheckbutton.grid(row=23, column=1)
+        self.rbJob = ttk.Radiobutton(cf, text="Job", variable=self.rbWhereShownValue, value="job",
+                                     command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbJob))
+        self.rbJob.grid(row=24, column=0, sticky="w", padx=(indent, 0))
+        self.rbLanding = ttk.Radiobutton(cf, text="Landing", variable=self.rbWhereShownValue, value="landing",
+                                         command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbLanding))
+        self.rbLanding.grid(row=25, column=0, sticky="w", padx=(indent, 0))
+        self.rbAssisting = ttk.Radiobutton(cf, text="Assisting", variable=self.rbWhereShownValue, value="assisting",
+                                           command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbAssisting))
+        self.rbAssisting.grid(row=26, column=0, sticky="w", padx=(indent, 0))
+        self.rbBoarding = ttk.Radiobutton(cf, text="Boarding", variable=self.rbWhereShownValue, value="boarding",
+                                          command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbBoarding))
+        self.rbBoarding.grid(row=27, column=0, sticky="w", padx=(indent, 0))
+
 
         #TODO: repeat
 
@@ -420,16 +453,18 @@ class GUI(object):
 
 
     def cbValueChanged(self, entryState, modifiedWidget):
-        print("test, value of %s is:" % modifiedWidget.__str__(), end="\t\t")
+        print("The value of %s is:" % modifiedWidget.__str__(), end="\t\t")
         print(entryState.get())
         if type(modifiedWidget) is str:
-            print(modifiedWidget + " has no subcomponents")
+            print("")
         elif entryState.get() is True:
             modifiedWidget.config(state='enabled')
         elif entryState.get() is False:
             modifiedWidget.config(state='disabled')
     #end cbValueChanged
 
+
+    #TODO: display name, not "PY_VARXX" (pending SO question)
     def rbValueChanged(self, radioValue, modifiedWidget):
         print("The value of %s is:" % radioValue.__str__(), end="\t\t")
         print(modifiedWidget.cget("value"))
