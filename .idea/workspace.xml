@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ESMB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+            <state relative-caret-position="198">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -27,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="887">
-              <caret line="434" column="43" lean-forward="true" selection-start-line="434" selection-start-column="43" selection-end-line="434" selection-end-column="43" />
+            <state relative-caret-position="397">
+              <caret line="460" column="74" selection-start-line="460" selection-start-column="74" selection-end-line="460" selection-end-column="74" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#3739#4683#1" />
@@ -49,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+            <state relative-caret-position="306">
+              <caret line="17" column="83" lean-forward="true" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -111,11 +112,11 @@
         <option value="$PROJECT_DIR$/venv/popupWindow.py" />
         <option value="$PROJECT_DIR$/defaultMission.txt" />
         <option value="$PROJECT_DIR$/Mission.py" />
-        <option value="$PROJECT_DIR$/ESMB.py" />
         <option value="$PROJECT_DIR$/MissionComponents.py" />
         <option value="$PROJECT_DIR$/popupWindow.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/MissionCompiler.py" />
+        <option value="$PROJECT_DIR$/ESMB.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
       </list>
     </option>
@@ -227,20 +228,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Added TODO">
-      <created>1552244245679</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1552244245679</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Removed completed TODOs">
-      <created>1552244374549</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1552244374549</updated>
     </task>
     <task id="LOCAL-00026" summary="Added a class and a TODO">
       <created>1552330153499</created>
@@ -571,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556405781608</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Minor Changes">
+      <created>1556406015046</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1556406015046</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Added whereShown components to GUI">
+      <created>1556407931903</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1556407931903</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TodoView">
@@ -678,8 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Bug fix" />
-    <MESSAGE value="Minor changes" />
     <MESSAGE value="Converted missionTextBox from a Canvas to a Text widget" />
     <MESSAGE value="Bug magically vanished. No idea how." />
     <MESSAGE value="Did some work on MissionComponents" />
@@ -703,7 +702,9 @@
     <MESSAGE value="Active mission now properly changes when the user adds a new mission" />
     <MESSAGE value="Added Invisible mission options to GUI" />
     <MESSAGE value="Added priority level mission options to GUI, and and change logging for radiobuttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added priority level mission options to GUI, and and change logging for radiobuttons" />
+    <MESSAGE value="Minor Changes" />
+    <MESSAGE value="Added whereShown components to GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added whereShown components to GUI" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -733,13 +734,6 @@
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ESMB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menuactions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -747,6 +741,13 @@
           <folding>
             <element signature="e#264#2750#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ESMB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -759,8 +760,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+        <state relative-caret-position="306">
+          <caret line="17" column="83" lean-forward="true" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
         </state>
       </provider>
     </entry>
@@ -773,8 +774,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="887">
-          <caret line="434" column="43" lean-forward="true" selection-start-line="434" selection-start-column="43" selection-end-line="434" selection-end-column="43" />
+        <state relative-caret-position="397">
+          <caret line="460" column="74" selection-start-line="460" selection-start-column="74" selection-end-line="460" selection-end-column="74" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#3739#4683#1" />

@@ -131,6 +131,15 @@ class GUI(object):
         self.rbAssisting = None
         self.rbBoarding  = None
 
+        ## repeat
+        self.repeatEntryState          = BooleanVar()
+        self.repeatOptionalsEntryState = BooleanVar()
+        self.repeatCheckbutton         = None
+
+        self.repeatOptionals            = StringVar()
+        self.repeatOptionalsEntry       = None
+        self.repeatOptionalsCheckbutton = None
+
 
         # declare missionFrame components
         self.missionTextBox = None
@@ -306,7 +315,7 @@ class GUI(object):
                                                    variable=self.deadlineEntryState, onvalue=1, offvalue=0)
         self.deadlineCheckbutton.grid(row=7, column=1)
 
-        self.deadlineOptionals.set("[<days> [<multiplier>]]")
+        self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
         self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off)
         self.deadlineOptionalsEntry.grid(row=8, column=0, sticky="ew", padx=(indent, 0))
         self.deadlineOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -325,11 +334,11 @@ class GUI(object):
                                                 variable=self.cargoEntryState, onvalue=1, offvalue=0)
         self.cargoCheckbutton.grid(row=9, column=1)
 
-        self.cargo.set("(random | <name>) <number>")
+        self.cargo.set("(random | <name>) <number#>")
         self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off)
         self.cargoEntry.grid(row=10, column=0, sticky="ew", padx=(indent, 0))
 
-        self.cargoOptionals.set("[<number> [<probability>]]")
+        self.cargoOptionals.set("[<number#> [<probability#>]]")
         self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off)
         self.cargoOptionalsEntry.grid(row=11, column=0, sticky="ew", padx=(indent, 0))
         self.cargoOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -346,7 +355,7 @@ class GUI(object):
                                                        variable=self.cargoFineEntryState, onvalue=1, offvalue=0)
         self.cargoIllegalCheckbutton.grid(row=12, column=1)
 
-        self.cargoFine.set("<fine>")
+        self.cargoFine.set("<fine#>")
         self.cargoFineEntry = ttk.Entry(cf, textvariable=self.cargoFine, state=off)
         self.cargoFineEntry.grid(row=13, column=0, sticky="ew", padx=(indent*2, 0))
 
@@ -377,11 +386,11 @@ class GUI(object):
                                                      variable=self.passengersEntryState, onvalue=1, offvalue=0)
         self.passengersCheckbutton.grid(row=16, column=1)
 
-        self.passengers.set("<number>")
+        self.passengers.set("<number#>")
         self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off)
         self.passengersEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
 
-        self.passengersOptionals.set("[<number> [<probability>]]")
+        self.passengersOptionals.set("[<number#> [<probability#>]]")
         self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off)
         self.passengersOptionalsEntry.grid(row=18, column=0, sticky="ew", padx=(indent, 0))
         self.passengersOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -439,7 +448,25 @@ class GUI(object):
         self.rbBoarding.grid(row=27, column=0, sticky="w", padx=(indent, 0))
 
 
-        #TODO: repeat
+        # repeat
+        repeatLabel = ttk.Label(cf, text="Repeat")
+        repeatLabel.grid(row=28, column=0, sticky="ew")
+        self.repeatCheckbutton = ttk.Checkbutton(cf,
+                                                 command=lambda: self.cbValueChanged(self.repeatEntryState,
+                                                                                     self.repeatOptionalsCheckbutton),
+                                                 variable=self.repeatEntryState, onvalue=1, offvalue=0)
+        self.repeatCheckbutton.grid(row=28, column=1)
+
+        self.repeatOptionals.set("[<times#>]")
+        self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off)
+        self.repeatOptionalsEntry.grid(row=29, column=0, sticky="ew", padx=(indent, 0))
+        self.repeatOptionalsCheckbutton = ttk.Checkbutton(cf,
+                                                          command=lambda: self.cbValueChanged(self.repeatOptionalsEntryState,
+                                                                                              self.repeatOptionalsEntry),
+                                                          variable=self.repeatOptionalsEntryState, onvalue=1, offvalue=0)
+        self.repeatOptionalsCheckbutton.grid(row=29, column=1)
+
+
 
         #TODO: Clearance
 
