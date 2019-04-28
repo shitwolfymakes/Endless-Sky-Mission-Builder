@@ -278,6 +278,9 @@ class GUI(object):
         compileMissionFileButton = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMission(self))
         compileMissionFileButton.pack(fill='x')
 
+        helpButton = ttk.Button(self.optionFrame, text="Help", command=helpUser)
+        helpButton.pack(fill='x')
+
         #TODO: Add functions to change missionName and delete mission. Also, update button grouping to reflect
 
         print("Done.")

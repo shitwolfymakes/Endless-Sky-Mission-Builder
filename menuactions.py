@@ -3,6 +3,7 @@
 '''
 
 import re, shlex
+import webbrowser
 
 from tkinter import filedialog
 
@@ -131,3 +132,8 @@ def compileMission(app):
     compiler = MissionCompiler(app)
     compiler.run()
 # end compileMission
+
+
+def helpUser():
+    webbrowser.open_new(r"https://github.com/endless-sky/endless-sky/wiki/CreatingMissions")
+#end helpUser
