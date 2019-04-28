@@ -596,6 +596,7 @@ class GUI(object):
 
 
         #TODO: Add Triggers
+        print("test")
 
 
         print("Done.")
