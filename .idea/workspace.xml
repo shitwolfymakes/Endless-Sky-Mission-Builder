@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="481" column="9" selection-start-line="481" selection-start-column="9" selection-end-line="481" selection-end-column="9" />
+            <state relative-caret-position="397">
+              <caret line="460" column="74" selection-start-line="460" selection-start-column="74" selection-end-line="460" selection-end-column="74" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#3739#4683#1" />
@@ -50,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
+            <state relative-caret-position="306">
+              <caret line="17" column="83" lean-forward="true" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -112,11 +112,11 @@
         <option value="$PROJECT_DIR$/venv/popupWindow.py" />
         <option value="$PROJECT_DIR$/defaultMission.txt" />
         <option value="$PROJECT_DIR$/Mission.py" />
+        <option value="$PROJECT_DIR$/MissionComponents.py" />
         <option value="$PROJECT_DIR$/popupWindow.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/MissionCompiler.py" />
         <option value="$PROJECT_DIR$/ESMB.py" />
-        <option value="$PROJECT_DIR$/MissionComponents.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
       </list>
     </option>
@@ -154,7 +154,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -228,6 +228,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added a class and a TODO">
+      <created>1552330153499</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1552330153499</updated>
     </task>
     <task id="LOCAL-00027" summary="Added instantiation of MissionComponent class">
       <created>1552941634714</created>
@@ -565,14 +572,7 @@
       <option name="project" value="LOCAL" />
       <updated>1556407931903</updated>
     </task>
-    <task id="LOCAL-00075" summary="Added repeat components to GUI">
-      <created>1556408714513</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1556408714513</updated>
-    </task>
-    <option name="localTasksCounter" value="76" />
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TodoView">
@@ -679,6 +679,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Converted missionTextBox from a Canvas to a Text widget" />
     <MESSAGE value="Bug magically vanished. No idea how." />
     <MESSAGE value="Did some work on MissionComponents" />
     <MESSAGE value="Added in Initialization of MissionComponents on new Mission creation" />
@@ -703,8 +704,7 @@
     <MESSAGE value="Added priority level mission options to GUI, and and change logging for radiobuttons" />
     <MESSAGE value="Minor Changes" />
     <MESSAGE value="Added whereShown components to GUI" />
-    <MESSAGE value="Added repeat components to GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added repeat components to GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added whereShown components to GUI" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -758,6 +758,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="83" lean-forward="true" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Mission.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="671">
@@ -765,17 +772,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="481" column="9" selection-start-line="481" selection-start-column="9" selection-end-line="481" selection-end-column="9" />
+        <state relative-caret-position="397">
+          <caret line="460" column="74" selection-start-line="460" selection-start-column="74" selection-end-line="460" selection-end-column="74" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#3739#4683#1" />

@@ -121,7 +121,6 @@ class GUI(object):
         self.rbPriority               = None
         self.rbMinor                  = None
 
-
         ## whereShown
         self.whereShownEntryState  = BooleanVar()
         self.rbWhereShownValue     = StringVar()
@@ -132,7 +131,6 @@ class GUI(object):
         self.rbAssisting = None
         self.rbBoarding  = None
 
-
         ## repeat
         self.repeatEntryState          = BooleanVar()
         self.repeatOptionalsEntryState = BooleanVar()
@@ -141,16 +139,6 @@ class GUI(object):
         self.repeatOptionals            = StringVar()
         self.repeatOptionalsEntry       = None
         self.repeatOptionalsCheckbutton = None
-
-
-        ## Clearance
-        self.clearanceEntryState          = BooleanVar()
-        self.clearanceOptionalsEntryState = BooleanVar()
-
-        self.clearanceCheckbutton    = None
-        self.clearanceOptionals      = StringVar()
-        self.clearanceOptionalsEntry = None
-
 
 
         # declare missionFrame components
@@ -479,18 +467,8 @@ class GUI(object):
         self.repeatOptionalsCheckbutton.grid(row=29, column=1)
 
 
-        # Clearance
-        clearanceLabel = ttk.Label(cf, text="Clearance")
-        clearanceLabel.grid(row=30, column=0, sticky="ew")
-        self.clearanceCheckbutton = ttk.Checkbutton(cf,
-                                                    command=lambda: self.cbValueChanged(self.clearanceEntryState,
-                                                                                        self.clearanceOptionalsEntry),
-                                                    variable=self.clearanceEntryState, onvalue=1, offvalue=0)
-        self.clearanceCheckbutton.grid(row=30, column=1)
 
-        self.clearanceOptionals.set("[<message>]")
-        self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off)
-        self.clearanceOptionalsEntry.grid(row=31, column=0, sticky="ew", padx=(indent, 0))
+        #TODO: Clearance
 
         #TODO: isInfiltrating
 
