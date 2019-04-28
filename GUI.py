@@ -157,6 +157,12 @@ class GUI(object):
         self.isInfiltratingCheckbutton = None
 
 
+        ## waypoint
+        self.waypointEntryState = BooleanVar()
+        self.waypoint           = StringVar()
+
+        self.waypointCheckbutton = None
+        self.waypointEntry       = None
 
         # declare missionFrame components
         self.missionTextBox = None
@@ -509,6 +515,17 @@ class GUI(object):
 
 
         #TODO: waypoint
+        waypointLabel = ttk.Label(cf, text="Mission Display Name")
+        waypointLabel.grid(row=33, column=0, sticky="ew")
+        self.waypointCheckbutton = ttk.Checkbutton(cf,
+                                                      command=lambda: self.cbValueChanged(self.waypointEntryState,
+                                                                                          self.waypointEntry),
+                                                      variable=self.waypointEntryState, onvalue=1, offvalue=0)
+        self.waypointCheckbutton.grid(row=33, column=1)
+
+        self.waypoint.set("<system>")
+        self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off)
+        self.waypointEntry.grid(row=34, column=0, sticky="ew", padx=(indent, 0))
 
         #TODO: stopover
         print("Done.")

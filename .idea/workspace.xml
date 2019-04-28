@@ -28,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="501" column="64" lean-forward="true" selection-start-line="501" selection-start-column="64" selection-end-line="501" selection-end-column="64" />
+            <state relative-caret-position="509">
+              <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
               </folding>
@@ -40,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="671">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
+            <state relative-caret-position="126">
+              <caret line="7" column="65" lean-forward="true" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -154,7 +154,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -228,20 +228,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Added instantiation of MissionComponent class">
-      <created>1552941634714</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1552941634714</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Completely overhauled how the three frames are built">
-      <created>1552943386594</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1552943386594</updated>
     </task>
     <task id="LOCAL-00029" summary="Added GUI component to centerFrame">
       <created>1552945358961</created>
@@ -572,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556410230630</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Added isInfiltrating components to GUI">
+      <created>1556410882186</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1556410882186</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Added isInfiltrating components to GUI">
+      <created>1556410924997</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1556410924997</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TodoView">
@@ -679,7 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Bug magically vanished. No idea how." />
     <MESSAGE value="Did some work on MissionComponents" />
     <MESSAGE value="Added in Initialization of MissionComponents on new Mission creation" />
     <MESSAGE value="Added data to defaultMission.txt" />
@@ -704,7 +703,8 @@
     <MESSAGE value="Minor Changes" />
     <MESSAGE value="Added whereShown components to GUI" />
     <MESSAGE value="Added Clearance components to GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Clearance components to GUI" />
+    <MESSAGE value="Added isInfiltrating components to GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added isInfiltrating components to GUI" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -734,13 +734,6 @@
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ESMB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menuactions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -758,6 +751,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ESMB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1404">
@@ -767,15 +767,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Mission.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="671">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        <state relative-caret-position="126">
+          <caret line="7" column="65" lean-forward="true" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="501" column="64" lean-forward="true" selection-start-line="501" selection-start-column="64" selection-end-line="501" selection-end-column="64" />
+        <state relative-caret-position="509">
+          <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
           </folding>
