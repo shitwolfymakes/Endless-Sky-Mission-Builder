@@ -131,6 +131,7 @@ def compileMission(app):
     print("\nTHIS IS NOT IMPLEMENTED YET")
     compiler = MissionCompiler(app)
     compiler.run()
+    app.updateMissionFrame()
 # end compileMission
 
 

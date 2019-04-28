@@ -13,8 +13,8 @@ class GUI(object):
 
     def __init__(self):
         print("Building GUI...")
-        self.missionList             = [Mission("Default", default=True)]
-        self.missionNameToObjectDict = {"Default" : self.missionList[0]}
+        self.missionList             = [Mission("Default", default=True)]            #TAKE THIS OUT EVENTUALLY
+        self.missionNameToObjectDict = {"Default" : self.missionList[0]}             #TAKE THIS OUT EVENTUALLY
         self.missionNames            = []
 
         # Build the application window
@@ -197,7 +197,7 @@ class GUI(object):
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
         self.buildMainView(self.gui)
-
+        self.activeMission = self.missionList[0]            #TAKE THIS OUT EVENTUALLY
         # Run the program
         self.gui.mainloop()
     #end init

@@ -30,7 +30,7 @@ class Mission(object):
 
 
     def addLine(self, line):
-        self.missionLines.append(line)
+        self.missionLines.append(line + "\n")
     #end addLine
 
 
@@ -50,6 +50,12 @@ class Mission(object):
     def parseMission(self):
         #TODO: IMPLEMENT THIS
         print("Parsing mission...", end="\t\t\t")
+        self.missionLines = []          # empty the default values
+        self.addLine("mission \"%s\"" % self.missionName)
+
+        if self.components.missionDisplayName is not None:
+            self.addLine("\tname \"%s\"" % self.components.missionDisplayName)
+
         print("Done.")
     #end parseMission
 
