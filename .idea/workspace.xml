@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="Active mission now properly changes when the user adds a new mission">
-      <change beforePath="$PROJECT_DIR$/.idea/ESMissionBuilder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ESMissionBuilder.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MissionCompiler.py" beforeDir="false" />
-    </list>
+    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +25,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
+            <state relative-caret-position="-8400">
               <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
@@ -69,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menuactions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
+            <state relative-caret-position="1800">
               <caret line="120" selection-start-line="120" selection-end-line="120" />
               <folding>
                 <element signature="e#101#117#0" expanded="true" />
@@ -138,6 +133,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -154,7 +150,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -234,13 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Minor changes">
-      <created>1552945718860</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1552945718860</updated>
     </task>
     <task id="LOCAL-00032" summary="Fixed missionSelected. Apparently you have to have the event as a parameter for it to work">
       <created>1553030250928</created>
@@ -578,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556412573011</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Active mission now properly changes when the user adds a new mission">
+      <created>1556414192719</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1556414192720</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView">
@@ -591,10 +586,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48557693" visible="true" weight="0.2248062" />
-      <window_info id="Structure" order="1" sideWeight="0.5144231" side_tool="true" visible="true" weight="0.2248062" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48397437" visible="true" weight="0.2248062" />
+      <window_info id="Structure" order="1" sideWeight="0.51602566" side_tool="true" visible="true" weight="0.2248062" />
       <window_info id="Favorites" order="2" sideWeight="0.50190115" side_tool="true" weight="0.24947146" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
@@ -603,7 +598,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.3299363" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.4982382" visible="true" weight="0.20509554" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4982382" visible="true" weight="0.20509554" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3299363" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3299363" />
@@ -700,7 +695,6 @@
     <MESSAGE value="Checked off a TODO" />
     <MESSAGE value="Default mission text now properly displays on launch" />
     <MESSAGE value="Cleaned up some stuff" />
-    <MESSAGE value="Active mission now properly changes when the user adds a new mission" />
     <MESSAGE value="Added Invisible mission options to GUI" />
     <MESSAGE value="Added priority level mission options to GUI, and and change logging for radiobuttons" />
     <MESSAGE value="Minor Changes" />
@@ -709,7 +703,8 @@
     <MESSAGE value="Added isInfiltrating components to GUI" />
     <MESSAGE value="Added waypoint components to GUI" />
     <MESSAGE value="Added stopover components to GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added stopover components to GUI" />
+    <MESSAGE value="Active mission now properly changes when the user adds a new mission" />
+    <option name="LAST_COMMIT_MESSAGE" value="Active mission now properly changes when the user adds a new mission" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -728,28 +723,11 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
     <entry file="file://$PROJECT_DIR$/venv/popupWindow.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/tkinter/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/popupWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/MissionCompiler.py" />
-    <entry file="file://$PROJECT_DIR$/defaultMission.txt">
+    <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="40" selection-start-column="40" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menuactions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
-          <folding>
-            <element signature="e#101#117#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -774,16 +752,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
+    <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state>
+          <caret column="40" selection-start-column="40" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menuactions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+          <folding>
+            <element signature="e#101#117#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popupWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="-8400">
           <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
