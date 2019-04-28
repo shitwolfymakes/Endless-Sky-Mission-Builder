@@ -6,31 +6,29 @@ class MissionComponents(object):
 
     def __init__(self):
         print("\tMission components initializing...")
-        self.missionDisplayName = None                          # mission <name>
-        self.description        = None                          # description <text>
-        self.blocked            = None                          # blocked <message>
-        self.deadline           = [None, None]                  # deadline [<days> [<multiplier>]]
+        self.missionDisplayName = None          # mission <name>
+        self.description        = None          # description <text>
+        self.blocked            = None          # blocked <message>
+        self.deadline           = [None, None]  # deadline [<days> [<multiplier>]]
         self.cargo              = Cargo()
         self.passengers         = Passengers()
-        self.isInvisible        = False                         # invisible
-        self.priorityLevel      = None                          # (priority | minor)
-        self.whereShown         = None                          # (job | landing | assisting | boarding)
-        self.repeat             = None                          # repeat [<number>]
+        self.isInvisible        = False         # invisible
+        self.priorityLevel      = None          # (priority | minor)
+        self.whereShown         = None          # (job | landing | assisting | boarding)
+        self.repeat             = None          # repeat [<number>]
         self.clearance          = Clearance()
-        self.isInfiltrating     = False                         # infiltrating
-        self.waypoint           = None                          # waypoint <system>
+        self.isInfiltrating     = False         # infiltrating
+        self.waypoint           = None          # waypoint <system>
         self.stopover           = Stopover()
-
-        print("\tMission components initialized.")
     #end init
 
 #end class MissionComponents
 
 class Cargo(object):
     '''
-    cargo  = [ [None, None, [None, None]], # cargo (random | <name>) <number> [<number> [<probability>]]
-               [None, None, None],         #     illegal <fine> [<message>]
-               None ]                      #     stealth
+    cargo  = [None, None, None, None,    # cargo (random | <name>) <number> [<number> [<probability>]]
+              None, None, None,          #     illegal <fine> [<message>]
+              None]                      #     stealth
     '''
 
     def __init__(self):

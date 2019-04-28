@@ -6,7 +6,7 @@
       <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mission.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mission.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MissionCompiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionCompiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menuactions.py" beforeDir="false" afterPath="$PROJECT_DIR$/menuactions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MissionComponents.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionComponents.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +23,7 @@
               <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="486">
-                    <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+                    <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
                   </state>
                 </provider>
               </entry>
@@ -50,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-36">
-              <caret line="16" column="82" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
+            <state relative-caret-position="91">
+              <caret line="341" column="114" selection-start-line="341" selection-start-column="114" selection-end-line="341" selection-end-column="114" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#5337#6281#1" />
@@ -72,20 +72,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+            <state relative-caret-position="509">
+              <caret line="60" column="67" lean-forward="true" selection-start-line="60" selection-start-column="67" selection-end-line="60" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="36" column="80" selection-start-line="36" selection-start-column="80" selection-end-line="36" selection-end-column="80" />
+            <state relative-caret-position="556">
+              <caret line="34" column="80" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -141,10 +141,10 @@
         <option value="$PROJECT_DIR$/ESMB.py" />
         <option value="$PROJECT_DIR$/ScrollingCenterFrame.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
-        <option value="$PROJECT_DIR$/MissionCompiler.py" />
         <option value="$PROJECT_DIR$/MissionComponents.py" />
-        <option value="$PROJECT_DIR$/GUI.py" />
         <option value="$PROJECT_DIR$/Mission.py" />
+        <option value="$PROJECT_DIR$/GUI.py" />
+        <option value="$PROJECT_DIR$/MissionCompiler.py" />
       </list>
     </option>
   </component>
@@ -255,13 +255,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Added initial cargo component">
-      <created>1553547950844</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1553547950844</updated>
     </task>
     <task id="LOCAL-00042" summary="Fixed a bug in openFile">
       <created>1553548474283</created>
@@ -599,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556478322085</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="started mission compilation">
+      <created>1556481228452</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1556481228452</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TodoView">
@@ -706,7 +706,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="new mission popup now properly prevents gui input to rest of the application" />
     <MESSAGE value="New mission default data added, it will now save and open as a discreet mission" />
     <MESSAGE value="Cleaned up code and removed completed TODOs" />
     <MESSAGE value="Added TODOs for remaining components" />
@@ -731,7 +730,8 @@
     <MESSAGE value="Added scrollbar to center frame" />
     <MESSAGE value="centerFrame width needs fixing" />
     <MESSAGE value="Added help button to optionFrame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added help button to optionFrame" />
+    <MESSAGE value="started mission compilation" />
+    <option name="LAST_COMMIT_MESSAGE" value="started mission compilation" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -751,13 +751,6 @@
     <entry file="file://$PROJECT_DIR$/venv/popupWindow.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/tkinter/__init__.py" />
     <entry file="file://$PROJECT_DIR$/venv/MissionCompiler.py" />
-    <entry file="file://$PROJECT_DIR$/ESMB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -765,41 +758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ScrollingCenterFrame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding>
-            <element signature="e#131#151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="16" column="82" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
-          <folding>
-            <element signature="e#64#85#0" expanded="true" />
-            <element signature="e#5337#6281#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="36" column="80" selection-start-line="36" selection-start-column="80" selection-end-line="36" selection-end-column="80" />
         </state>
       </provider>
     </entry>
@@ -813,10 +771,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ESMB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScrollingCenterFrame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding>
+            <element signature="e#131#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Mission.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+        <state relative-caret-position="509">
+          <caret line="60" column="67" lean-forward="true" selection-start-line="60" selection-start-column="67" selection-end-line="60" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="341" column="114" selection-start-line="341" selection-start-column="114" selection-end-line="341" selection-end-column="114" />
+          <folding>
+            <element signature="e#64#85#0" expanded="true" />
+            <element signature="e#5337#6281#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="34" column="80" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
         </state>
       </provider>
     </entry>

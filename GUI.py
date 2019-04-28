@@ -54,11 +54,9 @@ class GUI(object):
 
         ## isBlocked
         self.isBlockedEntryState         = BooleanVar()
-        self.isBlockedMessageEntryState  = BooleanVar()
         self.isBlockedCheckbutton        = None
         self.isBlockedMessage            = StringVar()
         self.isBlockedMessageEntry       = None
-        self.isBlockedMessageCheckbutton = None
 
 
         ## deadline
@@ -341,18 +339,13 @@ class GUI(object):
         isBlockedLabel.grid(row=5, column=0, sticky="ew")
         self.isBlockedCheckbutton = ttk.Checkbutton(cf,
                                                     command=lambda: self.cbValueChanged(self.isBlockedEntryState,
-                                                                                        self.isBlockedMessageCheckbutton),
+                                                                                        self.isBlockedMessageEntry),
                                                     variable=self.isBlockedEntryState, onvalue=1, offvalue=0)
         self.isBlockedCheckbutton.grid(row=5, column=1)
 
         self.isBlockedMessage.set("<message>")
         self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off)
         self.isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
-        self.isBlockedMessageCheckbutton = ttk.Checkbutton(cf,
-                                                           command=lambda: self.cbValueChanged(self.isBlockedMessageEntryState,
-                                                                                               self.isBlockedMessageEntry),
-                                                           variable=self.isBlockedMessageEntryState, onvalue=1, offvalue=0)
-        self.isBlockedMessageCheckbutton.grid(row=6, column=1)
 
 
         # Deadline

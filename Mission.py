@@ -55,6 +55,10 @@ class Mission(object):
 
         if self.components.missionDisplayName is not None:
             self.addLine("\tname \"%s\"" % self.components.missionDisplayName)
+        if self.components.description is not None:
+            self.addLine("\tdescription \"%s\"" % self.components.description)
+        if self.components.blocked is not None:
+            self.addLine("\tblocked \"%s\"" % self.components.blocked)
 
         print("Done.")
     #end parseMission

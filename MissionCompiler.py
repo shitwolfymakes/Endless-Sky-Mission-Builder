@@ -21,8 +21,12 @@ class MissionCompiler(object):
         if self.esmb.displayNameEntryState:
             print("Found display name: " + self.esmb.displayName.get())
             self.mission.components.missionDisplayName = self.esmb.displayName.get()
-
-
+        if self.esmb.descriptionEntryState:
+            print("Found description: " + self.esmb.description.get())
+            self.mission.components.description = self.esmb.description.get()
+        if self.esmb.isBlockedEntryState:
+            print("Found block: " + self.esmb.isBlockedMessage.get())
+            self.mission.components.blocked = self.esmb.isBlockedMessage.get()
 
 
         self.mission.parseMission()
