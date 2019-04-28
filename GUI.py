@@ -7,6 +7,7 @@ This handles the GUI for ESMB
 from tkinter import *
 from tkinter import ttk, StringVar
 from menuactions import *
+from ScrollingCenterFrame import *
 
 class GUI(object):
 
@@ -232,32 +233,16 @@ class GUI(object):
 
     def buildMainView(self, window):
         optionFrame  = ttk.Frame(window)
-        self.centerFrameWrapper  = ttk.Frame(window)
+        centerFrame  = ScrollingCenterFrame(window)
         missionFrame = ttk.Frame(window)
 
-
-        # Canvas comes with a scrollbar natively, so we'll put the centerFrame inside there
-        # create a canvas object and a vertical scrollbar for scrolling it
-        vscrollbar = Scrollbar(self.centerFrameWrapper, orient=VERTICAL)
-        vscrollbar.pack(fill=Y, side=RIGHT, expand=FALSE)
-        cfCanvas = Canvas(self.centerFrameWrapper, bd=0, highlightthickness=0, yscrollcommand=vscrollbar.set)
-        cfCanvas.pack(side=LEFT, fill=BOTH, expand=TRUE)
-        vscrollbar.config(command=cfCanvas.yview)
-
-        # reset the view
-        cfCanvas.xview_moveto(0)
-        cfCanvas.yview_moveto(0)
-
         self.optionFrame  = optionFrame
-        self.centerFrameWrapper.grid(row=0, column=1, sticky="ns")
-        self.centerFrame  = ttk.Frame(cfCanvas)
+        self.centerFrame  = centerFrame
         self.missionFrame = missionFrame
 
         # set up each of the frames
         self.buildOptionFrame()
-
         self.buildCenterFrame()
-
         self.buildMissionFrame()
     #end buildMainView
 
@@ -311,7 +296,7 @@ class GUI(object):
 
 
     def buildComponentsOnCenterFrame(self):
-        #TODO: Implement this - ~25% completed
+        #TODO: Implement this - ~50% completed
         # IN VERSION 2 ALL OF THIS SHOULD BE MOVED TO A CUSTOM CLASS
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
@@ -633,7 +618,7 @@ class GUI(object):
 
     #TODO: display name, not "PY_VARXX" (pending SO question)
     def rbValueChanged(self, radioValue, modifiedWidget):
-        print("The value of %s is:" % radioValue.__str__(), end="\t\t")
+        print("The value of %s is now:" % radioValue.__str__(), end="\t\t")
         print(modifiedWidget.cget("value"))
     #end rbValueChanged
 
@@ -654,7 +639,7 @@ class GUI(object):
         mfTitle.pack()
 
         #Populate the Text with a mission template
-        self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
+        self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack(expand=1, fill='both')
         self.missionTextBox.insert(END, self.missionList[0].printMissionLinesToText())
 
