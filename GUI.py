@@ -164,6 +164,15 @@ class GUI(object):
         self.waypointCheckbutton = None
         self.waypointEntry       = None
 
+
+        ## stopover
+        self.stopoverEntryState = BooleanVar()
+        self.stopover           = StringVar()
+
+        self.stopoverCheckbutton = None
+        self.stopoverEntry       = None
+
+
         # declare missionFrame components
         self.missionTextBox = None
 
@@ -514,8 +523,8 @@ class GUI(object):
         self.isInfiltratingCheckbutton.grid(row=32, column=1)
 
 
-        #TODO: waypoint
-        waypointLabel = ttk.Label(cf, text="Mission Display Name")
+        # waypoint
+        waypointLabel = ttk.Label(cf, text="Waypoint")
         waypointLabel.grid(row=33, column=0, sticky="ew")
         self.waypointCheckbutton = ttk.Checkbutton(cf,
                                                       command=lambda: self.cbValueChanged(self.waypointEntryState,
@@ -527,7 +536,21 @@ class GUI(object):
         self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off)
         self.waypointEntry.grid(row=34, column=0, sticky="ew", padx=(indent, 0))
 
-        #TODO: stopover
+
+        # stopover
+        stopoverLabel = ttk.Label(cf, text="Stopover")
+        stopoverLabel.grid(row=35, column=0, sticky="ew")
+        self.stopoverCheckbutton = ttk.Checkbutton(cf,
+                                                   command=lambda: self.cbValueChanged(self.stopoverEntryState,
+                                                                                       self.stopoverEntry),
+                                                   variable=self.stopoverEntryState, onvalue=1, offvalue=0)
+        self.stopoverCheckbutton.grid(row=35, column=1)
+
+        self.stopover.set("<planet>")
+        self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off)
+        self.stopoverEntry.grid(row=36, column=0, sticky="ew", padx=(indent, 0))
+
+
         print("Done.")
     #end buildComponentsOnCenterFrame
 
@@ -568,7 +591,7 @@ class GUI(object):
 
         #Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
-        self.missionTextBox.pack(expand=1, fill='x')
+        self.missionTextBox.pack(expand=1, fill='both')
         self.missionTextBox.insert(END, self.missionList[0].printMissionLinesToText())
 
         print("Done.")
