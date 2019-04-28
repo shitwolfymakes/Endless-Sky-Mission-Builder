@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="" />
+    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="602" selection-start-line="602" selection-end-line="602" />
+            <state relative-caret-position="288">
+              <caret line="235" column="40" lean-forward="true" selection-start-line="235" selection-start-column="40" selection-end-line="235" selection-end-column="40" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#5337#6281#1" />
@@ -226,13 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Fixed missionSelected. Apparently you have to have the event as a parameter for it to work">
-      <created>1553030250928</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1553030250928</updated>
     </task>
     <task id="LOCAL-00033" summary="Added more components">
       <created>1553032179423</created>
@@ -570,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556414192720</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="stuff">
+      <created>1556414475957</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1556414475957</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TodoView">
@@ -586,8 +589,8 @@
     <frame x="-7" y="-7" width="2080" height="1136" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4849624" visible="true" weight="0.14970645" />
-      <window_info id="Structure" order="1" sideWeight="0.5150376" side_tool="true" visible="true" weight="0.14970645" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4847682" visible="true" weight="0.14970645" />
+      <window_info id="Structure" order="1" sideWeight="0.5152318" side_tool="true" visible="true" weight="0.14970645" />
       <window_info id="Favorites" order="2" sideWeight="0.50190115" side_tool="true" weight="0.24947146" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
@@ -596,7 +599,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.3299363" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4982382" visible="true" weight="0.20597015" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4982382" weight="0.20597015" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3299363" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3299363" />
@@ -677,7 +680,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added data to defaultMission.txt" />
     <MESSAGE value="Restructured Mission initialization" />
     <MESSAGE value="Implemented new mission creation" />
     <MESSAGE value="Fixed bugs in new Mission creation" />
@@ -702,7 +704,8 @@
     <MESSAGE value="Added waypoint components to GUI" />
     <MESSAGE value="Added stopover components to GUI" />
     <MESSAGE value="Active mission now properly changes when the user adds a new mission" />
-    <option name="LAST_COMMIT_MESSAGE" value="Active mission now properly changes when the user adds a new mission" />
+    <MESSAGE value="stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -772,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="602" selection-start-line="602" selection-end-line="602" />
+        <state relative-caret-position="288">
+          <caret line="235" column="40" lean-forward="true" selection-start-line="235" selection-start-column="40" selection-end-line="235" selection-end-column="40" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#5337#6281#1" />

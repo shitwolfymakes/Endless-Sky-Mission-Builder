@@ -27,6 +27,7 @@ class GUI(object):
 
         # Declare the frames
         self.optionFrame  = None
+        self.centerFrameWrapper = None
         self.centerFrame  = None
         self.missionFrame = None
 
@@ -231,16 +232,32 @@ class GUI(object):
 
     def buildMainView(self, window):
         optionFrame  = ttk.Frame(window)
-        centerFrame  = ttk.Frame(window)
+        self.centerFrameWrapper  = ttk.Frame(window)
         missionFrame = ttk.Frame(window)
 
+
+        # Canvas comes with a scrollbar natively, so we'll put the centerFrame inside there
+        # create a canvas object and a vertical scrollbar for scrolling it
+        vscrollbar = Scrollbar(self.centerFrameWrapper, orient=VERTICAL)
+        vscrollbar.pack(fill=Y, side=RIGHT, expand=FALSE)
+        cfCanvas = Canvas(self.centerFrameWrapper, bd=0, highlightthickness=0, yscrollcommand=vscrollbar.set)
+        cfCanvas.pack(side=LEFT, fill=BOTH, expand=TRUE)
+        vscrollbar.config(command=cfCanvas.yview)
+
+        # reset the view
+        cfCanvas.xview_moveto(0)
+        cfCanvas.yview_moveto(0)
+
         self.optionFrame  = optionFrame
-        self.centerFrame  = centerFrame
+        self.centerFrameWrapper.grid(row=0, column=1, sticky="ns")
+        self.centerFrame  = ttk.Frame(cfCanvas)
         self.missionFrame = missionFrame
 
         # set up each of the frames
         self.buildOptionFrame()
+
         self.buildCenterFrame()
+
         self.buildMissionFrame()
     #end buildMainView
 
