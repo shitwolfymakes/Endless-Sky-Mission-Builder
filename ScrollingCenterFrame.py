@@ -24,6 +24,9 @@ class ScrollingCenterFrame:
         height = kwargs.pop('height', None)
         self.outer = ttk.Frame(master, **kwargs)
 
+        cfTitle = ttk.Label(self.outer, text="Mission Options")
+        cfTitle.pack()
+
         self.vsb = tk.Scrollbar(self.outer, orient=tk.VERTICAL)
         self.vsb.pack(fill=tk.Y, side=tk.RIGHT)
         self.canvas = tk.Canvas(self.outer, highlightthickness=0, width=width, height=height, bg="#ededed")

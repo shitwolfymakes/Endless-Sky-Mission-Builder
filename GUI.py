@@ -305,10 +305,6 @@ class GUI(object):
         off = "disabled"
         cf = self.centerFrame
 
-        # Print the default mission name
-        cfTitle = Label(cf, text="Mission Options", bg="#ededed")
-        cfTitle.grid(row=0, column=0, columnspan=2, sticky="ew")
-
         # Display name
         displayNameLabel = ttk.Label(cf, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
