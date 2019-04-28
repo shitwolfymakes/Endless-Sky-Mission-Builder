@@ -28,11 +28,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="460" column="74" selection-start-line="460" selection-start-column="74" selection-end-line="460" selection-end-column="74" />
+            <state relative-caret-position="203">
+              <caret line="501" column="64" lean-forward="true" selection-start-line="501" selection-start-column="64" selection-end-line="501" selection-end-column="64" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
-                <element signature="e#3739#4683#1" />
               </folding>
             </state>
           </provider>
@@ -50,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="83" lean-forward="true" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
+            <state relative-caret-position="1404">
+              <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -68,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menuactions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+            <state relative-caret-position="455">
+              <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
               <folding>
                 <element signature="e#264#2750#0" />
               </folding>
@@ -95,6 +94,7 @@
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
         <option value="shitwolfymakes &lt;bhawk11@gmail.com&gt;" />
+        <option value="wolfy &lt;bhawk11@gmail.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -228,13 +228,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Added a class and a TODO">
-      <created>1552330153499</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1552330153499</updated>
     </task>
     <task id="LOCAL-00027" summary="Added instantiation of MissionComponent class">
       <created>1552941634714</created>
@@ -572,7 +565,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556407931903</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Added Clearance components to GUI">
+      <created>1556410230630</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1556410230630</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TodoView">
@@ -679,7 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Converted missionTextBox from a Canvas to a Text widget" />
     <MESSAGE value="Bug magically vanished. No idea how." />
     <MESSAGE value="Did some work on MissionComponents" />
     <MESSAGE value="Added in Initialization of MissionComponents on new Mission creation" />
@@ -704,7 +703,8 @@
     <MESSAGE value="Added priority level mission options to GUI, and and change logging for radiobuttons" />
     <MESSAGE value="Minor Changes" />
     <MESSAGE value="Added whereShown components to GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added whereShown components to GUI" />
+    <MESSAGE value="Added Clearance components to GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Clearance components to GUI" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -734,20 +734,20 @@
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/menuactions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-          <folding>
-            <element signature="e#264#2750#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ESMB.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menuactions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
+          <folding>
+            <element signature="e#264#2750#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -760,8 +760,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="83" lean-forward="true" selection-start-line="17" selection-start-column="83" selection-end-line="17" selection-end-column="83" />
+        <state relative-caret-position="1404">
+          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -774,11 +774,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="460" column="74" selection-start-line="460" selection-start-column="74" selection-end-line="460" selection-end-column="74" />
+        <state relative-caret-position="203">
+          <caret line="501" column="64" lean-forward="true" selection-start-line="501" selection-start-column="64" selection-end-line="501" selection-end-column="64" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
-            <element signature="e#3739#4683#1" />
           </folding>
         </state>
       </provider>
