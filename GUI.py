@@ -498,7 +498,7 @@ class GUI(object):
         self.clearanceOptionalsEntry.grid(row=31, column=0, sticky="ew", padx=(indent, 0))
 
 
-        #TODO: isInfiltrating
+        # isInfiltrating
         isInfiltratingLabel = ttk.Label(cf, text="Infiltrating")
         isInfiltratingLabel.grid(row=32, column=0, sticky="ew")
         self.isInfiltratingCheckbutton = ttk.Checkbutton(cf,
