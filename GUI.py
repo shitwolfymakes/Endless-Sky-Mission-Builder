@@ -173,6 +173,22 @@ class GUI(object):
         self.stopoverEntry       = None
 
 
+        ## source
+        self.sourceEntryState = BooleanVar()
+        self.source           = StringVar()
+
+        self.sourceCheckbutton = None
+        self.sourceEntry       = None
+
+
+        ## source
+        self.destinationEntryState = BooleanVar()
+        self.destination           = StringVar()
+
+        self.destinationCheckbutton = None
+        self.destinationEntry       = None
+
+
         # declare missionFrame components
         self.missionTextBox = None
 
@@ -549,6 +565,37 @@ class GUI(object):
         self.stopover.set("<planet>")
         self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off)
         self.stopoverEntry.grid(row=36, column=0, sticky="ew", padx=(indent, 0))
+
+
+        # source
+        sourceLabel = ttk.Label(cf, text="Source")
+        sourceLabel.grid(row=37, column=0, sticky="ew")
+        self.sourceCheckbutton = ttk.Checkbutton(cf,
+                                                 command=lambda: self.cbValueChanged(self.sourceEntryState,
+                                                                                     self.sourceEntry),
+                                                 variable=self.sourceEntryState, onvalue=1, offvalue=0)
+        self.sourceCheckbutton.grid(row=37, column=1)
+
+        self.source.set("<planet>")
+        self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off)
+        self.sourceEntry.grid(row=38, column=0, sticky="ew", padx=(indent, 0))
+
+
+        # destination
+        destinationLabel = ttk.Label(cf, text="Destination")
+        destinationLabel.grid(row=39, column=0, sticky="ew")
+        self.sourceCheckbutton = ttk.Checkbutton(cf,
+                                                 command=lambda: self.cbValueChanged(self.destinationEntryState,
+                                                                                     self.destinationEntry),
+                                                 variable=self.destinationEntryState, onvalue=1, offvalue=0)
+        self.sourceCheckbutton.grid(row=39, column=1)
+
+        self.destination.set("<planet>")
+        self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off)
+        self.destinationEntry.grid(row=40, column=0, sticky="ew", padx=(indent, 0))
+
+
+        #TODO: Add Triggers
 
 
         print("Done.")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
+    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="Added stopover components to GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
     </list>
@@ -28,10 +28,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
+            <state relative-caret-position="365">
+              <caret line="595" selection-start-line="595" selection-end-line="595" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
+                <element signature="e#5337#6281#1" />
               </folding>
             </state>
           </provider>
@@ -49,7 +50,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1404">
+            <state relative-caret-position="594">
               <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
             </state>
           </provider>
@@ -228,20 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Added GUI component to centerFrame">
-      <created>1552945358961</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1552945358962</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Minor changes">
-      <created>1552945410649</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1552945410649</updated>
     </task>
     <task id="LOCAL-00031" summary="Minor changes">
       <created>1552945718860</created>
@@ -572,7 +559,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556410924997</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Added waypoint components to GUI">
+      <created>1556411594884</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1556411594885</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Added stopover components to GUI">
+      <created>1556412573011</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1556412573011</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TodoView">
@@ -679,8 +680,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Did some work on MissionComponents" />
-    <MESSAGE value="Added in Initialization of MissionComponents on new Mission creation" />
     <MESSAGE value="Added data to defaultMission.txt" />
     <MESSAGE value="Restructured Mission initialization" />
     <MESSAGE value="Implemented new mission creation" />
@@ -704,7 +703,9 @@
     <MESSAGE value="Added whereShown components to GUI" />
     <MESSAGE value="Added Clearance components to GUI" />
     <MESSAGE value="Added isInfiltrating components to GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added isInfiltrating components to GUI" />
+    <MESSAGE value="Added waypoint components to GUI" />
+    <MESSAGE value="Added stopover components to GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added stopover components to GUI" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -758,13 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Mission.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -772,12 +766,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
+        <state relative-caret-position="365">
+          <caret line="595" selection-start-line="595" selection-end-line="595" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
+            <element signature="e#5337#6281#1" />
           </folding>
         </state>
       </provider>
