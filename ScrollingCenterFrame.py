@@ -27,7 +27,7 @@ class ScrollingCenterFrame:
         self.vsb = tk.Scrollbar(self.outer, orient=tk.VERTICAL)
         self.vsb.pack(fill=tk.Y, side=tk.RIGHT)
         self.canvas = tk.Canvas(self.outer, highlightthickness=0, width=width, height=height, bg="#ededed")
-        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, pady=(0, 10))
         self.canvas['yscrollcommand'] = self.vsb.set
         # mouse scroll does not seem to work with just "bind"; You have
         # to use "bind_all". Therefore to use multiple windows you have
