@@ -5,6 +5,7 @@ Thanks m8!
 '''
 
 import tkinter as tk
+from tkinter import ttk
 
 class ScrollingCenterFrame:
     """
@@ -21,7 +22,7 @@ class ScrollingCenterFrame:
     def __init__(self, master, **kwargs):
         width = kwargs.pop('width', None)     #default width = None
         height = kwargs.pop('height', None)
-        self.outer = tk.Frame(master, **kwargs)
+        self.outer = ttk.Frame(master, **kwargs)
 
         self.vsb = tk.Scrollbar(self.outer, orient=tk.VERTICAL)
         self.vsb.pack(fill=tk.Y, side=tk.RIGHT)
@@ -35,7 +36,7 @@ class ScrollingCenterFrame:
         self.canvas.bind("<Leave>", self._unbind_mouse)
         self.vsb['command'] = self.canvas.yview
 
-        self.inner = tk.Frame(self.canvas)
+        self.inner = ttk.Frame(self.canvas)
         # pack the inner Frame into the Canvas with the topleft corner 4 pixels offset
         self.canvas.create_window(4, 4, window=self.inner, anchor='nw')
         self.inner.bind("<Configure>", self._on_frame_configure)

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ScrollingCenterFrame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrollingCenterFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrollingCenterFrame.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +41,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ScrollingCenterFrame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+            <state relative-caret-position="234">
+              <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+              <folding>
+                <element signature="e#131#151#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -240,13 +242,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Minor changes">
-      <created>1553032438733</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1553032438733</updated>
     </task>
     <task id="LOCAL-00035" summary="Minor changes">
       <created>1553032500915</created>
@@ -584,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556416333964</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="centerFrame width needs fixing">
+      <created>1556422488856</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1556422488856</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TodoView">
@@ -691,7 +693,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Implemented new mission creation" />
     <MESSAGE value="Fixed bugs in new Mission creation" />
     <MESSAGE value="new mission popup now properly prevents gui input to rest of the application" />
     <MESSAGE value="New mission default data added, it will now save and open as a discreet mission" />
@@ -716,7 +717,8 @@
     <MESSAGE value="Active mission now properly changes when the user adds a new mission" />
     <MESSAGE value="stuff" />
     <MESSAGE value="Added scrollbar to center frame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added scrollbar to center frame" />
+    <MESSAGE value="centerFrame width needs fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="centerFrame width needs fixing" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -797,8 +799,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ScrollingCenterFrame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+        <state relative-caret-position="234">
+          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+          <folding>
+            <element signature="e#131#151#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
