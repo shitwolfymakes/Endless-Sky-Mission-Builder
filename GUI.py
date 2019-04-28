@@ -7,7 +7,7 @@ This handles the GUI for ESMB
 from tkinter import *
 from tkinter import ttk, StringVar
 from menuactions import *
-from ScrollingCenterFrame import *
+from ScrollingCenterFrame import ScrollingCenterFrame
 
 class GUI(object):
 
