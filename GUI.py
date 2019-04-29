@@ -316,7 +316,7 @@ class GUI(object):
         self.displayNameCheckbutton.grid(row=1, column=1)
 
         self.displayName.set("<name>")
-        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off)
+        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30) # setting the width to 30 here widens the rest of them
         self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
 
