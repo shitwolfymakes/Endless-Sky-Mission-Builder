@@ -53,12 +53,28 @@ class Mission(object):
         self.missionLines = []          # empty the default values
         self.addLine("mission \"%s\"" % self.missionName)
 
+        # mission display name
         if self.components.missionDisplayName is not None:
             self.addLine("\tname \"%s\"" % self.components.missionDisplayName)
+
+        # description
         if self.components.description is not None:
             self.addLine("\tdescription \"%s\"" % self.components.description)
+
+        # isBlocked
         if self.components.blocked is not None:
             self.addLine("\tblocked \"%s\"" % self.components.blocked)
+
+        # deadline
+        if self.components.isDeadline is True:
+            line = "\tdeadline"
+            if self.components.deadline[0] is not None:
+                line = line + " " + self.components.deadline[0]
+                if self.components.deadline[1] is not None:
+                    line = line + " " + self.components.deadline[1]
+                #end if
+            #end if
+        #end if
 
         print("Done.")
     #end parseMission

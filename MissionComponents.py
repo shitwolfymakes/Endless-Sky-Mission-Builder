@@ -9,6 +9,7 @@ class MissionComponents(object):
         self.missionDisplayName = None          # mission <name>
         self.description        = None          # description <text>
         self.blocked            = None          # blocked <message>
+        self.isDeadline         = False
         self.deadline           = [None, None]  # deadline [<days> [<multiplier>]]
         self.cargo              = Cargo()
         self.passengers         = Passengers()
@@ -33,6 +34,9 @@ class Cargo(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+        self.cargoType      = [None, None, None, None]
+        self.cargoIllegal   = [None, None]
+        self.isCargoStealth = False
         print("Done.")
     #end init
 
