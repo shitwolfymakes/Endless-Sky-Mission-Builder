@@ -66,7 +66,7 @@ class Mission(object):
             self.addLine("\tblocked \"%s\"" % self.components.blocked)
 
         # deadline
-        if self.components.isDeadline is True:
+        if self.components.isDeadline:
             line = "\tdeadline"
             if self.components.deadline[0] is not None:
                 line = line + " " + self.components.deadline[0]
@@ -74,6 +74,7 @@ class Mission(object):
                     line = line + " " + self.components.deadline[1]
                 #end if
             #end if
+            self.addLine(line)
         #end if
 
         print("Done.")

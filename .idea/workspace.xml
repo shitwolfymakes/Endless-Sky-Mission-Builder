@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mission.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mission.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MissionCompiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionCompiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MissionComponents.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionComponents.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +20,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="432">
-                    <caret line="48" column="15" lean-forward="true" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+                  <state relative-caret-position="565">
+                    <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
                   </state>
                 </provider>
               </entry>
@@ -49,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="600" column="31" selection-start-line="600" selection-start-column="31" selection-end-line="600" selection-end-column="31" />
+            <state relative-caret-position="375">
+              <caret line="255" selection-start-line="255" selection-end-line="255" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#5337#6281#1" />
@@ -71,20 +70,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
-              <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+            <state relative-caret-position="401">
+              <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+            <state relative-caret-position="540">
+              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -92,11 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menuactions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
+            <state relative-caret-position="1566">
               <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
-              <folding>
-                <element signature="e#264#2750#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -141,9 +137,9 @@
         <option value="$PROJECT_DIR$/ScrollingCenterFrame.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
+        <option value="$PROJECT_DIR$/Mission.py" />
         <option value="$PROJECT_DIR$/MissionComponents.py" />
         <option value="$PROJECT_DIR$/MissionCompiler.py" />
-        <option value="$PROJECT_DIR$/Mission.py" />
       </list>
     </option>
   </component>
@@ -254,13 +250,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Fixed a bug where event text was being added to mission objects">
-      <created>1553834667956</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1553834667956</updated>
     </task>
     <task id="LOCAL-00045" summary="Implemented popup window to input new mission names">
       <created>1554139852144</created>
@@ -598,7 +587,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556507684390</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Added functionality to compiler and parser">
+      <created>1556568332648</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1556568332648</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TodoView">
@@ -705,7 +701,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added TODOs for remaining components" />
     <MESSAGE value="Added TODOs for new functionality" />
     <MESSAGE value="Added TODO for new functionality" />
     <MESSAGE value="Made the active mission an instance variable of the GUI object" />
@@ -730,7 +725,8 @@
     <MESSAGE value="started mission compilation" />
     <MESSAGE value="Added functionality to parser and compiler" />
     <MESSAGE value="fixed some of the issue with the centerFrame" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed some of the issue with the centerFrame" />
+    <MESSAGE value="Added functionality to compiler and parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functionality to compiler and parser" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -767,16 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/menuactions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
-          <folding>
-            <element signature="e#264#2750#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ScrollingCenterFrame.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1296">
@@ -787,10 +773,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/menuactions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1566">
+          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="600" column="31" selection-start-line="600" selection-start-column="31" selection-end-line="600" selection-end-column="31" />
+        <state relative-caret-position="375">
+          <caret line="255" selection-start-line="255" selection-end-line="255" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#5337#6281#1" />
@@ -798,24 +798,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="48" column="15" lean-forward="true" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="540">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
+    <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+        <state relative-caret-position="565">
+          <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
         </state>
       </provider>
     </entry>
