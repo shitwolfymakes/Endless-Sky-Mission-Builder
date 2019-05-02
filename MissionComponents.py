@@ -34,6 +34,7 @@ class Cargo(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+        self.isCargo        = False
         self.cargoType      = [None, None, None, None]
         self.cargoIllegal   = [None, None]
         self.isCargoStealth = False

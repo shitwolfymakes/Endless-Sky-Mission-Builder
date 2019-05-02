@@ -72,7 +72,7 @@ class GUI(object):
         ## cargo
         self.cargoEntryState            = BooleanVar()
         self.cargoOptionalsEntryState   = BooleanVar()
-        self.cargoFineEntryState        = BooleanVar()
+        self.cargoIllegalEntryState     = BooleanVar()
         self.cargoFineMessageEntryState = BooleanVar()
         self.cargoStealthEntryState     = BooleanVar()
 
@@ -392,9 +392,9 @@ class GUI(object):
         cargoIllegalLabel = ttk.Label(cf, text="Illegal")
         cargoIllegalLabel.grid(row=12, column=0, sticky="ew", padx=(indent, 0))
         self.cargoIllegalCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.cargoFineEntryState,
+                                                       command=lambda: self.cbValueChanged(self.cargoIllegalEntryState,
                                                                                            self.cargoFineEntry),
-                                                       variable=self.cargoFineEntryState, onvalue=1, offvalue=0)
+                                                       variable=self.cargoIllegalEntryState, onvalue=1, offvalue=0)
         self.cargoIllegalCheckbutton.grid(row=12, column=1)
 
         self.cargoFine.set("<fine#>")

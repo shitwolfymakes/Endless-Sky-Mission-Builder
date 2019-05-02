@@ -51,19 +51,22 @@ class MissionCompiler(object):
         # cargo
         if self.esmb.cargoEntryState.get():
             print("\tFound cargo: " + self.esmb.cargo.get())
+            self.mission.cargo.isCargo = True
             line = self.esmb.cargo.get()
             tokens = shlex.split(line)
             self.mission.cargo.cargoType[0] = tokens[0]
             self.mission.cargo.cargoType[1] = tokens[1]
             if self.esmb.cargoOptionalsEntryState.get():
-                print("\t\tFound optional cargo modifiers: " + self.esmb.cargoOptionals.get())
+                print("\t\tFound cargo optional modifiers: " + self.esmb.cargoOptionals.get())
                 line = self.esmb.cargoOptionals.get()
                 tokens = shlex.split(line)
                 i = 2
                 for token in tokens:
                     self.mission.cargo.cargoType[i] = token
                     i+=1
-
+            if self.esmb.cargoIllegalEntryState.get():
+                print("\t\tFound cargo illegal modifiers: %s %s" % (self.esmb.cargoFineEntry.get(),
+                                                                    self.esmb.cargoFineMessageEntry.get()))
 
 
         self.esmb.activeMission.parseMission()
