@@ -88,7 +88,9 @@ class Mission(object):
             for part in self.components.cargo.cargoType[1:]:
                 if part is not None:
                     line = line + " " + part
-                #end if
+                else:
+                    break
+                #end if/else
             #end for
             self.addLine(line)
             if self.components.cargo.cargoIllegal[0] is not None:
@@ -102,7 +104,37 @@ class Mission(object):
                 self.addLine("\t\tstealth")
         #end if
 
-        # Passengers
+        # passengers
+        if self.components.passengers.isPassengers:
+            line = "\tpassengers %s" % self.components.passengers.passengers[0]
+            for part in self.components.passengers.passengers[1:]:
+                if part is not None:
+                    line = line + " " + part
+                else:
+                    break
+                #end if/else
+            #end for
+            self.addLine(line)
+        #end if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         print("Done.")
     #end parseMission
 

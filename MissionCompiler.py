@@ -73,8 +73,11 @@ class MissionCompiler(object):
                 print("\t\tFound cargo optional modifiers: " + self.esmb.cargoOptionals.get())
                 line = self.esmb.cargoOptionals.get()
                 tokens = shlex.split(line)
-                self.mission.cargo.cargoType[2] = tokens[0]
-                self.mission.cargo.cargoType[3] = tokens[1]
+                i = 2
+                for token in tokens:
+                    self.mission.cargo.cargoType[i] = token
+                    i += 1
+                #end for
             #end if
             if self.esmb.cargoIllegalEntryState.get():
                 print("\t\tFound cargo illegal modifier: %s" % self.esmb.cargoFine.get())
@@ -90,7 +93,36 @@ class MissionCompiler(object):
             #end if
         #end if
 
+        # passengers
+        self.mission.passengers.isPassengers = False
+        self.mission.passengers.passengers   = [None, None, None]
+        if self.esmb.passengersEntryState.get():
+            print("\tFound passengers: %s" % self.esmb.passengers.get())
+            self.mission.passengers.isPassengers  = True
+            self.mission.passengers.passengers[0] = self.esmb.passengers.get()
+            if self.esmb.passengersOptionalsEntryState.get():
+                print("\t\tFound passengers optional data: %s" % self.esmb.passengersOptionals.get())
+                line = self.esmb.passengersOptionals.get()
+                tokens = shlex.split(line)
+                i = 1
+                for token in tokens:
+                    self.mission.passengers.passengers[i] = token
+                    i += 1
+                #end for
+            #end if
+        #end if
 
+
+
+
+
+
+
+
+
+
+
+        # call the parser to save the new data
         self.esmb.activeMission.parseMission()
         print("Mission compiled!")
     #end run

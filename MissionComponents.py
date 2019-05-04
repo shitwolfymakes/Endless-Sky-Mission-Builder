@@ -66,6 +66,8 @@ class Passengers(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        self.isPassengers = False
+        self.passengers   = [None, None, None]
         print("Done.")
     # end init
 

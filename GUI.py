@@ -20,9 +20,9 @@ class GUI(object):
         self.missionNames = []
 
         if self.debugging:
-            self.missionList             = [Mission("Default", default=True)]
-            self.missionNameToObjectDict = {"Default" : self.missionList[0]}
-            self.missionNames.append("Default")
+            self.missionList             = [Mission("Debugging", default=True)]
+            self.missionNameToObjectDict = {self.missionList[0].missionName : self.missionList[0]}
+            self.missionNames.append(self.missionList[0].missionName)
         #end if
 
         # Build the application window
@@ -308,8 +308,7 @@ class GUI(object):
 
 
     def buildComponentsOnCenterFrame(self):
-        #TODO: Implement this - ~50% completed
-        # IN VERSION 2 ALL OF THIS SHOULD BE MOVED TO A CUSTOM CLASS
+        #TODO: Implement this - ~75% completed
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
@@ -378,7 +377,7 @@ class GUI(object):
         self.deadlineOptionalsCheckbutton.grid(row=8, column=1)
 
 
-        #TODO: Cargo - needs some work
+        #TODO: Cargo - may still need some work
         cargoLabel = ttk.Label(cf, text="Cargo")
         cargoLabel.grid(row=9, column=0, sticky="ew")
         self.cargoCheckbutton = ttk.Checkbutton(cf,

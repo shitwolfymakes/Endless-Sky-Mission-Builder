@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mission.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mission.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MissionCompiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionCompiler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MissionComponents.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionComponents.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menuactions.py" beforeDir="false" afterPath="$PROJECT_DIR$/menuactions.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +22,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-1026">
-                    <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+                  <state relative-caret-position="313">
+                    <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
                   </state>
                 </provider>
               </entry>
@@ -49,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7416">
-              <caret line="255" column="22" lean-forward="true" selection-start-line="255" selection-start-column="22" selection-end-line="255" selection-end-column="22" />
+            <state relative-caret-position="-57">
+              <caret line="380" column="48" lean-forward="true" selection-start-line="380" selection-start-column="48" selection-end-line="380" selection-end-column="48" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#6076#7020#1" />
@@ -59,20 +60,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="62" lean-forward="true" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
+            <state relative-caret-position="342">
+              <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+            <state relative-caret-position="426">
+              <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -124,12 +125,12 @@
         <option value="$PROJECT_DIR$/defaultMission.txt" />
         <option value="$PROJECT_DIR$/popupWindow.py" />
         <option value="$PROJECT_DIR$/ScrollingCenterFrame.py" />
-        <option value="$PROJECT_DIR$/Mission.py" />
         <option value="$PROJECT_DIR$/ESMB.py" />
-        <option value="$PROJECT_DIR$/GUI.py" />
         <option value="$PROJECT_DIR$/menuactions.py" />
+        <option value="$PROJECT_DIR$/GUI.py" />
         <option value="$PROJECT_DIR$/MissionComponents.py" />
         <option value="$PROJECT_DIR$/MissionCompiler.py" />
+        <option value="$PROJECT_DIR$/Mission.py" />
       </list>
     </option>
   </component>
@@ -245,13 +246,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Minor changes">
-      <created>1554146461527</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1554146461527</updated>
     </task>
     <task id="LOCAL-00050" summary="Converted missionTextBox from a Canvas to a Text widget">
       <created>1554224680707</created>
@@ -589,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557006225648</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Fixed bug in the compiler">
+      <created>1557008330424</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1557008330424</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TodoView">
@@ -696,7 +697,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Made the active mission an instance variable of the GUI object" />
     <MESSAGE value="Added lots more gui items" />
     <MESSAGE value="Prettied up the UI a bit" />
     <MESSAGE value="Checked off a TODO" />
@@ -721,7 +721,8 @@
     <MESSAGE value="Added functionality to compiler and parser" />
     <MESSAGE value="Added functionality to compiler and parser, and fixed a bug" />
     <MESSAGE value="Added option debugging mode, removed initial active from non-debugging user experience" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added option debugging mode, removed initial active from non-debugging user experience" />
+    <MESSAGE value="Fixed bug in the compiler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug in the compiler" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -768,17 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7416">
-          <caret line="255" column="22" lean-forward="true" selection-start-line="255" selection-start-column="22" selection-end-line="255" selection-end-column="22" />
-          <folding>
-            <element signature="e#64#85#0" expanded="true" />
-            <element signature="e#6076#7020#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menuactions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="804">
@@ -786,24 +776,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="62" lean-forward="true" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
+        <state relative-caret-position="426">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+    <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+        <state relative-caret-position="-57">
+          <caret line="380" column="48" lean-forward="true" selection-start-line="380" selection-start-column="48" selection-end-line="380" selection-end-column="48" />
+          <folding>
+            <element signature="e#64#85#0" expanded="true" />
+            <element signature="e#6076#7020#1" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        <state relative-caret-position="313">
+          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
         </state>
       </provider>
     </entry>
