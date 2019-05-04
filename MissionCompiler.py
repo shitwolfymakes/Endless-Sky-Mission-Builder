@@ -17,37 +17,37 @@ class MissionCompiler(object):
     def run(self):
         print("Compiling mission...")
 
-        # step through each Checkbutton's corresponding EntryState
-        #   if selected, saved the data it guards
+        '''
+            Zero out all the data in the mission component, then store what data is selected
+            based on the value of the corresponding entry state
+        '''
 
         # mission display name
+        self.mission.missionDisplayName = None
         if self.esmb.displayNameEntryState.get():
             print("\tFound display name: " + self.esmb.displayName.get())
             self.mission.missionDisplayName = self.esmb.displayName.get()
-        else:
-            self.mission.missionDisplayName = None
-        #end if/else
+        #end if
 
         # description
+        self.mission.description = None
         if self.esmb.descriptionEntryState.get():
             print("\tFound description: " + self.esmb.description.get())
             self.mission.description = self.esmb.description.get()
-        else:
-            self.mission.description = None
-        #end if/else
+        #end if
 
         # isBlocked
+        self.mission.blocked = None
         if self.esmb.isBlockedEntryState.get():
             print("\tFound block: " + self.esmb.isBlockedMessage.get())
             self.mission.blocked = self.esmb.isBlockedMessage.get()
-        else:
-            self.mission.blocked = None
-        #end if/else
+        #end if
 
         # deadline
+        self.mission.deadline.isDeadline = False
+        self.mission.deadline.deadline   = [None, None]
         if self.esmb.deadlineEntryState.get():
             print("\tFound deadline")
-            self.mission.isDeadline = True
             if self.esmb.deadlineOptionalsEntryState.get():
                 print("\t\tFound deadline message: " + self.esmb.deadlineOptionals.get())
                 line = self.esmb.deadlineOptionals.get()
@@ -55,11 +55,13 @@ class MissionCompiler(object):
                 self.mission.deadline[0] = tokens[0]
                 self.mission.deadline[1] = tokens[1]
             #end if
-        else:
-            self.mission.isDeadline = False
-        #end if/else
+        #end if
 
         # cargo
+        self.mission.cargo.isCargo        = False
+        self.mission.cargo.cargoType      = [None, None, None, None]
+        self.mission.cargo.cargoIllegal   = [None, None]
+        self.mission.cargo.isCargoStealth = False
         if self.esmb.cargoEntryState.get():
             print("\tFound cargo: " + self.esmb.cargo.get())
             self.mission.cargo.isCargo = True
@@ -71,11 +73,8 @@ class MissionCompiler(object):
                 print("\t\tFound cargo optional modifiers: " + self.esmb.cargoOptionals.get())
                 line = self.esmb.cargoOptionals.get()
                 tokens = shlex.split(line)
-                i = 2
-                for token in tokens:
-                    self.mission.cargo.cargoType[i] = token
-                    i+=1
-                #end for
+                self.mission.cargo.cargoType[2] = tokens[0]
+                self.mission.cargo.cargoType[3] = tokens[1]
             #end if
             if self.esmb.cargoIllegalEntryState.get():
                 print("\t\tFound cargo illegal modifier: %s" % self.esmb.cargoFine.get())
@@ -89,9 +88,7 @@ class MissionCompiler(object):
                 print("\t\tFound cargo stealth modifier")
                 self.mission.cargo.isCargoStealth = True
             #end if
-        else:
-            self.mission.cargo.isCargo = False
-        #end if/else
+        #end if
 
 
         self.esmb.activeMission.parseMission()

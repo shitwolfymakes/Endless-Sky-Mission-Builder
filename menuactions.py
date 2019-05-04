@@ -127,8 +127,6 @@ def newMission(app):
 
 
 def compileMission(app):
-    #TODO: Implement this
-    print("\nTHIS IS NOT IMPLEMENTED YET")
     compiler = MissionCompiler(app)
     compiler.run()
     app.updateMissionFrame()
