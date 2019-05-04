@@ -15,7 +15,10 @@ from GUI import *
 class ESMB(object):
 
     def __init__(self):
-        self.gui = GUI()
+        debugMode = False
+        if "debug=True" in sys.argv:
+            debugMode = True
+        self.gui = GUI(debugMode)
     #end init
 
 #end class ESMB

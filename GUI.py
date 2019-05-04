@@ -11,11 +11,19 @@ from ScrollingCenterFrame import ScrollingCenterFrame
 
 class GUI(object):
 
-    def __init__(self):
+    def __init__(self, debugMode):
         print("Building GUI...")
-        self.missionList             = [Mission("Default", default=True)]            #TAKE THIS OUT EVENTUALLY
-        self.missionNameToObjectDict = {"Default" : self.missionList[0]}             #TAKE THIS OUT EVENTUALLY
-        self.missionNames            = []
+        self.debugging = debugMode
+
+        self.missionList = []
+        self.missionNameToObjectDict = {}
+        self.missionNames = []
+
+        if self.debugging:
+            self.missionList             = [Mission("Default", default=True)]
+            self.missionNameToObjectDict = {"Default" : self.missionList[0]}
+            self.missionNames.append("Default")
+        #end if
 
         # Build the application window
         self.gui = Tk()
@@ -195,7 +203,10 @@ class GUI(object):
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
         self.buildMainView(self.gui)
-        self.activeMission = self.missionList[0]            #TAKE THIS OUT EVENTUALLY
+
+        self.activeMission = None
+        if self.debugging:
+            self.activeMission = self.missionList[0]            #TAKE THIS OUT EVENTUALLY
         # Run the program
         self.gui.mainloop()
     #end init
@@ -231,7 +242,7 @@ class GUI(object):
 
     def buildMainView(self, window):
         optionFrame  = ttk.Frame(window)
-        centerFrame  = ScrollingCenterFrame(window)
+        centerFrame  = ScrollingCenterFrame(window, width=300)
         missionFrame = ttk.Frame(window)
 
         self.optionFrame  = optionFrame
@@ -255,13 +266,13 @@ class GUI(object):
         ofTitle = ttk.Label(self.optionFrame, text="Mission")
         ofTitle.pack()
 
-        self.missionNames.append("Default")
-
         # declare the combobox here, fill with missionNames
         self.missionComboBox = ttk.Combobox(self.optionFrame, state="readonly", values=self.missionNames)
         self.missionComboBox.bind("<<ComboboxSelected>>", self.missionSelected)
         self.missionComboBox.pack()
-        self.missionComboBox.current(0)
+
+        if self.debugging:
+            self.missionComboBox.current(0)
 
         # add function buttons
         newMissionButton = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newMission(self))
@@ -633,7 +644,14 @@ class GUI(object):
         #Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack(expand=1, fill='both')
-        self.missionTextBox.insert(END, self.missionList[0].printMissionLinesToText())
+        welcome_message = "\n"
+        welcome_message += "\t\t\tWelcome to Endless Sky Mission Builder!\n"
+        welcome_message += "\n\t - Click \"New Mission\" to get started\n"
+        welcome_message += "\n\t - Click \"Save Mission File\" to save all the missions to a text file\n"
+        welcome_message += "\n\t - Click \"Open Mission File\" to open a mission file for editing\n"
+        welcome_message += "\n\t - Click \"Compile Mission\" to save save the current mission\n"
+        welcome_message += "\n\t - Click \"Help\" to be directed to the Mission Creation wiki\n"
+        self.missionTextBox.insert(END, welcome_message)
 
         print("Done.")
     #end buildMissionFrame
