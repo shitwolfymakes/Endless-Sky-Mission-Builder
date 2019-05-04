@@ -84,11 +84,13 @@ class Mission(object):
                 line = line + " random"
             else:
                 line = line + " \"%s\"" % self.components.cargo.cargoType[0]
+            #end if/else
             for part in self.components.cargo.cargoType[1:]:
                 if part is not None:
                     line = line + " " + part
+                #end if
+            #end for
             self.addLine(line)
-
             if self.components.cargo.cargoIllegal[0] is not None:
                 line = "\t\tillegal %s" % self.components.cargo.cargoIllegal[0]
                 if self.components.cargo.cargoIllegal[1] is not None:
@@ -96,11 +98,11 @@ class Mission(object):
                 #end if
                 self.addLine(line)
             #end if
-
             if self.components.cargo.isCargoStealth:
-                self.addLine("stealth")
+                self.addLine("\t\tstealth")
+        #end if
 
-
+        # Passengers
         print("Done.")
     #end parseMission
 

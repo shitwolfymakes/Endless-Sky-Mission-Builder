@@ -1,7 +1,7 @@
 ''' GUI.py
 Created by wolfy
 
-This pulls the data the user has entered and stores it in the corresponding Mission object
+This pulls the data the user has entered and stores it in the corresponding Mission object.
 
 '''
 import shlex
@@ -24,16 +24,25 @@ class MissionCompiler(object):
         if self.esmb.displayNameEntryState.get():
             print("\tFound display name: " + self.esmb.displayName.get())
             self.mission.missionDisplayName = self.esmb.displayName.get()
+        else:
+            self.mission.missionDisplayName = None
+        #end if/else
 
         # description
         if self.esmb.descriptionEntryState.get():
             print("\tFound description: " + self.esmb.description.get())
             self.mission.description = self.esmb.description.get()
+        else:
+            self.mission.description = None
+        #end if/else
 
         # isBlocked
         if self.esmb.isBlockedEntryState.get():
             print("\tFound block: " + self.esmb.isBlockedMessage.get())
             self.mission.blocked = self.esmb.isBlockedMessage.get()
+        else:
+            self.mission.blocked = None
+        #end if/else
 
         # deadline
         if self.esmb.deadlineEntryState.get():
@@ -46,7 +55,9 @@ class MissionCompiler(object):
                 self.mission.deadline[0] = tokens[0]
                 self.mission.deadline[1] = tokens[1]
             #end if
-        #end if
+        else:
+            self.mission.isDeadline = False
+        #end if/else
 
         # cargo
         if self.esmb.cargoEntryState.get():
@@ -64,9 +75,23 @@ class MissionCompiler(object):
                 for token in tokens:
                     self.mission.cargo.cargoType[i] = token
                     i+=1
+                #end for
+            #end if
             if self.esmb.cargoIllegalEntryState.get():
-                print("\t\tFound cargo illegal modifiers: %s %s" % (self.esmb.cargoFineEntry.get(),
-                                                                    self.esmb.cargoFineMessageEntry.get()))
+                print("\t\tFound cargo illegal modifier: %s" % self.esmb.cargoFine.get())
+                self.mission.cargo.cargoIllegal[0] = self.esmb.cargoFine.get()
+                if self.esmb.cargoFineMessageEntryState.get():
+                    print("\t\tFounnd cargo illegal message: %s" % self.esmb.cargoFineMessage.get())
+                    self.mission.cargo.cargoIllegal[1] = self.esmb.cargoFineMessage.get()
+                #end if
+            #end if
+            if self.esmb.cargoStealthEntryState.get():
+                print("\t\tFound cargo stealth modifier")
+                self.mission.cargo.isCargoStealth = True
+            #end if
+        else:
+            self.mission.cargo.isCargo = False
+        #end if/else
 
 
         self.esmb.activeMission.parseMission()
