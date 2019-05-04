@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="Updated workspace.xml">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="723199aa-3b96-4eaf-a60b-619eec7edf9f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Mission.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MissionCompiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/MissionCompiler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +19,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="313">
-                    <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
+                  <state relative-caret-position="421">
+                    <caret line="126" column="15" selection-start-line="126" selection-start-column="15" selection-end-line="126" selection-end-column="15" />
                   </state>
                 </provider>
               </entry>
@@ -43,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
-              <caret line="380" column="48" lean-forward="true" selection-start-line="380" selection-start-column="48" selection-end-line="380" selection-end-column="48" />
+            <state relative-caret-position="231">
+              <caret line="465" column="65" lean-forward="true" selection-start-line="465" selection-start-column="65" selection-end-line="465" selection-end-column="65" />
               <folding>
                 <element signature="e#64#85#0" expanded="true" />
                 <element signature="e#6076#7020#1" />
@@ -56,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mission.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="116" column="30" lean-forward="true" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
+            <state relative-caret-position="498">
+              <caret line="124" column="23" selection-start-line="124" selection-start-column="23" selection-end-line="124" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -68,7 +69,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MissionComponents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
+            <state relative-caret-position="1182">
               <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
             </state>
           </provider>
@@ -98,6 +99,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="wolfy &lt;bhawk11@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -118,8 +124,8 @@
         <option value="$PROJECT_DIR$/menuactions.py" />
         <option value="$PROJECT_DIR$/GUI.py" />
         <option value="$PROJECT_DIR$/MissionComponents.py" />
-        <option value="$PROJECT_DIR$/MissionCompiler.py" />
         <option value="$PROJECT_DIR$/Mission.py" />
+        <option value="$PROJECT_DIR$/MissionCompiler.py" />
       </list>
     </option>
   </component>
@@ -241,20 +247,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545638246269</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Did some work on MissionComponents">
-      <created>1554226068804</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1554226068805</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Added in Initialization of MissionComponents on new Mission creation">
-      <created>1554227037061</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1554227037062</updated>
     </task>
     <task id="LOCAL-00054" summary="Added data to defaultMission.txt">
       <created>1554304067211</created>
@@ -585,7 +577,21 @@
       <option name="project" value="LOCAL" />
       <updated>1557010885453</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="Updated workspace.xml">
+      <created>1557011140793</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1557011140793</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Added functionality to compiler and parser">
+      <created>1557011591797</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1557011591797</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TodoView">
@@ -602,11 +608,11 @@
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47859326" visible="true" weight="0.20009784" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.5214067" side_tool="true" visible="true" weight="0.20009784" />
+      <window_info id="Structure" order="1" sideWeight="0.5214067" side_tool="true" visible="true" weight="0.20009784" />
       <window_info id="Favorites" order="2" sideWeight="0.50190115" side_tool="true" weight="0.24947146" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.34925374" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.34925374" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -715,9 +721,9 @@
     <MESSAGE value="Added functionality to compiler and parser, and fixed a bug" />
     <MESSAGE value="Added option debugging mode, removed initial active from non-debugging user experience" />
     <MESSAGE value="Fixed bug in the compiler" />
-    <MESSAGE value="Added functionality to compiler and parser" />
     <MESSAGE value="Updated workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated workspace.xml" />
+    <MESSAGE value="Added functionality to compiler and parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functionality to compiler and parser" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -757,13 +763,6 @@
     <entry file="file://$PROJECT_DIR$/defaultMission.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ESMB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menuactions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="804">
@@ -771,10 +770,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ESMB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1182">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mission.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="124" column="23" selection-start-line="124" selection-start-column="23" selection-end-line="124" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="380" column="48" lean-forward="true" selection-start-line="380" selection-start-column="48" selection-end-line="380" selection-end-column="48" />
+        <state relative-caret-position="231">
+          <caret line="465" column="65" lean-forward="true" selection-start-line="465" selection-start-column="65" selection-end-line="465" selection-end-column="65" />
           <folding>
             <element signature="e#64#85#0" expanded="true" />
             <element signature="e#6076#7020#1" />
@@ -782,24 +802,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MissionComponents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MissionCompiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mission.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="116" column="30" lean-forward="true" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
+        <state relative-caret-position="421">
+          <caret line="126" column="15" selection-start-line="126" selection-start-column="15" selection-end-line="126" selection-end-column="15" />
         </state>
       </provider>
     </entry>

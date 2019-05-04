@@ -119,8 +119,12 @@ class MissionCompiler(object):
             self.mission.isInvisible = True
         #end if
 
-
-
+        # priorityLevel
+        self.mission.priorityLevel = None
+        if self.esmb.priorityLevelEntryState.get():
+            print("\tFound priority level: %s" % self.esmb.rbPriorityValue.get())
+            self.mission.priorityLevel = self.esmb.rbPriorityValue.get()
+        #end if
 
 
 

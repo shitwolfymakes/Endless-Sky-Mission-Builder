@@ -122,7 +122,9 @@ class Mission(object):
             self.addLine("\tinvisible")
         #end if
 
-
+        # priorityLevel
+        if self.components.priorityLevel is not None:
+            self.addLine("\t%s" % self.components.priorityLevel)
 
 
 
