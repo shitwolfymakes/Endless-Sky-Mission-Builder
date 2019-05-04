@@ -117,9 +117,10 @@ class Mission(object):
             self.addLine(line)
         #end if
 
-
-
-
+        # isInvisible
+        if self.components.isInvisible:
+            self.addLine("\tinvisible")
+        #end if
 
 
 

@@ -112,6 +112,13 @@ class MissionCompiler(object):
             #end if
         #end if
 
+        # isInvisible
+        self.mission.isInvisible = False
+        if self.esmb.isInvisibleEntryState.get():
+            print("\tFound mission invisible modifier")
+            self.mission.isInvisible = True
+        #end if
+
 
 
 
