@@ -126,7 +126,12 @@ class MissionCompiler(object):
             self.mission.priorityLevel = self.esmb.rbPriorityValue.get()
         #end if
 
-
+        # whereShown
+        self.mission.whereShown = None
+        if self.esmb.whereShownEntryState.get():
+            print("\tFound where shown: %s" % self.esmb.rbWhereShownValue.get())
+            self.mission.whereShown = self.esmb.rbWhereShownValue.get()
+        # end if
 
 
 

@@ -126,7 +126,9 @@ class Mission(object):
         if self.components.priorityLevel is not None:
             self.addLine("\t%s" % self.components.priorityLevel)
 
-
+        # whereShown
+        if self.components.whereShown is not None:
+            self.addLine("\t%s" % self.components.whereShown)
 
 
 
