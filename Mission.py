@@ -66,12 +66,12 @@ class Mission(object):
             self.addLine("\tblocked \"%s\"" % self.components.blocked)
 
         # deadline
-        if self.components.isDeadline:
+        if self.components.deadline.isDeadline:
             line = "\tdeadline"
-            if self.components.deadline[0] is not None:
-                line = line + " " + self.components.deadline[0]
-                if self.components.deadline[1] is not None:
-                    line = line + " " + self.components.deadline[1]
+            if self.components.deadline.deadline[0] is not None:
+                line = line + " " + self.components.deadline.deadline[0]
+                if self.components.deadline.deadline[1] is not None:
+                    line = line + " " + self.components.deadline.deadline[1]
                 #end if
             #end if
             self.addLine(line)
@@ -130,7 +130,14 @@ class Mission(object):
         if self.components.whereShown is not None:
             self.addLine("\t%s" % self.components.whereShown)
 
-
+        # repeat
+        if self.components.isRepeat:
+            line = "\trepeat"
+            if self.components.repeat is not None:
+                line = line + " " + self.components.repeat
+            #end if
+            self.addLine(line)
+        #end if
 
 
 

@@ -9,13 +9,13 @@ class MissionComponents(object):
         self.missionDisplayName = None          # mission <name>
         self.description        = None          # description <text>
         self.blocked            = None          # blocked <message>
-        self.isDeadline         = False
         self.deadline           = Deadline()
         self.cargo              = Cargo()
         self.passengers         = Passengers()
         self.isInvisible        = False         # invisible
         self.priorityLevel      = None          # (priority | minor)
         self.whereShown         = None          # (job | landing | assisting | boarding)
+        self.isRepeat           = False
         self.repeat             = None          # repeat [<number>]
         self.clearance          = Clearance()
         self.isInfiltrating     = False         # infiltrating

@@ -48,12 +48,13 @@ class MissionCompiler(object):
         self.mission.deadline.deadline   = [None, None]
         if self.esmb.deadlineEntryState.get():
             print("\tFound deadline")
+            self.mission.deadline.isDeadline = True
             if self.esmb.deadlineOptionalsEntryState.get():
                 print("\t\tFound deadline message: " + self.esmb.deadlineOptionals.get())
                 line = self.esmb.deadlineOptionals.get()
                 tokens = shlex.split(line)
-                self.mission.deadline[0] = tokens[0]
-                self.mission.deadline[1] = tokens[1]
+                self.mission.deadline.deadline[0] = tokens[0]
+                self.mission.deadline.deadline[1] = tokens[1]
             #end if
         #end if
 
@@ -133,7 +134,17 @@ class MissionCompiler(object):
             self.mission.whereShown = self.esmb.rbWhereShownValue.get()
         # end if
 
-
+        # repeat
+        self.mission.isRepeat = False
+        self.mission.repeat   = None
+        if self.esmb.repeatEntryState.get():
+            print("\tFound repeat")
+            self.mission.isRepeat = True
+            if self.esmb.repeatOptionalsEntryState.get():
+                print("\t\tFound repeat optionals modifier: %s" % self.esmb.repeatOptionals.get())
+                self.mission.repeat = self.esmb.repeatOptionals.get()
+            #end if
+        #end if
 
 
 
