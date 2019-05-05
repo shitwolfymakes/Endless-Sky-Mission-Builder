@@ -206,7 +206,7 @@ class GUI(object):
 
         self.activeMission = None
         if self.debugging:
-            self.activeMission = self.missionList[0]            #TAKE THIS OUT EVENTUALLY
+            self.activeMission = self.missionList[0]
         # Run the program
         self.gui.mainloop()
     #end init
@@ -326,7 +326,7 @@ class GUI(object):
         self.displayNameCheckbutton.grid(row=1, column=1)
 
         self.displayName.set("<name>")
-        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=20) # setting the width to 30 here widens the rest of them
+        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30) # setting the width to 30 here widens the rest of them
         self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
 
