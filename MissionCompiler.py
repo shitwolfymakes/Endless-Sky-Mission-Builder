@@ -156,7 +156,12 @@ class MissionCompiler(object):
             self.mission.clearance.clearance   = self.esmb.clearanceOptionals.get()
         #end if
 
-
+        # isInfiltrating
+        self.mission.components.isInfiltrating = False
+        if self.esmb.isInfiltratingEntryState.get():
+            print("\tFound infiltrating")
+            self.mission.components.isInfiltrating = True
+        #end if
 
 
 

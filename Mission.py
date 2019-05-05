@@ -144,8 +144,9 @@ class Mission(object):
         if self.components.clearance.isClearance:
             self.addLine("\tclearance %s" % self.components.clearance.clearance)
 
-
-
+        # isInfiltrating
+        if self.components.isInfiltrating:
+            self.addLine("\tinfiltrating")
 
 
 
