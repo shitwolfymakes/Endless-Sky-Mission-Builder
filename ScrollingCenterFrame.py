@@ -20,7 +20,7 @@ class ScrollingCenterFrame:
     """
 
     def __init__(self, master, **kwargs):
-        width = kwargs.pop('width', 300)     #default width = None
+        width = kwargs.pop('width', None)     #default width = None
         height = kwargs.pop('height', None)
         self.outer = ttk.Frame(master, **kwargs)
 
@@ -41,8 +41,8 @@ class ScrollingCenterFrame:
 
         self.inner = tk.Frame(self.canvas, bg="#ededed")
         self.inner.configure(bg="orange")
-        # pack the inner Frame into the Canvas with the topleft corner 4 pixels offset
-        self.canvas.create_window(4, 4, window=self.inner, anchor='nw')
+        # pack the inner Frame into the Canvas with the top-left corner 4 pixels offset, set the Frame width
+        self.canvas.create_window(4, 4, window=self.inner, anchor='nw', width=int(self.canvas["width"])-10)
         self.inner.bind("<Configure>", self._on_frame_configure)
 
         self.outer_attr = set(dir(tk.Widget))
