@@ -641,7 +641,7 @@ class GUI(object):
         mfTitle.pack()
 
         #Populate the Text with a mission template
-        self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
+        self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
         self.missionTextBox.pack(expand=1, fill='both')
         welcome_message = "\n"
         welcome_message += "\t\t\tWelcome to Endless Sky Mission Builder!\n"
@@ -704,7 +704,7 @@ class GUI(object):
 
 
     def updateMissionTextBox(self):
-        self.missionTextBox = Text(self.missionFrame, height=30, width=100, wrap=WORD)
+        self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack()
         self.missionTextBox.insert(END, self.activeMission.printMissionLinesToText())
     #end updateTextCanvas
