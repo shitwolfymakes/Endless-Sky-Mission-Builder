@@ -171,6 +171,7 @@ class MissionCompiler(object):
         #end if
 
         # stopover
+        #TODO: fully implement this when filters are implemented
         self.mission.stopover.isStopover = False
         self.mission.stopover.stopover   = None
         if self.esmb.stopoverEntryState.get():
@@ -179,6 +180,25 @@ class MissionCompiler(object):
             self.mission.stopover.stopover   = self.esmb.stopover.get()
         #end if
 
+        # source
+        #TODO: fully implement this when filters are implemented
+        self.mission.source.isSource = False
+        self.mission.source.source   = None
+        if self.esmb.sourceEntryState.get():
+            print("\tFound source: %s" % self.esmb.source.get())
+            self.mission.source.isSource = True
+            self.mission.source.source   = self.esmb.source.get()
+        #end if
+
+        # destination
+        # TODO: fully implement this when filters are implemented
+        self.mission.destination.isDestination = False
+        self.mission.destination.destination   = None
+        if self.esmb.destinationEntryState.get():
+            print("\tFound source: %s" % self.esmb.destination.get())
+            self.mission.destination.isDestination = True
+            self.mission.destination.destination   = self.esmb.destination.get()
+        # end if
 
         print("Done.")
         # call the parser to save the new data

@@ -157,6 +157,15 @@ class Mission(object):
         if self.components.stopover.isStopover:
             self.addLine("\tstopover \"%s\"" % self.components.stopover.stopover)
 
+        # source
+        #TODO: fully implement this when filters are implemented
+        if self.components.source.isSource:
+            self.addLine("\tsource \"%s\"" % self.components.source.source)
+
+        # destination
+        #TODO: fully implement this when filters are implemented
+        if self.components.destination.isDestination:
+            self.addLine("\tdestination \"%s\"" % self.components.destination.destination)
 
         print("Done.")
     #end parseMission

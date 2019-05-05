@@ -2,6 +2,7 @@
     This file contains the classes defining some components of a mission
 '''
 
+#TODO: fully implement this when filters are implemented
 class MissionComponents(object):
 
     def __init__(self):
@@ -21,6 +22,8 @@ class MissionComponents(object):
         self.isInfiltrating     = False         # infiltrating
         self.waypoint           = None          # waypoint <system>
         self.stopover           = Stopover()
+        self.source             = Source()
+        self.destination        = Destination()
     #end init
 
 #end class MissionComponents
@@ -104,6 +107,45 @@ class Stopover(object):
     # end init
 
 # end class Conversations
+
+
+class Source(object):
+    '''
+        Usage:
+        (source) <planet>       # specific planet
+        or
+        (source)                filter
+            ...
+    '''
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        self.isSource = False
+        self.source   = [None, None]
+        print("Done.")
+    # end init
+
+# end class Source
+
+
+class Destination(object):
+    '''
+        Usage:
+        (destination) <planet>       # specific planet
+        or
+        (destination)                filter
+            ...
+    '''
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        self.isDestination = False
+        self.destination   = [None, None]
+        print("Done.")
+    # end init
+
+# end class Destination
+
 
 class Conversations(object):
     #TODO: Implement this in full in Version 2
