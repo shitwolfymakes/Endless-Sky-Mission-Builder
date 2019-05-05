@@ -152,7 +152,10 @@ class Mission(object):
         if self.components.waypoint is not None:
             self.addLine("\twaypoint \"%s\"" % self.components.waypoint)
 
-
+        # stopover
+        #TODO: fully implement this when filters are implemented
+        if self.components.stopover.isStopover:
+            self.addLine("\tstopover \"%s\"" % self.components.stopover.stopover)
 
 
         print("Done.")

@@ -157,22 +157,32 @@ class MissionCompiler(object):
         #end if
 
         # isInfiltrating
-        self.mission.components.isInfiltrating = False
+        self.mission.isInfiltrating = False
         if self.esmb.isInfiltratingEntryState.get():
             print("\tFound infiltrating")
-            self.mission.components.isInfiltrating = True
+            self.mission.isInfiltrating = True
         #end if
 
         # waypoint
-        self.mission.components.waypoint = None
+        self.mission.waypoint = None
         if self.esmb.waypointEntryState.get():
             print("\tFound waypoint: %s" % self.esmb.waypoint.get())
-            self.mission.components.waypoint = self.esmb.waypoint.get()
+            self.mission.waypoint = self.esmb.waypoint.get()
+        #end if
+
+        # stopover
+        self.mission.stopover.isStopover = False
+        self.mission.stopover.stopover   = None
+        if self.esmb.stopoverEntryState.get():
+            print("\tFound stopover: %s" % self.esmb.stopover.get())
+            self.mission.stopover.isStopover = True
+            self.mission.stopover.stopover   = self.esmb.stopover.get()
+        #end if
 
 
+        print("Done.")
         # call the parser to save the new data
         self.esmb.activeMission.parseMission()
-        print("Mission compiled!")
     #end run
 
 
