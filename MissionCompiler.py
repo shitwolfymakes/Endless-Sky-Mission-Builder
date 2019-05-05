@@ -163,8 +163,11 @@ class MissionCompiler(object):
             self.mission.components.isInfiltrating = True
         #end if
 
-
-
+        # waypoint
+        self.mission.components.waypoint = None
+        if self.esmb.waypointEntryState.get():
+            print("\tFound waypoint: %s" % self.esmb.waypoint.get())
+            self.mission.components.waypoint = self.esmb.waypoint.get()
 
 
         # call the parser to save the new data

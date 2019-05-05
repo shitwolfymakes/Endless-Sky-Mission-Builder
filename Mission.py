@@ -148,7 +148,9 @@ class Mission(object):
         if self.components.isInfiltrating:
             self.addLine("\tinfiltrating")
 
-
+        # waypoint
+        if self.components.waypoint is not None:
+            self.addLine("\twaypoint \"%s\"" % self.components.waypoint)
 
 
 
