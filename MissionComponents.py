@@ -82,6 +82,8 @@ class Clearance(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        self.isClearance = False
+        self.clearance   = None
         print("Done.")
     # end init
 

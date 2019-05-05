@@ -39,7 +39,7 @@ class ScrollingCenterFrame:
         self.canvas.bind("<Leave>", self._unbind_mouse)
         self.vsb['command'] = self.canvas.yview
 
-        self.inner = tk.Frame(self.canvas)
+        self.inner = tk.Frame(self.canvas, bg="#ededed")
         #self.inner.configure(bg="orange")
         # pack the inner Frame into the Canvas with the topleft corner 4 pixels offset
         self.canvas.create_window(4, 4, window=self.inner, anchor='nw')

@@ -146,6 +146,19 @@ class MissionCompiler(object):
             #end if
         #end if
 
+        # clearance
+        #TODO: fully implement this when filters are implemented
+        self.mission.clearance.isClearance = False
+        self.mission.clearance.clearance   = None
+        if self.esmb.clearanceEntryState.get():
+            print("\tFound clearance: %s" % self.esmb.clearanceOptionals.get())
+            self.mission.clearance.isClearance = True
+            self.mission.clearance.clearance   = self.esmb.clearanceOptionals.get()
+        #end if
+
+
+
+
 
 
 

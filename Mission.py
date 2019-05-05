@@ -139,6 +139,11 @@ class Mission(object):
             self.addLine(line)
         #end if
 
+        # clearance
+        #TODO: fully implement this when filters are implemented
+        if self.components.clearance.isClearance:
+            self.addLine("\tclearance %s" % self.components.clearance.clearance)
+
 
 
 
