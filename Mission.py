@@ -59,7 +59,7 @@ class Mission(object):
 
         # description
         if self.components.description is not None:
-            self.addLine("\tdescription \"%s\"" % self.components.description)
+            self.addLine("\tdescription `%s`" % self.components.description)
 
         # isBlocked
         if self.components.blocked is not None:
