@@ -80,10 +80,9 @@ def openFile(app):
                 continue
             app.missionList[i - 1].addLine(line)
         # end if/else
-
     # end for
 
-    print("")
+    print()
     print("Missions loaded:")
     for mission in app.missionList:
         print("\t%s" % mission.missionName)
@@ -111,6 +110,7 @@ def printMissionFile(missionFile):
 
 def saveFile(app):
     #TODO: Implement this - ~99% completed
+    #TODO: add preamble comments
     print("\nSaving selected file...")
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".

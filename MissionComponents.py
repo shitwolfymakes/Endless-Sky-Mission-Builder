@@ -84,7 +84,7 @@ class Clearance(object):
     '''
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
         self.isClearance = False
         self.clearance   = None
         print("Done.")
@@ -119,7 +119,7 @@ class Source(object):
     '''
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
         self.isSource = False
         self.source   = [None, None]
         print("Done.")
