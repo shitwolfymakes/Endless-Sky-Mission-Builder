@@ -8,7 +8,8 @@ import webbrowser
 from tkinter import filedialog
 
 from Mission import *
-from MissionCompiler import *
+from MissionCompiler import MissionCompiler
+from MissionFileParser import MissionFileParser
 from popupWindow import popupWindow
 
 
@@ -44,6 +45,7 @@ def openFile(app):
     matchEvent = re.compile(r'^ *event')
     for line in missionLines:
         # print(line, end="")
+        line = line.rstrip()
         # quick and dirty, may need validation later
         if "#" in line:
             # print(line, end="")
@@ -61,7 +63,7 @@ def openFile(app):
 
         if re.search(matchMission, line):
             eventLine = False
-            # print(line, end="")
+            #print(line)
             tokens     = shlex.split(line)
             newMission = Mission(tokens[1])
             app.missionList.append(newMission)
@@ -89,11 +91,13 @@ def openFile(app):
     # end for
 
     app.activeMission = app.missionList[0]
-
     app.updateOptionFrame()
 
     # close the file
     missionfile.close()
+
+    parser = MissionFileParser(app)
+    parser.run()
 # end openFile
 
 
@@ -101,6 +105,7 @@ def printMissionFile(missionFile):
     for line in missionFile:
         print(line, end="")
     #end for
+    print()
 #end printMissionFile
 
 

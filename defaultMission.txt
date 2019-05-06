@@ -9,3 +9,24 @@
 # PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 mission "Default"
+    name "test"
+    description `A test mission`
+    blocked "Oh piss off!"
+    deadline 2 1
+    cargo "food" 5 2 0.1
+        illegal 50 "Soviet citizens need no food comrade"
+        stealth
+    passengers 5 5 0.2
+    invisible
+    priority
+    job
+    repeat 5
+    clearance "You're on the list"
+    infiltrating
+    waypoint "Sol"
+    stopover "Delve"
+
+
+mission "Default 2"
+    name "test 2"
+    description `A second test mission`

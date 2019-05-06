@@ -687,7 +687,7 @@ class GUI(object):
         #TODO: Implement this
         print("Updating centerFrame...", end="\t\t")
 
-        #self.cfTitleText.set(str(self.activeMission.missionName))
+        print("\nTHIS HAS NOT BEEN IMPLEMENTED YET")
 
         print("Done.")
     #end updateCenterFrame

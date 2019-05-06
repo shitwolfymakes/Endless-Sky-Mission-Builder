@@ -16,7 +16,6 @@ class Mission(object):
             self.setDefaultValues(missionName)
         #end if/else
 
-        self.parseMission()
     #end init
 
 

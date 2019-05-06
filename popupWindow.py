@@ -24,4 +24,4 @@ class popupWindow(object):
         self.top.destroy()
     #end cleanup
 
-#end class popupWindow()
+#end class popupWindow
