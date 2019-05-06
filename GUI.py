@@ -300,6 +300,7 @@ class GUI(object):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
+        self.setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
         self.populateComponentSelections()
 
@@ -325,7 +326,6 @@ class GUI(object):
                                                       variable=self.displayNameEntryState, onvalue=1, offvalue=0)
         self.displayNameCheckbutton.grid(row=1, column=1)
 
-        self.displayName.set("<name>")
         self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30) # setting the width to 30 here widens the rest of them
         self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
@@ -339,7 +339,6 @@ class GUI(object):
                                                       variable=self.descriptionEntryState, onvalue=1, offvalue=0)
         self.descriptionCheckbutton.grid(row=3, column=1)
 
-        self.description.set("<description>")
         self.descriptionEntry = ttk.Entry(cf, textvariable=self.description, state=off)
         self.descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
@@ -353,7 +352,6 @@ class GUI(object):
                                                     variable=self.isBlockedEntryState, onvalue=1, offvalue=0)
         self.isBlockedCheckbutton.grid(row=5, column=1)
 
-        self.isBlockedMessage.set("<message>")
         self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off)
         self.isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
 
@@ -367,7 +365,6 @@ class GUI(object):
                                                    variable=self.deadlineEntryState, onvalue=1, offvalue=0)
         self.deadlineCheckbutton.grid(row=7, column=1)
 
-        self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
         self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off)
         self.deadlineOptionalsEntry.grid(row=8, column=0, sticky="ew", padx=(indent, 0))
         self.deadlineOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -386,11 +383,9 @@ class GUI(object):
                                                 variable=self.cargoEntryState, onvalue=1, offvalue=0)
         self.cargoCheckbutton.grid(row=9, column=1)
 
-        self.cargo.set("(random | <name>) <number#>")
         self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off)
         self.cargoEntry.grid(row=10, column=0, sticky="ew", padx=(indent, 0))
 
-        self.cargoOptionals.set("[<number#> [<probability#>]]")
         self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off)
         self.cargoOptionalsEntry.grid(row=11, column=0, sticky="ew", padx=(indent, 0))
         self.cargoOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -407,11 +402,9 @@ class GUI(object):
                                                        variable=self.cargoIllegalEntryState, onvalue=1, offvalue=0)
         self.cargoIllegalCheckbutton.grid(row=12, column=1)
 
-        self.cargoFine.set("<fine#>")
         self.cargoFineEntry = ttk.Entry(cf, textvariable=self.cargoFine, state=off)
         self.cargoFineEntry.grid(row=13, column=0, sticky="ew", padx=(indent*2, 0))
 
-        self.cargoFineMessage.set("[<message>]")
         self.cargoFineMessageEntry = ttk.Entry(cf, textvariable=self.cargoFineMessage, state=off)
         self.cargoFineMessageEntry.grid(row=14, column=0, sticky="ew", padx=(indent*2, 0))
         self.cargoFineMessageCheckbutton = ttk.Checkbutton(cf,
@@ -424,7 +417,7 @@ class GUI(object):
         cargoStealthLabel.grid(row=15, column=0, sticky="ew", padx=(indent, 0))
         self.cargoStealthCheckbutton = ttk.Checkbutton(cf,
                                                        command=lambda: self.cbValueChanged(self.cargoStealthEntryState,
-                                                                                           "cargoStealthCheckButton"),
+                                                                                           "cargoStealthCheckbutton"),
                                                        variable=self.cargoStealthEntryState, onvalue=1, offvalue=0)
         self.cargoStealthCheckbutton.grid(row=15, column=1)
 
@@ -438,11 +431,9 @@ class GUI(object):
                                                      variable=self.passengersEntryState, onvalue=1, offvalue=0)
         self.passengersCheckbutton.grid(row=16, column=1)
 
-        self.passengers.set("<number#>")
         self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off)
         self.passengersEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
 
-        self.passengersOptionals.set("[<number#> [<probability#>]]")
         self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off)
         self.passengersOptionalsEntry.grid(row=18, column=0, sticky="ew", padx=(indent, 0))
         self.passengersOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -509,7 +500,6 @@ class GUI(object):
                                                  variable=self.repeatEntryState, onvalue=1, offvalue=0)
         self.repeatCheckbutton.grid(row=28, column=1)
 
-        self.repeatOptionals.set("[<times#>]")
         self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off)
         self.repeatOptionalsEntry.grid(row=29, column=0, sticky="ew", padx=(indent, 0))
         self.repeatOptionalsCheckbutton = ttk.Checkbutton(cf,
@@ -528,7 +518,6 @@ class GUI(object):
                                                     variable=self.clearanceEntryState, onvalue=1, offvalue=0)
         self.clearanceCheckbutton.grid(row=30, column=1)
 
-        self.clearanceOptionals.set("[<message>]")
         self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off)
         self.clearanceOptionalsEntry.grid(row=31, column=0, sticky="ew", padx=(indent, 0))
 
@@ -552,7 +541,6 @@ class GUI(object):
                                                       variable=self.waypointEntryState, onvalue=1, offvalue=0)
         self.waypointCheckbutton.grid(row=33, column=1)
 
-        self.waypoint.set("<system>")
         self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off)
         self.waypointEntry.grid(row=34, column=0, sticky="ew", padx=(indent, 0))
 
@@ -566,7 +554,6 @@ class GUI(object):
                                                    variable=self.stopoverEntryState, onvalue=1, offvalue=0)
         self.stopoverCheckbutton.grid(row=35, column=1)
 
-        self.stopover.set("<planet>")
         self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off)
         self.stopoverEntry.grid(row=36, column=0, sticky="ew", padx=(indent, 0))
 
@@ -580,7 +567,6 @@ class GUI(object):
                                                  variable=self.sourceEntryState, onvalue=1, offvalue=0)
         self.sourceCheckbutton.grid(row=37, column=1)
 
-        self.source.set("<planet>")
         self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off)
         self.sourceEntry.grid(row=38, column=0, sticky="ew", padx=(indent, 0))
 
@@ -594,7 +580,6 @@ class GUI(object):
                                                  variable=self.destinationEntryState, onvalue=1, offvalue=0)
         self.sourceCheckbutton.grid(row=39, column=1)
 
-        self.destination.set("<planet>")
         self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off)
         self.destinationEntry.grid(row=40, column=0, sticky="ew", padx=(indent, 0))
 
@@ -631,7 +616,7 @@ class GUI(object):
         print("Done.")
     #end populateComponentSelections
 
-    # COMPLETE, WORKING
+
     def buildMissionFrame(self):
         print("Building missionFrame...", end="\t")
 
@@ -685,16 +670,187 @@ class GUI(object):
 
     def updateCenterFrame(self):
         #TODO: Implement this
-        print("Updating centerFrame...", end="\t\t")
+        print("\nUpdating centerFrame...", end="\t\t")
 
-        print("\nTHIS HAS NOT BEEN IMPLEMENTED YET")
+        self.setDefaultEntryValues()
+        self.setDefaultEntryStateValues()
 
-        print("Done.")
+        components = self.activeMission.components
+
+        # missionDisplayName
+        if components.missionDisplayName is not None:
+            self.displayNameEntryState.set(1)
+            self.displayName.set(components.missionDisplayName)
+        #end if
+        self.cbValueChanged(self.displayNameEntryState, self.displayNameEntry)
+
+        # description
+
+        if components.description is not None:
+            self.descriptionEntryState.set(1)
+            description = components.description.lstrip('`').rstrip('`')
+            self.description.set(description)
+        #end if
+        self.cbValueChanged(self.descriptionEntryState, self.descriptionEntry)
+
+        # blocked
+        if components.blocked is not None:
+            self.isBlockedEntryState.set(1)
+            self.isBlockedMessage.set(components.blocked)
+        #end if
+        self.cbValueChanged(self.isBlockedEntryState, self.isBlockedMessageEntry)
+
+        # deadline
+        if components.deadline.isDeadline is True:
+            self.deadlineEntryState.set(1)
+            if components.deadline.deadline[0] is not None:
+                self.deadlineOptionalsEntryState.set(1)
+                line = components.deadline.deadline[0]
+                if components.deadline.deadline[1] is not None:
+                    line = line + " " + components.deadline.deadline[1]
+                else:
+                    line = line + " [<multiplier#>]"
+                #end if/else
+                self.deadlineOptionals.set(line)
+            #end if
+        #end if
+        self.cbValueChanged(self.deadlineEntryState, self.deadlineOptionalsCheckbutton)
+        self.cbValueChanged(self.deadlineOptionalsEntryState, self.deadlineOptionalsEntry)
+
+        # cargo
+        if components.cargo.isCargo is True:
+            self.cargoEntryState.set(1)
+            self.cargo.set("%s %s" % (components.cargo.cargoType[0],
+                                      components.cargo.cargoType[1]))
+            # cargoOptionals
+            if components.cargo.cargoType[2] is not None:
+                self.cargoOptionalsEntryState.set(1)
+                line = components.cargo.cargoType[2]
+                if components.cargo.cargoType[3] is not None:
+                    line = line + " " + components.cargo.cargoType[3]
+                else:
+                    line = line + " [<probability#>]"
+                #end if/else
+                self.cargoOptionals.set(line)
+            #end if
+
+            # cargoIllegal
+            if components.cargo.cargoIllegal[0] is not None:
+                self.cargoIllegalEntryState.set(1)
+                self.cargoFine.set(components.cargo.cargoIllegal[0])
+                if components.cargo.cargoIllegal[1] is not None:
+                    self.cargoFineMessageEntryState.set(1)
+                    self.cargoFineMessage.set(components.cargo.cargoIllegal[1])
+                # end if
+            # end if
+
+            # cargoStealth
+            if components.cargo.isCargoStealth is True:
+                self.cargoStealthEntryState.set(1)
+        #end if
+        self.cbValueChanged(self.cargoEntryState, self.cargoEntry)
+        self.cbValueChanged(self.cargoOptionalsEntryState, self.cargoOptionalsEntry)
+        self.cbValueChanged(self.cargoIllegalEntryState, self.cargoFineEntry)
+        self.cbValueChanged(self.cargoFineMessageEntryState, self.cargoFineMessageEntry)
+        self.cbValueChanged(self.cargoStealthEntryState, "cargoStealthCheckbutton")
+
+        # passengers
+        if components.passengers.isPassengers is True:
+            self.passengersEntryState.set(1)
+            self.passengers.set(components.passengers.passengers[0])
+            if components.passengers.passengers[1] is not None:
+                self.passengersOptionalsEntryState.set(1)
+                line = components.passengers.passengers[1]
+                if components.passengers.passengers[2] is not None:
+                    line = line + " " + components.passengers.passengers[2]
+                else:
+                    line = line + " [<probability#>]"
+                self.passengersOptionals.set(line)
+            #end if
+        #end if
+        self.cbValueChanged(self.passengersEntryState, self.passengersEntry)
+        self.cbValueChanged(self.passengersOptionalsEntryState, self.passengersOptionalsEntry)
+
+        # isInvisible
+        if components.isInvisible is True:
+            self.isInvisibleEntryState.set(1)
+        #end if
+        self.cbValueChanged(self.isInvisibleEntryState, "isInvisibleCheckbutton")
+
+        # priorityLevel
+        if components.priorityLevel is not None:
+            self.priorityLevelEntryState.set(1)
+            self.rbPriorityValue.set(components.priorityLevel)
+        #end if
+        self.cbValueChanged(self.priorityLevelEntryState, "priorityLevelCheckbutton")
+
+        # whereShown
+        if components.whereShown is not None:
+            self.whereShownEntryState.set(1)
+            self.rbWhereShownValue.set(components.whereShown)
+        #end if
+        self.cbValueChanged(self.whereShownEntryState, "whereShownCheckbutton")
+
+        # repeat
+        if components.isRepeat is True:
+            self.repeatEntryState.set(1)
+            if components.repeat is not N:
+                self.repeatOptionalsEntryState.set(1)
+                self.repeatOptionals.set(components.repeat)
+            #end if
+        #end if
+        self.cbValueChanged(self.repeatEntryState, self.repeatOptionalsCheckbutton)
+        self.cbValueChanged(self.repeatOptionalsEntryState, self.repeatOptionalsEntry)
+
+        # clearance
+        if components.clearance.isClearance is True:
+            self.clearanceEntryState.set(1)
+            if components.clearance.clearance is not None:
+                self.clearanceOptionalsEntryState.set(1)
+                self.clearanceOptionals.set(components.clearance.clearance)
+        #end if
+        self.cbValueChanged(self.clearanceEntryState, self.clearanceOptionalsEntry)
+
+        # infiltrating
+        if components.isInfiltrating is True:
+            self.isInfiltratingEntryState.set(1)
+        #end if
+        self.cbValueChanged(self.isInfiltratingEntryState, "isInfiltratingCheckbutton")
+
+        # waypoint
+        if components.waypoint is not None:
+            self.waypointEntryState.set(1)
+            self.waypoint.set(components.waypoint)
+        # end if
+        self.cbValueChanged(self.waypointEntryState, self.waypointEntry)
+
+        # stopover
+        if components.stopover.isStopover is True:
+            self.stopoverEntryState.set(1)
+            self.stopover.set(components.stopover.stopover)
+        # end if
+        self.cbValueChanged(self.stopoverEntryState, self.stopoverEntry)
+
+        # source
+        if components.source.isSource is True:
+            self.sourceEntryState.set(1)
+            self.source.set(components.source.source)
+        # end if
+        self.cbValueChanged(self.sourceEntryState, self.sourceEntry)
+
+        # destination
+        if components.destination.isDestination is True:
+            self.destinationEntryState.set(1)
+            self.destination.set(components.destination)
+        # end if
+        self.cbValueChanged(self.destinationEntryState, self.destinationEntry)
+
+    print("Done.")
     #end updateCenterFrame
 
 
     def updateMissionFrame(self):
-        print("Updating missionFrame...", end="\t")
+        print("\nUpdating missionFrame...", end="\t")
 
         self.missionTextBox.forget()
         self.updateMissionTextBox()
@@ -712,7 +868,55 @@ class GUI(object):
 
     ### MISC METHODS ###
 
-    # COMPLETE, WORKING
+    def setDefaultEntryValues(self):
+        self.displayName.set("<name>")
+        self.description.set("<description>")
+        self.isBlockedMessage.set("<message>")
+        self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
+        self.cargo.set("(random | <name>) <number#>")
+        self.cargoOptionals.set("[<number#> [<probability#>]]")
+        self.cargoFine.set("<fine#>")
+        self.cargoFineMessage.set("[<message>]")
+        self.passengers.set("<number#>")
+        self.passengersOptionals.set("[<number#> [<probability#>]]")
+        self.rbPriorityValue.set("")
+        self.rbWhereShownValue.set("")
+        self.repeatOptionals.set("[<times#>]")
+        self.clearanceOptionals.set("[<message>]")
+        self.waypoint.set("<system>")
+        self.stopover.set("<planet>")
+        self.source.set("<planet>")
+        self.destination.set("<planet>")
+    #end setDefaultEntryValues
+
+
+    def setDefaultEntryStateValues(self):
+        self.displayNameEntryState.set(0)
+        self.descriptionEntryState.set(0)
+        self.isBlockedEntryState.set(0)
+        self.deadlineEntryState.set(0)
+        self.deadlineOptionalsEntryState.set(0)
+        self.cargoEntryState.set(0)
+        self.cargoOptionalsEntryState.set(0)
+        self.cargoIllegalEntryState.set(0)
+        self.cargoFineMessageEntryState.set(0)
+        self.cargoStealthEntryState.set(0)
+        self.passengersEntryState.set(0)
+        self.passengersOptionalsEntryState.set(0)
+        self.isInvisibleEntryState.set(0)
+        self.priorityLevelEntryState.set(0)
+        self.whereShownEntryState.set(0)
+        self.repeatEntryState.set(0)
+        self.clearanceEntryState.set(0)
+        self.clearanceOptionalsEntryState.set(0)
+        self.isInfiltratingEntryState.set(0)
+        self.waypointEntryState.set(0)
+        self.passengersOptionalsEntryState.set(0)
+        self.sourceEntryState.set(0)
+        self.destinationEntryState.set(0)
+    #end setDefaultEntryStateValues
+
+
     def missionSelected(self, event):
         selectedMissionName = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selectedMissionName)

@@ -23,9 +23,6 @@ class Mission(object):
         #TODO: Implement this
         self.missionName = missionName
         self.addLine("mission \"%s\"\n" % missionName)
-        self.addLine("\t-THIS IS A NEWLY CREATED DEFAULT MISSION\n")
-        self.addLine("\t-REMOVE THIS AFTER PARSER IS DONE\n")
-    #end setDefaultValues
 
 
     def addLine(self, line):

@@ -89,14 +89,14 @@ def openFile(app):
         #mission.printMission()
     # end for
 
-    app.activeMission = app.missionList[0]
-    app.updateOptionFrame()
-
     # close the file
     missionfile.close()
 
     parser = MissionFileParser(app)
     parser.run()
+
+    app.activeMission = app.missionList[0]
+    app.updateOptionFrame()
 # end openFile
 
 
