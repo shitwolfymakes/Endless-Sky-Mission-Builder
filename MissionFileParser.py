@@ -105,7 +105,7 @@ class MissionFileParser(object):
                     mission.components.destination.destination   = tokens[1]
                 #end if/else
             #end for
-            print("Done.")
+            print("\tDone.")
         #end for
         print("File parsing complete.")
     #end run

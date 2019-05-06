@@ -18,6 +18,9 @@ class ESMB(object):
         debugMode = False
         if "debug=True" in sys.argv:
             debugMode = True
+        else:
+            logfile = "log.txt"
+            sys.stdout = open(logfile, 'w')
         self.gui = GUI(debugMode)
     #end init
 
