@@ -1,7 +1,9 @@
-'''
+''' ScrollingCenterFrame.py
 Most of the code for this is from: https://gist.github.com/novel-yet-trivial/3eddfce704db3082e38c84664fc1fdf8
-Thanks m8!
 
+Link to their github: https://github.com/novel-yet-trivial
+
+Thanks m8!
 '''
 
 import tkinter as tk
