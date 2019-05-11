@@ -69,7 +69,7 @@ class Mission(object):
 
         # description
         if self.components.description is not None:
-            self.addLine("\tdescription `%s`" % self.components.description)
+            self.addLine("\tdescription \"%s\"" % self.components.description)
 
         # isBlocked
         if self.components.blocked is not None:
@@ -152,7 +152,7 @@ class Mission(object):
         # clearance
         #TODO: fully implement this when filters are implemented
         if self.components.clearance.isClearance:
-            self.addLine("\tclearance %s" % self.components.clearance.clearance)
+            self.addLine("\tclearance `%s`" % self.components.clearance.clearance)
 
         # isInfiltrating
         if self.components.isInfiltrating:

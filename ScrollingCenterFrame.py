@@ -22,7 +22,7 @@ class ScrollingCenterFrame:
     """
 
     def __init__(self, master, **kwargs):
-        width = kwargs.pop('width', None)     #default width = None
+        width = kwargs.pop('width', 350)     #default width = None
         height = kwargs.pop('height', None)
         self.outer = ttk.Frame(master, **kwargs)
 

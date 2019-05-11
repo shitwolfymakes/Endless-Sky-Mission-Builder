@@ -802,7 +802,7 @@ class GUI(object):
         # repeat
         if components.isRepeat is True:
             self.repeatEntryState.set(1)
-            if components.repeat is not N:
+            if components.repeat is not None:
                 self.repeatOptionalsEntryState.set(1)
                 self.repeatOptionals.set(components.repeat)
             #end if
@@ -849,7 +849,7 @@ class GUI(object):
         # destination
         if components.destination.isDestination is True:
             self.destinationEntryState.set(1)
-            self.destination.set(components.destination)
+            self.destination.set(components.destination.destination)
         # end if
         self.cbValueChanged(self.destinationEntryState, self.destinationEntry)
 
@@ -915,6 +915,7 @@ class GUI(object):
         self.priorityLevelEntryState.set(0)
         self.whereShownEntryState.set(0)
         self.repeatEntryState.set(0)
+        self.repeatOptionalsEntryState.set(0)
         self.clearanceEntryState.set(0)
         self.clearanceOptionalsEntryState.set(0)
         self.isInfiltratingEntryState.set(0)
