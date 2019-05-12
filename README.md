@@ -19,3 +19,6 @@ Future supported mission options:
 ## System requirements
 - Python 3.7 or greater
 - tkinter (comes with python 3)
+
+## Contributing
+If you'd like to contribute, or contact the dev, join me in [the Discord](https://discord.gg/MakYJSF)
