@@ -20,5 +20,5 @@ Future supported mission options:
 - Python 3.7 or greater
 - tkinter (comes with python 3)
 
-## Contributing
+## Contributing/Support
 If you'd like to contribute, or contact the dev, join me in [the Discord](https://discord.gg/MakYJSF)
