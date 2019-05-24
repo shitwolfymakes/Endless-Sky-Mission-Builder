@@ -29,7 +29,7 @@ def openFile(app):
     #TODO: add handling for "event" items inside missionfile
     #    NOTE: EVENTS ARE STORED IN THE MISSION FILE, BUT ARE
     #    COMPLETELY SEPARATE FROM MISSIONS. SAVE HANDLING
-    #    THESE FOR VERSION 3
+    #    THESE FOR LATER
 
     #TODO: Add handling for mission preamble
 

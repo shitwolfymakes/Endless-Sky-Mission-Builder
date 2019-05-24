@@ -310,14 +310,12 @@ class GUI(object):
         self.centerFrame.grid(row=0, column=1, sticky="ns")
         self.setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
-        self.populateComponentSelections()
 
         print("Done.")
     #end buildCenterFrame
 
 
     def buildComponentsOnCenterFrame(self):
-        #TODO: Implement this - ~75% completed
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
@@ -618,13 +616,6 @@ class GUI(object):
     #end rbValueChanged
 
 
-    def populateComponentSelections(self):
-        print("\tTesting populateComponentSelections...", end="\t\t")
-
-        print("Done.")
-    #end populateComponentSelections
-
-
     def buildMissionFrame(self):
         print("Building missionFrame...", end="\t")
 
@@ -677,7 +668,6 @@ class GUI(object):
 
 
     def updateCenterFrame(self):
-        #TODO: Implement this
         print("\nUpdating centerFrame...", end="\t\t")
 
         self.setDefaultEntryValues()

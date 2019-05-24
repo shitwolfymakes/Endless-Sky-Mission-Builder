@@ -34,7 +34,6 @@ class Mission(object):
 
 
     def setDefaultValues(self, missionName):
-        #TODO: Implement this
         self.missionName = missionName
         self.addLine("mission \"%s\"\n" % missionName)
 
@@ -58,7 +57,6 @@ class Mission(object):
 
 
     def parseMission(self):
-        #TODO: IMPLEMENT THIS
         print("Parsing mission...", end="\t\t\t")
         self.missionLines = []          # empty the default values
         self.addLine("mission \"%s\"" % self.missionName)

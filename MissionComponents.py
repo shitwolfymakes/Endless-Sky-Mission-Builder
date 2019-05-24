@@ -158,7 +158,7 @@ class Destination(object):
 
 
 class Conversations(object):
-    #TODO: Implement this in full in Version 2
+    #TODO: Implement this in full in a separate tool
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
