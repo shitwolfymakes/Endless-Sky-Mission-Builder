@@ -22,7 +22,7 @@ class ScrollingCenterFrame:
     """
 
     def __init__(self, master, **kwargs):
-        width = kwargs.pop('width', None)#, 350)     #default width = None
+        width = kwargs.pop('width', 350)     #default width = None
         height = kwargs.pop('height', None)
         self.outer = ttk.Frame(master, **kwargs)
 
@@ -42,7 +42,7 @@ class ScrollingCenterFrame:
         self.vsb['command'] = self.canvas.yview
 
         self.inner = tk.Frame(self.canvas, bg="#ededed")
-        self.inner.configure(bg="orange")
+        #self.inner.configure(bg="orange")
         # pack the inner Frame into the Canvas with the top-left corner 4 pixels offset, set the Frame width
         self.canvas.create_window(4, 4, window=self.inner, anchor='nw')
         self.inner.bind("<Configure>", self._on_frame_configure)
@@ -80,3 +80,11 @@ class ScrollingCenterFrame:
             self.canvas.yview_scroll(-1, "units")
         elif event.num == 5 or event.delta < 0:
             self.canvas.yview_scroll(1, "units")
+#end class ScrollingCenterFrame
+
+
+class ScrollingCenterFrame2(ttk.Frame):
+    #TODO: Implement this to replace the current SCF
+    print("NOT IMPLEMENTED YET")
+
+#end class ScrollingCenterFrame2
