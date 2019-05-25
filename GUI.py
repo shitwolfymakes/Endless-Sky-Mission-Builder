@@ -88,9 +88,6 @@ class GUI(object):
         ## cargo
         self.cargoEntryState            = BooleanVar()
         self.cargoOptionalsEntryState   = BooleanVar()
-        self.cargoIllegalEntryState     = BooleanVar()
-        self.cargoFineMessageEntryState = BooleanVar()
-        self.cargoStealthEntryState     = BooleanVar()
 
         self.cargoCheckbutton          = None
         self.cargo                     = StringVar()
@@ -99,16 +96,6 @@ class GUI(object):
         self.cargoOptionals            = StringVar()
         self.cargoOptionalsEntry       = None
         self.cargoOptionalsCheckbutton = None
-
-        self.cargoFine               = StringVar()
-        self.cargoFineEntry          = None
-        self.cargoIllegalCheckbutton = None
-
-        self.cargoFineMessage            = StringVar()
-        self.cargoFineMessageEntry       = None
-        self.cargoFineMessageCheckbutton = None
-
-        self.cargoStealthCheckbutton = None
 
 
         ## Passengers
@@ -122,6 +109,21 @@ class GUI(object):
         self.passengersOptionals            = StringVar()
         self.passengersOptionalsEntry       = None
         self.passengersOptionalsCheckbutton = None
+
+        ## illegal
+        self.illegalEntryState     = BooleanVar()
+        self.fineMessageEntryState = BooleanVar()
+        self.stealthEntryState     = BooleanVar()
+
+        self.fine               = StringVar()
+        self.fineEntry          = None
+        self.illegalCheckbutton = None
+
+        self.fineMessage            = StringVar()
+        self.fineMessageEntry       = None
+        self.fineMessageCheckbutton = None
+
+        self.stealthCheckbutton = None
 
 
         ## isInvisible
@@ -400,53 +402,57 @@ class GUI(object):
                                                          variable=self.cargoOptionalsEntryState, onvalue=1, offvalue=0)
         self.cargoOptionalsCheckbutton.grid(row=11, column=1)
 
-        cargoIllegalLabel = ttk.Label(cf, text="Illegal")
-        cargoIllegalLabel.grid(row=12, column=0, sticky="ew", padx=(indent, 0))
-        self.cargoIllegalCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.cargoIllegalEntryState,
-                                                                                           self.cargoFineEntry),
-                                                       variable=self.cargoIllegalEntryState, onvalue=1, offvalue=0)
-        self.cargoIllegalCheckbutton.grid(row=12, column=1)
-
-        self.cargoFineEntry = ttk.Entry(cf, textvariable=self.cargoFine, state=off)
-        self.cargoFineEntry.grid(row=13, column=0, sticky="ew", padx=(indent*2, 0))
-
-        self.cargoFineMessageEntry = ttk.Entry(cf, textvariable=self.cargoFineMessage, state=off)
-        self.cargoFineMessageEntry.grid(row=14, column=0, sticky="ew", padx=(indent*2, 0))
-        self.cargoFineMessageCheckbutton = ttk.Checkbutton(cf,
-                                                           command=lambda: self.cbValueChanged(self.cargoFineMessageEntryState,
-                                                                                               self.cargoFineMessageEntry),
-                                                           variable=self.cargoFineMessageEntryState, onvalue=1, offvalue=0)
-        self.cargoFineMessageCheckbutton.grid(row=14, column=1)
-
-        cargoStealthLabel = ttk.Label(cf, text="Stealth")
-        cargoStealthLabel.grid(row=15, column=0, sticky="ew", padx=(indent, 0))
-        self.cargoStealthCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.cargoStealthEntryState,
-                                                                                           "cargoStealthCheckbutton"),
-                                                       variable=self.cargoStealthEntryState, onvalue=1, offvalue=0)
-        self.cargoStealthCheckbutton.grid(row=15, column=1)
-
 
         # Passengers
         passengersLabel = ttk.Label(cf, text="Passengers")
-        passengersLabel.grid(row=16, column=0, sticky="ew")
+        passengersLabel.grid(row=12, column=0, sticky="ew")
         self.passengersCheckbutton = ttk.Checkbutton(cf,
                                                      command=lambda: self.cbValueChanged(self.passengersEntryState,
                                                                                          self.passengersEntry),
                                                      variable=self.passengersEntryState, onvalue=1, offvalue=0)
-        self.passengersCheckbutton.grid(row=16, column=1)
+        self.passengersCheckbutton.grid(row=12, column=1)
 
         self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off)
-        self.passengersEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
+        self.passengersEntry.grid(row=13, column=0, sticky="ew", padx=(indent, 0))
 
         self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off)
-        self.passengersOptionalsEntry.grid(row=18, column=0, sticky="ew", padx=(indent, 0))
+        self.passengersOptionalsEntry.grid(row=14, column=0, sticky="ew", padx=(indent, 0))
         self.passengersOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                               command=lambda: self.cbValueChanged(self.passengersOptionalsEntryState,
                                                                                                   self.passengersOptionalsEntry),
                                                               variable=self.passengersOptionalsEntryState, onvalue=1, offvalue=0)
-        self.passengersOptionalsCheckbutton.grid(row=18, column=1)
+        self.passengersOptionalsCheckbutton.grid(row=14, column=1)
+
+
+        # illegal
+        illegalLabel = ttk.Label(cf, text="Illegal")
+        illegalLabel.grid(row=15, column=0, sticky="ew")
+        self.illegalCheckbutton = ttk.Checkbutton(cf,
+                                                       command=lambda: self.cbValueChanged(self.illegalEntryState,
+                                                                                           self.fineEntry),
+                                                       variable=self.illegalEntryState, onvalue=1, offvalue=0)
+        self.illegalCheckbutton.grid(row=16, column=1)
+
+        self.fineEntry = ttk.Entry(cf, textvariable=self.fine, state=off)
+        self.fineEntry.grid(row=16, column=0, sticky="ew", padx=(indent, 0))
+
+        self.fineMessageEntry = ttk.Entry(cf, textvariable=self.fineMessage, state=off)
+        self.fineMessageEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
+        self.fineMessageCheckbutton = ttk.Checkbutton(cf,
+                                                           command=lambda: self.cbValueChanged(
+                                                               self.fineMessageEntryState,
+                                                               self.fineMessageEntry),
+                                                           variable=self.fineMessageEntryState, onvalue=1,
+                                                           offvalue=0)
+        self.fineMessageCheckbutton.grid(row=17, column=1)
+
+        stealthLabel = ttk.Label(cf, text="Stealth")
+        stealthLabel.grid(row=18, column=0, sticky="ew")
+        self.stealthCheckbutton = ttk.Checkbutton(cf,
+                                                       command=lambda: self.cbValueChanged(self.stealthEntryState,
+                                                                                           "stealthCheckbutton"),
+                                                       variable=self.stealthEntryState, onvalue=1, offvalue=0)
+        self.stealthCheckbutton.grid(row=18, column=1)
 
 
         # isInvisible
@@ -873,8 +879,8 @@ class GUI(object):
         self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
         self.cargo.set("(random | <name>) <number#>")
         self.cargoOptionals.set("[<number#> [<probability#>]]")
-        self.cargoFine.set("<fine#>")
-        self.cargoFineMessage.set("[<message>]")
+        self.fine.set("<fine#>")
+        self.fineMessage.set("[<message>]")
         self.passengers.set("<number#>")
         self.passengersOptionals.set("[<number#> [<probability#>]]")
         self.rbPriorityValue.set("")
@@ -896,9 +902,9 @@ class GUI(object):
         self.deadlineOptionalsEntryState.set(0)
         self.cargoEntryState.set(0)
         self.cargoOptionalsEntryState.set(0)
-        self.cargoIllegalEntryState.set(0)
-        self.cargoFineMessageEntryState.set(0)
-        self.cargoStealthEntryState.set(0)
+        self.illegalEntryState.set(0)
+        self.fineMessageEntryState.set(0)
+        self.stealthEntryState.set(0)
         self.passengersEntryState.set(0)
         self.passengersOptionalsEntryState.set(0)
         self.isInvisibleEntryState.set(0)
