@@ -431,7 +431,7 @@ class GUI(object):
                                                        command=lambda: self.cbValueChanged(self.illegalEntryState,
                                                                                            self.fineEntry),
                                                        variable=self.illegalEntryState, onvalue=1, offvalue=0)
-        self.illegalCheckbutton.grid(row=16, column=1)
+        self.illegalCheckbutton.grid(row=15, column=1)
 
         self.fineEntry = ttk.Entry(cf, textvariable=self.fine, state=off)
         self.fineEntry.grid(row=16, column=0, sticky="ew", padx=(indent, 0))
