@@ -114,6 +114,7 @@ class MissionCompiler(object):
         self.mission.illegal.illegal   = [None, None]
         if self.esmb.illegalEntryState.get():
             print("\t\tFound illegal modifier: %s" % self.esmb.fine.get())
+            self.mission.illegal.isIllegal  = True
             self.mission.illegal.illegal[0] = self.esmb.fine.get()
             if self.esmb.fineMessageEntryState.get():
                 print("\t\tFounnd illegal message: %s" % self.esmb.fineMessage.get())
