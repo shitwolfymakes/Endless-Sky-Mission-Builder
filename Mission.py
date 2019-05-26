@@ -63,11 +63,11 @@ class Mission(object):
 
         # mission display name
         if self.components.missionDisplayName is not None:
-            self.addLine("\tname \"%s\"" % self.components.missionDisplayName)
+            self.addLine("\tname `%s`" % self.components.missionDisplayName)
 
         # description
         if self.components.description is not None:
-            self.addLine("\tdescription \"%s\"" % self.components.description)
+            self.addLine("\tdescription `%s`" % self.components.description)
 
         # isBlocked
         if self.components.blocked is not None:
