@@ -87,6 +87,21 @@ class Passengers(object):
 # end class Passengers
 
 
+class Illegal(object):
+    '''
+        self.illegal = [None, None] # illegal <fine> [<message>]
+    '''
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        self.isIllegal = False
+        self.illegal   = [None, None]
+        print("Done.")
+    # end init
+
+#end class Illegal
+
+
 class Clearance(object):
     '''
     self.clearance = [[None, None],                # clearance [<message>]
