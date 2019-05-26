@@ -52,28 +52,18 @@ class MissionFileParser(object):
                 elif "cargo" in tokens[0]:
                     print("\t\tFound cargo: %s" % tokens[1:])
                     mission.components.cargo.isCargo = True
-                    #TODO: TURN THIS FOR LOOP INTO A SINGLETON
                     self.storeComponentData(mission.components.cargo.cargoType, tokens[1:])
-
-                    # check if next line contains cargo illegal data
-                    if self.getIndentLevel(mission.missionLines[i+1]) > self.getIndentLevel(line):
-                        i, line = next(lines)
-                        line = line.rstrip()
-                        tokens = self.tokenize(line)
-                        print("\t\t\tFound cargo illegal modifier: %s" % tokens[1:])
-                        self.storeComponentData(mission.components.cargo.cargoIllegal, tokens[1:])
-
-                        # check if next line contains stealth data
-                        if self.getIndentLevel(mission.missionLines[i+1]) == self.getIndentLevel(line):
-                            i, line = next(lines)
-                            print("\t\t\tFound cargo stealth modifier")
-                            mission.components.cargo.isCargoStealth = True
-                        #end if
-                    #end if
                 elif "passengers" in tokens[0]:
                     print("\t\tFound passengers: %s" % tokens[1:])
                     mission.components.passengers.isPassengers = True
                     self.storeComponentData(mission.components.passengers.passengers, tokens[1:])
+                elif "illegal" in tokens[0]:
+                    print("\t\tFound illegal modifier: %s" % tokens[1:])
+                    mission.components.illegal.isIllegal = True
+                    self.storeComponentData(mission.components.illegal.illegal, tokens[1:])
+                elif "stealth" in tokens[0]:
+                    print("\t\tFound stealth modifier")
+                    mission.components.isStealth = True
                 elif "invisible" in tokens[0]:
                     print("\t\tFound invisible modifier")
                     mission.components.isInvisible = True
