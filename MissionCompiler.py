@@ -21,14 +21,10 @@ class MissionCompiler(object):
         self.mission = esmb.activeMission.components
     #end init
 
-
+    # Zero out all the data in the mission component, then store what data is selected
+    #     based on the value of the corresponding entry state
     def run(self):
         print("Compiling mission...")
-
-        '''
-            Zero out all the data in the mission component, then store what data is selected
-            based on the value of the corresponding entry state
-        '''
 
         # mission display name
         self.mission.missionDisplayName = None
@@ -37,6 +33,7 @@ class MissionCompiler(object):
             self.mission.missionDisplayName = self.esmb.displayName.get()
         #end if
 
+
         # description
         self.mission.description = None
         if self.esmb.descriptionEntryState.get():
@@ -44,12 +41,14 @@ class MissionCompiler(object):
             self.mission.description = self.esmb.description.get()
         #end if
 
+
         # isBlocked
         self.mission.blocked = None
         if self.esmb.isBlockedEntryState.get():
             print("\tFound block: " + self.esmb.isBlockedMessage.get())
             self.mission.blocked = self.esmb.isBlockedMessage.get()
         #end if
+
 
         # deadline
         self.mission.deadline.isDeadline = False
@@ -66,11 +65,10 @@ class MissionCompiler(object):
             #end if
         #end if
 
+
         # cargo
         self.mission.cargo.isCargo        = False
         self.mission.cargo.cargoType      = [None, None, None, None]
-        self.mission.cargo.cargoIllegal   = [None, None]
-        self.mission.cargo.isCargoStealth = False
         if self.esmb.cargoEntryState.get():
             print("\tFound cargo: " + self.esmb.cargo.get())
             self.mission.cargo.isCargo = True
@@ -88,19 +86,8 @@ class MissionCompiler(object):
                     i += 1
                 #end for
             #end if
-            if self.esmb.cargoIllegalEntryState.get():
-                print("\t\tFound cargo illegal modifier: %s" % self.esmb.cargoFine.get())
-                self.mission.cargo.cargoIllegal[0] = self.esmb.cargoFine.get()
-                if self.esmb.cargoFineMessageEntryState.get():
-                    print("\t\tFounnd cargo illegal message: %s" % self.esmb.cargoFineMessage.get())
-                    self.mission.cargo.cargoIllegal[1] = self.esmb.cargoFineMessage.get()
-                #end if
-            #end if
-            if self.esmb.cargoStealthEntryState.get():
-                print("\t\tFound cargo stealth modifier")
-                self.mission.cargo.isCargoStealth = True
-            #end if
         #end if
+
 
         # passengers
         self.mission.passengers.isPassengers = False
@@ -121,12 +108,35 @@ class MissionCompiler(object):
             #end if
         #end if
 
+
+        # illegal
+        self.mission.illegal.isIllegal = False
+        self.mission.illegal.illegal   = [None, None]
+        if self.esmb.illegalEntryState.get():
+            print("\t\tFound illegal modifier: %s" % self.esmb.fine.get())
+            self.mission.illegal.illegal[0] = self.esmb.fine.get()
+            if self.esmb.fineMessageEntryState.get():
+                print("\t\tFounnd illegal message: %s" % self.esmb.fineMessage.get())
+                self.mission.illegal.illegal[1] = self.esmb.fineMessage.get()
+            # end if
+        # end if
+
+
+        # stealth
+        self.mission.isStealth = False
+        if self.esmb.stealthEntryState.get():
+            print("\t\tFound stealth modifier")
+            self.mission.isStealth = True
+        # end if
+
+
         # isInvisible
         self.mission.isInvisible = False
         if self.esmb.isInvisibleEntryState.get():
             print("\tFound mission invisible modifier")
             self.mission.isInvisible = True
         #end if
+
 
         # priorityLevel
         self.mission.priorityLevel = None
@@ -135,12 +145,14 @@ class MissionCompiler(object):
             self.mission.priorityLevel = self.esmb.rbPriorityValue.get()
         #end if
 
+
         # whereShown
         self.mission.whereShown = None
         if self.esmb.whereShownEntryState.get():
             print("\tFound where shown: %s" % self.esmb.rbWhereShownValue.get())
             self.mission.whereShown = self.esmb.rbWhereShownValue.get()
         # end if
+
 
         # repeat
         self.mission.isRepeat = False
@@ -154,6 +166,7 @@ class MissionCompiler(object):
             #end if
         #end if
 
+
         # clearance
         #TODO: fully implement this when filters are implemented
         self.mission.clearance.isClearance = False
@@ -164,6 +177,7 @@ class MissionCompiler(object):
             self.mission.clearance.clearance   = self.esmb.clearanceOptionals.get()
         #end if
 
+
         # isInfiltrating
         self.mission.isInfiltrating = False
         if self.esmb.isInfiltratingEntryState.get():
@@ -171,12 +185,14 @@ class MissionCompiler(object):
             self.mission.isInfiltrating = True
         #end if
 
+
         # waypoint
         self.mission.waypoint = None
         if self.esmb.waypointEntryState.get():
             print("\tFound waypoint: %s" % self.esmb.waypoint.get())
             self.mission.waypoint = self.esmb.waypoint.get()
         #end if
+
 
         # stopover
         #TODO: fully implement this when filters are implemented
@@ -188,6 +204,7 @@ class MissionCompiler(object):
             self.mission.stopover.stopover   = self.esmb.stopover.get()
         #end if
 
+
         # source
         #TODO: fully implement this when filters are implemented
         self.mission.source.isSource = False
@@ -198,6 +215,7 @@ class MissionCompiler(object):
             self.mission.source.source   = self.esmb.source.get()
         #end if
 
+
         # destination
         # TODO: fully implement this when filters are implemented
         self.mission.destination.isDestination = False
@@ -207,6 +225,7 @@ class MissionCompiler(object):
             self.mission.destination.isDestination = True
             self.mission.destination.destination   = self.esmb.destination.get()
         # end if
+
 
         print("Done.")
         # call the parser to save the new data
