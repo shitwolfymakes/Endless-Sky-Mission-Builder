@@ -101,6 +101,8 @@ class MissionFileParser(object):
                     print("\t\tFound destination: %s" % tokens[1])
                     mission.components.destination.isDestination = True
                     mission.components.destination.destination   = tokens[1]
+                else:
+                    print("ERROR: No tokens found on line %d: %s" % i, line)
                 #end if/else
             #end for
             print("\tDone.")
