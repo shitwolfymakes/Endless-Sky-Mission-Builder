@@ -12,7 +12,7 @@
 This takes the data read in from a mission file and stores it in each mission object
 
 '''
-#TODO: Add data validation, there is currently no checks to make sure it's not all junk data
+#TODO: Add data validation, there are currently no checks to make sure it's not all junk data
 import re, shlex
 
 class MissionFileParser(object):
