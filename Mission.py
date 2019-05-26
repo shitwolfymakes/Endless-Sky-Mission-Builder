@@ -101,15 +101,6 @@ class Mission(object):
                 #end if/else
             #end for
             self.addLine(line)
-            if self.components.cargo.cargoIllegal[0] is not None:
-                line = "\t\tillegal %s" % self.components.cargo.cargoIllegal[0]
-                if self.components.cargo.cargoIllegal[1] is not None:
-                    line = line + " " + self.components.cargo.cargoIllegal[1]
-                #end if
-                self.addLine(line)
-            #end if
-            if self.components.cargo.isCargoStealth:
-                self.addLine("\t\tstealth")
         #end if
 
         # passengers
@@ -125,10 +116,22 @@ class Mission(object):
             self.addLine(line)
         #end if
 
+        # illegal
+        if self.components.illegal.isIllegal:
+            line = "\tillegal %s" % self.components.illegal.illegal[0]
+            if self.components.illegal.illegal[1] is not None:
+                line = line + " " + self.components.illegal.illegal[1]
+            # end if
+            self.addLine(line)
+        #end if
+
+        # stealth
+        if self.components.isStealth:
+            self.addLine("\tstealth")
+
         # isInvisible
         if self.components.isInvisible:
             self.addLine("\tinvisible")
-        #end if
 
         # priorityLevel
         if self.components.priorityLevel is not None:
