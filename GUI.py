@@ -767,12 +767,12 @@ class GUI(object):
 
 
         # illegal
-        if components.illegal.isIllegal[0] is not None:
+        if components.illegal.isIllegal is True:
             self.illegalEntryState.set(1)
-            self.fine.set(components.illegal.isIllegal[0])
-            if components.illegal.isIllegal[1] is not None:
+            self.fine.set(components.illegal.illegal[0])
+            if components.illegal.illegal[1] is not None:
                 self.fineMessageEntryState.set(1)
-                self.fineMessage.set(components.illegal.isIllegal[1])
+                self.fineMessage.set(components.illegal.illegal[1])
             # end if
         # end if
         self.cbValueChanged(self.illegalEntryState, self.fineEntry)
