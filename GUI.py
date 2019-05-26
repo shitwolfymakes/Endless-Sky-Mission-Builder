@@ -681,6 +681,7 @@ class GUI(object):
 
         components = self.activeMission.components
 
+
         # missionDisplayName
         if components.missionDisplayName is not None:
             self.displayNameEntryState.set(1)
@@ -688,8 +689,8 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.displayNameEntryState, self.displayNameEntry)
 
-        # description
 
+        # description
         if components.description is not None:
             self.descriptionEntryState.set(1)
             description = components.description.lstrip('`').rstrip('`')
@@ -697,12 +698,14 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.descriptionEntryState, self.descriptionEntry)
 
+
         # blocked
         if components.blocked is not None:
             self.isBlockedEntryState.set(1)
             self.isBlockedMessage.set(components.blocked)
         #end if
         self.cbValueChanged(self.isBlockedEntryState, self.isBlockedMessageEntry)
+
 
         # deadline
         if components.deadline.isDeadline is True:
@@ -721,6 +724,7 @@ class GUI(object):
         self.cbValueChanged(self.deadlineEntryState, self.deadlineOptionalsCheckbutton)
         self.cbValueChanged(self.deadlineOptionalsEntryState, self.deadlineOptionalsEntry)
 
+
         # cargo
         if components.cargo.isCargo is True:
             self.cargoEntryState.set(1)
@@ -738,25 +742,11 @@ class GUI(object):
                 self.cargoOptionals.set(line)
             #end if
 
-            # cargoIllegal
-            if components.cargo.cargoIllegal[0] is not None:
-                self.cargoIllegalEntryState.set(1)
-                self.cargoFine.set(components.cargo.cargoIllegal[0])
-                if components.cargo.cargoIllegal[1] is not None:
-                    self.cargoFineMessageEntryState.set(1)
-                    self.cargoFineMessage.set(components.cargo.cargoIllegal[1])
-                # end if
-            # end if
 
-            # cargoStealth
-            if components.cargo.isCargoStealth is True:
-                self.cargoStealthEntryState.set(1)
         #end if
         self.cbValueChanged(self.cargoEntryState, self.cargoEntry)
         self.cbValueChanged(self.cargoOptionalsEntryState, self.cargoOptionalsEntry)
-        self.cbValueChanged(self.cargoIllegalEntryState, self.cargoFineEntry)
-        self.cbValueChanged(self.cargoFineMessageEntryState, self.cargoFineMessageEntry)
-        self.cbValueChanged(self.cargoStealthEntryState, "cargoStealthCheckbutton")
+
 
         # passengers
         if components.passengers.isPassengers is True:
@@ -775,11 +765,33 @@ class GUI(object):
         self.cbValueChanged(self.passengersEntryState, self.passengersEntry)
         self.cbValueChanged(self.passengersOptionalsEntryState, self.passengersOptionalsEntry)
 
+
+        # illegal
+        if components.illegal.isIllegal[0] is not None:
+            self.illegalEntryState.set(1)
+            self.fine.set(components.illegal.isIllegal[0])
+            if components.illegal.isIllegal[1] is not None:
+                self.fineMessageEntryState.set(1)
+                self.fineMessage.set(components.illegal.isIllegal[1])
+            # end if
+        # end if
+        self.cbValueChanged(self.illegalEntryState, self.fineEntry)
+        self.cbValueChanged(self.fineMessageEntryState, self.fineMessageEntry)
+
+
+        # stealth
+        if components.isStealth is True:
+            self.stealthEntryState.set(1)
+        #end if
+        self.cbValueChanged(self.stealthEntryState, "stealthCheckbutton")
+
+
         # isInvisible
         if components.isInvisible is True:
             self.isInvisibleEntryState.set(1)
         #end if
         self.cbValueChanged(self.isInvisibleEntryState, "isInvisibleCheckbutton")
+
 
         # priorityLevel
         if components.priorityLevel is not None:
@@ -788,12 +800,14 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.priorityLevelEntryState, "priorityLevelCheckbutton")
 
+
         # whereShown
         if components.whereShown is not None:
             self.whereShownEntryState.set(1)
             self.rbWhereShownValue.set(components.whereShown)
         #end if
         self.cbValueChanged(self.whereShownEntryState, "whereShownCheckbutton")
+
 
         # repeat
         if components.isRepeat is True:
@@ -806,6 +820,7 @@ class GUI(object):
         self.cbValueChanged(self.repeatEntryState, self.repeatOptionalsCheckbutton)
         self.cbValueChanged(self.repeatOptionalsEntryState, self.repeatOptionalsEntry)
 
+
         # clearance
         if components.clearance.isClearance is True:
             self.clearanceEntryState.set(1)
@@ -815,11 +830,13 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.clearanceEntryState, self.clearanceOptionalsEntry)
 
+
         # infiltrating
         if components.isInfiltrating is True:
             self.isInfiltratingEntryState.set(1)
         #end if
         self.cbValueChanged(self.isInfiltratingEntryState, "isInfiltratingCheckbutton")
+
 
         # waypoint
         if components.waypoint is not None:
@@ -828,6 +845,7 @@ class GUI(object):
         # end if
         self.cbValueChanged(self.waypointEntryState, self.waypointEntry)
 
+
         # stopover
         if components.stopover.isStopover is True:
             self.stopoverEntryState.set(1)
@@ -835,12 +853,14 @@ class GUI(object):
         # end if
         self.cbValueChanged(self.stopoverEntryState, self.stopoverEntry)
 
+
         # source
         if components.source.isSource is True:
             self.sourceEntryState.set(1)
             self.source.set(components.source.source)
         # end if
         self.cbValueChanged(self.sourceEntryState, self.sourceEntry)
+
 
         # destination
         if components.destination.isDestination is True:
