@@ -12,7 +12,6 @@
 This file contains the classes defining some components of a mission
 '''
 
-#TODO: fully implement this when filters are implemented
 class MissionComponents(object):
 
     def __init__(self):
@@ -23,6 +22,8 @@ class MissionComponents(object):
         self.deadline           = Deadline()
         self.cargo              = Cargo()
         self.passengers         = Passengers()
+        self.illegal            = Illegal()
+        self.isStealth          = False
         self.isInvisible        = False         # invisible
         self.priorityLevel      = None          # (priority | minor)
         self.whereShown         = None          # (job | landing | assisting | boarding)
@@ -55,17 +56,13 @@ class Deadline(object):
 
 class Cargo(object):
     '''
-    cargo  = [None, None, None, None,    # cargo (random | <name>) <number> [<number> [<probability>]]
-              None, None, None,          #     illegal <fine> [<message>]
-              None]                      #     stealth
+    cargo  = [None, None, None, None}    # cargo (random | <name>) <number> [<number> [<probability>]]
     '''
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
         self.isCargo        = False
         self.cargoType      = [None, None, None, None]
-        self.cargoIllegal   = [None, None]
-        self.isCargoStealth = False
         print("Done.")
     #end init
 
