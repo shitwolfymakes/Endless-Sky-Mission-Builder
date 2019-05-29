@@ -55,15 +55,22 @@ class AggregatedComponentFrame(ttk.Frame):
         label = ttk.Label(newComponent, text=labelText, anchor="w")
         label.grid(row=0, column=0, sticky="ew")
 
+        self.componentList.append(newComponent)
+
         editButton = ttk.Button(newComponent, text="edit")
         editButton.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(newComponent, text="X")
+        deleteButton = ttk.Button(newComponent, text="X", command=lambda: self.__deleteComponent(newComponent))
         deleteButton.grid(row=0, column=2)
-
-        self.componentList.append(newComponent)
 
         print("\t\t\t\tDone.")
     #end __addComponent
+
+
+    def __deleteComponent(self, component):
+        self.componentList.remove(component)
+        component.pack_forget()
+        component.destroy()
+    #end __deleteComponent
 
 #end class AggregatedComponentFrame
