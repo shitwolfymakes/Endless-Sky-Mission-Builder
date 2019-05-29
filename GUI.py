@@ -14,8 +14,10 @@ This handles the GUI for ESMB
 '''
 from tkinter import *
 from tkinter import ttk, StringVar
+
 from menuactions import *
 from ScrollingCenterFrame import ScrollingCenterFrame
+from AggregatedComponentFrame import *
 
 class GUI(object):
 
@@ -205,6 +207,10 @@ class GUI(object):
 
         self.destinationCheckbutton = None
         self.destinationEntry       = None
+
+
+        ## Triggers
+        self.triggers = None
 
 
         # declare missionFrame components
@@ -596,7 +602,9 @@ class GUI(object):
         self.destinationEntry.grid(row=40, column=0, sticky="ew", padx=(indent, 0))
 
 
-        #TODO: Add Triggers
+        # triggers
+        self.triggers = AggregatedComponentFrame(cf, "Triggers", "trigger")
+        self.triggers.grid(row=42, column=0, columnspan=2, sticky="ew")
 
 
         print("Done.")
