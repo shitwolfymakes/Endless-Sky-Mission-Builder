@@ -39,7 +39,7 @@ class AggregatedComponentFrame(ttk.Frame):
 
         buttonText = "Add " + self.componentType
         addButton = ttk.Button(self.outer, text=buttonText, width=31, command=self.__addComponent)
-        addButton.pack(expand=True, fill="x")\
+        addButton.pack(expand=True, fill="x")
 
         print("\t\t\tDone.")
     #end init
