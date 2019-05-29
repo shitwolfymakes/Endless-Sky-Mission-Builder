@@ -21,7 +21,6 @@ from tkinter import ttk
 class AggregatedComponentFrame(ttk.Frame):
 
     def __init__(self, parent, sectionName, componentType):
-        print("\n\t\t\tAdding %s" % sectionName)
         ttk.Frame.__init__(self, parent)
 
         self.sectionName   = sectionName
@@ -40,13 +39,11 @@ class AggregatedComponentFrame(ttk.Frame):
         buttonText = "Add " + self.componentType
         addButton = ttk.Button(self.outer, text=buttonText, width=31, command=self.__addComponent)
         addButton.pack(expand=True, fill="x")
-
-        print("\t\t\tDone.")
     #end init
 
 
     def __addComponent(self):
-        print("\t\t\t\tAdding %s to %s" % (self.componentType, self.sectionName))
+        print("Adding %s %d to %s..." % (self.componentType, len(self.componentList), self.sectionName), end="\t\t")
 
         newComponent = ttk.Frame(self.inner)
         newComponent.pack()
@@ -63,7 +60,7 @@ class AggregatedComponentFrame(ttk.Frame):
         deleteButton = ttk.Button(newComponent, text="X", command=lambda: self.__deleteComponent(newComponent))
         deleteButton.grid(row=0, column=2)
 
-        print("\t\t\t\tDone.")
+        print("Done.")
     #end __addComponent
 
 
