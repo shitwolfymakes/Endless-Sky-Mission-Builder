@@ -13,7 +13,7 @@
 
 from tkinter import *
 
-class popupWindow(object):
+class PopupWindow(object):
     def __init__(self, app, master, text):
         self.app = app
         self.top = Toplevel(master)

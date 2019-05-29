@@ -20,7 +20,7 @@ from tkinter import filedialog
 from Mission import *
 from MissionCompiler import MissionCompiler
 from MissionFileParser import MissionFileParser
-from PopupWindow import popupWindow
+from PopupWindow import PopupWindow
 
 
 def openFile(app):
@@ -137,7 +137,7 @@ def saveFile(app):
 
 def newMission(app):
     print("\nCreating new mission...")
-    popupWindow(app, app.gui, "Enter new mission name:")
+    PopupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
 
