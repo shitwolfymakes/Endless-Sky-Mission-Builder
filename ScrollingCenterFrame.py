@@ -60,7 +60,6 @@ class ScrollingCenterFrame:
     def _on_frame_configure(self, event=None):
         x1, y1, x2, y2 = self.canvas.bbox("all")
         width = self.inner.winfo_reqwidth()
-        print(width)
         height = self.canvas.winfo_height()
         self.canvas.config(scrollregion=(0, 0, width, max(y2, height)))
 
