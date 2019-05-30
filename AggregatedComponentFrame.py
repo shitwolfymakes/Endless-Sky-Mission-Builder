@@ -20,9 +20,10 @@ from tkinter import ttk
 
 class AggregatedComponentFrame(ttk.Frame):
 
-    def __init__(self, parent, sectionName, componentType):
+    def __init__(self, app, parent, sectionName, componentType):
         ttk.Frame.__init__(self, parent)
 
+        self.app           = app
         self.sectionName   = sectionName
         self.componentType = componentType
         self.componentList = []
