@@ -23,9 +23,27 @@ class TriggerWindow(object):
         print("Building TriggerWindow...")
 
         self.app = app
+        self.trigger = trigger
+
         self.top = Toplevel(master)
         self.top.title("Edit Trigger")
-        self.trigger = trigger
+
+        outer = ttk.Frame(self.top)
+        outer.pack()
+
+        self.leftFrame = ttk.Frame(outer)
+        self.leftFrame.pack(side=LEFT)
+
+        self.rightFrame = ttk.Frame(outer)
+        self.rightFrame.pack(side=RIGHT)
+
+        # build the left frame
+        testL = ttk.Label(self.leftFrame, text="test1")
+        testL.grid(row=0, column=0)
+
+        # build the right frame
+        testR = ttk.Label(self.rightFrame, text="test2")
+        testR.pack()
 
         print("Done.")
     #end init
