@@ -16,6 +16,7 @@ class MissionComponents(object):
 
     def __init__(self):
         print("\tMission components initializing...")
+
         self.missionDisplayName = None          # mission <name>
         self.description        = None          # description <text>
         self.blocked            = None          # blocked <message>
@@ -35,6 +36,9 @@ class MissionComponents(object):
         self.stopover           = Stopover()
         self.source             = Source()
         self.destination        = Destination()
+        self.triggerList        = []
+
+        print("\tDone.")
     #end init
 
 #end class MissionComponents
@@ -47,8 +51,10 @@ class Deadline(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isDeadline = False
         self.deadline   = [None, None]
+
         print("Done.")
     # end init
 
@@ -61,8 +67,10 @@ class Cargo(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+
         self.isCargo        = False
         self.cargoType      = [None, None, None, None]
+
         print("Done.")
     #end init
 
@@ -76,8 +84,10 @@ class Passengers(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isPassengers = False
         self.passengers   = [None, None, None]
+
         print("Done.")
     # end init
 
@@ -91,8 +101,10 @@ class Illegal(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isIllegal = False
         self.illegal   = [None, None]
+
         print("Done.")
     # end init
 
@@ -107,8 +119,10 @@ class Clearance(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+
         self.isClearance = False
         self.clearance   = None
+
         print("Done.")
     # end init
 
@@ -123,8 +137,10 @@ class Stopover(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
         self.isStopover = False
         self.stopover   = None
+
         print("Done.")
     # end init
 
@@ -142,8 +158,10 @@ class Source(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
         self.isSource = False
         self.source   = [None, None]
+
         print("Done.")
     # end init
 
@@ -161,12 +179,52 @@ class Destination(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isDestination = False
         self.destination   = [None, None]
+
         print("Done.")
     # end init
 
 # end class Destination
+
+
+class Trigger(object):
+    #TODO: Implement this - ~50% Complete
+    '''
+        Triggers:
+
+        on (offer | complete | accept | decline | defer | fail | visit | stopover | enter [<system>])
+            dialog <text>
+            <text>...
+            conversation <name>
+            conversation
+                ...
+            outfit <outfit> [<count#>]
+            require <outfit>
+            payment [<base> [<multiplier>]]
+            <condition> (= | += | -=) <value#>
+            <condition> (++ | --)
+            (set | clear) <condition>
+            event <name> [<delay#> [<max#>]]
+            fail [<name>]
+    '''
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
+        self.triggerType = None
+        self.dialog      = None
+        self.outfit      = [None, None]
+        self.require     = None
+        self.payment     = [None, None]
+        self.event       = [None, None, None]
+        self.fail        = None
+
+        print("Done.")
+    #end init
+
+#end class Trigger
 
 
 class Conversations(object):

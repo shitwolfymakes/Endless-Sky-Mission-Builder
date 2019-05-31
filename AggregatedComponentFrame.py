@@ -44,33 +44,28 @@ class AggregatedComponentFrame(ttk.Frame):
 
 
     def __addComponent(self):
-        print("Adding %s to %s..." % (self.componentType, self.sectionName), end="\t\t")
+        print("Adding %s to %s..." % (self.componentType, self.sectionName))
 
         ComponentFrame(self)
-        '''
-        newComponent = ttk.Frame(self.inner)
-        newComponent.pack()
 
-        labelText = "%s %d" % (self.componentType, len(self.componentList))
-        label = ttk.Label(newComponent, text=labelText, anchor="w")
-        label.grid(row=0, column=0, sticky="ew")
-
-        self.componentList.append(newComponent)
-
-        editButton = ttk.Button(newComponent, text="edit")
-        editButton.grid(row=0, column=1)
-
-        deleteButton = ttk.Button(newComponent, text="X", command=lambda: self.__deleteComponent(newComponent))
-        deleteButton.grid(row=0, column=2)'''
+        if self.componentType is "trigger":
+            self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
+            #print(self.componentList[-1].missionComponent)
 
         print("Done.")
     #end __addComponent
 
 
     def deleteComponent(self, component):
+        print("Removing %s from %s..." % (self.componentType, self.sectionName))
+
+        if self.componentType is "trigger":
+            self.app.activeMission.removeTrigger(component.missionComponent)
         self.componentList.remove(component)
         component.pack_forget()
         component.destroy()
+
+        print("Done.")
     #end __deleteComponent
 
 #end class AggregatedComponentFrame

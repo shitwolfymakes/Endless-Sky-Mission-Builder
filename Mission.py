@@ -181,4 +181,18 @@ class Mission(object):
         print("Done.")
     #end parseMission
 
+
+    def addTrigger(self):
+        #TODO: Implement this
+        newTrigger = MissionComponents.Trigger()
+        self.components.triggerList.append(newTrigger)
+        return newTrigger
+    #end addTrigger
+
+
+    def removeTrigger(self, trigger):
+        #print(trigger)
+        self.components.triggerList.remove(trigger)
+    #end removeTrigger
+
 #end class Mission
