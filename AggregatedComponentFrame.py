@@ -44,8 +44,10 @@ class AggregatedComponentFrame(ttk.Frame):
 
 
     def __addComponent(self):
-        print("Adding %s %d to %s..." % (self.componentType, len(self.componentList), self.sectionName), end="\t\t")
+        print("Adding %s to %s..." % (self.componentType, self.sectionName), end="\t\t")
 
+        ComponentFrame(self)
+        '''
         newComponent = ttk.Frame(self.inner)
         newComponent.pack()
 
@@ -59,16 +61,40 @@ class AggregatedComponentFrame(ttk.Frame):
         editButton.grid(row=0, column=1)
 
         deleteButton = ttk.Button(newComponent, text="X", command=lambda: self.__deleteComponent(newComponent))
-        deleteButton.grid(row=0, column=2)
+        deleteButton.grid(row=0, column=2)'''
 
         print("Done.")
     #end __addComponent
 
 
-    def __deleteComponent(self, component):
+    def deleteComponent(self, component):
         self.componentList.remove(component)
         component.pack_forget()
         component.destroy()
     #end __deleteComponent
 
 #end class AggregatedComponentFrame
+
+
+class ComponentFrame(object):
+
+    def __init__(self, master):
+        self.missionComponent = None
+
+        componentFrame = ttk.Frame(master.inner)
+        componentFrame.pack()
+
+        #labelText = "%s %d" % (master.componentType, len(master.componentList))
+        label = ttk.Label(componentFrame, text=master.componentType, anchor="w")
+        label.grid(row=0, column=0, sticky="ew")
+
+        master.componentList.append(componentFrame)
+
+        editButton = ttk.Button(componentFrame, text="edit")
+        editButton.grid(row=0, column=1)
+
+        deleteButton = ttk.Button(componentFrame, text="X", command=lambda: master.deleteComponent(componentFrame))
+        deleteButton.grid(row=0, column=2)
+    #end init
+
+#end class Component
