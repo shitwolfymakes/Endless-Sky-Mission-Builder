@@ -15,8 +15,9 @@ This frame encapsulates a group of components of a single type. This is done so 
 
 '''
 
-from tkinter import *
 from tkinter import ttk
+
+from TriggerWindow import TriggerWindow
 
 class AggregatedComponentFrame(ttk.Frame):
 
@@ -51,6 +52,7 @@ class AggregatedComponentFrame(ttk.Frame):
         if self.componentType is "trigger":
             self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
             #print(self.componentList[-1].missionComponent)
+            self.editComponent(self.componentList[-1])
 
         print("Done.")
     #end __addComponent
@@ -66,7 +68,14 @@ class AggregatedComponentFrame(ttk.Frame):
         component.destroy()
 
         print("Done.")
-    #end __deleteComponent
+    #end deleteComponent
+
+
+    def editComponent(self, component):
+        print("Editing ", end="")
+        print(component.missionComponent)
+        TriggerWindow(self.app, self.app.gui, component.missionComponent)
+    #end editComponent
 
 #end class AggregatedComponentFrame
 
@@ -85,7 +94,7 @@ class ComponentFrame(object):
 
         master.componentList.append(componentFrame)
 
-        editButton = ttk.Button(componentFrame, text="edit")
+        editButton = ttk.Button(componentFrame, text="edit", command=lambda: master.editComponent(componentFrame))
         editButton.grid(row=0, column=1)
 
         deleteButton = ttk.Button(componentFrame, text="X", command=lambda: master.deleteComponent(componentFrame))

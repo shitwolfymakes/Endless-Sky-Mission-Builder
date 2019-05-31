@@ -24,6 +24,7 @@ class TriggerWindow(object):
 
         self.app = app
         self.top = Toplevel(master)
+        self.top.title("Edit Trigger")
         self.trigger = trigger
 
         print("Done.")
