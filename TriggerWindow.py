@@ -20,16 +20,18 @@ from tkinter import ttk
 class TriggerWindow(object):
 
     def __init__(self, app, master, trigger):
-        print("Building TriggerWindow...")
+        print("\tBuilding TriggerWindow...", end="\t\t")
 
         self.app = app
         self.trigger = trigger
 
         self.top = Toplevel(master)
         self.top.title("Edit Trigger")
+        self.top.configure(bg="#ededed")
+        self.top.grab_set()  # freezes the app until the user enters or cancels
 
         outer = ttk.Frame(self.top)
-        outer.pack()
+        outer.pack(side=TOP)
 
         self.leftFrame = ttk.Frame(outer)
         self.leftFrame.pack(side=LEFT)
@@ -37,15 +39,48 @@ class TriggerWindow(object):
         self.rightFrame = ttk.Frame(outer)
         self.rightFrame.pack(side=RIGHT)
 
+        self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.closeButton.pack(side=BOTTOM)
+
         # build the left frame
-        testL = ttk.Label(self.leftFrame, text="test1")
-        testL.grid(row=0, column=0)
+
+        ## on action
+        onLabel = ttk.Label(self.leftFrame, text="on")
+        onLabel.grid(row=0, column=0)
+
+        #TODO: find a way to support "on enter <system>"
+        self.action = None
+        actionsList = ["offer", "complete", "accept", "decline", "defer", "fail", "visit", "stopover"]
+        self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=actionsList)
+        self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
+        self.onActionCombobox.grid(row=0, column=1)
+        self.onActionCombobox.current(0)
+
+
+
+
+
+
+
+
 
         # build the right frame
-        testR = ttk.Label(self.rightFrame, text="test2")
+        testR = ttk.Label(self.rightFrame, text="RightSideFrame")
         testR.pack()
 
         print("Done.")
     #end init
+
+
+    def actionSelected(self, event):
+        self.action = self.onActionCombobox.get()
+        print('\nTrigger action selected: "on %s"' % self.action)
+    #end actionSelected
+
+
+    def cleanup(self):
+        self.top.grab_release()  # HAVE TO RELEASE
+        self.top.destroy()
+    #end cleanup
 
 #end class TriggerWindow
