@@ -42,19 +42,23 @@ class TriggerWindow(object):
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
 
+        # declare all the variables in one place
+
+        #TODO: find a way to support "on enter <system>"
+        self.action = None
+        actionsList = ["offer", "complete", "accept", "decline", "defer", "fail", "visit", "stopover"]
+
+
+
         # build the left frame
 
         ## on action
         onLabel = ttk.Label(self.leftFrame, text="on")
         onLabel.grid(row=0, column=0)
 
-        #TODO: find a way to support "on enter <system>"
-        self.action = None
-        actionsList = ["offer", "complete", "accept", "decline", "defer", "fail", "visit", "stopover"]
         self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=actionsList)
         self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
         self.onActionCombobox.grid(row=0, column=1)
-        self.onActionCombobox.current(0)
 
 
 
