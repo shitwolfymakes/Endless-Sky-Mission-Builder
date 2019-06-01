@@ -959,15 +959,4 @@ class GUI(object):
     #end missionSelected
 
 
-    def addMission(self, newMissionName):
-        print("Adding mission: \"%s\"..." % newMissionName, end="\t\t")
-
-        mission = Mission(newMissionName, default=True)
-        self.missionList.append(mission)
-        self.missionNameToObjectDict.update({mission.missionName: mission})
-        self.activeMission = mission
-        self.updateOptionFrame()
-    #end addMission
-
-
 #end class GUI
