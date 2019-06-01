@@ -316,7 +316,7 @@ class GUI(object):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
-        self.setDefaultEntryValues()
+        self.__setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
 
         print("Done.")
@@ -684,8 +684,8 @@ class GUI(object):
     def updateCenterFrame(self):
         print("\nUpdating centerFrame...", end="\t\t")
 
-        self.setDefaultEntryValues()
-        self.setDefaultEntryStateValues()
+        self.__setDefaultEntryValues()
+        self.__setDefaultEntryStateValues()
 
         components = self.activeMission.components
 
@@ -900,7 +900,7 @@ class GUI(object):
 
     ### MISC METHODS ###
 
-    def setDefaultEntryValues(self):
+    def __setDefaultEntryValues(self):
         self.displayName.set("<name>")
         self.description.set("<description>")
         self.isBlockedMessage.set("<message>")
@@ -922,7 +922,7 @@ class GUI(object):
     #end setDefaultEntryValues
 
 
-    def setDefaultEntryStateValues(self):
+    def __setDefaultEntryStateValues(self):
         self.displayNameEntryState.set(0)
         self.descriptionEntryState.set(0)
         self.isBlockedEntryState.set(0)
