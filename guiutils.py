@@ -61,21 +61,27 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
 
     def build(self):
-        label1 = ttk.Label(self, text=self.subComponentName)
-        label1.grid(row=self.rowNum, column=0)
+        label1 = ttk.Label(self, text=self.subComponentName, width=5)
+        label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5,0))
         if self.numMandatory is 0:
+            self.listEntryStates.append(BooleanVar())
+
+            cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0])
+            cb.grid(row=self.rowNum, column=2, sticky="e")
+
             self.rowNum += 1
+        #end if
 
         for i in range(0, self.numEntries):
             self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[i].set(self.listDefaultEntryData[i])
 
-            entry = ttk.Entry(self, textvariable=self.listEntryData[i])
+            entry = ttk.Entry(self, textvariable=self.listEntryData[i])#, width=20)
             entry.grid(row=self.rowNum, column=1, sticky="ew")
 
             cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[i])
-            cb.grid(row=self.rowNum, column=2, sticky="ew")
+            cb.grid(row=self.rowNum, column=2, sticky="e")
 
             self.rowNum += 1
         #end for

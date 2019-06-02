@@ -55,15 +55,18 @@ class TriggerWindow(object):
         # build the left frame
 
         ## on action
-        onLabel = ttk.Label(self.leftFrame, text="on")
-        onLabel.grid(row=0, column=0)
+        onLabel = ttk.Label(self.leftFrame, text="on", width=4)
+        onLabel.grid(row=0, column=0, sticky="w", padx=(5,0))
 
         self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=actionsList)
         self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
         self.dialogSubComponent = buildMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"])
-        self.dialogSubComponent.grid(row=1, column=0, columnspan=2)
+        self.dialogSubComponent.grid(row=1, column=0, columnspan=2, sticky="ew")
+
+        self.outfitSubComponent = buildMandOptFrame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
+        self.outfitSubComponent.grid(row=2, column=0, columnspan=2, sticky="ew")
 
 
 
