@@ -61,7 +61,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
 
     def build(self):
-        label1 = ttk.Label(self, text=self.subComponentName, width=5)
+        label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5,0))
         if self.numMandatory is 0:
             self.listEntryStates.append(BooleanVar())

@@ -55,7 +55,7 @@ class TriggerWindow(object):
         ### BUILDING LEFT FRAME ###
 
         ## on action
-        onLabel = ttk.Label(self.leftFrame, text="on", width=4)
+        onLabel = ttk.Label(self.leftFrame, text="on", width=6)
         onLabel.grid(row=0, column=0, sticky="w", padx=(5,0))
 
         self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=actionsList)
@@ -71,8 +71,11 @@ class TriggerWindow(object):
         self.requireSubComponent = buildMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
         self.requireSubComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
+        self.paymentSubComponent = buildMandOptFrame(self.leftFrame, "payment", 0, 2, ["<base#>", "[<multiplier#>]"])
+        self.paymentSubComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
+
         self.eventSubComponent = buildMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
-        self.eventSubComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
+        self.eventSubComponent.grid(row=5, column=0, columnspan=2, sticky="ew")
 
         ### DONE BUILDING LEFT FRAME ###
 
