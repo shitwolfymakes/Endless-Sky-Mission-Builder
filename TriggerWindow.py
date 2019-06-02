@@ -17,6 +17,8 @@ This class creates a new window, wherein the user enters all the data they want 
 from tkinter import *
 from tkinter import ttk
 
+from guiutils import *
+
 class TriggerWindow(object):
 
     def __init__(self, app, master, trigger):
@@ -58,9 +60,10 @@ class TriggerWindow(object):
 
         self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=actionsList)
         self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
-        self.onActionCombobox.grid(row=0, column=1)
+        self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
-
+        self.dialogSubComponent = buildMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<tesxt>"])
+        self.dialogSubComponent.grid(row=1, column=0, columnspan=2)
 
 
 
