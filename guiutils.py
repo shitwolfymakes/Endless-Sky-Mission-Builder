@@ -13,6 +13,7 @@ This file contains helper functions for the ESMB gui, so that they don't need to
     or worse, imported from the gui components themselves
 
 '''
+from tkinter import *
 from tkinter import ttk
 
 from Mission import *
@@ -28,19 +29,19 @@ def addMission(app, newMissionName):
 # end addMission
 
 
-def buildMandOptFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
-    newFrame = _ComponentMandOptFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData)
+def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
+    newFrame = _SubComponentMandOptFrame(parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData)
 
     return newFrame
 #end buildMandOptFrame
 
 
-class _ComponentMandOptFrame(ttk.Frame):
+class _SubComponentMandOptFrame(ttk.Frame):
 
-    def __init__(self, parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
+    def __init__(self, parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
         ttk.Frame.__init__(self, parent)
 
-        self.componentName        = componentName
+        self.subComponentName     = subComponentName
         self.numMandatory         = numMandatory
         self.numOptionals         = numOptionals
         self.listDefaultEntryData = listDefaultEntryData
@@ -48,6 +49,46 @@ class _ComponentMandOptFrame(ttk.Frame):
         self.rowNum     = 0
         self.numEntries = numMandatory + numOptionals
 
+
+        self.listEntryStates  = []
+        self.listCheckbuttons = []
+        self.listEntryData    = []
+        self.listEntries      = []
+
+        self.build()
+
     #end init
 
-#end class _ComponentMandOptFrame
+
+    def build(self):
+        label1 = ttk.Label(self, text=self.subComponentName)
+        label1.grid(row=self.rowNum, column=0)
+        if self.numMandatory is 0:
+            self.rowNum += 1
+
+        for i in range(0, self.numEntries):
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[i].set(self.listDefaultEntryData[i])
+
+            entry = ttk.Entry(self, textvariable=self.listEntryData[i])
+            entry.grid(row=self.rowNum, column=1, sticky="ew")
+
+            cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[i])
+            cb.grid(row=self.rowNum, column=2, sticky="ew")
+
+            self.rowNum += 1
+        #end for
+
+    #end build
+
+    def addCheckbutton(self):
+        print()
+    #end addCheckbutton
+
+
+    def addEntry(self):
+        print()
+    #end addEntry
+
+#end class _SubComponentMandOptFrame
