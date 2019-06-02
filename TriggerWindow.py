@@ -62,7 +62,7 @@ class TriggerWindow(object):
         self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
-        self.dialogSubComponent = buildMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<tesxt>"])
+        self.dialogSubComponent = buildMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"])
         self.dialogSubComponent.grid(row=1, column=0, columnspan=2)
 
 
