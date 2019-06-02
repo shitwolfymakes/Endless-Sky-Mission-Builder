@@ -46,7 +46,7 @@ class AggregatedComponentFrame(ttk.Frame):
         self.componentList = []
 
         self.outer = ttk.Frame(self)
-        self.outer.pack()
+        self.outer.pack(expand=True, fill="x")
 
         sectionNameLabel = ttk.Label(self.outer, text=self.sectionName, anchor="center")
         sectionNameLabel.pack()
@@ -55,7 +55,7 @@ class AggregatedComponentFrame(ttk.Frame):
         self.inner.pack()
 
         buttonText = "Add " + self.componentType
-        addButton = ttk.Button(self.outer, text=buttonText, width=31, command=self.__addComponent)
+        addButton = ttk.Button(self.outer, text=buttonText, command=self.__addComponent)
         addButton.pack(expand=True, fill="x")
     #end init
 
@@ -90,7 +90,8 @@ class AggregatedComponentFrame(ttk.Frame):
     def editComponent(self, component):
         print("Editing ", end="")
         print(component.missionComponent)
-        TriggerWindow(self.app, self.app.gui, component.missionComponent)
+        if self.componentType is "trigger":
+            TriggerWindow(self.app, self.app.gui, component.missionComponent)
     #end editComponent
 
 #end class AggregatedComponentFrame
