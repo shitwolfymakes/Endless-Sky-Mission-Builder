@@ -18,6 +18,7 @@ from tkinter import *
 from tkinter import ttk
 
 from guiutils import buildMandOptFrame
+from AggregatedComponentFrame import AggregatedComponentFrame
 
 class TriggerWindow(object):
 
@@ -76,6 +77,9 @@ class TriggerWindow(object):
 
         self.eventSubComponent = buildMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
         self.eventSubComponent.grid(row=5, column=0, columnspan=2, sticky="ew")
+
+        self.failSubComponent = buildMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
+        self.failSubComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
         ### DONE BUILDING LEFT FRAME ###
 
