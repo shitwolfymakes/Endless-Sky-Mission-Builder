@@ -68,7 +68,8 @@ class TriggerWindow(object):
         self.outfitSubComponent = buildMandOptFrame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
         self.outfitSubComponent.grid(row=2, column=0, columnspan=2, sticky="ew")
 
-
+        self.requireSubComponent = buildMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
+        self.requireSubComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
 
 
