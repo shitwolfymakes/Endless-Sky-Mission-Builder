@@ -13,6 +13,8 @@ This file contains helper functions for the ESMB gui, so that they don't need to
     or worse, imported from the gui components themselves
 
 '''
+from tkinter import ttk
+
 from Mission import *
 
 def addMission(app, newMissionName):
@@ -24,3 +26,28 @@ def addMission(app, newMissionName):
     app.activeMission = mission
     app.updateOptionFrame()
 # end addMission
+
+
+def buildMandOptFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
+    newFrame = _ComponentMandOptFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData)
+
+    return newFrame
+#end buildMandOptFrame
+
+
+class _ComponentMandOptFrame(ttk.Frame):
+
+    def __init__(self, parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
+        ttk.Frame.__init__(self, parent)
+
+        self.componentName        = componentName
+        self.numMandatory         = numMandatory
+        self.numOptionals         = numOptionals
+        self.listDefaultEntryData = listDefaultEntryData
+
+        self.rowNum     = 0
+        self.numEntries = numMandatory + numOptionals
+
+    #end init
+
+#end class _ComponentMandOptFrame
