@@ -17,7 +17,7 @@ This class creates a new window, wherein the user enters all the data they want 
 from tkinter import *
 from tkinter import ttk
 
-from guiutils import *
+from guiutils import buildMandOptFrame
 
 class TriggerWindow(object):
 
@@ -52,7 +52,7 @@ class TriggerWindow(object):
 
 
 
-        # build the left frame
+        ### BUILDING LEFT FRAME ###
 
         ## on action
         onLabel = ttk.Label(self.leftFrame, text="on", width=4)
@@ -71,8 +71,10 @@ class TriggerWindow(object):
         self.requireSubComponent = buildMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
         self.requireSubComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
+        self.eventSubComponent = buildMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
+        self.eventSubComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
 
-
+        ### DONE BUILDING LEFT FRAME ###
 
 
         # build the right frame

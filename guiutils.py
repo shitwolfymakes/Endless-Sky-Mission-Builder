@@ -77,7 +77,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[i].set(self.listDefaultEntryData[i])
 
-            entry = ttk.Entry(self, textvariable=self.listEntryData[i])#, width=20)
+            entry = ttk.Entry(self, textvariable=self.listEntryData[i])
             entry.grid(row=self.rowNum, column=1, sticky="ew")
 
             cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[i])
