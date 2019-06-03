@@ -254,8 +254,11 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1]))
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
-            cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1])
-            cb.grid(row=self.rowNum, column=2, sticky="e")
+            if 0 < i < self.numMandatory:
+                self.listCheckbuttons.append(None)
+            else:
+                self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
+                self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
 
             self.rowNum += 1
         #end for
@@ -270,5 +273,17 @@ class _SubComponentMandOptFrame(ttk.Frame):
     def addEntry(self):
         print()
     #end addEntry
+
+
+    def cbValueChanged(self, entryState, modifiedWidget):
+        print("The value of %s is:" % modifiedWidget.__str__(), end="\t\t")
+        print(entryState.get())
+        if type(modifiedWidget) is str:
+            print("")
+        elif entryState.get() is True:
+            modifiedWidget.config(state='enabled')
+        elif entryState.get() is False:
+            modifiedWidget.config(state='disabled')
+    #end cbValueChanged
 
 #end class _SubComponentMandOptFrame
