@@ -223,7 +223,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
         self.rowNum     = 0
         self.numEntries = numMandatory + numOptionals
 
-
         self.listEntryStates  = []
         self.listCheckbuttons = []
         self.listEntryData    = []
@@ -237,6 +236,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
     def build(self):
         label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5,0))
+
         if self.numMandatory is 0:
             self.listEntryStates.append(BooleanVar())
 
@@ -254,11 +254,13 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1]))
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
+            # adds one checkbutton only for all mandatory fields
             if 0 < i < self.numMandatory:
                 self.listCheckbuttons.append(None)
             else:
                 self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
                 self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
+            #end if/else
 
             self.rowNum += 1
         #end for
