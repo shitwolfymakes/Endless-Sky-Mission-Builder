@@ -173,7 +173,7 @@ class TriggerWindow(object):
         self.requireSubComponent = buildMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
         self.requireSubComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
-        self.paymentSubComponent = buildMandOptFrame(self.leftFrame, "payment", 0, 2, ["<base#>", "[<multiplier#>]"])
+        self.paymentSubComponent = buildMandOptFrame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"])
         self.paymentSubComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
 
         self.eventSubComponent = buildMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
@@ -249,12 +249,12 @@ class _SubComponentMandOptFrame(ttk.Frame):
         for i in range(0, self.numEntries):
             self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
-            self.listEntryData[i].set(self.listDefaultEntryData[i])
+            self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-            entry = ttk.Entry(self, textvariable=self.listEntryData[i])
-            entry.grid(row=self.rowNum, column=1, sticky="ew")
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1]))
+            self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
-            cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[i])
+            cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1])
             cb.grid(row=self.rowNum, column=2, sticky="e")
 
             self.rowNum += 1
