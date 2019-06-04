@@ -89,7 +89,8 @@ class AggregatedComponentFrame(ttk.Frame):
 
     def editComponent(self, component):
         print("Editing ", end="")
-        print(component.missionComponent)
+        print(component.missionComponent, end="")
+        print("...")
         if self.componentType is "trigger":
             TriggerWindow(self.app, self.app.gui, component.missionComponent)
     #end editComponent
@@ -124,7 +125,7 @@ class ComponentFrame(object):
 class TriggerWindow(object):
 
     def __init__(self, app, master, trigger):
-        print("\tBuilding TriggerWindow...", end="\t\t")
+        print("\tBuilding TriggerWindow...")
 
         self.app = app
         self.trigger = trigger
@@ -192,7 +193,7 @@ class TriggerWindow(object):
         testR = ttk.Label(self.rightFrame, text="RightSideFrame")
         testR.pack()
 
-        print("Done.")
+        print("\tDone.")
     #end init
 
 
@@ -251,19 +252,25 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1]))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED))
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
             # adds one checkbutton only for all mandatory fields
             if 0 < i < self.numMandatory:
                 self.listCheckbuttons.append(None)
             else:
-                self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
+                self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1],
+                                                             command=lambda: self.cbValueChanged(self.listEntryStates[-1],
+                                                                 [self.listEntries[-1]])
+                                                             ))
                 self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
             #end if/else
 
             self.rowNum += 1
         #end for
+
+        self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
+                                                                               self.listEntries[0:self.numMandatory]))
 
     #end build
 
@@ -277,15 +284,19 @@ class _SubComponentMandOptFrame(ttk.Frame):
     #end addEntry
 
 
-    def cbValueChanged(self, entryState, modifiedWidget):
-        print("The value of %s is:" % modifiedWidget.__str__(), end="\t\t")
-        print(entryState.get())
-        if type(modifiedWidget) is str:
-            print("")
-        elif entryState.get() is True:
-            modifiedWidget.config(state='enabled')
-        elif entryState.get() is False:
-            modifiedWidget.config(state='disabled')
+    def cbValueChanged(self, entryState, modifiedWidgets):
+
+        for widget in modifiedWidgets:
+            print("The value of %s is:" % widget, end="\t\t")
+            print(entryState.get())
+            if type(widget) is str:
+                print("")
+            elif entryState.get() is True:
+                widget.config(state='enabled')
+            elif entryState.get() is False:
+                widget.config(state='disabled')
+        #end for
+
     #end cbValueChanged
 
 #end class _SubComponentMandOptFrame
