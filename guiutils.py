@@ -241,8 +241,8 @@ class _SubComponentMandOptFrame(ttk.Frame):
         if self.numMandatory is 0:
             self.listEntryStates.append(BooleanVar())
 
-            cb = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0])
-            cb.grid(row=self.rowNum, column=2, sticky="e")
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
 
             self.rowNum += 1
         #end if
@@ -269,8 +269,13 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.rowNum += 1
         #end for
 
-        self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
-                                                                               self.listEntries[0:self.numMandatory]))
+        # overwrite the first checkbox command
+        if self.numMandatory is 0:
+            self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
+                                                                                   [self.subComponentName]))
+        else:
+            self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
+                                                                                   self.listEntries[0:self.numMandatory]))
 
     #end build
 
@@ -290,7 +295,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             print("The value of %s is:" % widget, end="\t\t")
             print(entryState.get())
             if type(widget) is str:
-                print("")
+                break
             elif entryState.get() is True:
                 widget.config(state='enabled')
             elif entryState.get() is False:
