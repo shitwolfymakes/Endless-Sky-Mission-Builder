@@ -204,9 +204,16 @@ class TriggerWindow(object):
 
 
     def cleanup(self):
+        self.storeData()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
     #end cleanup
+
+
+    def storeData(self):
+        #TODO: IMPLEMENT THIS NEXT
+        print("In Progress!")
+    #end storeData
 
 #end class TriggerWindow
 
@@ -278,15 +285,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
                                                                                    self.listEntries[0:self.numMandatory]))
 
     #end build
-
-    def addCheckbutton(self):
-        print()
-    #end addCheckbutton
-
-
-    def addEntry(self):
-        print()
-    #end addEntry
 
 
     def cbValueChanged(self, entryState, modifiedWidgets):
