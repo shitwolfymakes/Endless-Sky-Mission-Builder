@@ -223,6 +223,9 @@ class _SubComponentMandOptFrame(ttk.Frame):
     def __init__(self, parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
         ttk.Frame.__init__(self, parent)
 
+        disabledEntryStyle = ttk.Style()
+        disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
+
         self.subComponentName     = subComponentName
         self.numMandatory         = numMandatory
         self.numOptionals         = numOptionals
@@ -259,7 +262,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry'))
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
             # adds one checkbutton only for all mandatory fields
@@ -295,9 +298,9 @@ class _SubComponentMandOptFrame(ttk.Frame):
             if type(widget) is str:
                 break
             elif entryState.get() is True:
-                widget.config(state='enabled')
+                widget.config(state='enabled', style='TEntry')
             elif entryState.get() is False:
-                widget.config(state='disabled')
+                widget.config(state='disabled', style='D.TEntry')
         #end for
 
     #end cbValueChanged

@@ -40,6 +40,9 @@ class GUI(object):
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
 
+        self.disabledEntryStyle = ttk.Style()
+        self.disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
+
         self.ofWidth = None
         self.cfWidth = None
         self.mfWidth = None
@@ -340,7 +343,7 @@ class GUI(object):
                                                       variable=self.displayNameEntryState, onvalue=1, offvalue=0)
         self.displayNameCheckbutton.grid(row=1, column=1)
 
-        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30) # setting the width to 30 here widens the rest of them
+        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30, style='D.TEntry') # setting the width to 30 here widens the rest of them
         self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
 
@@ -353,7 +356,7 @@ class GUI(object):
                                                       variable=self.descriptionEntryState, onvalue=1, offvalue=0)
         self.descriptionCheckbutton.grid(row=3, column=1)
 
-        self.descriptionEntry = ttk.Entry(cf, textvariable=self.description, state=off)
+        self.descriptionEntry = ttk.Entry(cf, textvariable=self.description, state=off, style='D.TEntry')
         self.descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
 
@@ -366,7 +369,7 @@ class GUI(object):
                                                     variable=self.isBlockedEntryState, onvalue=1, offvalue=0)
         self.isBlockedCheckbutton.grid(row=5, column=1)
 
-        self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off)
+        self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off, style='D.TEntry')
         self.isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
 
 
@@ -379,7 +382,7 @@ class GUI(object):
                                                    variable=self.deadlineEntryState, onvalue=1, offvalue=0)
         self.deadlineCheckbutton.grid(row=7, column=1)
 
-        self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off)
+        self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off, style='D.TEntry')
         self.deadlineOptionalsEntry.grid(row=8, column=0, sticky="ew", padx=(indent, 0))
         self.deadlineOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                             command=lambda: self.cbValueChanged(self.deadlineOptionalsEntryState,
@@ -397,10 +400,10 @@ class GUI(object):
                                                 variable=self.cargoEntryState, onvalue=1, offvalue=0)
         self.cargoCheckbutton.grid(row=9, column=1)
 
-        self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off)
+        self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off, style='D.TEntry')
         self.cargoEntry.grid(row=10, column=0, sticky="ew", padx=(indent, 0))
 
-        self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off)
+        self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off, style='D.TEntry')
         self.cargoOptionalsEntry.grid(row=11, column=0, sticky="ew", padx=(indent, 0))
         self.cargoOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                          command=lambda: self.cbValueChanged(self.cargoOptionalsEntryState,
@@ -418,10 +421,10 @@ class GUI(object):
                                                      variable=self.passengersEntryState, onvalue=1, offvalue=0)
         self.passengersCheckbutton.grid(row=12, column=1)
 
-        self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off)
+        self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off, style='D.TEntry')
         self.passengersEntry.grid(row=13, column=0, sticky="ew", padx=(indent, 0))
 
-        self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off)
+        self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off, style='D.TEntry')
         self.passengersOptionalsEntry.grid(row=14, column=0, sticky="ew", padx=(indent, 0))
         self.passengersOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                               command=lambda: self.cbValueChanged(self.passengersOptionalsEntryState,
@@ -439,10 +442,10 @@ class GUI(object):
                                                        variable=self.illegalEntryState, onvalue=1, offvalue=0)
         self.illegalCheckbutton.grid(row=15, column=1)
 
-        self.fineEntry = ttk.Entry(cf, textvariable=self.fine, state=off)
+        self.fineEntry = ttk.Entry(cf, textvariable=self.fine, state=off, style='D.TEntry')
         self.fineEntry.grid(row=16, column=0, sticky="ew", padx=(indent, 0))
 
-        self.fineMessageEntry = ttk.Entry(cf, textvariable=self.fineMessage, state=off)
+        self.fineMessageEntry = ttk.Entry(cf, textvariable=self.fineMessage, state=off, style='D.TEntry')
         self.fineMessageEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
         self.fineMessageCheckbutton = ttk.Checkbutton(cf,
                                                            command=lambda: self.cbValueChanged(
@@ -518,7 +521,7 @@ class GUI(object):
                                                  variable=self.repeatEntryState, onvalue=1, offvalue=0)
         self.repeatCheckbutton.grid(row=28, column=1)
 
-        self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off)
+        self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off, style='D.TEntry')
         self.repeatOptionalsEntry.grid(row=29, column=0, sticky="ew", padx=(indent, 0))
         self.repeatOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                           command=lambda: self.cbValueChanged(self.repeatOptionalsEntryState,
@@ -536,7 +539,7 @@ class GUI(object):
                                                     variable=self.clearanceEntryState, onvalue=1, offvalue=0)
         self.clearanceCheckbutton.grid(row=30, column=1)
 
-        self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off)
+        self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off, style='D.TEntry')
         self.clearanceOptionalsEntry.grid(row=31, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -559,7 +562,7 @@ class GUI(object):
                                                       variable=self.waypointEntryState, onvalue=1, offvalue=0)
         self.waypointCheckbutton.grid(row=33, column=1)
 
-        self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off)
+        self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off, style='D.TEntry')
         self.waypointEntry.grid(row=34, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -572,7 +575,7 @@ class GUI(object):
                                                    variable=self.stopoverEntryState, onvalue=1, offvalue=0)
         self.stopoverCheckbutton.grid(row=35, column=1)
 
-        self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off)
+        self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off, style='D.TEntry')
         self.stopoverEntry.grid(row=36, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -585,7 +588,7 @@ class GUI(object):
                                                  variable=self.sourceEntryState, onvalue=1, offvalue=0)
         self.sourceCheckbutton.grid(row=37, column=1)
 
-        self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off)
+        self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off, style='D.TEntry')
         self.sourceEntry.grid(row=38, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -598,7 +601,7 @@ class GUI(object):
                                                  variable=self.destinationEntryState, onvalue=1, offvalue=0)
         self.sourceCheckbutton.grid(row=39, column=1)
 
-        self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off)
+        self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off, style='D.TEntry')
         self.destinationEntry.grid(row=40, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -617,9 +620,9 @@ class GUI(object):
         if type(modifiedWidget) is str:
             print("")
         elif entryState.get() is True:
-            modifiedWidget.config(state='enabled')
+            modifiedWidget.config(state='enabled', style='TEntry')
         elif entryState.get() is False:
-            modifiedWidget.config(state='disabled')
+            modifiedWidget.config(state='disabled', style='D.TEntry')
     #end cbValueChanged
 
 
