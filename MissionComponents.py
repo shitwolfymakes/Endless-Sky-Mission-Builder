@@ -217,8 +217,10 @@ class Trigger(object):
         self.dialog      = None
         self.outfit      = [None, None]
         self.require     = [None, None]
+        self.isPayment   = False
         self.payment     = [None, None]
         self.event       = [None, None, None]
+        self.isFail      = False
         self.fail        = None
 
         print("Done.")
