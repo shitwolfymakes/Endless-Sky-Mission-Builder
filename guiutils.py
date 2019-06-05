@@ -288,8 +288,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries[0].grid(row=0, column=1, sticky="ew")
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
-                                                                                   [self.listEntries[0]]))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], [self.listEntries[0]]))
             self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
             self.rowNum += 1
         # Case 3: More than 1 mandatory field
@@ -319,8 +318,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
                 self.rowNum += 1
             #end for
-            self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
-                                                                                   self.listEntries))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], self.listEntries[:self.numMandatory]))
         #end if/else
 
         # add the optional fields
