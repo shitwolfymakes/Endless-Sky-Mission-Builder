@@ -241,15 +241,16 @@ class Trigger(object):
 
 
     def printTrigger(self):
-        print(self.triggerType)
-        print(self.dialog)
-        print(self.outfit)
-        print(self.require)
-        print(self.isPayment)
-        print(self.payment)
-        print(self.event)
-        print(self.isFail)
-        print(self.fail)
+        print("\n\tTrigger Data")
+        print("\t\tOn:", self.triggerType)
+        print("\t\tDialog:", self.dialog)
+        print("\t\tOutfit:", self.outfit)
+        print("\t\tRequire:", self.require)
+        print("\t\tisPayment:", self.isPayment)
+        print("\t\tPayment:", self.payment)
+        print("\t\tEvent:", self.event)
+        print("\t\tisFail:", self.isFail)
+        print("\t\tFail:", self.fail)
     #end printTrigger
 
 #end class Trigger
