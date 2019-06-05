@@ -229,14 +229,14 @@ class Trigger(object):
 
     def clearTrigger(self):
         self.triggerType = None
-        self.dialog = None
-        self.outfit = [None, None]
-        self.require = [None, None]
-        self.isPayment = False
-        self.payment = [None, None]
-        self.event = [None, None, None]
-        self.isFail = False
-        self.fail = None
+        self.dialog      = None
+        self.outfit      = [None, None]
+        self.require     = [None, None]
+        self.isPayment   = False
+        self.payment     = [None, None]
+        self.event       = [None, None, None]
+        self.isFail      = False
+        self.fail        = None
     #end clearTrigger
 
 
