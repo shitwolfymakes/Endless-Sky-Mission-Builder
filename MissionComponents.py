@@ -222,6 +222,8 @@ class Trigger(object):
         self.event       = [None, None, None]
         self.isFail      = False
         self.fail        = None
+        self.logs        = []
+        self.conditions  = []
 
         print("Done.")
     #end init
@@ -237,6 +239,8 @@ class Trigger(object):
         self.event       = [None, None, None]
         self.isFail      = False
         self.fail        = None
+        self.logs        = []
+        self.conditions  = []
     #end clearTrigger
 
 
@@ -254,6 +258,26 @@ class Trigger(object):
     #end printTrigger
 
 #end class Trigger
+
+
+class Log(object):
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        print("Done.")
+    # end init
+
+# end class Conversations
+
+
+class Condition(object):
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        print("Done.")
+    # end init
+
+# end class Conversations
 
 
 class Conversations(object):
