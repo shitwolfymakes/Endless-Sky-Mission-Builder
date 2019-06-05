@@ -250,14 +250,16 @@ class _SubComponentMandOptFrame(ttk.Frame):
         This function takes in the parameters passed into the object call, 
         and executes different logic based on what it finds.
         
-        e.g.: buildMandOptFrame(self.leftFrame, "fail", 0, 3, ["[<name>]", "[<test1>]", "[<test2>]"]) becomes:
+        e.g.: buildMandOptFrame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"]) 
         
-        label    entry      Checkbutton
-        fail                []
-                [<name>]    []
-                [<test1>]   []
-                [<test2>]   []
-                
+        becomes:
+        +------------------------+
+        | fail    [<test0>]   [] |
+        |         [<test1>]      |
+        |         [<name>]    [] |
+        |         [<test2>]   [] |
+        |         [<test3>]   [] |
+        +------------------------+
     '''
     def build(self):
         print("\t\tBuilding \"%s\"" % self.subComponentName)
