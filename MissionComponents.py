@@ -226,6 +226,32 @@ class Trigger(object):
         print("Done.")
     #end init
 
+
+    def clearTrigger(self):
+        self.triggerType = None
+        self.dialog = None
+        self.outfit = [None, None]
+        self.require = [None, None]
+        self.isPayment = False
+        self.payment = [None, None]
+        self.event = [None, None, None]
+        self.isFail = False
+        self.fail = None
+    #end clearTrigger
+
+
+    def printTrigger(self):
+        print(self.triggerType)
+        print(self.dialog)
+        print(self.outfit)
+        print(self.require)
+        print(self.isPayment)
+        print(self.payment)
+        print(self.event)
+        print(self.isFail)
+        print(self.fail)
+    #end printTrigger
+
 #end class Trigger
 
 
