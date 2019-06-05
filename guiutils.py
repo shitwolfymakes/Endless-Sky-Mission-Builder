@@ -113,10 +113,10 @@ class ComponentFrame(object):
 
         master.componentList.append(componentFrame)
 
-        editButton = ttk.Button(componentFrame, text="edit", command=lambda: master.editComponent(componentFrame))
+        editButton = ttk.Button(componentFrame, text="edit", command=partial(master.editComponent, componentFrame))
         editButton.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(componentFrame, text="X", command=lambda: master.deleteComponent(componentFrame))
+        deleteButton = ttk.Button(componentFrame, text="X", command=partial(master.deleteComponent, componentFrame))
         deleteButton.grid(row=0, column=2)
     #end init
 
@@ -152,7 +152,7 @@ class TriggerWindow(object):
 
         #TODO: find a way to support "on enter <system>"
         self.action = None
-        actionsList = ["offer", "complete", "accept", "decline", "defer", "fail", "visit", "stopover"]
+        self.actionsList = ["offer", "complete", "accept", "decline", "defer", "fail", "visit", "stopover"]
 
 
 
@@ -162,7 +162,7 @@ class TriggerWindow(object):
         onLabel = ttk.Label(self.leftFrame, text="on", width=6)
         onLabel.grid(row=0, column=0, sticky="w", padx=(5,0))
 
-        self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=actionsList)
+        self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=self.actionsList)
         self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
@@ -194,6 +194,8 @@ class TriggerWindow(object):
         testR = ttk.Label(self.rightFrame, text="RightSideFrame")
         #testR.pack()
 
+        self.populateTriggerWindow()
+
         print("\tDone.")
     #end init
 
@@ -216,45 +218,46 @@ class TriggerWindow(object):
         print("\nStoring TriggerWindow data...")
         self.trigger.clearTrigger()
 
+        # action
         if self.action is not None:
             print("\tOn:", self.action)
             self.trigger.triggerType = self.action
         #end if
 
         # dialog
-        if self.dialogSubComponent.listEntryStates[0].get():
+        if self.dialogSubComponent.listEntryStates[0].get() is True:
             print("\tDialog:", self.dialogSubComponent.listEntryData[0].get())
             self.trigger.dialog = self.dialogSubComponent.listEntryData[0].get()
         #end if
 
         # outfit
-        if self.outfitSubComponent.listEntryStates[0].get():
+        if self.outfitSubComponent.listEntryStates[0].get() is True:
             print("\tOutfit:", self.outfitSubComponent.listEntryData[0].get())
             self.trigger.outfit[0] = self.outfitSubComponent.listEntryData[0].get()
-            if self.outfitSubComponent.listEntryData[1].get():
+            if self.outfitSubComponent.listEntryData[1].get() is True:
                 print("\tOutfit Optional:", self.outfitSubComponent.listEntryData[1].get())
                 self.trigger.outfit[1] = self.outfitSubComponent.listEntryData[1].get()
             #end if
         #end if
 
         # require
-        if self.requireSubComponent.listEntryStates[0].get():
+        if self.requireSubComponent.listEntryStates[0].get() is True:
             print("\tRequire:", self.requireSubComponent.listEntryData[0].get())
             self.trigger.require[0] = self.requireSubComponent.listEntryData[0].get()
-            if self.requireSubComponent.listEntryData[1].get():
+            if self.requireSubComponent.listEntryData[1].get() is True:
                 print("\tRequire Optional:", self.requireSubComponent.listEntryData[1].get())
                 self.trigger.require[1] = self.requireSubComponent.listEntryData[1].get()
             # end if
         # end if
 
         # payment
-        if self.paymentSubComponent.listEntryStates[0].get():
+        if self.paymentSubComponent.listEntryStates[0].get() is True:
             print("\tPayment:", self.paymentSubComponent.subComponentName)
             self.trigger.isPayment = True
-            if self.paymentSubComponent.listEntryStates[1].get():
+            if self.paymentSubComponent.listEntryStates[1].get() is True:
                 print("\tPayment Optional 1:", self.paymentSubComponent.listEntryData[0].get())
                 self.trigger.payment[0] = self.paymentSubComponent.listEntryData[0].get()
-                if self.paymentSubComponent.listEntryStates[2].get():
+                if self.paymentSubComponent.listEntryStates[2].get() is True:
                     print("\tPayment Optional 2:", self.paymentSubComponent.listEntryData[1].get())
                     self.trigger.payment[1] = self.paymentSubComponent.listEntryData[1].get()
                 #end if
@@ -262,13 +265,13 @@ class TriggerWindow(object):
         #end if
 
         # event
-        if self.eventSubComponent.listEntryStates[0].get():
+        if self.eventSubComponent.listEntryStates[0].get() is True:
             print("\tEvent:", self.eventSubComponent.listEntryData[0].get())
             self.trigger.event[0] = self.eventSubComponent.listEntryData[0].get()
-            if self.eventSubComponent.listEntryStates[1].get():
+            if self.eventSubComponent.listEntryStates[1].get() is True:
                 print("\tEvent Optional 1:", self.eventSubComponent.listEntryData[1].get())
                 self.trigger.event[1] = self.eventSubComponent.listEntryData[1].get()
-                if self.eventSubComponent.listEntryStates[2].get():
+                if self.eventSubComponent.listEntryStates[2].get() is True:
                     print("\tEvent Optional 2:", self.eventSubComponent.listEntryData[2].get())
                     self.trigger.event[2] = self.eventSubComponent.listEntryData[2].get()
                 # end if
@@ -276,10 +279,10 @@ class TriggerWindow(object):
         # end if
 
         # fail
-        if self.failSubComponent.listEntryStates[0].get():
+        if self.failSubComponent.listEntryStates[0].get() is True:
             print("\tPayment:", self.failSubComponent.subComponentName)
             self.trigger.isFail = True
-            if self.failSubComponent.listEntryStates[1].get():
+            if self.failSubComponent.listEntryStates[1].get() is True:
                 print("\tPayment Optional 1:", self.failSubComponent.listEntryData[0].get())
                 self.trigger.fail = self.failSubComponent.listEntryData[0].get()
             #end if
