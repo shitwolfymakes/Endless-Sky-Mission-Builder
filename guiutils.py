@@ -42,6 +42,7 @@ class AggregatedComponentFrame(ttk.Frame):
         ttk.Frame.__init__(self, parent)
 
         self.app           = app
+        self.parent        = parent
         self.sectionName   = sectionName
         self.componentType = componentType
         self.componentList = []
@@ -70,6 +71,12 @@ class AggregatedComponentFrame(ttk.Frame):
             self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
             #print(self.componentList[-1].missionComponent)
             self.editComponent(self.componentList[-1])
+        elif self.componentType is "log":
+            self.componentList[-1].missionComponent = self.app.activeMission.addLog(self.app.activeTrigger)
+            # print(self.componentList[-1].missionComponent)
+            self.editComponent(self.componentList[-1])
+        else:
+            print("ERROR: Unknown component type")
 
         print("Done.")
     #end __addComponent
@@ -130,6 +137,7 @@ class TriggerWindow(object):
 
         self.app = app
         self.trigger = trigger
+        app.activeTrigger = trigger
 
         self.top = Toplevel(master)
         self.top.title("Edit Trigger")
@@ -208,6 +216,7 @@ class TriggerWindow(object):
 
     def cleanup(self):
         self.storeData()
+        self.app.activeTrigger = None
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
     #end cleanup

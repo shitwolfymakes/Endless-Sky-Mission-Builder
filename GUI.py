@@ -213,7 +213,8 @@ class GUI(object):
 
 
         ## Triggers
-        self.triggers = None
+        self.triggers      = None
+        self.activeTrigger = None
 
 
         # declare missionFrame components
