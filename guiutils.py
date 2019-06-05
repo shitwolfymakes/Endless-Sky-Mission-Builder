@@ -271,10 +271,11 @@ class _SubComponentMandOptFrame(ttk.Frame):
             print("\t\t\tNo mandatory fields")
 
             self.listEntryStates.append(BooleanVar())
+
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=lambda: self.cbValueChanged(self.listEntryStates[0],
-                                                                                   [self.subComponentName]))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], [self.subComponentName]))
             self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
+
             self.rowNum += 1
         # Case 2: 1 mandatory field
         elif self.numMandatory is 1:
@@ -290,6 +291,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
             self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], [self.listEntries[0]]))
             self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
+
             self.rowNum += 1
         # Case 3: More than 1 mandatory field
         elif self.numMandatory > 1:
@@ -305,6 +307,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
             self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
+
             self.rowNum += 1
 
             # loop through the remaining mandatory fields, slaving them to the first checkbutton
@@ -318,6 +321,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
                 self.rowNum += 1
             #end for
+
             self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], self.listEntries[:self.numMandatory]))
         #end if/else
 
@@ -331,9 +335,8 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
             # We have to use functools.partial here because lambda can't be used inside a loop
-            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1],
-                                                         command=partial(self.cbValueChanged, self.listEntryStates[-1],
-                                                                                             [self.listEntries[-1]])))
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
+            self.listCheckbuttons[-1].configure(command=partial(self.cbValueChanged, self.listEntryStates[-1], [self.listEntries[-1]]))
             self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
 
             self.rowNum += 1
