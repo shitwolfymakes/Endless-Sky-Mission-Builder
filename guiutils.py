@@ -14,6 +14,7 @@ This file contains helper functions and custom widgets for the ESMB gui
 '''
 from tkinter import *
 from tkinter import ttk
+from functools import partial
 
 from Mission import *
 
@@ -322,7 +323,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
         # add the optional fields
         for i in range(self.numMandatory, self.numFields):
-            print(self.rowNum)
             self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[-1].set(self.listDefaultEntryData[i])
@@ -330,15 +330,11 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
-            #print(self.listEntryStates[-1])
-            #print(self.listEntries)
+            # We have to use functools.partial here because lambda can't be used inside a loop
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1],
-                                                         command=lambda: self.cbValueChanged(self.listEntryStates[-1],
+                                                         command=partial(self.cbValueChanged, self.listEntryStates[-1],
                                                                                              [self.listEntries[-1]])))
             self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
-
-            print(self.listCheckbuttons[-1].__str__(), end=" is bound to: ")
-            print(self.listEntries[-1].__str__(), self.listEntryStates[-1])
 
             self.rowNum += 1
         # end for
