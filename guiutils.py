@@ -189,10 +189,10 @@ class TriggerWindow(object):
 
         ### DONE BUILDING LEFT FRAME ###
 
-
+        #TODO: add this in later version
         # build the right frame
         testR = ttk.Label(self.rightFrame, text="RightSideFrame")
-        testR.pack()
+        #testR.pack()
 
         print("\tDone.")
     #end init
@@ -213,7 +213,79 @@ class TriggerWindow(object):
 
     def storeData(self):
         #TODO: IMPLEMENT THIS NEXT
-        print("In Progress!")
+        print("\nStoring TriggerWindow data...")
+        self.trigger.clearTrigger()
+
+        if self.action is not None:
+            print("\tOn:", self.action)
+            self.trigger.triggerType = self.action
+        #end if
+
+        # dialog
+        if self.dialogSubComponent.listEntryStates[0].get():
+            print("\tDialog:", self.dialogSubComponent.listEntryData[0].get())
+            self.trigger.dialog = self.dialogSubComponent.listEntryData[0].get()
+        #end if
+
+        # outfit
+        if self.outfitSubComponent.listEntryStates[0].get():
+            print("\tOutfit:", self.outfitSubComponent.listEntryData[0].get())
+            self.trigger.outfit[0] = self.outfitSubComponent.listEntryData[0].get()
+            if self.outfitSubComponent.listEntryData[1].get():
+                print("\tOutfit Optional:", self.outfitSubComponent.listEntryData[1].get())
+                self.trigger.outfit[1] = self.outfitSubComponent.listEntryData[1].get()
+            #end if
+        #end if
+
+        # require
+        if self.requireSubComponent.listEntryStates[0].get():
+            print("\tRequire:", self.requireSubComponent.listEntryData[0].get())
+            self.trigger.require[0] = self.requireSubComponent.listEntryData[0].get()
+            if self.requireSubComponent.listEntryData[1].get():
+                print("\tRequire Optional:", self.requireSubComponent.listEntryData[1].get())
+                self.trigger.require[1] = self.requireSubComponent.listEntryData[1].get()
+            # end if
+        # end if
+
+        # payment
+        if self.paymentSubComponent.listEntryStates[0].get():
+            print("\tPayment:", self.paymentSubComponent.subComponentName)
+            self.trigger.isPayment = True
+            if self.paymentSubComponent.listEntryStates[1].get():
+                print("\tPayment Optional 1:", self.paymentSubComponent.listEntryData[0].get())
+                self.trigger.payment[0] = self.paymentSubComponent.listEntryData[0].get()
+                if self.paymentSubComponent.listEntryStates[2].get():
+                    print("\tPayment Optional 2:", self.paymentSubComponent.listEntryData[1].get())
+                    self.trigger.payment[1] = self.paymentSubComponent.listEntryData[1].get()
+                #end if
+            #end if
+        #end if
+
+        # event
+        if self.eventSubComponent.listEntryStates[0].get():
+            print("\tEvent:", self.eventSubComponent.listEntryData[0].get())
+            self.trigger.event[0] = self.eventSubComponent.listEntryData[0].get()
+            if self.eventSubComponent.listEntryStates[1].get():
+                print("\tEvent Optional 1:", self.eventSubComponent.listEntryData[1].get())
+                self.trigger.event[1] = self.eventSubComponent.listEntryData[1].get()
+                if self.eventSubComponent.listEntryStates[2].get():
+                    print("\tEvent Optional 2:", self.eventSubComponent.listEntryData[2].get())
+                    self.trigger.event[2] = self.eventSubComponent.listEntryData[2].get()
+                # end if
+            # end if
+        # end if
+
+        # fail
+        if self.failSubComponent.listEntryStates[0].get():
+            print("\tPayment:", self.failSubComponent.subComponentName)
+            self.trigger.isFail = True
+            if self.failSubComponent.listEntryStates[1].get():
+                print("\tPayment Optional 1:", self.failSubComponent.listEntryData[0].get())
+                self.trigger.fail = self.failSubComponent.listEntryData[0].get()
+            #end if
+        #end if
+
+        print("Done.")
     #end storeData
 
 #end class TriggerWindow
