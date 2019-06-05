@@ -84,6 +84,8 @@ class ScrollingCenterFrame:
 
 class ScrollingCenterFrame2(ttk.Frame):
     #TODO: Implement this to replace the current SCF
-    print("NOT IMPLEMENTED YET")
+    def __init__(self):
+        print("NOT IMPLEMENTED YET")
+    #end init
 
 #end class ScrollingCenterFrame2
