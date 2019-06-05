@@ -334,7 +334,8 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
             self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
-            # We have to use functools.partial here because lambda can't be used inside a loop
+            # We have to use functools.partial here because lambda can't be used
+            # inside a loop(the bound lambda will use the last assigned values)
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
             self.listCheckbuttons[-1].configure(command=partial(self.cbValueChanged, self.listEntryStates[-1], [self.listEntries[-1]]))
             self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
@@ -346,7 +347,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
 
     def cbValueChanged(self, entryState, modifiedWidgets):
-
         for widget in modifiedWidgets:
             print("The value of %s is:" % widget, end="\t\t")
             print(entryState.get())
@@ -357,7 +357,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
             elif entryState.get() is False:
                 widget.config(state='disabled', style='D.TEntry')
         #end for
-
     #end cbValueChanged
 
 #end class _SubComponentMandOptFrame
