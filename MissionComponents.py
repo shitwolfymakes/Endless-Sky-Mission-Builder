@@ -216,7 +216,7 @@ class Trigger(object):
         self.triggerType = None
         self.dialog      = None
         self.outfit      = [None, None]
-        self.require     = None
+        self.require     = [None, None]
         self.payment     = [None, None]
         self.event       = [None, None, None]
         self.fail        = None
