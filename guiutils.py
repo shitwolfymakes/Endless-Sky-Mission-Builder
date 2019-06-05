@@ -288,8 +288,87 @@ class TriggerWindow(object):
             #end if
         #end if
 
+        self.trigger.printTrigger()
+
         print("Done.")
     #end storeData
+
+    def populateTriggerWindow(self):
+        print("Populating TriggerWindow...", end="\t")
+
+        # action
+        if self.trigger.triggerType is not None:
+            index = self.actionsList.index(self.trigger.triggerType)
+            self.onActionCombobox.current(index)
+        #end if
+
+        # dialog
+        component = self.dialogSubComponent
+        if self.trigger.dialog is not None:
+            component.listEntryStates[0].set(1)
+            component.cbValueChanged(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
+            component.listEntryData[0].set(self.trigger.dialog)
+        #end if
+
+        # outfit
+        component = self.outfitSubComponent
+        for i, data in enumerate(self.trigger.outfit):
+            if data is not None:
+                component.listEntryStates[i].set(1)
+                component.cbValueChanged(component.listEntryStates[i], [component.listEntries[i]])
+                component.listEntryData[i].set(data)
+            #end if
+        #end for
+
+        # require
+        component = self.requireSubComponent
+        for i, data in enumerate(self.trigger.require):
+            if data is not None:
+                component.listEntryStates[i].set(1)
+                component.cbValueChanged(component.listEntryStates[i], [component.listEntries[i]])
+                component.listEntryData[i].set(data)
+            #end if
+        #end for
+
+        # payment
+        if self.trigger.isPayment:
+            component = self.paymentSubComponent
+            component.listEntryStates[0].set(1)
+            component.cbValueChanged(component.listEntryStates[0], [component.subComponentName])
+
+            for i, data in enumerate(self.trigger.payment):
+                if data is not None:
+                    component.listEntryStates[i+1].set(1)
+                    component.cbValueChanged(component.listEntryStates[i+1], [component.listEntries[i]])
+                    component.listEntryData[i].set(data)
+                # end if
+            # end for
+
+        # event
+        component = self.eventSubComponent
+        for i, data in enumerate(self.trigger.event):
+            if data is not None:
+                component.listEntryStates[i].set(1)
+                component.cbValueChanged(component.listEntryStates[i], [component.listEntries[i]])
+                component.listEntryData[i].set(data)
+            #end if
+        #end for
+
+        # fail
+        if self.trigger.isFail:
+            component = self.failSubComponent
+            component.listEntryStates[0].set(1)
+            component.cbValueChanged(component.listEntryStates[0], [component.subComponentName])
+
+            if self.trigger.fail is not None:
+                component.listEntryStates[0].set(1)
+                component.cbValueChanged(component.listEntryStates[1], [component.listEntries[0]])
+                component.listEntryData[0].set(self.trigger.fail)
+            #end if
+        #end if
+
+        print("Done.")
+    #end populateTriggerWindow
 
 #end class TriggerWindow
 
