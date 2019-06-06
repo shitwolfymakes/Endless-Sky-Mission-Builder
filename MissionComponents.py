@@ -266,6 +266,7 @@ class Log(object):
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
+        self.isActive = False
         self.logType = None
 
         print("Done.")
@@ -278,6 +279,9 @@ class Condition(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
+        self.isActive = False
+
         print("Done.")
     # end init
 
