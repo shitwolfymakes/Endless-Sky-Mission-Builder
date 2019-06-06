@@ -204,8 +204,9 @@ class Mission(object):
     #end addTrigger
 
 
-    def removeLog(self, trigger):
-        self.components.triggerList.remove(trigger)
+    def removeLog(self, log):
+        #TODO: Implement this
+        self.components.triggerList.remove(log)
     #end removeTrigger
 
 #end class Mission
