@@ -213,18 +213,18 @@ class Trigger(object):
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
 
-        self.triggerActive = False
-        self.triggerType   = None
-        self.dialog        = None
-        self.outfit        = [None, None]
-        self.require       = [None, None]
-        self.isPayment     = False
-        self.payment       = [None, None]
-        self.event         = [None, None, None]
-        self.isFail        = False
-        self.fail          = None
-        self.logs          = []
-        self.conditions    = []
+        self.isActive    = False
+        self.triggerType = None
+        self.dialog      = None
+        self.outfit      = [None, None]
+        self.require     = [None, None]
+        self.isPayment   = False
+        self.payment     = [None, None]
+        self.event       = [None, None, None]
+        self.isFail      = False
+        self.fail        = None
+        self.logs        = []
+        self.conditions  = []
 
         print("Done.")
     #end init
