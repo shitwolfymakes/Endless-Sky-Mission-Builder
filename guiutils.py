@@ -100,7 +100,7 @@ class AggregatedComponentFrame(ttk.Frame):
             self.app.activeMission.removeTrigger(component.missionComponent)
         elif self.componentType is "log":
             print("Not working yet")
-
+        #end if/else
 
         self.componentList.remove(component)
         component.pack_forget()
