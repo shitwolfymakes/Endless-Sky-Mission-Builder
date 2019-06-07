@@ -275,7 +275,7 @@ class Log(object):
 # end class Conversations
 
 
-class Condition(object):
+class TriggerCondition(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
