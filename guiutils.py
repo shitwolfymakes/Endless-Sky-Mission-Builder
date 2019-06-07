@@ -606,7 +606,6 @@ class LogWindow(object):
         self.logGroup   = StringVar()
         self.name       = StringVar()
         self.message    = StringVar()
-        self.message.set("<message>")
 
         self.top = Toplevel(master)
         self.top.title("Edit Log")
@@ -617,6 +616,7 @@ class LogWindow(object):
         frame.pack(side=TOP)
 
         if formatType == "<message>":
+            self.message.set("<message>")
             entry = ttk.Entry(frame, textvariable=self.message)
             entry.grid(row=0, column=0)
         else:
@@ -629,12 +629,15 @@ class LogWindow(object):
             entry2 = ttk.Entry(frame, textvariable=self.name, width=10)
             entry2.grid(row=0, column=1)
 
+            self.message.set("<message>")
             entry3 = ttk.Entry(frame, textvariable=self.message, width=30)
             entry3.grid(row=0, column=2)
         #end if/else
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
+
+        self.populateLogWindow()
 
         print("\tDone.")
     #end init
@@ -652,12 +655,35 @@ class LogWindow(object):
         self.log.clearLog()
 
         if self.formatType == "<message>":
-            self.log.log[0] = self.message
+            self.log.log[0] = self.message.get()
         else:
-            self.log.log[0] = self.logGroup
-            self.log.log[1] = self.name
-            self.log.log[2] = self.message
+            self.log.log[0] = self.logGroup.get()
+            self.log.log[1] = self.name.get()
+            self.log.log[2] = self.message.get()
+        #end if/else
+
+        self.log.printLog()
 
         print("Done.")
-    #end
+    #end storeData
+
+
+    def populateLogWindow(self):
+        print("Populating TriggerWindow...", end="\t")
+
+        if self.formatType == "<message>":
+            if self.log.log[0] is not None:
+                self.message.set(self.log.log[0])
+        else:
+            if self.log.log[0] is not None:
+                self.logGroup.set(self.log.log[0])
+            if self.log.log[1] is not None:
+                self.name.set(self.log.log[1])
+            if self.log.log[2] is not None:
+                self.message.set(self.log.log[2])
+        #end if/else
+
+        print("Done.")
+    #end populateLogWindow
+
 #end class LogWindow
