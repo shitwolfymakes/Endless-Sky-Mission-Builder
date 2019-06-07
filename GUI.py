@@ -607,7 +607,7 @@ class GUI(object):
 
 
         # triggers
-        self.triggers = AggregatedTriggerFrame(self, cf, "Triggers", "trigger")
+        self.triggers = AggregatedTriggerFrame(self, cf)
         self.triggers.grid(row=42, column=0, columnspan=2, sticky="ew")
 
 

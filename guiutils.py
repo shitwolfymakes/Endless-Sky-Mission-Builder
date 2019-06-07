@@ -38,40 +38,35 @@ def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, list
 
 class AggregatedTriggerFrame(ttk.Frame):
 
-    def __init__(self, app, parent, sectionName, componentType):
+    def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
 
         self.app           = app
         self.parent        = parent
-        self.sectionName   = sectionName
-        self.componentType = componentType
         self.componentList = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
 
-        sectionNameLabel = ttk.Label(self.outer, text=self.sectionName, anchor="center")
+        sectionNameLabel = ttk.Label(self.outer, text="Triggers", anchor="center")
         sectionNameLabel.pack()
 
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        buttonText = "Add " + self.componentType
-        addButton = ttk.Button(self.outer, text=buttonText, command=self.__addComponent)
+        addButton = ttk.Button(self.outer, text="Add Trigger", command=self.__addComponent)
         addButton.pack(expand=True, fill="x")
     #end init
 
 
     def __addComponent(self):
         #TODO: Checkbutton binding goes in here
-        print("Adding %s to %s..." % (self.componentType, self.sectionName))
+        print("Adding Trigger...")
 
-        cf = ComponentFrame(self)
+        cf = ComponentFrame(self, "trigger")
 
-        if self.componentType is "trigger":
-            self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
-            self.editComponent(self.componentList[-1])
-        #end if/else
+        self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
+        self.editComponent(self.componentList[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(cf.frame, onvalue=1, offvalue=0, variable=state)
@@ -83,10 +78,9 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def deleteComponent(self, component):
-        print("Removing %s from %s..." % (self.componentType, self.sectionName))
+        print("Removing component.missionComponent from Triggers")
 
-        if self.componentType is "trigger":
-            self.app.activeMission.removeTrigger(component.missionComponent)
+        self.app.activeMission.removeTrigger(component.missionComponent)
 
         self.componentList.remove(component)
         component.pack_forget()
@@ -100,8 +94,8 @@ class AggregatedTriggerFrame(ttk.Frame):
         print("Editing ", end="")
         print(component.missionComponent, end="")
         print("...")
-        if self.componentType is "trigger":
-            TriggerWindow(self.app, self.app.gui, component.missionComponent)
+
+        TriggerWindow(self.app, self.app.gui, component.missionComponent)
     #end editComponent
 
 
@@ -115,7 +109,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 class ComponentFrame(object):
 
-    def __init__(self, master):
+    def __init__(self, master, name):
         self.missionComponent = None
         self.master = master
 
@@ -123,8 +117,8 @@ class ComponentFrame(object):
         self.frame.pack(expand=True, fill="x")
         self.frame.grid_columnconfigure(0, weight=1)
 
-        text = self.master.componentType.title()
-        label = ttk.Label(self.frame, text=text)
+        name = name.title()
+        label = ttk.Label(self.frame, text=name)
         label.grid(row=0, column=0, sticky="ew", padx=(5,0))
 
         self.master.componentList.append(self.frame)
@@ -376,21 +370,20 @@ class TriggerWindow(object):
 
         # fail
         if self.trigger.isFail:
+            print("Test1")
             component = self.failSubComponent
             component.listEntryStates[0].set(1)
             component.cbValueChanged(component.listEntryStates[0], [component.subComponentName])
 
             if self.trigger.fail is not None:
+                print("test2")
                 component.listEntryStates[0].set(1)
                 component.cbValueChanged(component.listEntryStates[1], [component.listEntries[0]])
                 component.listEntryData[0].set(self.trigger.fail)
             #end if
         #end if
 
-        # logs
-        for log in self.app.activeTrigger.logs:
-            # populate a ComponentFrame for each log
-            print(log)
+        #TODO: POPULATE LOGS HERE
 
         print("Done.")
     #end populateTriggerWindow
