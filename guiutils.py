@@ -540,3 +540,36 @@ class _SubComponentMandOptFrame(ttk.Frame):
     #end cbValueChanged
 
 #end class _SubComponentMandOptFrame
+
+
+class TypeSelectorWindow(Toplevel):
+
+    def __init__(self, master, options, callback, **kwargs):
+        self.callback = callback
+        super().__init__(master, **kwargs)
+
+        self.optionList = ttk.Combobox(self, values=options, state="readonly")
+        self.optionList.current(0)
+        self.optionList.pack()
+
+        buttons = ttk.Frame(self)
+        ok = ttk.Button(buttons, text="OK", command=self.cleanup)
+        ok.pack(side=LEFT, fill="x")
+        cxl = ttk.Button(buttons, text="Cancel", command=self.destroy)
+        cxl.pack(fill="x")
+        buttons.pack()
+
+        # these commands make the parent window inactive
+        self.transient(master)
+        self.grab_set()
+        master.wait_window(self)
+    #end init
+
+
+    def cleanup(self):
+        self.callback(self.optionList.get())
+        self.destroy()
+    #end cleanup
+
+
+#end class TypeSelectorWindow
