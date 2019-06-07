@@ -308,7 +308,7 @@ class TriggerWindow(object):
     #end storeData
 
     def populateTriggerWindow(self):
-        print("Populating TriggerWindow...", end="\t")
+        print("\t\tPopulating TriggerWindow...", end="\t")
 
         # action
         if self.trigger.triggerType is not None:
