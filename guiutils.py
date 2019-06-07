@@ -147,10 +147,10 @@ class ComponentFrame(object):
 
         master.componentList.append(self.frame)
 
-        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(master.editComponent, self.frame))
+        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editComponent, self.frame))
         editButton.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(master.deleteComponent, self.frame))
+        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteComponent, self.frame))
         deleteButton.grid(row=0, column=2)
     #end init
 
