@@ -258,7 +258,6 @@ class Mission(object):
 
 
     def addTrigger(self):
-        #TODO: Implement this
         newTrigger = MissionComponents.Trigger()
         self.components.triggerList.append(newTrigger)
         return newTrigger
@@ -272,7 +271,6 @@ class Mission(object):
 
 
     def addLog(self, trigger):
-        #TODO: Implement this
         newLog = MissionComponents.Log()
         trigger.logs.append(newLog)
         return newLog
@@ -280,8 +278,7 @@ class Mission(object):
 
 
     def removeLog(self, log):
-        #TODO: Implement this
-        self.components.triggerList.remove(log)
+        self.components.triggerList.logs.remove(log)
     #end removeTrigger
 
 #end class Mission
