@@ -36,7 +36,7 @@ def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, list
 #end buildMandOptFrame
 
 
-class AggregatedComponentFrame(ttk.Frame):
+class AggregatedTriggerFrame(ttk.Frame):
 
     def __init__(self, app, parent, sectionName, componentType):
         ttk.Frame.__init__(self, parent)
@@ -46,7 +46,6 @@ class AggregatedComponentFrame(ttk.Frame):
         self.sectionName   = sectionName
         self.componentType = componentType
         self.componentList = []
-        self.formatType    = ""
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -72,17 +71,6 @@ class AggregatedComponentFrame(ttk.Frame):
         if self.componentType is "trigger":
             self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
             self.editComponent(self.componentList[-1])
-        elif self.componentType is "log":
-            TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
-            print(self.formatType)
-            if self.formatType is not "cancelled":
-                self.componentList[-1].missionComponent = self.app.activeMission.addLog(self.app.activeTrigger)
-                self.editComponent(self.componentList[-1])
-            else:
-                cf.cleanup()
-                return
-        else:
-            print("ERROR: Unknown component type")
         #end if/else
 
         state = BooleanVar()
@@ -99,10 +87,6 @@ class AggregatedComponentFrame(ttk.Frame):
 
         if self.componentType is "trigger":
             self.app.activeMission.removeTrigger(component.missionComponent)
-        elif self.componentType is "log":
-            print("\tRemoving", component.missionComponent)
-            self.app.activeMission.removeLog(component.missionComponent)
-        #end if/else
 
         self.componentList.remove(component)
         component.pack_forget()
@@ -118,8 +102,6 @@ class AggregatedComponentFrame(ttk.Frame):
         print("...")
         if self.componentType is "trigger":
             TriggerWindow(self.app, self.app.gui, component.missionComponent)
-        if self.componentType is "log":
-            LogWindow(self.app, self.app.gui, component.missionComponent, self.formatType)
     #end editComponent
 
 
@@ -127,10 +109,6 @@ class AggregatedComponentFrame(ttk.Frame):
         component.isActive = state.get()
         print(component, "is now", component.isActive)
     #def changeComponentState
-
-
-    def setFormatType(self, formatType):
-        self.formatType = formatType
 
 #end class AggregatedComponentFrame
 
@@ -226,8 +204,8 @@ class TriggerWindow(object):
         self.failSubComponent = buildMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
         self.failSubComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
-        self.logs = AggregatedComponentFrame(self.app, self.leftFrame, "Logs", "log")
-        self.logs.grid(row=7, column=0, columnspan=2, sticky="ew")
+        #self.logs = AggregatedTriggerFrame(self.app, self.leftFrame, "Logs", "log")
+        #self.logs.grid(row=7, column=0, columnspan=2, sticky="ew")
 
         ### DONE BUILDING LEFT FRAME ###
 
@@ -408,6 +386,11 @@ class TriggerWindow(object):
                 component.listEntryData[0].set(self.trigger.fail)
             #end if
         #end if
+
+        # logs
+        for log in self.app.activeTrigger.logs:
+            # populate a ComponentFrame for each log
+            print(log)
 
         print("Done.")
     #end populateTriggerWindow

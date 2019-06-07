@@ -17,7 +17,7 @@ from tkinter import ttk, StringVar
 
 from menuactions import *
 from ScrollingCenterFrame import ScrollingCenterFrame
-from guiutils import AggregatedComponentFrame
+from guiutils import AggregatedTriggerFrame
 
 class GUI(object):
 
@@ -607,7 +607,7 @@ class GUI(object):
 
 
         # triggers
-        self.triggers = AggregatedComponentFrame(self, cf, "Triggers", "trigger")
+        self.triggers = AggregatedTriggerFrame(self, cf, "Triggers", "trigger")
         self.triggers.grid(row=42, column=0, columnspan=2, sticky="ew")
 
 
