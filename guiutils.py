@@ -434,13 +434,13 @@ class _SubComponentMandOptFrame(ttk.Frame):
         +------------------------+
     '''
     def build(self):
-        print("\t\tBuilding \"%s\"" % self.subComponentName)
+        #print("\t\tBuilding \"%s\"" % self.subComponentName)
         label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5,0))
 
         # Case 1: No mandatory fields
         if self.numMandatory is 0:
-            print("\t\t\tNo mandatory fields")
+            #print("\t\t\tNo mandatory fields")
 
             self.listEntryStates.append(BooleanVar())
 
@@ -451,7 +451,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.rowNum += 1
         # Case 2: 1 mandatory field
         elif self.numMandatory is 1:
-            print("\t\t\t1 mandatory field")
+            #print("\t\t\t1 mandatory field")
 
             self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
@@ -467,7 +467,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.rowNum += 1
         # Case 3: More than 1 mandatory field
         elif self.numMandatory > 1:
-            print("\t\t\t%d mandatory fields" % self.numMandatory)
+            #print("\t\t\t%d mandatory fields" % self.numMandatory)
 
             # add the first checkbutton
             self.listEntryStates.append(BooleanVar())
