@@ -272,6 +272,11 @@ class Log(object):
         print("Done.")
     # end init
 
+
+    def clearLog(self):
+        self.log = [None, None, None]
+    #end clearLog
+
 # end class Conversations
 
 
