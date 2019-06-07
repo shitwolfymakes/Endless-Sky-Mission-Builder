@@ -267,7 +267,7 @@ class Log(object):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
         self.isActive = False
-        self.logType = None
+        self.log      = [None, None, None]
 
         print("Done.")
     # end init
