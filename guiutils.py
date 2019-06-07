@@ -54,7 +54,7 @@ class AggregatedComponentFrame(ttk.Frame):
         sectionNameLabel.pack()
 
         self.inner = ttk.Frame(self.outer)
-        self.inner.pack()
+        self.inner.pack(expand=True, fill="x")
 
         buttonText = "Add " + self.componentType
         addButton = ttk.Button(self.outer, text=buttonText, command=self.__addComponent)
@@ -63,20 +63,25 @@ class AggregatedComponentFrame(ttk.Frame):
 
 
     def __addComponent(self):
+        #TODO: Checkbutton binding goes in here
         print("Adding %s to %s..." % (self.componentType, self.sectionName))
 
-        ComponentFrame(self)
+        cf = ComponentFrame(self)
 
         if self.componentType is "trigger":
             self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
-            #print(self.componentList[-1].missionComponent)
             self.editComponent(self.componentList[-1])
         elif self.componentType is "log":
             self.componentList[-1].missionComponent = self.app.activeMission.addLog(self.app.activeTrigger)
-            # print(self.componentList[-1].missionComponent)
             self.editComponent(self.componentList[-1])
         else:
             print("ERROR: Unknown component type")
+        #end if/else
+
+        state = BooleanVar()
+        cb = ttk.Checkbutton(cf.frame, onvalue=1, offvalue=0, variable=state)
+        cb.configure(command=partial(self.changeComponentState, state, self.componentList[-1].missionComponent))
+        cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
     #end __addComponent
@@ -107,6 +112,13 @@ class AggregatedComponentFrame(ttk.Frame):
             TriggerWindow(self.app, self.app.gui, component.missionComponent)
     #end editComponent
 
+
+    def changeComponentState(self, state, component):
+        component.isActive = state.get()
+        print(component, "is now", component.isActive)
+
+    #def changeComponentState
+
 #end class AggregatedComponentFrame
 
 
@@ -115,19 +127,20 @@ class ComponentFrame(object):
     def __init__(self, master):
         self.missionComponent = None
 
-        componentFrame = ttk.Frame(master.inner)
-        componentFrame.pack()
+        self.frame = ttk.Frame(master.inner)
+        self.frame.pack(expand=True, fill="x")
+        self.frame.grid_columnconfigure(0, weight=1)
 
-        #labelText = "%s %d" % (master.componentType, len(master.componentList))
-        label = ttk.Label(componentFrame, text=master.componentType, anchor="w")
+        text = master.componentType.title()
+        label = ttk.Label(self.frame, text=text)
         label.grid(row=0, column=0, sticky="ew")
 
-        master.componentList.append(componentFrame)
+        master.componentList.append(self.frame)
 
-        editButton = ttk.Button(componentFrame, text="edit", command=partial(master.editComponent, componentFrame))
+        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(master.editComponent, self.frame))
         editButton.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(componentFrame, text="X", command=partial(master.deleteComponent, componentFrame))
+        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(master.deleteComponent, self.frame))
         deleteButton.grid(row=0, column=2)
     #end init
 
