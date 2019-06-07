@@ -46,6 +46,7 @@ class AggregatedComponentFrame(ttk.Frame):
         self.sectionName   = sectionName
         self.componentType = componentType
         self.componentList = []
+        self.formatType    = ""
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -72,8 +73,13 @@ class AggregatedComponentFrame(ttk.Frame):
             self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
             self.editComponent(self.componentList[-1])
         elif self.componentType is "log":
-            self.componentList[-1].missionComponent = self.app.activeMission.addLog(self.app.activeTrigger)
-            self.editComponent(self.componentList[-1])
+            TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
+            print(self.formatType)
+            if self.formatType is not "cancelled":
+                self.componentList[-1].missionComponent = self.app.activeMission.addLog(self.app.activeTrigger)
+            else:
+                cf.cleanup()
+                return
         else:
             print("ERROR: Unknown component type")
         #end if/else
@@ -116,8 +122,11 @@ class AggregatedComponentFrame(ttk.Frame):
     def changeComponentState(self, state, component):
         component.isActive = state.get()
         print(component, "is now", component.isActive)
-
     #def changeComponentState
+
+
+    def setFormatType(self, formatType):
+        self.formatType = formatType
 
 #end class AggregatedComponentFrame
 
@@ -126,6 +135,7 @@ class ComponentFrame(object):
 
     def __init__(self, master):
         self.missionComponent = None
+        self.master = master
 
         self.frame = ttk.Frame(master.inner)
         self.frame.pack(expand=True, fill="x")
@@ -133,7 +143,7 @@ class ComponentFrame(object):
 
         text = master.componentType.title()
         label = ttk.Label(self.frame, text=text)
-        label.grid(row=0, column=0, sticky="ew")
+        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
 
         master.componentList.append(self.frame)
 
@@ -143,6 +153,9 @@ class ComponentFrame(object):
         deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(master.deleteComponent, self.frame))
         deleteButton.grid(row=0, column=2)
     #end init
+
+    def cleanup(self):
+        self.master.deleteComponent(self.frame)
 
 #end class ComponentFrame
 
@@ -555,7 +568,7 @@ class TypeSelectorWindow(Toplevel):
         buttons = ttk.Frame(self)
         ok = ttk.Button(buttons, text="OK", command=self.cleanup)
         ok.pack(side=LEFT, fill="x")
-        cxl = ttk.Button(buttons, text="Cancel", command=self.destroy)
+        cxl = ttk.Button(buttons, text="Cancel", command=self.cancelled)
         cxl.pack(fill="x")
         buttons.pack()
 
@@ -571,5 +584,10 @@ class TypeSelectorWindow(Toplevel):
         self.destroy()
     #end cleanup
 
+
+    def cancelled(self):
+        self.callback("cancelled")
+        self.destroy()
+    #end cancelled
 
 #end class TypeSelectorWindow
