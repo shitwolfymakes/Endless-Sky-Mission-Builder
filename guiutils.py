@@ -253,7 +253,6 @@ class TriggerWindow(object):
 
 
     def storeData(self):
-        #TODO: IMPLEMENT THIS NEXT
         print("\nStoring TriggerWindow data...")
         self.trigger.clearTrigger()
 
@@ -622,8 +621,7 @@ class LogWindow(object):
 
 
     def storeData(self):
-        #TODO: IMPLEMENT THIS NEXT
-        print("\nStoring TriggerWindow data...")
+        print("\nStoring LogWindow data...")
         self.log.clearLog()
 
 #end class LogWindow
