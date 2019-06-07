@@ -77,6 +77,7 @@ class AggregatedComponentFrame(ttk.Frame):
             print(self.formatType)
             if self.formatType is not "cancelled":
                 self.componentList[-1].missionComponent = self.app.activeMission.addLog(self.app.activeTrigger)
+                self.editComponent(self.componentList[-1])
             else:
                 cf.cleanup()
                 return
@@ -116,6 +117,8 @@ class AggregatedComponentFrame(ttk.Frame):
         print("...")
         if self.componentType is "trigger":
             TriggerWindow(self.app, self.app.gui, component.missionComponent)
+        if self.componentType is "log":
+            LogWindow(self.app, self.app.gui, component.missionComponent, self.formatType)
     #end editComponent
 
 
@@ -594,11 +597,12 @@ class TypeSelectorWindow(Toplevel):
 
 class LogWindow(object):
 
-    def __init__(self, app, master, log):
+    def __init__(self, app, master, log, formatType):
         print("\tBuilding LogWindow...")
 
         self.app = app
         self.log = log
+        self.formatType = formatType
 
         self.top = Toplevel(master)
         self.top.title("Edit Log")
