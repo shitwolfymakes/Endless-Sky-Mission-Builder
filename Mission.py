@@ -178,6 +178,81 @@ class Mission(object):
         if self.components.destination.isDestination:
             self.addLine("\tdestination \"%s\"" % self.components.destination.destination)
 
+        # Trigger(s)
+        for trigger in self.components.triggerList:
+            if trigger.isActive:
+
+                # triggerType
+                if trigger.triggerType is not None:
+                    self.addLine("\ton %s" % trigger.triggerType)
+
+                # dialog
+                if trigger.dialog is not None:
+                    self.addLine("\t\tdialog `%s`" % trigger.dialog)
+
+                # TODO: HANDLE CONVERSATIONS HERE
+
+                # outfit
+                if trigger.outfit[0] is not None:
+                    line = "\t\toutfit"
+                    for data in trigger.outfit:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    #end for
+                    self.addLine(line)
+                #end if
+
+                # request
+                if trigger.require[0] is not None:
+                    line = "\t\trequire"
+                    for data in trigger.require:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    # end for
+                    self.addLine(line)
+                # end if
+
+                # payment
+                if trigger.isPayment:
+                    line = "\t\tpayment"
+                    for data in trigger.payment:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    # end for
+                    self.addLine(line)
+                # end if
+
+                #TODO: PARSE CONDITIONS HERE
+
+                # event
+                if trigger.event[0] is not None:
+                    line = "\t\tevent"
+                    for data in trigger.event:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    # end for
+                    self.addLine(line)
+                # end if
+
+                # fail
+                if trigger.isFail:
+                    line = "\t\tfail"
+                    if trigger.fail is not None:
+                        line = line + " " + trigger.fail
+                    # end for
+                    self.addLine(line)
+                #end if
+
+                #TODO: PARSE LOGS HERE
+
+
+            #end if
+        #end for
+
         print("Done.")
     #end parseMission
 
