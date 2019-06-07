@@ -281,10 +281,8 @@ class Log(object):
     def printLog(self):
         print("\n\tLog Data")
         print("\t\tisActive:", self.isActive)
-        logs = []
-        for log in self.log:
-            logs.append(log.get())
-        print("\t\tLog:", logs)
+        print("\t\tLog:", self.log)
+    #end printLog
 
 # end class Conversations
 
