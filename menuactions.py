@@ -122,6 +122,7 @@ def saveFile(app):
     #TODO: Implement this - ~99% completed
     #TODO: add preamble comments
     print("\nSaving selected file...")
+    compileMission(app)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
