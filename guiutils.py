@@ -591,3 +591,39 @@ class TypeSelectorWindow(Toplevel):
     #end cancelled
 
 #end class TypeSelectorWindow
+
+
+class LogWindow(object):
+
+    def __init__(self, app, master, log):
+        print("\tBuilding LogWindow...")
+
+        self.app = app
+        self.log = log
+
+        self.top = Toplevel(master)
+        self.top.title("Edit Log")
+        self.top.configure(bg="#ededed")
+        self.top.grab_set()  # freezes the app until the user enters or cancels
+
+        outer = ttk.Frame(self.top)
+        outer.pack(side=TOP)
+
+        self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.closeButton.pack(side=BOTTOM)
+    #end init
+
+
+    def cleanup(self):
+        self.storeData()
+        self.top.grab_release()  # HAVE TO RELEASE
+        self.top.destroy()
+    #end cleanup
+
+
+    def storeData(self):
+        #TODO: IMPLEMENT THIS NEXT
+        print("\nStoring TriggerWindow data...")
+        self.log.clearLog()
+
+#end class LogWindow
