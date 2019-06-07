@@ -600,20 +600,43 @@ class LogWindow(object):
     def __init__(self, app, master, log, formatType):
         print("\tBuilding LogWindow...")
 
-        self.app = app
-        self.log = log
+        self.app        = app
+        self.log        = log
         self.formatType = formatType
+        self.logGroup   = StringVar()
+        self.name       = StringVar()
+        self.message    = StringVar()
+        self.message.set("<message>")
 
         self.top = Toplevel(master)
         self.top.title("Edit Log")
         self.top.configure(bg="#ededed")
         self.top.grab_set()  # freezes the app until the user enters or cancels
 
-        outer = ttk.Frame(self.top)
-        outer.pack(side=TOP)
+        frame = ttk.Frame(self.top)
+        frame.pack(side=TOP)
+
+        if formatType == "<message>":
+            entry = ttk.Entry(frame, textvariable=self.message)
+            entry.grid(row=0, column=0)
+        else:
+            print("Type 3")
+            self.logGroup.set("<type>")
+            entry = ttk.Entry(frame, textvariable=self.logGroup, width=10)
+            entry.grid(row=0, column=0)
+
+            self.name.set("<name>")
+            entry2 = ttk.Entry(frame, textvariable=self.name, width=10)
+            entry2.grid(row=0, column=1)
+
+            entry3 = ttk.Entry(frame, textvariable=self.message, width=30)
+            entry3.grid(row=0, column=2)
+        #end if/else
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
+
+        print("\tDone.")
     #end init
 
 
@@ -625,7 +648,16 @@ class LogWindow(object):
 
 
     def storeData(self):
-        print("\nStoring LogWindow data...")
+        print("\nStoring LogWindow data...", end="\t")
         self.log.clearLog()
 
+        if self.formatType == "<message>":
+            self.log.log[0] = self.message
+        else:
+            self.log.log[0] = self.logGroup
+            self.log.log[1] = self.name
+            self.log.log[2] = self.message
+
+        print("Done.")
+    #end
 #end class LogWindow

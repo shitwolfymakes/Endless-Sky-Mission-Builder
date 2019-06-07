@@ -277,6 +277,12 @@ class Log(object):
         self.log = [None, None, None]
     #end clearLog
 
+
+    def printLog(self):
+        print("\n\tLog Data")
+        print("\t\tisActive:", self.isActive)
+        print("\t\tLog:", self.log)
+
 # end class Conversations
 
 
