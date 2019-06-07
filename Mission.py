@@ -243,7 +243,7 @@ class Mission(object):
                     line = "\t\tfail"
                     if trigger.fail is not None:
                         line = line + " " + trigger.fail
-                    # end for
+                    # end if
                     self.addLine(line)
                 #end if
 
@@ -278,7 +278,11 @@ class Mission(object):
 
 
     def removeLog(self, log):
-        self.components.triggerList.logs.remove(log)
+        print("\t\t", log)
+        for trigger in self.components.triggerList:
+            if log in trigger.logs:
+                trigger.logs.remove(log)
+        #end for
     #end removeTrigger
 
 #end class Mission
