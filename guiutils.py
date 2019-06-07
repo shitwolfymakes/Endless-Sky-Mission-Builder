@@ -141,11 +141,11 @@ class ComponentFrame(object):
         self.frame.pack(expand=True, fill="x")
         self.frame.grid_columnconfigure(0, weight=1)
 
-        text = master.componentType.title()
+        text = self.master.componentType.title()
         label = ttk.Label(self.frame, text=text)
         label.grid(row=0, column=0, sticky="ew", padx=(5,0))
 
-        master.componentList.append(self.frame)
+        self.master.componentList.append(self.frame)
 
         editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editComponent, self.frame))
         editButton.grid(row=0, column=1)
