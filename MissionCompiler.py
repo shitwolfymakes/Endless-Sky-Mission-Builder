@@ -227,6 +227,7 @@ class MissionCompiler(object):
             self.mission.destination.destination   = self.esmb.destination.get()
         # end if
 
+        # Trigger data is compiled when TriggerWindow is closed
 
         print("Done.")
         # call the parser to save the new data
