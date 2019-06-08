@@ -680,8 +680,6 @@ class LogWindow(object):
             self.log.log[2] = self.message.get()
         #end if/else
 
-        self.log.printLog()
-
         print("Done.")
     #end storeData
 
@@ -735,8 +733,8 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         print("Adding TriggerCondition...")
 
         tc = TriggerConditionFrame(self, self.trigger, "log")
-        condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
-        TypeSelectorWindow(self, condTypes, self.setFormatType)
+        self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
+        TypeSelectorWindow(self, self.condTypes, self.setFormatType)
 
         if tc.condition.conditionType == "cancelled":
             tc.cleanup()
@@ -747,7 +745,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeTCState, state, self.tcFrameList[-1].log))
+        cb.configure(command=partial(self.changeTCState, state, self.tcFrameList[-1].condition))
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
@@ -756,7 +754,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
     def editTC(self, tcFrame):
         print("Editing ", tcFrame.condition, "...")
-        TriggerConditionWindow(self.app, self.app.gui, tcFrame.condition, tcFrame.condition.conditionType)
+        TriggerConditionWindow(self.app, self.app.gui, tcFrame.condition)
     #end editTC
 
 
@@ -796,7 +794,11 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
     def setFormatType(self, formatType):
-        self.tcFrameList[-1].condition.conditionType = formatType
+        if formatType == "cancelled":
+            self.tcFrameList[-1].condition.conditionType = "cancelled"
+            return
+        ft = self.condTypes.index(formatType)
+        self.tcFrameList[-1].condition.conditionType = ft
     #end setFormatType
 
 #end class AggregatedTriggerConditionsFrame
@@ -808,7 +810,7 @@ class TriggerConditionFrame(object):
         self.condition = None
         if not populating:
             self.condition = trigger.addTC()
-        self.master = master
+        self.master  = master
         self.trigger = trigger
 
         self.frame = ttk.Frame(master.inner)
@@ -833,3 +835,136 @@ class TriggerConditionFrame(object):
     #end cleanup
 
 #end class LogFrame
+
+
+class TriggerConditionWindow(object):
+
+    def __init__(self, app, master, condition):
+        print("\tBuilding TriggerConditionWindow...")
+
+        self.app            = app
+        self.condition      = condition
+        self.conditionType  = condition.conditionType
+        self.condData       = StringVar()
+        self.value          = StringVar()
+        self.selectedOption = None
+
+        self.top = Toplevel(master)
+        self.top.title("Edit Condition")
+        self.top.configure(bg="#ededed")
+        self.top.grab_set()  # freezes the app until the user enters or cancels
+
+        frame = ttk.Frame(self.top)
+        frame.pack(side=TOP)
+        self.optionsCombo  = ttk.Combobox(frame, state="readonly")
+        self.optionsCombo.bind("<<ComboboxSelected>>", self.comboCallback)
+
+        self.condData.set("<condition>")
+        if self.conditionType == 0:
+            entry = ttk.Entry(frame, textvariable=self.condData)
+            entry.grid(row=0, column=0)
+
+
+            self.selectedOption = "="
+            self.comboOptions = ["=", "+=", "-="]
+            self.optionsCombo.configure(values=self.comboOptions, width=5)
+            self.optionsCombo.current(0)
+            self.optionsCombo.grid(row=0, column=1)
+
+            self.value.set("<value>")
+            entry2 = ttk.Entry(frame, textvariable=self.value, width=6)
+            entry2.grid(row=0, column=2)
+        elif self.conditionType == 1:
+            entry = ttk.Entry(frame, textvariable=self.condData)
+            entry.grid(row=0, column=0)
+
+            self.selectedOption = "++"
+            self.comboOptions = ["++", "--"]
+            self.optionsCombo.configure(values=self.comboOptions, width=5)
+            self.optionsCombo.current(0)
+            self.optionsCombo.grid(row=0, column=1)
+        elif self.conditionType == 2:
+            self.selectedOption = "set"
+            self.comboOptions = ["set", "clear"]
+            self.optionsCombo.configure(values=self.comboOptions, width=5)
+            self.optionsCombo.current(0)
+            self.optionsCombo.grid(row=0, column=0)
+
+            entry = ttk.Entry(frame, textvariable=self.condData)
+            entry.grid(row=0, column=1)
+        else:
+            print("Invalid conditionType!!")
+        #end if/else
+
+        self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.closeButton.pack(side=BOTTOM)
+
+        self.populateTCWindow()
+
+        print("\tDone.")
+    #end init
+
+
+    def cleanup(self):
+        self.storeData()
+        self.top.grab_release()  # HAVE TO RELEASE
+        self.top.destroy()
+    #end cleanup
+
+
+    def storeData(self):
+        print("\nStoring TriggerConditionWindow data...", end="\t")
+        self.condition.clearCondition()
+
+        if self.conditionType == 0:
+            self.condition.condition[0] = self.condData.get()
+            self.condition.condition[1] = self.selectedOption
+            self.condition.condition[2] = self.value.get()
+        elif self.conditionType == 1:
+            self.condition.condition[0] = self.condData.get()
+            self.condition.condition[1] = self.selectedOption
+        elif self.conditionType == 2:
+            self.condition.condition[1] = self.selectedOption
+            self.condition.condition[0] = self.condData.get()
+        else:
+            print("Invalid conditionType!!!")
+        #end if/else
+
+        print("Done.")
+    #end storeData
+
+
+    def populateTCWindow(self):
+        print("\t\tPopulating TriggerWindow...", end="\t")
+
+        if self.conditionType == 0:
+            if self.condition.condition[0] is not None:
+                self.condData.set(self.condition.condition[0])
+                index = self.comboOptions.index(self.condition.condition[1])
+                self.optionsCombo.current(index)
+                self.value.set(self.condition.condition[2])
+            #end if
+        elif self.conditionType == 1:
+            if self.condition.condition[0] is not None:
+                self.condData.set(self.condition.condition[0])
+                index = self.comboOptions.index(self.condition.condition[1])
+                self.optionsCombo.current(index)
+            #end if
+        elif self.conditionType == 2:
+            if self.condition.condition[0] is not None:
+                index = self.comboOptions.index(self.condition.condition[1])
+                self.optionsCombo.current(index)
+                self.condData.set(self.condition.condition[0])
+        else:
+            print("Data corrupted")
+        #end if/else
+
+        print("Done.")
+    #end populateLogWindow
+
+
+    def comboCallback(self, event):
+        self.selectedOption = self.optionsCombo.get()
+    #end comboCallback
+
+#end class LogWindow
