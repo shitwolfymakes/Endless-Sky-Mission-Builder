@@ -301,6 +301,7 @@ class Log(object):
     def printLog(self):
         print("\t\tLog Data")
         print("\t\t\tisActive:", self.isActive)
+        print("\t\t\tformatType:", self.formatType)
         print("\t\t\tLog:", self.log)
     #end printLog
 
