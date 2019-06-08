@@ -521,6 +521,10 @@ class AggregatedLogFrame(ttk.Frame):
         cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self.changeLogState, state, log))
         cb.grid(row=0, column=3, sticky="e")
+
+        if log.isActive:
+            state.set(1)
+            self.changeLogState(state, log)
     #end populateLog
 
 
