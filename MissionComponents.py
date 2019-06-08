@@ -277,6 +277,21 @@ class Trigger(object):
         print("Done.")
     #end removeLog
 
+
+    def addTC(self):
+        newCond = TriggerCondition()
+        self.conditions.append(newCond)
+        print("TriggerCondition", newCond, "added to", self)
+        return newCond
+    #end addLog
+
+
+    def removeTC(self, condition):
+        print("Removing", condition, "from", self, "...", end="\t\t")
+        self.conditions.remove(condition)
+        print("Done.")
+    #end removeLog
+
 #end class Trigger
 
 
