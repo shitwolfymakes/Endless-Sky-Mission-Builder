@@ -607,7 +607,6 @@ class LogWindow(object):
             entry = ttk.Entry(frame, textvariable=self.message)
             entry.grid(row=0, column=0)
         else:
-            print("Type 3")
             self.logGroup.set("<type>")
             entry = ttk.Entry(frame, textvariable=self.logGroup, width=10)
             entry.grid(row=0, column=0)
