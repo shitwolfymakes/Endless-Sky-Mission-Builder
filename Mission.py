@@ -194,8 +194,9 @@ class Mission(object):
 
                 # outfit
                 if trigger.outfit[0] is not None:
-                    line = "\t\toutfit"
-                    for data in trigger.outfit:
+                    line = "\t\toutfit "
+                    line += self.addQuotes(trigger.outfit[0])
+                    for data in trigger.outfit[1:]:
                         if data is None:
                             break
                         line = line + " " + data
@@ -205,8 +206,9 @@ class Mission(object):
 
                 # request
                 if trigger.require[0] is not None:
-                    line = "\t\trequire"
-                    for data in trigger.require:
+                    line = "\t\trequire "
+                    line += self.addQuotes(trigger.require[0])
+                    for data in trigger.require[1:]:
                         if data is None:
                             break
                         line = line + " " + data
@@ -229,8 +231,9 @@ class Mission(object):
 
                 # event
                 if trigger.event[0] is not None:
-                    line = "\t\tevent"
-                    for data in trigger.event:
+                    line = "\t\tevent "
+                    line += self.addQuotes(trigger.event[0])
+                    for data in trigger.event[1:]:
                         if data is None:
                             break
                         line = line + " " + data
@@ -240,9 +243,9 @@ class Mission(object):
 
                 # fail
                 if trigger.isFail:
-                    line = "\t\tfail"
+                    line = "\t\tfail "
                     if trigger.fail is not None:
-                        line = line + " " + trigger.fail
+                        line += self.addQuotes(trigger.fail)
                     # end if
                     self.addLine(line)
                 #end if
@@ -260,13 +263,17 @@ class Mission(object):
                 #end for
 
                 # Conditions
-                for condtion in trigger.conditions:
-                    if condtion.isActive:
-                        if condtion.conditionType == 0:
-                            self.addLine("\t\t%s %s %s" % (condtion.condition[0], condtion.condition[1], condtion.condition[2]))
-                            continue
-                        #end if
-                    self.addLine("\t\t%s %s" % (condtion.condition[0], condtion.condition[1]))
+                for condition in trigger.conditions:
+                    if condition.isActive:
+                        if condition.conditionType == 0:
+                            self.addLine("\t\t\"%s\" %s %s" % (condition.condition[0], condition.condition[1], condition.condition[2]))
+                        elif condition.conditionType == 1:
+                            self.addLine("\t\t\"%s\" %s" % (condition.condition[0], condition.condition[1]))
+                        elif condition.conditionType == 2:
+                            self.addLine("\t\t%s \"%s\"" % (condition.condition[0], condition.condition[1]))
+                        else:
+                            print("Data corrupted!")
+                        #end if/else
                     #end if
                 #end for
 
@@ -288,5 +295,12 @@ class Mission(object):
         #print(trigger)
         self.components.triggerList.remove(trigger)
     #end removeTrigger
+
+
+    def addQuotes(self, line):
+        if " " in line:
+            line = "\"%s\"" % line
+        return line
+    #end addQuotes
 
 #end class Mission
