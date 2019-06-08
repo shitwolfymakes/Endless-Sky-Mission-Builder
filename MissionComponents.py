@@ -336,12 +336,12 @@ class TriggerCondition(object):
     # end init
 
 
-    def clearConditions(self):
+    def clearCondition(self):
         self.condition = [None, None, None]
     #end clearConditions
 
 
-    def printConditions(self):
+    def printCondition(self):
         print("\t\tCondition Data")
         print("\t\t\tisActive:", self.isActive)
         print("\t\t\tconditionType:", self.conditionType)
