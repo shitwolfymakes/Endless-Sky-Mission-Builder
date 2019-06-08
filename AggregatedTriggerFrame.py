@@ -43,7 +43,6 @@ class AggregatedTriggerFrame(ttk.Frame):
         print("Adding Trigger...")
 
         tf = TriggerFrame(self, self.app, "trigger")
-
         self.editTrigger(self.triggerFrameList[-1])
 
         state = BooleanVar()
@@ -56,7 +55,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def deleteTrigger(self, triggerFrame):
-        print("Removing component.missionComponent from Triggers")
+        print("Removing %s from Triggers", triggerFrame.trigger)
 
         self.app.activeMission.removeTrigger(triggerFrame.trigger)
 
@@ -99,7 +98,7 @@ class TriggerFrame(object):
         label = ttk.Label(self.frame, text=name)
         label.grid(row=0, column=0, sticky="ew", padx=(5,0))
 
-        self.master.triggerFrameList.append(self.frame)
+        self.master.triggerFrameList.append(self)
 
         editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editTrigger, self))
         editButton.grid(row=0, column=1)
