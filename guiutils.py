@@ -210,7 +210,7 @@ class TriggerWindow(object):
         self.leftFrame.pack(side=LEFT)
 
         self.rightFrame = ttk.Frame(outer)
-        self.rightFrame.pack(side=RIGHT)
+        self.rightFrame.pack(side=RIGHT, anchor=N)
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
@@ -256,10 +256,11 @@ class TriggerWindow(object):
 
         ### DONE BUILDING LEFT FRAME ###
 
-        #TODO: add this in later version
-        # build the right frame
-        testR = ttk.Label(self.rightFrame, text="RightSideFrame")
-        #testR.pack()
+        ### BUILDING RIGHT FRAME###
+
+        # Conditions (inside Trigger)
+        self.triggerConditionsSubComponent = AggregatedTriggerConditionsFrame(self.app, self.rightFrame, self.trigger)
+        self.triggerConditionsSubComponent.grid(row=0, column=0, columnspan=2, sticky="ew")
 
         self.populateTriggerWindow()
 
@@ -703,3 +704,97 @@ class LogWindow(object):
     #end populateLogWindow
 
 #end class LogWindow
+
+
+class AggregatedTriggerConditionsFrame(ttk.Frame):
+
+    def __init__(self, app, parent, trigger):
+        ttk.Frame.__init__(self, parent)
+
+        self.app          = app
+        self.parent       = parent
+        self.trigger      = trigger
+        self.tcFrameList  = []
+
+        self.outer = ttk.Frame(self)
+        self.outer.pack(expand=True, fill="x")
+
+        sectionNameLabel = ttk.Label(self.outer, text="Conditions", anchor="center")
+        sectionNameLabel.pack()
+
+        self.inner = ttk.Frame(self.outer)
+        self.inner.pack(expand=True, fill="x")
+
+        addButton = ttk.Button(self.outer, text="Add Condition", command=self.__addTC)
+        addButton.pack(expand=True, fill="x")
+    #end init
+
+
+    def __addTC(self):
+        print("Adding TriggerCondition...")
+
+        tc = TriggerConditionFrame(self, self.trigger, "log")
+        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
+
+        if tc.condition.conditionType == "cancelled":
+            tc.cleanup()
+            return
+        #end if
+        self.editTC(self.tcFrameList[-1])
+
+
+        state = BooleanVar()
+        cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
+        cb.configure(command=partial(self.changeTCState, state, self.tcFrameList[-1].log))
+        cb.grid(row=0, column=3, sticky="e")
+
+        print("Done.")
+    #end __addTC
+
+
+    def editTC(self, tcFrame):
+        print("Editing ", tcFrame.condition, "...")
+        TriggerConditionWindow(self.app, self.app.gui, tcFrame.condition, tcFrame.condition.conditionType)
+    #end editTC
+
+
+    def deleteTC(self, tcFrame):
+        print("Removing %s from Triggers" % tcFrame.condition)
+
+        self.trigger.removeLog(tcFrame.condition)
+
+        self.tcFrameList.remove(tcFrame)
+        tcFrame.frame.pack_forget()
+        tcFrame.frame.destroy()
+
+        print("Done.")
+    #end deleteTC
+
+
+    def populateTC(self, tc):
+        tc = TriggerConditionFrame(self, self.trigger, "log", populating=True)
+        tc.condition = tc
+
+        state = BooleanVar()
+        cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
+        cb.configure(command=partial(self.changeTCState, state, tc))
+        cb.grid(row=0, column=3, sticky="e")
+
+        if tc.isActive:
+            state.set(1)
+            self.changeTCState(state, tc)
+    #end populateTC
+
+
+    @staticmethod
+    def changeTCState(state, tc):
+        tc.isActive = state.get()
+        print(tc, "is now", tc.isActive)
+    #def changeTriggerConditionsState
+
+
+    def setFormatType(self, formatType):
+        self.tcFrameList[-1].condition.conditionType = formatType
+    #end setFormatType
+
+#end class AggregatedTriggerConditionsFrame
