@@ -240,8 +240,6 @@ class Trigger(object):
         self.event       = [None, None, None]
         self.isFail      = False
         self.fail        = None
-        self.logs        = []
-        self.conditions  = []
     #end clearTrigger
 
 
