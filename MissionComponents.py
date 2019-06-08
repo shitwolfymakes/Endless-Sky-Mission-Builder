@@ -313,8 +313,8 @@ class TriggerCondition(object):
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
-        self.isActive   = False
-        self.formatType = None
+        self.isActive      = False
+        self.conditionType = None
 
         print("Done.")
     # end init
@@ -328,7 +328,7 @@ class TriggerCondition(object):
     def printConditions(self):
         print("\t\tCondition Data")
         print("\t\t\tisActive:", self.isActive)
-        print("\t\t\tformatType:", self.formatType)
+        print("\t\t\tconditionType:", self.conditionType)
     #end printConditions
 
 # end class Conditions
