@@ -55,13 +55,13 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def deleteTrigger(self, triggerFrame):
-        print("Removing %s from Triggers", triggerFrame.trigger)
+        print("Removing %s from Triggers" % triggerFrame.trigger)
 
         self.app.activeMission.removeTrigger(triggerFrame.trigger)
 
         self.triggerFrameList.remove(triggerFrame)
-        triggerFrame.pack_forget()
-        triggerFrame.destroy()
+        triggerFrame.frame.pack_forget()
+        triggerFrame.frame.destroy()
 
         print("Done.")
     #end deleteTrigger
@@ -84,9 +84,10 @@ class AggregatedTriggerFrame(ttk.Frame):
 #end class AggregatedTriggerFrame
 
 
-class TriggerFrame(object):
+class TriggerFrame(ttk.Frame):
 
     def __init__(self, master, app, name):
+        ttk.Frame.__init__(self, master)
         self.trigger = app.activeMission.addTrigger()
         self.master  = master
 
