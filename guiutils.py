@@ -403,7 +403,7 @@ class TriggerWindow(object):
             #end if
         #end if
 
-        #TODO: POPULATE LOGS HERE AFTER THEY'RE STORED IN THE TRIGGER
+        # Logs
         component = self.logsSubComponent
         if self.trigger.logs:
             for log in self.trigger.logs:
