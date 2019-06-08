@@ -266,13 +266,13 @@ class Trigger(object):
     def addLog(self):
         newLog = Log()
         self.logs.append(newLog)
-        print("Log", newLog, "added to", self)
+        print("\t\tLog", newLog, "added to", self)
         return newLog
     #end addLog
 
 
     def removeLog(self, log):
-        print("Removing", log, "from", self, "...", end="\t\t")
+        print("\t\tRemoving", log, "from", self, "...", end="\t\t")
         self.logs.remove(log)
         print("Done.")
     #end removeLog
@@ -281,13 +281,13 @@ class Trigger(object):
     def addTC(self):
         newCond = TriggerCondition()
         self.conditions.append(newCond)
-        print("TriggerCondition", newCond, "added to", self)
+        print("\t\tTriggerCondition", newCond, "added to", self)
         return newCond
     #end addLog
 
 
     def removeTC(self, condition):
-        print("Removing", condition, "from", self, "...", end="\t\t")
+        print("\t\tRemoving", condition, "from", self, "...", end="\t\t")
         self.conditions.remove(condition)
         print("Done.")
     #end removeLog
