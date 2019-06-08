@@ -51,7 +51,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
-    #end __addComponent
+    #end __addTrigger
 
 
     def deleteTrigger(self, triggerFrame):
@@ -64,7 +64,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         triggerFrame.destroy()
 
         print("Done.")
-    #end deleteComponent
+    #end deleteTrigger
 
 
     def editTrigger(self, triggerFrame):
@@ -73,13 +73,13 @@ class AggregatedTriggerFrame(ttk.Frame):
         print("...")
 
         TriggerWindow(self.app, self.app.gui, triggerFrame.trigger)
-    #end editComponent
+    #end editTrigger
 
 
     def changeTriggerState(self, state, trigger):
         trigger.isActive = state.get()
         print(trigger, "is now", trigger.isActive)
-    #def changeComponentState
+    #def changeTriggerState
 
 #end class AggregatedTriggerFrame
 
@@ -109,5 +109,6 @@ class TriggerFrame(object):
 
     def cleanup(self):
         self.master.deleteTrigger(self)
+    #end cleanup
 
-#end class ComponentFrame
+#end class TriggerFrame
