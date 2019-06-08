@@ -330,13 +330,14 @@ class TriggerCondition(object):
 
         self.isActive      = False
         self.conditionType = None
+        self.condition     = [None, None, None]
 
         print("Done.")
     # end init
 
 
     def clearConditions(self):
-        print("Not implemented yet")
+        self.condition = [None, None, None]
     #end clearConditions
 
 
