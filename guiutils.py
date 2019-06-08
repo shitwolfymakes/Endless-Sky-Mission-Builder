@@ -152,8 +152,6 @@ class TriggerWindow(object):
         self.failSubComponent = buildMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
         self.failSubComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
-        #self.logs = AggregatedTriggerFrame(self.app, self.leftFrame, "Logs", "log")
-        #self.logs.grid(row=7, column=0, columnspan=2, sticky="ew")
 
         ### DONE BUILDING LEFT FRAME ###
 
