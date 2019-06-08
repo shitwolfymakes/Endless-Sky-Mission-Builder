@@ -298,9 +298,9 @@ class Log(object):
 
 
     def printLog(self):
-        print("\n\tLog Data")
-        print("\t\tisActive:", self.isActive)
-        print("\t\tLog:", self.log)
+        print("\t\tLog Data")
+        print("\t\t\tisActive:", self.isActive)
+        print("\t\t\tLog:", self.log)
     #end printLog
 
 # end class Log
@@ -323,8 +323,8 @@ class TriggerCondition(object):
 
 
     def printConditions(self):
-        print("\n\tCondition Data")
-        print("\t\tisActive:", self.isActive)
+        print("\t\tCondition Data")
+        print("\t\t\tisActive:", self.isActive)
     #end printConditions
 
 # end class Conditions
