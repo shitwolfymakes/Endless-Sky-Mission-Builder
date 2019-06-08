@@ -369,15 +369,13 @@ class TriggerWindow(object):
         #end for
 
         # fail
+        component = self.failSubComponent
         if self.trigger.isFail:
-            print("Test1")
-            component = self.failSubComponent
             component.listEntryStates[0].set(1)
             component.cbValueChanged(component.listEntryStates[0], [component.subComponentName])
 
             if self.trigger.fail is not None:
-                print("test2")
-                component.listEntryStates[0].set(1)
+                component.listEntryStates[1].set(1)
                 component.cbValueChanged(component.listEntryStates[1], [component.listEntries[0]])
                 component.listEntryData[0].set(self.trigger.fail)
             #end if
