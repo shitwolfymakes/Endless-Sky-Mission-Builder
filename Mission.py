@@ -247,8 +247,17 @@ class Mission(object):
                     self.addLine(line)
                 #end if
 
-                #TODO: PARSE LOGS HERE
-                print(trigger.logs)
+                # Logs
+                for log in trigger.logs:
+                    if log.isActive:
+                        line = "\t\tlog"
+                        if log.formatType == "<message>":
+                            self.addLine("%s `%s`" % (line, log.log[0]))
+                            continue
+                        #end if
+                        self.addLine("%s \"%s\" \"%s\" `%s`" % (line, log.log[0], log.log[1], log.log[2]))
+                    #end if
+                #end for
 
             #end if
         #end for
