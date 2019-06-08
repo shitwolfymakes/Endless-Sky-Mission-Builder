@@ -285,8 +285,9 @@ class Log(object):
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
-        self.isActive = False
-        self.log      = [None, None, None]
+        self.isActive   = False
+        self.formatType = None
+        self.log        = [None, None, None]
 
         print("Done.")
     # end init
