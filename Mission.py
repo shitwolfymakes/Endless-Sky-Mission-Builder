@@ -248,7 +248,7 @@ class Mission(object):
                 #end if
 
                 #TODO: PARSE LOGS HERE
-
+                print(trigger.logs)
 
             #end if
         #end for
