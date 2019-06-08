@@ -227,7 +227,20 @@ class Mission(object):
                     self.addLine(line)
                 # end if
 
-                #TODO: PARSE CONDITIONS HERE
+                # Conditions
+                for condition in trigger.conditions:
+                    if condition.isActive:
+                        if condition.conditionType == 0:
+                            self.addLine("\t\t\"%s\" %s %s" % (condition.condition[0], condition.condition[1], condition.condition[2]))
+                        elif condition.conditionType == 1:
+                            self.addLine("\t\t\"%s\" %s" % (condition.condition[0], condition.condition[1]))
+                        elif condition.conditionType == 2:
+                            self.addLine("\t\t%s \"%s\"" % (condition.condition[0], condition.condition[1]))
+                        else:
+                            print("Data corrupted!")
+                        # end if/else
+                    # end if
+                # end for
 
                 # event
                 if trigger.event[0] is not None:
@@ -259,21 +272,6 @@ class Mission(object):
                             continue
                         #end if
                         self.addLine("%s \"%s\" \"%s\" `%s`" % (line, log.log[0], log.log[1], log.log[2]))
-                    #end if
-                #end for
-
-                # Conditions
-                for condition in trigger.conditions:
-                    if condition.isActive:
-                        if condition.conditionType == 0:
-                            self.addLine("\t\t\"%s\" %s %s" % (condition.condition[0], condition.condition[1], condition.condition[2]))
-                        elif condition.conditionType == 1:
-                            self.addLine("\t\t\"%s\" %s" % (condition.condition[0], condition.condition[1]))
-                        elif condition.conditionType == 2:
-                            self.addLine("\t\t%s \"%s\"" % (condition.condition[0], condition.condition[1]))
-                        else:
-                            print("Data corrupted!")
-                        #end if/else
                     #end if
                 #end for
 
