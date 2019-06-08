@@ -189,6 +189,44 @@ class _SubComponentMandOptFrame(ttk.Frame):
 # end class _SubComponentMandOptFrame
 
 
+class TypeSelectorWindow(Toplevel):
+
+    def __init__(self, master, options, callback, **kwargs):
+        self.callback = callback
+        super().__init__(master, **kwargs)
+
+        self.optionList = ttk.Combobox(self, values=options, state="readonly")
+        self.optionList.current(0)
+        self.optionList.pack()
+
+        buttons = ttk.Frame(self)
+        ok = ttk.Button(buttons, text="OK", command=self.cleanup)
+        ok.pack(side=LEFT, fill="x")
+        cxl = ttk.Button(buttons, text="Cancel", command=self.cancelled)
+        cxl.pack(fill="x")
+        buttons.pack()
+
+        # these commands make the parent window inactive
+        self.transient(master)
+        self.grab_set()
+        master.wait_window(self)
+    #end init
+
+
+    def cleanup(self):
+        self.callback(self.optionList.get())
+        self.destroy()
+    #end cleanup
+
+
+    def cancelled(self):
+        self.callback("cancelled")
+        self.destroy()
+    #end cancelled
+
+#end class TypeSelectorWindow
+
+
 class TriggerWindow(object):
 
     def __init__(self, app, master, trigger):
@@ -573,44 +611,6 @@ class LogFrame(object):
         self.master.deleteLog(self)
 
 #end class LogFrame
-
-
-class TypeSelectorWindow(Toplevel):
-
-    def __init__(self, master, options, callback, **kwargs):
-        self.callback = callback
-        super().__init__(master, **kwargs)
-
-        self.optionList = ttk.Combobox(self, values=options, state="readonly")
-        self.optionList.current(0)
-        self.optionList.pack()
-
-        buttons = ttk.Frame(self)
-        ok = ttk.Button(buttons, text="OK", command=self.cleanup)
-        ok.pack(side=LEFT, fill="x")
-        cxl = ttk.Button(buttons, text="Cancel", command=self.cancelled)
-        cxl.pack(fill="x")
-        buttons.pack()
-
-        # these commands make the parent window inactive
-        self.transient(master)
-        self.grab_set()
-        master.wait_window(self)
-    #end init
-
-
-    def cleanup(self):
-        self.callback(self.optionList.get())
-        self.destroy()
-    #end cleanup
-
-
-    def cancelled(self):
-        self.callback("cancelled")
-        self.destroy()
-    #end cancelled
-
-#end class TypeSelectorWindow
 
 
 class LogWindow(object):
