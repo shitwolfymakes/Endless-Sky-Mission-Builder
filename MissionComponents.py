@@ -345,6 +345,7 @@ class TriggerCondition(object):
         print("\t\tCondition Data")
         print("\t\t\tisActive:", self.isActive)
         print("\t\t\tconditionType:", self.conditionType)
+        print("\t\t\tCondition:", self.condition)
     #end printConditions
 
 # end class TriggerConditions
