@@ -265,6 +265,13 @@ class Trigger(object):
         return self.logs[-1]
     #end addLog
 
+
+    def removeLog(self, log):
+        print("Removing", log, "from", self, "...", end="\t\t")
+        self.logs.remove(log)
+        print("Done.")
+    #end removeLog
+
 #end class Trigger
 
 

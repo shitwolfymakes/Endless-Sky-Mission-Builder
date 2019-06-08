@@ -64,11 +64,11 @@ class AggregatedLogFrame(ttk.Frame):
         print("Adding Trigger...")
 
         tf = LogFrame(self, self.trigger, "log")
-        #self.editLog(self.logList[-1])
+        self.editLog(self.logFrameList[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
-        #cb.configure(command=partial(self.changeLogState, state, self.logList[-1].log))
+        cb.configure(command=partial(self.changeLogState, state, self.logFrameList[-1].log))
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
@@ -80,8 +80,26 @@ class AggregatedLogFrame(ttk.Frame):
         print(logFrame.log, end="")
         print("...")
 
-        TriggerWindow(self.app, self.app.gui, logFrame.log)
-    #end editTrigger
+        #TODO: IMPLEMENT THIS
+    #end editLog
+
+
+    def deleteLog(self, logFrame):
+        print("Removing %s from Triggers" % logFrame.log)
+
+        self.trigger.removeLog(logFrame.log)
+
+        self.logFrameList.remove(logFrame)
+        logFrame.frame.pack_forget()
+        logFrame.frame.destroy()
+
+        print("Done.")
+    #end deleteLog
+
+    def changeLogState(self, state, log):
+        log.isActive = state.get()
+        print(log, "is now", log.isActive)
+    #def changeTriggerState
 
 #end class AggregatedLogFrame
 
