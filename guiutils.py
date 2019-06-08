@@ -103,6 +103,12 @@ class AggregatedLogFrame(ttk.Frame):
     #end deleteLog
 
 
+    def populateLog(self, log):
+        lf = LogFrame(self, self.trigger, "log")
+        lf.log = log
+    #end populateLog
+
+
     def changeLogState(self, state, log):
         log.isActive = state.get()
         print(log, "is now", log.isActive)
@@ -393,7 +399,10 @@ class TriggerWindow(object):
         #TODO: POPULATE LOGS HERE AFTER THEY'RE STORED IN THE TRIGGER
         component = self.logsSubComponent
         if self.trigger.logs:
-            print("Logs found")
+            for log in self.trigger.logs:
+                log.printLog()
+            #print
+        #end if
 
         print("Done.")
     #end populateTriggerWindow
