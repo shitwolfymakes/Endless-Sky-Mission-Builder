@@ -195,7 +195,7 @@ class TypeSelectorWindow(Toplevel):
         self.callback = callback
         super().__init__(master, **kwargs)
 
-        self.optionList = ttk.Combobox(self, values=options, state="readonly")
+        self.optionList = ttk.Combobox(self, values=options, state="readonly", width=25)
         self.optionList.current(0)
         self.optionList.pack()
 
@@ -609,6 +609,7 @@ class LogFrame(object):
 
     def cleanup(self):
         self.master.deleteLog(self)
+    #end cleanup
 
 #end class LogFrame
 
@@ -734,7 +735,8 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         print("Adding TriggerCondition...")
 
         tc = TriggerConditionFrame(self, self.trigger, "log")
-        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
+        condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
+        TypeSelectorWindow(self, condTypes, self.setFormatType)
 
         if tc.condition.conditionType == "cancelled":
             tc.cleanup()
@@ -761,7 +763,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
     def deleteTC(self, tcFrame):
         print("Removing %s from Triggers" % tcFrame.condition)
 
-        self.trigger.removeLog(tcFrame.condition)
+        self.trigger.removeTC(tcFrame.condition)
 
         self.tcFrameList.remove(tcFrame)
         tcFrame.frame.pack_forget()
@@ -771,18 +773,18 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
     #end deleteTC
 
 
-    def populateTC(self, tc):
+    def populateTC(self, condition):
         tc = TriggerConditionFrame(self, self.trigger, "log", populating=True)
-        tc.condition = tc
+        tc.condition = condition
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self.changeTCState, state, tc))
         cb.grid(row=0, column=3, sticky="e")
 
-        if tc.isActive:
+        if condition.isActive:
             state.set(1)
-            self.changeTCState(state, tc)
+            self.changeTCState(state, condition)
     #end populateTC
 
 
@@ -798,3 +800,36 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
     #end setFormatType
 
 #end class AggregatedTriggerConditionsFrame
+
+
+class TriggerConditionFrame(object):
+
+    def __init__(self, master, trigger, name, populating=False):
+        self.condition = None
+        if not populating:
+            self.condition = trigger.addTC()
+        self.master = master
+        self.trigger = trigger
+
+        self.frame = ttk.Frame(master.inner)
+        self.frame.pack(expand=True, fill="x")
+        self.frame.grid_columnconfigure(0, weight=1)
+
+        label = ttk.Label(self.frame, text=name)
+        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
+
+        self.master.tcFrameList.append(self)
+
+        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editTC, self))
+        editButton.grid(row=0, column=1)
+
+        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteTC, self))
+        deleteButton.grid(row=0, column=2)
+    #end init
+
+
+    def cleanup(self):
+        self.master.deleteTC(self)
+    #end cleanup
+
+#end class LogFrame
