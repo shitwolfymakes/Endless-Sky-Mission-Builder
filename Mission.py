@@ -269,20 +269,4 @@ class Mission(object):
         self.components.triggerList.remove(trigger)
     #end removeTrigger
 
-
-    def addLog(self, trigger):
-        newLog = MissionComponents.Log()
-        trigger.logs.append(newLog)
-        return newLog
-    #end addTrigger
-
-
-    def removeLog(self, log):
-        print("\t\t", log)
-        for trigger in self.components.triggerList:
-            if log in trigger.logs:
-                trigger.logs.remove(log)
-        #end for
-    #end removeTrigger
-
 #end class Mission
