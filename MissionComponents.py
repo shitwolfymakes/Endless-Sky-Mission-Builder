@@ -258,6 +258,13 @@ class Trigger(object):
         print("\t\tFail:", self.fail)
     #end printTrigger
 
+
+    def addLog(self):
+        self.logs.append(Log)
+        print("Log", self.logs[-1], "added to", self)
+        return self.logs[-1]
+    #end addLog
+
 #end class Trigger
 
 

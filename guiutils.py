@@ -38,12 +38,13 @@ def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, list
 
 class AggregatedLogFrame(ttk.Frame):
 
-    def __init__(self, app, parent):
+    def __init__(self, app, parent, trigger):
         ttk.Frame.__init__(self, parent)
 
-        self.app           = app
-        self.parent        = parent
-        self.componentList = []
+        self.app     = app
+        self.parent  = parent
+        self.trigger = trigger
+        self.logList = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -58,14 +59,30 @@ class AggregatedLogFrame(ttk.Frame):
         addButton.pack(expand=True, fill="x")
     #end init
 
+
+    def __addLog(self):
+        print("Adding Trigger...")
+
+        tf = LogFrame(self, self.trigger, "log")
+        #self.editLog(self.logList[-1])
+
+        state = BooleanVar()
+        cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
+        #cb.configure(command=partial(self.changeLogState, state, self.logList[-1].log))
+        cb.grid(row=0, column=3, sticky="e")
+
+        print("Done.")
+    #end __addLog
+
 #end class AggregatedLogFrame
 
 
-class ComponentFrame(object):
+class LogFrame(object):
 
-    def __init__(self, master, name):
-        self.missionComponent = None
+    def __init__(self, master, trigger, name):
+        self.log = trigger.addLog()
         self.master = master
+        self.trigger = trigger
 
         self.frame = ttk.Frame(master.inner)
         self.frame.pack(expand=True, fill="x")
@@ -152,6 +169,8 @@ class TriggerWindow(object):
         self.failSubComponent = buildMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
         self.failSubComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
+        self.logsSubComponent = AggregatedLogFrame(self.app, self.leftFrame, self.trigger)
+        self.logsSubComponent.grid(row=7, column=0, columnspan=2, sticky="ew")
 
         ### DONE BUILDING LEFT FRAME ###
 
