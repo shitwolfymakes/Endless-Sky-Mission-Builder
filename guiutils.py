@@ -41,21 +41,21 @@ class AggregatedLogFrame(ttk.Frame):
     def __init__(self, app, parent, trigger):
         ttk.Frame.__init__(self, parent)
 
-        self.app     = app
-        self.parent  = parent
-        self.trigger = trigger
-        self.logList = []
+        self.app          = app
+        self.parent       = parent
+        self.trigger      = trigger
+        self.logFrameList = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
 
-        sectionNameLabel = ttk.Label(self.outer, text="Triggers", anchor="center")
+        sectionNameLabel = ttk.Label(self.outer, text="Logs", anchor="center")
         sectionNameLabel.pack()
 
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        addButton = ttk.Button(self.outer, text="Add Trigger", command=self.__addLog)
+        addButton = ttk.Button(self.outer, text="Add Log", command=self.__addLog)
         addButton.pack(expand=True, fill="x")
     #end init
 
@@ -74,6 +74,15 @@ class AggregatedLogFrame(ttk.Frame):
         print("Done.")
     #end __addLog
 
+
+    def editLog(self, logFrame):
+        print("Editing ", end="")
+        print(logFrame.log, end="")
+        print("...")
+
+        TriggerWindow(self.app, self.app.gui, logFrame.log)
+    #end editTrigger
+
 #end class AggregatedLogFrame
 
 
@@ -88,16 +97,15 @@ class LogFrame(object):
         self.frame.pack(expand=True, fill="x")
         self.frame.grid_columnconfigure(0, weight=1)
 
-        name = name.title()
         label = ttk.Label(self.frame, text=name)
         label.grid(row=0, column=0, sticky="ew", padx=(5,0))
 
-        self.master.componentList.append(self.frame)
+        self.master.logFrameList.append(self)
 
-        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editComponent, self.frame))
+        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editLog, self))
         editButton.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteComponent, self.frame))
+        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteLog, self))
         deleteButton.grid(row=0, column=2)
     #end init
 
