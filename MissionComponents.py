@@ -254,8 +254,12 @@ class Trigger(object):
         print("\t\tEvent:", self.event)
         print("\t\tisFail:", self.isFail)
         print("\t\tFail:", self.fail)
-        print("\t\tLogs:", self.logs)
-        print("\t\tConditions:", self.conditions)
+        print("\t\tLogs:")
+        for log in self.logs:
+            log.printLog()
+        print("\t\tConditions:")
+        for cond in self.conditions:
+            cond.printConditions()
     #end printTrigger
 
 
@@ -299,7 +303,7 @@ class Log(object):
         print("\t\tLog:", self.log)
     #end printLog
 
-# end class Conversations
+# end class Log
 
 
 class TriggerCondition(object):
@@ -312,7 +316,18 @@ class TriggerCondition(object):
         print("Done.")
     # end init
 
-# end class Conversations
+
+    def clearCondtions(self):
+        print("Not implemented yet")
+    #end clearConditions
+
+
+    def printConditions(self):
+        print("\n\tCondition Data")
+        print("\t\tisActive:", self.isActive)
+    #end printConditions
+
+# end class Conditions
 
 
 class Conversations(object):
