@@ -543,8 +543,8 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
     #end build
 
-
-    def cbValueChanged(self, entryState, modifiedWidgets):
+    @staticmethod
+    def cbValueChanged(entryState, modifiedWidgets):
         for widget in modifiedWidgets:
             print("The value of %s is:" % widget, end="\t\t")
             print(entryState.get())
