@@ -320,7 +320,7 @@ class TriggerCondition(object):
     # end init
 
 
-    def clearCondtions(self):
+    def clearConditions(self):
         print("Not implemented yet")
     #end clearConditions
 
@@ -331,7 +331,7 @@ class TriggerCondition(object):
         print("\t\t\tconditionType:", self.conditionType)
     #end printConditions
 
-# end class Conditions
+# end class TriggerConditions
 
 
 class Conversations(object):
