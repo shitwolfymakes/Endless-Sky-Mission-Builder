@@ -104,7 +104,7 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def populateLog(self, log):
-        lf = LogFrame(self, self.trigger, "log")
+        lf = LogFrame(self, self.trigger, "log", populating=True)
         lf.log = log
     #end populateLog
 
@@ -124,8 +124,10 @@ class AggregatedLogFrame(ttk.Frame):
 
 class LogFrame(object):
 
-    def __init__(self, master, trigger, name):
-        self.log = trigger.addLog()
+    def __init__(self, master, trigger, name, populating=False):
+        self.log = None
+        if not populating:
+            self.log = trigger.addLog()
         self.master = master
         self.trigger = trigger
 
@@ -400,7 +402,7 @@ class TriggerWindow(object):
         component = self.logsSubComponent
         if self.trigger.logs:
             for log in self.trigger.logs:
-                log.printLog()
+                component.populateLog(log)
             #print
         #end if
 
