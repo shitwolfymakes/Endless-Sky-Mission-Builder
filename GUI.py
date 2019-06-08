@@ -17,7 +17,7 @@ from tkinter import ttk, StringVar
 
 from menuactions import *
 from ScrollingCenterFrame import ScrollingCenterFrame
-from guiutils import AggregatedTriggerFrame
+from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 class GUI(object):
 

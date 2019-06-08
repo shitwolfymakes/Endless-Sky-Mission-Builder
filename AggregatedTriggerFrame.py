@@ -21,8 +21,8 @@ class AggregatedTriggerFrame(ttk.Frame):
     def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
 
-        self.app         = app
-        self.parent      = parent
+        self.app              = app
+        self.parent           = parent
         self.triggerFrameList = []
 
         self.outer = ttk.Frame(self)
@@ -42,9 +42,8 @@ class AggregatedTriggerFrame(ttk.Frame):
     def __addComponent(self):
         print("Adding Trigger...")
 
-        tf = TriggerFrame(self, "trigger")
+        tf = TriggerFrame(self, self.app, "trigger")
 
-        self.triggerFrameList[-1].trigger = self.app.activeMission.addTrigger()
         self.editTrigger(self.triggerFrameList[-1])
 
         state = BooleanVar()
@@ -88,8 +87,8 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 class TriggerFrame(object):
 
-    def __init__(self, master, name):
-        self.trigger = None
+    def __init__(self, master, app, name):
+        self.trigger = app.activeMission.addTrigger()
         self.master  = master
 
         self.frame = ttk.Frame(master.inner)
