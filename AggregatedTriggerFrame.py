@@ -34,12 +34,12 @@ class AggregatedTriggerFrame(ttk.Frame):
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        addButton = ttk.Button(self.outer, text="Add Trigger", command=self.__addComponent)
+        addButton = ttk.Button(self.outer, text="Add Trigger", command=self.__addTrigger)
         addButton.pack(expand=True, fill="x")
     #end init
 
 
-    def __addComponent(self):
+    def __addTrigger(self):
         print("Adding Trigger...")
 
         tf = TriggerFrame(self, self.app, "trigger")
