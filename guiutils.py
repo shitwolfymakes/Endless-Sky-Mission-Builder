@@ -41,9 +41,9 @@ class AggregatedTriggerFrame(ttk.Frame):
     def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
 
-        self.app           = app
-        self.parent        = parent
-        self.componentList = []
+        self.app         = app
+        self.parent      = parent
+        self.triggerFrameList = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -60,17 +60,16 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def __addComponent(self):
-        #TODO: Checkbutton binding goes in here
         print("Adding Trigger...")
 
         cf = ComponentFrame(self, "trigger")
 
-        self.componentList[-1].missionComponent = self.app.activeMission.addTrigger()
-        self.editComponent(self.componentList[-1])
+        self.triggerFrameList[-1].missionComponent = self.app.activeMission.addTrigger()
+        self.editComponent(self.triggerFrameList[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(cf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeComponentState, state, self.componentList[-1].missionComponent))
+        cb.configure(command=partial(self.changeComponentState, state, self.triggerFrameList[-1].missionComponent))
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
@@ -82,7 +81,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         self.app.activeMission.removeTrigger(component.missionComponent)
 
-        self.componentList.remove(component)
+        self.triggerFrameList.remove(component)
         component.pack_forget()
         component.destroy()
 
@@ -105,6 +104,31 @@ class AggregatedTriggerFrame(ttk.Frame):
     #def changeComponentState
 
 #end class AggregatedComponentFrame
+
+
+class AggregatedLogFrame(ttk.Frame):
+
+    def __init__(self, app, parent):
+        ttk.Frame.__init__(self, parent)
+
+        self.app           = app
+        self.parent        = parent
+        self.componentList = []
+
+        self.outer = ttk.Frame(self)
+        self.outer.pack(expand=True, fill="x")
+
+        sectionNameLabel = ttk.Label(self.outer, text="Triggers", anchor="center")
+        sectionNameLabel.pack()
+
+        self.inner = ttk.Frame(self.outer)
+        self.inner.pack(expand=True, fill="x")
+
+        addButton = ttk.Button(self.outer, text="Add Trigger", command=self.__addLog)
+        addButton.pack(expand=True, fill="x")
+    #end init
+
+#end class AggregatedLogFrame
 
 
 class ComponentFrame(object):
