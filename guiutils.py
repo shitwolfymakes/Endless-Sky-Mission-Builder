@@ -36,124 +36,157 @@ def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, list
 #end buildMandOptFrame
 
 
-class AggregatedLogFrame(ttk.Frame):
+class _SubComponentMandOptFrame(ttk.Frame):
 
-    def __init__(self, app, parent, trigger):
+    def __init__(self, parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
         ttk.Frame.__init__(self, parent)
 
-        self.app          = app
-        self.parent       = parent
-        self.trigger      = trigger
-        self.logFrameList = []
+        disabledEntryStyle = ttk.Style()
+        disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
 
-        self.outer = ttk.Frame(self)
-        self.outer.pack(expand=True, fill="x")
+        self.subComponentName     = subComponentName
+        self.numMandatory         = numMandatory
+        self.numOptionals         = numOptionals
+        self.listDefaultEntryData = listDefaultEntryData
 
-        sectionNameLabel = ttk.Label(self.outer, text="Logs", anchor="center")
-        sectionNameLabel.pack()
+        self.rowNum       = 0
+        self.numMandatory = numMandatory
+        self.numOptionals = numOptionals
+        self.numFields    = numMandatory + numOptionals
 
-        self.inner = ttk.Frame(self.outer)
-        self.inner.pack(expand=True, fill="x")
+        self.listEntryStates  = []
+        self.listCheckbuttons = []
+        self.listEntryData    = []
+        self.listEntries      = []
 
-        addButton = ttk.Button(self.outer, text="Add Log", command=self.__addLog)
-        addButton.pack(expand=True, fill="x")
-    #end init
-
-
-    def __addLog(self):
-        print("Adding Trigger...")
-
-        lf = LogFrame(self, self.trigger, "log")
-        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
-
-        if lf.log.formatType == "cancelled":
-            lf.cleanup()
-            return
-        #end if
-        self.editLog(self.logFrameList[-1])
+        self.build()
+    # end init
 
 
-        state = BooleanVar()
-        cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeLogState, state, self.logFrameList[-1].log))
-        cb.grid(row=0, column=3, sticky="e")
+    '''
+        This function takes in the parameters passed into the object call, 
+        and executes different logic based on what it finds.
 
-        print("Done.")
-    #end __addLog
+        e.g.: buildMandOptFrame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"]) 
 
+        becomes:
+        +------------------------+
+        | fail    [<test0>]   [] |
+        |         [<test1>]      |
+        |         [<name>]    [] |
+        |         [<test2>]   [] |
+        |         [<test3>]   [] |
+        +------------------------+
+    '''
+    def build(self):
+        # print("\t\tBuilding \"%s\"" % self.subComponentName)
+        label1 = ttk.Label(self, text=self.subComponentName, width=7)
+        label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5, 0))
 
-    def editLog(self, logFrame):
-        print("Editing ", logFrame.log, "...")
-        LogWindow(self.app, self.app.gui, logFrame.log, logFrame.log.formatType)
-    #end editLog
+        # Case 1: No mandatory fields
+        if self.numMandatory is 0:
+            # print("\t\t\tNo mandatory fields")
 
+            self.listEntryStates.append(BooleanVar())
 
-    def deleteLog(self, logFrame):
-        print("Removing %s from Triggers" % logFrame.log)
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
+                                                               self.listEntryStates[0],
+                                                               [self.subComponentName]))
+            self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
 
-        self.trigger.removeLog(logFrame.log)
+            self.rowNum += 1
+        # Case 2: 1 mandatory field
+        elif self.numMandatory is 1:
+            # print("\t\t\t1 mandatory field")
 
-        self.logFrameList.remove(logFrame)
-        logFrame.frame.pack_forget()
-        logFrame.frame.destroy()
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[0].set(self.listDefaultEntryData[0])
 
-        print("Done.")
-    #end deleteLog
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries[0].grid(row=0, column=1, sticky="ew")
 
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
+                                                               self.listEntryStates[0],
+                                                               [self.listEntries[0]]))
+            self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
 
-    def populateLog(self, log):
-        lf = LogFrame(self, self.trigger, "log", populating=True)
-        lf.log = log
+            self.rowNum += 1
+        # Case 3: More than 1 mandatory field
+        elif self.numMandatory > 1:
+            # print("\t\t\t%d mandatory fields" % self.numMandatory)
 
-        state = BooleanVar()
-        cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeLogState, state, log))
-        cb.grid(row=0, column=3, sticky="e")
-    #end populateLog
+            # add the first checkbutton
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[0].set(self.listDefaultEntryData[0])
+
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries[0].grid(row=0, column=1, sticky="ew")
+
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
+
+            self.rowNum += 1
+
+            # loop through the remaining mandatory fields, slaving them to the first checkbutton
+            for i in range(1, self.numMandatory):
+                self.listEntryStates.append(BooleanVar())
+                self.listEntryData.append(StringVar())
+                self.listEntryData[-1].set(self.listDefaultEntryData[i])
+
+                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry'))
+                self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
+
+                self.rowNum += 1
+            # end for
+
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
+                                                               self.listEntryStates[0],
+                                                               self.listEntries[:self.numMandatory]))
+        # end if/else
+
+        # add the optional fields
+        for i in range(self.numMandatory, self.numFields):
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[-1].set(self.listDefaultEntryData[i])
+
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
+            self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
+
+            # We have to use functools.partial here because lambda can't be used
+            # inside a loop(the bound lambda will use the last assigned values)
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
+            self.listCheckbuttons[-1].configure(command=partial(self.cbValueChanged,
+                                                                self.listEntryStates[-1],
+                                                                [self.listEntries[-1]]))
+            self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
+
+            self.rowNum += 1
+        # end for
+
+    # end build
+
 
     @staticmethod
-    def changeLogState(state, log):
-        log.isActive = state.get()
-        print(log, "is now", log.isActive)
-    #def changeTriggerState
+    def cbValueChanged(entryState, modifiedWidgets):
+        for widget in modifiedWidgets:
+            print("The value of %s is:" % widget, end="\t\t")
+            print(entryState.get())
+            if type(widget) is str:
+                break
+            elif entryState.get() is True:
+                widget.config(state='enabled', style='TEntry')
+            elif entryState.get() is False:
+                widget.config(state='disabled', style='D.TEntry')
+            #end if/else
+        # end for
+    # end cbValueChanged
 
-
-    def setFormatType(self, formatType):
-        self.logFrameList[-1].log.formatType = formatType
-    #setFormatType
-
-#end class AggregatedLogFrame
-
-
-class LogFrame(object):
-
-    def __init__(self, master, trigger, name, populating=False):
-        self.log = None
-        if not populating:
-            self.log = trigger.addLog()
-        self.master = master
-        self.trigger = trigger
-
-        self.frame = ttk.Frame(master.inner)
-        self.frame.pack(expand=True, fill="x")
-        self.frame.grid_columnconfigure(0, weight=1)
-
-        label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
-
-        self.master.logFrameList.append(self)
-
-        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editLog, self))
-        editButton.grid(row=0, column=1)
-
-        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteLog, self))
-        deleteButton.grid(row=0, column=2)
-    #end init
-
-    def cleanup(self):
-        self.master.deleteLog(self)
-
-#end class ComponentFrame
+# end class _SubComponentMandOptFrame
 
 
 class TriggerWindow(object):
@@ -161,8 +194,8 @@ class TriggerWindow(object):
     def __init__(self, app, master, trigger):
         print("\tBuilding TriggerWindow...")
 
-        self.app = app
-        self.trigger = trigger
+        self.app          = app
+        self.trigger      = trigger
         app.activeTrigger = trigger
 
         self.top = Toplevel(master)
@@ -415,147 +448,126 @@ class TriggerWindow(object):
 #end class TriggerWindow
 
 
-class _SubComponentMandOptFrame(ttk.Frame):
+class AggregatedLogFrame(ttk.Frame):
 
-    def __init__(self, parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
+    def __init__(self, app, parent, trigger):
         ttk.Frame.__init__(self, parent)
 
-        disabledEntryStyle = ttk.Style()
-        disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
+        self.app          = app
+        self.parent       = parent
+        self.trigger      = trigger
+        self.logFrameList = []
 
-        self.subComponentName     = subComponentName
-        self.numMandatory         = numMandatory
-        self.numOptionals         = numOptionals
-        self.listDefaultEntryData = listDefaultEntryData
+        self.outer = ttk.Frame(self)
+        self.outer.pack(expand=True, fill="x")
 
-        self.rowNum       = 0
-        self.numMandatory = numMandatory
-        self.numOptionals = numOptionals
-        self.numFields    = numMandatory + numOptionals
+        sectionNameLabel = ttk.Label(self.outer, text="Logs", anchor="center")
+        sectionNameLabel.pack()
 
-        self.listEntryStates  = []
-        self.listCheckbuttons = []
-        self.listEntryData    = []
-        self.listEntries      = []
+        self.inner = ttk.Frame(self.outer)
+        self.inner.pack(expand=True, fill="x")
 
-        self.build()
-
+        addButton = ttk.Button(self.outer, text="Add Log", command=self.__addLog)
+        addButton.pack(expand=True, fill="x")
     #end init
 
-    '''
-        This function takes in the parameters passed into the object call, 
-        and executes different logic based on what it finds.
-        
-        e.g.: buildMandOptFrame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"]) 
-        
-        becomes:
-        +------------------------+
-        | fail    [<test0>]   [] |
-        |         [<test1>]      |
-        |         [<name>]    [] |
-        |         [<test2>]   [] |
-        |         [<test3>]   [] |
-        +------------------------+
-    '''
-    def build(self):
-        #print("\t\tBuilding \"%s\"" % self.subComponentName)
-        label1 = ttk.Label(self, text=self.subComponentName, width=7)
-        label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5,0))
 
-        # Case 1: No mandatory fields
-        if self.numMandatory is 0:
-            #print("\t\t\tNo mandatory fields")
+    def __addLog(self):
+        print("Adding Trigger...")
 
-            self.listEntryStates.append(BooleanVar())
+        lf = LogFrame(self, self.trigger, "log")
+        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
 
-            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], [self.subComponentName]))
-            self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
+        if lf.log.formatType == "cancelled":
+            lf.cleanup()
+            return
+        #end if
+        self.editLog(self.logFrameList[-1])
 
-            self.rowNum += 1
-        # Case 2: 1 mandatory field
-        elif self.numMandatory is 1:
-            #print("\t\t\t1 mandatory field")
 
-            self.listEntryStates.append(BooleanVar())
-            self.listEntryData.append(StringVar())
-            self.listEntryData[0].set(self.listDefaultEntryData[0])
+        state = BooleanVar()
+        cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
+        cb.configure(command=partial(self.changeLogState, state, self.logFrameList[-1].log))
+        cb.grid(row=0, column=3, sticky="e")
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
-            self.listEntries[0].grid(row=0, column=1, sticky="ew")
+        print("Done.")
+    #end __addLog
 
-            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], [self.listEntries[0]]))
-            self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
 
-            self.rowNum += 1
-        # Case 3: More than 1 mandatory field
-        elif self.numMandatory > 1:
-            #print("\t\t\t%d mandatory fields" % self.numMandatory)
+    def editLog(self, logFrame):
+        print("Editing ", logFrame.log, "...")
+        LogWindow(self.app, self.app.gui, logFrame.log, logFrame.log.formatType)
+    #end editLog
 
-            # add the first checkbutton
-            self.listEntryStates.append(BooleanVar())
-            self.listEntryData.append(StringVar())
-            self.listEntryData[0].set(self.listDefaultEntryData[0])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
-            self.listEntries[0].grid(row=0, column=1, sticky="ew")
+    def deleteLog(self, logFrame):
+        print("Removing %s from Triggers" % logFrame.log)
 
-            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
+        self.trigger.removeLog(logFrame.log)
 
-            self.rowNum += 1
+        self.logFrameList.remove(logFrame)
+        logFrame.frame.pack_forget()
+        logFrame.frame.destroy()
 
-            # loop through the remaining mandatory fields, slaving them to the first checkbutton
-            for i in range(1, self.numMandatory):
-                self.listEntryStates.append(BooleanVar())
-                self.listEntryData.append(StringVar())
-                self.listEntryData[-1].set(self.listDefaultEntryData[i])
+        print("Done.")
+    #end deleteLog
 
-                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry'))
-                self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
 
-                self.rowNum += 1
-            #end for
+    def populateLog(self, log):
+        lf = LogFrame(self, self.trigger, "log", populating=True)
+        lf.log = log
 
-            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged, self.listEntryStates[0], self.listEntries[:self.numMandatory]))
-        #end if/else
+        state = BooleanVar()
+        cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
+        cb.configure(command=partial(self.changeLogState, state, log))
+        cb.grid(row=0, column=3, sticky="e")
+    #end populateLog
 
-        # add the optional fields
-        for i in range(self.numMandatory, self.numFields):
-            self.listEntryStates.append(BooleanVar())
-            self.listEntryData.append(StringVar())
-            self.listEntryData[-1].set(self.listDefaultEntryData[i])
-
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
-            self.listEntries[-1].grid(row=self.rowNum, column=1, sticky="ew")
-
-            # We have to use functools.partial here because lambda can't be used
-            # inside a loop(the bound lambda will use the last assigned values)
-            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
-            self.listCheckbuttons[-1].configure(command=partial(self.cbValueChanged, self.listEntryStates[-1], [self.listEntries[-1]]))
-            self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
-
-            self.rowNum += 1
-        # end for
-
-    #end build
 
     @staticmethod
-    def cbValueChanged(entryState, modifiedWidgets):
-        for widget in modifiedWidgets:
-            print("The value of %s is:" % widget, end="\t\t")
-            print(entryState.get())
-            if type(widget) is str:
-                break
-            elif entryState.get() is True:
-                widget.config(state='enabled', style='TEntry')
-            elif entryState.get() is False:
-                widget.config(state='disabled', style='D.TEntry')
-        #end for
-    #end cbValueChanged
+    def changeLogState(state, log):
+        log.isActive = state.get()
+        print(log, "is now", log.isActive)
+    #def changeTriggerState
 
-#end class _SubComponentMandOptFrame
+
+    def setFormatType(self, formatType):
+        self.logFrameList[-1].log.formatType = formatType
+    #end setFormatType
+
+#end class AggregatedLogFrame
+
+
+class LogFrame(object):
+
+    def __init__(self, master, trigger, name, populating=False):
+        self.log = None
+        if not populating:
+            self.log = trigger.addLog()
+        self.master = master
+        self.trigger = trigger
+
+        self.frame = ttk.Frame(master.inner)
+        self.frame.pack(expand=True, fill="x")
+        self.frame.grid_columnconfigure(0, weight=1)
+
+        label = ttk.Label(self.frame, text=name)
+        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
+
+        self.master.logFrameList.append(self)
+
+        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editLog, self))
+        editButton.grid(row=0, column=1)
+
+        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteLog, self))
+        deleteButton.grid(row=0, column=2)
+    #end init
+
+
+    def cleanup(self):
+        self.master.deleteLog(self)
+
+#end class LogFrame
 
 
 class TypeSelectorWindow(Toplevel):
