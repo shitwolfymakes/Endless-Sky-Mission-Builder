@@ -256,13 +256,16 @@ class Trigger(object):
         print("\t\tEvent:", self.event)
         print("\t\tisFail:", self.isFail)
         print("\t\tFail:", self.fail)
+        print("\t\tLogs:", self.logs)
+        print("\t\tConditions:", self.conditions)
     #end printTrigger
 
 
     def addLog(self):
-        self.logs.append(Log)
-        print("Log", self.logs[-1], "added to", self)
-        return self.logs[-1]
+        newLog = Log()
+        self.logs.append(newLog)
+        print("Log", newLog, "added to", self)
+        return newLog
     #end addLog
 
 
