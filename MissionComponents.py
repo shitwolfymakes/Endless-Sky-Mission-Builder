@@ -259,7 +259,7 @@ class Trigger(object):
             log.printLog()
         print("\t\tConditions:")
         for cond in self.conditions:
-            cond.printConditions()
+            cond.printCondition()
     #end printTrigger
 
 
