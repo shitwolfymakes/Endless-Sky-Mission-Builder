@@ -45,6 +45,7 @@ class AggregatedLogFrame(ttk.Frame):
         self.parent       = parent
         self.trigger      = trigger
         self.logFrameList = []
+        self.formatType   = ""
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -63,11 +64,18 @@ class AggregatedLogFrame(ttk.Frame):
     def __addLog(self):
         print("Adding Trigger...")
 
-        tf = LogFrame(self, self.trigger, "log")
+        lf = LogFrame(self, self.trigger, "log")
+        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
+
+        if self.formatType == "cancelled":
+            lf.cleanup()
+            return
+        #end if
         self.editLog(self.logFrameList[-1])
 
+
         state = BooleanVar()
-        cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
+        cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self.changeLogState, state, self.logFrameList[-1].log))
         cb.grid(row=0, column=3, sticky="e")
 
@@ -76,10 +84,8 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def editLog(self, logFrame):
-        print("Editing ", end="")
-        print(logFrame.log, end="")
-        print("...")
-
+        print("Editing ", logFrame.log, "...")
+        LogWindow(self.app, self.app.gui, logFrame.log, self.formatType)
         #TODO: IMPLEMENT THIS
     #end editLog
 
@@ -96,10 +102,16 @@ class AggregatedLogFrame(ttk.Frame):
         print("Done.")
     #end deleteLog
 
+
     def changeLogState(self, state, log):
         log.isActive = state.get()
         print(log, "is now", log.isActive)
     #def changeTriggerState
+
+
+    def setFormatType(self, formatType):
+        self.formatType = formatType
+    #setFormatType
 
 #end class AggregatedLogFrame
 
@@ -128,7 +140,7 @@ class LogFrame(object):
     #end init
 
     def cleanup(self):
-        self.master.deleteComponent(self.frame)
+        self.master.deleteLog(self)
 
 #end class ComponentFrame
 
@@ -378,7 +390,10 @@ class TriggerWindow(object):
             #end if
         #end if
 
-        #TODO: POPULATE LOGS HERE
+        #TODO: POPULATE LOGS HERE AFTER THEY'RE STORED IN THE TRIGGER
+        component = self.logsSubComponent
+        if self.trigger.logs:
+            print("Logs found")
 
         print("Done.")
     #end populateTriggerWindow
