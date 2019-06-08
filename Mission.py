@@ -259,6 +259,17 @@ class Mission(object):
                     #end if
                 #end for
 
+                # Conditions
+                for condtion in trigger.conditions:
+                    if condtion.isActive:
+                        if condtion.conditionType == 0:
+                            self.addLine("\t\t%s %s %s" % (condtion.condition[0], condtion.condition[1], condtion.condition[2]))
+                            continue
+                        #end if
+                    self.addLine("\t\t%s %s" % (condtion.condition[0], condtion.condition[1]))
+                    #end if
+                #end for
+
             #end if
         #end for
 
