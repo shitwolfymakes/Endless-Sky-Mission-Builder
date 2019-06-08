@@ -113,8 +113,8 @@ class AggregatedLogFrame(ttk.Frame):
         cb.grid(row=0, column=3, sticky="e")
     #end populateLog
 
-
-    def changeLogState(self, state, log):
+    @staticmethod
+    def changeLogState(state, log):
         log.isActive = state.get()
         print(log, "is now", log.isActive)
     #def changeTriggerState
