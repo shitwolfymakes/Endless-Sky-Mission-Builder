@@ -45,7 +45,6 @@ class AggregatedLogFrame(ttk.Frame):
         self.parent       = parent
         self.trigger      = trigger
         self.logFrameList = []
-        self.formatType   = ""
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -67,7 +66,7 @@ class AggregatedLogFrame(ttk.Frame):
         lf = LogFrame(self, self.trigger, "log")
         TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
 
-        if self.formatType == "cancelled":
+        if lf.log.formatType == "cancelled":
             lf.cleanup()
             return
         #end if
@@ -85,8 +84,7 @@ class AggregatedLogFrame(ttk.Frame):
 
     def editLog(self, logFrame):
         print("Editing ", logFrame.log, "...")
-        LogWindow(self.app, self.app.gui, logFrame.log, self.formatType)
-        #TODO: IMPLEMENT THIS
+        LogWindow(self.app, self.app.gui, logFrame.log, logFrame.log.formatType)
     #end editLog
 
 
@@ -121,7 +119,7 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def setFormatType(self, formatType):
-        self.formatType = formatType
+        self.logFrameList[-1].log.formatType = formatType
     #setFormatType
 
 #end class AggregatedLogFrame
