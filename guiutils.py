@@ -481,6 +481,14 @@ class TriggerWindow(object):
             #print
         #end if
 
+        # Conditions
+        component = self.triggerConditionsSubComponent
+        if self.trigger.conditions:
+            for condition in self.trigger.conditions:
+                component.populateTC(condition)
+            # print
+        # end if
+
         print("Done.")
     #end populateTriggerWindow
 
