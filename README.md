@@ -7,12 +7,12 @@ Current supported mission options:
   - Basic mission characteristics
   - source (specific planet)
   - destination (specific planet)
+  - Triggers
 
 Future supported mission options:
   - filters
   - conditions
   - NPCs
-  - Triggers
   - Events
   - Phrases
 
