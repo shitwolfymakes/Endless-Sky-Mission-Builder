@@ -52,7 +52,7 @@ def openFile(app):
     i = 0
     eventLine = False
     matchMission = re.compile(r'^ *mission')
-    matchEvent = re.compile(r'^ *event')
+    matchEvent = re.compile(r'^event')
     for line in missionLines:
         # print(line, end="")
         line = line.rstrip()
