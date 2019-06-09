@@ -413,7 +413,7 @@ class TriggerWindow(object):
         if self.trigger.dialog is not None:
             component.listEntryStates[0].set(1)
             component.cbValueChanged(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
-            component.listEntryData[0].set(self.trigger.dialog)
+            component.listEntryData[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
         #end if
 
         # outfit
@@ -697,14 +697,14 @@ class LogWindow(object):
 
         if self.formatType == "<message>":
             if self.log.log[0] is not None:
-                self.message.set(self.log.log[0])
+                self.message.set(self.log.log[0].lstrip('`').rstrip('`'))
         else:
             if self.log.log[0] is not None:
                 self.logGroup.set(self.log.log[0])
             if self.log.log[1] is not None:
                 self.name.set(self.log.log[1])
             if self.log.log[2] is not None:
-                self.message.set(self.log.log[2])
+                self.message.set(self.log.log[2].lstrip('`').rstrip('`'))
         #end if/else
 
         print("Done.")
