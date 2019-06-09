@@ -34,7 +34,6 @@ class Mission(object):
 
 
     def setDefaultValues(self, missionName):
-        #TODO: Implement this
         self.missionName = missionName
         self.addLine("mission \"%s\"\n" % missionName)
 
@@ -58,18 +57,17 @@ class Mission(object):
 
 
     def parseMission(self):
-        #TODO: IMPLEMENT THIS
         print("Parsing mission...", end="\t\t\t")
         self.missionLines = []          # empty the default values
         self.addLine("mission \"%s\"" % self.missionName)
 
         # mission display name
         if self.components.missionDisplayName is not None:
-            self.addLine("\tname \"%s\"" % self.components.missionDisplayName)
+            self.addLine("\tname `%s`" % self.components.missionDisplayName)
 
         # description
         if self.components.description is not None:
-            self.addLine("\tdescription \"%s\"" % self.components.description)
+            self.addLine("\tdescription `%s`" % self.components.description)
 
         # isBlocked
         if self.components.blocked is not None:
@@ -103,15 +101,6 @@ class Mission(object):
                 #end if/else
             #end for
             self.addLine(line)
-            if self.components.cargo.cargoIllegal[0] is not None:
-                line = "\t\tillegal %s" % self.components.cargo.cargoIllegal[0]
-                if self.components.cargo.cargoIllegal[1] is not None:
-                    line = line + " " + self.components.cargo.cargoIllegal[1]
-                #end if
-                self.addLine(line)
-            #end if
-            if self.components.cargo.isCargoStealth:
-                self.addLine("\t\tstealth")
         #end if
 
         # passengers
@@ -127,10 +116,22 @@ class Mission(object):
             self.addLine(line)
         #end if
 
+        # illegal
+        if self.components.illegal.isIllegal:
+            line = "\tillegal %s" % self.components.illegal.illegal[0]
+            if self.components.illegal.illegal[1] is not None:
+                line = line + " " + self.components.illegal.illegal[1]
+            # end if
+            self.addLine(line)
+        #end if
+
+        # stealth
+        if self.components.isStealth:
+            self.addLine("\tstealth")
+
         # isInvisible
         if self.components.isInvisible:
             self.addLine("\tinvisible")
-        #end if
 
         # priorityLevel
         if self.components.priorityLevel is not None:
@@ -177,7 +178,127 @@ class Mission(object):
         if self.components.destination.isDestination:
             self.addLine("\tdestination \"%s\"" % self.components.destination.destination)
 
+        # Trigger(s)
+        for trigger in self.components.triggerList:
+            if trigger.isActive:
+
+                # triggerType
+                if trigger.triggerType is not None:
+                    self.addLine("\ton %s" % trigger.triggerType)
+
+                # dialog
+                if trigger.dialog is not None:
+                    self.addLine("\t\tdialog `%s`" % trigger.dialog)
+
+                # TODO: HANDLE CONVERSATIONS HERE
+
+                # outfit
+                if trigger.outfit[0] is not None:
+                    line = "\t\toutfit "
+                    line += self.addQuotes(trigger.outfit[0])
+                    for data in trigger.outfit[1:]:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    #end for
+                    self.addLine(line)
+                #end if
+
+                # request
+                if trigger.require[0] is not None:
+                    line = "\t\trequire "
+                    line += self.addQuotes(trigger.require[0])
+                    for data in trigger.require[1:]:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    # end for
+                    self.addLine(line)
+                # end if
+
+                # payment
+                if trigger.isPayment:
+                    line = "\t\tpayment"
+                    for data in trigger.payment:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    # end for
+                    self.addLine(line)
+                # end if
+
+                # Conditions
+                for condition in trigger.conditions:
+                    if condition.isActive:
+                        if condition.conditionType == 0:
+                            self.addLine("\t\t\"%s\" %s %s" % (condition.condition[0], condition.condition[1], condition.condition[2]))
+                        elif condition.conditionType == 1:
+                            self.addLine("\t\t\"%s\" %s" % (condition.condition[0], condition.condition[1]))
+                        elif condition.conditionType == 2:
+                            self.addLine("\t\t%s \"%s\"" % (condition.condition[0], condition.condition[1]))
+                        else:
+                            print("Data corrupted!")
+                        # end if/else
+                    # end if
+                # end for
+
+                # event
+                if trigger.event[0] is not None:
+                    line = "\t\tevent "
+                    line += self.addQuotes(trigger.event[0])
+                    for data in trigger.event[1:]:
+                        if data is None:
+                            break
+                        line = line + " " + data
+                    # end for
+                    self.addLine(line)
+                # end if
+
+                # fail
+                if trigger.isFail:
+                    line = "\t\tfail "
+                    if trigger.fail is not None:
+                        line += self.addQuotes(trigger.fail)
+                    # end if
+                    self.addLine(line)
+                #end if
+
+                # Logs
+                for log in trigger.logs:
+                    if log.isActive:
+                        line = "\t\tlog"
+                        if log.formatType == "<message>":
+                            self.addLine("%s `%s`" % (line, log.log[0]))
+                            continue
+                        #end if
+                        self.addLine("%s \"%s\" \"%s\" `%s`" % (line, log.log[0], log.log[1], log.log[2]))
+                    #end if
+                #end for
+
+            #end if
+        #end for
+
         print("Done.")
     #end parseMission
+
+
+    def addTrigger(self):
+        newTrigger = MissionComponents.Trigger()
+        self.components.triggerList.append(newTrigger)
+        return newTrigger
+    #end addTrigger
+
+
+    def removeTrigger(self, trigger):
+        #print(trigger)
+        self.components.triggerList.remove(trigger)
+    #end removeTrigger
+
+
+    def addQuotes(self, line):
+        if " " in line:
+            line = "\"%s\"" % line
+        return line
+    #end addQuotes
 
 #end class Mission

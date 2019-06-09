@@ -12,17 +12,19 @@
 This file contains the classes defining some components of a mission
 '''
 
-#TODO: fully implement this when filters are implemented
 class MissionComponents(object):
 
     def __init__(self):
         print("\tMission components initializing...")
+
         self.missionDisplayName = None          # mission <name>
         self.description        = None          # description <text>
         self.blocked            = None          # blocked <message>
         self.deadline           = Deadline()
         self.cargo              = Cargo()
         self.passengers         = Passengers()
+        self.illegal            = Illegal()
+        self.isStealth          = False
         self.isInvisible        = False         # invisible
         self.priorityLevel      = None          # (priority | minor)
         self.whereShown         = None          # (job | landing | assisting | boarding)
@@ -34,6 +36,9 @@ class MissionComponents(object):
         self.stopover           = Stopover()
         self.source             = Source()
         self.destination        = Destination()
+        self.triggerList        = []
+
+        print("\tDone.")
     #end init
 
 #end class MissionComponents
@@ -46,8 +51,10 @@ class Deadline(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isDeadline = False
         self.deadline   = [None, None]
+
         print("Done.")
     # end init
 
@@ -55,17 +62,15 @@ class Deadline(object):
 
 class Cargo(object):
     '''
-    cargo  = [None, None, None, None,    # cargo (random | <name>) <number> [<number> [<probability>]]
-              None, None, None,          #     illegal <fine> [<message>]
-              None]                      #     stealth
+    cargo  = [None, None, None, None}    # cargo (random | <name>) <number> [<number> [<probability>]]
     '''
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+
         self.isCargo        = False
         self.cargoType      = [None, None, None, None]
-        self.cargoIllegal   = [None, None]
-        self.isCargoStealth = False
+
         print("Done.")
     #end init
 
@@ -79,12 +84,31 @@ class Passengers(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isPassengers = False
         self.passengers   = [None, None, None]
+
         print("Done.")
     # end init
 
 # end class Passengers
+
+
+class Illegal(object):
+    '''
+        self.illegal = [None, None] # illegal <fine> [<message>]
+    '''
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
+        self.isIllegal = False
+        self.illegal   = [None, None]
+
+        print("Done.")
+    # end init
+
+#end class Illegal
 
 
 class Clearance(object):
@@ -95,8 +119,10 @@ class Clearance(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+
         self.isClearance = False
         self.clearance   = None
+
         print("Done.")
     # end init
 
@@ -111,8 +137,10 @@ class Stopover(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
         self.isStopover = False
         self.stopover   = None
+
         print("Done.")
     # end init
 
@@ -130,8 +158,10 @@ class Source(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
         self.isSource = False
         self.source   = [None, None]
+
         print("Done.")
     # end init
 
@@ -149,16 +179,182 @@ class Destination(object):
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
         self.isDestination = False
         self.destination   = [None, None]
+
         print("Done.")
     # end init
 
 # end class Destination
 
 
+class Trigger(object):
+    #TODO: Implement this - ~50% Complete
+    '''
+        Triggers:
+
+        on (offer | complete | accept | decline | defer | fail | visit | stopover | enter [<system>])
+            dialog <text>
+            <text>...
+            conversation <name>
+            conversation
+                ...
+            outfit <outfit> [<count#>]
+            require <outfit>
+            payment [<base> [<multiplier>]]
+            <condition> (= | += | -=) <value#>
+            <condition> (++ | --)
+            (set | clear) <condition>
+            event <name> [<delay#> [<max#>]]
+            fail [<name>]
+    '''
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+
+        self.isActive    = False
+        self.triggerType = None
+        self.dialog      = None
+        self.outfit      = [None, None]
+        self.require     = [None, None]
+        self.isPayment   = False
+        self.payment     = [None, None]
+        self.event       = [None, None, None]
+        self.isFail      = False
+        self.fail        = None
+        self.logs        = []
+        self.conditions  = []
+
+        print("Done.")
+    #end init
+
+
+    def clearTrigger(self):
+        self.triggerType = None
+        self.dialog      = None
+        self.outfit      = [None, None]
+        self.require     = [None, None]
+        self.isPayment   = False
+        self.payment     = [None, None]
+        self.event       = [None, None, None]
+        self.isFail      = False
+        self.fail        = None
+    #end clearTrigger
+
+
+    def printTrigger(self):
+        print("\n\tTrigger Data")
+        print("\t\tisActive:", self.isActive)
+        print("\t\tOn:", self.triggerType)
+        print("\t\tDialog:", self.dialog)
+        print("\t\tOutfit:", self.outfit)
+        print("\t\tRequire:", self.require)
+        print("\t\tisPayment:", self.isPayment)
+        print("\t\tPayment:", self.payment)
+        print("\t\tEvent:", self.event)
+        print("\t\tisFail:", self.isFail)
+        print("\t\tFail:", self.fail)
+        print("\t\tLogs:")
+        for log in self.logs:
+            log.printLog()
+        print("\t\tConditions:")
+        for cond in self.conditions:
+            cond.printCondition()
+        print()
+    #end printTrigger
+
+
+    def addLog(self):
+        newLog = Log()
+        self.logs.append(newLog)
+        print("\t\tLog", newLog, "added to", self)
+        return newLog
+    #end addLog
+
+
+    def removeLog(self, log):
+        print("\t\tRemoving", log, "from", self, "...", end="\t\t")
+        self.logs.remove(log)
+        print("Done.")
+    #end removeLog
+
+
+    def addTC(self):
+        newCond = TriggerCondition()
+        self.conditions.append(newCond)
+        print("\t\tTriggerCondition", newCond, "added to", self)
+        return newCond
+    #end addLog
+
+
+    def removeTC(self, condition):
+        print("\t\tRemoving", condition, "from", self, "...", end="\t\t")
+        self.conditions.remove(condition)
+        print("Done.")
+    #end removeLog
+
+#end class Trigger
+
+
+class Log(object):
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
+        self.isActive   = False
+        self.formatType = None
+        self.log        = [None, None, None]
+
+        print("Done.")
+    # end init
+
+
+    def clearLog(self):
+        self.log = [None, None, None]
+    #end clearLog
+
+
+    def printLog(self):
+        print("\t\tLog Data")
+        print("\t\t\tisActive:", self.isActive)
+        print("\t\t\tformatType:", self.formatType)
+        print("\t\t\tLog:", self.log)
+    #end printLog
+
+# end class Log
+
+
+class TriggerCondition(object):
+
+    def __init__(self):
+        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+
+        self.isActive      = False
+        self.conditionType = None
+        self.condition     = [None, None, None]
+
+        print("Done.")
+    # end init
+
+
+    def clearCondition(self):
+        self.condition = [None, None, None]
+    #end clearConditions
+
+
+    def printCondition(self):
+        print("\t\tCondition Data")
+        print("\t\t\tisActive:", self.isActive)
+        print("\t\t\tconditionType:", self.conditionType)
+        print("\t\t\tCondition:", self.condition)
+    #end printConditions
+
+# end class TriggerConditions
+
+
 class Conversations(object):
-    #TODO: Implement this in full in Version 2
+    #TODO: Implement this in full in a separate tool
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")

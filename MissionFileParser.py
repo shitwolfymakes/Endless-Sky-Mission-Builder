@@ -12,7 +12,7 @@
 This takes the data read in from a mission file and stores it in each mission object
 
 '''
-#TODO: Add data validation, there is currently no checks to make sure it's not all junk data
+#TODO: Add data validation, there are currently no checks to make sure it's not all junk data
 import re, shlex
 
 class MissionFileParser(object):
@@ -20,7 +20,8 @@ class MissionFileParser(object):
         self.esmb     = esmb
         self.missions = esmb.missionList
 
-        self.graveKeyPattern = re.compile(r'^ *(.*) (`.*`).*')
+        self.graveKeyPattern = re.compile(r'^ *(.*) (`.*`) *')
+        self.logMessagePattern = re.compile(r'^ *')
     #end init
 
     def run(self):
@@ -36,7 +37,9 @@ class MissionFileParser(object):
                 #print(tokens)
 
                 # determine which attribute we've got
-                if "name" in tokens[0]:
+                if "mission" in tokens[0]:
+                    continue
+                elif "name" in tokens[0]:
                     print("\t\tFound mission display name: \"%s\"" % tokens[1])
                     mission.components.missionDisplayName = tokens[1]
                 elif "description" in tokens[0]:
@@ -52,28 +55,18 @@ class MissionFileParser(object):
                 elif "cargo" in tokens[0]:
                     print("\t\tFound cargo: %s" % tokens[1:])
                     mission.components.cargo.isCargo = True
-                    #TODO: TURN THIS FOR LOOP INTO A SINGLETON
                     self.storeComponentData(mission.components.cargo.cargoType, tokens[1:])
-
-                    # check if next line contains cargo illegal data
-                    if self.getIndentLevel(mission.missionLines[i+1]) > self.getIndentLevel(line):
-                        i, line = next(lines)
-                        line = line.rstrip()
-                        tokens = self.tokenize(line)
-                        print("\t\t\tFound cargo illegal modifier: %s" % tokens[1:])
-                        self.storeComponentData(mission.components.cargo.cargoIllegal, tokens[1:])
-
-                        # check if next line contains stealth data
-                        if self.getIndentLevel(mission.missionLines[i+1]) == self.getIndentLevel(line):
-                            i, line = next(lines)
-                            print("\t\t\tFound cargo stealth modifier")
-                            mission.components.cargo.isCargoStealth = True
-                        #end if
-                    #end if
                 elif "passengers" in tokens[0]:
                     print("\t\tFound passengers: %s" % tokens[1:])
                     mission.components.passengers.isPassengers = True
                     self.storeComponentData(mission.components.passengers.passengers, tokens[1:])
+                elif "illegal" in tokens[0]:
+                    print("\t\tFound illegal modifier: %s" % tokens[1:])
+                    mission.components.illegal.isIllegal = True
+                    self.storeComponentData(mission.components.illegal.illegal, tokens[1:])
+                elif "stealth" in tokens[0]:
+                    print("\t\tFound stealth modifier")
+                    mission.components.isStealth = True
                 elif "invisible" in tokens[0]:
                     print("\t\tFound invisible modifier")
                     mission.components.isInvisible = True
@@ -111,7 +104,91 @@ class MissionFileParser(object):
                     print("\t\tFound destination: %s" % tokens[1])
                     mission.components.destination.isDestination = True
                     mission.components.destination.destination   = tokens[1]
+                elif "on" in tokens:
+                    print("\t\tFound Trigger: on %s" % tokens[1])
+                    trigger             = mission.addTrigger()
+                    trigger.isActive    = True
+                    trigger.triggerType = tokens[1]
+
+                    cur = self.getIndentLevel(mission.missionLines[i])
+                    nxt = self.getIndentLevel((mission.missionLines[i+1]))
+                    while True:
+                        if nxt <= cur:
+                            break
+                        i, line = lines.__next__()
+                        line = line.rstrip()
+                        tokens = self.tokenize(line)
+                        #print(i, tokens)
+
+                        # dialog
+                        if "dialog" in tokens[0]:
+                            print("\t\t\tFound Dialog: %s" % tokens[1])
+                            trigger.dialog = tokens[1]
+                        elif "outfit" in tokens[0]:
+                            print("\t\t\tFound Outfit: %s" % tokens)
+                            self.storeComponentData(trigger.outfit, tokens[1:])
+                        elif "require" in tokens[0]:
+                            print("\t\t\tFound Require: %s" % tokens)
+                            self.storeComponentData(trigger.require, tokens[1:])
+                        elif "payment" in tokens[0]:
+                            print("\t\t\tFound Outfit: %s" % tokens)
+                            trigger.isPayment = True
+                            self.storeComponentData(trigger.payment, tokens[1:])
+                        elif "event" in tokens[0]:
+                            print("\t\t\tFound Event: %s" % tokens)
+                            self.storeComponentData(trigger.event, tokens[1:])
+                        elif "fail" in tokens[0]:
+                            print("\t\t\tFound Event: %s" % tokens[1])
+                            trigger.isFail = True
+                            trigger.fail   = tokens[1]
+                        elif "log" in tokens[0] and tokens[0] == "log":
+                            print("\t\t\tFound Log: %s" % tokens)
+                            newLog            = trigger.addLog()
+                            newLog.isActive   = True
+                            newLog.formatType = "<message>"
+                            newLog.log[0]     = tokens[1]
+                        elif "log" in tokens[0]:
+                            print("\t\t\tFound Log: %s" % tokens)
+                            newLog            = trigger.addLog()
+                            newLog.isActive   = True
+                            newLog.formatType = "<type> <name> <message>"
+
+                            tokens2 = shlex.split(tokens[0])
+                            tokens2.append(tokens[1])
+                            self.storeComponentData(newLog.log, tokens2[1:])
+                        elif tokens[1] in ["=", "+=", "-="]:
+                            print("\t\t\tFound TriggerCondition: %s" % tokens)
+                            newTC               = trigger.addTC()
+                            newTC.isActive      = True
+                            newTC.conditionType = 0
+                            self.storeComponentData(newTC.condition, tokens)
+                        elif tokens[1] in ["++", "--"]:
+                            print("\t\t\tFound TriggerCondition: %s" % tokens)
+                            newTC               = trigger.addTC()
+                            newTC.isActive      = True
+                            newTC.conditionType = 1
+                            self.storeComponentData(newTC.condition, tokens)
+                        elif tokens[0] in ["set", "clear"]:
+                            print("\t\t\tFound TriggerCondition: %s" % tokens)
+                            newTC               = trigger.addTC()
+                            newTC.isActive      = True
+                            newTC.conditionType = 2
+                            self.storeComponentData(newTC.condition, tokens)
+                        else:
+                            print("Trigger component no found: ", i, line)
+                        #end if else
+
+                        try:
+                            nxt = self.getIndentLevel(mission.missionLines[i+1])
+                        except IndexError:
+                            break
+
+                    #end while
+                else:
+                    print("ERROR: No tokens found on line %d: %s" % (i, line))
                 #end if/else
+                for trigger in mission.components.triggerList:
+                    trigger.printTrigger()
             #end for
             print("\tDone.")
         #end for
@@ -120,12 +197,14 @@ class MissionFileParser(object):
 
 
     def tokenize(self, line):
-        tokens = shlex.split(line)
         if '`' in line:
             #TODO: Fully implement this later, it's a ghetto-rigged POS
             #print(line)
             tokens = re.split(self.graveKeyPattern, line)
             tokens = tokens[1:3]
+        else:
+            tokens = shlex.split(line)
+        #end if/else
         #print(tokens)
         return tokens
     #end tokenize

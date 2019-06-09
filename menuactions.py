@@ -20,7 +20,7 @@ from tkinter import filedialog
 from Mission import *
 from MissionCompiler import MissionCompiler
 from MissionFileParser import MissionFileParser
-from PopupWindow import popupWindow
+from PopupWindow import PopupWindow
 
 
 def openFile(app):
@@ -29,7 +29,7 @@ def openFile(app):
     #TODO: add handling for "event" items inside missionfile
     #    NOTE: EVENTS ARE STORED IN THE MISSION FILE, BUT ARE
     #    COMPLETELY SEPARATE FROM MISSIONS. SAVE HANDLING
-    #    THESE FOR VERSION 3
+    #    THESE FOR LATER
 
     #TODO: Add handling for mission preamble
 
@@ -52,7 +52,7 @@ def openFile(app):
     i = 0
     eventLine = False
     matchMission = re.compile(r'^ *mission')
-    matchEvent = re.compile(r'^ *event')
+    matchEvent = re.compile(r'^event')
     for line in missionLines:
         # print(line, end="")
         line = line.rstrip()
@@ -122,6 +122,7 @@ def saveFile(app):
     #TODO: Implement this - ~99% completed
     #TODO: add preamble comments
     print("\nSaving selected file...")
+    compileMission(app)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
@@ -137,7 +138,7 @@ def saveFile(app):
 
 def newMission(app):
     print("\nCreating new mission...")
-    popupWindow(app, app.gui, "Enter new mission name:")
+    PopupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
 

@@ -22,7 +22,7 @@ class ScrollingCenterFrame:
     """
 
     def __init__(self, master, **kwargs):
-        width = kwargs.pop('width', 350)     #default width = None
+        width = kwargs.pop('width', 450)     #default width = None
         height = kwargs.pop('height', None)
         self.outer = ttk.Frame(master, **kwargs)
 
@@ -30,7 +30,7 @@ class ScrollingCenterFrame:
         cfTitle.pack()
 
         self.vsb = tk.Scrollbar(self.outer, orient=tk.VERTICAL)
-        self.vsb.pack(fill=tk.Y, side=tk.RIGHT)
+        self.vsb.pack(fill=tk.Y, side=tk.RIGHT, pady=(2,2))
         self.canvas = tk.Canvas(self.outer, highlightthickness=0, width=width, height=height, bg="#ededed")
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, pady=(0, 10))
         self.canvas['yscrollcommand'] = self.vsb.set
@@ -44,7 +44,7 @@ class ScrollingCenterFrame:
         self.inner = tk.Frame(self.canvas, bg="#ededed")
         #self.inner.configure(bg="orange")
         # pack the inner Frame into the Canvas with the top-left corner 4 pixels offset, set the Frame width
-        self.canvas.create_window(4, 4, window=self.inner, anchor='nw', width=int(self.canvas["width"])-10)
+        self.canvas.create_window(4, 4, window=self.inner, anchor='nw')
         self.inner.bind("<Configure>", self._on_frame_configure)
 
         self.outer_attr = set(dir(tk.Widget))
@@ -59,8 +59,9 @@ class ScrollingCenterFrame:
 
     def _on_frame_configure(self, event=None):
         x1, y1, x2, y2 = self.canvas.bbox("all")
+        width = self.inner.winfo_reqwidth()
         height = self.canvas.winfo_height()
-        self.canvas.config(scrollregion=(0, 0, x2, max(y2, height)))
+        self.canvas.config(scrollregion=(0, 0, width, max(y2, height)))
 
     def _bind_mouse(self, event=None):
         self.canvas.bind_all("<4>", self._on_mousewheel)
@@ -78,3 +79,13 @@ class ScrollingCenterFrame:
             self.canvas.yview_scroll(-1, "units")
         elif event.num == 5 or event.delta < 0:
             self.canvas.yview_scroll(1, "units")
+#end class ScrollingCenterFrame
+
+
+class ScrollingCenterFrame2(ttk.Frame):
+    #TODO: Implement this to replace the current SCF
+    def __init__(self):
+        print("NOT IMPLEMENTED YET")
+    #end init
+
+#end class ScrollingCenterFrame2

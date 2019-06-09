@@ -13,7 +13,10 @@
 
 from tkinter import *
 
-class popupWindow(object):
+from guiutils import addMission
+
+class PopupWindow(object):
+
     def __init__(self, app, master, text):
         self.app = app
         self.top = Toplevel(master)
@@ -31,8 +34,8 @@ class popupWindow(object):
 
 
     def cleanup(self):
-        value = self.e.get()
-        self.app.addMission(value)
+        name = self.e.get()
+        addMission(self.app, name)
         self.top.grab_release()         # HAVE TO RELEASE
         self.top.destroy()
     #end cleanup

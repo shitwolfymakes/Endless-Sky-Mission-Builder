@@ -14,8 +14,10 @@ This handles the GUI for ESMB
 '''
 from tkinter import *
 from tkinter import ttk, StringVar
+
 from menuactions import *
 from ScrollingCenterFrame import ScrollingCenterFrame
+from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 class GUI(object):
 
@@ -37,6 +39,9 @@ class GUI(object):
         self.gui = Tk()
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
+
+        self.disabledEntryStyle = ttk.Style()
+        self.disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
 
         self.ofWidth = None
         self.cfWidth = None
@@ -88,9 +93,6 @@ class GUI(object):
         ## cargo
         self.cargoEntryState            = BooleanVar()
         self.cargoOptionalsEntryState   = BooleanVar()
-        self.cargoIllegalEntryState     = BooleanVar()
-        self.cargoFineMessageEntryState = BooleanVar()
-        self.cargoStealthEntryState     = BooleanVar()
 
         self.cargoCheckbutton          = None
         self.cargo                     = StringVar()
@@ -99,16 +101,6 @@ class GUI(object):
         self.cargoOptionals            = StringVar()
         self.cargoOptionalsEntry       = None
         self.cargoOptionalsCheckbutton = None
-
-        self.cargoFine               = StringVar()
-        self.cargoFineEntry          = None
-        self.cargoIllegalCheckbutton = None
-
-        self.cargoFineMessage            = StringVar()
-        self.cargoFineMessageEntry       = None
-        self.cargoFineMessageCheckbutton = None
-
-        self.cargoStealthCheckbutton = None
 
 
         ## Passengers
@@ -122,6 +114,21 @@ class GUI(object):
         self.passengersOptionals            = StringVar()
         self.passengersOptionalsEntry       = None
         self.passengersOptionalsCheckbutton = None
+
+        ## illegal
+        self.illegalEntryState     = BooleanVar()
+        self.fineMessageEntryState = BooleanVar()
+        self.stealthEntryState     = BooleanVar()
+
+        self.fine               = StringVar()
+        self.fineEntry          = None
+        self.illegalCheckbutton = None
+
+        self.fineMessage            = StringVar()
+        self.fineMessageEntry       = None
+        self.fineMessageCheckbutton = None
+
+        self.stealthCheckbutton = None
 
 
         ## isInvisible
@@ -203,6 +210,11 @@ class GUI(object):
 
         self.destinationCheckbutton = None
         self.destinationEntry       = None
+
+
+        ## Triggers
+        self.triggersFrame = None
+        self.activeTrigger = None
 
 
         # declare missionFrame components
@@ -308,16 +320,14 @@ class GUI(object):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
-        self.setDefaultEntryValues()
+        self.__setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
-        self.populateComponentSelections()
 
         print("Done.")
     #end buildCenterFrame
 
 
     def buildComponentsOnCenterFrame(self):
-        #TODO: Implement this - ~75% completed
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
@@ -334,7 +344,7 @@ class GUI(object):
                                                       variable=self.displayNameEntryState, onvalue=1, offvalue=0)
         self.displayNameCheckbutton.grid(row=1, column=1)
 
-        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30) # setting the width to 30 here widens the rest of them
+        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30, style='D.TEntry') # setting the width to 30 here widens the rest of them
         self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
 
 
@@ -347,7 +357,7 @@ class GUI(object):
                                                       variable=self.descriptionEntryState, onvalue=1, offvalue=0)
         self.descriptionCheckbutton.grid(row=3, column=1)
 
-        self.descriptionEntry = ttk.Entry(cf, textvariable=self.description, state=off)
+        self.descriptionEntry = ttk.Entry(cf, textvariable=self.description, state=off, style='D.TEntry')
         self.descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
 
 
@@ -360,7 +370,7 @@ class GUI(object):
                                                     variable=self.isBlockedEntryState, onvalue=1, offvalue=0)
         self.isBlockedCheckbutton.grid(row=5, column=1)
 
-        self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off)
+        self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off, style='D.TEntry')
         self.isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
 
 
@@ -373,7 +383,7 @@ class GUI(object):
                                                    variable=self.deadlineEntryState, onvalue=1, offvalue=0)
         self.deadlineCheckbutton.grid(row=7, column=1)
 
-        self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off)
+        self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off, style='D.TEntry')
         self.deadlineOptionalsEntry.grid(row=8, column=0, sticky="ew", padx=(indent, 0))
         self.deadlineOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                             command=lambda: self.cbValueChanged(self.deadlineOptionalsEntryState,
@@ -391,10 +401,10 @@ class GUI(object):
                                                 variable=self.cargoEntryState, onvalue=1, offvalue=0)
         self.cargoCheckbutton.grid(row=9, column=1)
 
-        self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off)
+        self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off, style='D.TEntry')
         self.cargoEntry.grid(row=10, column=0, sticky="ew", padx=(indent, 0))
 
-        self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off)
+        self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off, style='D.TEntry')
         self.cargoOptionalsEntry.grid(row=11, column=0, sticky="ew", padx=(indent, 0))
         self.cargoOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                          command=lambda: self.cbValueChanged(self.cargoOptionalsEntryState,
@@ -402,53 +412,57 @@ class GUI(object):
                                                          variable=self.cargoOptionalsEntryState, onvalue=1, offvalue=0)
         self.cargoOptionalsCheckbutton.grid(row=11, column=1)
 
-        cargoIllegalLabel = ttk.Label(cf, text="Illegal")
-        cargoIllegalLabel.grid(row=12, column=0, sticky="ew", padx=(indent, 0))
-        self.cargoIllegalCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.cargoIllegalEntryState,
-                                                                                           self.cargoFineEntry),
-                                                       variable=self.cargoIllegalEntryState, onvalue=1, offvalue=0)
-        self.cargoIllegalCheckbutton.grid(row=12, column=1)
-
-        self.cargoFineEntry = ttk.Entry(cf, textvariable=self.cargoFine, state=off)
-        self.cargoFineEntry.grid(row=13, column=0, sticky="ew", padx=(indent*2, 0))
-
-        self.cargoFineMessageEntry = ttk.Entry(cf, textvariable=self.cargoFineMessage, state=off)
-        self.cargoFineMessageEntry.grid(row=14, column=0, sticky="ew", padx=(indent*2, 0))
-        self.cargoFineMessageCheckbutton = ttk.Checkbutton(cf,
-                                                           command=lambda: self.cbValueChanged(self.cargoFineMessageEntryState,
-                                                                                               self.cargoFineMessageEntry),
-                                                           variable=self.cargoFineMessageEntryState, onvalue=1, offvalue=0)
-        self.cargoFineMessageCheckbutton.grid(row=14, column=1)
-
-        cargoStealthLabel = ttk.Label(cf, text="Stealth")
-        cargoStealthLabel.grid(row=15, column=0, sticky="ew", padx=(indent, 0))
-        self.cargoStealthCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.cargoStealthEntryState,
-                                                                                           "cargoStealthCheckbutton"),
-                                                       variable=self.cargoStealthEntryState, onvalue=1, offvalue=0)
-        self.cargoStealthCheckbutton.grid(row=15, column=1)
-
 
         # Passengers
         passengersLabel = ttk.Label(cf, text="Passengers")
-        passengersLabel.grid(row=16, column=0, sticky="ew")
+        passengersLabel.grid(row=12, column=0, sticky="ew")
         self.passengersCheckbutton = ttk.Checkbutton(cf,
                                                      command=lambda: self.cbValueChanged(self.passengersEntryState,
                                                                                          self.passengersEntry),
                                                      variable=self.passengersEntryState, onvalue=1, offvalue=0)
-        self.passengersCheckbutton.grid(row=16, column=1)
+        self.passengersCheckbutton.grid(row=12, column=1)
 
-        self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off)
-        self.passengersEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
+        self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off, style='D.TEntry')
+        self.passengersEntry.grid(row=13, column=0, sticky="ew", padx=(indent, 0))
 
-        self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off)
-        self.passengersOptionalsEntry.grid(row=18, column=0, sticky="ew", padx=(indent, 0))
+        self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off, style='D.TEntry')
+        self.passengersOptionalsEntry.grid(row=14, column=0, sticky="ew", padx=(indent, 0))
         self.passengersOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                               command=lambda: self.cbValueChanged(self.passengersOptionalsEntryState,
                                                                                                   self.passengersOptionalsEntry),
                                                               variable=self.passengersOptionalsEntryState, onvalue=1, offvalue=0)
-        self.passengersOptionalsCheckbutton.grid(row=18, column=1)
+        self.passengersOptionalsCheckbutton.grid(row=14, column=1)
+
+
+        # illegal
+        illegalLabel = ttk.Label(cf, text="Illegal")
+        illegalLabel.grid(row=15, column=0, sticky="ew")
+        self.illegalCheckbutton = ttk.Checkbutton(cf,
+                                                       command=lambda: self.cbValueChanged(self.illegalEntryState,
+                                                                                           self.fineEntry),
+                                                       variable=self.illegalEntryState, onvalue=1, offvalue=0)
+        self.illegalCheckbutton.grid(row=15, column=1)
+
+        self.fineEntry = ttk.Entry(cf, textvariable=self.fine, state=off, style='D.TEntry')
+        self.fineEntry.grid(row=16, column=0, sticky="ew", padx=(indent, 0))
+
+        self.fineMessageEntry = ttk.Entry(cf, textvariable=self.fineMessage, state=off, style='D.TEntry')
+        self.fineMessageEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
+        self.fineMessageCheckbutton = ttk.Checkbutton(cf,
+                                                           command=lambda: self.cbValueChanged(
+                                                               self.fineMessageEntryState,
+                                                               self.fineMessageEntry),
+                                                           variable=self.fineMessageEntryState, onvalue=1,
+                                                           offvalue=0)
+        self.fineMessageCheckbutton.grid(row=17, column=1)
+
+        stealthLabel = ttk.Label(cf, text="Stealth")
+        stealthLabel.grid(row=18, column=0, sticky="ew")
+        self.stealthCheckbutton = ttk.Checkbutton(cf,
+                                                       command=lambda: self.cbValueChanged(self.stealthEntryState,
+                                                                                           "stealthCheckbutton"),
+                                                       variable=self.stealthEntryState, onvalue=1, offvalue=0)
+        self.stealthCheckbutton.grid(row=18, column=1)
 
 
         # isInvisible
@@ -508,7 +522,7 @@ class GUI(object):
                                                  variable=self.repeatEntryState, onvalue=1, offvalue=0)
         self.repeatCheckbutton.grid(row=28, column=1)
 
-        self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off)
+        self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off, style='D.TEntry')
         self.repeatOptionalsEntry.grid(row=29, column=0, sticky="ew", padx=(indent, 0))
         self.repeatOptionalsCheckbutton = ttk.Checkbutton(cf,
                                                           command=lambda: self.cbValueChanged(self.repeatOptionalsEntryState,
@@ -526,7 +540,7 @@ class GUI(object):
                                                     variable=self.clearanceEntryState, onvalue=1, offvalue=0)
         self.clearanceCheckbutton.grid(row=30, column=1)
 
-        self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off)
+        self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off, style='D.TEntry')
         self.clearanceOptionalsEntry.grid(row=31, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -549,7 +563,7 @@ class GUI(object):
                                                       variable=self.waypointEntryState, onvalue=1, offvalue=0)
         self.waypointCheckbutton.grid(row=33, column=1)
 
-        self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off)
+        self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off, style='D.TEntry')
         self.waypointEntry.grid(row=34, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -562,7 +576,7 @@ class GUI(object):
                                                    variable=self.stopoverEntryState, onvalue=1, offvalue=0)
         self.stopoverCheckbutton.grid(row=35, column=1)
 
-        self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off)
+        self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off, style='D.TEntry')
         self.stopoverEntry.grid(row=36, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -575,7 +589,7 @@ class GUI(object):
                                                  variable=self.sourceEntryState, onvalue=1, offvalue=0)
         self.sourceCheckbutton.grid(row=37, column=1)
 
-        self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off)
+        self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off, style='D.TEntry')
         self.sourceEntry.grid(row=38, column=0, sticky="ew", padx=(indent, 0))
 
 
@@ -588,11 +602,13 @@ class GUI(object):
                                                  variable=self.destinationEntryState, onvalue=1, offvalue=0)
         self.sourceCheckbutton.grid(row=39, column=1)
 
-        self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off)
+        self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off, style='D.TEntry')
         self.destinationEntry.grid(row=40, column=0, sticky="ew", padx=(indent, 0))
 
 
-        #TODO: Add Triggers
+        # triggers
+        self.triggersFrame = AggregatedTriggerFrame(self, cf)
+        self.triggersFrame.grid(row=42, column=0, columnspan=2, sticky="ew")
 
 
         print("Done.")
@@ -605,9 +621,9 @@ class GUI(object):
         if type(modifiedWidget) is str:
             print("")
         elif entryState.get() is True:
-            modifiedWidget.config(state='enabled')
+            modifiedWidget.config(state='enabled', style='TEntry')
         elif entryState.get() is False:
-            modifiedWidget.config(state='disabled')
+            modifiedWidget.config(state='disabled', style='D.TEntry')
     #end cbValueChanged
 
 
@@ -616,13 +632,6 @@ class GUI(object):
         print("The value of %s is now:" % radioValue.__str__(), end="\t\t")
         print(modifiedWidget.cget("value"))
     #end rbValueChanged
-
-
-    def populateComponentSelections(self):
-        print("\tTesting populateComponentSelections...", end="\t\t")
-
-        print("Done.")
-    #end populateComponentSelections
 
 
     def buildMissionFrame(self):
@@ -677,13 +686,13 @@ class GUI(object):
 
 
     def updateCenterFrame(self):
-        #TODO: Implement this
-        print("\nUpdating centerFrame...", end="\t\t")
+        print("\nUpdating centerFrame...")
 
-        self.setDefaultEntryValues()
-        self.setDefaultEntryStateValues()
+        self.__setDefaultEntryValues()
+        self.__setDefaultEntryStateValues()
 
         components = self.activeMission.components
+
 
         # missionDisplayName
         if components.missionDisplayName is not None:
@@ -692,8 +701,8 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.displayNameEntryState, self.displayNameEntry)
 
-        # description
 
+        # description
         if components.description is not None:
             self.descriptionEntryState.set(1)
             description = components.description.lstrip('`').rstrip('`')
@@ -701,12 +710,14 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.descriptionEntryState, self.descriptionEntry)
 
+
         # blocked
         if components.blocked is not None:
             self.isBlockedEntryState.set(1)
             self.isBlockedMessage.set(components.blocked)
         #end if
         self.cbValueChanged(self.isBlockedEntryState, self.isBlockedMessageEntry)
+
 
         # deadline
         if components.deadline.isDeadline is True:
@@ -725,6 +736,7 @@ class GUI(object):
         self.cbValueChanged(self.deadlineEntryState, self.deadlineOptionalsCheckbutton)
         self.cbValueChanged(self.deadlineOptionalsEntryState, self.deadlineOptionalsEntry)
 
+
         # cargo
         if components.cargo.isCargo is True:
             self.cargoEntryState.set(1)
@@ -742,25 +754,11 @@ class GUI(object):
                 self.cargoOptionals.set(line)
             #end if
 
-            # cargoIllegal
-            if components.cargo.cargoIllegal[0] is not None:
-                self.cargoIllegalEntryState.set(1)
-                self.cargoFine.set(components.cargo.cargoIllegal[0])
-                if components.cargo.cargoIllegal[1] is not None:
-                    self.cargoFineMessageEntryState.set(1)
-                    self.cargoFineMessage.set(components.cargo.cargoIllegal[1])
-                # end if
-            # end if
 
-            # cargoStealth
-            if components.cargo.isCargoStealth is True:
-                self.cargoStealthEntryState.set(1)
         #end if
         self.cbValueChanged(self.cargoEntryState, self.cargoEntry)
         self.cbValueChanged(self.cargoOptionalsEntryState, self.cargoOptionalsEntry)
-        self.cbValueChanged(self.cargoIllegalEntryState, self.cargoFineEntry)
-        self.cbValueChanged(self.cargoFineMessageEntryState, self.cargoFineMessageEntry)
-        self.cbValueChanged(self.cargoStealthEntryState, "cargoStealthCheckbutton")
+
 
         # passengers
         if components.passengers.isPassengers is True:
@@ -779,11 +777,33 @@ class GUI(object):
         self.cbValueChanged(self.passengersEntryState, self.passengersEntry)
         self.cbValueChanged(self.passengersOptionalsEntryState, self.passengersOptionalsEntry)
 
+
+        # illegal
+        if components.illegal.isIllegal is True:
+            self.illegalEntryState.set(1)
+            self.fine.set(components.illegal.illegal[0])
+            if components.illegal.illegal[1] is not None:
+                self.fineMessageEntryState.set(1)
+                self.fineMessage.set(components.illegal.illegal[1])
+            # end if
+        # end if
+        self.cbValueChanged(self.illegalEntryState, self.fineEntry)
+        self.cbValueChanged(self.fineMessageEntryState, self.fineMessageEntry)
+
+
+        # stealth
+        if components.isStealth is True:
+            self.stealthEntryState.set(1)
+        #end if
+        self.cbValueChanged(self.stealthEntryState, "stealthCheckbutton")
+
+
         # isInvisible
         if components.isInvisible is True:
             self.isInvisibleEntryState.set(1)
         #end if
         self.cbValueChanged(self.isInvisibleEntryState, "isInvisibleCheckbutton")
+
 
         # priorityLevel
         if components.priorityLevel is not None:
@@ -792,12 +812,14 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.priorityLevelEntryState, "priorityLevelCheckbutton")
 
+
         # whereShown
         if components.whereShown is not None:
             self.whereShownEntryState.set(1)
             self.rbWhereShownValue.set(components.whereShown)
         #end if
         self.cbValueChanged(self.whereShownEntryState, "whereShownCheckbutton")
+
 
         # repeat
         if components.isRepeat is True:
@@ -810,6 +832,7 @@ class GUI(object):
         self.cbValueChanged(self.repeatEntryState, self.repeatOptionalsCheckbutton)
         self.cbValueChanged(self.repeatOptionalsEntryState, self.repeatOptionalsEntry)
 
+
         # clearance
         if components.clearance.isClearance is True:
             self.clearanceEntryState.set(1)
@@ -819,11 +842,13 @@ class GUI(object):
         #end if
         self.cbValueChanged(self.clearanceEntryState, self.clearanceOptionalsEntry)
 
+
         # infiltrating
         if components.isInfiltrating is True:
             self.isInfiltratingEntryState.set(1)
         #end if
         self.cbValueChanged(self.isInfiltratingEntryState, "isInfiltratingCheckbutton")
+
 
         # waypoint
         if components.waypoint is not None:
@@ -832,12 +857,14 @@ class GUI(object):
         # end if
         self.cbValueChanged(self.waypointEntryState, self.waypointEntry)
 
+
         # stopover
         if components.stopover.isStopover is True:
             self.stopoverEntryState.set(1)
             self.stopover.set(components.stopover.stopover)
         # end if
         self.cbValueChanged(self.stopoverEntryState, self.stopoverEntry)
+
 
         # source
         if components.source.isSource is True:
@@ -846,12 +873,19 @@ class GUI(object):
         # end if
         self.cbValueChanged(self.sourceEntryState, self.sourceEntry)
 
+
         # destination
         if components.destination.isDestination is True:
             self.destinationEntryState.set(1)
             self.destination.set(components.destination.destination)
         # end if
         self.cbValueChanged(self.destinationEntryState, self.destinationEntry)
+
+        # Triggers
+        if components.triggerList:
+            print("\tTriggers found")
+            for trigger in components.triggerList:
+                self.triggersFrame.populateTrigger(trigger)
 
     print("Done.")
     #end updateCenterFrame
@@ -876,15 +910,15 @@ class GUI(object):
 
     ### MISC METHODS ###
 
-    def setDefaultEntryValues(self):
+    def __setDefaultEntryValues(self):
         self.displayName.set("<name>")
         self.description.set("<description>")
         self.isBlockedMessage.set("<message>")
         self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
         self.cargo.set("(random | <name>) <number#>")
         self.cargoOptionals.set("[<number#> [<probability#>]]")
-        self.cargoFine.set("<fine#>")
-        self.cargoFineMessage.set("[<message>]")
+        self.fine.set("<fine#>")
+        self.fineMessage.set("[<message>]")
         self.passengers.set("<number#>")
         self.passengersOptionals.set("[<number#> [<probability#>]]")
         self.rbPriorityValue.set("")
@@ -898,7 +932,7 @@ class GUI(object):
     #end setDefaultEntryValues
 
 
-    def setDefaultEntryStateValues(self):
+    def __setDefaultEntryStateValues(self):
         self.displayNameEntryState.set(0)
         self.descriptionEntryState.set(0)
         self.isBlockedEntryState.set(0)
@@ -906,9 +940,9 @@ class GUI(object):
         self.deadlineOptionalsEntryState.set(0)
         self.cargoEntryState.set(0)
         self.cargoOptionalsEntryState.set(0)
-        self.cargoIllegalEntryState.set(0)
-        self.cargoFineMessageEntryState.set(0)
-        self.cargoStealthEntryState.set(0)
+        self.illegalEntryState.set(0)
+        self.fineMessageEntryState.set(0)
+        self.stealthEntryState.set(0)
         self.passengersEntryState.set(0)
         self.passengersOptionalsEntryState.set(0)
         self.isInvisibleEntryState.set(0)
@@ -933,17 +967,6 @@ class GUI(object):
         self.updateCenterFrame()
         self.updateMissionFrame()
     #end missionSelected
-
-
-    def addMission(self, newMissionName):
-        print("Adding mission: \"%s\"..." % newMissionName, end="\t\t")
-
-        mission = Mission(newMissionName, default=True)
-        self.missionList.append(mission)
-        self.missionNameToObjectDict.update({mission.missionName: mission})
-        self.activeMission = mission
-        self.updateOptionFrame()
-    #end addMission
 
 
 #end class GUI
