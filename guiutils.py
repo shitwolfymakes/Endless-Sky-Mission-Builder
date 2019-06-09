@@ -960,9 +960,10 @@ class TriggerConditionWindow(object):
             #end if
         elif self.conditionType == 2:
             if self.condition.condition[0] is not None:
-                index = self.comboOptions.index(self.condition.condition[1])
+                print(self.condition.condition[1])
+                index = self.comboOptions.index(self.condition.condition[0])
                 self.optionsCombo.current(index)
-                self.condData.set(self.condition.condition[0])
+                self.condData.set(self.condition.condition[1])
         else:
             print("Data corrupted")
         #end if/else
