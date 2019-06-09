@@ -261,6 +261,7 @@ class Trigger(object):
         print("\t\tConditions:")
         for cond in self.conditions:
             cond.printCondition()
+        print()
     #end printTrigger
 
 
