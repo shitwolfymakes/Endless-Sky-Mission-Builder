@@ -90,8 +90,8 @@ class AggregatedTriggerFrame(ttk.Frame):
             self.changeTriggerState(state, trigger)
     #end populateLog
 
-
-    def changeTriggerState(self, state, trigger):
+    @staticmethod
+    def changeTriggerState( state, trigger):
         trigger.isActive = state.get()
         print(trigger, "is now", trigger.isActive)
     #def changeTriggerState
