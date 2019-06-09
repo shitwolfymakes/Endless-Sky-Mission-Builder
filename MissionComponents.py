@@ -246,6 +246,7 @@ class Trigger(object):
     def printTrigger(self):
         print("\n\tTrigger Data")
         print("\t\tOn:", self.triggerType)
+        print("\t\tisActive:", self.isActive)
         print("\t\tDialog:", self.dialog)
         print("\t\tOutfit:", self.outfit)
         print("\t\tRequire:", self.require)
