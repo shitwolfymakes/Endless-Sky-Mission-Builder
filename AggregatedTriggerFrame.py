@@ -76,6 +76,21 @@ class AggregatedTriggerFrame(ttk.Frame):
     #end editTrigger
 
 
+    def populateTrigger(self, trigger):
+        tf = TriggerFrame(self, self.app, "trigger", populating=True)
+        tf.trigger = trigger
+
+        state = BooleanVar()
+        cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
+        cb.configure(command=partial(self.changeTriggerState, state, trigger))
+        cb.grid(row=0, column=3, sticky="e")
+
+        if trigger.isActive:
+            state.set(1)
+            self.changeTriggerState(state, trigger)
+    #end populateLog
+
+
     def changeTriggerState(self, state, trigger):
         trigger.isActive = state.get()
         print(trigger, "is now", trigger.isActive)
@@ -86,9 +101,11 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 class TriggerFrame(ttk.Frame):
 
-    def __init__(self, master, app, name):
+    def __init__(self, master, app, name, populating=False):
         ttk.Frame.__init__(self, master)
-        self.trigger = app.activeMission.addTrigger()
+        self.trigger = None
+        if not populating:
+            self.trigger = app.activeMission.addTrigger()
         self.master  = master
 
         self.frame = ttk.Frame(master.inner)
