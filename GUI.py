@@ -213,7 +213,7 @@ class GUI(object):
 
 
         ## Triggers
-        self.triggers      = None
+        self.triggersFrame = None
         self.activeTrigger = None
 
 
@@ -607,8 +607,8 @@ class GUI(object):
 
 
         # triggers
-        self.triggers = AggregatedTriggerFrame(self, cf)
-        self.triggers.grid(row=42, column=0, columnspan=2, sticky="ew")
+        self.triggersFrame = AggregatedTriggerFrame(self, cf)
+        self.triggersFrame.grid(row=42, column=0, columnspan=2, sticky="ew")
 
 
         print("Done.")
@@ -686,7 +686,7 @@ class GUI(object):
 
 
     def updateCenterFrame(self):
-        print("\nUpdating centerFrame...", end="\t\t")
+        print("\nUpdating centerFrame...")
 
         self.__setDefaultEntryValues()
         self.__setDefaultEntryStateValues()
@@ -880,6 +880,12 @@ class GUI(object):
             self.destination.set(components.destination.destination)
         # end if
         self.cbValueChanged(self.destinationEntryState, self.destinationEntry)
+
+        # Triggers
+        if components.triggerList:
+            print("\tTriggers found")
+            for trigger in components.triggerList:
+                self.triggersFrame.populateTrigger(trigger)
 
     print("Done.")
     #end updateCenterFrame
