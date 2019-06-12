@@ -4,8 +4,9 @@ image:
 - Ubuntu
 - Visual Studio 2015
 
-build_script:
+- skip_non_tags: true
 
+build_script:
 - cmd: appveyor\build.bat
 - sh: chmod +x appveyor/build.sh && ./appveyor/build.sh
 
