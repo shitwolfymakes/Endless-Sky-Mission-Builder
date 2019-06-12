@@ -4,7 +4,7 @@ image:
 - Ubuntu
 - Visual Studio 2015
 
-- skip_non_tags: true
+skip_non_tags: true
 
 build_script:
 - cmd: appveyor\build.bat
