@@ -1,0 +1,18 @@
+version: '#{build}'
+
+image:
+- Ubuntu
+- Visual Studio 2015
+
+build_script:
+
+- cmd: appveyor\build.bat
+- sh: chmod +x appveyor/build.sh && ./appveyor/build.sh
+
+artifacts:
+- path: ESMB-*64*
+
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: +t67fTQF/OlAb0OEH0mntAmbF4MOWhR7Be+egNMeMSk8nchh6r9CTjzLUlWND9JZ
