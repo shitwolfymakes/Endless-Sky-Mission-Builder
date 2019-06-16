@@ -6,7 +6,7 @@ Link to their github: https://github.com/novel-yet-trivial
 Thanks m8!
 '''
 
-import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 
 class ScrollingCenterFrame:
@@ -84,8 +84,33 @@ class ScrollingCenterFrame:
 
 class ScrollingCenterFrame2(ttk.Frame):
     #TODO: Implement this to replace the current SCF
-    def __init__(self):
-        print("NOT IMPLEMENTED YET")
+    def __init__(self, app, parent):
+        ttk.Frame.__init__(self, parent)
+
+        self.app = app
+
+        self.outer = ttk.Frame(self)
+        self.outer.pack(expand=True, fill=BOTH)
+
+        cfTitle = ttk.Label(self.outer, text="Mission Options")
+        cfTitle.pack()
+
+        self.canvas = Canvas(self.outer, borderwidth=0, background="#ffffff")
+        self.inner  = ttk.Frame(self.canvas)
+        self.vsb    = ttk.Scrollbar(self.outer, orient=VERTICAL, command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.vsb.set)
+
+        self.vsb.pack(side=RIGHT, fill=Y)
+        self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
+        self.canvas.create_window((4,4), window=self.inner, anchor=NW, tags="self.frame")
+
+        self.inner.bind("<Configure>", self.onFrameConfigure)
+
     #end init
+
+
+    def onFrameConfigure(self):
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+    #end onFrameConfigure
 
 #end class ScrollingCenterFrame2
