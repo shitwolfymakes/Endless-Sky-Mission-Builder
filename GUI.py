@@ -59,12 +59,7 @@ class GUI(object):
 
         # declare centerFrame components
         self.displayNameComponent = None
-
-        ## description
-        self.descriptionEntryState  = BooleanVar()
-        self.descriptionCheckbutton = None
-        self.description            = StringVar()
-        self.descriptionEntry       = None
+        self.descriptionComponent = None
 
 
         ## isBlocked
@@ -325,28 +320,17 @@ class GUI(object):
         print()
         print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
-        indent = 20
-        off = "disabled"
         cf = self.centerFrame.inner
 
         # Display name
         self.displayNameComponent = buildComponentFrame(cf, "Mission Display Name", 1, 0, ["<text>"])
         self.displayNameComponent.grid(row=1, column=0, sticky="ew")
 
-        """
         # Description
-        descriptionLabel = ttk.Label(cf, text="Description")
-        descriptionLabel.grid(row=3, column=0, sticky="ew")
-        self.descriptionCheckbutton = ttk.Checkbutton(cf,
-                                                      command=lambda: self.cbValueChanged(self.descriptionEntryState,
-                                                                                          self.descriptionEntry),
-                                                      variable=self.descriptionEntryState, onvalue=1, offvalue=0)
-        self.descriptionCheckbutton.grid(row=3, column=1)
+        self.descriptionComponent = buildComponentFrame(cf, "Description", 1, 0, ["<description>"])
+        self.descriptionComponent.grid(row=1, column=0, sticky="ew")
 
-        self.descriptionEntry = ttk.Entry(cf, textvariable=self.description, state=off, style='D.TEntry')
-        self.descriptionEntry.grid(row=4, column=0, sticky="ew", padx=(indent,0))
-
-
+        """
         # isBlocked
         isBlockedLabel = ttk.Label(cf, text="Blocked")
         isBlockedLabel.grid(row=5, column=0, sticky="ew")
