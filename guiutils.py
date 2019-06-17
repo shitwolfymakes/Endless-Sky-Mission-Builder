@@ -36,6 +36,168 @@ def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, list
 #end buildMandOptFrame
 
 
+def buildComponentFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
+    newFrame = _ComponentMandOptFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData)
+
+    return newFrame
+#end buildMandOptFrame
+
+
+class _ComponentMandOptFrame(ttk.Frame):
+
+    def __init__(self, parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
+        ttk.Frame.__init__(self, parent)
+
+        disabledEntryStyle = ttk.Style()
+        disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
+
+        self.componentName        = componentName
+        self.numMandatory         = numMandatory
+        self.numOptionals         = numOptionals
+        self.listDefaultEntryData = listDefaultEntryData
+
+        self.rowNum       = 0
+        self.numMandatory = numMandatory
+        self.numOptionals = numOptionals
+        self.numFields    = numMandatory + numOptionals
+
+        self.listEntryStates  = []
+        self.listCheckbuttons = []
+        self.listEntryData    = []
+        self.listEntries      = []
+
+        self.build()
+    # end init
+
+
+    '''
+        This function takes in the parameters passed into the object call, 
+        and executes different logic based on what it finds.
+
+        e.g.: buildComponentFrame(parent, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"]) 
+
+        becomes:
+        +------------------------+
+        | fail                [] |
+        |         [<test0>]      |
+        |         [<test1>]      |
+        |         [<name>]    [] |
+        |         [<test2>]   [] |
+        |         [<test3>]   [] |
+        +------------------------+
+    '''
+    def build(self):
+        print("\t\tBuilding \"%s\"" % self.componentName)
+        label1 = ttk.Label(self, text=self.componentName)
+        label1.grid(row=0, column=0, columnspan=2, sticky="w", padx=(5, 0))
+        self.rowNum += 1
+
+        # Case 1: No mandatory fields
+        if self.numMandatory is 0:
+            # print("\t\t\tNo mandatory fields")
+
+            self.listEntryStates.append(BooleanVar())
+
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
+                                                               self.listEntryStates[0],
+                                                               [self.componentName]))
+            self.listCheckbuttons[0].grid(row=0, column=1, sticky="e")
+
+            self.rowNum += 1
+        # Case 2: 1 mandatory field
+        elif self.numMandatory is 1:
+            # print("\t\t\t1 mandatory field")
+
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[0].set(self.listDefaultEntryData[0])
+
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
+
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
+                                                               self.listEntryStates[0],
+                                                               [self.listEntries[0]]))
+            self.listCheckbuttons[0].grid(row=0, column=1, sticky="e")
+
+            self.rowNum += 1
+        # Case 3: More than 1 mandatory field
+        elif self.numMandatory > 1:
+            # print("\t\t\t%d mandatory fields" % self.numMandatory)
+
+            # add the first checkbutton
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[0].set(self.listDefaultEntryData[0])
+
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
+
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
+            self.listCheckbuttons[0].grid(row=0, column=1, sticky="e")
+
+            self.rowNum += 1
+
+            # loop through the remaining mandatory fields, slaving them to the first checkbutton
+            for i in range(1, self.numMandatory):
+                self.listEntryStates.append(BooleanVar())
+                self.listEntryData.append(StringVar())
+                self.listEntryData[-1].set(self.listDefaultEntryData[i])
+
+                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry'))
+                self.listEntries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
+
+                self.rowNum += 1
+            # end for
+
+            self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
+                                                               self.listEntryStates[0],
+                                                               self.listEntries[:self.numMandatory]))
+        # end if/else
+
+        # add the optional fields
+        for i in range(self.numMandatory, self.numFields):
+            self.listEntryStates.append(BooleanVar())
+            self.listEntryData.append(StringVar())
+            self.listEntryData[-1].set(self.listDefaultEntryData[i])
+
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
+            self.listEntries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
+
+            # We have to use functools.partial here because lambda can't be used
+            # inside a loop(the bound lambda will use the last assigned values)
+            self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
+            self.listCheckbuttons[-1].configure(command=partial(self.cbValueChanged,
+                                                                self.listEntryStates[-1],
+                                                                [self.listEntries[-1]]))
+            self.listCheckbuttons[-1].grid(row=self.rowNum, column=1, sticky="e")
+
+            self.rowNum += 1
+        # end for
+
+    # end build
+
+
+    @staticmethod
+    def cbValueChanged(entryState, modifiedWidgets):
+        for widget in modifiedWidgets:
+            print("The value of %s is:" % widget, end="\t\t")
+            print(entryState.get())
+            if type(widget) is str:
+                break
+            elif entryState.get() is True:
+                widget.config(state='enabled', style='TEntry')
+            elif entryState.get() is False:
+                widget.config(state='disabled', style='D.TEntry')
+            #end if/else
+        # end for
+    # end cbValueChanged
+
+# end class _ComponentMandOptFrame
+
+
 class _SubComponentMandOptFrame(ttk.Frame):
 
     def __init__(self, parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
