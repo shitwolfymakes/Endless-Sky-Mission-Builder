@@ -95,7 +95,7 @@ class ScrollingCenterFrame2(ttk.Frame):
         cfTitle = ttk.Label(self.outer, text="Mission Options")
         cfTitle.pack()
 
-        self.canvas = Canvas(self.outer, borderwidth=0, background="#ffffff")
+        self.canvas = Canvas(self.outer, highlightthickness=0, bg="#ededed")
         self.inner  = ttk.Frame(self.canvas)
         self.vsb    = ttk.Scrollbar(self.outer, orient=VERTICAL, command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.vsb.set)
