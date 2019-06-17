@@ -62,29 +62,7 @@ class GUI(object):
         self.descriptionComponent = None
         self.blockedComponent     = None
         self.deadlineComponent    = None
-
-
-        ## deadline
-        self.deadlineEntryState           = BooleanVar()
-        self.deadlineOptionalsEntryState  = BooleanVar()
-        self.deadlineCheckbutton          = None
-
-        self.deadlineOptionals            = StringVar()
-        self.deadlineOptionalsEntry       = None
-        self.deadlineOptionalsCheckbutton = None
-
-
-        ## cargo
-        self.cargoEntryState            = BooleanVar()
-        self.cargoOptionalsEntryState   = BooleanVar()
-
-        self.cargoCheckbutton          = None
-        self.cargo                     = StringVar()
-        self.cargoEntry                = None
-
-        self.cargoOptionals            = StringVar()
-        self.cargoOptionalsEntry       = None
-        self.cargoOptionalsCheckbutton = None
+        self.cargoComponent       = None
 
 
         ## Passengers
@@ -333,28 +311,11 @@ class GUI(object):
         self.deadlineComponent = buildComponentFrame(cf, "Deadline", 0, 2, ["[<days#>]", "[<multiplier#>]"])
         self.deadlineComponent.grid(row=3, column=0, sticky="ew")
 
+        # Cargo
+        self.cargoComponent = buildComponentFrame(cf, "Cargo", 2, 2, ["(random | <name>)", "<number#>", "[<number#>]", "[<probability#>]"])
+        self.cargoComponent.grid(row=4, column=0, sticky="ew")
+
         """
-        #TODO: Cargo - may still need some work
-        cargoLabel = ttk.Label(cf, text="Cargo")
-        cargoLabel.grid(row=9, column=0, sticky="ew")
-        self.cargoCheckbutton = ttk.Checkbutton(cf,
-                                                command=lambda: self.cbValueChanged(self.cargoEntryState,
-                                                                                    self.cargoEntry),
-                                                variable=self.cargoEntryState, onvalue=1, offvalue=0)
-        self.cargoCheckbutton.grid(row=9, column=1)
-
-        self.cargoEntry = ttk.Entry(cf, textvariable=self.cargo, state=off, style='D.TEntry')
-        self.cargoEntry.grid(row=10, column=0, sticky="ew", padx=(indent, 0))
-
-        self.cargoOptionalsEntry = ttk.Entry(cf, textvariable=self.cargoOptionals, state=off, style='D.TEntry')
-        self.cargoOptionalsEntry.grid(row=11, column=0, sticky="ew", padx=(indent, 0))
-        self.cargoOptionalsCheckbutton = ttk.Checkbutton(cf,
-                                                         command=lambda: self.cbValueChanged(self.cargoOptionalsEntryState,
-                                                                                             self.cargoOptionalsEntry),
-                                                         variable=self.cargoOptionalsEntryState, onvalue=1, offvalue=0)
-        self.cargoOptionalsCheckbutton.grid(row=11, column=1)
-
-
         # Passengers
         passengersLabel = ttk.Label(cf, text="Passengers")
         passengersLabel.grid(row=12, column=0, sticky="ew")
