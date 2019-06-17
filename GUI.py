@@ -16,7 +16,7 @@ from tkinter import *
 from tkinter import ttk, StringVar
 
 from menuactions import *
-from ScrollingCenterFrame import ScrollingCenterFrame
+from ScrollingCenterFrame import ScrollingCenterFrame2
 from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 class GUI(object):
@@ -262,7 +262,7 @@ class GUI(object):
 
     def buildMainView(self, window):
         optionFrame  = ttk.Frame(window)
-        centerFrame  = ScrollingCenterFrame(window)
+        centerFrame  = ScrollingCenterFrame2(self, window)
         missionFrame = ttk.Frame(window)
 
         self.optionFrame  = optionFrame
@@ -335,6 +335,7 @@ class GUI(object):
         off = "disabled"
         cf = self.centerFrame
 
+        """
         # Display name
         displayNameLabel = ttk.Label(cf, text="Mission Display Name")
         displayNameLabel.grid(row=1, column=0, sticky="ew")
@@ -609,7 +610,7 @@ class GUI(object):
         # triggers
         self.triggersFrame = AggregatedTriggerFrame(self, cf)
         self.triggersFrame.grid(row=42, column=0, columnspan=2, sticky="ew")
-
+        """
 
         print("Done.")
     #end buildComponentsOnCenterFrame
