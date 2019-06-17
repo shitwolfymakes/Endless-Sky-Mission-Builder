@@ -63,19 +63,7 @@ class GUI(object):
         self.blockedComponent     = None
         self.deadlineComponent    = None
         self.cargoComponent       = None
-
-
-        ## Passengers
-        self.passengersEntryState          = BooleanVar()
-        self.passengersOptionalsEntryState = BooleanVar()
-
-        self.passengers               = StringVar()
-        self.passengersEntry          = None
-        self.passengersCheckbutton    = None
-
-        self.passengersOptionals            = StringVar()
-        self.passengersOptionalsEntry       = None
-        self.passengersOptionalsCheckbutton = None
+        self.passengersComponent  = None
 
         ## illegal
         self.illegalEntryState     = BooleanVar()
@@ -315,28 +303,11 @@ class GUI(object):
         self.cargoComponent = buildComponentFrame(cf, "Cargo", 2, 2, ["(random | <name>)", "<number#>", "[<number#>]", "[<probability#>]"])
         self.cargoComponent.grid(row=4, column=0, sticky="ew")
 
-        """
         # Passengers
-        passengersLabel = ttk.Label(cf, text="Passengers")
-        passengersLabel.grid(row=12, column=0, sticky="ew")
-        self.passengersCheckbutton = ttk.Checkbutton(cf,
-                                                     command=lambda: self.cbValueChanged(self.passengersEntryState,
-                                                                                         self.passengersEntry),
-                                                     variable=self.passengersEntryState, onvalue=1, offvalue=0)
-        self.passengersCheckbutton.grid(row=12, column=1)
+        self.passengersComponent = buildComponentFrame(cf, "Passengers", 1, 2, ["<number#>", "[<number#>]", "[<probability#>]"])
+        self.passengersComponent.grid(row=5, column=0, sticky="ew")
 
-        self.passengersEntry = ttk.Entry(cf, textvariable=self.passengers, state=off, style='D.TEntry')
-        self.passengersEntry.grid(row=13, column=0, sticky="ew", padx=(indent, 0))
-
-        self.passengersOptionalsEntry = ttk.Entry(cf, textvariable=self.passengersOptionals, state=off, style='D.TEntry')
-        self.passengersOptionalsEntry.grid(row=14, column=0, sticky="ew", padx=(indent, 0))
-        self.passengersOptionalsCheckbutton = ttk.Checkbutton(cf,
-                                                              command=lambda: self.cbValueChanged(self.passengersOptionalsEntryState,
-                                                                                                  self.passengersOptionalsEntry),
-                                                              variable=self.passengersOptionalsEntryState, onvalue=1, offvalue=0)
-        self.passengersOptionalsCheckbutton.grid(row=14, column=1)
-
-
+        """
         # illegal
         illegalLabel = ttk.Label(cf, text="Illegal")
         illegalLabel.grid(row=15, column=0, sticky="ew")
