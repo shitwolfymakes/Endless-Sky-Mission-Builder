@@ -1,4 +1,4 @@
-''' guiutils.py
+""" guiutils.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -10,8 +10,7 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 This file contains helper functions and custom widgets for the ESMB gui
-
-'''
+"""
 from tkinter import *
 from tkinter import ttk
 from functools import partial
