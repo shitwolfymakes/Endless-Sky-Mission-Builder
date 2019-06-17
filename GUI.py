@@ -16,6 +16,7 @@ from tkinter import *
 from tkinter import ttk, StringVar
 
 from menuactions import *
+from guiutils import *
 from ScrollingCenterFrame import ScrollingCenterFrame2
 from AggregatedTriggerFrame import AggregatedTriggerFrame
 
@@ -49,7 +50,6 @@ class GUI(object):
 
         # Declare the frames
         self.optionFrame  = None
-        self.centerFrameWrapper = None
         self.centerFrame  = None
         self.missionFrame = None
 
@@ -58,13 +58,7 @@ class GUI(object):
         self.activeMission   = None
 
         # declare centerFrame components
-
-        ## displayName
-        self.displayNameEntryState  = BooleanVar()
-        self.displayNameCheckbutton = None
-        self.displayName            = StringVar()
-        self.displayNameEntry       = None
-
+        self.displayNameComponent = None
 
         ## description
         self.descriptionEntryState  = BooleanVar()
@@ -333,22 +327,13 @@ class GUI(object):
 
         indent = 20
         off = "disabled"
-        cf = self.centerFrame
+        cf = self.centerFrame.inner
+
+        # Display name
+        self.displayNameComponent = buildComponentFrame(cf, "Mission Display Name", 1, 0, ["<text>"])
+        self.displayNameComponent.grid(row=1, column=0, sticky="ew")
 
         """
-        # Display name
-        displayNameLabel = ttk.Label(cf, text="Mission Display Name")
-        displayNameLabel.grid(row=1, column=0, sticky="ew")
-        self.displayNameCheckbutton = ttk.Checkbutton(cf,
-                                                      command=lambda: self.cbValueChanged(self.displayNameEntryState,
-                                                                                          self.displayNameEntry),
-                                                      variable=self.displayNameEntryState, onvalue=1, offvalue=0)
-        self.displayNameCheckbutton.grid(row=1, column=1)
-
-        self.displayNameEntry = ttk.Entry(cf, textvariable=self.displayName, state=off, width=30, style='D.TEntry') # setting the width to 30 here widens the rest of them
-        self.displayNameEntry.grid(row=2, column=0, sticky="ew", padx=(indent,0))
-
-
         # Description
         descriptionLabel = ttk.Label(cf, text="Description")
         descriptionLabel.grid(row=3, column=0, sticky="ew")
