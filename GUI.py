@@ -66,11 +66,7 @@ class GUI(object):
         self.passengersComponent  = None
         self.illegalComponent     = None
         self.stealthComponent     = None
-
-
-        ## isInvisible
-        self.isInvisibleEntryState  = BooleanVar()
-        self.isInvisibleCheckbutton = None
+        self.invisibleComponent   = None
 
 
         ## priorityLevel
@@ -302,17 +298,11 @@ class GUI(object):
         self.stealthComponent = buildComponentFrame(cf, "Stealth", 0, 0, [])
         self.stealthComponent.grid(row=7, column=0, sticky="ew")
 
+        # Invisible
+        self.invisibleComponent = buildComponentFrame(cf, "Invisible", 0, 0, [])
+        self.invisibleComponent.grid(row=8, column=0, sticky="ew")
+
         """
-        # isInvisible
-        isInvisibleLabel = ttk.Label(cf, text="Invisible")
-        isInvisibleLabel.grid(row=19, column=0, sticky="ew")
-        self.isInvisibleCheckbutton = ttk.Checkbutton(cf,
-                                                      command=lambda: self.cbValueChanged(self.isInvisibleEntryState,
-                                                                                          "isInvisibleCheckbutton"),
-                                                      variable=self.isInvisibleEntryState, onvalue=1, offvalue=0)
-        self.isInvisibleCheckbutton.grid(row=19, column=1)
-
-
         # priorityLevel
         priorityLevelLabel = ttk.Label(cf, text="Priority Level")
         priorityLevelLabel.grid(row=20, column=0, sticky="ew")
