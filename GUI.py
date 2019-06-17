@@ -60,13 +60,7 @@ class GUI(object):
         # declare centerFrame components
         self.displayNameComponent = None
         self.descriptionComponent = None
-
-
-        ## isBlocked
-        self.isBlockedEntryState         = BooleanVar()
-        self.isBlockedCheckbutton        = None
-        self.isBlockedMessage            = StringVar()
-        self.isBlockedMessageEntry       = None
+        self.blockedComponent     = None
 
 
         ## deadline
@@ -309,7 +303,7 @@ class GUI(object):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
-        self.__setDefaultEntryValues()
+        #self.__setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
 
         print("Done.")
@@ -324,26 +318,17 @@ class GUI(object):
 
         # Display name
         self.displayNameComponent = buildComponentFrame(cf, "Mission Display Name", 1, 0, ["<text>"])
-        self.displayNameComponent.grid(row=1, column=0, sticky="ew")
+        self.displayNameComponent.grid(row=0, column=0, sticky="ew")
 
         # Description
         self.descriptionComponent = buildComponentFrame(cf, "Description", 1, 0, ["<description>"])
         self.descriptionComponent.grid(row=1, column=0, sticky="ew")
 
-        """
         # isBlocked
-        isBlockedLabel = ttk.Label(cf, text="Blocked")
-        isBlockedLabel.grid(row=5, column=0, sticky="ew")
-        self.isBlockedCheckbutton = ttk.Checkbutton(cf,
-                                                    command=lambda: self.cbValueChanged(self.isBlockedEntryState,
-                                                                                        self.isBlockedMessageEntry),
-                                                    variable=self.isBlockedEntryState, onvalue=1, offvalue=0)
-        self.isBlockedCheckbutton.grid(row=5, column=1)
+        self.blockedComponent = buildComponentFrame(cf, "Blocked", 1, 0, ["<message>"])
+        self.blockedComponent.grid(row=2, column=0, sticky="ew")
 
-        self.isBlockedMessageEntry = ttk.Entry(cf, textvariable=self.isBlockedMessage, state=off, style='D.TEntry')
-        self.isBlockedMessageEntry.grid(row=6, column=0, sticky="ew", padx=(indent,0))
-
-
+        """
         # Deadline
         deadlineLabel = ttk.Label(cf, text="Deadline")
         deadlineLabel.grid(row=7, column=0, sticky="ew")
