@@ -64,21 +64,8 @@ class GUI(object):
         self.deadlineComponent    = None
         self.cargoComponent       = None
         self.passengersComponent  = None
-
-        ## illegal
-        self.illegalEntryState     = BooleanVar()
-        self.fineMessageEntryState = BooleanVar()
-        self.stealthEntryState     = BooleanVar()
-
-        self.fine               = StringVar()
-        self.fineEntry          = None
-        self.illegalCheckbutton = None
-
-        self.fineMessage            = StringVar()
-        self.fineMessageEntry       = None
-        self.fineMessageCheckbutton = None
-
-        self.stealthCheckbutton = None
+        self.illegalComponent     = None
+        self.stealthComponent     = None
 
 
         ## isInvisible
@@ -307,38 +294,15 @@ class GUI(object):
         self.passengersComponent = buildComponentFrame(cf, "Passengers", 1, 2, ["<number#>", "[<number#>]", "[<probability#>]"])
         self.passengersComponent.grid(row=5, column=0, sticky="ew")
 
+        # Illegal
+        self.illegalComponent = buildComponentFrame(cf, "Illegal", 0, 2, ["<fine#>", "[<message>]"])
+        self.illegalComponent.grid(row=6, column=0, sticky="ew")
+
+        # Stealth
+        self.stealthComponent = buildComponentFrame(cf, "Stealth", 0, 0, [])
+        self.stealthComponent.grid(row=7, column=0, sticky="ew")
+
         """
-        # illegal
-        illegalLabel = ttk.Label(cf, text="Illegal")
-        illegalLabel.grid(row=15, column=0, sticky="ew")
-        self.illegalCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.illegalEntryState,
-                                                                                           self.fineEntry),
-                                                       variable=self.illegalEntryState, onvalue=1, offvalue=0)
-        self.illegalCheckbutton.grid(row=15, column=1)
-
-        self.fineEntry = ttk.Entry(cf, textvariable=self.fine, state=off, style='D.TEntry')
-        self.fineEntry.grid(row=16, column=0, sticky="ew", padx=(indent, 0))
-
-        self.fineMessageEntry = ttk.Entry(cf, textvariable=self.fineMessage, state=off, style='D.TEntry')
-        self.fineMessageEntry.grid(row=17, column=0, sticky="ew", padx=(indent, 0))
-        self.fineMessageCheckbutton = ttk.Checkbutton(cf,
-                                                           command=lambda: self.cbValueChanged(
-                                                               self.fineMessageEntryState,
-                                                               self.fineMessageEntry),
-                                                           variable=self.fineMessageEntryState, onvalue=1,
-                                                           offvalue=0)
-        self.fineMessageCheckbutton.grid(row=17, column=1)
-
-        stealthLabel = ttk.Label(cf, text="Stealth")
-        stealthLabel.grid(row=18, column=0, sticky="ew")
-        self.stealthCheckbutton = ttk.Checkbutton(cf,
-                                                       command=lambda: self.cbValueChanged(self.stealthEntryState,
-                                                                                           "stealthCheckbutton"),
-                                                       variable=self.stealthEntryState, onvalue=1, offvalue=0)
-        self.stealthCheckbutton.grid(row=18, column=1)
-
-
         # isInvisible
         isInvisibleLabel = ttk.Label(cf, text="Invisible")
         isInvisibleLabel.grid(row=19, column=0, sticky="ew")
