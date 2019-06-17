@@ -109,7 +109,7 @@ class ScrollingCenterFrame2(ttk.Frame):
     #end init
 
 
-    def onFrameConfigure(self):
+    def onFrameConfigure(self, event=None):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
     #end onFrameConfigure
 
