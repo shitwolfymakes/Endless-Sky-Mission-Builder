@@ -61,6 +61,7 @@ class GUI(object):
         self.displayNameComponent = None
         self.descriptionComponent = None
         self.blockedComponent     = None
+        self.deadlineComponent    = None
 
 
         ## deadline
@@ -328,25 +329,11 @@ class GUI(object):
         self.blockedComponent = buildComponentFrame(cf, "Blocked", 1, 0, ["<message>"])
         self.blockedComponent.grid(row=2, column=0, sticky="ew")
 
-        """
         # Deadline
-        deadlineLabel = ttk.Label(cf, text="Deadline")
-        deadlineLabel.grid(row=7, column=0, sticky="ew")
-        self.deadlineCheckbutton = ttk.Checkbutton(cf,
-                                                   command=lambda: self.cbValueChanged(self.deadlineEntryState,
-                                                                                       self.deadlineOptionalsCheckbutton),
-                                                   variable=self.deadlineEntryState, onvalue=1, offvalue=0)
-        self.deadlineCheckbutton.grid(row=7, column=1)
+        self.deadlineComponent = buildComponentFrame(cf, "Deadline", 0, 2, ["[<days#>]", "[<multiplier#>]"])
+        self.deadlineComponent.grid(row=3, column=0, sticky="ew")
 
-        self.deadlineOptionalsEntry = ttk.Entry(cf, textvariable=self.deadlineOptionals, state=off, style='D.TEntry')
-        self.deadlineOptionalsEntry.grid(row=8, column=0, sticky="ew", padx=(indent, 0))
-        self.deadlineOptionalsCheckbutton = ttk.Checkbutton(cf,
-                                                            command=lambda: self.cbValueChanged(self.deadlineOptionalsEntryState,
-                                                                                                self.deadlineOptionalsEntry),
-                                                            variable=self.deadlineOptionalsEntryState, onvalue=1, offvalue=0)
-        self.deadlineOptionalsCheckbutton.grid(row=8, column=1)
-
-
+        """
         #TODO: Cargo - may still need some work
         cargoLabel = ttk.Label(cf, text="Cargo")
         cargoLabel.grid(row=9, column=0, sticky="ew")
