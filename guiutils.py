@@ -46,6 +46,8 @@ class _ComponentMandOptFrame(ttk.Frame):
 
     def __init__(self, parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
         ttk.Frame.__init__(self, parent)
+        # this line makes the frames with no mandatory or optionals fill the frame
+        self.columnconfigure(0, weight=1)
 
         disabledEntryStyle = ttk.Style()
         disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
@@ -88,7 +90,7 @@ class _ComponentMandOptFrame(ttk.Frame):
     def build(self):
         print("\t\tBuilding \"%s\"" % self.componentName)
         label1 = ttk.Label(self, text=self.componentName)
-        label1.grid(row=0, column=0, columnspan=2, sticky="w", padx=(5, 0))
+        label1.grid(row=0, column=0, sticky="w", padx=(5, 0))
         self.rowNum += 1
 
         # Case 1: No mandatory fields
