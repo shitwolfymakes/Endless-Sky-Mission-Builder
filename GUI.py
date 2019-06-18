@@ -60,46 +60,26 @@ class GUI(object):
         self.activeMission   = None
 
         # declare centerFrame components
-        self.displayNameComponent  = None
-        self.descriptionComponent  = None
-        self.blockedComponent      = None
-        self.deadlineComponent     = None
-        self.cargoComponent        = None
-        self.passengersComponent   = None
-        self.illegalComponent      = None
-        self.stealthComponent      = None
-        self.invisibleComponent    = None
+        self.displayNameComponent   = None
+        self.descriptionComponent   = None
+        self.blockedComponent       = None
+        self.deadlineComponent      = None
+        self.cargoComponent         = None
+        self.passengersComponent    = None
+        self.illegalComponent       = None
+        self.stealthComponent       = None
+        self.invisibleComponent     = None
+        self.priorityLevelComponent = None
+        self.whereShownComponent    = None
+        self.repeatComponent        = None
+        self.clearanceComponent     = None
+        self.infiltratingComponent  = None
+        self.waypointComponent      = None
+        self.stopoverComponent      = None
+        self.sourceComponent        = None
+        self.destinationComponent   = None
 
-        self.repeatComponent       = None
-        self.clearanceComponent    = None
-        self.infiltratingComponent = None
-        self.waypointComponent     = None
-        self.stopoverComponent     = None
-        self.sourceComponent       = None
-        self.destinationComponent  = None
-
-
-        ## priorityLevel
-        self.priorityLevelEntryState = BooleanVar()
-        self.rbPriorityValue         = StringVar()
-
-        self.priorityLevelCheckbutton = None
-        self.rbPriority               = None
-        self.rbMinor                  = None
-
-
-        ## whereShown
-        self.whereShownEntryState  = BooleanVar()
-        self.rbWhereShownValue     = StringVar()
-        self.whereShownCheckbutton = None
-
-        self.rbJob       = None
-        self.rbLanding   = None
-        self.rbAssisting = None
-        self.rbBoarding  = None
-
-
-        ## Triggers
+        # Triggers
         self.triggersFrame = None
         self.activeTrigger = None
 
@@ -256,45 +236,13 @@ class GUI(object):
         self.invisibleComponent = buildComponentFrame(cf, "Invisible", 0, 0, [])
         self.invisibleComponent.grid(row=8, column=0, sticky="ew")
 
-        """
         # priorityLevel
-        priorityLevelLabel = ttk.Label(cf, text="Priority Level")
-        priorityLevelLabel.grid(row=20, column=0, sticky="ew")
-        self.priorityLevelCheckbutton = ttk.Checkbutton(cf,
-                                                        command=lambda: self.cbValueChanged(self.priorityLevelEntryState,
-                                                                                            "priorityLevelCheckbutton"),
-                                                        variable=self.priorityLevelEntryState, onvalue=1, offvalue=0)
-        self.priorityLevelCheckbutton.grid(row=20, column=1)
-        self.rbPriority = ttk.Radiobutton(cf, text="Priority", variable=self.rbPriorityValue, value="priority",
-                                          command=lambda: self.rbValueChanged(self.rbPriorityValue, self.rbPriority))
-        self.rbPriority.grid(row=21, column=0, sticky="w", padx=(indent, 0))
-        self.rbMinor = ttk.Radiobutton(cf, text="Minor", variable=self.rbPriorityValue, value="minor",
-                                       command=lambda: self.rbValueChanged(self.rbPriorityValue, self.rbMinor))
-        self.rbMinor.grid(row=22, column=0, sticky="w", padx=(indent, 0))
-
+        self.priorityLevelComponent = buildComboComponentFrame(cf, "Priority Level", ["Priority", "Minor"])
+        self.priorityLevelComponent.grid(row=9, column=0, sticky="ew")
 
         # whereShown
-        whereShownLabel = ttk.Label(cf, text="Where to show")
-        whereShownLabel.grid(row=23, column=0, sticky="ew")
-        self.whereShownCheckbutton = ttk.Checkbutton(cf,
-                                                     command=lambda: self.cbValueChanged(self.whereShownEntryState,
-                                                                                         "whereShownCheckbutton"),
-                                                     variable=self.whereShownEntryState, onvalue=1, offvalue=0)
-        self.whereShownCheckbutton.grid(row=23, column=1)
-        self.rbJob = ttk.Radiobutton(cf, text="Job", variable=self.rbWhereShownValue, value="job",
-                                     command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbJob))
-        self.rbJob.grid(row=24, column=0, sticky="w", padx=(indent, 0))
-        self.rbLanding = ttk.Radiobutton(cf, text="Landing", variable=self.rbWhereShownValue, value="landing",
-                                         command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbLanding))
-        self.rbLanding.grid(row=25, column=0, sticky="w", padx=(indent, 0))
-        self.rbAssisting = ttk.Radiobutton(cf, text="Assisting", variable=self.rbWhereShownValue, value="assisting",
-                                           command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbAssisting))
-        self.rbAssisting.grid(row=26, column=0, sticky="w", padx=(indent, 0))
-        self.rbBoarding = ttk.Radiobutton(cf, text="Boarding", variable=self.rbWhereShownValue, value="boarding",
-                                          command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbBoarding))
-        self.rbBoarding.grid(row=27, column=0, sticky="w", padx=(indent, 0))
-
-        """
+        self.whereShownComponent = buildComboComponentFrame(cf, "Where Shown", ["Job", "Landing", "Assisting", "Boarding"])
+        self.whereShownComponent.grid(row=10, column=0, sticky="ew")
 
         # Repeat
         self.repeatComponent = buildComponentFrame(cf, "Repeat", 0, 1, ["[<times#>]"])
