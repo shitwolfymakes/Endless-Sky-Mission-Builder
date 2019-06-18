@@ -100,6 +100,10 @@ class ScrollingCenterFrame2(ttk.Frame):
         self.vsb    = ttk.Scrollbar(self.outer, orient=VERTICAL, command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.vsb.set)
 
+        self.canvas.bind("<Enter>", self._bind_mouse)
+        self.canvas.bind("<Leave>", self._unbind_mouse)
+        self.vsb['command'] = self.canvas.yview
+
         self.vsb.pack(side=RIGHT, fill=Y)
         self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
         self.canvas.create_window((4,4), window=self.inner, anchor=NW, tags="self.frame")
@@ -107,6 +111,26 @@ class ScrollingCenterFrame2(ttk.Frame):
         self.inner.bind("<Configure>", self.onFrameConfigure)
 
     #end init
+
+
+    def _bind_mouse(self, event=None):
+        self.canvas.bind_all("<4>", self._on_mousewheel)
+        self.canvas.bind_all("<5>", self._on_mousewheel)
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+
+
+    def _unbind_mouse(self, event=None):
+        self.canvas.unbind_all("<4>")
+        self.canvas.unbind_all("<5>")
+        self.canvas.unbind_all("<MouseWheel>")
+
+
+    def _on_mousewheel(self, event):
+        """Linux uses event.num; Windows / Mac uses event.delta"""
+        if event.num == 4 or event.delta > 0:
+            self.canvas.yview_scroll(-1, "units")
+        elif event.num == 5 or event.delta < 0:
+            self.canvas.yview_scroll(1, "units")
 
 
     def onFrameConfigure(self, event=None):
