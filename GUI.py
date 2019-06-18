@@ -43,6 +43,8 @@ class GUI(object):
 
         self.disabledEntryStyle = ttk.Style()
         self.disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
+        self.disabledComboboxStyle = ttk.Style()
+        self.disabledComboboxStyle.configure('D.TCombobox', background='#D3D3D3')
 
         self.ofWidth = None
         self.cfWidth = None
@@ -331,7 +333,7 @@ class GUI(object):
         print("Done.")
     #end buildComponentsOnCenterFrame
 
-
+    """
     def cbValueChanged(self, entryState, modifiedWidget):
         print("The value of %s is:" % modifiedWidget.__str__(), end="\t\t")
         print(entryState.get())
@@ -342,6 +344,7 @@ class GUI(object):
         elif entryState.get() is False:
             modifiedWidget.config(state='disabled', style='D.TEntry')
     #end cbValueChanged
+    """
 
 
     #TODO: display name, not "PY_VARXX" (pending SO question)
