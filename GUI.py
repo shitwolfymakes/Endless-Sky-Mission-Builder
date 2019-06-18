@@ -333,26 +333,6 @@ class GUI(object):
         print("Done.")
     #end buildComponentsOnCenterFrame
 
-    """
-    def cbValueChanged(self, entryState, modifiedWidget):
-        print("The value of %s is:" % modifiedWidget.__str__(), end="\t\t")
-        print(entryState.get())
-        if type(modifiedWidget) is str:
-            print("")
-        elif entryState.get() is True:
-            modifiedWidget.config(state='enabled', style='TEntry')
-        elif entryState.get() is False:
-            modifiedWidget.config(state='disabled', style='D.TEntry')
-    #end cbValueChanged
-    """
-
-
-    #TODO: display name, not "PY_VARXX" (pending SO question)
-    def rbValueChanged(self, radioValue, modifiedWidget):
-        print("The value of %s is now:" % radioValue.__str__(), end="\t\t")
-        print(modifiedWidget.cget("value"))
-    #end rbValueChanged
-
 
     def buildMissionFrame(self):
         print("Building missionFrame...", end="\t")
