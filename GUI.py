@@ -58,18 +58,19 @@ class GUI(object):
         self.activeMission   = None
 
         # declare centerFrame components
-        self.displayNameComponent = None
-        self.descriptionComponent = None
-        self.blockedComponent     = None
-        self.deadlineComponent    = None
-        self.cargoComponent       = None
-        self.passengersComponent  = None
-        self.illegalComponent     = None
-        self.stealthComponent     = None
-        self.invisibleComponent   = None
+        self.displayNameComponent  = None
+        self.descriptionComponent  = None
+        self.blockedComponent      = None
+        self.deadlineComponent     = None
+        self.cargoComponent        = None
+        self.passengersComponent   = None
+        self.illegalComponent      = None
+        self.stealthComponent      = None
+        self.invisibleComponent    = None
 
-        self.repeatComponent      = None
-        self.clearanceComponent   = None
+        self.repeatComponent       = None
+        self.clearanceComponent    = None
+        self.infiltratingComponent = None
 
 
         ## priorityLevel
@@ -90,11 +91,6 @@ class GUI(object):
         self.rbLanding   = None
         self.rbAssisting = None
         self.rbBoarding  = None
-
-
-        ## isInfiltrating
-        self.isInfiltratingEntryState  = BooleanVar()
-        self.isInfiltratingCheckbutton = None
 
 
         ## waypoint
@@ -333,17 +329,12 @@ class GUI(object):
         # Clearance
         self.clearanceComponent = buildComponentFrame(cf, "Clearance", 0, 1, ["[<message>]"])
         self.clearanceComponent.grid(row=12, column=0, sticky="ew")
+
+        # Infiltrating
+        self.infiltratingComponent = buildComponentFrame(cf, "Infiltrating", 0, 0, [])
+        self.infiltratingComponent.grid(row=13, column=0, sticky="ew")
+
         """
-        # isInfiltrating
-        isInfiltratingLabel = ttk.Label(cf, text="Infiltrating")
-        isInfiltratingLabel.grid(row=32, column=0, sticky="ew")
-        self.isInfiltratingCheckbutton = ttk.Checkbutton(cf,
-                                                         command=lambda: self.cbValueChanged(self.isInfiltratingEntryState,
-                                                                                             "isInfiltratingCheckbutton"),
-                                                         variable=self.isInfiltratingEntryState, onvalue=1, offvalue=0)
-        self.isInfiltratingCheckbutton.grid(row=32, column=1)
-
-
         # waypoint
         waypointLabel = ttk.Label(cf, text="Waypoint")
         waypointLabel.grid(row=33, column=0, sticky="ew")
