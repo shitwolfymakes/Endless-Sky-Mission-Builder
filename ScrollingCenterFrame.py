@@ -87,28 +87,30 @@ class ScrollingCenterFrame2(ttk.Frame):
     def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
 
-        self.app = app
-
-        self.outer = ttk.Frame(self)
-        self.outer.pack(expand=True, fill=BOTH)
-
-        cfTitle = ttk.Label(self.outer, text="Mission Options")
+        cfTitle = ttk.Label(self, text="Mission Options")
         cfTitle.pack()
 
-        self.canvas = Canvas(self.outer, highlightthickness=0, bg="#ededed")
-        self.inner  = ttk.Frame(self.canvas)
-        self.vsb    = ttk.Scrollbar(self.outer, orient=VERTICAL, command=self.canvas.yview)
-        self.canvas.configure(yscrollcommand=self.vsb.set)
+        self.app = app
+        self.parent = parent
 
+        # create canvas and scrollbar
+        self.vsb = ttk.Scrollbar(self, orient=VERTICAL)
+        self.vsb.pack(side=RIGHT, fill=Y)
+        self.canvas = Canvas(self, highlightthickness=0, bg="#ededed", height=10, width=10)
+        self.canvas.configure(yscrollcommand=self.vsb.set)
+        self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
+        self.vsb.configure(command=self.canvas.yview)
+
+        # add bindings for mousewheel
         self.canvas.bind("<Enter>", self._bind_mouse)
         self.canvas.bind("<Leave>", self._unbind_mouse)
-        self.vsb['command'] = self.canvas.yview
 
-        self.vsb.pack(side=RIGHT, fill=Y)
-        self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
-        self.canvas.create_window((4,4), window=self.inner, anchor=NW, tags="self.frame")
 
-        self.inner.bind("<Configure>", self.onFrameConfigure)
+        self.inner  = ttk.Frame(self.canvas)
+        self.inner_id = self.canvas.create_window((4,4), window=self.inner, anchor=NW)
+
+        self.inner.bind("<Configure>", self._configureInner)
+        self.canvas.bind("<Configure>", self._configureCanvas)
 
     #end init
 
@@ -133,8 +135,29 @@ class ScrollingCenterFrame2(ttk.Frame):
             self.canvas.yview_scroll(1, "units")
 
 
-    def onFrameConfigure(self, event=None):
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-    #end onFrameConfigure
+    def _configureInner(self, event=None):
+        # update the scrollbars to match the size of the inner frame
+        size = (self.inner.winfo_width(), self.inner.winfo_height())
+        self.canvas.config(scrollregion="0 0 %s %s" % size)
+        if self.inner.winfo_reqwidth() >= self.canvas.winfo_width():
+            # update the canvas's width to fit the inner frame
+            # only works before mainloop
+            self.canvas.config(width=self.inner.winfo_reqwidth())
+        screen_h = self.winfo_screenheight()
+        height   = self.parent.winfo_rooty() + self.parent.winfo_height() - self.canvas.winfo_height() + self.inner.winfo_reqheight()
+        if height < screen_h:
+            self.canvas.configure(height=self.inner.winfo_reqheight())
+    #end _configureInner
+
+
+    def _configureCanvas(self, event=None):
+        if self.inner.winfo_reqwidth() < self.canvas.winfo_width():
+            self.canvas.itemconfigure(self.inner_id, width=self.canvas.winfo_width())
+        elif self.inner.winfo_reqwidth() > self.canvas.winfo_width():
+            self.canvas.config(width=self.inner.winfo_reqwidth())
+
+        if (self.inner.winfo_reqheight() < self.canvas.winfo_height()) or (self.inner.winfo_height() < self.canvas.winfo_height()):
+            self.canvas.itemconfigure(self.inner_id, height=self.canvas.winfo_height())
+    #end _configureCanvas
 
 #end class ScrollingCenterFrame2
