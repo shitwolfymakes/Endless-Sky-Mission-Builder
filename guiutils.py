@@ -61,6 +61,7 @@ class _ComboComponentFrame(ttk.Frame):
 
         self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.isActive)
         self.combo    = ttk.Combobox(self, state="disabled", values=listComboboxData, style='D.TCombobox')
+        self.combo.bind("<<ComboboxSelected>>", self.optionSelected)
 
         self.button.configure(command=partial(self.cbValueChanged, self.isActive, [self.combo]))
         self.button.grid(row=0, column=1, sticky="e")
