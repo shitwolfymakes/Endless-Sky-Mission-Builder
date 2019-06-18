@@ -71,6 +71,10 @@ class GUI(object):
         self.repeatComponent       = None
         self.clearanceComponent    = None
         self.infiltratingComponent = None
+        self.waypointComponent     = None
+        self.stopoverComponent     = None
+        self.sourceComponent       = None
+        self.destinationComponent  = None
 
 
         ## priorityLevel
@@ -91,38 +95,6 @@ class GUI(object):
         self.rbLanding   = None
         self.rbAssisting = None
         self.rbBoarding  = None
-
-
-        ## waypoint
-        self.waypointEntryState = BooleanVar()
-        self.waypoint           = StringVar()
-
-        self.waypointCheckbutton = None
-        self.waypointEntry       = None
-
-
-        ## stopover
-        self.stopoverEntryState = BooleanVar()
-        self.stopover           = StringVar()
-
-        self.stopoverCheckbutton = None
-        self.stopoverEntry       = None
-
-
-        ## source
-        self.sourceEntryState = BooleanVar()
-        self.source           = StringVar()
-
-        self.sourceCheckbutton = None
-        self.sourceEntry       = None
-
-
-        ## source
-        self.destinationEntryState = BooleanVar()
-        self.destination           = StringVar()
-
-        self.destinationCheckbutton = None
-        self.destinationEntry       = None
 
 
         ## Triggers
@@ -334,63 +306,27 @@ class GUI(object):
         self.infiltratingComponent = buildComponentFrame(cf, "Infiltrating", 0, 0, [])
         self.infiltratingComponent.grid(row=13, column=0, sticky="ew")
 
-        """
-        # waypoint
-        waypointLabel = ttk.Label(cf, text="Waypoint")
-        waypointLabel.grid(row=33, column=0, sticky="ew")
-        self.waypointCheckbutton = ttk.Checkbutton(cf,
-                                                      command=lambda: self.cbValueChanged(self.waypointEntryState,
-                                                                                          self.waypointEntry),
-                                                      variable=self.waypointEntryState, onvalue=1, offvalue=0)
-        self.waypointCheckbutton.grid(row=33, column=1)
+        # Waypoint
+        self.waypointComponent = buildComponentFrame(cf, "Waypoint", 1, 0, ["[<system>]"])
+        self.waypointComponent.grid(row=14, column=0, sticky="ew")
 
-        self.waypointEntry = ttk.Entry(cf, textvariable=self.waypoint, state=off, style='D.TEntry')
-        self.waypointEntry.grid(row=34, column=0, sticky="ew", padx=(indent, 0))
+        # Stopover
+        self.stopoverComponent = buildComponentFrame(cf, "Stopover", 1, 0, ["[<planet>]"])
+        self.stopoverComponent.grid(row=15, column=0, sticky="ew")
 
+        # Source
+        self.sourceComponent = buildComponentFrame(cf, "Source", 1, 0, ["[<planet>]"])
+        self.sourceComponent.grid(row=16, column=0, sticky="ew")
 
-        # stopover
-        stopoverLabel = ttk.Label(cf, text="Stopover")
-        stopoverLabel.grid(row=35, column=0, sticky="ew")
-        self.stopoverCheckbutton = ttk.Checkbutton(cf,
-                                                   command=lambda: self.cbValueChanged(self.stopoverEntryState,
-                                                                                       self.stopoverEntry),
-                                                   variable=self.stopoverEntryState, onvalue=1, offvalue=0)
-        self.stopoverCheckbutton.grid(row=35, column=1)
-
-        self.stopoverEntry = ttk.Entry(cf, textvariable=self.stopover, state=off, style='D.TEntry')
-        self.stopoverEntry.grid(row=36, column=0, sticky="ew", padx=(indent, 0))
-
-
-        # source
-        sourceLabel = ttk.Label(cf, text="Source")
-        sourceLabel.grid(row=37, column=0, sticky="ew")
-        self.sourceCheckbutton = ttk.Checkbutton(cf,
-                                                 command=lambda: self.cbValueChanged(self.sourceEntryState,
-                                                                                     self.sourceEntry),
-                                                 variable=self.sourceEntryState, onvalue=1, offvalue=0)
-        self.sourceCheckbutton.grid(row=37, column=1)
-
-        self.sourceEntry = ttk.Entry(cf, textvariable=self.source, state=off, style='D.TEntry')
-        self.sourceEntry.grid(row=38, column=0, sticky="ew", padx=(indent, 0))
-
-
-        # destination
-        destinationLabel = ttk.Label(cf, text="Destination")
-        destinationLabel.grid(row=39, column=0, sticky="ew")
-        self.sourceCheckbutton = ttk.Checkbutton(cf,
-                                                 command=lambda: self.cbValueChanged(self.destinationEntryState,
-                                                                                     self.destinationEntry),
-                                                 variable=self.destinationEntryState, onvalue=1, offvalue=0)
-        self.sourceCheckbutton.grid(row=39, column=1)
-
-        self.destinationEntry = ttk.Entry(cf, textvariable=self.destination, state=off, style='D.TEntry')
-        self.destinationEntry.grid(row=40, column=0, sticky="ew", padx=(indent, 0))
+        # Destination
+        self.destinationComponent = buildComponentFrame(cf, "Destination", 1, 0, ["[<planet>]"])
+        self.destinationComponent.grid(row=17, column=0, sticky="ew")
 
 
         # triggers
         self.triggersFrame = AggregatedTriggerFrame(self, cf)
-        self.triggersFrame.grid(row=42, column=0, columnspan=2, sticky="ew")
-        """
+        self.triggersFrame.grid(row=18, column=0, sticky="ew")
+
 
         print("Done.")
     #end buildComponentsOnCenterFrame
