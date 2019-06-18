@@ -68,6 +68,9 @@ class GUI(object):
         self.stealthComponent     = None
         self.invisibleComponent   = None
 
+        self.repeatComponent      = None
+        self.clearanceComponent   = None
+
 
         ## priorityLevel
         self.priorityLevelEntryState = BooleanVar()
@@ -87,25 +90,6 @@ class GUI(object):
         self.rbLanding   = None
         self.rbAssisting = None
         self.rbBoarding  = None
-
-
-        ## repeat
-        self.repeatEntryState          = BooleanVar()
-        self.repeatOptionalsEntryState = BooleanVar()
-        self.repeatCheckbutton         = None
-
-        self.repeatOptionals            = StringVar()
-        self.repeatOptionalsEntry       = None
-        self.repeatOptionalsCheckbutton = None
-
-
-        ## Clearance
-        self.clearanceEntryState          = BooleanVar()
-        self.clearanceOptionalsEntryState = BooleanVar()
-
-        self.clearanceCheckbutton    = None
-        self.clearanceOptionals      = StringVar()
-        self.clearanceOptionalsEntry = None
 
 
         ## isInfiltrating
@@ -340,38 +324,16 @@ class GUI(object):
                                           command=lambda: self.rbValueChanged(self.rbWhereShownValue, self.rbBoarding))
         self.rbBoarding.grid(row=27, column=0, sticky="w", padx=(indent, 0))
 
+        """
 
-        # repeat
-        repeatLabel = ttk.Label(cf, text="Repeat")
-        repeatLabel.grid(row=28, column=0, sticky="ew")
-        self.repeatCheckbutton = ttk.Checkbutton(cf,
-                                                 command=lambda: self.cbValueChanged(self.repeatEntryState,
-                                                                                     self.repeatOptionalsCheckbutton),
-                                                 variable=self.repeatEntryState, onvalue=1, offvalue=0)
-        self.repeatCheckbutton.grid(row=28, column=1)
-
-        self.repeatOptionalsEntry = ttk.Entry(cf, textvariable=self.repeatOptionals, state=off, style='D.TEntry')
-        self.repeatOptionalsEntry.grid(row=29, column=0, sticky="ew", padx=(indent, 0))
-        self.repeatOptionalsCheckbutton = ttk.Checkbutton(cf,
-                                                          command=lambda: self.cbValueChanged(self.repeatOptionalsEntryState,
-                                                                                              self.repeatOptionalsEntry),
-                                                          variable=self.repeatOptionalsEntryState, onvalue=1, offvalue=0)
-        self.repeatOptionalsCheckbutton.grid(row=29, column=1)
-
+        # Repeat
+        self.repeatComponent = buildComponentFrame(cf, "Repeat", 0, 1, ["[<times#>]"])
+        self.repeatComponent.grid(row=11, column=0, sticky="ew")
 
         # Clearance
-        clearanceLabel = ttk.Label(cf, text="Clearance")
-        clearanceLabel.grid(row=30, column=0, sticky="ew")
-        self.clearanceCheckbutton = ttk.Checkbutton(cf,
-                                                    command=lambda: self.cbValueChanged(self.clearanceEntryState,
-                                                                                        self.clearanceOptionalsEntry),
-                                                    variable=self.clearanceEntryState, onvalue=1, offvalue=0)
-        self.clearanceCheckbutton.grid(row=30, column=1)
-
-        self.clearanceOptionalsEntry = ttk.Entry(cf, textvariable=self.clearanceOptionals, state=off, style='D.TEntry')
-        self.clearanceOptionalsEntry.grid(row=31, column=0, sticky="ew", padx=(indent, 0))
-
-
+        self.clearanceComponent = buildComponentFrame(cf, "Clearance", 0, 1, ["[<message>]"])
+        self.clearanceComponent.grid(row=12, column=0, sticky="ew")
+        """
         # isInfiltrating
         isInfiltratingLabel = ttk.Label(cf, text="Infiltrating")
         isInfiltratingLabel.grid(row=32, column=0, sticky="ew")
