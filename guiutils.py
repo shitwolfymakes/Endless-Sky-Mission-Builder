@@ -30,16 +30,65 @@ def addMission(app, newMissionName):
 
 def buildMandOptFrame(parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData):
     newFrame = _SubComponentMandOptFrame(parent, subComponentName, numMandatory, numOptionals, listDefaultEntryData)
-
     return newFrame
 #end buildMandOptFrame
 
 
 def buildComponentFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData):
     newFrame = _ComponentMandOptFrame(parent, componentName, numMandatory, numOptionals, listDefaultEntryData)
-
     return newFrame
 #end buildMandOptFrame
+
+
+def buildComboComponentFrame(parent, componentName, listComboboxData):
+    newFrame = _ComboComponentFrame(parent, componentName, listComboboxData)
+    return newFrame
+#end buildComboComponentFrame
+
+
+class _ComboComponentFrame(ttk.Frame):
+
+    def __init__(self, parent, componentName, listComboboxData):
+        ttk.Frame.__init__(self, parent)
+        self.columnconfigure(0, weight=1)
+
+        print("\tBuilding \"%s\"" % componentName)
+        label = ttk.Label(self, text=componentName)
+        label.grid(row=0, column=0, sticky="w", padx=(5, 0))
+
+        self.isActive = BooleanVar()
+        self.option   = None
+
+        self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.isActive)
+        self.combo    = ttk.Combobox(self, state="disabled", values=listComboboxData, style='D.TCombobox')
+
+        self.button.configure(command=partial(self.cbValueChanged, self.isActive, [self.combo]))
+        self.button.grid(row=0, column=1, sticky="e")
+        self.combo.grid(row=1, column=0, sticky="ew", padx=(20,0))
+
+    #end init
+
+    @staticmethod
+    def cbValueChanged(entryState, modifiedWidgets):
+        for widget in modifiedWidgets:
+            print("The value of %s is:" % widget, end="\t\t")
+            print(entryState.get())
+            if type(widget) is str:
+                break
+            elif entryState.get() is True:
+                widget.config(state='readonly', style='TCombobox')
+            elif entryState.get() is False:
+                widget.config(state='disabled', style='D.TCombobox')
+            # end if/else
+        # end for
+    # end cbValueChanged
+
+    def optionSelected(self, event=None):
+        selectedOption = self.combo.get()
+        print('\nOption selected: "%s"' % selectedOption)
+    #end missionSelected
+
+#end class _ComboComponentFrame
 
 
 class _ComponentMandOptFrame(ttk.Frame):
