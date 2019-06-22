@@ -136,6 +136,8 @@ class ScrollingCenterFrame2(ttk.Frame):
 
 
     def _configureInner(self, event=None):
+        #TODO: Fix the bug in here
+
         # update the scrollbars to match the size of the inner frame
         size = (self.inner.winfo_width(), self.inner.winfo_height())
         self.canvas.config(scrollregion="0 0 %s %s" % size)
