@@ -11,8 +11,7 @@
 
 '''
 
-from tkinter import Toplevel
-from tkinter.ttk import Button, Entry, Label
+from tkinter import Toplevel, ttk
 
 from guiutils import addMission
 
@@ -25,11 +24,11 @@ class PopupWindow(object):
         self.top.grab_set()             # freezes the app until the user enters or cancels
 
         # build the widgets
-        self.l = Label(self.top, text=text, background='white')
+        self.l = ttk.Label(self.top, text=text, background='white')
         self.l.pack()
-        self.e = Entry(self.top)
+        self.e = ttk.Entry(self.top)
         self.e.pack()
-        self.b = Button(self.top, text='Ok', command=self.cleanup)
+        self.b = ttk.Button(self.top, text='Ok', command=self.cleanup)
         self.b.pack()
     #end init
 
