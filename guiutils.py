@@ -164,7 +164,7 @@ class _ComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry', width=30))
             self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
@@ -183,7 +183,7 @@ class _ComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry', width=30))
             self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
@@ -197,7 +197,7 @@ class _ComponentMandOptFrame(ttk.Frame):
                 self.listEntryData.append(StringVar())
                 self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry'))
+                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry', width=30))
                 self.listEntries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
                 self.rowNum += 1
@@ -214,7 +214,7 @@ class _ComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry", width=30))
             self.listEntries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
             # We have to use functools.partial here because lambda can't be used
