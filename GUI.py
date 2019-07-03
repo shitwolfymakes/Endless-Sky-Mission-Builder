@@ -187,7 +187,6 @@ class GUI(object):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
-        #self.__setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
 
         print("Done.")
@@ -558,56 +557,6 @@ class GUI(object):
 
     ### MISC METHODS ###
 
-    def __setDefaultEntryValues(self):
-        self.displayName.set("<name>")
-        self.description.set("<description>")
-        self.isBlockedMessage.set("<message>")
-        self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
-        self.cargo.set("(random | <name>) <number#>")
-        self.cargoOptionals.set("[<number#> [<probability#>]]")
-        self.fine.set("<fine#>")
-        self.fineMessage.set("[<message>]")
-        self.passengers.set("<number#>")
-        self.passengersOptionals.set("[<number#> [<probability#>]]")
-        self.rbPriorityValue.set("")
-        self.rbWhereShownValue.set("")
-        self.repeatOptionals.set("[<times#>]")
-        self.clearanceOptionals.set("[<message>]")
-        self.waypoint.set("<system>")
-        self.stopover.set("<planet>")
-        self.source.set("<planet>")
-        self.destination.set("<planet>")
-    #end setDefaultEntryValues
-
-
-    def __setDefaultEntryStateValues(self):
-        self.displayNameEntryState.set(0)
-        self.descriptionEntryState.set(0)
-        self.isBlockedEntryState.set(0)
-        self.deadlineEntryState.set(0)
-        self.deadlineOptionalsEntryState.set(0)
-        self.cargoEntryState.set(0)
-        self.cargoOptionalsEntryState.set(0)
-        self.illegalEntryState.set(0)
-        self.fineMessageEntryState.set(0)
-        self.stealthEntryState.set(0)
-        self.passengersEntryState.set(0)
-        self.passengersOptionalsEntryState.set(0)
-        self.isInvisibleEntryState.set(0)
-        self.priorityLevelEntryState.set(0)
-        self.whereShownEntryState.set(0)
-        self.repeatEntryState.set(0)
-        self.repeatOptionalsEntryState.set(0)
-        self.clearanceEntryState.set(0)
-        self.clearanceOptionalsEntryState.set(0)
-        self.isInfiltratingEntryState.set(0)
-        self.waypointEntryState.set(0)
-        self.passengersOptionalsEntryState.set(0)
-        self.sourceEntryState.set(0)
-        self.destinationEntryState.set(0)
-    #end setDefaultEntryStateValues
-
-
     def missionSelected(self, event):
         selectedMissionName = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selectedMissionName)
@@ -615,6 +564,5 @@ class GUI(object):
         self.updateCenterFrame()
         self.updateMissionFrame()
     #end missionSelected
-
 
 #end class GUI
