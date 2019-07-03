@@ -17,7 +17,7 @@ from tkinter import ttk, StringVar
 
 from menuactions import *
 from guiutils import *
-from ScrollingCenterFrame import ScrollingCenterFrame2
+from ScrollingCenterFrame import ScrollingCenterFrame
 from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 class GUI(object):
@@ -129,7 +129,7 @@ class GUI(object):
 
     def buildMainView(self, window):
         optionFrame  = ttk.Frame(window)
-        centerFrame  = ScrollingCenterFrame2(self, window)
+        centerFrame  = ScrollingCenterFrame(self, window)
         missionFrame = ttk.Frame(window)
 
         self.optionFrame  = optionFrame
