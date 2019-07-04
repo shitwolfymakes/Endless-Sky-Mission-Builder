@@ -55,7 +55,7 @@ class MissionFileParser(object):
                 elif "cargo" in tokens[0]:
                     print("\t\tFound cargo: %s" % tokens[1:])
                     mission.components.cargo.isCargo = True
-                    self.storeComponentData(mission.components.cargo.cargoType, tokens[1:])
+                    self.storeComponentData(mission.components.cargo.cargo, tokens[1:])
                 elif "passengers" in tokens[0]:
                     print("\t\tFound passengers: %s" % tokens[1:])
                     mission.components.passengers.isPassengers = True
