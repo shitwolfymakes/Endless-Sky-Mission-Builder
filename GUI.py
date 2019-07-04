@@ -335,27 +335,19 @@ class GUI(object):
     def updateCenterFrame(self):
         print("\nUpdating centerFrame...")
 
-        self.__setDefaultEntryValues()
-        self.__setDefaultEntryStateValues()
-
         components = self.activeMission.components
 
 
         # missionDisplayName
         if components.missionDisplayName is not None:
-            self.displayNameEntryState.set(1)
-            self.displayName.set(components.missionDisplayName)
-        #end if
-        self.cbValueChanged(self.displayNameEntryState, self.displayNameEntry)
+            self.displayNameComponent.set(0, 0, components.missionDisplayName)
 
 
         # description
         if components.description is not None:
-            self.descriptionEntryState.set(1)
             description = components.description.lstrip('`').rstrip('`')
-            self.description.set(description)
+            self.descriptionComponent.set(0, 0, description)
         #end if
-        self.cbValueChanged(self.descriptionEntryState, self.descriptionEntry)
 
 
         # blocked
