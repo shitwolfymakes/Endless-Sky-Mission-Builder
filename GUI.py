@@ -342,21 +342,15 @@ class GUI(object):
         if components.missionDisplayName is not None:
             self.displayNameComponent.set(0, 0, components.missionDisplayName)
 
-
         # description
         if components.description is not None:
             description = components.description.lstrip('`').rstrip('`')
             self.descriptionComponent.set(0, 0, description)
         #end if
 
-
         # blocked
         if components.blocked is not None:
-            self.isBlockedEntryState.set(1)
-            self.isBlockedMessage.set(components.blocked)
-        #end if
-        self.cbValueChanged(self.isBlockedEntryState, self.isBlockedMessageEntry)
-
+            self.blockedComponent.set(0, 0, components.blocked)
 
         # deadline
         if components.deadline.isDeadline is True:
