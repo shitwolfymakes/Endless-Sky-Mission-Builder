@@ -368,26 +368,16 @@ class GUI(object):
 
 
         # cargo
+        self.cargoComponent.reset()
         if components.cargo.isCargo is True:
-            self.cargoEntryState.set(1)
-            self.cargo.set("%s %s" % (components.cargo.cargoType[0],
-                                      components.cargo.cargoType[1]))
-            # cargoOptionals
-            if components.cargo.cargoType[2] is not None:
-                self.cargoOptionalsEntryState.set(1)
-                line = components.cargo.cargoType[2]
-                if components.cargo.cargoType[3] is not None:
-                    line = line + " " + components.cargo.cargoType[3]
-                else:
-                    line = line + " [<probability#>]"
-                #end if/else
-                self.cargoOptionals.set(line)
+            self.cargoComponent.set(0, 0, components.cargo.cargo[0])
+            self.cargoComponent.set(1, 1, components.cargo.cargo[1])
+            if components.cargo.cargo[2] is not None:
+                self.cargoComponent.set(2, 2, components.cargo.cargo[2])
+                if components.cargo.cargo[2] is not None:
+                    self.cargoComponent.set(3, 3, components.cargo.cargo[3])
             #end if
-
-
         #end if
-        self.cbValueChanged(self.cargoEntryState, self.cargoEntry)
-        self.cbValueChanged(self.cargoOptionalsEntryState, self.cargoOptionalsEntry)
 
 
         # passengers
