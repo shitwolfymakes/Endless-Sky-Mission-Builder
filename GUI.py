@@ -339,35 +339,32 @@ class GUI(object):
 
 
         # missionDisplayName
+        self.displayNameComponent.reset()
         if components.missionDisplayName is not None:
             self.displayNameComponent.set(0, 0, components.missionDisplayName)
 
         # description
+        self.descriptionComponent.reset()
         if components.description is not None:
             description = components.description.lstrip('`').rstrip('`')
             self.descriptionComponent.set(0, 0, description)
         #end if
 
         # blocked
+        self.blockedComponent.reset()
         if components.blocked is not None:
             self.blockedComponent.set(0, 0, components.blocked)
 
         # deadline
+        self.deadlineComponent.reset()
         if components.deadline.isDeadline is True:
-            self.deadlineEntryState.set(1)
+            self.deadlineComponent.set(0, None, "isDeadline")
             if components.deadline.deadline[0] is not None:
-                self.deadlineOptionalsEntryState.set(1)
-                line = components.deadline.deadline[0]
+                self.deadlineComponent.set(1, 0, components.deadline.deadline[0])
                 if components.deadline.deadline[1] is not None:
-                    line = line + " " + components.deadline.deadline[1]
-                else:
-                    line = line + " [<multiplier#>]"
-                #end if/else
-                self.deadlineOptionals.set(line)
+                    self.deadlineComponent.set(2, 1, components.deadline.deadline[1])
             #end if
         #end if
-        self.cbValueChanged(self.deadlineEntryState, self.deadlineOptionalsCheckbutton)
-        self.cbValueChanged(self.deadlineOptionalsEntryState, self.deadlineOptionalsEntry)
 
 
         # cargo
