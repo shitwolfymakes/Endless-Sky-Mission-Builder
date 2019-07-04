@@ -247,6 +247,13 @@ class _ComponentMandOptFrame(ttk.Frame):
     # end cbValueChanged
 
 
+    def set(self, entryStateNum, entryNum, data):
+        self.listEntryStates[entryStateNum].set(1)
+        self.listEntryData[entryStateNum].set(data)
+        self.cbValueChanged(self.listEntryStates[entryStateNum], [self.listEntries[entryNum]])
+    #end set
+
+
     def reset(self):
         for entry in self.listEntryStates:
             entry.set(0)
