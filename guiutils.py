@@ -254,7 +254,7 @@ class _ComponentMandOptFrame(ttk.Frame):
         if entryNum is None:
             self.cbValueChanged(self.listEntryStates[entryStateNum], [data])
         else:
-            self.listEntryData[entryStateNum].set(data)
+            self.listEntryData[entryStateNum-1].set(data)
             self.cbValueChanged(self.listEntryStates[entryStateNum], [self.listEntries[entryNum]])
         #end if/else
     #end set
