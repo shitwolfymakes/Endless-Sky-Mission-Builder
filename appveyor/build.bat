@@ -1,6 +1,5 @@
 REM Setup
-REM We need the development version of pyinstaller, because 3.4 does not include the hook for ttkthemes
-C:\Python37-x64\python -m pip install nuitka https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
+C:\Python37-x64\python -m pip install nuitka PyInstaller
 C:\Python37-x64\python -m pip install -r requirements.txt
 
 REM Nuitka Compilation
