@@ -12,8 +12,6 @@
 This handles the GUI for ESMB
 
 '''
-from tkinter import *
-from tkinter import ttk, StringVar
 
 from menuactions import *
 from guiutils import *
