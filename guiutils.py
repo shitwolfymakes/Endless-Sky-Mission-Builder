@@ -298,9 +298,13 @@ class _ComponentMandOptFrame(ttk.Frame):
 
     def printData(self):
         print("%s Data:" % self.componentName)
-        print("\tlistEntryStates: ", self.listEntryStates)
+        print("\tlistEntryStates: ")
+        for es in self.listEntryStates:
+            print("\t\t%s" % str(es.get()))
         print("\tlistCheckbuttons: ", self.listCheckbuttons)
-        print("\tlistEntryData: ", self.listEntryData)
+        print("\tlistEntryData: ")
+        for ed in self.listEntryData:
+            print("\t\t%s" % ed.get())
         print("\tlistEntries: ", self.listEntries)
     #end printData
 
