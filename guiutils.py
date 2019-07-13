@@ -56,11 +56,12 @@ class _ComboComponentFrame(ttk.Frame):
         label = ttk.Label(self, text=componentName)
         label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
+        self.listComboboxData = listComboboxData
         self.isActive = BooleanVar()
         self.option   = None
 
         self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.isActive)
-        self.combo    = ttk.Combobox(self, state="disabled", values=listComboboxData, style='D.TCombobox')
+        self.combo    = ttk.Combobox(self, state="disabled", values=self.listComboboxData, style='D.TCombobox')
         self.combo.bind("<<ComboboxSelected>>", self.optionSelected)
 
         self.button.configure(command=partial(self.cbValueChanged, self.isActive, [self.combo]))
@@ -88,6 +89,27 @@ class _ComboComponentFrame(ttk.Frame):
         selectedOption = self.combo.get()
         print('\nOption selected: "%s"' % selectedOption)
     #end missionSelected
+
+
+    def set(self, data):
+        '''
+            This method does the following:
+                1) set the given entry state to 1
+                2) set the combobox to the given data
+                3) enable the given entry using cbValueChanged
+        '''
+
+        self.isActive.set(1)
+        self.combo.current(self.listComboboxData.index(data.title()))
+        self.cbValueChanged(self.isActive, [self.combo])
+    #end set
+
+
+    def reset(self):
+        self.isActive.set(0)
+        self.combo.current(None)
+        self.combo.config(state='disabled', style='D.TCombobox')
+    #end reset
 
 #end class _ComboComponentFrame
 
@@ -269,6 +291,8 @@ class _ComponentMandOptFrame(ttk.Frame):
             entry.set(0)
         for i, entry in enumerate(self.listEntryData):
             entry.set(self.listDefaultEntryData[i])
+        for entry in self.listEntries:
+            entry.config(state='disabled', style='D.TEntry')
     #end reset
 
 # end class _ComponentMandOptFrame
