@@ -402,23 +402,13 @@ class GUI(object):
         if components.isInvisible is True:
             self.invisibleComponent.set(0, None, "isInvisibleCheckbutton")
 
-        #TODO: Update these
-        '''
         # priorityLevel
         if components.priorityLevel is not None:
-            self.priorityLevelEntryState.set(1)
-            self.rbPriorityValue.set(components.priorityLevel)
-        #end if
-        self.cbValueChanged(self.priorityLevelEntryState, "priorityLevelCheckbutton")
-
+            self.priorityLevelComponent.set(components.priorityLevel)
 
         # whereShown
         if components.whereShown is not None:
-            self.whereShownEntryState.set(1)
-            self.rbWhereShownValue.set(components.whereShown)
-        #end if
-        self.cbValueChanged(self.whereShownEntryState, "whereShownCheckbutton")
-        '''
+            self.whereShownComponent.set(components.whereShown)
 
         # repeat
         if components.isRepeat is True:
