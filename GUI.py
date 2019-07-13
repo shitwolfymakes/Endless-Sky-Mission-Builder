@@ -451,18 +451,11 @@ class GUI(object):
 
         # source
         if components.source.isSource is True:
-            self.sourceEntryState.set(1)
-            self.source.set(components.source.source)
-        # end if
-        self.cbValueChanged(self.sourceEntryState, self.sourceEntry)
-
+            self.sourceComponent.set(0, 0, components.source.source)
 
         # destination
         if components.destination.isDestination is True:
-            self.destinationEntryState.set(1)
-            self.destination.set(components.destination.destination)
-        # end if
-        self.cbValueChanged(self.destinationEntryState, self.destinationEntry)
+            self.destinationComponent.set(0, 0, components.destination.destination)
 
         # Triggers
         if components.triggerList:
