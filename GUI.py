@@ -438,17 +438,11 @@ class GUI(object):
 
         # infiltrating
         if components.isInfiltrating is True:
-            self.isInfiltratingEntryState.set(1)
-        #end if
-        self.cbValueChanged(self.isInfiltratingEntryState, "isInfiltratingCheckbutton")
-
+            self.infiltratingComponent.set(0, None, "isInfiltratingCheckbutton")
 
         # waypoint
         if components.waypoint is not None:
-            self.waypointEntryState.set(1)
-            self.waypoint.set(components.waypoint)
-        # end if
-        self.cbValueChanged(self.waypointEntryState, self.waypointEntry)
+            self.waypointComponent.set(0, 0, components.waypoint)
 
 
         # stopover
