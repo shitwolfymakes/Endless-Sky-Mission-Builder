@@ -246,16 +246,11 @@ class _ComponentMandOptFrame(ttk.Frame):
 
     def set(self, entryStateNum, entryNum, data):
         '''
-            This method uses the arguments it's given to set the corresponding gui component
-
-            1) set the given entry state to 1
-            2) store data in the given entry
-            3) enable the given entry using cbValueChanged
-
-            Currently it is bugged
-            Why is this so hard for me to figure out?
+            This method does the following:
+                1) set the given entry state to 1
+                2) store data in the given entry
+                3) enable the given entry using cbValueChanged
         '''
-        print(data)
 
         if self.listEntryStates[entryStateNum].get() is False:
             self.listEntryStates[entryStateNum].set(1)
