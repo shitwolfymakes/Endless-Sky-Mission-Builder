@@ -431,13 +431,10 @@ class GUI(object):
 
         # clearance
         if components.clearance.isClearance is True:
-            self.clearanceEntryState.set(1)
+            self.clearanceComponent.set(0, None, "isClearanceCheckbutton")
             if components.clearance.clearance is not None:
-                self.clearanceOptionalsEntryState.set(1)
-                self.clearanceOptionals.set(components.clearance.clearance)
+                self.clearanceComponent.set(1, 0, components.clearance.clearance)
         #end if
-        self.cbValueChanged(self.clearanceEntryState, self.clearanceOptionalsEntry)
-
 
         # infiltrating
         if components.isInfiltrating is True:
