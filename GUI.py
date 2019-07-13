@@ -447,11 +447,7 @@ class GUI(object):
 
         # stopover
         if components.stopover.isStopover is True:
-            self.stopoverEntryState.set(1)
-            self.stopover.set(components.stopover.stopover)
-        # end if
-        self.cbValueChanged(self.stopoverEntryState, self.stopoverEntry)
-
+            self.stopoverComponent.set(0, 0, components.stopover.stopover)
 
         # source
         if components.source.isSource is True:
