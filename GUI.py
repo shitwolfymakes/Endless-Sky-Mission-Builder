@@ -400,11 +400,12 @@ class GUI(object):
         if components.isStealth is True:
             self.stealthComponent.set(0, None, "stealthCheckbutton")
 
-        # isInvisible
+        # invisible
         if components.isInvisible is True:
             self.invisibleComponent.set(0, None, "isInvisibleCheckbutton")
 
-
+        #TODO: Update these
+        '''
         # priorityLevel
         if components.priorityLevel is not None:
             self.priorityLevelEntryState.set(1)
@@ -419,19 +420,14 @@ class GUI(object):
             self.rbWhereShownValue.set(components.whereShown)
         #end if
         self.cbValueChanged(self.whereShownEntryState, "whereShownCheckbutton")
-
+        '''
 
         # repeat
         if components.isRepeat is True:
-            self.repeatEntryState.set(1)
+            self.repeatComponent.set(0, None, "isRepeatCheckbutton")
             if components.repeat is not None:
-                self.repeatOptionalsEntryState.set(1)
-                self.repeatOptionals.set(components.repeat)
-            #end if
+                self.repeatComponent.set(1, 0, components.repeat)
         #end if
-        self.cbValueChanged(self.repeatEntryState, self.repeatOptionalsCheckbutton)
-        self.cbValueChanged(self.repeatOptionalsEntryState, self.repeatOptionalsEntry)
-
 
         # clearance
         if components.clearance.isClearance is True:
