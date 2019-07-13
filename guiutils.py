@@ -326,11 +326,12 @@ class _SubComponentMandOptFrame(ttk.Frame):
         label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5, 0))
 
+        # all components need at least one entry state
+        self.listEntryStates.append(BooleanVar())
+
         # Case 1: No mandatory fields
         if self.numMandatory is 0:
             # print("\t\t\tNo mandatory fields")
-
-            self.listEntryStates.append(BooleanVar())
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
             self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
@@ -343,7 +344,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
         elif self.numMandatory is 1:
             # print("\t\t\t1 mandatory field")
 
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
@@ -362,7 +362,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
             # print("\t\t\t%d mandatory fields" % self.numMandatory)
 
             # add the first checkbutton
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
@@ -376,7 +375,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
             # loop through the remaining mandatory fields, slaving them to the first checkbutton
             for i in range(1, self.numMandatory):
-                self.listEntryStates.append(BooleanVar())
                 self.listEntryData.append(StringVar())
                 self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
