@@ -295,6 +295,15 @@ class _ComponentMandOptFrame(ttk.Frame):
             entry.config(state='disabled', style='D.TEntry')
     #end reset
 
+
+    def printData(self):
+        print("%s Data:" % self.componentName)
+        print("\tlistEntryStates: ", self.listEntryStates)
+        print("\tlistCheckbuttons: ", self.listCheckbuttons)
+        print("\tlistEntryData: ", self.listEntryData)
+        print("\tlistEntries: ", self.listEntries)
+    #end printData
+
 # end class _ComponentMandOptFrame
 
 
