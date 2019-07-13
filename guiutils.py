@@ -143,11 +143,12 @@ class _ComponentMandOptFrame(ttk.Frame):
         label1.grid(row=0, column=0, sticky="w", padx=(5, 0))
         self.rowNum += 1
 
+        # all components need at least one entry state
+        self.listEntryStates.append(BooleanVar())
+
         # Case 1: No mandatory fields
         if self.numMandatory is 0:
             # print("\t\t\tNo mandatory fields")
-
-            self.listEntryStates.append(BooleanVar())
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
             self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
@@ -160,7 +161,6 @@ class _ComponentMandOptFrame(ttk.Frame):
         elif self.numMandatory is 1:
             # print("\t\t\t1 mandatory field")
 
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
@@ -179,7 +179,6 @@ class _ComponentMandOptFrame(ttk.Frame):
             # print("\t\t\t%d mandatory fields" % self.numMandatory)
 
             # add the first checkbutton
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
@@ -193,7 +192,6 @@ class _ComponentMandOptFrame(ttk.Frame):
 
             # loop through the remaining mandatory fields, slaving them to the first checkbutton
             for i in range(1, self.numMandatory):
-                self.listEntryStates.append(BooleanVar())
                 self.listEntryData.append(StringVar())
                 self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
@@ -227,7 +225,6 @@ class _ComponentMandOptFrame(ttk.Frame):
 
             self.rowNum += 1
         # end for
-
     # end build
 
 
@@ -248,18 +245,25 @@ class _ComponentMandOptFrame(ttk.Frame):
 
 
     def set(self, entryStateNum, entryNum, data):
+        '''
+            This method uses the arguments it's given to set the corresponding gui component
+
+            1) set the given entry state to 1
+            2) store data in the given entry
+            3) enable the given entry using cbValueChanged
+
+            Currently it is bugged
+            Why is this so hard for me to figure out?
+        '''
+        print(data)
+
         if self.listEntryStates[entryStateNum].get() is False:
             self.listEntryStates[entryStateNum].set(1)
 
         if entryNum is None:
             self.cbValueChanged(self.listEntryStates[entryStateNum], [data])
         else:
-            if self.numMandatory == 0:
-                self.listEntryData[entryStateNum-1].set(data)
-            else:
-                self.listEntryData[entryStateNum].set(data)
-            #end if/else
-
+            self.listEntryData[entryNum].set(data)
             self.cbValueChanged(self.listEntryStates[entryStateNum], [self.listEntries[entryNum]])
         #end if/else
     #end set
