@@ -366,37 +366,27 @@ class GUI(object):
             #end if
         #end if
 
-
         # cargo
         self.cargoComponent.reset()
         if components.cargo.isCargo is True:
             self.cargoComponent.set(0, 0, components.cargo.cargo[0])
-            self.cargoComponent.set(1, 1, components.cargo.cargo[1])
+            self.cargoComponent.set(0, 1, components.cargo.cargo[1])
             if components.cargo.cargo[2] is not None:
-                self.cargoComponent.set(2, 2, components.cargo.cargo[2])
+                self.cargoComponent.set(1, 2, components.cargo.cargo[2])
                 if components.cargo.cargo[2] is not None:
-                    self.cargoComponent.set(3, 3, components.cargo.cargo[3])
+                    self.cargoComponent.set(2, 3, components.cargo.cargo[3])
             #end if
         #end if
-
 
         # passengers
         if components.passengers.isPassengers is True:
-            self.passengersEntryState.set(1)
-            self.passengers.set(components.passengers.passengers[0])
+            self.passengersComponent.set(0, 0, components.passengers.passengers[0])
             if components.passengers.passengers[1] is not None:
-                self.passengersOptionalsEntryState.set(1)
-                line = components.passengers.passengers[1]
+                self.passengersComponent.set(1, 1, components.passengers.passengers[1])
                 if components.passengers.passengers[2] is not None:
-                    line = line + " " + components.passengers.passengers[2]
-                else:
-                    line = line + " [<probability#>]"
-                self.passengersOptionals.set(line)
+                    self.passengersComponent.set(2, 2, components.passengers.passengers[2])
             #end if
         #end if
-        self.cbValueChanged(self.passengersEntryState, self.passengersEntry)
-        self.cbValueChanged(self.passengersOptionalsEntryState, self.passengersOptionalsEntry)
-
 
         # illegal
         if components.illegal.isIllegal is True:
