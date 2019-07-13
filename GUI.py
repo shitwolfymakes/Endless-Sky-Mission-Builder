@@ -224,7 +224,7 @@ class GUI(object):
         self.passengersComponent.grid(row=5, column=0, sticky="ew")
 
         # Illegal
-        self.illegalComponent = buildComponentFrame(cf, "Illegal", 0, 2, ["<fine#>", "[<message>]"])
+        self.illegalComponent = buildComponentFrame(cf, "Illegal", 1, 1, ["<fine#>", "[<message>]"])
         self.illegalComponent.grid(row=6, column=0, sticky="ew")
 
         # Stealth
@@ -358,7 +358,7 @@ class GUI(object):
         # deadline
         self.deadlineComponent.reset()
         if components.deadline.isDeadline is True:
-            self.deadlineComponent.set(0, None, "isDeadline")
+            self.deadlineComponent.set(0, None, "isDeadlineCheckbutton")
             if components.deadline.deadline[0] is not None:
                 self.deadlineComponent.set(1, 0, components.deadline.deadline[0])
                 if components.deadline.deadline[1] is not None:
@@ -390,23 +390,16 @@ class GUI(object):
 
         # illegal
         if components.illegal.isIllegal is True:
-            self.illegalEntryState.set(1)
-            self.fine.set(components.illegal.illegal[0])
+            self.illegalComponent.set(0, 0, components.illegal.illegal[0])
             if components.illegal.illegal[1] is not None:
-                self.fineMessageEntryState.set(1)
-                self.fineMessage.set(components.illegal.illegal[1])
+                self.illegalComponent.set(1, 1, components.illegal.illegal[1])
             # end if
         # end if
-        self.cbValueChanged(self.illegalEntryState, self.fineEntry)
-        self.cbValueChanged(self.fineMessageEntryState, self.fineMessageEntry)
-
 
         # stealth
         if components.isStealth is True:
-            self.stealthEntryState.set(1)
+            self.stealthComponent.set(0, None, "stealthCheckbutton")
         #end if
-        self.cbValueChanged(self.stealthEntryState, "stealthCheckbutton")
-
 
         # isInvisible
         if components.isInvisible is True:
