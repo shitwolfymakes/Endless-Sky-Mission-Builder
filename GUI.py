@@ -399,13 +399,10 @@ class GUI(object):
         # stealth
         if components.isStealth is True:
             self.stealthComponent.set(0, None, "stealthCheckbutton")
-        #end if
 
         # isInvisible
         if components.isInvisible is True:
-            self.isInvisibleEntryState.set(1)
-        #end if
-        self.cbValueChanged(self.isInvisibleEntryState, "isInvisibleCheckbutton")
+            self.invisibleComponent.set(0, None, "isInvisibleCheckbutton")
 
 
         # priorityLevel
