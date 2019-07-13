@@ -12,6 +12,7 @@
 This handles the GUI for ESMB
 
 '''
+import tkinter.font as tkfont
 
 from menuactions import *
 from guiutils import *
@@ -287,7 +288,7 @@ class GUI(object):
         mfTitle = ttk.Label(self.missionFrame, text="Mission Text")
         mfTitle.pack()
 
-        #Populate the Text with a mission template
+        # Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
         self.missionTextBox.pack(expand=1, fill='both')
         welcome_message = "\n"
