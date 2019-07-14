@@ -13,6 +13,7 @@ This handles the GUI for ESMB
 
 '''
 import tkinter.font as tkfont
+from ttkthemes import ThemedTk
 
 from menuactions import *
 from guiutils import *
