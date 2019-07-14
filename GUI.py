@@ -12,7 +12,6 @@
 This handles the GUI for ESMB
 
 '''
-import tkinter.font as tkfont
 from ttkthemes import ThemedTk
 
 from menuactions import *
@@ -37,7 +36,7 @@ class GUI(object):
         #end if
 
         # Build the application window
-        self.gui = ThemedTk(theme="arc")
+        self.gui = ThemedTk(theme="plastik")
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
 
