@@ -20,7 +20,6 @@ class MissionFileParser(object):
         self.esmb     = esmb
         self.missions = esmb.missionList
 
-        self.graveKeyPattern = re.compile(r'^ *(.*) (`.*`) *')
         self.logMessagePattern = re.compile(r'^ *')
     #end init
 
@@ -195,29 +194,28 @@ class MissionFileParser(object):
         print("File parsing complete.")
     #end run
 
-
-    def tokenize(self, line):
-        if '`' in line:
-            #TODO: Fully implement this later, it's a ghetto-rigged POS
-            #print(line)
-            tokens = re.split(self.graveKeyPattern, line)
-            tokens = tokens[1:3]
-        else:
-            tokens = shlex.split(line)
-        #end if/else
-        #print(tokens)
+    @staticmethod
+    def tokenize(line):
+        pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
+        tokens = re.findall(pattern, line)
+        for i, token in enumerate(tokens):
+            if token.startswith("`"):
+                tokens[i] = token[1:-1]
+            elif token.startswith("\""):
+                tokens[i] = token[1:-1]
+        print(tokens)
         return tokens
     #end tokenize
 
-
-    def getIndentLevel(self, line):
+    @staticmethod
+    def getIndentLevel(line):
         tabCount = len(line) - len(line.lstrip(' '))
         #print(tabCount)
         return tabCount
     #end getIndentLevel
 
-
-    def storeComponentData(self, component, tokens):
+    @staticmethod
+    def storeComponentData(component, tokens):
         for i, token in enumerate(tokens):
             if token is not None:
                 component[i] = token
