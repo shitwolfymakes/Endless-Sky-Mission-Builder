@@ -375,6 +375,7 @@ class GUI(object):
         #end if
 
         # passengers
+        self.passengersComponent.reset()
         if components.passengers.isPassengers is True:
             self.passengersComponent.set(0, 0, components.passengers.passengers[0])
             if components.passengers.passengers[1] is not None:
@@ -385,6 +386,7 @@ class GUI(object):
         #end if
 
         # illegal
+        self.illegalComponent.reset()
         if components.illegal.isIllegal is True:
             self.illegalComponent.set(0, 0, components.illegal.illegal[0])
             if components.illegal.illegal[1] is not None:
@@ -393,22 +395,27 @@ class GUI(object):
         # end if
 
         # stealth
+        self.stealthComponent.reset()
         if components.isStealth is True:
             self.stealthComponent.set(0, None, "stealthCheckbutton")
 
         # invisible
+        self.invisibleComponent.reset()
         if components.isInvisible is True:
             self.invisibleComponent.set(0, None, "isInvisibleCheckbutton")
 
         # priorityLevel
+        self.priorityLevelComponent.reset()
         if components.priorityLevel is not None:
             self.priorityLevelComponent.set(components.priorityLevel)
 
         # whereShown
+        self.whereShownComponent.reset()
         if components.whereShown is not None:
             self.whereShownComponent.set(components.whereShown)
 
         # repeat
+        self.repeatComponent.reset()
         if components.isRepeat is True:
             self.repeatComponent.set(0, None, "isRepeatCheckbutton")
             if components.repeat is not None:
@@ -416,6 +423,7 @@ class GUI(object):
         #end if
 
         # clearance
+        self.clearanceComponent.reset()
         if components.clearance.isClearance is True:
             self.clearanceComponent.set(0, None, "isClearanceCheckbutton")
             if components.clearance.clearance is not None:
@@ -423,23 +431,28 @@ class GUI(object):
         #end if
 
         # infiltrating
+        self.infiltratingComponent.reset()
         if components.isInfiltrating is True:
             self.infiltratingComponent.set(0, None, "isInfiltratingCheckbutton")
 
         # waypoint
+        self.waypointComponent.reset()
         if components.waypoint is not None:
             self.waypointComponent.set(0, 0, components.waypoint)
 
 
         # stopover
+        self.stopoverComponent.reset()
         if components.stopover.isStopover is True:
             self.stopoverComponent.set(0, 0, components.stopover.stopover)
 
         # source
+        self.sourceComponent.reset()
         if components.source.isSource is True:
             self.sourceComponent.set(0, 0, components.source.source)
 
         # destination
+        self.destinationComponent.reset()
         if components.destination.isDestination is True:
             self.destinationComponent.set(0, 0, components.destination.destination)
 
