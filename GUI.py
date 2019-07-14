@@ -1,4 +1,4 @@
-''' GUI.py
+""" GUI.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -10,8 +10,8 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 This handles the GUI for ESMB
+"""
 
-'''
 from ttkthemes import ThemedTk
 
 from menuactions import *
