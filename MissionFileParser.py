@@ -140,7 +140,7 @@ class MissionFileParser(object):
                             print("\t\t\tFound Event: %s" % tokens[1])
                             trigger.isFail = True
                             trigger.fail   = tokens[1]
-                        elif "log" in tokens[0] and tokens[0] == "log":
+                        elif "log" in tokens[0] and len(tokens) == 2:
                             print("\t\t\tFound Log: %s" % tokens)
                             newLog            = trigger.addLog()
                             newLog.isActive   = True
@@ -151,10 +151,7 @@ class MissionFileParser(object):
                             newLog            = trigger.addLog()
                             newLog.isActive   = True
                             newLog.formatType = "<type> <name> <message>"
-
-                            tokens2 = shlex.split(tokens[0])
-                            tokens2.append(tokens[1])
-                            self.storeComponentData(newLog.log, tokens2[1:])
+                            self.storeComponentData(newLog.log, tokens[1:])
                         elif tokens[1] in ["=", "+=", "-="]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
                             newTC               = trigger.addTC()
