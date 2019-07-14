@@ -13,7 +13,7 @@ This takes the data read in from a mission file and stores it in each mission ob
 
 '''
 #TODO: Add data validation, there are currently no checks to make sure it's not all junk data
-import re, shlex
+import re
 
 class MissionFileParser(object):
     def __init__(self, esmb):
