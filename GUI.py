@@ -270,11 +270,9 @@ class GUI(object):
         self.destinationComponent = buildComponentFrame(cf, "Destination", 1, 0, ["[<planet>]"])
         self.destinationComponent.grid(row=17, column=0, sticky="ew")
 
-
         # triggers
         self.triggersFrame = AggregatedTriggerFrame(self, cf)
         self.triggersFrame.grid(row=18, column=0, sticky="ew")
-
 
         print("Done.")
     #end buildComponentsOnCenterFrame
@@ -335,7 +333,6 @@ class GUI(object):
         print("\nUpdating centerFrame...")
 
         components = self.activeMission.components
-
 
         # missionDisplayName
         self.displayNameComponent.reset()
@@ -446,6 +443,11 @@ class GUI(object):
         if components.destination.isDestination is True:
             self.destinationComponent.set(0, 0, components.destination.destination)
 
+        # Clear out the AggregatedTriggerFrame
+        self.triggersFrame.grid_forget()
+        self.triggersFrame = AggregatedTriggerFrame(self, self.centerFrame.inner)
+        self.triggersFrame.grid(row=18, column=0, sticky="ew")
+
         # Triggers
         if components.triggerList:
             print("\tTriggers found")
@@ -475,7 +477,7 @@ class GUI(object):
 
     ### MISC METHODS ###
 
-    def missionSelected(self, event):
+    def missionSelected(self, event=None):
         selectedMissionName = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selectedMissionName)
         self.activeMission = self.missionNameToObjectDict.get(selectedMissionName)

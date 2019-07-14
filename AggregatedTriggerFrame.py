@@ -90,11 +90,21 @@ class AggregatedTriggerFrame(ttk.Frame):
             self.changeTriggerState(state, trigger)
     #end populateLog
 
+
     @staticmethod
-    def changeTriggerState( state, trigger):
+    def changeTriggerState(state, trigger):
         trigger.isActive = state.get()
         print(trigger, "is now", trigger.isActive)
     #def changeTriggerState
+
+
+    def reset(self):
+        for trigger in self.triggerFrameList:
+            print(trigger)
+            trigger.pack_forget()
+            trigger.destroy()
+            print(trigger)
+    #end reset
 
 #end class AggregatedTriggerFrame
 
