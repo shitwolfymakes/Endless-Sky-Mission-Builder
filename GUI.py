@@ -32,7 +32,7 @@ class GUI(object):
 
         if self.debugging:
             self.missionList             = [Mission("Debugging", default=True)]
-            self.missionNameToObjectDict = {self.missionList[0].missionName : self.missionList[0]}
+            self.missionNameToObjectDict = {self.missionList[0].missionName: self.missionList[0]}
             self.missionNames.append(self.missionList[0].missionName)
         #end if
 
@@ -83,13 +83,12 @@ class GUI(object):
         self.triggersFrame = None
         self.activeTrigger = None
 
-
         # declare missionFrame components
         self.missionTextBox = None
 
         # Build the different parts of the main window
         #self.buildMenu(self.gui)
-        self.buildMainView(self.gui)
+        self.build_main_view(self.gui)
 
         self.activeMission = None
         if self.debugging:
@@ -127,75 +126,66 @@ class GUI(object):
     #end buildMenu
     '''
 
-    def buildMainView(self, window):
-        optionFrame  = ttk.Frame(window)
-        centerFrame  = ScrollingCenterFrame(self, window)
-        missionFrame = ttk.Frame(window)
+    def build_main_view(self, window):
+        option_frame  = ttk.Frame(window)
+        center_frame  = ScrollingCenterFrame(self, window)
+        mission_frame = ttk.Frame(window)
 
-        self.optionFrame  = optionFrame
-        self.centerFrame  = centerFrame
-        self.missionFrame = missionFrame
+        self.optionFrame  = option_frame
+        self.centerFrame  = center_frame
+        self.missionFrame = mission_frame
 
         # set up each of the frames
-        self.buildOptionFrame()
-        self.buildCenterFrame()
-        self.buildMissionFrame()
-    #end buildMainView
+        self.build_option_frame()
+        self.build_center_frame()
+        self.build_mission_frame()
+    #end build_main_view
 
 
     ### BUILDING FRAMES ###
 
 
-    def buildOptionFrame(self):
+    def build_option_frame(self):
         print("Building optionFrame...", end="\t\t")
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
-        ofTitle = ttk.Label(self.optionFrame, text="Mission")
-        ofTitle.pack()
+        of_title = ttk.Label(self.optionFrame, text="Mission")
+        of_title.pack()
 
         # declare the combobox here, fill with missionNames
         self.missionComboBox = ttk.Combobox(self.optionFrame, state="readonly", values=self.missionNames)
-        self.missionComboBox.bind("<<ComboboxSelected>>", self.missionSelected)
+        self.missionComboBox.bind("<<ComboboxSelected>>", self.mission_selected)
         self.missionComboBox.pack()
 
         if self.debugging:
             self.missionComboBox.current(0)
 
         # add function buttons
-        newMissionButton = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newMission(self))
-        newMissionButton.pack(fill='x')
+        new_mission_button = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newMission(self))
+        new_mission_button.pack(fill='x')
 
-        saveMissionFileButton = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: saveFile(self))
-        saveMissionFileButton.pack(fill='x')
+        save_mission_file_button = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: saveFile(self))
+        save_mission_file_button.pack(fill='x')
 
-        openMissionFileButton = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: openFile(self))
-        openMissionFileButton.pack(fill='x')
+        open_mission_file_button = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: openFile(self))
+        open_mission_file_button.pack(fill='x')
 
-        compileMissionFileButton = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMission(self))
-        compileMissionFileButton.pack(fill='x')
+        compile_mission_file_button = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMission(self))
+        compile_mission_file_button.pack(fill='x')
 
-        helpButton = ttk.Button(self.optionFrame, text="Help", command=helpUser)
-        helpButton.pack(fill='x')
+        help_button = ttk.Button(self.optionFrame, text="Help", command=helpUser)
+        help_button.pack(fill='x')
 
         #TODO: Add functions to change missionName and delete mission. Also, update button grouping to reflect
 
         print("Done.")
-    #end buildOptionFrame
+    #end build_option_frame
 
 
-    def buildCenterFrame(self):
+    def build_center_frame(self):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
-        self.buildComponentsOnCenterFrame()
-
-        print("Done.")
-    #end buildCenterFrame
-
-
-    def buildComponentsOnCenterFrame(self):
-        print()
-        print("\tRunning buildComponentsOnCenterFrame...", end="\t\t")
 
         cf = self.centerFrame.inner
 
@@ -276,16 +266,16 @@ class GUI(object):
         self.triggersFrame.grid(row=18, column=0, sticky="ew")
 
         print("Done.")
-    #end buildComponentsOnCenterFrame
+    #end build_center_frame
 
 
-    def buildMissionFrame(self):
+    def build_mission_frame(self):
         print("Building missionFrame...", end="\t")
 
         #Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
-        mfTitle = ttk.Label(self.missionFrame, text="Mission Text")
-        mfTitle.pack()
+        mf_title = ttk.Label(self.missionFrame, text="Mission Text")
+        mf_title.pack()
 
         # Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
@@ -300,13 +290,13 @@ class GUI(object):
         self.missionTextBox.insert(END, welcome_message)
 
         print("Done.")
-    #end buildMissionFrame
+    #end build_mission_frame
 
 
     ### UPDATING FRAMES ###
 
 
-    def updateOptionFrame(self):
+    def update_option_frame(self):
         print("\nUpdating optionFrame...")
 
         ### Start updating combobox
@@ -323,14 +313,14 @@ class GUI(object):
         ### Finish updating combobox
 
         # update the other two frames to reflect the current mission
-        self.updateCenterFrame()
-        self.updateMissionFrame()
+        self.update_center_frame()
+        self.update_mission_frame()
 
         print("Done.")
-    #end updateOptionFrame
+    #end update_option_frame
 
 
-    def updateCenterFrame(self):
+    def update_center_frame(self):
         print("\nUpdating centerFrame...")
 
         components = self.activeMission.components
@@ -469,10 +459,10 @@ class GUI(object):
                 self.triggersFrame.populateTrigger(trigger)
 
     print("Done.")
-    #end updateCenterFrame
+    #end update_center_frame
 
 
-    def updateMissionFrame(self):
+    def update_mission_frame(self):
         print("\nUpdating missionFrame...", end="\t")
 
         self.missionTextBox.forget()
@@ -481,17 +471,18 @@ class GUI(object):
         self.missionTextBox.insert(END, self.activeMission.printMissionLinesToText())
 
         print("Done.")
-    #end updateMissionFrame
+    #end update_mission_frame
 
 
     ### MISC METHODS ###
 
-    def missionSelected(self, event=None):
-        selectedMissionName = self.missionComboBox.get()
-        print('\nOpening mission "%s"' % selectedMissionName)
-        self.activeMission = self.missionNameToObjectDict.get(selectedMissionName)
-        self.updateCenterFrame()
-        self.updateMissionFrame()
-    #end missionSelected
+
+    def mission_selected(self, event=None):
+        selected_mission_name = self.missionComboBox.get()
+        print('\nOpening mission "%s"' % selected_mission_name)
+        self.activeMission = self.missionNameToObjectDict.get(selected_mission_name)
+        self.update_center_frame()
+        self.update_mission_frame()
+    #end mission_selected
 
 #end class GUI

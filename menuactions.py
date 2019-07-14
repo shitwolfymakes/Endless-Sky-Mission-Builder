@@ -106,7 +106,7 @@ def openFile(app):
     parser.run()
 
     app.activeMission = app.missionList[0]
-    app.updateOptionFrame()
+    app.update_option_frame()
 # end openFile
 
 
@@ -145,7 +145,7 @@ def newMission(app):
 def compileMission(app):
     compiler = MissionCompiler(app)
     compiler.run()
-    app.updateMissionFrame()
+    app.update_mission_frame()
 # end compileMission
 
 

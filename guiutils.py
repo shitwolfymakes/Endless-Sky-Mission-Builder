@@ -24,7 +24,7 @@ def addMission(app, newMissionName):
     app.missionList.append(mission)
     app.missionNameToObjectDict.update({mission.missionName: mission})
     app.activeMission = mission
-    app.updateOptionFrame()
+    app.update_option_frame()
 # end addMission
 
 
@@ -88,7 +88,7 @@ class _ComboComponentFrame(ttk.Frame):
     def optionSelected(self, event=None):
         selectedOption = self.combo.get()
         print('\nOption selected: "%s"' % selectedOption)
-    #end missionSelected
+    #end mission_selected
 
 
     def set(self, data):
