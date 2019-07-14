@@ -13,14 +13,13 @@ This takes the data read in from a mission file and stores it in each mission ob
 
 '''
 #TODO: Add data validation, there are currently no checks to make sure it's not all junk data
-import re, shlex
+import re
 
 class MissionFileParser(object):
     def __init__(self, esmb):
         self.esmb     = esmb
         self.missions = esmb.missionList
 
-        self.graveKeyPattern = re.compile(r'^ *(.*) (`.*`) *')
         self.logMessagePattern = re.compile(r'^ *')
     #end init
 
@@ -55,7 +54,7 @@ class MissionFileParser(object):
                 elif "cargo" in tokens[0]:
                     print("\t\tFound cargo: %s" % tokens[1:])
                     mission.components.cargo.isCargo = True
-                    self.storeComponentData(mission.components.cargo.cargoType, tokens[1:])
+                    self.storeComponentData(mission.components.cargo.cargo, tokens[1:])
                 elif "passengers" in tokens[0]:
                     print("\t\tFound passengers: %s" % tokens[1:])
                     mission.components.passengers.isPassengers = True
@@ -141,7 +140,7 @@ class MissionFileParser(object):
                             print("\t\t\tFound Event: %s" % tokens[1])
                             trigger.isFail = True
                             trigger.fail   = tokens[1]
-                        elif "log" in tokens[0] and tokens[0] == "log":
+                        elif "log" in tokens[0] and len(tokens) == 2:
                             print("\t\t\tFound Log: %s" % tokens)
                             newLog            = trigger.addLog()
                             newLog.isActive   = True
@@ -152,10 +151,7 @@ class MissionFileParser(object):
                             newLog            = trigger.addLog()
                             newLog.isActive   = True
                             newLog.formatType = "<type> <name> <message>"
-
-                            tokens2 = shlex.split(tokens[0])
-                            tokens2.append(tokens[1])
-                            self.storeComponentData(newLog.log, tokens2[1:])
+                            self.storeComponentData(newLog.log, tokens[1:])
                         elif tokens[1] in ["=", "+=", "-="]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
                             newTC               = trigger.addTC()
@@ -195,29 +191,28 @@ class MissionFileParser(object):
         print("File parsing complete.")
     #end run
 
-
-    def tokenize(self, line):
-        if '`' in line:
-            #TODO: Fully implement this later, it's a ghetto-rigged POS
-            #print(line)
-            tokens = re.split(self.graveKeyPattern, line)
-            tokens = tokens[1:3]
-        else:
-            tokens = shlex.split(line)
-        #end if/else
-        #print(tokens)
+    @staticmethod
+    def tokenize(line):
+        pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
+        tokens = re.findall(pattern, line)
+        for i, token in enumerate(tokens):
+            if token.startswith("`"):
+                tokens[i] = token[1:-1]
+            elif token.startswith("\""):
+                tokens[i] = token[1:-1]
+        print(tokens)
         return tokens
     #end tokenize
 
-
-    def getIndentLevel(self, line):
+    @staticmethod
+    def getIndentLevel(line):
         tabCount = len(line) - len(line.lstrip(' '))
         #print(tabCount)
         return tabCount
     #end getIndentLevel
 
-
-    def storeComponentData(self, component, tokens):
+    @staticmethod
+    def storeComponentData(component, tokens):
         for i, token in enumerate(tokens):
             if token is not None:
                 component[i] = token

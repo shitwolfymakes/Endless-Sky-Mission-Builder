@@ -12,13 +12,11 @@
 This handles the GUI for ESMB
 
 '''
-from tkinter import *
-from tkinter import ttk, StringVar
-from ttkthemes import ThemedTk
+import tkinter.font as tkfont
 
 from menuactions import *
 from guiutils import *
-from ScrollingCenterFrame import ScrollingCenterFrame2
+from ScrollingCenterFrame import ScrollingCenterFrame
 from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 class GUI(object):
@@ -130,7 +128,7 @@ class GUI(object):
 
     def buildMainView(self, window):
         optionFrame  = ttk.Frame(window)
-        centerFrame  = ScrollingCenterFrame2(self, window)
+        centerFrame  = ScrollingCenterFrame(self, window)
         missionFrame = ttk.Frame(window)
 
         self.optionFrame  = optionFrame
@@ -188,7 +186,6 @@ class GUI(object):
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
-        #self.__setDefaultEntryValues()
         self.buildComponentsOnCenterFrame()
 
         print("Done.")
@@ -226,7 +223,7 @@ class GUI(object):
         self.passengersComponent.grid(row=5, column=0, sticky="ew")
 
         # Illegal
-        self.illegalComponent = buildComponentFrame(cf, "Illegal", 0, 2, ["<fine#>", "[<message>]"])
+        self.illegalComponent = buildComponentFrame(cf, "Illegal", 1, 1, ["<fine#>", "[<message>]"])
         self.illegalComponent.grid(row=6, column=0, sticky="ew")
 
         # Stealth
@@ -291,7 +288,7 @@ class GUI(object):
         mfTitle = ttk.Label(self.missionFrame, text="Mission Text")
         mfTitle.pack()
 
-        #Populate the Text with a mission template
+        # Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
         self.missionTextBox.pack(expand=1, fill='both')
         welcome_message = "\n"
@@ -337,198 +334,117 @@ class GUI(object):
     def updateCenterFrame(self):
         print("\nUpdating centerFrame...")
 
-        self.__setDefaultEntryValues()
-        self.__setDefaultEntryStateValues()
-
         components = self.activeMission.components
 
 
         # missionDisplayName
+        self.displayNameComponent.reset()
         if components.missionDisplayName is not None:
-            self.displayNameEntryState.set(1)
-            self.displayName.set(components.missionDisplayName)
-        #end if
-        self.cbValueChanged(self.displayNameEntryState, self.displayNameEntry)
-
+            self.displayNameComponent.set(0, 0, components.missionDisplayName)
 
         # description
+        self.descriptionComponent.reset()
         if components.description is not None:
-            self.descriptionEntryState.set(1)
-            description = components.description.lstrip('`').rstrip('`')
-            self.description.set(description)
+            description = components.description
+            self.descriptionComponent.set(0, 0, description)
         #end if
-        self.cbValueChanged(self.descriptionEntryState, self.descriptionEntry)
-
 
         # blocked
+        self.blockedComponent.reset()
         if components.blocked is not None:
-            self.isBlockedEntryState.set(1)
-            self.isBlockedMessage.set(components.blocked)
-        #end if
-        self.cbValueChanged(self.isBlockedEntryState, self.isBlockedMessageEntry)
-
+            self.blockedComponent.set(0, 0, components.blocked)
 
         # deadline
+        self.deadlineComponent.reset()
         if components.deadline.isDeadline is True:
-            self.deadlineEntryState.set(1)
+            self.deadlineComponent.set(0, None, "isDeadlineCheckbutton")
             if components.deadline.deadline[0] is not None:
-                self.deadlineOptionalsEntryState.set(1)
-                line = components.deadline.deadline[0]
+                self.deadlineComponent.set(1, 0, components.deadline.deadline[0])
                 if components.deadline.deadline[1] is not None:
-                    line = line + " " + components.deadline.deadline[1]
-                else:
-                    line = line + " [<multiplier#>]"
-                #end if/else
-                self.deadlineOptionals.set(line)
+                    self.deadlineComponent.set(2, 1, components.deadline.deadline[1])
             #end if
         #end if
-        self.cbValueChanged(self.deadlineEntryState, self.deadlineOptionalsCheckbutton)
-        self.cbValueChanged(self.deadlineOptionalsEntryState, self.deadlineOptionalsEntry)
-
 
         # cargo
+        self.cargoComponent.reset()
         if components.cargo.isCargo is True:
-            self.cargoEntryState.set(1)
-            self.cargo.set("%s %s" % (components.cargo.cargoType[0],
-                                      components.cargo.cargoType[1]))
-            # cargoOptionals
-            if components.cargo.cargoType[2] is not None:
-                self.cargoOptionalsEntryState.set(1)
-                line = components.cargo.cargoType[2]
-                if components.cargo.cargoType[3] is not None:
-                    line = line + " " + components.cargo.cargoType[3]
-                else:
-                    line = line + " [<probability#>]"
-                #end if/else
-                self.cargoOptionals.set(line)
+            self.cargoComponent.set(0, 0, components.cargo.cargo[0])
+            self.cargoComponent.set(0, 1, components.cargo.cargo[1])
+            if components.cargo.cargo[2] is not None:
+                self.cargoComponent.set(1, 2, components.cargo.cargo[2])
+                if components.cargo.cargo[2] is not None:
+                    self.cargoComponent.set(2, 3, components.cargo.cargo[3])
             #end if
-
-
         #end if
-        self.cbValueChanged(self.cargoEntryState, self.cargoEntry)
-        self.cbValueChanged(self.cargoOptionalsEntryState, self.cargoOptionalsEntry)
-
 
         # passengers
         if components.passengers.isPassengers is True:
-            self.passengersEntryState.set(1)
-            self.passengers.set(components.passengers.passengers[0])
+            self.passengersComponent.set(0, 0, components.passengers.passengers[0])
             if components.passengers.passengers[1] is not None:
-                self.passengersOptionalsEntryState.set(1)
-                line = components.passengers.passengers[1]
+                self.passengersComponent.set(1, 1, components.passengers.passengers[1])
                 if components.passengers.passengers[2] is not None:
-                    line = line + " " + components.passengers.passengers[2]
-                else:
-                    line = line + " [<probability#>]"
-                self.passengersOptionals.set(line)
+                    self.passengersComponent.set(2, 2, components.passengers.passengers[2])
             #end if
         #end if
-        self.cbValueChanged(self.passengersEntryState, self.passengersEntry)
-        self.cbValueChanged(self.passengersOptionalsEntryState, self.passengersOptionalsEntry)
-
 
         # illegal
         if components.illegal.isIllegal is True:
-            self.illegalEntryState.set(1)
-            self.fine.set(components.illegal.illegal[0])
+            self.illegalComponent.set(0, 0, components.illegal.illegal[0])
             if components.illegal.illegal[1] is not None:
-                self.fineMessageEntryState.set(1)
-                self.fineMessage.set(components.illegal.illegal[1])
+                self.illegalComponent.set(1, 1, components.illegal.illegal[1])
             # end if
         # end if
-        self.cbValueChanged(self.illegalEntryState, self.fineEntry)
-        self.cbValueChanged(self.fineMessageEntryState, self.fineMessageEntry)
-
 
         # stealth
         if components.isStealth is True:
-            self.stealthEntryState.set(1)
-        #end if
-        self.cbValueChanged(self.stealthEntryState, "stealthCheckbutton")
+            self.stealthComponent.set(0, None, "stealthCheckbutton")
 
-
-        # isInvisible
+        # invisible
         if components.isInvisible is True:
-            self.isInvisibleEntryState.set(1)
-        #end if
-        self.cbValueChanged(self.isInvisibleEntryState, "isInvisibleCheckbutton")
-
+            self.invisibleComponent.set(0, None, "isInvisibleCheckbutton")
 
         # priorityLevel
         if components.priorityLevel is not None:
-            self.priorityLevelEntryState.set(1)
-            self.rbPriorityValue.set(components.priorityLevel)
-        #end if
-        self.cbValueChanged(self.priorityLevelEntryState, "priorityLevelCheckbutton")
-
+            self.priorityLevelComponent.set(components.priorityLevel)
 
         # whereShown
         if components.whereShown is not None:
-            self.whereShownEntryState.set(1)
-            self.rbWhereShownValue.set(components.whereShown)
-        #end if
-        self.cbValueChanged(self.whereShownEntryState, "whereShownCheckbutton")
-
+            self.whereShownComponent.set(components.whereShown)
 
         # repeat
         if components.isRepeat is True:
-            self.repeatEntryState.set(1)
+            self.repeatComponent.set(0, None, "isRepeatCheckbutton")
             if components.repeat is not None:
-                self.repeatOptionalsEntryState.set(1)
-                self.repeatOptionals.set(components.repeat)
-            #end if
+                self.repeatComponent.set(1, 0, components.repeat)
         #end if
-        self.cbValueChanged(self.repeatEntryState, self.repeatOptionalsCheckbutton)
-        self.cbValueChanged(self.repeatOptionalsEntryState, self.repeatOptionalsEntry)
-
 
         # clearance
         if components.clearance.isClearance is True:
-            self.clearanceEntryState.set(1)
+            self.clearanceComponent.set(0, None, "isClearanceCheckbutton")
             if components.clearance.clearance is not None:
-                self.clearanceOptionalsEntryState.set(1)
-                self.clearanceOptionals.set(components.clearance.clearance)
+                self.clearanceComponent.set(1, 0, components.clearance.clearance)
         #end if
-        self.cbValueChanged(self.clearanceEntryState, self.clearanceOptionalsEntry)
-
 
         # infiltrating
         if components.isInfiltrating is True:
-            self.isInfiltratingEntryState.set(1)
-        #end if
-        self.cbValueChanged(self.isInfiltratingEntryState, "isInfiltratingCheckbutton")
-
+            self.infiltratingComponent.set(0, None, "isInfiltratingCheckbutton")
 
         # waypoint
         if components.waypoint is not None:
-            self.waypointEntryState.set(1)
-            self.waypoint.set(components.waypoint)
-        # end if
-        self.cbValueChanged(self.waypointEntryState, self.waypointEntry)
+            self.waypointComponent.set(0, 0, components.waypoint)
 
 
         # stopover
         if components.stopover.isStopover is True:
-            self.stopoverEntryState.set(1)
-            self.stopover.set(components.stopover.stopover)
-        # end if
-        self.cbValueChanged(self.stopoverEntryState, self.stopoverEntry)
-
+            self.stopoverComponent.set(0, 0, components.stopover.stopover)
 
         # source
         if components.source.isSource is True:
-            self.sourceEntryState.set(1)
-            self.source.set(components.source.source)
-        # end if
-        self.cbValueChanged(self.sourceEntryState, self.sourceEntry)
-
+            self.sourceComponent.set(0, 0, components.source.source)
 
         # destination
         if components.destination.isDestination is True:
-            self.destinationEntryState.set(1)
-            self.destination.set(components.destination.destination)
-        # end if
-        self.cbValueChanged(self.destinationEntryState, self.destinationEntry)
+            self.destinationComponent.set(0, 0, components.destination.destination)
 
         # Triggers
         if components.triggerList:
@@ -559,56 +475,6 @@ class GUI(object):
 
     ### MISC METHODS ###
 
-    def __setDefaultEntryValues(self):
-        self.displayName.set("<name>")
-        self.description.set("<description>")
-        self.isBlockedMessage.set("<message>")
-        self.deadlineOptionals.set("[<days#> [<multiplier#>]]")
-        self.cargo.set("(random | <name>) <number#>")
-        self.cargoOptionals.set("[<number#> [<probability#>]]")
-        self.fine.set("<fine#>")
-        self.fineMessage.set("[<message>]")
-        self.passengers.set("<number#>")
-        self.passengersOptionals.set("[<number#> [<probability#>]]")
-        self.rbPriorityValue.set("")
-        self.rbWhereShownValue.set("")
-        self.repeatOptionals.set("[<times#>]")
-        self.clearanceOptionals.set("[<message>]")
-        self.waypoint.set("<system>")
-        self.stopover.set("<planet>")
-        self.source.set("<planet>")
-        self.destination.set("<planet>")
-    #end setDefaultEntryValues
-
-
-    def __setDefaultEntryStateValues(self):
-        self.displayNameEntryState.set(0)
-        self.descriptionEntryState.set(0)
-        self.isBlockedEntryState.set(0)
-        self.deadlineEntryState.set(0)
-        self.deadlineOptionalsEntryState.set(0)
-        self.cargoEntryState.set(0)
-        self.cargoOptionalsEntryState.set(0)
-        self.illegalEntryState.set(0)
-        self.fineMessageEntryState.set(0)
-        self.stealthEntryState.set(0)
-        self.passengersEntryState.set(0)
-        self.passengersOptionalsEntryState.set(0)
-        self.isInvisibleEntryState.set(0)
-        self.priorityLevelEntryState.set(0)
-        self.whereShownEntryState.set(0)
-        self.repeatEntryState.set(0)
-        self.repeatOptionalsEntryState.set(0)
-        self.clearanceEntryState.set(0)
-        self.clearanceOptionalsEntryState.set(0)
-        self.isInfiltratingEntryState.set(0)
-        self.waypointEntryState.set(0)
-        self.passengersOptionalsEntryState.set(0)
-        self.sourceEntryState.set(0)
-        self.destinationEntryState.set(0)
-    #end setDefaultEntryStateValues
-
-
     def missionSelected(self, event):
         selectedMissionName = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selectedMissionName)
@@ -616,6 +482,5 @@ class GUI(object):
         self.updateCenterFrame()
         self.updateMissionFrame()
     #end missionSelected
-
 
 #end class GUI

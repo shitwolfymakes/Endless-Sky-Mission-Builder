@@ -56,11 +56,12 @@ class _ComboComponentFrame(ttk.Frame):
         label = ttk.Label(self, text=componentName)
         label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
+        self.listComboboxData = listComboboxData
         self.isActive = BooleanVar()
         self.option   = None
 
         self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.isActive)
-        self.combo    = ttk.Combobox(self, state="disabled", values=listComboboxData, style='D.TCombobox')
+        self.combo    = ttk.Combobox(self, state="disabled", values=self.listComboboxData, style='D.TCombobox')
         self.combo.bind("<<ComboboxSelected>>", self.optionSelected)
 
         self.button.configure(command=partial(self.cbValueChanged, self.isActive, [self.combo]))
@@ -88,6 +89,27 @@ class _ComboComponentFrame(ttk.Frame):
         selectedOption = self.combo.get()
         print('\nOption selected: "%s"' % selectedOption)
     #end missionSelected
+
+
+    def set(self, data):
+        '''
+            This method does the following:
+                1) set the given entry state to 1
+                2) set the combobox to the given data
+                3) enable the given entry using cbValueChanged
+        '''
+
+        self.isActive.set(1)
+        self.combo.current(self.listComboboxData.index(data.title()))
+        self.cbValueChanged(self.isActive, [self.combo])
+    #end set
+
+
+    def reset(self):
+        self.isActive.set(0)
+        self.combo.current(None)
+        self.combo.config(state='disabled', style='D.TCombobox')
+    #end reset
 
 #end class _ComboComponentFrame
 
@@ -143,11 +165,12 @@ class _ComponentMandOptFrame(ttk.Frame):
         label1.grid(row=0, column=0, sticky="w", padx=(5, 0))
         self.rowNum += 1
 
+        # all components need at least one entry state
+        self.listEntryStates.append(BooleanVar())
+
         # Case 1: No mandatory fields
         if self.numMandatory is 0:
             # print("\t\t\tNo mandatory fields")
-
-            self.listEntryStates.append(BooleanVar())
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
             self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
@@ -160,11 +183,10 @@ class _ComponentMandOptFrame(ttk.Frame):
         elif self.numMandatory is 1:
             # print("\t\t\t1 mandatory field")
 
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry', width=30))
             self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
@@ -179,11 +201,10 @@ class _ComponentMandOptFrame(ttk.Frame):
             # print("\t\t\t%d mandatory fields" % self.numMandatory)
 
             # add the first checkbutton
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry'))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[0], state=DISABLED, style='D.TEntry', width=30))
             self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
@@ -193,11 +214,10 @@ class _ComponentMandOptFrame(ttk.Frame):
 
             # loop through the remaining mandatory fields, slaving them to the first checkbutton
             for i in range(1, self.numMandatory):
-                self.listEntryStates.append(BooleanVar())
                 self.listEntryData.append(StringVar())
                 self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry'))
+                self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style='D.TEntry', width=30))
                 self.listEntries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
                 self.rowNum += 1
@@ -214,7 +234,7 @@ class _ComponentMandOptFrame(ttk.Frame):
             self.listEntryData.append(StringVar())
             self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
-            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry"))
+            self.listEntries.append(ttk.Entry(self, textvariable=self.listEntryData[-1], state=DISABLED, style="D.TEntry", width=30))
             self.listEntries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20,0))
 
             # We have to use functools.partial here because lambda can't be used
@@ -227,7 +247,6 @@ class _ComponentMandOptFrame(ttk.Frame):
 
             self.rowNum += 1
         # end for
-
     # end build
 
 
@@ -245,6 +264,49 @@ class _ComponentMandOptFrame(ttk.Frame):
             #end if/else
         # end for
     # end cbValueChanged
+
+
+    def set(self, entryStateNum, entryNum, data):
+        '''
+            This method does the following:
+                1) set the given entry state to 1
+                2) store data in the given entry
+                3) enable the given entry using cbValueChanged
+        '''
+
+        if self.listEntryStates[entryStateNum].get() is False:
+            self.listEntryStates[entryStateNum].set(1)
+
+        if entryNum is None:
+            self.cbValueChanged(self.listEntryStates[entryStateNum], [data])
+        else:
+            self.listEntryData[entryNum].set(data)
+            self.cbValueChanged(self.listEntryStates[entryStateNum], [self.listEntries[entryNum]])
+        #end if/else
+    #end set
+
+
+    def reset(self):
+        for entry in self.listEntryStates:
+            entry.set(0)
+        for i, entry in enumerate(self.listEntryData):
+            entry.set(self.listDefaultEntryData[i])
+        for entry in self.listEntries:
+            entry.config(state='disabled', style='D.TEntry')
+    #end reset
+
+
+    def printData(self):
+        print("%s Data:" % self.componentName)
+        print("\tlistEntryStates: ")
+        for es in self.listEntryStates:
+            print("\t\t%s" % str(es.get()))
+        print("\tlistCheckbuttons: ", self.listCheckbuttons)
+        print("\tlistEntryData: ")
+        for ed in self.listEntryData:
+            print("\t\t%s" % ed.get())
+        print("\tlistEntries: ", self.listEntries)
+    #end printData
 
 # end class _ComponentMandOptFrame
 
@@ -296,11 +358,12 @@ class _SubComponentMandOptFrame(ttk.Frame):
         label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5, 0))
 
+        # all components need at least one entry state
+        self.listEntryStates.append(BooleanVar())
+
         # Case 1: No mandatory fields
         if self.numMandatory is 0:
             # print("\t\t\tNo mandatory fields")
-
-            self.listEntryStates.append(BooleanVar())
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
             self.listCheckbuttons[0].configure(command=partial(self.cbValueChanged,
@@ -313,7 +376,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
         elif self.numMandatory is 1:
             # print("\t\t\t1 mandatory field")
 
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
@@ -332,7 +394,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
             # print("\t\t\t%d mandatory fields" % self.numMandatory)
 
             # add the first checkbutton
-            self.listEntryStates.append(BooleanVar())
             self.listEntryData.append(StringVar())
             self.listEntryData[0].set(self.listDefaultEntryData[0])
 
@@ -346,7 +407,6 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
             # loop through the remaining mandatory fields, slaving them to the first checkbutton
             for i in range(1, self.numMandatory):
-                self.listEntryStates.append(BooleanVar())
                 self.listEntryData.append(StringVar())
                 self.listEntryData[-1].set(self.listDefaultEntryData[i])
 
