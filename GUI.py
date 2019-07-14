@@ -345,7 +345,7 @@ class GUI(object):
         # description
         self.descriptionComponent.reset()
         if components.description is not None:
-            description = components.description.lstrip('`').rstrip('`')
+            description = components.description
             self.descriptionComponent.set(0, 0, description)
         #end if
 
