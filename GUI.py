@@ -462,17 +462,12 @@ class GUI(object):
         print("\nUpdating missionFrame...", end="\t")
 
         self.missionTextBox.forget()
-        self.updateMissionTextBox()
-
-        print("Done.")
-    #end updateMissionFrame
-
-
-    def updateMissionTextBox(self):
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack()
         self.missionTextBox.insert(END, self.activeMission.printMissionLinesToText())
-    #end updateTextCanvas
+
+        print("Done.")
+    #end updateMissionFrame
 
 
     ### MISC METHODS ###
