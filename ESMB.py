@@ -1,4 +1,4 @@
-''' ESMB.py
+""" ESMB.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -17,27 +17,28 @@ Endless Sky is made by Michael Zahniser.
 
 My Github: https://github.com/shitwolfymakes
 Endless Sky Github: https://github.com/endless-sky/endless-sky
-'''
+"""
 
 from GUI import *
+
 
 class ESMB(object):
 
     def __init__(self):
-        debugMode = False
+        debug_mode = False
         if "debug=True" in sys.argv:
-            debugMode = True
+            debug_mode = True
         else:
             logfile = "log.txt"
             sys.stdout = open(logfile, 'w')
-        self.gui = GUI(debugMode)
+        self.gui = GUI(debug_mode)
     #end init
 
 #end class ESMB
 
 
 def main():
-    app = ESMB()
+    ESMB()
 # end main
 
 
