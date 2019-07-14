@@ -19,11 +19,12 @@ from guiutils import *
 from ScrollingCenterFrame import ScrollingCenterFrame
 from AggregatedTriggerFrame import AggregatedTriggerFrame
 
+
 class GUI(object):
 
-    def __init__(self, debugMode):
+    def __init__(self, debug_mode):
         print("Building GUI...")
-        self.debugging = debugMode
+        self.debugging = debug_mode
 
         self.missionList = []
         self.missionNameToObjectDict = {}
