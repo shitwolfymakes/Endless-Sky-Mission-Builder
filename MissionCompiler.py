@@ -12,7 +12,6 @@
 This pulls the data the user has entered and stores it in the corresponding Mission object.
 
 '''
-import shlex
 
 class MissionCompiler(object):
 
@@ -28,203 +27,185 @@ class MissionCompiler(object):
 
         # mission display name
         self.mission.missionDisplayName = None
-        if self.esmb.displayNameEntryState.get():
-            print("\tFound display name: " + self.esmb.displayName.get())
-            self.mission.missionDisplayName = self.esmb.displayName.get()
+        if self.esmb.displayNameComponent.listEntryStates[0].get():
+            print("\tFound display name:", self.esmb.displayNameComponent.listEntryData[0].get())
+            self.mission.missionDisplayName = self.esmb.displayNameComponent.listEntryData[0].get()
         #end if
-
 
         # description
         self.mission.description = None
-        if self.esmb.descriptionEntryState.get():
-            print("\tFound description: " + self.esmb.description.get())
-            self.mission.description = self.esmb.description.get()
+        if self.esmb.descriptionComponent.listEntryStates[0].get():
+            print("\tFound description:", self.esmb.descriptionComponent.listEntryData[0].get())
+            self.mission.description = self.esmb.descriptionComponent.listEntryData[0].get()
         #end if
-
 
         # isBlocked
         self.mission.blocked = None
-        if self.esmb.isBlockedEntryState.get():
-            print("\tFound block: " + self.esmb.isBlockedMessage.get())
-            self.mission.blocked = self.esmb.isBlockedMessage.get()
+        if self.esmb.blockedComponent.listEntryStates[0].get():
+            print("\tFound block:", self.esmb.blockedComponent.listEntryData[0].get())
+            self.mission.blocked = self.esmb.blockedComponent.listEntryData[0].get()
         #end if
-
 
         # deadline
         self.mission.deadline.isDeadline = False
         self.mission.deadline.deadline   = [None, None]
-        if self.esmb.deadlineEntryState.get():
+        if self.esmb.deadlineComponent.listEntryStates[0].get():
             print("\tFound deadline")
             self.mission.deadline.isDeadline = True
-            if self.esmb.deadlineOptionalsEntryState.get():
-                print("\t\tFound deadline message: " + self.esmb.deadlineOptionals.get())
-                line = self.esmb.deadlineOptionals.get()
-                tokens = shlex.split(line)
-                self.mission.deadline.deadline[0] = tokens[0]
-                self.mission.deadline.deadline[1] = tokens[1]
+            if self.esmb.deadlineComponent.listEntryStates[1].get():
+                print("\t\tFound deadline days:", self.esmb.deadlineComponent.listEntryData[0].get())
+                self.mission.deadline.deadline[0] = self.esmb.deadlineComponent.listEntryData[0].get()
+                if self.esmb.deadlineComponent.listEntryStates[2].get():
+                    print("\t\tFound deadline message:", self.esmb.deadlineComponent.listEntryData[1].get())
+                    self.mission.deadline.deadline[1] = self.esmb.deadlineComponent.listEntryData[1].get()
+                #end if
             #end if
         #end if
-
 
         # cargo
-        self.mission.cargo.isCargo        = False
-        self.mission.cargo.cargoType      = [None, None, None, None]
-        if self.esmb.cargoEntryState.get():
-            print("\tFound cargo: " + self.esmb.cargo.get())
+        self.mission.cargo.isCargo = False
+        self.mission.cargo.cargo   = [None, None, None, None]
+        if self.esmb.cargoComponent.listEntryStates[0].get():
+            print("\tFound cargo:")
+            print("\t\t", self.esmb.cargoComponent.listEntryData[0].get())
+            print("\t\t", self.esmb.cargoComponent.listEntryData[1].get())
             self.mission.cargo.isCargo = True
-            line = self.esmb.cargo.get()
-            tokens = shlex.split(line)
-            self.mission.cargo.cargoType[0] = tokens[0]
-            self.mission.cargo.cargoType[1] = tokens[1]
-            if self.esmb.cargoOptionalsEntryState.get():
-                print("\t\tFound cargo optional modifiers: " + self.esmb.cargoOptionals.get())
-                line = self.esmb.cargoOptionals.get()
-                tokens = shlex.split(line)
-                i = 2
-                for token in tokens:
-                    self.mission.cargo.cargoType[i] = token
-                    i += 1
-                #end for
+            self.mission.cargo.cargo[0] = self.esmb.cargoComponent.listEntryData[0].get()
+            self.mission.cargo.cargo[1] = self.esmb.cargoComponent.listEntryData[1].get()
+            if self.esmb.cargoComponent.listEntryStates[1].get():
+                print("\t\tFound cargo optional modifiers:")
+                print("\t\t\t%s" % self.esmb.cargoComponent.listEntryData[2].get())
+                self.mission.cargo.cargo[2] = self.esmb.cargoComponent.listEntryData[2].get()
+                if self.esmb.cargoComponent.listEntryStates[2].get():
+                    print("\t\t\t%s" % self.esmb.cargoComponent.listEntryData[3].get())
+                    self.mission.cargo.cargo[3] = self.esmb.cargoComponent.listEntryData[3].get()
+                #end if
             #end if
         #end if
-
 
         # passengers
         self.mission.passengers.isPassengers = False
         self.mission.passengers.passengers   = [None, None, None]
-        if self.esmb.passengersEntryState.get():
-            print("\tFound passengers: %s" % self.esmb.passengers.get())
+        if self.esmb.passengersComponent.listEntryStates[0].get():
+            print("\tFound passengers: %s" % self.esmb.passengersComponent.listEntryData[0].get())
             self.mission.passengers.isPassengers  = True
-            self.mission.passengers.passengers[0] = self.esmb.passengers.get()
-            if self.esmb.passengersOptionalsEntryState.get():
-                print("\t\tFound passengers optional data: %s" % self.esmb.passengersOptionals.get())
-                line = self.esmb.passengersOptionals.get()
-                tokens = shlex.split(line)
-                i = 1
-                for token in tokens:
-                    self.mission.passengers.passengers[i] = token
-                    i += 1
-                #end for
+            self.mission.passengers.passengers[0] = self.esmb.passengersComponent.listEntryData[0].get()
+            if self.esmb.passengersComponent.listEntryStates[1].get():
+                print("\t\tFound passengers optional data:")
+                print("\t\t\t%s" % self.esmb.passengersComponent.listEntryData[1].get())
+                self.mission.passengers.passengers[1] = self.esmb.passengersComponent.listEntryData[1].get()
+                if self.esmb.passengersComponent.listEntryStates[2].get():
+                    print("\t\t\t%s" % self.esmb.passengersComponent.listEntryData[2].get())
+                    self.mission.passengers.passengers[2] = self.esmb.passengersComponent.listEntryData[2].get()
+                #end if
             #end if
         #end if
-
 
         # illegal
         self.mission.illegal.isIllegal = False
         self.mission.illegal.illegal   = [None, None]
-        if self.esmb.illegalEntryState.get():
-            print("\t\tFound illegal modifier: %s" % self.esmb.fine.get())
+        if self.esmb.illegalComponent.listEntryStates[0].get():
+            print("\tFound illegal: %s" % self.esmb.illegalComponent.listEntryData[0].get())
             self.mission.illegal.isIllegal  = True
-            self.mission.illegal.illegal[0] = self.esmb.fine.get()
-            if self.esmb.fineMessageEntryState.get():
-                print("\t\tFounnd illegal message: %s" % self.esmb.fineMessage.get())
-                self.mission.illegal.illegal[1] = self.esmb.fineMessage.get()
+            self.mission.illegal.illegal[0] = self.esmb.illegalComponent.listEntryData[0].get()
+            if self.esmb.illegalComponent.listEntryStates[1].get():
+                print("\t\tFound illegal optional modifier: %s" % self.esmb.illegalComponent.listEntryData[1].get())
+                self.mission.illegal.illegal[1] = self.esmb.illegalComponent.listEntryData[1].get()
             # end if
         # end if
 
-
         # stealth
         self.mission.isStealth = False
-        if self.esmb.stealthEntryState.get():
-            print("\t\tFound stealth modifier")
+        if self.esmb.stealthComponent.listEntryStates[0].get():
+            print("\tFound stealth modifier")
             self.mission.isStealth = True
         # end if
 
-
         # isInvisible
         self.mission.isInvisible = False
-        if self.esmb.isInvisibleEntryState.get():
+        if self.esmb.invisibleComponent.listEntryStates[0].get():
             print("\tFound mission invisible modifier")
             self.mission.isInvisible = True
         #end if
 
-
         # priorityLevel
         self.mission.priorityLevel = None
-        if self.esmb.priorityLevelEntryState.get():
-            print("\tFound priority level: %s" % self.esmb.rbPriorityValue.get())
-            self.mission.priorityLevel = self.esmb.rbPriorityValue.get()
+        if self.esmb.priorityLevelComponent.isActive.get():
+            print("\tFound priority level: %s" % self.esmb.priorityLevelComponent.combo.get().lower())
+            self.mission.priorityLevel = self.esmb.priorityLevelComponent.combo.get().lower()
         #end if
-
 
         # whereShown
         self.mission.whereShown = None
-        if self.esmb.whereShownEntryState.get():
-            print("\tFound where shown: %s" % self.esmb.rbWhereShownValue.get())
-            self.mission.whereShown = self.esmb.rbWhereShownValue.get()
+        if self.esmb.whereShownComponent.isActive.get():
+            print("\tFound where shown: %s" % self.esmb.whereShownComponent.combo.get().lower())
+            self.mission.whereShown = self.esmb.whereShownComponent.combo.get().lower()
         # end if
-
 
         # repeat
         self.mission.isRepeat = False
         self.mission.repeat   = None
-        if self.esmb.repeatEntryState.get():
+        if self.esmb.repeatComponent.listEntryStates[0].get():
             print("\tFound repeat")
             self.mission.isRepeat = True
-            if self.esmb.repeatOptionalsEntryState.get():
-                print("\t\tFound repeat optionals modifier: %s" % self.esmb.repeatOptionals.get())
-                self.mission.repeat = self.esmb.repeatOptionals.get()
+            if self.esmb.repeatComponent.listEntryStates[1].get():
+                print("\t\tFound repeat optionals modifier: %s" % self.esmb.repeatComponent.listEntryData[0].get())
+                self.mission.repeat = self.esmb.repeatComponent.listEntryData[0].get()
             #end if
         #end if
-
 
         # clearance
         #TODO: fully implement this when filters are implemented
         self.mission.clearance.isClearance = False
         self.mission.clearance.clearance   = None
-        if self.esmb.clearanceEntryState.get():
-            print("\tFound clearance: %s" % self.esmb.clearanceOptionals.get())
+        if self.esmb.clearanceComponent.listEntryStates[0].get():
+            print("\tFound clearance: %s" % self.esmb.clearanceComponent.listEntryData[0].get())
             self.mission.clearance.isClearance = True
-            self.mission.clearance.clearance   = self.esmb.clearanceOptionals.get()
+            self.mission.clearance.clearance   = self.esmb.clearanceComponent.listEntryData[0].get()
         #end if
 
-
-        # isInfiltrating
+        # infiltrating
         self.mission.isInfiltrating = False
-        if self.esmb.isInfiltratingEntryState.get():
+        if self.esmb.infiltratingComponent.listEntryStates[0].get():
             print("\tFound infiltrating")
             self.mission.isInfiltrating = True
         #end if
 
-
         # waypoint
         self.mission.waypoint = None
-        if self.esmb.waypointEntryState.get():
-            print("\tFound waypoint: %s" % self.esmb.waypoint.get())
-            self.mission.waypoint = self.esmb.waypoint.get()
+        if self.esmb.waypointComponent.listEntryStates[0].get():
+            print("\tFound waypoint: %s" % self.esmb.waypointComponent.listEntryData[0].get())
+            self.mission.waypoint = self.esmb.waypointComponent.listEntryData[0].get()
         #end if
-
 
         # stopover
         #TODO: fully implement this when filters are implemented
         self.mission.stopover.isStopover = False
         self.mission.stopover.stopover   = None
-        if self.esmb.stopoverEntryState.get():
-            print("\tFound stopover: %s" % self.esmb.stopover.get())
+        if self.esmb.stopoverComponent.listEntryStates[0].get():
+            print("\tFound stopover: %s" % self.esmb.stopoverComponent.listEntryData[0].get())
             self.mission.stopover.isStopover = True
-            self.mission.stopover.stopover   = self.esmb.stopover.get()
+            self.mission.stopover.stopover   = self.esmb.stopoverComponent.listEntryData[0].get()
         #end if
-
 
         # source
         #TODO: fully implement this when filters are implemented
         self.mission.source.isSource = False
         self.mission.source.source   = None
-        if self.esmb.sourceEntryState.get():
-            print("\tFound source: %s" % self.esmb.source.get())
+        if self.esmb.sourceComponent.listEntryStates[0].get():
+            print("\tFound source: %s" % self.esmb.sourceComponent.listEntryData[0].get())
             self.mission.source.isSource = True
-            self.mission.source.source   = self.esmb.source.get()
+            self.mission.source.source   = self.esmb.sourceComponent.listEntryData[0].get()
         #end if
-
 
         # destination
         # TODO: fully implement this when filters are implemented
         self.mission.destination.isDestination = False
         self.mission.destination.destination   = None
-        if self.esmb.destinationEntryState.get():
-            print("\tFound source: %s" % self.esmb.destination.get())
+        if self.esmb.destinationComponent.listEntryStates[0].get():
+            print("\tFound source: %s" % self.esmb.destinationComponent.listEntryData[0].get())
             self.mission.destination.isDestination = True
-            self.mission.destination.destination   = self.esmb.destination.get()
+            self.mission.destination.destination   = self.esmb.destinationComponent.listEntryData[0].get()
         # end if
 
         # Trigger data is compiled when TriggerWindow is closed

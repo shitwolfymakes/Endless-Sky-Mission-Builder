@@ -88,12 +88,12 @@ class Mission(object):
         # cargo
         if self.components.cargo.isCargo:
             line = "\tcargo"
-            if self.components.cargo.cargoType[0] is "random":
+            if self.components.cargo.cargo[0] is "random":
                 line = line + " random"
             else:
-                line = line + " \"%s\"" % self.components.cargo.cargoType[0]
+                line = line + " \"%s\"" % self.components.cargo.cargo[0]
             #end if/else
-            for part in self.components.cargo.cargoType[1:]:
+            for part in self.components.cargo.cargo[1:]:
                 if part is not None:
                     line = line + " " + part
                 else:
@@ -120,7 +120,7 @@ class Mission(object):
         if self.components.illegal.isIllegal:
             line = "\tillegal %s" % self.components.illegal.illegal[0]
             if self.components.illegal.illegal[1] is not None:
-                line = line + " " + self.components.illegal.illegal[1]
+                line = line + " `" + self.components.illegal.illegal[1] + "`"
             # end if
             self.addLine(line)
         #end if
