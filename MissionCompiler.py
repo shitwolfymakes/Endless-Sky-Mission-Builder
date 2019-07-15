@@ -212,7 +212,7 @@ class MissionCompiler(object):
 
         print("Done.")
         # call the parser to save the new data
-        self.esmb.activeMission.parseMission()
+        self.esmb.activeMission.parse_mission()
     #end run
 
 

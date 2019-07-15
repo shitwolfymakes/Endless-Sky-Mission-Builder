@@ -78,7 +78,7 @@ def open_file(app):
             cur_mission = Mission(tokens[1])
             app.missionList.append(cur_mission)
             app.missionNameToObjectDict.update({cur_mission.missionName: cur_mission})
-            app.missionList[i].addLine(line)
+            app.missionList[i].add_line(line)
             i += 1
             continue
         elif re.search(match_event, line):
@@ -88,7 +88,7 @@ def open_file(app):
         else:
             if event_line is True:
                 continue
-            app.missionList[i - 1].addLine(line)
+            app.missionList[i - 1].add_line(line)
         # end if/else
     # end for
 

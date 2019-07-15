@@ -58,7 +58,7 @@ class AggregatedTriggerFrame(ttk.Frame):
     def delete_trigger(self, trigger_frame):
         print("Removing %s from Triggers" % trigger_frame.trigger)
 
-        self.app.activeMission.removeTrigger(trigger_frame.trigger)
+        self.app.activeMission.remove_trigger(trigger_frame.trigger)
 
         self.triggerFrameList.remove(trigger_frame)
         trigger_frame.frame.pack_forget()
@@ -107,7 +107,7 @@ class TriggerFrame(ttk.Frame):
         ttk.Frame.__init__(self, master)
         self.trigger = None
         if not populating:
-            self.trigger = app.activeMission.addTrigger()
+            self.trigger = app.activeMission.add_trigger()
         self.master  = master
 
         self.frame = ttk.Frame(master.inner)

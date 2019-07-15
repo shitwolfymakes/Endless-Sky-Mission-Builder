@@ -105,7 +105,7 @@ class MissionFileParser(object):
                     mission.components.destination.destination   = tokens[1]
                 elif "on" in tokens:
                     print("\t\tFound Trigger: on %s" % tokens[1])
-                    trigger             = mission.addTrigger()
+                    trigger             = mission.add_trigger()
                     trigger.isActive    = True
                     trigger.triggerType = tokens[1]
 

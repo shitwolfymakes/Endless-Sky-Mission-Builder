@@ -468,7 +468,7 @@ class GUI(object):
         self.missionTextBox.forget()
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack()
-        self.missionTextBox.insert(END, self.activeMission.printMissionLinesToText())
+        self.missionTextBox.insert(END, self.activeMission.print_mission_lines_to_text())
 
         print("Done.")
     #end update_mission_frame
