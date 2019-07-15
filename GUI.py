@@ -111,8 +111,8 @@ class GUI(object):
 
         # adds a command to the menu option, names it, and set the command to run
         file.add_command(label="New", command=lambda: newFile(self))
-        file.add_command(label="Open", command=lambda: openFile(self))
-        file.add_command(label="Save", command=lambda: saveFile(self))
+        file.add_command(label="Open", command=lambda: open_file(self))
+        file.add_command(label="Save", command=lambda: save_file(self))
         file.add_command(label="Exit", command=exit)
 
         # added "File" to our menu
@@ -161,19 +161,19 @@ class GUI(object):
             self.missionComboBox.current(0)
 
         # add function buttons
-        new_mission_button = ttk.Button(self.optionFrame, text="New Mission", command=lambda: newMission(self))
+        new_mission_button = ttk.Button(self.optionFrame, text="New Mission", command=lambda: new_mission(self))
         new_mission_button.pack(fill='x')
 
-        save_mission_file_button = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: saveFile(self))
+        save_mission_file_button = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: save_file(self))
         save_mission_file_button.pack(fill='x')
 
-        open_mission_file_button = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: openFile(self))
+        open_mission_file_button = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: open_file(self))
         open_mission_file_button.pack(fill='x')
 
-        compile_mission_file_button = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compileMission(self))
+        compile_mission_file_button = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compile_mission(self))
         compile_mission_file_button.pack(fill='x')
 
-        help_button = ttk.Button(self.optionFrame, text="Help", command=helpUser)
+        help_button = ttk.Button(self.optionFrame, text="Help", command=help_user)
         help_button.pack(fill='x')
 
         #TODO: Add functions to change missionName and delete mission. Also, update button grouping to reflect
