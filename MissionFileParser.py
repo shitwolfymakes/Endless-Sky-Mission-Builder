@@ -1,4 +1,4 @@
-''' MissionFileParser.py
+""" MissionFileParser.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -11,9 +11,11 @@
 
 This takes the data read in from a mission file and stores it in each mission object
 
-'''
+"""
+
 #TODO: Add data validation, there are currently no checks to make sure it's not all junk data
 import re
+
 
 class MissionFileParser(object):
     def __init__(self, esmb):
@@ -31,9 +33,7 @@ class MissionFileParser(object):
             lines = enumerate(mission.missionLines)
             for i, line in lines:
                 line = line.rstrip()
-                #print(i, line)
                 tokens = self.tokenize(line)
-                #print(tokens)
 
                 # determine which attribute we've got
                 if "mission" in tokens[0]:
@@ -50,19 +50,19 @@ class MissionFileParser(object):
                 elif "deadline" in tokens[0]:
                     print("\t\tFound deadline")
                     mission.components.deadline.isDeadline = True
-                    self.storeComponentData(mission.components.deadline.deadline, tokens[1:])
+                    self.store_component_data(mission.components.deadline.deadline, tokens[1:])
                 elif "cargo" in tokens[0]:
                     print("\t\tFound cargo: %s" % tokens[1:])
                     mission.components.cargo.isCargo = True
-                    self.storeComponentData(mission.components.cargo.cargo, tokens[1:])
+                    self.store_component_data(mission.components.cargo.cargo, tokens[1:])
                 elif "passengers" in tokens[0]:
                     print("\t\tFound passengers: %s" % tokens[1:])
                     mission.components.passengers.isPassengers = True
-                    self.storeComponentData(mission.components.passengers.passengers, tokens[1:])
+                    self.store_component_data(mission.components.passengers.passengers, tokens[1:])
                 elif "illegal" in tokens[0]:
                     print("\t\tFound illegal modifier: %s" % tokens[1:])
                     mission.components.illegal.isIllegal = True
-                    self.storeComponentData(mission.components.illegal.illegal, tokens[1:])
+                    self.store_component_data(mission.components.illegal.illegal, tokens[1:])
                 elif "stealth" in tokens[0]:
                     print("\t\tFound stealth modifier")
                     mission.components.isStealth = True
@@ -109,8 +109,8 @@ class MissionFileParser(object):
                     trigger.isActive    = True
                     trigger.triggerType = tokens[1]
 
-                    cur = self.getIndentLevel(mission.missionLines[i])
-                    nxt = self.getIndentLevel((mission.missionLines[i+1]))
+                    cur = self.get_indent_level(mission.missionLines[i])
+                    nxt = self.get_indent_level((mission.missionLines[i + 1]))
                     while True:
                         if nxt <= cur:
                             break
@@ -125,57 +125,57 @@ class MissionFileParser(object):
                             trigger.dialog = tokens[1]
                         elif "outfit" in tokens[0]:
                             print("\t\t\tFound Outfit: %s" % tokens)
-                            self.storeComponentData(trigger.outfit, tokens[1:])
+                            self.store_component_data(trigger.outfit, tokens[1:])
                         elif "require" in tokens[0]:
                             print("\t\t\tFound Require: %s" % tokens)
-                            self.storeComponentData(trigger.require, tokens[1:])
+                            self.store_component_data(trigger.require, tokens[1:])
                         elif "payment" in tokens[0]:
                             print("\t\t\tFound Outfit: %s" % tokens)
                             trigger.isPayment = True
-                            self.storeComponentData(trigger.payment, tokens[1:])
+                            self.store_component_data(trigger.payment, tokens[1:])
                         elif "event" in tokens[0]:
                             print("\t\t\tFound Event: %s" % tokens)
-                            self.storeComponentData(trigger.event, tokens[1:])
+                            self.store_component_data(trigger.event, tokens[1:])
                         elif "fail" in tokens[0]:
                             print("\t\t\tFound Event: %s" % tokens[1])
                             trigger.isFail = True
                             trigger.fail   = tokens[1]
                         elif "log" in tokens[0] and len(tokens) == 2:
                             print("\t\t\tFound Log: %s" % tokens)
-                            newLog            = trigger.add_log()
-                            newLog.isActive   = True
-                            newLog.formatType = "<message>"
-                            newLog.log[0]     = tokens[1]
+                            new_log            = trigger.add_log()
+                            new_log.isActive   = True
+                            new_log.formatType = "<message>"
+                            new_log.log[0]     = tokens[1]
                         elif "log" in tokens[0]:
                             print("\t\t\tFound Log: %s" % tokens)
-                            newLog            = trigger.add_log()
-                            newLog.isActive   = True
-                            newLog.formatType = "<type> <name> <message>"
-                            self.storeComponentData(newLog.log, tokens[1:])
+                            new_log            = trigger.add_log()
+                            new_log.isActive   = True
+                            new_log.formatType = "<type> <name> <message>"
+                            self.store_component_data(new_log.log, tokens[1:])
                         elif tokens[1] in ["=", "+=", "-="]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
-                            newTC               = trigger.add_tc()
-                            newTC.isActive      = True
-                            newTC.conditionType = 0
-                            self.storeComponentData(newTC.condition, tokens)
+                            new_tc               = trigger.add_tc()
+                            new_tc.isActive      = True
+                            new_tc.conditionType = 0
+                            self.store_component_data(new_tc.condition, tokens)
                         elif tokens[1] in ["++", "--"]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
-                            newTC               = trigger.add_tc()
-                            newTC.isActive      = True
-                            newTC.conditionType = 1
-                            self.storeComponentData(newTC.condition, tokens)
+                            new_tc               = trigger.add_tc()
+                            new_tc.isActive      = True
+                            new_tc.conditionType = 1
+                            self.store_component_data(new_tc.condition, tokens)
                         elif tokens[0] in ["set", "clear"]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
-                            newTC               = trigger.add_tc()
-                            newTC.isActive      = True
-                            newTC.conditionType = 2
-                            self.storeComponentData(newTC.condition, tokens)
+                            new_tc               = trigger.add_tc()
+                            new_tc.isActive      = True
+                            new_tc.conditionType = 2
+                            self.store_component_data(new_tc.condition, tokens)
                         else:
                             print("Trigger component no found: ", i, line)
                         #end if else
 
                         try:
-                            nxt = self.getIndentLevel(mission.missionLines[i+1])
+                            nxt = self.get_indent_level(mission.missionLines[i + 1])
                         except IndexError:
                             break
 
@@ -205,14 +205,14 @@ class MissionFileParser(object):
     #end tokenize
 
     @staticmethod
-    def getIndentLevel(line):
-        tabCount = len(line) - len(line.lstrip(' '))
-        #print(tabCount)
-        return tabCount
-    #end getIndentLevel
+    def get_indent_level(line):
+        tab_count = len(line) - len(line.lstrip(' '))
+        #print(tab_count)
+        return tab_count
+    #end get_indent_level
 
     @staticmethod
-    def storeComponentData(component, tokens):
+    def store_component_data(component, tokens):
         for i, token in enumerate(tokens):
             if token is not None:
                 component[i] = token
@@ -221,5 +221,6 @@ class MissionFileParser(object):
             # end if/else
         # end for
         #print(component)
-    #end storeComponentData
+    #end store_component_data
+
 #end class MissionFileParser
