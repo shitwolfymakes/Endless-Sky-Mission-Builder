@@ -1,4 +1,4 @@
-''' AggregatedTriggerFrame.py
+""" AggregatedTriggerFrame.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -12,9 +12,10 @@
 This frame allows the user to add an arbitrary number of Trigger objects to the activeMission,
     and manipulate the data therein.
 
-'''
+"""
 
 from guiutils import *
+
 
 class AggregatedTriggerFrame(ttk.Frame):
 
@@ -28,74 +29,74 @@ class AggregatedTriggerFrame(ttk.Frame):
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
 
-        sectionNameLabel = ttk.Label(self.outer, text="Triggers", anchor="center")
-        sectionNameLabel.pack()
+        section_name_label = ttk.Label(self.outer, text="Triggers", anchor="center")
+        section_name_label.pack()
 
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        addButton = ttk.Button(self.outer, text="Add Trigger", command=self.__addTrigger)
-        addButton.pack(expand=True, fill="x")
+        add_button = ttk.Button(self.outer, text="Add Trigger", command=self._add_trigger)
+        add_button.pack(expand=True, fill="x")
     #end init
 
 
-    def __addTrigger(self):
+    def _add_trigger(self):
         print("Adding Trigger...")
 
         tf = TriggerFrame(self, self.app, "trigger")
-        self.editTrigger(self.triggerFrameList[-1])
+        self.edit_trigger(self.triggerFrameList[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeTriggerState, state, self.triggerFrameList[-1].trigger))
+        cb.configure(command=partial(self._change_trigger_state, state, self.triggerFrameList[-1].trigger))
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
-    #end __addTrigger
+    #end _add_trigger
 
 
-    def deleteTrigger(self, triggerFrame):
-        print("Removing %s from Triggers" % triggerFrame.trigger)
+    def delete_trigger(self, trigger_frame):
+        print("Removing %s from Triggers" % trigger_frame.trigger)
 
-        self.app.activeMission.removeTrigger(triggerFrame.trigger)
+        self.app.activeMission.removeTrigger(trigger_frame.trigger)
 
-        self.triggerFrameList.remove(triggerFrame)
-        triggerFrame.frame.pack_forget()
-        triggerFrame.frame.destroy()
+        self.triggerFrameList.remove(trigger_frame)
+        trigger_frame.frame.pack_forget()
+        trigger_frame.frame.destroy()
 
         print("Done.")
-    #end deleteTrigger
+    #end delete_trigger
 
 
-    def editTrigger(self, triggerFrame):
+    def edit_trigger(self, trigger_frame):
         print("Editing ", end="")
-        print(triggerFrame.trigger, end="")
+        print(trigger_frame.trigger, end="")
         print("...")
 
-        TriggerWindow(self.app, self.app.gui, triggerFrame.trigger)
-    #end editTrigger
+        TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
+    #end edit_trigger
 
 
-    def populateTrigger(self, trigger):
+    def _populate_trigger(self, trigger):
         tf = TriggerFrame(self, self.app, "trigger", populating=True)
         tf.trigger = trigger
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeTriggerState, state, trigger))
+        cb.configure(command=partial(self._change_trigger_state, state, trigger))
         cb.grid(row=0, column=3, sticky="e")
 
         if trigger.isActive:
             state.set(1)
-            self.changeTriggerState(state, trigger)
-    #end populateLog
+            self._change_trigger_state(state, trigger)
+    #end _populate_trigger
 
 
     @staticmethod
-    def changeTriggerState(state, trigger):
+    def _change_trigger_state(state, trigger):
         trigger.isActive = state.get()
         print(trigger, "is now", trigger.isActive)
-    #def changeTriggerState
+    #def _change_trigger_state
 
 #end class AggregatedTriggerFrame
 
@@ -115,20 +116,20 @@ class TriggerFrame(ttk.Frame):
 
         name = name.title()
         label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
+        label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
         self.master.triggerFrameList.append(self)
 
-        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editTrigger, self))
-        editButton.grid(row=0, column=1)
+        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_trigger, self))
+        edit_button.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteTrigger, self))
-        deleteButton.grid(row=0, column=2)
+        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_trigger, self))
+        delete_button.grid(row=0, column=2)
     #end init
 
-    def cleanup(self):
-        self.master.deleteTrigger(self)
-    #end cleanup
+    def _cleanup(self):
+        self.master.delete_trigger(self)
+    #end _cleanup
 
 #end class TriggerFrame
 
@@ -156,7 +157,7 @@ class TriggerWindow(object):
         self.rightFrame = ttk.Frame(outer)
         self.rightFrame.pack(side=RIGHT, anchor=N)
 
-        self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.closeButton = ttk.Button(self.top, text="Ok", command=self._cleanup)
         self.closeButton.pack(side=BOTTOM)
 
         # declare all the variables in one place
@@ -168,11 +169,11 @@ class TriggerWindow(object):
         ### BUILDING LEFT FRAME ###
 
         ## on action
-        onLabel = ttk.Label(self.leftFrame, text="on", width=6)
-        onLabel.grid(row=0, column=0, sticky="w", padx=(5,0))
+        on_label = ttk.Label(self.leftFrame, text="on", width=6)
+        on_label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
         self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=self.actionsList)
-        self.onActionCombobox.bind("<<ComboboxSelected>>", self.actionSelected)
+        self.onActionCombobox.bind("<<ComboboxSelected>>", self._action_selected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
         self.dialogSubComponent = buildMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"])
@@ -204,27 +205,27 @@ class TriggerWindow(object):
         self.triggerConditionsSubComponent = AggregatedTriggerConditionsFrame(self.app, self.rightFrame, self.trigger)
         self.triggerConditionsSubComponent.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-        self.populateTriggerWindow()
+        self._populate_trigger_window()
 
         print("\tDone.")
     #end init
 
 
-    def actionSelected(self, event):
+    def _action_selected(self, event=None):
         self.action = self.onActionCombobox.get()
         print('\nTrigger action selected: "on %s"' % self.action)
-    #end actionSelected
+    #end _action_selected
 
 
-    def cleanup(self):
-        self.storeData()
+    def _cleanup(self):
+        self._store_data()
         self.app.activeTrigger = None
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
-    #end cleanup
+    #end _cleanup
 
 
-    def storeData(self):
+    def _store_data(self):
         print("\nStoring TriggerWindow data...")
         self.trigger.clearTrigger()
 
@@ -301,9 +302,9 @@ class TriggerWindow(object):
         self.trigger.printTrigger()
 
         print("Done.")
-    #end storeData
+    #end _store_data
 
-    def populateTriggerWindow(self):
+    def _populate_trigger_window(self):
         print("\t\tPopulating TriggerWindow...", end="\t")
 
         # action
@@ -381,7 +382,7 @@ class TriggerWindow(object):
         component = self.logsSubComponent
         if self.trigger.logs:
             for log in self.trigger.logs:
-                component.populateLog(log)
+                component.populate_log(log)
             #print
         #end if
 
@@ -389,12 +390,12 @@ class TriggerWindow(object):
         component = self.triggerConditionsSubComponent
         if self.trigger.conditions:
             for condition in self.trigger.conditions:
-                component.populateTC(condition)
+                component.populate_trigger_condition(condition)
             # print
         # end if
 
         print("Done.")
-    #end populateTriggerWindow
+    #end _populate_trigger_window
 
 #end class TriggerWindow
 
@@ -412,83 +413,83 @@ class AggregatedLogFrame(ttk.Frame):
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
 
-        sectionNameLabel = ttk.Label(self.outer, text="Logs", anchor="center")
-        sectionNameLabel.pack()
+        section_name_label = ttk.Label(self.outer, text="Logs", anchor="center")
+        section_name_label.pack()
 
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        addButton = ttk.Button(self.outer, text="Add Log", command=self.__addLog)
-        addButton.pack(expand=True, fill="x")
+        add_button = ttk.Button(self.outer, text="Add Log", command=self._add_log)
+        add_button.pack(expand=True, fill="x")
     #end init
 
 
-    def __addLog(self):
+    def _add_log(self):
         print("Adding Trigger...")
 
         lf = LogFrame(self, self.trigger, "log")
-        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self.setFormatType)
+        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
 
         if lf.log.formatType == "cancelled":
             lf.cleanup()
             return
         #end if
-        self.editLog(self.logFrameList[-1])
+        self.edit_log(self.logFrameList[-1])
 
 
         state = BooleanVar()
         cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeLogState, state, self.logFrameList[-1].log))
+        cb.configure(command=partial(self._change_log_state, state, self.logFrameList[-1].log))
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
-    #end __addLog
+    #end _add_log
 
 
-    def editLog(self, logFrame):
-        print("Editing ", logFrame.log, "...")
-        LogWindow(self.app, self.app.gui, logFrame.log, logFrame.log.formatType)
-    #end editLog
+    def edit_log(self, log_frame):
+        print("Editing ", log_frame.log, "...")
+        LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
+    #end edit_log
 
 
-    def deleteLog(self, logFrame):
-        print("Removing %s from Triggers" % logFrame.log)
+    def delete_log(self, log_frame):
+        print("Removing %s from Triggers" % log_frame.log)
 
-        self.trigger.removeLog(logFrame.log)
+        self.trigger.removeLog(log_frame.log)
 
-        self.logFrameList.remove(logFrame)
-        logFrame.frame.pack_forget()
-        logFrame.frame.destroy()
+        self.logFrameList.remove(log_frame)
+        log_frame.frame.pack_forget()
+        log_frame.frame.destroy()
 
         print("Done.")
-    #end deleteLog
+    #end delete_log
 
 
-    def populateLog(self, log):
+    def populate_log(self, log):
         lf = LogFrame(self, self.trigger, "log", populating=True)
         lf.log = log
 
         state = BooleanVar()
         cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeLogState, state, log))
+        cb.configure(command=partial(self._change_log_state, state, log))
         cb.grid(row=0, column=3, sticky="e")
 
         if log.isActive:
             state.set(1)
-            self.changeLogState(state, log)
-    #end populateLog
+            self._change_log_state(state, log)
+    #end populate_log
 
 
     @staticmethod
-    def changeLogState(state, log):
+    def _change_log_state(state, log):
         log.isActive = state.get()
         print(log, "is now", log.isActive)
-    #def changeTriggerState
+    #def _change_trigger_state
 
 
-    def setFormatType(self, formatType):
-        self.logFrameList[-1].log.formatType = formatType
-    #end setFormatType
+    def _set_format_type(self, format_type):
+        self.logFrameList[-1].log.formatType = format_type
+    #end _set_format_type
 
 #end class AggregatedLogFrame
 
@@ -507,33 +508,33 @@ class LogFrame(object):
         self.frame.grid_columnconfigure(0, weight=1)
 
         label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
+        label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
         self.master.logFrameList.append(self)
 
-        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editLog, self))
-        editButton.grid(row=0, column=1)
+        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_log, self))
+        edit_button.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteLog, self))
-        deleteButton.grid(row=0, column=2)
+        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_log, self))
+        delete_button.grid(row=0, column=2)
     #end init
 
 
     def cleanup(self):
-        self.master.deleteLog(self)
-    #end cleanup
+        self.master.delete_log(self)
+    #end _cleanup
 
 #end class LogFrame
 
 
 class LogWindow(object):
 
-    def __init__(self, app, master, log, formatType):
+    def __init__(self, app, master, log, format_type):
         print("\tBuilding LogWindow...")
 
         self.app        = app
         self.log        = log
-        self.formatType = formatType
+        self.formatType = format_type
         self.logGroup   = StringVar()
         self.name       = StringVar()
         self.message    = StringVar()
@@ -546,7 +547,7 @@ class LogWindow(object):
         frame = ttk.Frame(self.top)
         frame.pack(side=TOP)
 
-        if formatType == "<message>":
+        if format_type == "<message>":
             self.message.set("<message>")
             entry = ttk.Entry(frame, textvariable=self.message)
             entry.grid(row=0, column=0)
@@ -567,20 +568,20 @@ class LogWindow(object):
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
 
-        self.populateLogWindow()
+        self.populate_log_window()
 
         print("\tDone.")
     #end init
 
 
     def cleanup(self):
-        self.storeData()
+        self._store_data()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
-    #end cleanup
+    #end _cleanup
 
 
-    def storeData(self):
+    def _store_data(self):
         print("\nStoring LogWindow data...", end="\t")
         self.log.clearLog()
 
@@ -593,10 +594,10 @@ class LogWindow(object):
         #end if/else
 
         print("Done.")
-    #end storeData
+    #end store_data
 
 
-    def populateLogWindow(self):
+    def populate_log_window(self):
         print("Populating TriggerWindow...", end="\t")
 
         if self.formatType == "<message>":
@@ -612,7 +613,7 @@ class LogWindow(object):
         #end if/else
 
         print("Done.")
-    #end populateLogWindow
+    #end populate_log_window
 
 #end class LogWindow
 
@@ -630,88 +631,88 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
 
-        sectionNameLabel = ttk.Label(self.outer, text="Conditions", anchor="center")
-        sectionNameLabel.pack()
+        section_name_label = ttk.Label(self.outer, text="Conditions", anchor="center")
+        section_name_label.pack()
 
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        addButton = ttk.Button(self.outer, text="Add Condition", command=self.__addTC)
-        addButton.pack(expand=True, fill="x")
+        add_button = ttk.Button(self.outer, text="Add Condition", command=self._add_trigger_condition)
+        add_button.pack(expand=True, fill="x")
     #end init
 
 
-    def __addTC(self):
+    def _add_trigger_condition(self):
         print("Adding TriggerCondition...")
 
         tc = TriggerConditionFrame(self, self.trigger, "log")
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
-        TypeSelectorWindow(self, self.condTypes, self.setFormatType)
+        TypeSelectorWindow(self, self.condTypes, self._set_format_type)
 
         if tc.condition.conditionType == "cancelled":
             tc.cleanup()
             return
         #end if
-        self.editTC(self.tcFrameList[-1])
+        self.edit_trigger_condition(self.tcFrameList[-1])
 
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeTCState, state, self.tcFrameList[-1].condition))
+        cb.configure(command=partial(self._change_tc_state, state, self.tcFrameList[-1].condition))
         cb.grid(row=0, column=3, sticky="e")
 
         print("Done.")
-    #end __addTC
+    #end _add_trigger_condition
 
 
-    def editTC(self, tcFrame):
-        print("Editing ", tcFrame.condition, "...")
-        TriggerConditionWindow(self.app, self.app.gui, tcFrame.condition)
-    #end editTC
+    def edit_trigger_condition(self, tc_frame):
+        print("Editing ", tc_frame.condition, "...")
+        TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
+    #end edit_trigger_condition
 
 
-    def deleteTC(self, tcFrame):
-        print("Removing %s from Triggers" % tcFrame.condition)
+    def delete_trigger_condition(self, tc_frame):
+        print("Removing %s from Triggers" % tc_frame.condition)
 
-        self.trigger.removeTC(tcFrame.condition)
+        self.trigger.removeTC(tc_frame.condition)
 
-        self.tcFrameList.remove(tcFrame)
-        tcFrame.frame.pack_forget()
-        tcFrame.frame.destroy()
+        self.tcFrameList.remove(tc_frame)
+        tc_frame.frame.pack_forget()
+        tc_frame.frame.destroy()
 
         print("Done.")
-    #end deleteTC
+    #end delete_trigger_condition
 
 
-    def populateTC(self, condition):
+    def populate_trigger_condition(self, condition):
         tc = TriggerConditionFrame(self, self.trigger, "log", populating=True)
         tc.condition = condition
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self.changeTCState, state, tc))
+        cb.configure(command=partial(self._change_tc_state, state, tc))
         cb.grid(row=0, column=3, sticky="e")
 
         if condition.isActive:
             state.set(1)
-            self.changeTCState(state, condition)
-    #end populateTC
+            self._change_tc_state(state, condition)
+    #end populate_trigger_condition
 
 
     @staticmethod
-    def changeTCState(state, tc):
+    def _change_tc_state(state, tc):
         tc.isActive = state.get()
         print(tc, "is now", tc.isActive)
     #def changeTriggerConditionsState
 
 
-    def setFormatType(self, formatType):
-        if formatType == "cancelled":
+    def _set_format_type(self, format_type):
+        if format_type == "cancelled":
             self.tcFrameList[-1].condition.conditionType = "cancelled"
             return
-        ft = self.condTypes.index(formatType)
+        ft = self.condTypes.index(format_type)
         self.tcFrameList[-1].condition.conditionType = ft
-    #end setFormatType
+    #end _set_format_type
 
 #end class AggregatedTriggerConditionsFrame
 
@@ -730,20 +731,20 @@ class TriggerConditionFrame(object):
         self.frame.grid_columnconfigure(0, weight=1)
 
         label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5,0))
+        label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
         self.master.tcFrameList.append(self)
 
-        editButton = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.editTC, self))
-        editButton.grid(row=0, column=1)
+        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_trigger_condition, self))
+        edit_button.grid(row=0, column=1)
 
-        deleteButton = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.deleteTC, self))
-        deleteButton.grid(row=0, column=2)
+        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_trigger_condition, self))
+        delete_button.grid(row=0, column=2)
     #end init
 
 
     def cleanup(self):
-        self.master.deleteTC(self)
+        self.master.delete_trigger_condition(self)
     #end cleanup
 
 #end class LogFrame
@@ -769,7 +770,7 @@ class TriggerConditionWindow(object):
         frame = ttk.Frame(self.top)
         frame.pack(side=TOP)
         self.optionsCombo  = ttk.Combobox(frame, state="readonly")
-        self.optionsCombo.bind("<<ComboboxSelected>>", self.comboCallback)
+        self.optionsCombo.bind("<<ComboboxSelected>>", self._combo_callback)
 
         self.condData.set("<condition>")
         if self.conditionType == 0:
@@ -811,20 +812,20 @@ class TriggerConditionWindow(object):
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
 
-        self.populateTCWindow()
+        self._populate_tc_window()
 
         print("\tDone.")
     #end init
 
 
     def cleanup(self):
-        self.storeData()
+        self._store_data()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
     #end cleanup
 
 
-    def storeData(self):
+    def _store_data(self):
         print("\nStoring TriggerConditionWindow data...", end="\t")
         self.condition.clearCondition()
 
@@ -843,10 +844,10 @@ class TriggerConditionWindow(object):
         #end if/else
 
         print("Done.")
-    #end storeData
+    #end _store_data
 
 
-    def populateTCWindow(self):
+    def _populate_tc_window(self):
         print("\t\tPopulating TriggerWindow...", end="\t")
 
         if self.conditionType == 0:
@@ -873,11 +874,11 @@ class TriggerConditionWindow(object):
         #end if/else
 
         print("Done.")
-    #end populateLogWindow
+    #end _populate_log_window
 
 
-    def comboCallback(self, event):
+    def _combo_callback(self, event=None):
         self.selectedOption = self.optionsCombo.get()
-    #end comboCallback
+    #end _combo_callback
 
 #end class LogWindow

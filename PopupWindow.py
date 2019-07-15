@@ -38,6 +38,6 @@ class PopupWindow(object):
         addMission(self.app, name)
         self.top.grab_release()         # HAVE TO RELEASE
         self.top.destroy()
-    #end cleanup
+    #end _cleanup
 
 #end class popupWindow

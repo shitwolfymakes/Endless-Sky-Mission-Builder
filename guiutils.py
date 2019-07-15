@@ -489,7 +489,7 @@ class TypeSelectorWindow(Toplevel):
     def cleanup(self):
         self.callback(self.optionList.get())
         self.destroy()
-    #end cleanup
+    #end _cleanup
 
 
     def cancelled(self):
