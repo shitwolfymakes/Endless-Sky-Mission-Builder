@@ -13,7 +13,7 @@
 
 from tkinter import Toplevel, ttk
 
-from guiutils import addMission
+from guiutils import add_mission
 
 class PopupWindow(object):
 
@@ -23,7 +23,7 @@ class PopupWindow(object):
         self.top.title("New Mission")
         self.top.grab_set()             # freezes the app until the user enters or cancels
 
-        # build the widgets
+        # _build the widgets
         self.l = ttk.Label(self.top, text=text, background='white')
         self.l.pack()
         self.e = ttk.Entry(self.top)
@@ -35,7 +35,7 @@ class PopupWindow(object):
 
     def cleanup(self):
         name = self.e.get()
-        addMission(self.app, name)
+        add_mission(self.app, name)
         self.top.grab_release()         # HAVE TO RELEASE
         self.top.destroy()
     #end _cleanup

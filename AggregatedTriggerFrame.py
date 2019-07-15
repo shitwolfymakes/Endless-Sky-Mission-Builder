@@ -176,22 +176,22 @@ class TriggerWindow(object):
         self.onActionCombobox.bind("<<ComboboxSelected>>", self._action_selected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
-        self.dialogSubComponent = buildMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"])
+        self.dialogSubComponent = build_mand_opt_frame(self.leftFrame, "dialog", 1, 0, ["<text>"])
         self.dialogSubComponent.grid(row=1, column=0, columnspan=2, sticky="ew")
 
-        self.outfitSubComponent = buildMandOptFrame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
+        self.outfitSubComponent = build_mand_opt_frame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
         self.outfitSubComponent.grid(row=2, column=0, columnspan=2, sticky="ew")
 
-        self.requireSubComponent = buildMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
+        self.requireSubComponent = build_mand_opt_frame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
         self.requireSubComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
-        self.paymentSubComponent = buildMandOptFrame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"])
+        self.paymentSubComponent = build_mand_opt_frame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"])
         self.paymentSubComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
 
-        self.eventSubComponent = buildMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
+        self.eventSubComponent = build_mand_opt_frame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
         self.eventSubComponent.grid(row=5, column=0, columnspan=2, sticky="ew")
 
-        self.failSubComponent = buildMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
+        self.failSubComponent = build_mand_opt_frame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
         self.failSubComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
         self.logsSubComponent = AggregatedLogFrame(self.app, self.leftFrame, self.trigger)
@@ -317,7 +317,7 @@ class TriggerWindow(object):
         component = self.dialogSubComponent
         if self.trigger.dialog is not None:
             component.listEntryStates[0].set(1)
-            component.cbValueChanged(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
+            component._cb_value_changed(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
             component.listEntryData[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
         #end if
 
@@ -326,7 +326,7 @@ class TriggerWindow(object):
         for i, data in enumerate(self.trigger.outfit):
             if data is not None:
                 component.listEntryStates[i].set(1)
-                component.cbValueChanged(component.listEntryStates[i], [component.listEntries[i]])
+                component._cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
                 component.listEntryData[i].set(data)
             #end if
         #end for
@@ -336,7 +336,7 @@ class TriggerWindow(object):
         for i, data in enumerate(self.trigger.require):
             if data is not None:
                 component.listEntryStates[i].set(1)
-                component.cbValueChanged(component.listEntryStates[i], [component.listEntries[i]])
+                component._cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
                 component.listEntryData[i].set(data)
             #end if
         #end for
@@ -345,12 +345,12 @@ class TriggerWindow(object):
         if self.trigger.isPayment:
             component = self.paymentSubComponent
             component.listEntryStates[0].set(1)
-            component.cbValueChanged(component.listEntryStates[0], [component.subComponentName])
+            component._cb_value_changed(component.listEntryStates[0], [component.subComponentName])
 
             for i, data in enumerate(self.trigger.payment):
                 if data is not None:
                     component.listEntryStates[i+1].set(1)
-                    component.cbValueChanged(component.listEntryStates[i+1], [component.listEntries[i]])
+                    component._cb_value_changed(component.listEntryStates[i + 1], [component.listEntries[i]])
                     component.listEntryData[i].set(data)
                 # end if
             # end for
@@ -360,7 +360,7 @@ class TriggerWindow(object):
         for i, data in enumerate(self.trigger.event):
             if data is not None:
                 component.listEntryStates[i].set(1)
-                component.cbValueChanged(component.listEntryStates[i], [component.listEntries[i]])
+                component._cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
                 component.listEntryData[i].set(data)
             #end if
         #end for
@@ -369,11 +369,11 @@ class TriggerWindow(object):
         component = self.failSubComponent
         if self.trigger.isFail:
             component.listEntryStates[0].set(1)
-            component.cbValueChanged(component.listEntryStates[0], [component.subComponentName])
+            component._cb_value_changed(component.listEntryStates[0], [component.subComponentName])
 
             if self.trigger.fail is not None:
                 component.listEntryStates[1].set(1)
-                component.cbValueChanged(component.listEntryStates[1], [component.listEntries[0]])
+                component._cb_value_changed(component.listEntryStates[1], [component.listEntries[0]])
                 component.listEntryData[0].set(self.trigger.fail)
             #end if
         #end if
@@ -430,7 +430,7 @@ class AggregatedLogFrame(ttk.Frame):
         lf = LogFrame(self, self.trigger, "log")
         TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
 
-        if lf.log.formatType == "cancelled":
+        if lf.log.formatType == "_cancelled":
             lf.cleanup()
             return
         #end if
@@ -649,7 +649,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
         TypeSelectorWindow(self, self.condTypes, self._set_format_type)
 
-        if tc.condition.conditionType == "cancelled":
+        if tc.condition.conditionType == "_cancelled":
             tc.cleanup()
             return
         #end if
@@ -707,8 +707,8 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
     def _set_format_type(self, format_type):
-        if format_type == "cancelled":
-            self.tcFrameList[-1].condition.conditionType = "cancelled"
+        if format_type == "_cancelled":
+            self.tcFrameList[-1].condition.conditionType = "_cancelled"
             return
         ft = self.condTypes.index(format_type)
         self.tcFrameList[-1].condition.conditionType = ft
@@ -745,7 +745,7 @@ class TriggerConditionFrame(object):
 
     def cleanup(self):
         self.master.delete_trigger_condition(self)
-    #end cleanup
+    #end _cleanup
 
 #end class LogFrame
 
@@ -822,7 +822,7 @@ class TriggerConditionWindow(object):
         self._store_data()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
-    #end cleanup
+    #end _cleanup
 
 
     def _store_data(self):
