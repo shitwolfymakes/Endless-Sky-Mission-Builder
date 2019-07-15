@@ -1,4 +1,4 @@
-''' ScrollingCenterFrame.py
+""" ScrollingCenterFrame.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -10,17 +10,19 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 This code provides for the center frame to resize as necessary to fit all the components in a mission
-'''
+"""
 
 from tkinter import *
 from tkinter import ttk
 
+
 class ScrollingCenterFrame(ttk.Frame):
+
     def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
 
-        cfTitle = ttk.Label(self, text="Mission Options")
-        cfTitle.pack()
+        cf_title = ttk.Label(self, text="Mission Options")
+        cf_title.pack()
 
         self.app = app
         self.parent = parent
@@ -39,9 +41,9 @@ class ScrollingCenterFrame(ttk.Frame):
 
 
         self.inner  = ttk.Frame(self.canvas)
-        self.inner_id = self.canvas.create_window((4,4), window=self.inner, anchor=NW)
+        self.inner_id = self.canvas.create_window((4, 4), window=self.inner, anchor=NW)
 
-        self.inner.bind("<Configure>", self._configureInner)
+        self.inner.bind("<Configure>", self._configure_inner)
         self.canvas.bind("<Configure>", self._configureCanvas)
 
     #end init
@@ -71,7 +73,7 @@ class ScrollingCenterFrame(ttk.Frame):
     #end _on_mousewheel
 
 
-    def _configureInner(self, event=None):
+    def _configure_inner(self, event=None):
 
         # update the scrollbars to match the size of the inner frame
         bbox = self.canvas.bbox("all")
@@ -87,7 +89,7 @@ class ScrollingCenterFrame(ttk.Frame):
 
         if height < screen_h:
             self.canvas.configure(height=self.inner.winfo_reqheight())
-    #end _configureInner
+    #end _configure_inner
 
 
     def _configureCanvas(self, event=None):
