@@ -1,4 +1,4 @@
-''' PopupWindow.py
+""" PopupWindow.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -9,11 +9,11 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-'''
+"""
 
 from tkinter import Toplevel, ttk
-
 from guiutils import add_mission
+
 
 class PopupWindow(object):
 
@@ -23,17 +23,17 @@ class PopupWindow(object):
         self.top.title("New Mission")
         self.top.grab_set()             # freezes the app until the user enters or cancels
 
-        # _build the widgets
-        self.l = ttk.Label(self.top, text=text, background='white')
-        self.l.pack()
+        # build the widgets
+        self.label = ttk.Label(self.top, text=text, background='white')
+        self.label.pack()
         self.e = ttk.Entry(self.top)
         self.e.pack()
-        self.b = ttk.Button(self.top, text='Ok', command=self.cleanup)
+        self.b = ttk.Button(self.top, text='Ok', command=self._cleanup)
         self.b.pack()
     #end init
 
 
-    def cleanup(self):
+    def _cleanup(self):
         name = self.e.get()
         add_mission(self.app, name)
         self.top.grab_release()         # HAVE TO RELEASE
