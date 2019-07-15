@@ -1,4 +1,4 @@
-''' MissionComponents.py
+""" MissionComponents.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -10,7 +10,8 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 This file contains the classes defining some components of a mission
-'''
+"""
+
 
 class MissionComponents(object):
 
@@ -45,9 +46,9 @@ class MissionComponents(object):
 
 
 class Deadline(object):
-    '''
+    """
         deadline = deadline [<days> [<multiplier>]]
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
@@ -60,10 +61,11 @@ class Deadline(object):
 
 # end class Deadline
 
+
 class Cargo(object):
-    '''
+    """
     cargo  = [None, None, None, None}    # cargo (random | <name>) <number> [<number> [<probability>]]
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
@@ -78,9 +80,9 @@ class Cargo(object):
 
 
 class Passengers(object):
-    '''
+    """
         self.passengers = [None, None, None] # passengers <number> [<number> [<probability>]]
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
@@ -95,9 +97,9 @@ class Passengers(object):
 
 
 class Illegal(object):
-    '''
+    """
         self.illegal = [None, None] # illegal <fine> [<message>]
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
@@ -112,10 +114,10 @@ class Illegal(object):
 
 
 class Clearance(object):
-    '''
+    """
     self.clearance = [[None, None],                # clearance [<message>]
                       [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
@@ -130,10 +132,10 @@ class Clearance(object):
 
 
 class Stopover(object):
-    '''
+    """
     self.stopover = [[None, None],                # stopover [<planet>]
                      [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
@@ -148,13 +150,13 @@ class Stopover(object):
 
 
 class Source(object):
-    '''
+    """
         Usage:
         (source) <planet>       # specific planet
         or
         (source)                filter
             ...
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
@@ -169,13 +171,13 @@ class Source(object):
 
 
 class Destination(object):
-    '''
+    """
         Usage:
         (destination) <planet>       # specific planet
         or
         (destination)                filter
             ...
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
@@ -191,7 +193,7 @@ class Destination(object):
 
 class Trigger(object):
     #TODO: Implement this - ~50% Complete
-    '''
+    """
         Triggers:
 
         on (offer | complete | accept | decline | defer | fail | visit | stopover | enter [<system>])
@@ -208,7 +210,7 @@ class Trigger(object):
             (set | clear) <condition>
             event <name> [<delay#> [<max#>]]
             fail [<name>]
-    '''
+    """
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
@@ -230,7 +232,7 @@ class Trigger(object):
     #end init
 
 
-    def clearTrigger(self):
+    def clear_trigger(self):
         self.triggerType = None
         self.dialog      = None
         self.outfit      = [None, None]
@@ -240,10 +242,10 @@ class Trigger(object):
         self.event       = [None, None, None]
         self.isFail      = False
         self.fail        = None
-    #end clearTrigger
+    #end clear_trigger
 
 
-    def printTrigger(self):
+    def print_trigger(self):
         print("\n\tTrigger Data")
         print("\t\tisActive:", self.isActive)
         print("\t\tOn:", self.triggerType)
@@ -257,42 +259,42 @@ class Trigger(object):
         print("\t\tFail:", self.fail)
         print("\t\tLogs:")
         for log in self.logs:
-            log.printLog()
+            log.print_log()
         print("\t\tConditions:")
         for cond in self.conditions:
-            cond.printCondition()
+            cond.print_condition()
         print()
-    #end printTrigger
+    #end print_trigger
 
 
-    def addLog(self):
-        newLog = Log()
-        self.logs.append(newLog)
-        print("\t\tLog", newLog, "added to", self)
-        return newLog
-    #end addLog
+    def add_log(self):
+        new_log = Log()
+        self.logs.append(new_log)
+        print("\t\tLog", new_log, "added to", self)
+        return new_log
+    #end add_log
 
 
-    def removeLog(self, log):
+    def remove_log(self, log):
         print("\t\tRemoving", log, "from", self, "...", end="\t\t")
         self.logs.remove(log)
         print("Done.")
-    #end removeLog
+    #end remove_log
 
 
-    def addTC(self):
-        newCond = TriggerCondition()
-        self.conditions.append(newCond)
-        print("\t\tTriggerCondition", newCond, "added to", self)
-        return newCond
-    #end addLog
+    def add_tc(self):
+        new_cond = TriggerCondition()
+        self.conditions.append(new_cond)
+        print("\t\tTriggerCondition", new_cond, "added to", self)
+        return new_cond
+    #end add_log
 
 
-    def removeTC(self, condition):
+    def remove_tc(self, condition):
         print("\t\tRemoving", condition, "from", self, "...", end="\t\t")
         self.conditions.remove(condition)
         print("Done.")
-    #end removeLog
+    #end remove_log
 
 #end class Trigger
 
@@ -310,17 +312,17 @@ class Log(object):
     # end init
 
 
-    def clearLog(self):
+    def clear_log(self):
         self.log = [None, None, None]
-    #end clearLog
+    #end clear_log
 
 
-    def printLog(self):
+    def print_log(self):
         print("\t\tLog Data")
         print("\t\t\tisActive:", self.isActive)
         print("\t\t\tformatType:", self.formatType)
         print("\t\t\tLog:", self.log)
-    #end printLog
+    #end print_log
 
 # end class Log
 
@@ -338,12 +340,12 @@ class TriggerCondition(object):
     # end init
 
 
-    def clearCondition(self):
+    def clear_condition(self):
         self.condition = [None, None, None]
     #end clearConditions
 
 
-    def printCondition(self):
+    def print_condition(self):
         print("\t\tCondition Data")
         print("\t\t\tisActive:", self.isActive)
         print("\t\t\tconditionType:", self.conditionType)

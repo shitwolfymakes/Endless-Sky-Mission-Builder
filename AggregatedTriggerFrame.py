@@ -227,7 +227,7 @@ class TriggerWindow(object):
 
     def _store_data(self):
         print("\nStoring TriggerWindow data...")
-        self.trigger.clearTrigger()
+        self.trigger.clear_trigger()
 
         # action
         if self.action is not None:
@@ -299,7 +299,7 @@ class TriggerWindow(object):
             #end if
         #end if
 
-        self.trigger.printTrigger()
+        self.trigger.print_trigger()
 
         print("Done.")
     #end _store_data
@@ -455,7 +455,7 @@ class AggregatedLogFrame(ttk.Frame):
     def delete_log(self, log_frame):
         print("Removing %s from Triggers" % log_frame.log)
 
-        self.trigger.removeLog(log_frame.log)
+        self.trigger.remove_log(log_frame.log)
 
         self.logFrameList.remove(log_frame)
         log_frame.frame.pack_forget()
@@ -499,7 +499,7 @@ class LogFrame(object):
     def __init__(self, master, trigger, name, populating=False):
         self.log = None
         if not populating:
-            self.log = trigger.addLog()
+            self.log = trigger.add_log()
         self.master = master
         self.trigger = trigger
 
@@ -583,7 +583,7 @@ class LogWindow(object):
 
     def _store_data(self):
         print("\nStoring LogWindow data...", end="\t")
-        self.log.clearLog()
+        self.log.clear_log()
 
         if self.formatType == "<message>":
             self.log.log[0] = self.message.get()
@@ -674,7 +674,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
     def delete_trigger_condition(self, tc_frame):
         print("Removing %s from Triggers" % tc_frame.condition)
 
-        self.trigger.removeTC(tc_frame.condition)
+        self.trigger.remove_tc(tc_frame.condition)
 
         self.tcFrameList.remove(tc_frame)
         tc_frame.frame.pack_forget()
@@ -722,7 +722,7 @@ class TriggerConditionFrame(object):
     def __init__(self, master, trigger, name, populating=False):
         self.condition = None
         if not populating:
-            self.condition = trigger.addTC()
+            self.condition = trigger.add_tc()
         self.master  = master
         self.trigger = trigger
 
@@ -827,7 +827,7 @@ class TriggerConditionWindow(object):
 
     def _store_data(self):
         print("\nStoring TriggerConditionWindow data...", end="\t")
-        self.condition.clearCondition()
+        self.condition.clear_condition()
 
         if self.conditionType == 0:
             self.condition.condition[0] = self.condData.get()

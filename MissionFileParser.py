@@ -142,31 +142,31 @@ class MissionFileParser(object):
                             trigger.fail   = tokens[1]
                         elif "log" in tokens[0] and len(tokens) == 2:
                             print("\t\t\tFound Log: %s" % tokens)
-                            newLog            = trigger.addLog()
+                            newLog            = trigger.add_log()
                             newLog.isActive   = True
                             newLog.formatType = "<message>"
                             newLog.log[0]     = tokens[1]
                         elif "log" in tokens[0]:
                             print("\t\t\tFound Log: %s" % tokens)
-                            newLog            = trigger.addLog()
+                            newLog            = trigger.add_log()
                             newLog.isActive   = True
                             newLog.formatType = "<type> <name> <message>"
                             self.storeComponentData(newLog.log, tokens[1:])
                         elif tokens[1] in ["=", "+=", "-="]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
-                            newTC               = trigger.addTC()
+                            newTC               = trigger.add_tc()
                             newTC.isActive      = True
                             newTC.conditionType = 0
                             self.storeComponentData(newTC.condition, tokens)
                         elif tokens[1] in ["++", "--"]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
-                            newTC               = trigger.addTC()
+                            newTC               = trigger.add_tc()
                             newTC.isActive      = True
                             newTC.conditionType = 1
                             self.storeComponentData(newTC.condition, tokens)
                         elif tokens[0] in ["set", "clear"]:
                             print("\t\t\tFound TriggerCondition: %s" % tokens)
-                            newTC               = trigger.addTC()
+                            newTC               = trigger.add_tc()
                             newTC.isActive      = True
                             newTC.conditionType = 2
                             self.storeComponentData(newTC.condition, tokens)
@@ -184,7 +184,7 @@ class MissionFileParser(object):
                     print("ERROR: No tokens found on line %d: %s" % (i, line))
                 #end if/else
                 for trigger in mission.components.triggerList:
-                    trigger.printTrigger()
+                    trigger.print_trigger()
             #end for
             print("\tDone.")
         #end for
