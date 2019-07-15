@@ -1,4 +1,4 @@
-''' MissionCompiler.py
+""" MissionCompiler.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -11,7 +11,8 @@
 
 This pulls the data the user has entered and stores it in the corresponding Mission object.
 
-'''
+"""
+
 
 class MissionCompiler(object):
 
@@ -214,6 +215,5 @@ class MissionCompiler(object):
         # call the parser to save the new data
         self.esmb.activeMission.parse_mission()
     #end run
-
 
 #end class MissionCompiler
