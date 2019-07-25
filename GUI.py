@@ -41,6 +41,10 @@ class GUI(object):
         self.gui.title("ESMissionBuilder")
         self.gui.configure(bg="orange")
 
+        # enable window resizing
+        self.gui.columnconfigure(0, weight=1)
+        self.gui.rowconfigure(0, weight=1)
+
         self.disabledEntryStyle = ttk.Style()
         self.disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
         self.disabledComboboxStyle = ttk.Style()
@@ -264,6 +268,10 @@ class GUI(object):
         # triggers
         self.triggersFrame = AggregatedTriggerFrame(self, cf)
         self.triggersFrame.grid(row=18, column=0, sticky="ew")
+
+        # add a blank label to pad the bottom of the frame
+        bl1 = ttk.Label(cf, textvariable=" ")
+        bl1.grid(row=19, column=0, sticky="ew")
 
         print("Done.")
     #end build_center_frame
