@@ -296,6 +296,7 @@ class GUI(object):
         welcome_message += "\n\t - Click \"Compile Mission\" to save save the current mission\n"
         welcome_message += "\n\t - Click \"Help\" to be directed to the Mission Creation wiki\n"
         self.missionTextBox.insert(END, welcome_message)
+        self.missionTextBox.config(state=DISABLED)
 
         print("Done.")
     #end build_mission_frame
@@ -477,6 +478,7 @@ class GUI(object):
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack()
         self.missionTextBox.insert(END, self.activeMission.print_mission_lines_to_text())
+        self.missionTextBox.config(state=DISABLED)
 
         print("Done.")
     #end update_mission_frame
