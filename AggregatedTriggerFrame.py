@@ -77,7 +77,7 @@ class AggregatedTriggerFrame(ttk.Frame):
     #end edit_trigger
 
 
-    def _populate_trigger(self, trigger):
+    def populate_trigger(self, trigger):
         tf = TriggerFrame(self, self.app, "trigger", populating=True)
         tf.trigger = trigger
 
@@ -89,7 +89,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         if trigger.isActive:
             state.set(1)
             self._change_trigger_state(state, trigger)
-    #end _populate_trigger
+    #end populate_trigger
 
 
     @staticmethod

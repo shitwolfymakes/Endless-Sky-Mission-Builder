@@ -465,7 +465,7 @@ class GUI(object):
         if components.triggerList:
             print("\tTriggers found")
             for trigger in components.triggerList:
-                self.triggersFrame._populate_trigger(trigger)
+                self.triggersFrame.populate_trigger(trigger)
 
     print("Done.")
     #end update_center_frame
