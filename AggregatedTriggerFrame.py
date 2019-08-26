@@ -514,7 +514,7 @@ class AggregatedLogFrame(ttk.Frame):
 
     def populate_log(self, log):
         """
-        This method populates the GUI with a TrLogFrame widget, then stores the data from log inside it
+        This method populates the GUI with a LogFrame widget, then stores the data from log inside it
 
         :param log: the log containing the data to be populated
         """
@@ -722,7 +722,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
         TypeSelectorWindow(self, self.condTypes, self._set_format_type)
 
-        if tc.condition.conditionType == "_cancelled":
+        if tc.condition.conditionType == "cancelled":
             tc.cleanup()
             return
         #end if
@@ -770,6 +770,11 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
     def populate_trigger_condition(self, condition):
+        """
+        This method populates the GUI with a TriggerConditionFrame widget, then stores the data from condition inside it
+
+        :param condition: the TriggerCondition containing the data to be populated
+        """
         tc = TriggerConditionFrame(self, self.trigger, "log", populating=True)
         tc.condition = condition
 
@@ -792,8 +797,8 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
     def _set_format_type(self, format_type):
-        if format_type == "_cancelled":
-            self.tcFrameList[-1].condition.conditionType = "_cancelled"
+        if format_type == "cancelled":
+            self.tcFrameList[-1].condition.conditionType = "cancelled"
             return
         ft = self.condTypes.index(format_type)
         self.tcFrameList[-1].condition.conditionType = ft
