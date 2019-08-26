@@ -454,7 +454,10 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def _add_log(self):
-        """Add a trigger to the activeMission"""
+        """
+        Add a log to the current trigger. We can assume a specific trigger because these functions are only accessible
+        after has opened the trigger they are adding this log to.
+        """
         print("Adding Trigger...")
 
         lf = LogFrame(self, self.trigger, "log")
@@ -477,12 +480,24 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def edit_log(self, log_frame):
+        """
+        This method uses the data stored in the log_frame to edit the data stored in the associated
+        Log object.
+
+        :param log_frame: The LogFrame containing the log to be edited
+        """
         print("Editing ", log_frame.log, "...")
         LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
     #end edit_log
 
 
     def delete_log(self, log_frame):
+        """
+        This method uses the data stored in the log_frame to remove the associated Log object from the
+        current trigger. Once that is completed, it removes the log_frame widget from the GUI.
+
+        :param log_frame: The LogFrame to be removed
+        """
         print("Removing %s from Triggers" % log_frame.log)
 
         self.trigger.remove_log(log_frame.log)
@@ -496,6 +511,11 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def populate_log(self, log):
+        """
+        This method populates the GUI with a TrLogFrame widget, then stores the data from log inside it
+
+        :param log: the log containing the data to be populated
+        """
         lf = LogFrame(self, self.trigger, "log", populating=True)
         lf.log = log
 
@@ -512,6 +532,11 @@ class AggregatedLogFrame(ttk.Frame):
 
     @staticmethod
     def _change_log_state(state, log):
+        """
+        Set log to state
+        :param state: the state of the log
+        :param log: the log
+        """
         log.isActive = state.get()
         print(log, "is now", log.isActive)
     #def _change_trigger_state
