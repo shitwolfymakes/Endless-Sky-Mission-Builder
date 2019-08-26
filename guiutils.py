@@ -84,7 +84,7 @@ class _ComboComponentFrame(ttk.Frame):
                 widget.config(state='disabled', style='D.TCombobox')
             # end if/else
         # end for
-    # end _cb_value_changed
+    # end cb_value_changed
 
     def option_selected(self, event=None):
         selected_option = self.combo.get()
@@ -97,7 +97,7 @@ class _ComboComponentFrame(ttk.Frame):
             This method does the following:
                 1) set the given entry state to 1
                 2) set the combobox to the given data
-                3) enable the given entry using _cb_value_changed
+                3) enable the given entry using cb_value_changed
         """
 
         self.isActive.set(1)
@@ -264,7 +264,7 @@ class _ComponentMandOptFrame(ttk.Frame):
                 widget.config(state='disabled', style='D.TEntry')
             #end if/else
         # end for
-    # end _cb_value_changed
+    # end cb_value_changed
 
 
     def set(self, entry_state_num, entry_num, data):
@@ -272,7 +272,7 @@ class _ComponentMandOptFrame(ttk.Frame):
             This method does the following:
                 1) set the given entry state to 1
                 2) store data in the given entry
-                3) enable the given entry using _cb_value_changed
+                3) enable the given entry using cb_value_changed
         """
 
         if self.listEntryStates[entry_state_num].get() is False:
@@ -367,7 +367,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             # print("\t\t\tNo mandatory fields")
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[0].configure(command=partial(self.cb_value_changed,
                                                                self.listEntryStates[0],
                                                                [self.subComponentName]))
             self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
@@ -384,7 +384,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.listEntries[0].grid(row=0, column=1, sticky="ew")
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[0].configure(command=partial(self.cb_value_changed,
                                                                self.listEntryStates[0],
                                                                [self.listEntries[0]]))
             self.listCheckbuttons[0].grid(row=self.rowNum, column=2, sticky="e")
@@ -417,7 +417,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
                 self.rowNum += 1
             # end for
 
-            self.listCheckbuttons[0].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[0].configure(command=partial(self.cb_value_changed,
                                                                self.listEntryStates[0],
                                                                self.listEntries[:self.numMandatory]))
         # end if/else
@@ -434,7 +434,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             # We have to use functools.partial here because lambda can't be used
             # inside a loop(the bound lambda will use the last assigned values)
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
-            self.listCheckbuttons[-1].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[-1].configure(command=partial(self.cb_value_changed,
                                                                 self.listEntryStates[-1],
                                                                 [self.listEntries[-1]]))
             self.listCheckbuttons[-1].grid(row=self.rowNum, column=2, sticky="e")
@@ -446,7 +446,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
 
     @staticmethod
-    def _cb_value_changed(entry_state, modified_widgets):
+    def cb_value_changed(entry_state, modified_widgets):
         for widget in modified_widgets:
             print("The value of %s is:" % widget, end="\t\t")
             print(entry_state.get())
@@ -458,7 +458,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
                 widget.config(state='disabled', style='D.TEntry')
             #end if/else
         # end for
-    # end _cb_value_changed
+    # end cb_value_changed
 
 # end class _SubComponentMandOptFrame
 

@@ -345,7 +345,7 @@ class TriggerWindow(object):
         component = self.dialogSubComponent
         if self.trigger.dialog is not None:
             component.listEntryStates[0].set(1)
-            component._cb_value_changed(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
+            component.cb_value_changed(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
             component.listEntryData[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
         #end if
 
@@ -354,7 +354,7 @@ class TriggerWindow(object):
         for i, data in enumerate(self.trigger.outfit):
             if data is not None:
                 component.listEntryStates[i].set(1)
-                component._cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
+                component.cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
                 component.listEntryData[i].set(data)
             #end if
         #end for
@@ -364,7 +364,7 @@ class TriggerWindow(object):
         for i, data in enumerate(self.trigger.require):
             if data is not None:
                 component.listEntryStates[i].set(1)
-                component._cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
+                component.cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
                 component.listEntryData[i].set(data)
             #end if
         #end for
@@ -373,12 +373,12 @@ class TriggerWindow(object):
         if self.trigger.isPayment:
             component = self.paymentSubComponent
             component.listEntryStates[0].set(1)
-            component._cb_value_changed(component.listEntryStates[0], [component.subComponentName])
+            component.cb_value_changed(component.listEntryStates[0], [component.subComponentName])
 
             for i, data in enumerate(self.trigger.payment):
                 if data is not None:
                     component.listEntryStates[i+1].set(1)
-                    component._cb_value_changed(component.listEntryStates[i + 1], [component.listEntries[i]])
+                    component.cb_value_changed(component.listEntryStates[i + 1], [component.listEntries[i]])
                     component.listEntryData[i].set(data)
                 # end if
             # end for
@@ -388,7 +388,7 @@ class TriggerWindow(object):
         for i, data in enumerate(self.trigger.event):
             if data is not None:
                 component.listEntryStates[i].set(1)
-                component._cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
+                component.cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
                 component.listEntryData[i].set(data)
             #end if
         #end for
@@ -397,11 +397,11 @@ class TriggerWindow(object):
         component = self.failSubComponent
         if self.trigger.isFail:
             component.listEntryStates[0].set(1)
-            component._cb_value_changed(component.listEntryStates[0], [component.subComponentName])
+            component.cb_value_changed(component.listEntryStates[0], [component.subComponentName])
 
             if self.trigger.fail is not None:
                 component.listEntryStates[1].set(1)
-                component._cb_value_changed(component.listEntryStates[1], [component.listEntries[0]])
+                component.cb_value_changed(component.listEntryStates[1], [component.listEntries[0]])
                 component.listEntryData[0].set(self.trigger.fail)
             #end if
         #end if
