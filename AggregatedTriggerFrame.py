@@ -238,12 +238,14 @@ class TriggerWindow(object):
 
 
     def _action_selected(self, event=None):
+        """Store the combobox option selected by the user"""
         self.action = self.onActionCombobox.get()
         print('\nTrigger action selected: "on %s"' % self.action)
     #end _action_selected
 
 
     def _cleanup(self):
+        """Clean up whatever popups we've created"""
         self._store_data()
         self.app.activeTrigger = None
         self.top.grab_release()  # HAVE TO RELEASE
@@ -543,6 +545,11 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def _set_format_type(self, format_type):
+        """
+        Set the format of the log, so the code knows what to look for
+        :param format_type:
+        :return:
+        """
         self.logFrameList[-1].log.formatType = format_type
     #end _set_format_type
 
@@ -550,6 +557,7 @@ class AggregatedLogFrame(ttk.Frame):
 
 
 class LogFrame(object):
+    """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, master, trigger, name, populating=False):
         self.log = None
@@ -576,6 +584,7 @@ class LogFrame(object):
 
 
     def cleanup(self):
+        """Clean up whatever popups we've created"""
         self.master.delete_log(self)
     #end _cleanup
 
@@ -583,6 +592,7 @@ class LogFrame(object):
 
 
 class LogWindow(object):
+    """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
     def __init__(self, app, master, log, format_type):
         print("\tBuilding LogWindow...")
@@ -630,6 +640,7 @@ class LogWindow(object):
 
 
     def cleanup(self):
+        """Clean up whatever popups we've created"""
         self._store_data()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
@@ -637,6 +648,7 @@ class LogWindow(object):
 
 
     def _store_data(self):
+        """Store the data from the GUI into the associated Log object"""
         print("\nStoring LogWindow data...", end="\t")
         self.log.clear_log()
 
@@ -653,6 +665,7 @@ class LogWindow(object):
 
 
     def populate_log_window(self):
+        """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
         print("Populating TriggerWindow...", end="\t")
 
         if self.formatType == "<message>":
@@ -674,6 +687,10 @@ class LogWindow(object):
 
 
 class AggregatedTriggerConditionsFrame(ttk.Frame):
+    """
+    This class extends ttk.Frame, allowing the user to add an arbitrary
+    number of TriggerConditionFrame widgets to the GUI.
+    """
 
     def __init__(self, app, parent, trigger):
         ttk.Frame.__init__(self, parent)
@@ -698,6 +715,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
     def _add_trigger_condition(self):
+        """Add a condition to the current trigger"""
         print("Adding TriggerCondition...")
 
         tc = TriggerConditionFrame(self, self.trigger, "log")
@@ -721,12 +739,24 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
     def edit_trigger_condition(self, tc_frame):
+        """
+        This method uses the data stored in the tc_frame to edit the data stored in the associated
+        TriggerCondition object.
+
+        :param tc_frame: The TriggerConditionFrame containing the condition to be edited
+        """
         print("Editing ", tc_frame.condition, "...")
         TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
     #end edit_trigger_condition
 
 
     def delete_trigger_condition(self, tc_frame):
+        """
+        This method uses the data stored in the tc_frame to remove the associated TriggerCondition object from the
+        current trigger. Once that is completed, it removes the tc_frame widget from the GUI.
+
+        :param tc_frame: The TriggerConditionFrame to be removed
+        """
         print("Removing %s from Triggers" % tc_frame.condition)
 
         self.trigger.remove_tc(tc_frame.condition)
