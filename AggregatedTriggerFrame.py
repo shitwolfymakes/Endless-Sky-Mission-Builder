@@ -9,15 +9,16 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-This frame allows the user to add an arbitrary number of Trigger objects to the activeMission,
-    and manipulate the data therein.
-
+This library contains classes and methods that extend ttk widgets
 """
 
 from guiutils import *
 
 
 class AggregatedTriggerFrame(ttk.Frame):
+    """
+    This class extends ttk.Frame, allowing the user to add an arbitrary number of TriggerFrame widgets to the GUI.
+    """
 
     def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
@@ -41,6 +42,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def _add_trigger(self):
+        """Add a trigger to the activeMission"""
         print("Adding Trigger...")
 
         tf = TriggerFrame(self, self.app, "trigger")
@@ -56,6 +58,12 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def delete_trigger(self, trigger_frame):
+        """
+        This method uses the data stored in the trigger_frame to remove the associated Trigger object from the
+            activeMission. Once that is completed, it removes the trigger_frame TriggerFrame widget from the GUI.
+
+        :param trigger_frame: The TriggerFrame to be removed
+        """
         print("Removing %s from Triggers" % trigger_frame.trigger)
 
         self.app.activeMission.remove_trigger(trigger_frame.trigger)
@@ -69,6 +77,12 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def edit_trigger(self, trigger_frame):
+        """
+        This method uses the data stored in the trigger_frame to edit the data stored in the associated
+        Trigger object.
+
+        :param trigger_frame: The TriggerFrame containing the trigger to be edited
+        """
         print("Editing ", end="")
         print(trigger_frame.trigger, end="")
         print("...")
@@ -78,6 +92,11 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
     def populate_trigger(self, trigger):
+        """
+        This method populates the GUI with a TriggerFrame widget, then stores the data from trigger inside it
+
+        :param trigger: the trigger containing the data to be populated
+        """
         tf = TriggerFrame(self, self.app, "trigger", populating=True)
         tf.trigger = trigger
 
@@ -94,6 +113,11 @@ class AggregatedTriggerFrame(ttk.Frame):
 
     @staticmethod
     def _change_trigger_state(state, trigger):
+        """
+        Set trigger to state
+        :param state: the state of the trigger
+        :param trigger: the trigger
+        """
         trigger.isActive = state.get()
         print(trigger, "is now", trigger.isActive)
     #def _change_trigger_state
@@ -102,6 +126,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
 
 class TriggerFrame(ttk.Frame):
+    """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, master, app, name, populating=False):
         ttk.Frame.__init__(self, master)
@@ -135,6 +160,7 @@ class TriggerFrame(ttk.Frame):
 
 
 class TriggerWindow(object):
+    """This class creates a custom pop-up window to display and edit the data in an associated Trigger object"""
 
     def __init__(self, app, master, trigger):
         print("\tBuilding TriggerWindow...")
@@ -226,6 +252,7 @@ class TriggerWindow(object):
 
 
     def _store_data(self):
+        """Store the data from the GUI into the associated Trigger object"""
         print("\nStoring TriggerWindow data...")
         self.trigger.clear_trigger()
 
@@ -305,6 +332,7 @@ class TriggerWindow(object):
     #end _store_data
 
     def _populate_trigger_window(self):
+        """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
         print("\t\tPopulating TriggerWindow...", end="\t")
 
         # action
@@ -401,6 +429,7 @@ class TriggerWindow(object):
 
 
 class AggregatedLogFrame(ttk.Frame):
+    """"""
 
     def __init__(self, app, parent, trigger):
         ttk.Frame.__init__(self, parent)
