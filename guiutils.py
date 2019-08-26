@@ -494,7 +494,7 @@ class TypeSelectorWindow(Toplevel):
 
 
     def _cancelled(self):
-        self.callback("_cancelled")
+        self.callback("cancelled")
         self.destroy()
     #end _cancelled
 

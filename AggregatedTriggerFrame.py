@@ -429,7 +429,7 @@ class TriggerWindow(object):
 
 
 class AggregatedLogFrame(ttk.Frame):
-    """"""
+    """This class extends ttk.Frame, allowing the user to add an arbitrary number of LogFrame widgets to the GUI."""
 
     def __init__(self, app, parent, trigger):
         ttk.Frame.__init__(self, parent)
@@ -454,12 +454,13 @@ class AggregatedLogFrame(ttk.Frame):
 
 
     def _add_log(self):
+        """Add a trigger to the activeMission"""
         print("Adding Trigger...")
 
         lf = LogFrame(self, self.trigger, "log")
         TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
-
-        if lf.log.formatType == "_cancelled":
+        print(lf.log.formatType)
+        if lf.log.formatType == "cancelled":
             lf.cleanup()
             return
         #end if
