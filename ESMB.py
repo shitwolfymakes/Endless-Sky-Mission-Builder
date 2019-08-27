@@ -23,6 +23,7 @@ from GUI import *
 
 
 class ESMB(object):
+    """The application object"""
 
     def __init__(self):
         debug_mode = False
