@@ -19,6 +19,12 @@ from Mission import *
 
 
 def add_mission(app, new_mission_name):
+    """
+    Helper method that creates a new mission, then updates the data model and GUI
+
+    :param app: The ESMB object
+    :param new_mission_name: A string containing the name of the new mission
+    """
     print("Adding mission: \"%s\"..." % new_mission_name, end="\t\t")
 
     mission = Mission(new_mission_name, default=True)
@@ -30,18 +36,43 @@ def add_mission(app, new_mission_name):
 
 
 def build_mand_opt_frame(parent, sub_component_name, num_mandatory, num_optionals, list_default_entry_data):
+    """
+    This method returns a SubComponentMandOptFrame object
+
+    :param parent: The parent widget of this one
+    :param sub_component_name: The name of the mission component
+    :param num_mandatory: The number of must-use mission subcomponents
+    :param num_optionals: The number of optional-use mission subcomponents
+    :param list_default_entry_data: The default data to be stored in the entries that will be created
+    """
     new_frame = _SubComponentMandOptFrame(parent, sub_component_name, num_mandatory, num_optionals, list_default_entry_data)
     return new_frame
 #end build_mand_opt_frame
 
 
 def build_component_frame(parent, component_name, num_mandatory, num_optionals, list_default_entry_data):
+    """
+    This method returns a ComponentMandOptFrame object
+
+    :param parent: The parent widget of this one
+    :param component_name: The name of the mission component
+    :param num_mandatory: The number of must-use mission subcomponents
+    :param num_optionals: The number of optional-use mission subcomponents
+    :param list_default_entry_data: The default data to be stored in the entries that will be created
+    """
     new_frame = _ComponentMandOptFrame(parent, component_name, num_mandatory, num_optionals, list_default_entry_data)
     return new_frame
 #end build_mand_opt_frame
 
 
 def build_combo_component_frame(parent, component_name, list_combobox_data):
+    """
+    This method returns a SubComponentMandOptFrame object
+
+    :param parent: The parent widget of this one
+    :param component_name: The name of the mission component
+    :param list_combobox_data: The data that the combobox will contain
+    """
     new_frame = _ComboComponentFrame(parent, component_name, list_combobox_data)
     return new_frame
 #end build_combo_component_frame
