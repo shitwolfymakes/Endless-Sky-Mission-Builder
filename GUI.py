@@ -21,6 +21,7 @@ from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 
 class GUI(object):
+    """This class houses the top level of the GUI"""
 
     def __init__(self, debug_mode):
         print("Building GUI...")
@@ -131,6 +132,11 @@ class GUI(object):
     '''
 
     def build_main_view(self, window):
+        """
+        Instantiate the three major frames, and call methods to build the respective GUI areas
+
+        :param window: The ThemedTK object that the rest of the GUI is built off of
+        """
         option_frame  = ttk.Frame(window)
         center_frame  = ScrollingCenterFrame(self, window)
         mission_frame = ttk.Frame(window)
@@ -150,6 +156,7 @@ class GUI(object):
 
 
     def build_option_frame(self):
+        """Add widgets to the optionFrame"""
         print("Building optionFrame...", end="\t\t")
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
@@ -180,13 +187,14 @@ class GUI(object):
         help_button = ttk.Button(self.optionFrame, text="Help", command=help_user)
         help_button.pack(fill='x')
 
-        #TODO: Add functions to change missionName and delete mission. Also, update button grouping to reflect
+        #TODO: Add functionality to change missionName and delete mission. Also, update button grouping to reflect
 
         print("Done.")
     #end build_option_frame
 
 
     def build_center_frame(self):
+        """Add widgets to the centerFrame"""
         print("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
@@ -278,6 +286,7 @@ class GUI(object):
 
 
     def build_mission_frame(self):
+        """Add widgets to the missionFrame"""
         print("Building missionFrame...", end="\t")
 
         #Display a default mission template on launch
@@ -306,6 +315,7 @@ class GUI(object):
 
 
     def update_option_frame(self):
+        """Update optionFrame to use the most recent data"""
         print("\nUpdating optionFrame...")
 
         ### Start updating combobox
@@ -330,6 +340,7 @@ class GUI(object):
 
 
     def update_center_frame(self):
+        """Update missionFrame to use the most recent data"""
         print("\nUpdating centerFrame...")
 
         components = self.activeMission.components
@@ -472,6 +483,7 @@ class GUI(object):
 
 
     def update_mission_frame(self):
+        """Update missionFrame to use the most recent data"""
         print("\nUpdating missionFrame...", end="\t")
 
         self.missionTextBox.forget()
@@ -488,6 +500,7 @@ class GUI(object):
 
 
     def mission_selected(self, event=None):
+        """Set activeMission to the combobox option selected by the user"""
         selected_mission_name = self.missionComboBox.get()
         print('\nOpening mission "%s"' % selected_mission_name)
         self.activeMission = self.missionNameToObjectDict.get(selected_mission_name)
