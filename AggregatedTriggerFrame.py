@@ -548,7 +548,6 @@ class AggregatedLogFrame(ttk.Frame):
         """
         Set the format of the log, so the code knows what to look for
         :param format_type:
-        :return:
         """
         self.logFrameList[-1].log.formatType = format_type
     #end _set_format_type
@@ -791,12 +790,21 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
     @staticmethod
     def _change_tc_state(state, tc):
+        """
+        Set tc to state
+        :param state: the state of the condition
+        :param tc: the trigger condition
+        """
         tc.isActive = state.get()
         print(tc, "is now", tc.isActive)
     #def changeTriggerConditionsState
 
 
     def _set_format_type(self, format_type):
+        """
+        Set the format of the condition, so the code knows what to look for
+        :param format_type: the format type
+        """
         if format_type == "cancelled":
             self.tcFrameList[-1].condition.conditionType = "cancelled"
             return
@@ -808,6 +816,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
 
 class TriggerConditionFrame(object):
+    """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, master, trigger, name, populating=False):
         self.condition = None
@@ -834,13 +843,17 @@ class TriggerConditionFrame(object):
 
 
     def cleanup(self):
+        """Remove this widget from the gui"""
         self.master.delete_trigger_condition(self)
     #end _cleanup
 
-#end class LogFrame
+#end class TriggerConditionFrame
 
 
 class TriggerConditionWindow(object):
+    """
+    This class creates a custom pop-up window to display and edit the data in an associated TriggerCondition object
+    """
 
     def __init__(self, app, master, condition):
         print("\tBuilding TriggerConditionWindow...")
@@ -909,6 +922,7 @@ class TriggerConditionWindow(object):
 
 
     def cleanup(self):
+        """Clean up whatever popups we've created"""
         self._store_data()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
@@ -916,6 +930,7 @@ class TriggerConditionWindow(object):
 
 
     def _store_data(self):
+        """Store the data from the GUI into the associated Log object"""
         print("\nStoring TriggerConditionWindow data...", end="\t")
         self.condition.clear_condition()
 
@@ -938,6 +953,10 @@ class TriggerConditionWindow(object):
 
 
     def _populate_tc_window(self):
+        """
+        Take the associated TriggerCondition object, and populate
+        each of the widgets in the window with the data inside
+        """
         print("\t\tPopulating TriggerWindow...", end="\t")
 
         if self.conditionType == 0:
@@ -968,7 +987,8 @@ class TriggerConditionWindow(object):
 
 
     def _combo_callback(self, event=None):
+        """Store the combobox option selected by the user"""
         self.selectedOption = self.optionsCombo.get()
     #end _combo_callback
 
-#end class LogWindow
+#end class TriggerConditionWindow
