@@ -79,6 +79,7 @@ def build_combo_component_frame(parent, component_name, list_combobox_data):
 
 
 class _SubComponentMandOptFrame(ttk.Frame):
+    """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, sub_component_name, num_mandatory, num_optionals, list_default_entry_data):
         ttk.Frame.__init__(self, parent)
@@ -105,13 +106,18 @@ class _SubComponentMandOptFrame(ttk.Frame):
     # end init
 
 
-    '''
-        This function takes in the parameters passed into the object call, 
-        and executes different logic based on what it finds.
+    def _build(self):
+        """
+        This function takes in the parameters passed into the object call, and executes different logic based on what
+        it finds. Each mandatory entry will be slaved to a single checkbutton, whereas each optional entry will be
+        slaved to it's own separate checkbutton
 
-        e.g.: build_mand_opt_frame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"]) 
+        For example:
+
+        build_mand_opt_frame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"])
 
         becomes:
+
         +------------------------+
         | fail    [<test0>]   [] |
         |         [<test1>]      |
@@ -119,8 +125,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
         |         [<test2>]   [] |
         |         [<test3>]   [] |
         +------------------------+
-    '''
-    def _build(self):
+        """
         # print("\t\tBuilding \"%s\"" % self.subComponentName)
         label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5, 0))
@@ -213,6 +218,12 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
     @staticmethod
     def cb_value_changed(entry_state, modified_widgets):
+        """
+        Set each of the modified_widgets to entry_state
+
+        :param entry_state: The boolean value of the entry
+        :param modified_widgets: A list of widgets
+        """
         for widget in modified_widgets:
             print("The value of %s is:" % widget, end="\t\t")
             print(entry_state.get())
@@ -230,6 +241,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
 
 
 class _ComponentMandOptFrame(ttk.Frame):
+    """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, component_name, num_mandatory, num_optionals, list_default_entry_data):
         ttk.Frame.__init__(self, parent)
@@ -258,23 +270,26 @@ class _ComponentMandOptFrame(ttk.Frame):
     # end init
 
 
-    '''
-        This function takes in the parameters passed into the object call, 
-        and executes different logic based on what it finds.
+    def _build(self):
+        """
+        This function takes in the parameters passed into the object call, and executes different logic based on what
+        it finds. Each mandatory entry will be slaved to a single checkbutton, whereas each optional entry will be
+        slaved to it's own separate checkbutton
 
-        e.g.: build_component_frame(parent, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"]) 
+        For example:
+
+        build_component_frame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"])
 
         becomes:
+
         +------------------------+
-        | fail                [] |
-        |         [<test0>]      |
+        | fail    [<test0>]   [] |
         |         [<test1>]      |
         |         [<name>]    [] |
         |         [<test2>]   [] |
         |         [<test3>]   [] |
         +------------------------+
-    '''
-    def _build(self):
+        """
         print("\t\tBuilding \"%s\"" % self.componentName)
         label1 = ttk.Label(self, text=self.componentName)
         label1.grid(row=0, column=0, sticky="w", padx=(5, 0))
@@ -367,6 +382,12 @@ class _ComponentMandOptFrame(ttk.Frame):
 
     @staticmethod
     def _cb_value_changed(entry_state, modified_widgets):
+        """
+        Set each of the modified_widgets to entry_state
+
+        :param entry_state: The boolean value of the entry
+        :param modified_widgets: A list of widgets
+        """
         for widget in modified_widgets:
             print("The value of %s is:" % widget, end="\t\t")
             print(entry_state.get())
@@ -383,12 +404,15 @@ class _ComponentMandOptFrame(ttk.Frame):
 
     def set(self, entry_state_num, entry_num, data):
         """
-            This method does the following:
+        This method does the following:
                 1) set the given entry state to 1
                 2) store data in the given entry
                 3) enable the given entry using cb_value_changed
-        """
 
+        :param entry_state_num: The entry state that will be changed
+        :param entry_num: The entry the data will be stored in
+        :param data: The data to be stored
+        """
         if self.listEntryStates[entry_state_num].get() is False:
             self.listEntryStates[entry_state_num].set(1)
 
@@ -402,6 +426,7 @@ class _ComponentMandOptFrame(ttk.Frame):
 
 
     def reset(self):
+        """Reset the entry to the default format"""
         for entry in self.listEntryStates:
             entry.set(0)
         for i, entry in enumerate(self.listEntryData):
@@ -412,6 +437,7 @@ class _ComponentMandOptFrame(ttk.Frame):
 
 
     def print_data(self):
+        """Prints the data all fancy-like"""
         print("%s Data:" % self.componentName)
         print("\tlistEntryStates: ")
         for es in self.listEntryStates:
@@ -427,6 +453,7 @@ class _ComponentMandOptFrame(ttk.Frame):
 
 
 class _ComboComponentFrame(ttk.Frame):
+    """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, component_name, list_combobox_data):
         ttk.Frame.__init__(self, parent)
@@ -452,6 +479,12 @@ class _ComboComponentFrame(ttk.Frame):
 
     @staticmethod
     def _cb_value_changed(entry_state, modified_widgets):
+        """
+        Set each of the modified_widgets to entry_state
+
+        :param entry_state: The boolean value of the entry
+        :param modified_widgets: A list of widgets
+        """
         for widget in modified_widgets:
             print("The value of %s is:" % widget, end="\t\t")
             print(entry_state.get())
