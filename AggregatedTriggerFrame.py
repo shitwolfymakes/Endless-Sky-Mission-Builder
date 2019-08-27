@@ -536,6 +536,7 @@ class AggregatedLogFrame(ttk.Frame):
     def _change_log_state(state, log):
         """
         Set log to state
+
         :param state: the state of the log
         :param log: the log
         """
@@ -547,6 +548,7 @@ class AggregatedLogFrame(ttk.Frame):
     def _set_format_type(self, format_type):
         """
         Set the format of the log, so the code knows what to look for
+
         :param format_type:
         """
         self.logFrameList[-1].log.formatType = format_type
@@ -792,6 +794,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
     def _change_tc_state(state, tc):
         """
         Set tc to state
+
         :param state: the state of the condition
         :param tc: the trigger condition
         """
@@ -803,6 +806,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
     def _set_format_type(self, format_type):
         """
         Set the format of the condition, so the code knows what to look for
+
         :param format_type: the format type
         """
         if format_type == "cancelled":
