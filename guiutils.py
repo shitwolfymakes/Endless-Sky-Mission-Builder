@@ -83,8 +83,8 @@ class _SubComponentMandOptFrame(ttk.Frame):
     def __init__(self, parent, sub_component_name, num_mandatory, num_optionals, list_default_entry_data):
         ttk.Frame.__init__(self, parent)
 
-        disabledEntryStyle = ttk.Style()
-        disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
+        disabled_entry_style = ttk.Style()
+        disabled_entry_style.configure('D.TEntry', background='#D3D3D3')
 
         self.subComponentName     = sub_component_name
         self.numMandatory         = num_mandatory
