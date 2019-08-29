@@ -9,11 +9,12 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-This file contains the classes defining some components of a mission
+This file contains the classes defining the components of a mission
 """
 
 
 class MissionComponents(object):
+    """This class keeps instances of each different component in one place, for easy access"""
 
     def __init__(self):
         print("\tMission components initializing...")
@@ -192,7 +193,7 @@ class Destination(object):
 
 
 class Trigger(object):
-    #TODO: Implement this - ~50% Complete
+    #TODO: Implement this - ~80% Complete
     """
         Triggers:
 
