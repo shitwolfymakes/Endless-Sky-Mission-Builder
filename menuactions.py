@@ -25,13 +25,20 @@ from PopupWindow import PopupWindow
 
 
 def open_file(app):
+    """
+    This method handles reading in Endless Sky mission files.
+    It creates a mission object for each mission it finds,
+    and then calls the parser to parse the data
+
+    :param app: The instance of ESMB
+    """
 
     #TODO: add handling for "event" items inside missionfile
     #    NOTE: EVENTS ARE STORED IN THE MISSION FILE, BUT ARE
     #    COMPLETELY SEPARATE FROM MISSIONS. SAVE HANDLING
     #    THESE FOR LATER
 
-    #TODO: Add handling for mission preamble
+    #TODO: Add handling for mission preamble(license text)
 
     # empty the missionList
     app.missionList             = []
@@ -49,6 +56,7 @@ def open_file(app):
         #print_mission_file(missionLines)
 
     # populate the missionList object
+    #TODO: refactor this to use enumerate()
     i = 0
     event_line = False
     match_mission = re.compile(r'^ *mission')
@@ -92,8 +100,7 @@ def open_file(app):
         # end if/else
     # end for
 
-    print()
-    print("Missions loaded:")
+    print("\nMissions loaded:")
     for mission in app.missionList:
         print("\t%s" % mission.missionName)
         #mission.printMission()
@@ -111,6 +118,11 @@ def open_file(app):
 
 
 def print_mission_file(mission_file):
+    """
+    Helper function to print the entire mission file
+
+    :mission_file: the text data of the mission file
+    """
     for line in mission_file:
         print(line, end="")
     print()
@@ -118,6 +130,11 @@ def print_mission_file(mission_file):
 
 
 def save_file(app):
+    """
+    This method saves the data to a mission file
+
+    :param app: The instance of ESMB
+    """
     #TODO: add preamble comments
     print("\nSaving selected file...")
     compile_mission(app)
@@ -127,7 +144,7 @@ def save_file(app):
     for mission in app.missionList:
         for line in mission.missionLines:
             f.write(line)
-        f.write("\n\n\n")       # add whitespace between missions
+        f.write("\n\n\n")       # add whitespace between missions, per the Creating Missions guidelines
     f.close()
 
     print("Done.")
@@ -135,12 +152,23 @@ def save_file(app):
 
 
 def new_mission(app):
+    """
+    Prompt the user for the name of a new mission
+
+    :param app: The instance of ESMB
+    """
     print("\nCreating new mission...")
     PopupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
 
 def compile_mission(app):
+    """
+    Store the active working data to the data model.
+    NOTE: This will not save any data to a file
+
+    :param app: The instance of ESMB
+    """
     compiler = MissionCompiler(app)
     compiler.run()
     app.update_mission_frame()
@@ -148,5 +176,7 @@ def compile_mission(app):
 
 
 def help_user():
+    """Open the Creating Mission documentation for Endless Sky"""
+    #TODO: Replace this with a link to ESMB user documentation once it's completed
     webbrowser.open_new(r"https://github.com/endless-sky/endless-sky/wiki/CreatingMissions")
 #end help_user
