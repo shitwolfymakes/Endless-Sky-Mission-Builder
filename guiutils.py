@@ -499,6 +499,7 @@ class _ComboComponentFrame(ttk.Frame):
     # end cb_value_changed
 
     def option_selected(self, event=None):
+        """Store the combobox option selected by the user"""
         selected_option = self.combo.get()
         print('\nOption selected: "%s"' % selected_option)
     #end mission_selected
@@ -506,12 +507,13 @@ class _ComboComponentFrame(ttk.Frame):
 
     def set(self, data):
         """
-            This method does the following:
+        This method does the following:
                 1) set the given entry state to 1
                 2) set the combobox to the given data
                 3) enable the given entry using cb_value_changed
-        """
 
+        :param data: The data to be stored
+        """
         self.isActive.set(1)
         self.combo.current(self.listComboboxData.index(data.title()))
         self._cb_value_changed(self.isActive, [self.combo])
@@ -519,6 +521,7 @@ class _ComboComponentFrame(ttk.Frame):
 
 
     def reset(self):
+        """Reset the frame to defaults"""
         self.isActive.set(0)
         self.combo.current(None)
         self.combo.config(state='disabled', style='D.TCombobox')
@@ -528,6 +531,7 @@ class _ComboComponentFrame(ttk.Frame):
 
 
 class TypeSelectorWindow(Toplevel):
+    """This class creates a custom pop-up window this allows the user to select a given data format"""
 
     def __init__(self, master, options, callback, **kwargs):
         self.callback = callback
@@ -552,12 +556,14 @@ class TypeSelectorWindow(Toplevel):
 
 
     def _cleanup(self):
+        """Clean up whatever popups we've created"""
         self.callback(self.optionList.get())
         self.destroy()
     #end _cleanup
 
 
     def _cancelled(self):
+        """Close the window"""
         self.callback("cancelled")
         self.destroy()
     #end _cancelled
