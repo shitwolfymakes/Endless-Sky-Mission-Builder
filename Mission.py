@@ -8,14 +8,13 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-
 """
 
 import MissionComponents
 
 
 class Mission(object):
+    """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, mission_name, default=False):
         print("Building mission:", mission_name)
@@ -34,29 +33,42 @@ class Mission(object):
 
 
     def _set_default_values(self, mission_name):
+        """
+        Set data to default values. This method should only run when ESMB is run with the debugging flag
+
+        :param mission_name: The name of the mission
+        """
         self.missionName = mission_name
         self.add_line("mission \"%s\"\n" % mission_name)
     #end _set_default_values
 
 
     def add_line(self, line):
+        """
+        Helper method for appending text to missionLines
+
+        :param line: the string to be appended
+        """
         self.missionLines.append(line + "\n")
     #end add_line
 
 
     def print_mission_to_console(self):
+        """Helper method to print out the formatted text of the mission. e.g.: what it will look like when saved"""
         print(self.missionLines)
     #end printMission
 
 
     def print_mission_lines_to_text(self):
-        # this is the most efficient and pythonic way to concat all these strings together
+        """Concatenate all the missionLines together. Used to make a block of text to display in the missionFrame."""
+        # Note to self: this is the most efficient and pythonic way to concat all these strings together
         mission_text = "".join(self.missionLines)
         return mission_text
     #end print_mission_lines_to_text
 
 
     def parse_mission(self):
+        """This method parses the mission data(stored in components), formats it, and stores it in missionLines"""
         print("Parsing mission...", end="\t\t\t")
         self.missionLines = []          # empty the default values
         self.add_line("mission \"%s\"" % self.missionName)
@@ -283,6 +295,7 @@ class Mission(object):
 
 
     def add_trigger(self):
+        """Add a trigger object to this mission"""
         new_trigger = MissionComponents.Trigger()
         self.components.triggerList.append(new_trigger)
         return new_trigger
@@ -290,6 +303,7 @@ class Mission(object):
 
 
     def remove_trigger(self, trigger):
+        """Remove a trigger object from this mission"""
         #print(trigger)
         self.components.triggerList.remove(trigger)
     #end remove_trigger
@@ -297,6 +311,11 @@ class Mission(object):
 
     @staticmethod
     def add_quotes(line):
+        """
+        Helper method to add quotes to a string
+
+        :param line: The string to modify
+        """
         if " " in line:
             line = "\"%s\"" % line
         return line
