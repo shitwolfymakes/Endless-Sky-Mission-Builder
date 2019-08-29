@@ -8,22 +8,22 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-This pulls the data the user has entered and stores it in the corresponding Mission object.
-
 """
 
 
 class MissionCompiler(object):
+    """This class compiles the data the user has entered into the current Mission object"""
 
     def __init__(self, esmb):
         self.esmb = esmb
         self.mission = esmb.activeMission.components
     #end init
 
-    # Zero out all the data in the mission component, then store what data is selected
-    #     based on the value of the corresponding entry state
+
     def run(self):
+        """
+        Zero the Mission data, then store what data is selected based on the value of the corresponding entry state
+        """
         print("Compiling mission...")
 
         # mission display name
