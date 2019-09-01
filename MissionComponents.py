@@ -194,6 +194,7 @@ class Destination(object):
 
 class Trigger(object):
     #TODO: Implement this - ~80% Complete
+    # still needs on enter [<system>]
     """
         Triggers:
 
@@ -234,6 +235,7 @@ class Trigger(object):
 
 
     def clear_trigger(self):
+        """Zeroes out the data in the Trigger"""
         self.triggerType = None
         self.dialog      = None
         self.outfit      = [None, None]
@@ -247,6 +249,7 @@ class Trigger(object):
 
 
     def print_trigger(self):
+        """Print the data all pretty-like"""
         print("\n\tTrigger Data")
         print("\t\tisActive:", self.isActive)
         print("\t\tOn:", self.triggerType)
@@ -269,6 +272,7 @@ class Trigger(object):
 
 
     def add_log(self):
+        """Add a log to this Trigger object"""
         new_log = Log()
         self.logs.append(new_log)
         print("\t\tLog", new_log, "added to", self)
@@ -277,6 +281,7 @@ class Trigger(object):
 
 
     def remove_log(self, log):
+        """Remove a log from this Trigger object"""
         print("\t\tRemoving", log, "from", self, "...", end="\t\t")
         self.logs.remove(log)
         print("Done.")
@@ -284,6 +289,7 @@ class Trigger(object):
 
 
     def add_tc(self):
+        """Add a TriggerCondition object to this Trigger object"""
         new_cond = TriggerCondition()
         self.conditions.append(new_cond)
         print("\t\tTriggerCondition", new_cond, "added to", self)
@@ -292,6 +298,7 @@ class Trigger(object):
 
 
     def remove_tc(self, condition):
+        """Remove a TriggerCondition object to this Trigger object"""
         print("\t\tRemoving", condition, "from", self, "...", end="\t\t")
         self.conditions.remove(condition)
         print("Done.")
@@ -301,6 +308,7 @@ class Trigger(object):
 
 
 class Log(object):
+    """This object stores data for Endless Sky logs"""
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
@@ -314,11 +322,13 @@ class Log(object):
 
 
     def clear_log(self):
+        """Zeroes out the data in the Log"""
         self.log = [None, None, None]
     #end clear_log
 
 
     def print_log(self):
+        """Print the data all pretty-like"""
         print("\t\tLog Data")
         print("\t\t\tisActive:", self.isActive)
         print("\t\t\tformatType:", self.formatType)
@@ -329,6 +339,7 @@ class Log(object):
 
 
 class TriggerCondition(object):
+    """This object stores data for condition modifiers inside Endless Sky triggers"""
 
     def __init__(self):
         print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
@@ -342,11 +353,13 @@ class TriggerCondition(object):
 
 
     def clear_condition(self):
+        """Zeroes out the data in the TriggerCondition"""
         self.condition = [None, None, None]
     #end clearConditions
 
 
     def print_condition(self):
+        """Print the data all pretty-like"""
         print("\t\tCondition Data")
         print("\t\t\tisActive:", self.isActive)
         print("\t\t\tconditionType:", self.conditionType)
