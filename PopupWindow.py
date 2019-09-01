@@ -16,7 +16,10 @@ from guiutils import add_mission
 
 
 class PopupWindow(object):
+    """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
+    #TODO: Refactor to pass "New Mission as a parameter"
+    #TODO: Refactor to pass "add_mission(self.app, name)"
     def __init__(self, app, master, text):
         self.app = app
         self.top = Toplevel(master)
@@ -34,6 +37,7 @@ class PopupWindow(object):
 
 
     def _cleanup(self):
+        """Clean up the window we created"""
         name = self.e.get()
         add_mission(self.app, name)
         self.top.grab_release()         # HAVE TO RELEASE
