@@ -8,8 +8,6 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-This code provides for the center frame to resize as necessary to fit all the components in a mission
 """
 
 from tkinter import *
@@ -17,6 +15,7 @@ from tkinter import ttk
 
 
 class ScrollingCenterFrame(ttk.Frame):
+    """This code provides for the center frame to resize as necessary to fit all the components in a mission"""
 
     def __init__(self, app, parent):
         ttk.Frame.__init__(self, parent)
@@ -39,7 +38,6 @@ class ScrollingCenterFrame(ttk.Frame):
         self.canvas.bind("<Enter>", self._bind_mouse)
         self.canvas.bind("<Leave>", self._unbind_mouse)
 
-
         self.inner  = ttk.Frame(self.canvas)
         self.inner_id = self.canvas.create_window((4, 4), window=self.inner, anchor=NW)
 
@@ -50,6 +48,7 @@ class ScrollingCenterFrame(ttk.Frame):
 
 
     def _bind_mouse(self, event=None):
+        """Tell the canvas that the cursor is over it, so we can do scrolling"""
         self.canvas.bind_all("<4>", self._on_mousewheel)
         self.canvas.bind_all("<5>", self._on_mousewheel)
         self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
@@ -57,6 +56,7 @@ class ScrollingCenterFrame(ttk.Frame):
 
 
     def _unbind_mouse(self, event=None):
+        """Tell the canvas that the cursor is no longer over it"""
         self.canvas.unbind_all("<4>")
         self.canvas.unbind_all("<5>")
         self.canvas.unbind_all("<MouseWheel>")
@@ -74,7 +74,7 @@ class ScrollingCenterFrame(ttk.Frame):
 
 
     def _configure_inner(self, event=None):
-
+        """Resize the inner frame and scrollbars to make the screen scroll properly, even when you change the window"""
         # update the scrollbars to match the size of the inner frame
         bbox = self.canvas.bbox("all")
         self.canvas.config(scrollregion=bbox)
@@ -93,6 +93,7 @@ class ScrollingCenterFrame(ttk.Frame):
 
 
     def _configureCanvas(self, event=None):
+        """Resize the canvas if the inner frame changes"""
         if self.inner.winfo_reqwidth() < self.canvas.winfo_width():
             self.canvas.itemconfigure(self.inner_id, width=self.canvas.winfo_width())
         elif self.inner.winfo_reqwidth() > self.canvas.winfo_width():
