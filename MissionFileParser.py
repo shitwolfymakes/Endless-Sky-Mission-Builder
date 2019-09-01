@@ -8,9 +8,6 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-This takes the data read in from a mission file and stores it in each mission object
-
 """
 
 #TODO: Add data validation, there are currently no checks to make sure it's not all junk data
@@ -18,6 +15,7 @@ import re
 
 
 class MissionFileParser(object):
+    """This takes the data read in from a mission file and stores it in each mission object"""
     def __init__(self, esmb):
         self.esmb     = esmb
         self.missions = esmb.missionList
@@ -26,6 +24,7 @@ class MissionFileParser(object):
     #end init
 
     def run(self):
+        """Runs the parser"""
         print("\nParsing Mission file...")
 
         for mission in self.missions:
@@ -193,6 +192,11 @@ class MissionFileParser(object):
 
     @staticmethod
     def tokenize(line):
+        """
+        Break the line into a list of tokens, saving anything inside quotes as a single token
+
+        :param line:
+        """
         pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
         tokens = re.findall(pattern, line)
         for i, token in enumerate(tokens):
@@ -206,6 +210,11 @@ class MissionFileParser(object):
 
     @staticmethod
     def get_indent_level(line):
+        """
+        Counts the number of tabs at the beginning of the string
+
+        :param line: The string to be checked
+        """
         tab_count = len(line) - len(line.lstrip(' '))
         #print(tab_count)
         return tab_count
@@ -213,6 +222,12 @@ class MissionFileParser(object):
 
     @staticmethod
     def store_component_data(component, tokens):
+        """
+        Store the tokens in the given component
+
+        :param component: The component the data will be stored in
+        :param tokens: The tokens to store
+        """
         for i, token in enumerate(tokens):
             if token is not None:
                 component[i] = token
