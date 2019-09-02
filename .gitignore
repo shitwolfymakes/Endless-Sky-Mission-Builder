@@ -154,3 +154,6 @@ ipch/
 log.txt
 
 exampleMission.txt
+/Releases/
+/appify.sh
+/setup.py

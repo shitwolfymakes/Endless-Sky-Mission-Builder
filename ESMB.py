@@ -18,11 +18,13 @@ Endless Sky is made by Michael Zahniser.
 My Github: https://github.com/shitwolfymakes
 Endless Sky Github: https://github.com/endless-sky/endless-sky
 """
+#TODO: Implement logging
 
 from GUI import *
 
 
 class ESMB(object):
+    """The application object"""
 
     def __init__(self):
         debug_mode = False
