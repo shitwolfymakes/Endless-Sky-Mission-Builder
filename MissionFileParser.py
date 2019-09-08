@@ -26,7 +26,7 @@ class MissionFileParser(object):
 
     def run(self):
         """Runs the parser"""
-        logging.debug("\nParsing Mission file...")
+        logging.debug("\tParsing Mission file...")
 
         for mission in self.missions:
             logging.debug("\tParsing mission: \"%s\"" % mission.missionName)
@@ -117,7 +117,6 @@ class MissionFileParser(object):
                         i, line = lines.__next__()
                         line = line.rstrip()
                         tokens = self.tokenize(line)
-                        #print(i, tokens)
 
                         # dialog
                         if "dialog" in tokens[0]:
@@ -172,13 +171,12 @@ class MissionFileParser(object):
                             self.store_component_data(new_tc.condition, tokens)
                         else:
                             logging.debug("Trigger component no found: ", i, line)
-                        #end if else
+                        #end if/elif/else
 
                         try:
                             nxt = self.get_indent_level(mission.missionLines[i + 1])
                         except IndexError:
                             break
-
                     #end while
                 else:
                     logging.debug("ERROR: No tokens found on line %d: %s" % (i, line))
@@ -186,8 +184,8 @@ class MissionFileParser(object):
                 for trigger in mission.components.triggerList:
                     trigger.print_trigger()
             #end for
-            logging.debug("\tDone.")
         #end for
+
         logging.debug("File parsing complete.")
     #end run
 
@@ -196,7 +194,7 @@ class MissionFileParser(object):
         """
         Break the line into a list of tokens, saving anything inside quotes as a single token
 
-        :param line:
+        :param line: the String to be tokenized
         """
         pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
         tokens = re.findall(pattern, line)
@@ -205,7 +203,6 @@ class MissionFileParser(object):
                 tokens[i] = token[1:-1]
             elif token.startswith("\""):
                 tokens[i] = token[1:-1]
-        logging.debug(tokens)
         return tokens
     #end tokenize
 
@@ -217,7 +214,6 @@ class MissionFileParser(object):
         :param line: The string to be checked
         """
         tab_count = len(line) - len(line.lstrip(' '))
-        #logging.debug(tab_count)
         return tab_count
     #end get_indent_level
 
@@ -236,7 +232,6 @@ class MissionFileParser(object):
                 break
             # end if/else
         # end for
-        #logging.debug(component)
     #end store_component_data
 
 #end class MissionFileParser
