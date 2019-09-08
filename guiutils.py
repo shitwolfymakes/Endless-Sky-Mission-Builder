@@ -26,7 +26,7 @@ def add_mission(app, new_mission_name):
     :param app: The ESMB object
     :param new_mission_name: A string containing the name of the new mission
     """
-    logging.debug("Adding mission: \"%s\"..." % new_mission_name, end="\t\t")
+    logging.debug(str.format("Adding mission: \"%s\"..." % new_mission_name, end="\t\t"))
 
     mission = Mission(new_mission_name, default=True)
     app.missionList.append(mission)
@@ -127,7 +127,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
         |         [<test3>]   [] |
         +------------------------+
         """
-        logging.debug("\t\tBuilding \"%s\"" % self.subComponentName)
+        logging.debug(str.format("\t\tBuilding \"%s\"" % self.subComponentName))
         label1 = ttk.Label(self, text=self.subComponentName, width=7)
         label1.grid(row=self.rowNum, column=0, sticky="w", padx=(5, 0))
 
@@ -164,7 +164,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
             self.rowNum += 1
         # Case 3: More than 1 mandatory field
         elif self.numMandatory > 1:
-            logging.info("\t\t\t%d mandatory fields" % self.numMandatory)
+            logging.info(str.format("\t\t\t%d mandatory fields" % self.numMandatory))
 
             # add the first checkbutton
             self.listEntryData.append(StringVar())
@@ -226,7 +226,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
         :param modified_widgets: A list of widgets
         """
         for widget in modified_widgets:
-            logging.debug("The value of %s is:" % widget, end="\t\t")
+            logging.debug(str.format("The value of %s is:" % widget, end="\t\t"))
             logging.debug(entry_state.get())
             if type(widget) is str:
                 break
@@ -291,7 +291,7 @@ class _ComponentMandOptFrame(ttk.Frame):
         |         [<test3>]   [] |
         +------------------------+
         """
-        logging.debug("\t\tBuilding \"%s\"" % self.componentName)
+        logging.debug(str.format("\t\tBuilding \"%s\"" % self.componentName))
         label1 = ttk.Label(self, text=self.componentName)
         label1.grid(row=0, column=0, sticky="w", padx=(5, 0))
         self.rowNum += 1
@@ -329,7 +329,7 @@ class _ComponentMandOptFrame(ttk.Frame):
             self.rowNum += 1
         # Case 3: More than 1 mandatory field
         elif self.numMandatory > 1:
-            logging.info("\t\t\t%d mandatory fields" % self.numMandatory)
+            logging.info(str.format("\t\t\t%d mandatory fields" % self.numMandatory))
 
             # add the first checkbutton
             self.listEntryData.append(StringVar())
@@ -390,7 +390,7 @@ class _ComponentMandOptFrame(ttk.Frame):
         :param modified_widgets: A list of widgets
         """
         for widget in modified_widgets:
-            logging.debug("The value of %s is:" % widget, end="\t\t")
+            logging.debug(str.format("The value of %s is:" % widget, end="\t\t"))
             logging.debug(entry_state.get())
             if type(widget) is str:
                 break
@@ -439,15 +439,15 @@ class _ComponentMandOptFrame(ttk.Frame):
 
     def print_data(self):
         """Prints the data all fancy-like"""
-        logging.debug("%s Data:" % self.componentName)
+        logging.debug(str.format("%s Data:" % self.componentName))
         logging.debug("\tlistEntryStates: ")
         for es in self.listEntryStates:
-            logging.debug("\t\t%s" % str(es.get()))
-        logging.debug("\tlistCheckbuttons: ", self.listCheckbuttons)
+            logging.debug(str.format("\t\t%s" % str(es.get())))
+        logging.debug(str.format("\tlistCheckbuttons: ", self.listCheckbuttons))
         logging.debug("\tlistEntryData: ")
         for ed in self.listEntryData:
-            logging.debug("\t\t%s" % ed.get())
-        logging.debug("\tlistEntries: ", self.listEntries)
+            logging.debug(str.format("\t\t%s" % ed.get()))
+        logging.debug(str.format("\tlistEntries: ", self.listEntries))
     #end print_data
 
 # end class _ComponentMandOptFrame
@@ -460,7 +460,7 @@ class _ComboComponentFrame(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.columnconfigure(0, weight=1)
 
-        logging.debug("\tBuilding \"%s\"" % component_name)
+        logging.debug(str.format("\tBuilding \"%s\"" % component_name))
         label = ttk.Label(self, text=component_name)
         label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
@@ -487,7 +487,7 @@ class _ComboComponentFrame(ttk.Frame):
         :param modified_widgets: A list of widgets
         """
         for widget in modified_widgets:
-            logging.debug("The value of %s is:" % widget, end="\t\t")
+            logging.debug(str.format("The value of %s is:" % widget, end="\t\t"))
             logging.debug(entry_state.get())
             if type(widget) is str:
                 break
@@ -502,7 +502,7 @@ class _ComboComponentFrame(ttk.Frame):
     def option_selected(self, event=None):
         """Store the combobox option selected by the user"""
         selected_option = self.combo.get()
-        logging.debug('\nOption selected: "%s"' % selected_option)
+        logging.debug(str.format('\nOption selected: "%s"' % selected_option))
     #end mission_selected
 
 
