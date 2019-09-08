@@ -81,10 +81,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
-        logging.debug(str.format("Editing ", end=""))
-        logging.debug(str.format(str(trigger_frame.trigger), end=""))
-        logging.debug(str.format("..."))
-
+        logging.debug("Editing %s..." % str(trigger_frame.trigger))
         TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
     #end edit_trigger
 
@@ -117,7 +114,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger: the trigger
         """
         trigger.isActive = state.get()
-        logging.debug(str.format(str(trigger), "is now", trigger.isActive))
+        logging.debug("%s is now %s" % (str(trigger), str(trigger.isActive)))
     #def _change_trigger_state
 
 #end class AggregatedTriggerFrame
@@ -327,8 +324,6 @@ class TriggerWindow(object):
         #end if
 
         self.trigger.print_trigger()
-
-        logging.debug("Done.")
     #end _store_data
 
     def _populate_trigger_window(self):
@@ -459,20 +454,17 @@ class AggregatedLogFrame(ttk.Frame):
 
         lf = LogFrame(self, self.trigger, "log")
         TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
-        logging.debug(lf.log.formatType)
+        logging.debug("Log format type selected: %s" % lf.log.formatType)
         if lf.log.formatType == "cancelled":
             lf.cleanup()
             return
         #end if
         self.edit_log(self.logFrameList[-1])
 
-
         state = BooleanVar()
         cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_log_state, state, self.logFrameList[-1].log))
         cb.grid(row=0, column=3, sticky="e")
-
-        logging.debug("Done.")
     #end _add_log
 
 
@@ -483,7 +475,7 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log_frame: The LogFrame containing the log to be edited
         """
-        logging.debug("Editing " + str(log_frame.log) + " ...")
+        logging.debug("Editing %s..." % str(log_frame.log))
         LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
     #end edit_log
 
@@ -495,15 +487,13 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log_frame: The LogFrame to be removed
         """
-        logging.debug(str.format("Removing %s from Triggers" % log_frame.log))
-
         self.trigger.remove_log(log_frame.log)
 
         self.logFrameList.remove(log_frame)
         log_frame.frame.pack_forget()
         log_frame.frame.destroy()
 
-        logging.debug("Done.")
+        logging.debug("Removed %s from Triggers" % str(log_frame.log))
     #end delete_log
 
 
@@ -536,7 +526,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log: the log
         """
         log.isActive = state.get()
-        logging.debug("%s is now %s", str(log), str(log.isActive))
+        logging.debug("%s is now %s" % (str(log), str(log.isActive)))
     #def _change_trigger_state
 
 
@@ -645,7 +635,7 @@ class LogWindow(object):
 
     def _store_data(self):
         """Store the data from the GUI into the associated Log object"""
-        logging.debug(str.format("\nStoring LogWindow data...", end="\t"))
+        logging.debug("\nStoring LogWindow data...")
         self.log.clear_log()
 
         if self.formatType == "<message>":
@@ -655,14 +645,12 @@ class LogWindow(object):
             self.log.log[1] = self.name.get()
             self.log.log[2] = self.message.get()
         #end if/else
-
-        logging.debug("Done.")
     #end store_data
 
 
     def populate_log_window(self):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
-        logging.debug(str.format("Populating TriggerWindow...", end="\t"))
+        logging.debug("Populating TriggerWindow...")
 
         if self.formatType == "<message>":
             if self.log.log[0] is not None:
@@ -675,8 +663,6 @@ class LogWindow(object):
             if self.log.log[2] is not None:
                 self.message.set(self.log.log[2].lstrip('`').rstrip('`'))
         #end if/else
-
-        logging.debug("Done.")
     #end populate_log_window
 
 #end class LogWindow
@@ -729,8 +715,6 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_tc_state, state, self.tcFrameList[-1].condition))
         cb.grid(row=0, column=3, sticky="e")
-
-        logging.debug("Done.")
     #end _add_trigger_condition
 
 
@@ -741,7 +725,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
-        logging.debug("Editing " + str(tc_frame.condition) + " ...")
+        logging.debug("Editing  %s" % str(tc_frame.condition))
         TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
     #end edit_trigger_condition
 
@@ -753,15 +737,12 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param tc_frame: The TriggerConditionFrame to be removed
         """
-        logging.debug("Removing %s from Triggers" % tc_frame.condition)
-
         self.trigger.remove_tc(tc_frame.condition)
-
         self.tcFrameList.remove(tc_frame)
         tc_frame.frame.pack_forget()
         tc_frame.frame.destroy()
 
-        logging.debug("Done.")
+        logging.debug("Removed %s from Triggers" % tc_frame.condition)
     #end delete_trigger_condition
 
 
@@ -915,8 +896,6 @@ class TriggerConditionWindow(object):
         self.closeButton.pack(side=BOTTOM)
 
         self._populate_tc_window()
-
-        logging.debug("\tDone.")
     #end init
 
 
@@ -985,7 +964,7 @@ class TriggerConditionWindow(object):
                 self.selectedOption = self.condition.condition[0]
             #end if
         else:
-            logging.error("Data corrupted")
+            logging.error("Data corrupted!!!")
         #end if/else
     #end _populate_log_window
 
