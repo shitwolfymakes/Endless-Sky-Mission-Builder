@@ -26,8 +26,8 @@ class ESMB(object):
     """The application object"""
 
     def __init__(self):
-        logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
-        logging.error("Starting ESMB...")
+        loggerSetup()
+        logging.debug("Starting ESMB...")
 
         debug_mode = False
         if "debug=True" in sys.argv:
@@ -37,6 +37,15 @@ class ESMB(object):
     #end init
 
 #end class ESMB
+
+
+def loggerSetup():
+    # For some reason this for loop is required to get the outputting to a file working
+    # See here: https://stackoverflow.com/a/49202811
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
+#end logger setup
 
 
 def main():
