@@ -82,7 +82,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
         logging.debug(str.format("Editing ", end=""))
-        logging.debug(str.format(trigger_frame.trigger, end=""))
+        logging.debug(str.format(str(trigger_frame.trigger), end=""))
         logging.debug(str.format("..."))
 
         TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
@@ -258,45 +258,45 @@ class TriggerWindow(object):
 
         # action
         if self.action is not None:
-            logging.debug("\tOn:", self.action)
+            logging.debug("\tOn: %s" % self.action)
             self.trigger.triggerType = self.action
         #end if
 
         # dialog
         if self.dialogSubComponent.listEntryStates[0].get():
-            logging.debug("\tDialog:", self.dialogSubComponent.listEntryData[0].get())
+            logging.debug("\tDialog: %s" % self.dialogSubComponent.listEntryData[0].get())
             self.trigger.dialog = self.dialogSubComponent.listEntryData[0].get()
         #end if
 
         # outfit
         if self.outfitSubComponent.listEntryStates[0].get():
-            logging.debug("\tOutfit:", self.outfitSubComponent.listEntryData[0].get())
+            logging.debug("\tOutfit: %s" % self.outfitSubComponent.listEntryData[0].get())
             self.trigger.outfit[0] = self.outfitSubComponent.listEntryData[0].get()
             if self.outfitSubComponent.listEntryStates[1].get():
-                logging.debug("\tOutfit Optional:", self.outfitSubComponent.listEntryData[1].get())
+                logging.debug("\tOutfit Optional: %s" % self.outfitSubComponent.listEntryData[1].get())
                 self.trigger.outfit[1] = self.outfitSubComponent.listEntryData[1].get()
             #end if
         #end if
 
         # require
         if self.requireSubComponent.listEntryStates[0].get():
-            logging.debug("\tRequire:", self.requireSubComponent.listEntryData[0].get())
+            logging.debug("\tRequire: %s" % self.requireSubComponent.listEntryData[0].get())
             self.trigger.require[0] = self.requireSubComponent.listEntryData[0].get()
             if self.requireSubComponent.listEntryStates[1].get():
-                logging.debug("\tRequire Optional:", self.requireSubComponent.listEntryData[1].get())
+                logging.debug("\tRequire Optional: %s" % self.requireSubComponent.listEntryData[1].get())
                 self.trigger.require[1] = self.requireSubComponent.listEntryData[1].get()
             # end if
         # end if
 
         # payment
         if self.paymentSubComponent.listEntryStates[0].get():
-            logging.debug("\tPayment:", self.paymentSubComponent.subComponentName)
+            logging.debug("\tPayment: %s" % self.paymentSubComponent.subComponentName)
             self.trigger.isPayment = True
             if self.paymentSubComponent.listEntryStates[1].get():
-                logging.debug("\tPayment Optional 1:", self.paymentSubComponent.listEntryData[0].get())
+                logging.debug("\tPayment Optional 1: %s" % self.paymentSubComponent.listEntryData[0].get())
                 self.trigger.payment[0] = self.paymentSubComponent.listEntryData[0].get()
                 if self.paymentSubComponent.listEntryStates[2].get():
-                    logging.debug("\tPayment Optional 2:", self.paymentSubComponent.listEntryData[1].get())
+                    logging.debug("\tPayment Optional 2: %s" % self.paymentSubComponent.listEntryData[1].get())
                     self.trigger.payment[1] = self.paymentSubComponent.listEntryData[1].get()
                 #end if
             #end if
@@ -304,13 +304,13 @@ class TriggerWindow(object):
 
         # event
         if self.eventSubComponent.listEntryStates[0].get():
-            logging.debug("\tEvent:", self.eventSubComponent.listEntryData[0].get())
+            logging.debug("\tEvent: %s" % self.eventSubComponent.listEntryData[0].get())
             self.trigger.event[0] = self.eventSubComponent.listEntryData[0].get()
             if self.eventSubComponent.listEntryStates[1].get():
-                logging.debug("\tEvent Optional 1:", self.eventSubComponent.listEntryData[1].get())
+                logging.debug("\tEvent Optional 1: %s" % self.eventSubComponent.listEntryData[1].get())
                 self.trigger.event[1] = self.eventSubComponent.listEntryData[1].get()
                 if self.eventSubComponent.listEntryStates[2].get():
-                    logging.debug("\tEvent Optional 2:", self.eventSubComponent.listEntryData[2].get())
+                    logging.debug("\tEvent Optional 2: %s" % self.eventSubComponent.listEntryData[2].get())
                     self.trigger.event[2] = self.eventSubComponent.listEntryData[2].get()
                 # end if
             # end if
@@ -318,10 +318,10 @@ class TriggerWindow(object):
 
         # fail
         if self.failSubComponent.listEntryStates[0].get():
-            logging.debug("\tPayment:", self.failSubComponent.subComponentName)
+            logging.debug("\tPayment: %s" % self.failSubComponent.subComponentName)
             self.trigger.isFail = True
             if self.failSubComponent.listEntryStates[1].get():
-                logging.debug("\tPayment Optional 1:", self.failSubComponent.listEntryData[0].get())
+                logging.debug("\tPayment Optional 1: %s" % self.failSubComponent.listEntryData[0].get())
                 self.trigger.fail = self.failSubComponent.listEntryData[0].get()
             #end if
         #end if
@@ -333,7 +333,7 @@ class TriggerWindow(object):
 
     def _populate_trigger_window(self):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
-        logging.debug("\t\tPopulating TriggerWindow...", end="\t")
+        logging.debug(str.format("\t\tPopulating TriggerWindow...", end="\t"))
 
         # action
         if self.trigger.triggerType is not None:
@@ -496,7 +496,7 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log_frame: The LogFrame to be removed
         """
-        logging.debug("Removing %s from Triggers" % log_frame.log)
+        logging.debug(str.format("Removing %s from Triggers" % log_frame.log))
 
         self.trigger.remove_log(log_frame.log)
 
@@ -537,7 +537,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log: the log
         """
         log.isActive = state.get()
-        logging.debug(log, "is now", log.isActive)
+        logging.debug(str(log), "is now", log.isActive)
     #def _change_trigger_state
 
 
@@ -646,7 +646,7 @@ class LogWindow(object):
 
     def _store_data(self):
         """Store the data from the GUI into the associated Log object"""
-        logging.debug("\nStoring LogWindow data...", end="\t")
+        logging.debug(str.format("\nStoring LogWindow data...", end="\t"))
         self.log.clear_log()
 
         if self.formatType == "<message>":
@@ -663,7 +663,7 @@ class LogWindow(object):
 
     def populate_log_window(self):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
-        logging.debug("Populating TriggerWindow...", end="\t")
+        logging.debug(str.format("Populating TriggerWindow...", end="\t"))
 
         if self.formatType == "<message>":
             if self.log.log[0] is not None:
@@ -742,7 +742,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
-        logging.debug("Editing ", tc_frame.condition, "...")
+        logging.debug("Editing " + tc_frame.condition + " ...")
         TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
     #end edit_trigger_condition
 
@@ -795,7 +795,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         :param tc: the trigger condition
         """
         tc.isActive = state.get()
-        logging.debug(tc, "is now", tc.isActive)
+        logging.debug(tc + " is now " + tc.isActive)
     #def changeTriggerConditionsState
 
 
@@ -909,7 +909,7 @@ class TriggerConditionWindow(object):
             entry = ttk.Entry(frame, textvariable=self.condData)
             entry.grid(row=0, column=1)
         else:
-            logging.debug("Invalid conditionType!!")
+            logging.error("Invalid conditionType!!")
         #end if/else
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
@@ -931,7 +931,7 @@ class TriggerConditionWindow(object):
 
     def _store_data(self):
         """Store the data from the GUI into the associated Log object"""
-        logging.debug("\nStoring TriggerConditionWindow data...", end="\t")
+        logging.debug(str.format("\nStoring TriggerConditionWindow data...", end="\t"))
         self.condition.clear_condition()
 
         if self.conditionType == 0:
@@ -945,7 +945,7 @@ class TriggerConditionWindow(object):
             self.condition.condition[1] = self.selectedOption
             self.condition.condition[0] = self.condData.get()
         else:
-            logging.debug("Invalid conditionType!!!")
+            logging.error("Invalid conditionType!!!")
         #end if/else
 
         logging.debug("Done.")
@@ -957,7 +957,7 @@ class TriggerConditionWindow(object):
         Take the associated TriggerCondition object, and populate
         each of the widgets in the window with the data inside
         """
-        logging.debug("\t\tPopulating TriggerWindow...", end="\t")
+        logging.debug(str.format("\t\tPopulating TriggerWindow...", end="\t"))
 
         if self.conditionType == 0:
             if self.condition.condition[0] is not None:
@@ -979,7 +979,7 @@ class TriggerConditionWindow(object):
                 self.optionsCombo.current(index)
                 self.condData.set(self.condition.condition[1])
         else:
-            logging.debug("Data corrupted")
+            logging.error("Data corrupted")
         #end if/else
 
         logging.debug("Done.")
