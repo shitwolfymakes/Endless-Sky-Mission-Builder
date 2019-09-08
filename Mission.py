@@ -10,6 +10,8 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
+import logging
+
 import MissionComponents
 
 
@@ -17,7 +19,7 @@ class Mission(object):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, mission_name, default=False):
-        print("Building mission:", mission_name)
+        logging.debug("Building mission:", mission_name)
 
         self.components   = MissionComponents.MissionComponents()
         self.missionLines = []  # List of the mission text
@@ -55,7 +57,7 @@ class Mission(object):
 
     def print_mission_to_console(self):
         """Helper method to print out the formatted text of the mission. e.g.: what it will look like when saved"""
-        print(self.missionLines)
+        logging.debug(self.missionLines)
     #end printMission
 
 
@@ -69,7 +71,7 @@ class Mission(object):
 
     def parse_mission(self):
         """This method parses the mission data(stored in components), formats it, and stores it in missionLines"""
-        print("Parsing mission...", end="\t\t\t")
+        logging.debug("Parsing mission...", end="\t\t\t")
         self.missionLines = []          # empty the default values
         self.add_line("mission \"%s\"" % self.missionName)
 
@@ -249,7 +251,7 @@ class Mission(object):
                         elif condition.conditionType == 2:
                             self.add_line("\t\t%s \"%s\"" % (condition.condition[0], condition.condition[1]))
                         else:
-                            print("Data corrupted!")
+                            logging.debug("Data corrupted!")
                         # end if/else
                     # end if
                 # end for
@@ -290,7 +292,7 @@ class Mission(object):
             #end if
         #end for
 
-        print("Done.")
+        logging.debug("Done.")
     #end parse_mission
 
 
