@@ -269,7 +269,7 @@ class Trigger(object):
         logging.debug("\t\tConditions:")
         for cond in self.conditions:
             cond.print_condition()
-        logging.debug()
+        logging.debug("\n")
     #end print_trigger
 
 

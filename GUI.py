@@ -474,7 +474,7 @@ class GUI(object):
 
         # Triggers
         if components.triggerList:
-            print("\tTriggers found")
+            logging.debug("\tTriggers found")
             for trigger in components.triggerList:
                 self.triggersFrame.populate_trigger(trigger)
 
