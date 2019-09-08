@@ -31,21 +31,21 @@ class MissionCompiler(object):
         # mission display name
         self.mission.missionDisplayName = None
         if self.esmb.displayNameComponent.listEntryStates[0].get():
-            logging.debug("\tFound display name:", self.esmb.displayNameComponent.listEntryData[0].get())
+            logging.debug("\tFound display name: %s" % self.esmb.displayNameComponent.listEntryData[0].get())
             self.mission.missionDisplayName = self.esmb.displayNameComponent.listEntryData[0].get()
         #end if
 
         # description
         self.mission.description = None
         if self.esmb.descriptionComponent.listEntryStates[0].get():
-            logging.debug("\tFound description:", self.esmb.descriptionComponent.listEntryData[0].get())
+            logging.debug("\tFound description: %s" % self.esmb.descriptionComponent.listEntryData[0].get())
             self.mission.description = self.esmb.descriptionComponent.listEntryData[0].get()
         #end if
 
         # isBlocked
         self.mission.blocked = None
         if self.esmb.blockedComponent.listEntryStates[0].get():
-            logging.debug("\tFound block:", self.esmb.blockedComponent.listEntryData[0].get())
+            logging.debug("\tFound block: %s" % self.esmb.blockedComponent.listEntryData[0].get())
             self.mission.blocked = self.esmb.blockedComponent.listEntryData[0].get()
         #end if
 
@@ -56,10 +56,10 @@ class MissionCompiler(object):
             logging.debug("\tFound deadline")
             self.mission.deadline.isDeadline = True
             if self.esmb.deadlineComponent.listEntryStates[1].get():
-                logging.debug("\t\tFound deadline days:", self.esmb.deadlineComponent.listEntryData[0].get())
+                logging.debug("\t\tFound deadline days:" % self.esmb.deadlineComponent.listEntryData[0].get())
                 self.mission.deadline.deadline[0] = self.esmb.deadlineComponent.listEntryData[0].get()
                 if self.esmb.deadlineComponent.listEntryStates[2].get():
-                    logging.debug("\t\tFound deadline message:", self.esmb.deadlineComponent.listEntryData[1].get())
+                    logging.debug("\t\tFound deadline message: %s" % self.esmb.deadlineComponent.listEntryData[1].get())
                     self.mission.deadline.deadline[1] = self.esmb.deadlineComponent.listEntryData[1].get()
                 #end if
             #end if
@@ -70,8 +70,8 @@ class MissionCompiler(object):
         self.mission.cargo.cargo   = [None, None, None, None]
         if self.esmb.cargoComponent.listEntryStates[0].get():
             logging.debug("\tFound cargo:")
-            logging.debug("\t\t", self.esmb.cargoComponent.listEntryData[0].get())
-            logging.debug("\t\t", self.esmb.cargoComponent.listEntryData[1].get())
+            logging.debug("\t\t%s" % self.esmb.cargoComponent.listEntryData[0].get())
+            logging.debug("\t\t%s" % self.esmb.cargoComponent.listEntryData[1].get())
             self.mission.cargo.isCargo = True
             self.mission.cargo.cargo[0] = self.esmb.cargoComponent.listEntryData[0].get()
             self.mission.cargo.cargo[1] = self.esmb.cargoComponent.listEntryData[1].get()
