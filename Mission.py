@@ -19,7 +19,7 @@ class Mission(object):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, mission_name, default=False):
-        logging.debug("Building mission:", mission_name)
+        logging.debug(str.format("Building mission:", mission_name))
 
         self.components   = MissionComponents.MissionComponents()
         self.missionLines = []  # List of the mission text
@@ -57,7 +57,7 @@ class Mission(object):
 
     def print_mission_to_console(self):
         """Helper method to print out the formatted text of the mission. e.g.: what it will look like when saved"""
-        logging.debug(self.missionLines)
+        print(self.missionLines)
     #end printMission
 
 
