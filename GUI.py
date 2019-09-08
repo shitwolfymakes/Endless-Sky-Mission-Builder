@@ -22,7 +22,7 @@ class GUI(object):
     """This handles the GUI for ESMB"""
 
     def __init__(self, debug_mode):
-        logging.debug("Building GUI...")
+        logging.debug("\tBuilding GUI...")
         self.debugging = debug_mode
 
         #TODO: Look into changing this to not need the dictionary
@@ -149,7 +149,7 @@ class GUI(object):
         self.build_center_frame()
         self.build_mission_frame()
 
-        logging.debug("GUI built")
+        logging.debug("\tGUI built")
     #end build_main_view
 
 
@@ -158,7 +158,7 @@ class GUI(object):
 
     def build_option_frame(self):
         """Add widgets to the optionFrame"""
-        logging.debug("Building optionFrame...")
+        logging.debug("\tBuilding optionFrame...")
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
         of_title = ttk.Label(self.optionFrame, text="Mission")
@@ -194,7 +194,7 @@ class GUI(object):
 
     def build_center_frame(self):
         """Add widgets to the centerFrame"""
-        logging.debug("Building centerFrame...")
+        logging.debug("\tBuilding centerFrame...")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
 
@@ -284,7 +284,7 @@ class GUI(object):
 
     def build_mission_frame(self):
         """Add widgets to the missionFrame"""
-        logging.debug("Building missionFrame...")
+        logging.debug("\tBuilding missionFrame...")
 
         #Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
@@ -490,7 +490,7 @@ class GUI(object):
     def mission_selected(self, event=None):
         """Set activeMission to the combobox option selected by the user"""
         selected_mission_name = self.missionComboBox.get()
-        logging.debug("\nOpening mission \"%s\"" % selected_mission_name)
+        logging.debug("Opening mission \"%s\"" % selected_mission_name)
         self.activeMission = self.missionNameToObjectDict.get(selected_mission_name)
         self.update_center_frame()
         self.update_mission_frame()
