@@ -26,7 +26,8 @@ class ESMB(object):
     """The application object"""
 
     def __init__(self):
-        logging.basicConfig(filename='log.log', level=logging.DEBUG)
+        logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
+        logging.error("Starting ESMB...")
 
         debug_mode = False
         if "debug=True" in sys.argv:
