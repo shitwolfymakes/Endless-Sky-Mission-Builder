@@ -54,12 +54,10 @@ class Deadline(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isDeadline = False
         self.deadline   = [None, None]
-
-        logging.debug("Done.")
     # end init
 
 # end class Deadline
@@ -71,12 +69,10 @@ class Cargo(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isCargo = False
         self.cargo   = [None, None, None, None]
-
-        logging.debug("Done.")
     #end init
 
 #end class Cargo
@@ -88,12 +84,10 @@ class Passengers(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isPassengers = False
         self.passengers   = [None, None, None]
-
-        logging.debug("Done.")
     # end init
 
 # end class Passengers
@@ -105,12 +99,10 @@ class Illegal(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isIllegal = False
         self.illegal   = [None, None]
-
-        logging.debug("Done.")
     # end init
 
 #end class Illegal
@@ -123,12 +115,10 @@ class Clearance(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isClearance = False
         self.clearance   = None
-
-        logging.debug("Done.")
     # end init
 
 # end class Clearance
@@ -141,12 +131,10 @@ class Stopover(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isStopover = False
         self.stopover   = None
-
-        logging.debug("Done.")
     # end init
 
 # end class Conversations
@@ -162,12 +150,10 @@ class Source(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isSource = False
         self.source   = [None, None]
-
-        logging.debug("Done.")
     # end init
 
 # end class Source
@@ -183,12 +169,10 @@ class Destination(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isDestination = False
         self.destination   = [None, None]
-
-        logging.debug("Done.")
     # end init
 
 # end class Destination
@@ -217,7 +201,7 @@ class Trigger(object):
     """
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isActive    = False
         self.triggerType = None
@@ -231,8 +215,6 @@ class Trigger(object):
         self.fail        = None
         self.logs        = []
         self.conditions  = []
-
-        logging.debug("Done.")
     #end init
 
 
@@ -277,16 +259,15 @@ class Trigger(object):
         """Add a log to this Trigger object"""
         new_log = Log()
         self.logs.append(new_log)
-        logging.debug(str.format("\t\tLog", new_log, "added to", self))
+        logging.debug("\t\tLog %s added to %s" % (str(new_log), str(self)))
         return new_log
     #end add_log
 
 
     def remove_log(self, log):
         """Remove a log from this Trigger object"""
-        logging.debug(str.format("\t\tRemoving", log, "from", self, "...", end="\t\t"))
+        logging.debug("\t\tRemoving %s from %s..." % (str(log), str(self)))
         self.logs.remove(log)
-        logging.debug("Done.")
     #end remove_log
 
 
@@ -294,7 +275,7 @@ class Trigger(object):
         """Add a TriggerCondition object to this Trigger object"""
         new_cond = TriggerCondition()
         self.conditions.append(new_cond)
-        logging.debug(str.format("\t\tTriggerCondition", new_cond, "added to", self))
+        logging.debug("\t\tTriggerCondition %s added to %s" % (str(new_cond), str(self)))
         return new_cond
     #end add_log
 
@@ -312,13 +293,11 @@ class Log(object):
     """This object stores data for Endless Sky logs"""
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isActive   = False
         self.formatType = None
         self.log        = [None, None, None]
-
-        logging.debug("Done.")
     # end init
 
 
@@ -343,13 +322,11 @@ class TriggerCondition(object):
     """This object stores data for condition modifiers inside Endless Sky triggers"""
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t"))
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
 
         self.isActive      = False
         self.conditionType = None
         self.condition     = [None, None, None]
-
-        logging.debug("Done.")
     # end init
 
 
@@ -374,8 +351,7 @@ class Conversations(object):
     #TODO: Implement this in full in a separate tool
 
     def __init__(self):
-        logging.debug(str.format("\t\tcomponent %s initializing..." % self.__class__, end="\t\t"))
-        logging.debug("Done.")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__)
     # end init
 
 # end class Conversations
