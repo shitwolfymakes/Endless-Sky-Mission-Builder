@@ -484,7 +484,7 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log_frame: The LogFrame containing the log to be edited
         """
-        logging.debug("Editing ", log_frame.log, "...")
+        logging.debug("Editing " + str(log_frame.log) + " ...")
         LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
     #end edit_log
 
@@ -537,7 +537,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log: the log
         """
         log.isActive = state.get()
-        logging.debug(str(log), "is now", log.isActive)
+        logging.debug("%s is now %s", str(log), str(log.isActive))
     #def _change_trigger_state
 
 
@@ -742,7 +742,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
-        logging.debug("Editing " + tc_frame.condition + " ...")
+        logging.debug("Editing " + str(tc_frame.condition) + " ...")
         TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
     #end edit_trigger_condition
 
@@ -795,7 +795,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         :param tc: the trigger condition
         """
         tc.isActive = state.get()
-        logging.debug(tc + " is now " + tc.isActive)
+        logging.debug("%s is now %s", str(tc), str(tc.isActive))
     #def changeTriggerConditionsState
 
 
