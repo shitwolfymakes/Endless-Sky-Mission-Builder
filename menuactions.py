@@ -15,6 +15,7 @@ This file contains the code for each menu action(open, save, undo, etc.)
 import re
 import shlex
 import webbrowser
+import logging
 
 from tkinter import filedialog
 
@@ -44,11 +45,11 @@ def open_file(app):
     app.missionList             = []
     app.missionNameToObjectDict = {}
 
-    print("\nSelecting mission file...")
+    logging.debug("\nSelecting mission file...")
     f = filedialog.askopenfile()
     if f is None:  # askopenasfile return `None` if dialog closed with "cancel".
         return
-    print("Opening file: %s\n" % f.name)
+    logging.debug("Opening file: %s\n" % f.name)
 
     with open(f.name) as missionfile:
         mission_lines = missionfile.readlines()
@@ -90,7 +91,7 @@ def open_file(app):
             i += 1
             continue
         elif re.search(match_event, line):
-            print("EVENT FOUND IN FILE")
+            logging.debug("EVENT FOUND IN FILE")
             event_line = True
             continue
         else:
@@ -100,9 +101,9 @@ def open_file(app):
         # end if/else
     # end for
 
-    print("\nMissions loaded:")
+    logging.debug("\nMissions loaded:")
     for mission in app.missionList:
-        print("\t%s" % mission.missionName)
+        logging.debug("\t%s" % mission.missionName)
         #mission.printMission()
     # end for
 
@@ -124,8 +125,8 @@ def print_mission_file(mission_file):
     :mission_file: the text data of the mission file
     """
     for line in mission_file:
-        print(line, end="")
-    print()
+        logging.debug(line, end="")
+    logging.debug()
 #end print_mission_file
 
 
@@ -136,7 +137,7 @@ def save_file(app):
     :param app: The instance of ESMB
     """
     #TODO: add preamble comments
-    print("\nSaving selected file...")
+    logging.debug("\nSaving selected file...")
     compile_mission(app)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
@@ -147,7 +148,7 @@ def save_file(app):
         f.write("\n\n\n")       # add whitespace between missions, per the Creating Missions guidelines
     f.close()
 
-    print("Done.")
+    logging.debug("Done.")
 # end save_file
 
 
@@ -157,7 +158,7 @@ def new_mission(app):
 
     :param app: The instance of ESMB
     """
-    print("\nCreating new mission...")
+    logging.debug("\nCreating new mission...")
     PopupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
