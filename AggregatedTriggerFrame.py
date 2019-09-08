@@ -943,8 +943,8 @@ class TriggerConditionWindow(object):
             self.condition.condition[1] = self.selectedOption
             logging.debug("Condition type %d: %s" % (self.conditionType, str(self.condition.condition)))
         elif self.conditionType == 2:
-            self.condition.condition[1] = self.selectedOption
-            self.condition.condition[0] = self.condData.get()
+            self.condition.condition[0] = self.selectedOption
+            self.condition.condition[1] = self.condData.get()
             logging.debug("Condition type %d: %s" % (self.conditionType, str(self.condition.condition)))
         else:
             logging.error("Invalid conditionType!!!")
@@ -957,7 +957,7 @@ class TriggerConditionWindow(object):
         Take the associated TriggerCondition object, and populate
         each of the widgets in the window with the data inside
         """
-        logging.debug("\t\tPopulating TriggerWindow...")
+        logging.debug("\n\nPopulating TriggerWindow...")
 
         if self.conditionType == 0:
             if self.condition.condition[0] is not None:
@@ -965,18 +965,25 @@ class TriggerConditionWindow(object):
                 index = self.comboOptions.index(self.condition.condition[1])
                 self.optionsCombo.current(index)
                 self.value.set(self.condition.condition[2])
+
+                self.selectedOption = self.condition.condition[1]
             #end if
         elif self.conditionType == 1:
             if self.condition.condition[0] is not None:
                 self.condData.set(self.condition.condition[0])
                 index = self.comboOptions.index(self.condition.condition[1])
                 self.optionsCombo.current(index)
+
+                self.selectedOption = self.condition.condition[1]
             #end if
         elif self.conditionType == 2:
             if self.condition.condition[0] is not None:
                 index = self.comboOptions.index(self.condition.condition[0])
                 self.optionsCombo.current(index)
                 self.condData.set(self.condition.condition[1])
+
+                self.selectedOption = self.condition.condition[0]
+            #end if
         else:
             logging.error("Data corrupted")
         #end if/else
