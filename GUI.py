@@ -156,7 +156,7 @@ class GUI(object):
 
     def build_option_frame(self):
         """Add widgets to the optionFrame"""
-        logging.debug("Building optionFrame...", end="\t\t")
+        logging.debug(str.format("Building optionFrame...", end="\t\t"))
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
         of_title = ttk.Label(self.optionFrame, text="Mission")
@@ -194,7 +194,7 @@ class GUI(object):
 
     def build_center_frame(self):
         """Add widgets to the centerFrame"""
-        logging.debug("Building centerFrame...", end="\t\t")
+        logging.debug(str.format("Building centerFrame...", end="\t\t"))
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
 
@@ -286,7 +286,7 @@ class GUI(object):
 
     def build_mission_frame(self):
         """Add widgets to the missionFrame"""
-        logging.debug("Building missionFrame...", end="\t")
+        logging.debug(str.format("Building missionFrame...", end="\t"))
 
         #Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
@@ -320,7 +320,7 @@ class GUI(object):
         ### Start updating combobox
         ml = self.missionList
         self.missionNames = []
-        logging.debug("\tNew mission options:", end=" ")
+        logging.debug(str.format("\tNew mission options:", end=" "))
         for m in ml:
             self.missionNames.append(m.missionName)
         logging.debug(self.missionNames)
@@ -483,7 +483,7 @@ class GUI(object):
 
     def update_mission_frame(self):
         """Update missionFrame to use the most recent data"""
-        logging.debug("\nUpdating missionFrame...", end="\t")
+        logging.debug(str.format("\nUpdating missionFrame...", end="\t"))
 
         self.missionTextBox.forget()
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
@@ -501,7 +501,7 @@ class GUI(object):
     def mission_selected(self, event=None):
         """Set activeMission to the combobox option selected by the user"""
         selected_mission_name = self.missionComboBox.get()
-        logging.debug('\nOpening mission "%s"' % selected_mission_name)
+        logging.debug(str.format('\nOpening mission "%s"' % selected_mission_name))
         self.activeMission = self.missionNameToObjectDict.get(selected_mission_name)
         self.update_center_frame()
         self.update_mission_frame()
