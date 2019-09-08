@@ -156,3 +156,4 @@ log.txt
 /Releases/
 /appify.sh
 /setup.py
+/setup-backup.py
