@@ -11,7 +11,6 @@
 
 This file contains helper functions and custom widgets for the ESMB gui
 """
-import logging
 
 from tkinter import *
 from tkinter import ttk

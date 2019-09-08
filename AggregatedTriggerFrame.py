@@ -10,8 +10,6 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-import logging
-
 from guiutils import *
 
 

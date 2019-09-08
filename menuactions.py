@@ -15,7 +15,6 @@ This file contains the code for each menu action(open, save, undo, etc.)
 import re
 import shlex
 import webbrowser
-import logging
 
 from tkinter import filedialog
 
