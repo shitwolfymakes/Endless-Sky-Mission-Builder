@@ -18,7 +18,7 @@ Endless Sky is made by Michael Zahniser.
 My Github: https://github.com/shitwolfymakes
 Endless Sky Github: https://github.com/endless-sky/endless-sky
 """
-#TODO: Implement logging
+
 import logging
 
 from GUI import *
