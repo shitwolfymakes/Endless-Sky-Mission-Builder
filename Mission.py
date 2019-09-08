@@ -19,7 +19,7 @@ class Mission(object):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, mission_name, default=False):
-        logging.debug(str.format("Building mission:", mission_name))
+        logging.debug("Building mission: %s" % mission_name)
 
         self.components   = MissionComponents.MissionComponents()
         self.missionLines = []  # List of the mission text
@@ -71,9 +71,9 @@ class Mission(object):
 
     def parse_mission(self):
         """This method parses the mission data(stored in components), formats it, and stores it in missionLines"""
-        logging.debug(str.format("Parsing mission...", end="\t\t\t"))
+        logging.debug("\tParsing mission...")
         self.missionLines = []          # empty the default values
-        self.add_line(str.format("mission \"%s\"" % self.missionName))
+        self.add_line("mission \"%s\"" % self.missionName)
 
         # mission display name
         if self.components.missionDisplayName is not None:
@@ -291,8 +291,6 @@ class Mission(object):
 
             #end if
         #end for
-
-        logging.debug("Done.")
     #end parse_mission
 
 
