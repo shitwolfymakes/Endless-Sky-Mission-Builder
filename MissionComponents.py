@@ -253,16 +253,16 @@ class Trigger(object):
     def print_trigger(self):
         """Print the data all pretty-like"""
         logging.debug("\n\tTrigger Data")
-        logging.debug(str.format("\t\tisActive:", self.isActive))
-        logging.debug(str.format("\t\tOn:", self.triggerType))
-        logging.debug(str.format("\t\tDialog:", self.dialog))
-        logging.debug(str.format("\t\tOutfit:", self.outfit))
-        logging.debug(str.format("\t\tRequire:", self.require))
-        logging.debug(str.format("\t\tisPayment:", self.isPayment))
-        logging.debug(str.format("\t\tPayment:", self.payment))
-        logging.debug(str.format("\t\tEvent:", self.event))
-        logging.debug(str.format("\t\tisFail:", self.isFail))
-        logging.debug(str.format("\t\tFail:", self.fail))
+        logging.debug("\t\tisActive: %s" % self.isActive)
+        logging.debug("\t\tOn: %s" % self.triggerType)
+        logging.debug("\t\tDialog: %s" % self.dialog)
+        logging.debug("\t\tOutfit: %s" % self.outfit)
+        logging.debug("\t\tRequire: %s" % self.require)
+        logging.debug("\t\tisPayment: %s" % self.isPayment)
+        logging.debug("\t\tPayment: %s" % self.payment)
+        logging.debug("\t\tEvent: %s" % self.event)
+        logging.debug("\t\tisFail: %s" % self.isFail)
+        logging.debug("\t\tFail: %s" % self.fail)
         logging.debug("\t\tLogs:")
         for log in self.logs:
             log.print_log()
@@ -301,9 +301,8 @@ class Trigger(object):
 
     def remove_tc(self, condition):
         """Remove a TriggerCondition object to this Trigger object"""
-        logging.debug(str.format("\t\tRemoving", condition, "from", self, "...", end="\t\t"))
+        logging.debug("\t\tRemoving %s from %s..." % (condition, str(self)))
         self.conditions.remove(condition)
-        logging.debug("Done.")
     #end remove_log
 
 #end class Trigger
@@ -332,9 +331,9 @@ class Log(object):
     def print_log(self):
         """Print the data all pretty-like"""
         logging.debug("\t\tLog Data")
-        logging.debug(str.format("\t\t\tisActive:", self.isActive))
-        logging.debug(str.format("\t\t\tformatType:", self.formatType))
-        logging.debug(str.format("\t\t\tLog:", self.log))
+        logging.debug("\t\t\tisActive: %s" % self.isActive)
+        logging.debug("\t\t\tformatType: %s" % self.formatType)
+        logging.debug("\t\t\tLog: %s" % self.log)
     #end print_log
 
 # end class Log
@@ -363,9 +362,9 @@ class TriggerCondition(object):
     def print_condition(self):
         """Print the data all pretty-like"""
         logging.debug("\t\tCondition Data")
-        logging.debug(str.format("\t\t\tisActive:", self.isActive))
-        logging.debug(str.format("\t\t\tconditionType:", self.conditionType))
-        logging.debug(str.format("\t\t\tCondition:", self.condition))
+        logging.debug("\t\t\tisActive: %s" % self.isActive)
+        logging.debug("\t\t\tconditionType: %s" % self.conditionType)
+        logging.debug("\t\t\tCondition: %s" % self.condition)
     #end printConditions
 
 # end class TriggerConditions
