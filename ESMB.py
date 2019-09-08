@@ -19,21 +19,23 @@ My Github: https://github.com/shitwolfymakes
 Endless Sky Github: https://github.com/endless-sky/endless-sky
 """
 #TODO: Implement logging
+import logging
 
 from GUI import *
+
+debugMode = False
 
 
 class ESMB(object):
     """The application object"""
 
     def __init__(self):
-        debug_mode = False
         if "debug=True" in sys.argv:
-            debug_mode = True
+            global debugMode
+            debugMode= True
         else:
-            logfile = "log.txt"
-            sys.stdout = open(logfile, 'w')
-        self.gui = GUI(debug_mode)
+            logging.basicConfig(filename='log.txt', level=logging.DEBUG)
+        self.gui = GUI(debugMode)
     #end init
 
 #end class ESMB
