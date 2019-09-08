@@ -333,7 +333,7 @@ class TriggerWindow(object):
 
     def _populate_trigger_window(self):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
-        logging.debug(str.format("\t\tPopulating TriggerWindow...", end="\t"))
+        logging.debug("\t\tPopulating TriggerWindow...")
 
         # action
         if self.trigger.triggerType is not None:
@@ -419,8 +419,6 @@ class TriggerWindow(object):
             for condition in self.trigger.conditions:
                 component.populate_trigger_condition(condition)
         # end if
-
-        logging.debug("Done.")
     #end _populate_trigger_window
 
 #end class TriggerWindow

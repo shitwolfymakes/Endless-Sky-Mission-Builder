@@ -226,8 +226,7 @@ class _SubComponentMandOptFrame(ttk.Frame):
         :param modified_widgets: A list of widgets
         """
         for widget in modified_widgets:
-            logging.debug(str.format("The value of %s is:" % widget, end="\t\t"))
-            logging.debug(entry_state.get())
+            logging.debug("The value of %s is: %s" % (widget, entry_state.get()))
             if type(widget) is str:
                 break
             elif entry_state.get() is True:
