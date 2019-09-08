@@ -256,7 +256,7 @@ class Trigger(object):
         """Add a log to this Trigger object"""
         new_log = Log()
         self.logs.append(new_log)
-        logging.debug("\tLog %s added to %s" % (str(new_log), str(self)))
+        logging.debug("\t\tLog %s added to %s" % (str(new_log), str(self)))
         return new_log
     #end add_log
 
@@ -272,7 +272,7 @@ class Trigger(object):
         """Add a TriggerCondition object to this Trigger object"""
         new_cond = TriggerCondition()
         self.conditions.append(new_cond)
-        logging.debug("\tTriggerCondition %s added to %s" % (str(new_cond), str(self)))
+        logging.debug("\t\tTriggerCondition %s added to %s" % (str(new_cond), str(self)))
         return new_cond
     #end add_log
 
