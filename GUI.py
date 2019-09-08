@@ -8,10 +8,9 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-This handles the GUI for ESMB
 """
 
+import logging
 from ttkthemes import ThemedTk
 
 from menuactions import *
@@ -21,10 +20,10 @@ from AggregatedTriggerFrame import AggregatedTriggerFrame
 
 
 class GUI(object):
-    """This class houses the top level of the GUI"""
+    """This handles the GUI for ESMB"""
 
     def __init__(self, debug_mode):
-        print("Building GUI...")
+        logging.debug("Building GUI...")
         self.debugging = debug_mode
 
         #TODO: Look into changing this to not need the dictionary
@@ -158,7 +157,7 @@ class GUI(object):
 
     def build_option_frame(self):
         """Add widgets to the optionFrame"""
-        print("Building optionFrame...", end="\t\t")
+        logging.debug("Building optionFrame...", end="\t\t")
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
         of_title = ttk.Label(self.optionFrame, text="Mission")
@@ -190,13 +189,13 @@ class GUI(object):
 
         #TODO: Add functionality to change missionName and delete mission. Also, update button grouping to reflect
 
-        print("Done.")
+        logging.debug("Done.")
     #end build_option_frame
 
 
     def build_center_frame(self):
         """Add widgets to the centerFrame"""
-        print("Building centerFrame...", end="\t\t")
+        logging.debug("Building centerFrame...", end="\t\t")
 
         self.centerFrame.grid(row=0, column=1, sticky="ns")
 
@@ -282,13 +281,13 @@ class GUI(object):
         bl1 = ttk.Label(cf, textvariable=" ")
         bl1.grid(row=19, column=0, sticky="ew")
 
-        print("Done.")
+        logging.debug("Done.")
     #end build_center_frame
 
 
     def build_mission_frame(self):
         """Add widgets to the missionFrame"""
-        print("Building missionFrame...", end="\t")
+        logging.debug("Building missionFrame...", end="\t")
 
         #Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
@@ -308,7 +307,7 @@ class GUI(object):
         self.missionTextBox.insert(END, welcome_message)
         self.missionTextBox.config(state=DISABLED)
 
-        print("Done.")
+        logging.debug("Done.")
     #end build_mission_frame
 
 
@@ -317,15 +316,15 @@ class GUI(object):
 
     def update_option_frame(self):
         """Update optionFrame to use the most recent data"""
-        print("\nUpdating optionFrame...")
+        logging.debug("\nUpdating optionFrame...")
 
         ### Start updating combobox
         ml = self.missionList
         self.missionNames = []
-        print("\tNew mission options:", end=" ")
+        logging.debug("\tNew mission options:", end=" ")
         for m in ml:
             self.missionNames.append(m.missionName)
-        print(self.missionNames)
+        logging.debug(self.missionNames)
 
         # update options in the combobox
         self.missionComboBox['values'] = self.missionNames
@@ -336,13 +335,13 @@ class GUI(object):
         self.update_center_frame()
         self.update_mission_frame()
 
-        print("Done.")
+        logging.debug("Done.")
     #end update_option_frame
 
 
     def update_center_frame(self):
         """Update missionFrame to use the most recent data"""
-        print("\nUpdating centerFrame...")
+        logging.debug("\nUpdating centerFrame...")
 
         components = self.activeMission.components
 
@@ -479,13 +478,13 @@ class GUI(object):
             for trigger in components.triggerList:
                 self.triggersFrame.populate_trigger(trigger)
 
-    print("Done.")
+    logging.debug("Done.")
     #end update_center_frame
 
 
     def update_mission_frame(self):
         """Update missionFrame to use the most recent data"""
-        print("\nUpdating missionFrame...", end="\t")
+        logging.debug("\nUpdating missionFrame...", end="\t")
 
         self.missionTextBox.forget()
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
@@ -493,7 +492,7 @@ class GUI(object):
         self.missionTextBox.insert(END, self.activeMission.print_mission_lines_to_text())
         self.missionTextBox.config(state=DISABLED)
 
-        print("Done.")
+        logging.debug("Done.")
     #end update_mission_frame
 
 
@@ -503,7 +502,7 @@ class GUI(object):
     def mission_selected(self, event=None):
         """Set activeMission to the combobox option selected by the user"""
         selected_mission_name = self.missionComboBox.get()
-        print('\nOpening mission "%s"' % selected_mission_name)
+        logging.debug('\nOpening mission "%s"' % selected_mission_name)
         self.activeMission = self.missionNameToObjectDict.get(selected_mission_name)
         self.update_center_frame()
         self.update_mission_frame()
