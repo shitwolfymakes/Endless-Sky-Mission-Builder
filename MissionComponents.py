@@ -12,12 +12,14 @@
 This file contains the classes defining the components of a mission
 """
 
+import logging
+
 
 class MissionComponents(object):
     """This class keeps instances of each different component in one place, for easy access"""
 
     def __init__(self):
-        print("\tMission components initializing...")
+        logging.debug("\tMission components initializing...")
 
         self.missionDisplayName = None          # mission <name>
         self.description        = None          # description <text>
@@ -40,7 +42,7 @@ class MissionComponents(object):
         self.destination        = Destination()
         self.triggerList        = []
 
-        print("\tDone.")
+        logging.debug("\tDone.")
     #end init
 
 #end class MissionComponents
@@ -52,12 +54,12 @@ class Deadline(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t")
 
         self.isDeadline = False
         self.deadline   = [None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 # end class Deadline
@@ -69,12 +71,12 @@ class Cargo(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
 
         self.isCargo = False
         self.cargo   = [None, None, None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     #end init
 
 #end class Cargo
@@ -86,12 +88,12 @@ class Passengers(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t")
 
         self.isPassengers = False
         self.passengers   = [None, None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 # end class Passengers
@@ -103,12 +105,12 @@ class Illegal(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t")
 
         self.isIllegal = False
         self.illegal   = [None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 #end class Illegal
@@ -121,12 +123,12 @@ class Clearance(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t\t")
 
         self.isClearance = False
         self.clearance   = None
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 # end class Clearance
@@ -139,12 +141,12 @@ class Stopover(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
         self.isStopover = False
         self.stopover   = None
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 # end class Conversations
@@ -160,12 +162,12 @@ class Source(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
         self.isSource = False
         self.source   = [None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 # end class Source
@@ -181,12 +183,12 @@ class Destination(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t")
 
         self.isDestination = False
         self.destination   = [None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 # end class Destination
@@ -215,7 +217,7 @@ class Trigger(object):
     """
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t")
 
         self.isActive    = False
         self.triggerType = None
@@ -230,7 +232,7 @@ class Trigger(object):
         self.logs        = []
         self.conditions  = []
 
-        print("Done.")
+        logging.debug("Done.")
     #end init
 
 
@@ -250,24 +252,24 @@ class Trigger(object):
 
     def print_trigger(self):
         """Print the data all pretty-like"""
-        print("\n\tTrigger Data")
-        print("\t\tisActive:", self.isActive)
-        print("\t\tOn:", self.triggerType)
-        print("\t\tDialog:", self.dialog)
-        print("\t\tOutfit:", self.outfit)
-        print("\t\tRequire:", self.require)
-        print("\t\tisPayment:", self.isPayment)
-        print("\t\tPayment:", self.payment)
-        print("\t\tEvent:", self.event)
-        print("\t\tisFail:", self.isFail)
-        print("\t\tFail:", self.fail)
-        print("\t\tLogs:")
+        logging.debug("\n\tTrigger Data")
+        logging.debug("\t\tisActive:", self.isActive)
+        logging.debug("\t\tOn:", self.triggerType)
+        logging.debug("\t\tDialog:", self.dialog)
+        logging.debug("\t\tOutfit:", self.outfit)
+        logging.debug("\t\tRequire:", self.require)
+        logging.debug("\t\tisPayment:", self.isPayment)
+        logging.debug("\t\tPayment:", self.payment)
+        logging.debug("\t\tEvent:", self.event)
+        logging.debug("\t\tisFail:", self.isFail)
+        logging.debug("\t\tFail:", self.fail)
+        logging.debug("\t\tLogs:")
         for log in self.logs:
             log.print_log()
-        print("\t\tConditions:")
+        logging.debug("\t\tConditions:")
         for cond in self.conditions:
             cond.print_condition()
-        print()
+        logging.debug()
     #end print_trigger
 
 
@@ -275,16 +277,16 @@ class Trigger(object):
         """Add a log to this Trigger object"""
         new_log = Log()
         self.logs.append(new_log)
-        print("\t\tLog", new_log, "added to", self)
+        logging.debug("\t\tLog", new_log, "added to", self)
         return new_log
     #end add_log
 
 
     def remove_log(self, log):
         """Remove a log from this Trigger object"""
-        print("\t\tRemoving", log, "from", self, "...", end="\t\t")
+        logging.debug("\t\tRemoving", log, "from", self, "...", end="\t\t")
         self.logs.remove(log)
-        print("Done.")
+        logging.debug("Done.")
     #end remove_log
 
 
@@ -292,16 +294,16 @@ class Trigger(object):
         """Add a TriggerCondition object to this Trigger object"""
         new_cond = TriggerCondition()
         self.conditions.append(new_cond)
-        print("\t\tTriggerCondition", new_cond, "added to", self)
+        logging.debug("\t\tTriggerCondition", new_cond, "added to", self)
         return new_cond
     #end add_log
 
 
     def remove_tc(self, condition):
         """Remove a TriggerCondition object to this Trigger object"""
-        print("\t\tRemoving", condition, "from", self, "...", end="\t\t")
+        logging.debug("\t\tRemoving", condition, "from", self, "...", end="\t\t")
         self.conditions.remove(condition)
-        print("Done.")
+        logging.debug("Done.")
     #end remove_log
 
 #end class Trigger
@@ -311,13 +313,13 @@ class Log(object):
     """This object stores data for Endless Sky logs"""
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
         self.isActive   = False
         self.formatType = None
         self.log        = [None, None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 
@@ -329,10 +331,10 @@ class Log(object):
 
     def print_log(self):
         """Print the data all pretty-like"""
-        print("\t\tLog Data")
-        print("\t\t\tisActive:", self.isActive)
-        print("\t\t\tformatType:", self.formatType)
-        print("\t\t\tLog:", self.log)
+        logging.debug("\t\tLog Data")
+        logging.debug("\t\t\tisActive:", self.isActive)
+        logging.debug("\t\t\tformatType:", self.formatType)
+        logging.debug("\t\t\tLog:", self.log)
     #end print_log
 
 # end class Log
@@ -342,13 +344,13 @@ class TriggerCondition(object):
     """This object stores data for condition modifiers inside Endless Sky triggers"""
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
 
         self.isActive      = False
         self.conditionType = None
         self.condition     = [None, None, None]
 
-        print("Done.")
+        logging.debug("Done.")
     # end init
 
 
@@ -360,10 +362,10 @@ class TriggerCondition(object):
 
     def print_condition(self):
         """Print the data all pretty-like"""
-        print("\t\tCondition Data")
-        print("\t\t\tisActive:", self.isActive)
-        print("\t\t\tconditionType:", self.conditionType)
-        print("\t\t\tCondition:", self.condition)
+        logging.debug("\t\tCondition Data")
+        logging.debug("\t\t\tisActive:", self.isActive)
+        logging.debug("\t\t\tconditionType:", self.conditionType)
+        logging.debug("\t\t\tCondition:", self.condition)
     #end printConditions
 
 # end class TriggerConditions
@@ -373,8 +375,8 @@ class Conversations(object):
     #TODO: Implement this in full in a separate tool
 
     def __init__(self):
-        print("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
-        print("Done.")
+        logging.debug("\t\tcomponent %s initializing..." % self.__class__, end="\t\t")
+        logging.debug("Done.")
     # end init
 
 # end class Conversations
