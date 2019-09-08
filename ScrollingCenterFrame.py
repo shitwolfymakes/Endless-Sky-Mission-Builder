@@ -42,7 +42,7 @@ class ScrollingCenterFrame(ttk.Frame):
         self.inner_id = self.canvas.create_window((4, 4), window=self.inner, anchor=NW)
 
         self.inner.bind("<Configure>", self._configure_inner)
-        self.canvas.bind("<Configure>", self._configureCanvas)
+        self.canvas.bind("<Configure>", self._configure_canvas)
 
     #end init
 
@@ -92,7 +92,7 @@ class ScrollingCenterFrame(ttk.Frame):
     #end _configure_inner
 
 
-    def _configureCanvas(self, event=None):
+    def _configure_canvas(self, event=None):
         """Resize the canvas if the inner frame changes"""
         if self.inner.winfo_reqwidth() < self.canvas.winfo_width():
             self.canvas.itemconfigure(self.inner_id, width=self.canvas.winfo_width())

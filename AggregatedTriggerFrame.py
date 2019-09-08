@@ -8,8 +8,6 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-This library contains classes and methods that extend ttk widgets
 """
 
 from guiutils import *
@@ -43,7 +41,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
     def _add_trigger(self):
         """Add a trigger to the activeMission"""
-        print("Adding Trigger...")
+        logging.debug("Adding Trigger...")
 
         tf = TriggerFrame(self, self.app, "trigger")
         self.edit_trigger(self.triggerFrameList[-1])
@@ -52,8 +50,6 @@ class AggregatedTriggerFrame(ttk.Frame):
         cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_trigger_state, state, self.triggerFrameList[-1].trigger))
         cb.grid(row=0, column=3, sticky="e")
-
-        print("Done.")
     #end _add_trigger
 
 
@@ -64,15 +60,13 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger_frame: The TriggerFrame to be removed
         """
-        print("Removing %s from Triggers" % trigger_frame.trigger)
+        logging.debug(str.format("Removing %s from Triggers" % trigger_frame.trigger))
 
         self.app.activeMission.remove_trigger(trigger_frame.trigger)
 
         self.triggerFrameList.remove(trigger_frame)
         trigger_frame.frame.pack_forget()
         trigger_frame.frame.destroy()
-
-        print("Done.")
     #end delete_trigger
 
 
@@ -83,10 +77,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
-        print("Editing ", end="")
-        print(trigger_frame.trigger, end="")
-        print("...")
-
+        logging.debug("Editing %s..." % str(trigger_frame.trigger))
         TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
     #end edit_trigger
 
@@ -119,7 +110,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger: the trigger
         """
         trigger.isActive = state.get()
-        print(trigger, "is now", trigger.isActive)
+        logging.debug("%s is now %s" % (str(trigger), str(trigger.isActive)))
     #def _change_trigger_state
 
 #end class AggregatedTriggerFrame
@@ -163,7 +154,7 @@ class TriggerWindow(object):
     """This class creates a custom pop-up window to display and edit the data in an associated Trigger object"""
 
     def __init__(self, app, master, trigger):
-        print("\tBuilding TriggerWindow...")
+        logging.debug("\tBuilding TriggerWindow...")
 
         self.app          = app
         self.trigger      = trigger
@@ -232,15 +223,13 @@ class TriggerWindow(object):
         self.triggerConditionsSubComponent.grid(row=0, column=0, columnspan=2, sticky="ew")
 
         self._populate_trigger_window()
-
-        print("\tDone.")
     #end init
 
 
     def _action_selected(self, event=None):
         """Store the combobox option selected by the user"""
         self.action = self.onActionCombobox.get()
-        print('\nTrigger action selected: "on %s"' % self.action)
+        logging.debug("\tTrigger action selected: \"on %s\"" % self.action)
     #end _action_selected
 
 
@@ -255,50 +244,50 @@ class TriggerWindow(object):
 
     def _store_data(self):
         """Store the data from the GUI into the associated Trigger object"""
-        print("\nStoring TriggerWindow data...")
+        logging.debug("\tStoring TriggerWindow data...")
         self.trigger.clear_trigger()
 
         # action
         if self.action is not None:
-            print("\tOn:", self.action)
+            logging.debug("\t\tOn: %s" % self.action)
             self.trigger.triggerType = self.action
         #end if
 
         # dialog
         if self.dialogSubComponent.listEntryStates[0].get():
-            print("\tDialog:", self.dialogSubComponent.listEntryData[0].get())
+            logging.debug("\t\tDialog: %s" % self.dialogSubComponent.listEntryData[0].get())
             self.trigger.dialog = self.dialogSubComponent.listEntryData[0].get()
         #end if
 
         # outfit
         if self.outfitSubComponent.listEntryStates[0].get():
-            print("\tOutfit:", self.outfitSubComponent.listEntryData[0].get())
+            logging.debug("\t\tOutfit: %s" % self.outfitSubComponent.listEntryData[0].get())
             self.trigger.outfit[0] = self.outfitSubComponent.listEntryData[0].get()
             if self.outfitSubComponent.listEntryStates[1].get():
-                print("\tOutfit Optional:", self.outfitSubComponent.listEntryData[1].get())
+                logging.debug("\t\t\tOutfit Optional: %s" % self.outfitSubComponent.listEntryData[1].get())
                 self.trigger.outfit[1] = self.outfitSubComponent.listEntryData[1].get()
             #end if
         #end if
 
         # require
         if self.requireSubComponent.listEntryStates[0].get():
-            print("\tRequire:", self.requireSubComponent.listEntryData[0].get())
+            logging.debug("\t\tRequire: %s" % self.requireSubComponent.listEntryData[0].get())
             self.trigger.require[0] = self.requireSubComponent.listEntryData[0].get()
             if self.requireSubComponent.listEntryStates[1].get():
-                print("\tRequire Optional:", self.requireSubComponent.listEntryData[1].get())
+                logging.debug("\t\t\tRequire Optional: %s" % self.requireSubComponent.listEntryData[1].get())
                 self.trigger.require[1] = self.requireSubComponent.listEntryData[1].get()
             # end if
         # end if
 
         # payment
         if self.paymentSubComponent.listEntryStates[0].get():
-            print("\tPayment:", self.paymentSubComponent.subComponentName)
+            logging.debug("\t\tPayment: %s" % self.paymentSubComponent.subComponentName)
             self.trigger.isPayment = True
             if self.paymentSubComponent.listEntryStates[1].get():
-                print("\tPayment Optional 1:", self.paymentSubComponent.listEntryData[0].get())
+                logging.debug("\t\t\tPayment Optional 1: %s" % self.paymentSubComponent.listEntryData[0].get())
                 self.trigger.payment[0] = self.paymentSubComponent.listEntryData[0].get()
                 if self.paymentSubComponent.listEntryStates[2].get():
-                    print("\tPayment Optional 2:", self.paymentSubComponent.listEntryData[1].get())
+                    logging.debug("\t\t\tPayment Optional 2: %s" % self.paymentSubComponent.listEntryData[1].get())
                     self.trigger.payment[1] = self.paymentSubComponent.listEntryData[1].get()
                 #end if
             #end if
@@ -306,13 +295,13 @@ class TriggerWindow(object):
 
         # event
         if self.eventSubComponent.listEntryStates[0].get():
-            print("\tEvent:", self.eventSubComponent.listEntryData[0].get())
+            logging.debug("\t\tEvent: %s" % self.eventSubComponent.listEntryData[0].get())
             self.trigger.event[0] = self.eventSubComponent.listEntryData[0].get()
             if self.eventSubComponent.listEntryStates[1].get():
-                print("\tEvent Optional 1:", self.eventSubComponent.listEntryData[1].get())
+                logging.debug("\t\t\tEvent Optional 1: %s" % self.eventSubComponent.listEntryData[1].get())
                 self.trigger.event[1] = self.eventSubComponent.listEntryData[1].get()
                 if self.eventSubComponent.listEntryStates[2].get():
-                    print("\tEvent Optional 2:", self.eventSubComponent.listEntryData[2].get())
+                    logging.debug("\t\t\tEvent Optional 2: %s" % self.eventSubComponent.listEntryData[2].get())
                     self.trigger.event[2] = self.eventSubComponent.listEntryData[2].get()
                 # end if
             # end if
@@ -320,25 +309,24 @@ class TriggerWindow(object):
 
         # fail
         if self.failSubComponent.listEntryStates[0].get():
-            print("\tPayment:", self.failSubComponent.subComponentName)
+            logging.debug("\t\tPayment: %s" % self.failSubComponent.subComponentName)
             self.trigger.isFail = True
             if self.failSubComponent.listEntryStates[1].get():
-                print("\tPayment Optional 1:", self.failSubComponent.listEntryData[0].get())
+                logging.debug("\t\t\tPayment Optional 1: %s" % self.failSubComponent.listEntryData[0].get())
                 self.trigger.fail = self.failSubComponent.listEntryData[0].get()
             #end if
         #end if
 
         self.trigger.print_trigger()
-
-        print("Done.")
     #end _store_data
 
     def _populate_trigger_window(self):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
-        print("\t\tPopulating TriggerWindow...", end="\t")
+        logging.debug("\t\tPopulating TriggerWindow...")
 
         # action
         if self.trigger.triggerType is not None:
+            self.action = self.trigger.triggerType
             index = self.actionsList.index(self.trigger.triggerType)
             self.onActionCombobox.current(index)
         #end if
@@ -413,7 +401,6 @@ class TriggerWindow(object):
         if self.trigger.logs:
             for log in self.trigger.logs:
                 component.populate_log(log)
-            #print
         #end if
 
         # Conditions
@@ -421,10 +408,7 @@ class TriggerWindow(object):
         if self.trigger.conditions:
             for condition in self.trigger.conditions:
                 component.populate_trigger_condition(condition)
-            # print
         # end if
-
-        print("Done.")
     #end _populate_trigger_window
 
 #end class TriggerWindow
@@ -460,24 +444,21 @@ class AggregatedLogFrame(ttk.Frame):
         Add a log to the current trigger. We can assume a specific trigger because these functions are only accessible
         after has opened the trigger they are adding this log to.
         """
-        print("Adding Trigger...")
+        logging.debug("Adding Trigger...")
 
         lf = LogFrame(self, self.trigger, "log")
         TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
-        print(lf.log.formatType)
+        logging.debug("Log format type selected: %s" % lf.log.formatType)
         if lf.log.formatType == "cancelled":
             lf.cleanup()
             return
         #end if
         self.edit_log(self.logFrameList[-1])
 
-
         state = BooleanVar()
         cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_log_state, state, self.logFrameList[-1].log))
         cb.grid(row=0, column=3, sticky="e")
-
-        print("Done.")
     #end _add_log
 
 
@@ -488,7 +469,7 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log_frame: The LogFrame containing the log to be edited
         """
-        print("Editing ", log_frame.log, "...")
+        logging.debug("Editing %s..." % str(log_frame.log))
         LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
     #end edit_log
 
@@ -500,15 +481,13 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log_frame: The LogFrame to be removed
         """
-        print("Removing %s from Triggers" % log_frame.log)
-
         self.trigger.remove_log(log_frame.log)
 
         self.logFrameList.remove(log_frame)
         log_frame.frame.pack_forget()
         log_frame.frame.destroy()
 
-        print("Done.")
+        logging.debug("Removed %s from Triggers" % str(log_frame.log))
     #end delete_log
 
 
@@ -541,7 +520,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log: the log
         """
         log.isActive = state.get()
-        print(log, "is now", log.isActive)
+        logging.debug("%s is now %s" % (str(log), str(log.isActive)))
     #def _change_trigger_state
 
 
@@ -596,7 +575,7 @@ class LogWindow(object):
     """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
     def __init__(self, app, master, log, format_type):
-        print("\tBuilding LogWindow...")
+        logging.debug("\tBuilding LogWindow...")
 
         self.app        = app
         self.log        = log
@@ -635,8 +614,6 @@ class LogWindow(object):
         self.closeButton.pack(side=BOTTOM)
 
         self.populate_log_window()
-
-        print("\tDone.")
     #end init
 
 
@@ -650,7 +627,7 @@ class LogWindow(object):
 
     def _store_data(self):
         """Store the data from the GUI into the associated Log object"""
-        print("\nStoring LogWindow data...", end="\t")
+        logging.debug("Storing LogWindow data...")
         self.log.clear_log()
 
         if self.formatType == "<message>":
@@ -660,14 +637,12 @@ class LogWindow(object):
             self.log.log[1] = self.name.get()
             self.log.log[2] = self.message.get()
         #end if/else
-
-        print("Done.")
     #end store_data
 
 
     def populate_log_window(self):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
-        print("Populating TriggerWindow...", end="\t")
+        logging.debug("Populating TriggerWindow...")
 
         if self.formatType == "<message>":
             if self.log.log[0] is not None:
@@ -680,8 +655,6 @@ class LogWindow(object):
             if self.log.log[2] is not None:
                 self.message.set(self.log.log[2].lstrip('`').rstrip('`'))
         #end if/else
-
-        print("Done.")
     #end populate_log_window
 
 #end class LogWindow
@@ -717,7 +690,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
     def _add_trigger_condition(self):
         """Add a condition to the current trigger"""
-        print("Adding TriggerCondition...")
+        logging.debug("Adding TriggerCondition...")
 
         tc = TriggerConditionFrame(self, self.trigger, "log")
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
@@ -734,8 +707,6 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_tc_state, state, self.tcFrameList[-1].condition))
         cb.grid(row=0, column=3, sticky="e")
-
-        print("Done.")
     #end _add_trigger_condition
 
 
@@ -746,7 +717,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
-        print("Editing ", tc_frame.condition, "...")
+        logging.debug("Editing  %s" % str(tc_frame.condition))
         TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
     #end edit_trigger_condition
 
@@ -758,15 +729,12 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param tc_frame: The TriggerConditionFrame to be removed
         """
-        print("Removing %s from Triggers" % tc_frame.condition)
-
         self.trigger.remove_tc(tc_frame.condition)
-
         self.tcFrameList.remove(tc_frame)
         tc_frame.frame.pack_forget()
         tc_frame.frame.destroy()
 
-        print("Done.")
+        logging.debug("Removed %s from Triggers" % tc_frame.condition)
     #end delete_trigger_condition
 
 
@@ -799,7 +767,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         :param tc: the trigger condition
         """
         tc.isActive = state.get()
-        print(tc, "is now", tc.isActive)
+        logging.debug("%s is now %s", str(tc), str(tc.isActive))
     #def changeTriggerConditionsState
 
 
@@ -860,7 +828,7 @@ class TriggerConditionWindow(object):
     """
 
     def __init__(self, app, master, condition):
-        print("\tBuilding TriggerConditionWindow...")
+        logging.debug("\tBuilding TriggerConditionWindow...")
 
         self.app            = app
         self.condition      = condition
@@ -913,15 +881,13 @@ class TriggerConditionWindow(object):
             entry = ttk.Entry(frame, textvariable=self.condData)
             entry.grid(row=0, column=1)
         else:
-            print("Invalid conditionType!!")
+            logging.error("Invalid conditionType!!")
         #end if/else
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
 
         self._populate_tc_window()
-
-        print("\tDone.")
     #end init
 
 
@@ -935,24 +901,25 @@ class TriggerConditionWindow(object):
 
     def _store_data(self):
         """Store the data from the GUI into the associated Log object"""
-        print("\nStoring TriggerConditionWindow data...", end="\t")
+        logging.debug("\t\tStoring TriggerConditionWindow data...")
         self.condition.clear_condition()
 
         if self.conditionType == 0:
             self.condition.condition[0] = self.condData.get()
             self.condition.condition[1] = self.selectedOption
             self.condition.condition[2] = self.value.get()
+            logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
         elif self.conditionType == 1:
             self.condition.condition[0] = self.condData.get()
             self.condition.condition[1] = self.selectedOption
+            logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
         elif self.conditionType == 2:
-            self.condition.condition[1] = self.selectedOption
-            self.condition.condition[0] = self.condData.get()
+            self.condition.condition[0] = self.selectedOption
+            self.condition.condition[1] = self.condData.get()
+            logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
         else:
-            print("Invalid conditionType!!!")
+            logging.error("Invalid TriggerCondition conditionType!!!")
         #end if/else
-
-        print("Done.")
     #end _store_data
 
 
@@ -961,7 +928,7 @@ class TriggerConditionWindow(object):
         Take the associated TriggerCondition object, and populate
         each of the widgets in the window with the data inside
         """
-        print("\t\tPopulating TriggerWindow...", end="\t")
+        logging.debug("\t\tPopulating TriggerWindow...")
 
         if self.conditionType == 0:
             if self.condition.condition[0] is not None:
@@ -969,24 +936,28 @@ class TriggerConditionWindow(object):
                 index = self.comboOptions.index(self.condition.condition[1])
                 self.optionsCombo.current(index)
                 self.value.set(self.condition.condition[2])
+
+                self.selectedOption = self.condition.condition[1]
             #end if
         elif self.conditionType == 1:
             if self.condition.condition[0] is not None:
                 self.condData.set(self.condition.condition[0])
                 index = self.comboOptions.index(self.condition.condition[1])
                 self.optionsCombo.current(index)
+
+                self.selectedOption = self.condition.condition[1]
             #end if
         elif self.conditionType == 2:
             if self.condition.condition[0] is not None:
-                print(self.condition.condition[1])
                 index = self.comboOptions.index(self.condition.condition[0])
                 self.optionsCombo.current(index)
                 self.condData.set(self.condition.condition[1])
-        else:
-            print("Data corrupted")
-        #end if/else
 
-        print("Done.")
+                self.selectedOption = self.condition.condition[0]
+            #end if
+        else:
+            logging.error("Data corrupted!!!")
+        #end if/else
     #end _populate_log_window
 
 
