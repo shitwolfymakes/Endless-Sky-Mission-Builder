@@ -62,7 +62,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger_frame: The TriggerFrame to be removed
         """
-        logging.debug("Removing %s from Triggers" % trigger_frame.trigger)
+        logging.debug(str.format("Removing %s from Triggers" % trigger_frame.trigger))
 
         self.app.activeMission.remove_trigger(trigger_frame.trigger)
 
@@ -81,9 +81,9 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
-        logging.debug("Editing ", end="")
-        logging.debug(trigger_frame.trigger, end="")
-        logging.debug("...")
+        logging.debug(str.format("Editing ", end=""))
+        logging.debug(str.format(trigger_frame.trigger, end=""))
+        logging.debug(str.format("..."))
 
         TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
     #end edit_trigger
@@ -117,7 +117,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger: the trigger
         """
         trigger.isActive = state.get()
-        logging.debug(trigger, "is now", trigger.isActive)
+        logging.debug(str.format(trigger, "is now", trigger.isActive))
     #def _change_trigger_state
 
 #end class AggregatedTriggerFrame
@@ -238,7 +238,7 @@ class TriggerWindow(object):
     def _action_selected(self, event=None):
         """Store the combobox option selected by the user"""
         self.action = self.onActionCombobox.get()
-        logging.debug('\nTrigger action selected: "on %s"' % self.action)
+        logging.debug(str.format('\nTrigger action selected: "on %s"' % self.action))
     #end _action_selected
 
 
