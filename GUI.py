@@ -27,6 +27,7 @@ class GUI(object):
         print("Building GUI...")
         self.debugging = debug_mode
 
+        #TODO: Look into changing this to not need the dictionary
         self.missionList = []
         self.missionNameToObjectDict = {}
         self.missionNames = []
