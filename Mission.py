@@ -71,9 +71,9 @@ class Mission(object):
 
     def parse_mission(self):
         """This method parses the mission data(stored in components), formats it, and stores it in missionLines"""
-        logging.debug("Parsing mission...", end="\t\t\t")
+        logging.debug(str.format("Parsing mission...", end="\t\t\t"))
         self.missionLines = []          # empty the default values
-        self.add_line("mission \"%s\"" % self.missionName)
+        self.add_line(str.format("mission \"%s\"" % self.missionName))
 
         # mission display name
         if self.components.missionDisplayName is not None:
@@ -251,7 +251,7 @@ class Mission(object):
                         elif condition.conditionType == 2:
                             self.add_line("\t\t%s \"%s\"" % (condition.condition[0], condition.condition[1]))
                         else:
-                            logging.debug("Data corrupted!")
+                            logging.error("Data corrupted!")
                         # end if/else
                     # end if
                 # end for
