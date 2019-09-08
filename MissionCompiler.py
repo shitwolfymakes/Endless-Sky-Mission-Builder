@@ -56,7 +56,7 @@ class MissionCompiler(object):
             logging.debug("\tFound deadline")
             self.mission.deadline.isDeadline = True
             if self.esmb.deadlineComponent.listEntryStates[1].get():
-                logging.debug("\t\tFound deadline days:" % self.esmb.deadlineComponent.listEntryData[0].get())
+                logging.debug("\t\tFound deadline days: %s" % self.esmb.deadlineComponent.listEntryData[0].get())
                 self.mission.deadline.deadline[0] = self.esmb.deadlineComponent.listEntryData[0].get()
                 if self.esmb.deadlineComponent.listEntryStates[2].get():
                     logging.debug("\t\tFound deadline message: %s" % self.esmb.deadlineComponent.listEntryData[1].get())
