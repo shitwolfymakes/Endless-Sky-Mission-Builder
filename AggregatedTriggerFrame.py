@@ -337,6 +337,7 @@ class TriggerWindow(object):
 
         # action
         if self.trigger.triggerType is not None:
+            self.action = self.trigger.triggerType
             index = self.actionsList.index(self.trigger.triggerType)
             self.onActionCombobox.current(index)
         #end if
