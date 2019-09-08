@@ -44,11 +44,11 @@ def open_file(app):
     app.missionList             = []
     app.missionNameToObjectDict = {}
 
-    logging.debug("\nSelecting mission file...")
+    logging.debug("Selecting mission file...")
     f = filedialog.askopenfile()
     if f is None:  # askopenasfile return `None` if dialog closed with "cancel".
         return
-    logging.debug("Opening file: %s\n" % f.name)
+    logging.debug("Opening file: %s" % f.name)
 
     with open(f.name) as missionfile:
         mission_lines = missionfile.readlines()
@@ -100,13 +100,12 @@ def open_file(app):
         # end if/else
     # end for
 
-    logging.debug("\nMissions loaded:")
+    logging.debug("\t\tMissions loaded:")
     for mission in app.missionList:
-        logging.debug("\t%s" % mission.missionName)
+        logging.debug("\t\t%s" % mission.missionName)
         #mission.printMission()
     # end for
 
-    # close the file
     missionfile.close()
 
     parser = MissionFileParser(app)
@@ -125,7 +124,6 @@ def print_mission_file(mission_file):
     """
     for line in mission_file:
         logging.debug(line, end="")
-    logging.debug()
 #end print_mission_file
 
 
@@ -136,7 +134,7 @@ def save_file(app):
     :param app: The instance of ESMB
     """
     #TODO: add preamble comments
-    logging.debug("\nSaving selected file...")
+    logging.debug("Saving selected file...")
     compile_mission(app)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
@@ -157,7 +155,7 @@ def new_mission(app):
 
     :param app: The instance of ESMB
     """
-    logging.debug("\nCreating new mission...")
+    logging.debug("Creating new mission...")
     PopupWindow(app, app.gui, "Enter new mission name:")
 # end newFile
 
