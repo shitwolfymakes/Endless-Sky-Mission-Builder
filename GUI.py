@@ -26,6 +26,7 @@ class GUI(object):
         self.debugging = debug_mode
 
         #TODO: Look into changing this to not need the dictionary
+        #TODO: Make missionList an instance variable of ESMB
         self.missionList = []
         self.missionNameToObjectDict = {}
         self.missionNames = []
