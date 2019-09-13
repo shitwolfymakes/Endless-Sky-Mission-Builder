@@ -267,8 +267,7 @@ class GUI(object):
         # Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
         self.missionTextBox.pack(expand=1, fill='both')
-        welcome_message = "\n"
-        welcome_message += "\t\t\tWelcome to Endless Sky Mission Builder!\n"
+        welcome_message = "\n\t\t\tWelcome to Endless Sky Mission Builder!\n"
         welcome_message += "\n\t - Click \"New Mission\" to get started\n"
         welcome_message += "\n\t - Click \"Save Mission File\" to save all the missions to a text file\n"
         welcome_message += "\n\t - Click \"Open Mission File\" to open a mission file for editing\n"
