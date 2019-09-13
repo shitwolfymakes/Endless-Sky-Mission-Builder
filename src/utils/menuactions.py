@@ -18,10 +18,10 @@ import webbrowser
 
 from tkinter import filedialog
 
-from src.Mission import *
-from src.MissionCompiler import MissionCompiler
-from src.MissionFileParser import MissionFileParser
-from src.PopupWindow import PopupWindow
+from src.model.Mission import *
+from src.model.MissionCompiler import MissionCompiler
+from src.model.MissionFileParser import MissionFileParser
+from src.esmbwidgets.PopupWindow import PopupWindow
 
 
 def open_file(app):

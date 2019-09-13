@@ -12,10 +12,10 @@
 
 from ttkthemes import ThemedTk
 
-from src.menuactions import *
-from src.guiutils import *
-from src.ScrollingCenterFrame import ScrollingCenterFrame
-from src.AggregatedTriggerFrame import AggregatedTriggerFrame
+from src.utils.menuactions import *
+from src.gui.guiutils import *
+from src.esmbwidgets.ScrollingCenterFrame import ScrollingCenterFrame
+from src.esmbwidgets.AggregatedTriggerFrame import AggregatedTriggerFrame
 
 
 class GUI(object):

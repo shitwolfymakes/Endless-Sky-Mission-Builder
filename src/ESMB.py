@@ -19,7 +19,7 @@ My Github: https://github.com/shitwolfymakes
 Endless Sky Github: https://github.com/endless-sky/endless-sky
 """
 
-from src.GUI import *
+from src.gui.GUI import *
 
 
 class ESMB(object):
