@@ -12,10 +12,10 @@
 
 from ttkthemes import ThemedTk
 
-from src.utils.menuactions import *
 from src.gui.guiutils import *
 from src.esmbwidgets.ScrollingCenterFrame import ScrollingCenterFrame
 from src.esmbwidgets.AggregatedTriggerFrame import AggregatedTriggerFrame
+import src.utils as utils
 
 
 class GUI(object):
@@ -174,19 +174,19 @@ class GUI(object):
             self.missionComboBox.current(0)
 
         # add function buttons
-        new_mission_button = ttk.Button(self.optionFrame, text="New Mission", command=lambda: new_mission(self))
+        new_mission_button = ttk.Button(self.optionFrame, text="New Mission", command=partial(utils.new_mission, self))
         new_mission_button.pack(fill='x')
 
-        save_mission_file_button = ttk.Button(self.optionFrame, text="Save Mission File", command=lambda: save_file(self))
+        save_mission_file_button = ttk.Button(self.optionFrame, text="Save Mission File", command=partial(utils.save_file, self))
         save_mission_file_button.pack(fill='x')
 
-        open_mission_file_button = ttk.Button(self.optionFrame, text="Open Mission File", command=lambda: open_file(self))
+        open_mission_file_button = ttk.Button(self.optionFrame, text="Open Mission File", command=partial(utils.open_file, self))
         open_mission_file_button.pack(fill='x')
 
-        compile_mission_file_button = ttk.Button(self.optionFrame, text="Compile Mission", command=lambda: compile_mission(self))
+        compile_mission_file_button = ttk.Button(self.optionFrame, text="Compile Mission", command=partial(utils.compile_mission, self))
         compile_mission_file_button.pack(fill='x')
 
-        help_button = ttk.Button(self.optionFrame, text="Help", command=help_user)
+        help_button = ttk.Button(self.optionFrame, text="Help", command=partial(utils.help_user))
         help_button.pack(fill='x')
 
         #TODO: Add functionality to change missionName and delete mission. Also, update button grouping to reflect
