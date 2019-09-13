@@ -259,12 +259,10 @@ class GUI(object):
         """Add widgets to the missionFrame"""
         logging.debug("\tBuilding missionFrame...")
 
-        #Display a default mission template on launch
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
         mf_title = ttk.Label(self.missionFrame, text="Mission Text")
         mf_title.pack()
 
-        # Populate the Text with a mission template
         self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
         self.missionTextBox.pack(expand=1, fill='both')
         welcome_message = "\n\t\t\tWelcome to Endless Sky Mission Builder!\n"
