@@ -19,6 +19,21 @@ from functools import partial
 from src.model.Mission import *
 
 
+def add_mission(app, new_mission_name):
+    """
+    Helper method that creates a new mission, then updates the data model and GUI
+
+    :param app: The ESMB object
+    :param new_mission_name: A string containing the name of the new mission
+    """
+    logging.debug("Adding mission: \"%s\"..." % new_mission_name)
+
+    mission = Mission(new_mission_name, default=True)
+    app.missionList.append(mission)
+    app.missionNameToObjectDict.update({mission.missionName: mission})
+    app.activeMission = mission
+    app.update_option_frame()
+# end add_mission
 
 
 def build_mand_opt_frame(parent, sub_component_name, num_mandatory, num_optionals, list_default_entry_data):

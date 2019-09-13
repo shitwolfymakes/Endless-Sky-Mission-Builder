@@ -7,7 +7,7 @@ Provides the GUI used by ESMB
 
 from .GUI import GUI
 
-from src.utils.newmission import add_mission
+from .guiutils import add_mission
 from .guiutils import build_mand_opt_frame
 from .guiutils import build_component_frame
 from .guiutils import build_combo_component_frame
