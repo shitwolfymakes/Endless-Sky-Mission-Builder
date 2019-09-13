@@ -102,34 +102,6 @@ class GUI(object):
         self.gui.mainloop()
     #end init
 
-    # This may be used later, after shortcuts are introduced
-    '''
-    def buildMenu(self, window):
-        #TODO: IMPLEMENT THIS
-        # creating a menu instance
-        menu = Menu()
-        window.config(menu=menu)
-
-        # create the file object
-        file = Menu(menu)
-        edit = Menu(menu)
-
-        # adds a command to the menu option, names it, and set the command to run
-        file.add_command(label="New", command=lambda: newFile(self))
-        file.add_command(label="Open", command=lambda: open_file(self))
-        file.add_command(label="Save", command=lambda: save_file(self))
-        file.add_command(label="Exit", command=exit)
-
-        # added "File" to our menu
-        menu.add_cascade(label="File", menu=file)
-
-        # adds a command to the menu option, names it, and set the command to run
-        edit.add_command(label="Undo", command=lambda: undoAction(self))
-
-        # added "Edit" to our menu
-        menu.add_cascade(label="Edit", menu=edit)
-    #end buildMenu
-    '''
 
     def build_main_view(self, window):
         """
