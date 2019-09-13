@@ -1,4 +1,4 @@
-""" menuactions.py
+"""
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -8,20 +8,14 @@
 # Endless Sky Mission Builder is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-This file contains the code for each menu action(open, save, undo, etc.)
 """
 
+import logging
 import re
 import shlex
-import webbrowser
-
 from tkinter import filedialog
 
-from src.model.Mission import *
-from src.model.MissionCompiler import MissionCompiler
-from src.model.MissionFileParser import MissionFileParser
-from src.esmbwidgets.PopupWindow import PopupWindow
+from src.model import Mission, MissionFileParser
 
 
 def open_file(app):
@@ -113,7 +107,7 @@ def open_file(app):
 
     app.activeMission = app.missionList[0]
     app.update_option_frame()
-# end open_file
+#end open_file
 
 
 def print_mission_file(mission_file):
@@ -125,56 +119,3 @@ def print_mission_file(mission_file):
     for line in mission_file:
         logging.debug(line, end="")
 #end print_mission_file
-
-
-def save_file(app):
-    """
-    This method saves the data to a mission file
-
-    :param app: The instance of ESMB
-    """
-    #TODO: add preamble comments
-    logging.debug("Saving selected file...")
-    compile_mission(app)
-    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
-    if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-        return
-    for mission in app.missionList:
-        for line in mission.missionLines:
-            f.write(line)
-        f.write("\n\n\n")       # add whitespace between missions, per the Creating Missions guidelines
-    f.close()
-
-    logging.debug("Done.")
-# end save_file
-
-
-def new_mission(app):
-    """
-    Prompt the user for the name of a new mission
-
-    :param app: The instance of ESMB
-    """
-    logging.debug("Creating new mission...")
-    PopupWindow(app, app.gui, "Enter new mission name:")
-# end newFile
-
-
-def compile_mission(app):
-    """
-    Store the active working data to the data model.
-    NOTE: This will not save any data to a file
-
-    :param app: The instance of ESMB
-    """
-    compiler = MissionCompiler(app)
-    compiler.run()
-    app.update_mission_frame()
-# end compile_mission
-
-
-def help_user():
-    """Open the Creating Mission documentation for Endless Sky"""
-    #TODO: Replace this with a link to ESMB user documentation once it's completed
-    webbrowser.open_new(r"https://github.com/endless-sky/endless-sky/wiki/CreatingMissions")
-#end help_user
