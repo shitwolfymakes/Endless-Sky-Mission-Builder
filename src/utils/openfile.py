@@ -1,4 +1,4 @@
-"""
+""" openfile.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
