@@ -17,4 +17,3 @@ from .AggregatedTriggerFrame import TriggerConditionWindow
 
 from .PopupWindow import PopupWindow
 from .ScrollingCenterFrame import ScrollingCenterFrame
-from .TypeSelectorWindow import TypeSelectorWindow
