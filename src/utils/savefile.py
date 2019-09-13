@@ -22,7 +22,10 @@ def save_file(app):
 
     :param app: The instance of ESMB
     """
-    #TODO: add preamble comments
+    #TODO: Expand this to save every part of the mission file:
+    #   - Comments/Copyright
+    #   - Mission
+    #   - Events
     logging.debug("Saving selected file...")
     compile_mission(app)
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
