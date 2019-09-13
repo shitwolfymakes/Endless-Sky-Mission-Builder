@@ -83,7 +83,6 @@ class GUI(object):
         self.stopoverComponent      = None
         self.sourceComponent        = None
         self.destinationComponent   = None
-
         # Triggers
         self.triggersFrame = None
         self.activeTrigger = None
@@ -91,14 +90,12 @@ class GUI(object):
         # declare missionFrame components
         self.missionTextBox = None
 
-        # Build the different parts of the main window
-        #self.buildMenu(self.gui)
         self.build_main_view(self.gui)
 
         self.activeMission = None
         if self.debugging:
             self.activeMission = self.missionList[0]
-        # Run the program
+
         self.gui.mainloop()
     #end init
 
@@ -137,7 +134,6 @@ class GUI(object):
         of_title = ttk.Label(self.optionFrame, text="Mission")
         of_title.pack()
 
-        # declare the combobox here, fill with missionNames
         self.missionComboBox = ttk.Combobox(self.optionFrame, state="readonly", values=self.missionNames)
         self.missionComboBox.bind("<<ComboboxSelected>>", self.mission_selected)
         self.missionComboBox.pack()
