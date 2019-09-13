@@ -10,7 +10,7 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-from guiutils import *
+from src.guiutils import *
 
 
 class AggregatedTriggerFrame(ttk.Frame):

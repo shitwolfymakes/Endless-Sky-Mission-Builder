@@ -12,7 +12,7 @@
 """
 
 from tkinter import Toplevel, ttk
-from guiutils import add_mission
+from src.guiutils import add_mission
 
 
 class PopupWindow(object):

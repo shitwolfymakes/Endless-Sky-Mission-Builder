@@ -16,7 +16,7 @@ from tkinter import *
 from tkinter import ttk
 from functools import partial
 
-from Mission import *
+from src.Mission import *
 
 
 def add_mission(app, new_mission_name):

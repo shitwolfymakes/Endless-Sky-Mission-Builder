@@ -12,7 +12,7 @@
 
 import logging
 
-import MissionComponents
+from src import MissionComponents
 
 
 class Mission(object):
