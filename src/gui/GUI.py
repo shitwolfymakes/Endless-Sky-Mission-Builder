@@ -283,19 +283,15 @@ class GUI(object):
         """Update optionFrame to use the most recent data"""
         logging.debug("Updating optionFrame...")
 
-        ### Start updating combobox
         ml = self.missionList
         self.missionNames = []
         for m in ml:
             self.missionNames.append(m.missionName)
         logging.debug("\tNew mission options: %s" % str(self.missionNames))
 
-        # update options in the combobox
         self.missionComboBox['values'] = self.missionNames
         self.missionComboBox.current(0)
-        ### Finish updating combobox
 
-        # update the other two frames to reflect the current mission
         self.update_center_frame()
         self.update_mission_frame()
     #end update_option_frame
