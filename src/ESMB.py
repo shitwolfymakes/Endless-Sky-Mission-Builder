@@ -22,6 +22,7 @@ Endless Sky Github: https://github.com/endless-sky/endless-sky
 from src.gui.GUI import *
 
 
+#TODO: Have ESMB hold the missionList instead of GUI
 class ESMB(object):
     """The application object"""
 
