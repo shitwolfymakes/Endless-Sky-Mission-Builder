@@ -1,4 +1,4 @@
-""" NewMissionPopup.pyp.py
+""" NewMissionPopup.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -10,8 +10,10 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
+import logging
 from tkinter import ttk, Toplevel
-from src.gui.guiutils import add_mission
+
+from src.model import Mission
 
 
 class NewMissionPopup(object):
@@ -35,9 +37,20 @@ class NewMissionPopup(object):
     def _cleanup(self):
         """Clean up the window we created"""
         name = self.e.get()
-        add_mission(self.app, name)
+        self._add_to_mission_list(self.app, name)
         self.top.grab_release()         # HAVE TO RELEASE
         self.top.destroy()
     #end _cleanup
 
-#end class popupWindow
+    @staticmethod
+    def _add_to_mission_list(app, new_mission_name):
+        logging.debug("Adding mission: \"%s\"..." % new_mission_name)
+
+        mission = Mission(new_mission_name, default=True)
+        app.missionList.append(mission)
+        app.missionNameToObjectDict.update({mission.missionName: mission})
+        app.activeMission = mission
+        app.missionComboBox.current(len(app.missionComboBox['values'])-1)
+        app.update_option_frame()
+    # end add_mission
+#end class NewMissionPopup
