@@ -11,8 +11,7 @@ from .AggregatedTriggerFrame import TriggerWindow
 from .AggregatedTriggerFrame import AggregatedLogFrame
 from .AggregatedTriggerFrame import LogFrame
 from .AggregatedTriggerFrame import LogWindow
-from .AggregatedTriggerFrame import AggregatedTriggerConditionsFrame
-
+from src.widgets.AggregatedTriggerConditionFrame import AggregatedTriggerConditionFrame
 
 from .ComponentMandOptFrame import ComponentMandOptFrame
 from .ComboComponentFrame import ComboComponentFrame
