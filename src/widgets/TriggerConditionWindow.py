@@ -146,3 +146,4 @@ class TriggerConditionWindow(object):
         """Store the combobox option selected by the user"""
         self.selectedOption = self.optionsCombo.get()
     #end _combo_callback
+#end class TriggerConditionWindow
