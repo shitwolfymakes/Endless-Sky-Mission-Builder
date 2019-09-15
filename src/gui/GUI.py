@@ -12,6 +12,7 @@
 
 from ttkthemes import ThemedTk
 
+from src.esmbwidgets import ComponentMandOptFrame
 from src.gui.guiutils import *
 from src.esmbwidgets.ScrollingCenterFrame import ScrollingCenterFrame
 from src.esmbwidgets.AggregatedTriggerFrame import AggregatedTriggerFrame
@@ -170,39 +171,39 @@ class GUI(object):
         cf = self.centerFrame.inner
 
         # Display name
-        self.displayNameComponent = build_component_frame(cf, "Mission Display Name", 1, 0, ["<text>"])
+        self.displayNameComponent = ComponentMandOptFrame(cf, "Mission Display Name", 1, 0, ["<text>"])
         self.displayNameComponent.grid(row=0, column=0, sticky="ew")
 
         # Description
-        self.descriptionComponent = build_component_frame(cf, "Description", 1, 0, ["<description>"])
+        self.descriptionComponent = ComponentMandOptFrame(cf, "Description", 1, 0, ["<description>"])
         self.descriptionComponent.grid(row=1, column=0, sticky="ew")
 
         # isBlocked
-        self.blockedComponent = build_component_frame(cf, "Blocked", 1, 0, ["<message>"])
+        self.blockedComponent = ComponentMandOptFrame(cf, "Blocked", 1, 0, ["<message>"])
         self.blockedComponent.grid(row=2, column=0, sticky="ew")
 
         # Deadline
-        self.deadlineComponent = build_component_frame(cf, "Deadline", 0, 2, ["[<days#>]", "[<multiplier#>]"])
+        self.deadlineComponent = ComponentMandOptFrame(cf, "Deadline", 0, 2, ["[<days#>]", "[<multiplier#>]"])
         self.deadlineComponent.grid(row=3, column=0, sticky="ew")
 
         # Cargo
-        self.cargoComponent = build_component_frame(cf, "Cargo", 2, 2, ["(random | <name>)", "<number#>", "[<number#>]", "[<probability#>]"])
+        self.cargoComponent = ComponentMandOptFrame(cf, "Cargo", 2, 2, ["(random | <name>)", "<number#>", "[<number#>]", "[<probability#>]"])
         self.cargoComponent.grid(row=4, column=0, sticky="ew")
 
         # Passengers
-        self.passengersComponent = build_component_frame(cf, "Passengers", 1, 2, ["<number#>", "[<number#>]", "[<probability#>]"])
+        self.passengersComponent = ComponentMandOptFrame(cf, "Passengers", 1, 2, ["<number#>", "[<number#>]", "[<probability#>]"])
         self.passengersComponent.grid(row=5, column=0, sticky="ew")
 
         # Illegal
-        self.illegalComponent = build_component_frame(cf, "Illegal", 1, 1, ["<fine#>", "[<message>]"])
+        self.illegalComponent = ComponentMandOptFrame(cf, "Illegal", 1, 1, ["<fine#>", "[<message>]"])
         self.illegalComponent.grid(row=6, column=0, sticky="ew")
 
         # Stealth
-        self.stealthComponent = build_component_frame(cf, "Stealth", 0, 0, [])
+        self.stealthComponent = ComponentMandOptFrame(cf, "Stealth", 0, 0, [])
         self.stealthComponent.grid(row=7, column=0, sticky="ew")
 
         # Invisible
-        self.invisibleComponent = build_component_frame(cf, "Invisible", 0, 0, [])
+        self.invisibleComponent = ComponentMandOptFrame(cf, "Invisible", 0, 0, [])
         self.invisibleComponent.grid(row=8, column=0, sticky="ew")
 
         # priorityLevel
@@ -214,31 +215,31 @@ class GUI(object):
         self.whereShownComponent.grid(row=10, column=0, sticky="ew")
 
         # Repeat
-        self.repeatComponent = build_component_frame(cf, "Repeat", 0, 1, ["[<times#>]"])
+        self.repeatComponent = ComponentMandOptFrame(cf, "Repeat", 0, 1, ["[<times#>]"])
         self.repeatComponent.grid(row=11, column=0, sticky="ew")
 
         # Clearance
-        self.clearanceComponent = build_component_frame(cf, "Clearance", 0, 1, ["[<message>]"])
+        self.clearanceComponent = ComponentMandOptFrame(cf, "Clearance", 0, 1, ["[<message>]"])
         self.clearanceComponent.grid(row=12, column=0, sticky="ew")
 
         # Infiltrating
-        self.infiltratingComponent = build_component_frame(cf, "Infiltrating", 0, 0, [])
+        self.infiltratingComponent = ComponentMandOptFrame(cf, "Infiltrating", 0, 0, [])
         self.infiltratingComponent.grid(row=13, column=0, sticky="ew")
 
         # Waypoint
-        self.waypointComponent = build_component_frame(cf, "Waypoint", 1, 0, ["[<system>]"])
+        self.waypointComponent = ComponentMandOptFrame(cf, "Waypoint", 1, 0, ["[<system>]"])
         self.waypointComponent.grid(row=14, column=0, sticky="ew")
 
         # Stopover
-        self.stopoverComponent = build_component_frame(cf, "Stopover", 1, 0, ["[<planet>]"])
+        self.stopoverComponent = ComponentMandOptFrame(cf, "Stopover", 1, 0, ["[<planet>]"])
         self.stopoverComponent.grid(row=15, column=0, sticky="ew")
 
         # Source
-        self.sourceComponent = build_component_frame(cf, "Source", 1, 0, ["[<planet>]"])
+        self.sourceComponent = ComponentMandOptFrame(cf, "Source", 1, 0, ["[<planet>]"])
         self.sourceComponent.grid(row=16, column=0, sticky="ew")
 
         # Destination
-        self.destinationComponent = build_component_frame(cf, "Destination", 1, 0, ["[<planet>]"])
+        self.destinationComponent = ComponentMandOptFrame(cf, "Destination", 1, 0, ["[<planet>]"])
         self.destinationComponent.grid(row=17, column=0, sticky="ew")
 
         # triggers
