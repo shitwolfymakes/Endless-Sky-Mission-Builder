@@ -12,7 +12,7 @@
 
 import src.widgets as widgets
 from src.gui.guiutils import *
-from src.widgets import AggregatedTriggerConditionFrame, LogWindow
+from src.widgets import AggregatedTriggerConditionFrame, LogWindow, LogFrame
 
 
 class AggregatedTriggerFrame(ttk.Frame):
@@ -537,37 +537,3 @@ class AggregatedLogFrame(ttk.Frame):
 
 #end class AggregatedLogFrame
 
-
-class LogFrame(object):
-    """This class extends ttk.Frame to create a custom GUI widget"""
-
-    def __init__(self, master, trigger, name, populating=False):
-        self.log = None
-        if not populating:
-            self.log = trigger.add_log()
-        self.master = master
-        self.trigger = trigger
-
-        self.frame = ttk.Frame(master.inner)
-        self.frame.pack(expand=True, fill="x")
-        self.frame.grid_columnconfigure(0, weight=1)
-
-        label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
-
-        self.master.logFrameList.append(self)
-
-        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_log, self))
-        edit_button.grid(row=0, column=1)
-
-        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_log, self))
-        delete_button.grid(row=0, column=2)
-    #end init
-
-
-    def cleanup(self):
-        """Clean up whatever popups we've created"""
-        self.master.delete_log(self)
-    #end _cleanup
-
-#end class LogFrame
