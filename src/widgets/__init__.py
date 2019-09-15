@@ -13,10 +13,10 @@ from .AggregatedTriggerFrame import LogFrame
 from .AggregatedTriggerFrame import LogWindow
 from .AggregatedTriggerFrame import AggregatedTriggerConditionsFrame
 from .AggregatedTriggerFrame import TriggerConditionFrame
-from .AggregatedTriggerFrame import TriggerConditionWindow
 
-from .PopupWindow import PopupWindow
-from .ScrollingCenterFrame import ScrollingCenterFrame
-from .TypeSelectorWindow import TypeSelectorWindow
 from .ComponentMandOptFrame import ComponentMandOptFrame
 from .ComboComponentFrame import ComboComponentFrame
+from .PopupWindow import PopupWindow
+from .ScrollingCenterFrame import ScrollingCenterFrame
+from .TriggerConditionWindow import TriggerConditionWindow
+from .TypeSelectorWindow import TypeSelectorWindow
