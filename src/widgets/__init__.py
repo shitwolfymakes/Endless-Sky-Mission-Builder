@@ -12,7 +12,7 @@ from .ComboComponentFrame import ComboComponentFrame
 from .ComponentMandOptFrame import ComponentMandOptFrame
 from .LogFrame import LogFrame
 from .LogWindow import LogWindow
-from .PopupWindow import PopupWindow
+from .NewMissionPopup import NewMissionPopup
 from .ScrollingCenterFrame import ScrollingCenterFrame
 from .TriggerConditionWindow import TriggerConditionWindow
 from .TriggerConditionFrame import TriggerConditionFrame

@@ -12,7 +12,7 @@
 
 import logging
 
-from src.widgets.PopupWindow import PopupWindow
+from src.widgets.NewMissionPopup import NewMissionPopup
 
 
 def new_mission(app):
@@ -22,5 +22,5 @@ def new_mission(app):
     :param app: The instance of ESMB
     """
     logging.debug("Creating new mission...")
-    PopupWindow(app, app.gui, "Enter new mission name:")
+    NewMissionPopup(app, app.gui, "Enter new mission name:")
 #end new_mission

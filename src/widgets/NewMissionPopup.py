@@ -1,4 +1,4 @@
-""" PopupWindow.py
+""" NewMissionPopup.pyp.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -14,18 +14,15 @@ from tkinter import ttk, Toplevel
 from src.gui.guiutils import add_mission
 
 
-class PopupWindow(object):
-    """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
+class NewMissionPopup(object):
+    """This class creates a custom pop-up window for use when creating a new Mission object"""
 
-    #TODO: Refactor to pass "New Mission as a parameter"
-    #TODO: Refactor to pass "add_mission(self.app, name)"
     def __init__(self, app, master, text):
         self.app = app
         self.top = Toplevel(master)
         self.top.title("New Mission")
         self.top.grab_set()             # freezes the app until the user enters or cancels
 
-        # build the widgets
         self.label = ttk.Label(self.top, text=text, background='white')
         self.label.pack()
         self.e = ttk.Entry(self.top)
