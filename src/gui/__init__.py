@@ -14,4 +14,3 @@ from .guiutils import build_combo_component_frame
 from .guiutils import _SubComponentMandOptFrame
 from .guiutils import _ComponentMandOptFrame
 from .guiutils import _ComboComponentFrame
-from .guiutils import TypeSelectorWindow
