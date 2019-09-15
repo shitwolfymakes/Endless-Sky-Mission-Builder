@@ -1,5 +1,5 @@
 """
-esmbwidgets
+widgets
 ===========
 
 Provides custom widgets to encapsulate complex, common parts of ESMB's gui

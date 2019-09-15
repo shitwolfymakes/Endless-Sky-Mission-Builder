@@ -12,7 +12,7 @@
 
 import logging
 
-from src.esmbwidgets.PopupWindow import PopupWindow
+from src.widgets.PopupWindow import PopupWindow
 
 
 def new_mission(app):

@@ -13,7 +13,7 @@
 from ttkthemes import ThemedTk
 
 from src.gui.guiutils import *
-from src.esmbwidgets import *
+from src.widgets import *
 import src.utils as utils
 
 

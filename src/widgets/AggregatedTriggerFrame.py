@@ -9,7 +9,8 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
-from . import TypeSelectorWindow
+
+from src.widgets import TypeSelectorWindow
 from src.gui.guiutils import *
 
 
