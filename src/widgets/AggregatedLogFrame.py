@@ -15,7 +15,7 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 
-from src.widgets import LogFrame, TypeSelectorWindow, LogWindow
+import src.widgets as widgets
 
 
 class AggregatedLogFrame(ttk.Frame):
@@ -50,8 +50,8 @@ class AggregatedLogFrame(ttk.Frame):
         """
         logging.debug("Adding Trigger...")
 
-        lf = LogFrame(self, self.trigger, "log")
-        TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
+        lf = widgets.LogFrame(self, self.trigger, "log")
+        widgets.TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
         logging.debug("Log format type selected: %s" % lf.log.formatType)
         if lf.log.formatType == "cancelled":
             lf.cleanup()
@@ -74,7 +74,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log_frame: The LogFrame containing the log to be edited
         """
         logging.debug("Editing %s..." % str(log_frame.log))
-        LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
+        widgets.LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
     #end edit_log
 
 
@@ -101,7 +101,7 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log: the log containing the data to be populated
         """
-        lf = LogFrame(self, self.trigger, "log", populating=True)
+        lf = widgets.LogFrame(self, self.trigger, "log", populating=True)
         lf.log = log
 
         state = BooleanVar()

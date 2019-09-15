@@ -10,7 +10,11 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-from src.gui.guiutils import *
+import logging
+from functools import partial
+from tkinter import *
+from tkinter import ttk
+
 import src.widgets as widgets
 
 

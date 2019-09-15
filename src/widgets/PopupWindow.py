@@ -10,7 +10,7 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-from tkinter import Toplevel, ttk
+from tkinter import ttk, Toplevel
 from src.gui.guiutils import add_mission
 
 
