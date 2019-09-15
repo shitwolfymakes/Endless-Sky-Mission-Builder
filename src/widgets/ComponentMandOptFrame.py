@@ -80,7 +80,7 @@ class ComponentMandOptFrame(ttk.Frame):
             logging.info("\t\t\tNo mandatory fields")
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[0].configure(command=partial(self.cb_value_changed,
                                                                self.listEntryStates[0],
                                                                [self.componentName]))
             self.listCheckbuttons[0].grid(row=0, column=1, sticky="e")
@@ -97,7 +97,7 @@ class ComponentMandOptFrame(ttk.Frame):
             self.listEntries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[0]))
-            self.listCheckbuttons[0].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[0].configure(command=partial(self.cb_value_changed,
                                                                self.listEntryStates[0],
                                                                [self.listEntries[0]]))
             self.listCheckbuttons[0].grid(row=0, column=1, sticky="e")
@@ -130,7 +130,7 @@ class ComponentMandOptFrame(ttk.Frame):
                 self.rowNum += 1
             # end for
 
-            self.listCheckbuttons[0].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[0].configure(command=partial(self.cb_value_changed,
                                                                self.listEntryStates[0],
                                                                self.listEntries[:self.numMandatory]))
         # end if/else
@@ -147,7 +147,7 @@ class ComponentMandOptFrame(ttk.Frame):
             # We have to use functools.partial here because lambda can't be used
             # inside a loop(the bound lambda will use the last assigned values)
             self.listCheckbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.listEntryStates[-1]))
-            self.listCheckbuttons[-1].configure(command=partial(self._cb_value_changed,
+            self.listCheckbuttons[-1].configure(command=partial(self.cb_value_changed,
                                                                 self.listEntryStates[-1],
                                                                 [self.listEntries[-1]]))
             self.listCheckbuttons[-1].grid(row=self.rowNum, column=1, sticky="e")
@@ -158,7 +158,7 @@ class ComponentMandOptFrame(ttk.Frame):
 
 
     @staticmethod
-    def _cb_value_changed(entry_state, modified_widgets):
+    def cb_value_changed(entry_state, modified_widgets):
         """
         Set each of the modified_widgets to entry_state
 
@@ -193,10 +193,10 @@ class ComponentMandOptFrame(ttk.Frame):
             self.listEntryStates[entry_state_num].set(1)
 
         if entry_num is None:
-            self._cb_value_changed(self.listEntryStates[entry_state_num], [data])
+            self.cb_value_changed(self.listEntryStates[entry_state_num], [data])
         else:
             self.listEntryData[entry_num].set(data)
-            self._cb_value_changed(self.listEntryStates[entry_state_num], [self.listEntries[entry_num]])
+            self.cb_value_changed(self.listEntryStates[entry_state_num], [self.listEntries[entry_num]])
         #end if/else
     #end set
 
