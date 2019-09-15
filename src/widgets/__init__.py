@@ -7,7 +7,7 @@ Provides custom widgets to encapsulate complex, common parts of ESMB's gui
 
 from .AggregatedTriggerFrame import TriggerFrame
 from .AggregatedTriggerFrame import TriggerWindow
-from .AggregatedTriggerFrame import AggregatedLogFrame
+from src.widgets.AggregatedLogFrame import AggregatedLogFrame
 from src.widgets.LogFrame import LogFrame
 from src.widgets.LogWindow import LogWindow
 
