@@ -28,20 +28,10 @@ class Mission(object):
         if default is False:
             self.missionName  = mission_name
         else:
-            self._set_default_values(mission_name)
+            self.missionName = mission_name
+            self.add_line("mission \"%s\"\n" % mission_name)
         #end if/else
     #end init
-
-
-    def _set_default_values(self, mission_name):
-        """
-        Set data to default values. This method should only run when ESMB is run with the debugging flag
-
-        :param mission_name: The name of the mission
-        """
-        self.missionName = mission_name
-        self.add_line("mission \"%s\"\n" % mission_name)
-    #end _set_default_values
 
 
     def add_line(self, line):
