@@ -38,3 +38,4 @@ class TypeSelectorWindow(Toplevel):
         self.callback("cancelled")
         self.destroy()
     #end _cancelled
+#end class TypeSelectorWindow
