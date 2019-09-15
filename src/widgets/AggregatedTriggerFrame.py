@@ -11,7 +11,7 @@
 """
 
 from src.gui.guiutils import *
-from src.widgets import TriggerWindow, TriggerFrame
+import src.widgets as widgets
 
 
 class AggregatedTriggerFrame(ttk.Frame):
@@ -44,7 +44,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         """Add a trigger to the activeMission"""
         logging.debug("Adding Trigger...")
 
-        tf = TriggerFrame(self, self.app, "trigger")
+        tf = widgets.TriggerFrame(self, self.app, "trigger")
         self.edit_trigger(self.triggerFrameList[-1])
 
         state = BooleanVar()
@@ -79,7 +79,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
         logging.debug("Editing %s..." % str(trigger_frame.trigger))
-        TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
+        widgets.TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
     #end edit_trigger
 
 
@@ -89,7 +89,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger: the trigger containing the data to be populated
         """
-        tf = TriggerFrame(self, self.app, "trigger", populating=True)
+        tf = widgets.TriggerFrame(self, self.app, "trigger", populating=True)
         tf.trigger = trigger
 
         state = BooleanVar()
@@ -113,5 +113,4 @@ class AggregatedTriggerFrame(ttk.Frame):
         trigger.isActive = state.get()
         logging.debug("%s is now %s" % (str(trigger), str(trigger.isActive)))
     #def _change_trigger_state
-
 #end class AggregatedTriggerFrame
