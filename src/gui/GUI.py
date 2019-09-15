@@ -34,7 +34,7 @@ class GUI(object):
         self.missionNames = []
 
         if self.debugging:
-            self.missionList             = [Mission("Debugging", default=True)]
+            self.missionList = [Mission("Debugging", default=True)]
             self.missionNameToObjectDict = {self.missionList[0].missionName: self.missionList[0]}
             self.missionNames.append(self.missionList[0].missionName)
         #end if
@@ -58,6 +58,7 @@ class GUI(object):
         self.mfWidth = None
 
         # Declare the frames
+        # TODO: move each frame into their own custom class - 1/3 Completed
         self.optionFrame  = None
         self.centerFrame  = None
         self.missionFrame = None
