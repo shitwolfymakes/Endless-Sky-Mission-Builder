@@ -205,11 +205,11 @@ class GUI(object):
         self.invisibleComponent.grid(row=8, column=0, sticky="ew")
 
         # priorityLevel
-        self.priorityLevelComponent = build_combo_component_frame(cf, "Priority Level", ["Priority", "Minor"])
+        self.priorityLevelComponent = ComboComponentFrame(cf, "Priority Level", ["Priority", "Minor"])
         self.priorityLevelComponent.grid(row=9, column=0, sticky="ew")
 
         # whereShown
-        self.whereShownComponent = build_combo_component_frame(cf, "Where Shown", ["Job", "Landing", "Assisting", "Boarding"])
+        self.whereShownComponent = ComboComponentFrame(cf, "Where Shown", ["Job", "Landing", "Assisting", "Boarding"])
         self.whereShownComponent.grid(row=10, column=0, sticky="ew")
 
         # Repeat

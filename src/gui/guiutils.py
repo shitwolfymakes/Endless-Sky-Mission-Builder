@@ -50,19 +50,6 @@ def build_mand_opt_frame(parent, sub_component_name, num_mandatory, num_optional
 #end build_mand_opt_frame
 
 
-def build_combo_component_frame(parent, component_name, list_combobox_data):
-    """
-    This method returns a SubComponentMandOptFrame object
-
-    :param parent: The parent widget of this one
-    :param component_name: The name of the mission component
-    :param list_combobox_data: The data that the combobox will contain
-    """
-    new_frame = _ComboComponentFrame(parent, component_name, list_combobox_data)
-    return new_frame
-#end build_combo_component_frame
-
-
 class _SubComponentMandOptFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
