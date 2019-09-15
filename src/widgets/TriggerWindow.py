@@ -14,8 +14,7 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
-from src.gui import build_mand_opt_frame
-from src.widgets import AggregatedLogFrame, AggregatedTriggerConditionFrame
+import src.widgets as widgets
 
 
 class TriggerWindow(object):
@@ -57,29 +56,29 @@ class TriggerWindow(object):
         self.onActionCombobox.bind("<<ComboboxSelected>>", self._action_selected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
-        self.dialogSubComponent = build_mand_opt_frame(self.leftFrame, "dialog", 1, 0, ["<text>"])
-        self.dialogSubComponent.grid(row=1, column=0, columnspan=2, sticky="ew")
+        self.dialogComponent = widgets.ComponentMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"])
+        self.dialogComponent.grid(row=1, column=0, columnspan=2, sticky="ew")
 
-        self.outfitSubComponent = build_mand_opt_frame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
-        self.outfitSubComponent.grid(row=2, column=0, columnspan=2, sticky="ew")
+        self.outfitComponent = widgets.ComponentMandOptFrame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
+        self.outfitComponent.grid(row=2, column=0, columnspan=2, sticky="ew")
 
-        self.requireSubComponent = build_mand_opt_frame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
-        self.requireSubComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
+        self.requireComponent = widgets.ComponentMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
+        self.requireComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
-        self.paymentSubComponent = build_mand_opt_frame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"])
-        self.paymentSubComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
+        self.paymentComponent = widgets.ComponentMandOptFrame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"])
+        self.paymentComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
 
-        self.eventSubComponent = build_mand_opt_frame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
-        self.eventSubComponent.grid(row=5, column=0, columnspan=2, sticky="ew")
+        self.eventComponent = widgets.ComponentMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
+        self.eventComponent.grid(row=5, column=0, columnspan=2, sticky="ew")
 
-        self.failSubComponent = build_mand_opt_frame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
-        self.failSubComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
+        self.failComponent = widgets.ComponentMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
+        self.failComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
-        self.logsSubComponent = AggregatedLogFrame(self.app, self.leftFrame, self.trigger)
-        self.logsSubComponent.grid(row=7, column=0, columnspan=2, sticky="ew")
+        self.logsComponent = widgets.AggregatedLogFrame(self.app, self.leftFrame, self.trigger)
+        self.logsComponent.grid(row=7, column=0, columnspan=2, sticky="ew")
 
         ### BUILDING RIGHT FRAME###
-        self.triggerConditionsSubComponent = AggregatedTriggerConditionFrame(self.app, self.rightFrame, self.trigger)
+        self.triggerConditionsSubComponent = widgets.AggregatedTriggerConditionFrame(self.app, self.rightFrame, self.trigger)
         self.triggerConditionsSubComponent.grid(row=0, column=0, columnspan=2, sticky="ew")
 
         self._populate_trigger_window()
@@ -114,66 +113,66 @@ class TriggerWindow(object):
         #end if
 
         # dialog
-        if self.dialogSubComponent.listEntryStates[0].get():
-            logging.debug("\t\tDialog: %s" % self.dialogSubComponent.listEntryData[0].get())
-            self.trigger.dialog = self.dialogSubComponent.listEntryData[0].get()
+        if self.dialogComponent.listEntryStates[0].get():
+            logging.debug("\t\tDialog: %s" % self.dialogComponent.listEntryData[0].get())
+            self.trigger.dialog = self.dialogComponent.listEntryData[0].get()
         #end if
 
         # outfit
-        if self.outfitSubComponent.listEntryStates[0].get():
-            logging.debug("\t\tOutfit: %s" % self.outfitSubComponent.listEntryData[0].get())
-            self.trigger.outfit[0] = self.outfitSubComponent.listEntryData[0].get()
-            if self.outfitSubComponent.listEntryStates[1].get():
-                logging.debug("\t\t\tOutfit Optional: %s" % self.outfitSubComponent.listEntryData[1].get())
-                self.trigger.outfit[1] = self.outfitSubComponent.listEntryData[1].get()
+        if self.outfitComponent.listEntryStates[0].get():
+            logging.debug("\t\tOutfit: %s" % self.outfitComponent.listEntryData[0].get())
+            self.trigger.outfit[0] = self.outfitComponent.listEntryData[0].get()
+            if self.outfitComponent.listEntryStates[1].get():
+                logging.debug("\t\t\tOutfit Optional: %s" % self.outfitComponent.listEntryData[1].get())
+                self.trigger.outfit[1] = self.outfitComponent.listEntryData[1].get()
             #end if
         #end if
 
         # require
-        if self.requireSubComponent.listEntryStates[0].get():
-            logging.debug("\t\tRequire: %s" % self.requireSubComponent.listEntryData[0].get())
-            self.trigger.require[0] = self.requireSubComponent.listEntryData[0].get()
-            if self.requireSubComponent.listEntryStates[1].get():
-                logging.debug("\t\t\tRequire Optional: %s" % self.requireSubComponent.listEntryData[1].get())
-                self.trigger.require[1] = self.requireSubComponent.listEntryData[1].get()
+        if self.requireComponent.listEntryStates[0].get():
+            logging.debug("\t\tRequire: %s" % self.requireComponent.listEntryData[0].get())
+            self.trigger.require[0] = self.requireComponent.listEntryData[0].get()
+            if self.requireComponent.listEntryStates[1].get():
+                logging.debug("\t\t\tRequire Optional: %s" % self.requireComponent.listEntryData[1].get())
+                self.trigger.require[1] = self.requireComponent.listEntryData[1].get()
             # end if
         # end if
 
         # payment
-        if self.paymentSubComponent.listEntryStates[0].get():
-            logging.debug("\t\tPayment: %s" % self.paymentSubComponent.subComponentName)
+        if self.paymentComponent.listEntryStates[0].get():
+            logging.debug("\t\tPayment: %s" % self.paymentComponent.componentName)
             self.trigger.isPayment = True
-            if self.paymentSubComponent.listEntryStates[1].get():
-                logging.debug("\t\t\tPayment Optional 1: %s" % self.paymentSubComponent.listEntryData[0].get())
-                self.trigger.payment[0] = self.paymentSubComponent.listEntryData[0].get()
-                if self.paymentSubComponent.listEntryStates[2].get():
-                    logging.debug("\t\t\tPayment Optional 2: %s" % self.paymentSubComponent.listEntryData[1].get())
-                    self.trigger.payment[1] = self.paymentSubComponent.listEntryData[1].get()
+            if self.paymentComponent.listEntryStates[1].get():
+                logging.debug("\t\t\tPayment Optional 1: %s" % self.paymentComponent.listEntryData[0].get())
+                self.trigger.payment[0] = self.paymentComponent.listEntryData[0].get()
+                if self.paymentComponent.listEntryStates[2].get():
+                    logging.debug("\t\t\tPayment Optional 2: %s" % self.paymentComponent.listEntryData[1].get())
+                    self.trigger.payment[1] = self.paymentComponent.listEntryData[1].get()
                 #end if
             #end if
         #end if
 
         # event
-        if self.eventSubComponent.listEntryStates[0].get():
-            logging.debug("\t\tEvent: %s" % self.eventSubComponent.listEntryData[0].get())
-            self.trigger.event[0] = self.eventSubComponent.listEntryData[0].get()
-            if self.eventSubComponent.listEntryStates[1].get():
-                logging.debug("\t\t\tEvent Optional 1: %s" % self.eventSubComponent.listEntryData[1].get())
-                self.trigger.event[1] = self.eventSubComponent.listEntryData[1].get()
-                if self.eventSubComponent.listEntryStates[2].get():
-                    logging.debug("\t\t\tEvent Optional 2: %s" % self.eventSubComponent.listEntryData[2].get())
-                    self.trigger.event[2] = self.eventSubComponent.listEntryData[2].get()
+        if self.eventComponent.listEntryStates[0].get():
+            logging.debug("\t\tEvent: %s" % self.eventComponent.listEntryData[0].get())
+            self.trigger.event[0] = self.eventComponent.listEntryData[0].get()
+            if self.eventComponent.listEntryStates[1].get():
+                logging.debug("\t\t\tEvent Optional 1: %s" % self.eventComponent.listEntryData[1].get())
+                self.trigger.event[1] = self.eventComponent.listEntryData[1].get()
+                if self.eventComponent.listEntryStates[2].get():
+                    logging.debug("\t\t\tEvent Optional 2: %s" % self.eventComponent.listEntryData[2].get())
+                    self.trigger.event[2] = self.eventComponent.listEntryData[2].get()
                 # end if
             # end if
         # end if
 
         # fail
-        if self.failSubComponent.listEntryStates[0].get():
-            logging.debug("\t\tPayment: %s" % self.failSubComponent.subComponentName)
+        if self.failComponent.listEntryStates[0].get():
+            logging.debug("\t\tPayment: %s" % self.failComponent.componentName)
             self.trigger.isFail = True
-            if self.failSubComponent.listEntryStates[1].get():
-                logging.debug("\t\t\tPayment Optional 1: %s" % self.failSubComponent.listEntryData[0].get())
-                self.trigger.fail = self.failSubComponent.listEntryData[0].get()
+            if self.failComponent.listEntryStates[1].get():
+                logging.debug("\t\t\tPayment Optional 1: %s" % self.failComponent.listEntryData[0].get())
+                self.trigger.fail = self.failComponent.listEntryData[0].get()
             #end if
         #end if
 
@@ -192,15 +191,15 @@ class TriggerWindow(object):
         #end if
 
         # dialog
-        component = self.dialogSubComponent
+        component = self.dialogComponent
         if self.trigger.dialog is not None:
             component.listEntryStates[0].set(1)
-            component.cb_value_changed(self.dialogSubComponent.listEntryStates[0], [self.dialogSubComponent.listEntries[0]])
+            component.cb_value_changed(self.dialogComponent.listEntryStates[0], [self.dialogComponent.listEntries[0]])
             component.listEntryData[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
         #end if
 
         # outfit
-        component = self.outfitSubComponent
+        component = self.outfitComponent
         for i, data in enumerate(self.trigger.outfit):
             if data is not None:
                 component.listEntryStates[i].set(1)
@@ -210,7 +209,7 @@ class TriggerWindow(object):
         #end for
 
         # require
-        component = self.requireSubComponent
+        component = self.requireComponent
         for i, data in enumerate(self.trigger.require):
             if data is not None:
                 component.listEntryStates[i].set(1)
@@ -221,9 +220,9 @@ class TriggerWindow(object):
 
         # payment
         if self.trigger.isPayment:
-            component = self.paymentSubComponent
+            component = self.paymentComponent
             component.listEntryStates[0].set(1)
-            component.cb_value_changed(component.listEntryStates[0], [component.subComponentName])
+            component.cb_value_changed(component.listEntryStates[0], [component.componentName])
 
             for i, data in enumerate(self.trigger.payment):
                 if data is not None:
@@ -235,7 +234,7 @@ class TriggerWindow(object):
         #end if
 
         # event
-        component = self.eventSubComponent
+        component = self.eventComponent
         for i, data in enumerate(self.trigger.event):
             if data is not None:
                 component.listEntryStates[i].set(1)
@@ -245,10 +244,10 @@ class TriggerWindow(object):
         #end for
 
         # fail
-        component = self.failSubComponent
+        component = self.failComponent
         if self.trigger.isFail:
             component.listEntryStates[0].set(1)
-            component.cb_value_changed(component.listEntryStates[0], [component.subComponentName])
+            component.cb_value_changed(component.listEntryStates[0], [component.componentName])
 
             if self.trigger.fail is not None:
                 component.listEntryStates[1].set(1)
@@ -258,7 +257,7 @@ class TriggerWindow(object):
         #end if
 
         # Logs
-        component = self.logsSubComponent
+        component = self.logsComponent
         if self.trigger.logs:
             for log in self.trigger.logs:
                 component.populate_log(log)
