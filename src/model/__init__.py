@@ -12,3 +12,5 @@ from .Mission import Mission
 from .MissionCompiler import MissionCompiler
 from .MissionComponents import MissionComponents
 from .MissionFileParser import MissionFileParser
+
+import src.model.components

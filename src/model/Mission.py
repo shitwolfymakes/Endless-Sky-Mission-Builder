@@ -12,7 +12,7 @@
 
 import logging
 
-from src.model import MissionComponents
+import src.model as model
 
 
 class Mission(object):
@@ -21,16 +21,15 @@ class Mission(object):
     def __init__(self, mission_name, default=False):
         logging.debug("Building mission: %s" % mission_name)
 
-        self.components   = MissionComponents.MissionComponents()
+        self.components = model.MissionComponents()
         self.missionLines = []  # List of the mission text
-        self.convoList    = []  # List of lists containing one conversation section per element
+        self.convoList = []  # List of lists containing one conversation section per element
 
         if default is False:
             self.missionName  = mission_name
         else:
             self._set_default_values(mission_name)
         #end if/else
-
     #end init
 
 
@@ -296,7 +295,7 @@ class Mission(object):
 
     def add_trigger(self):
         """Add a trigger object to this mission"""
-        new_trigger = MissionComponents.Trigger()
+        new_trigger = model.components.Trigger()
         self.components.triggerList.append(new_trigger)
         return new_trigger
     #end add_trigger
@@ -320,5 +319,4 @@ class Mission(object):
             line = "\"%s\"" % line
         return line
     #end add_quotes
-
 #end class Mission
