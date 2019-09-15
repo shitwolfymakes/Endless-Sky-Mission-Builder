@@ -306,6 +306,7 @@ class Mission(object):
         :param line: The string to modify
         """
         if " " in line:
+            # if there is a space anywhere in the data piece, Endless Sky requires it to be inside quotations
             line = "\"%s\"" % line
         return line
     #end add_quotes
