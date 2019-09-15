@@ -693,7 +693,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         """Add a condition to the current trigger"""
         logging.debug("Adding TriggerCondition...")
 
-        tc = TriggerConditionFrame(self, self.trigger, "log")
+        tc = widgets.TriggerConditionFrame(self, self.trigger, "log")
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
         widgets.TypeSelectorWindow(self, self.condTypes, self._set_format_type)
 
@@ -745,7 +745,7 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
 
         :param condition: the TriggerCondition containing the data to be populated
         """
-        tc = TriggerConditionFrame(self, self.trigger, "log", populating=True)
+        tc = widgets.TriggerConditionFrame(self, self.trigger, "log", populating=True)
         tc.condition = condition
 
         state = BooleanVar()
@@ -784,40 +784,4 @@ class AggregatedTriggerConditionsFrame(ttk.Frame):
         ft = self.condTypes.index(format_type)
         self.tcFrameList[-1].condition.conditionType = ft
     #end _set_format_type
-
 #end class AggregatedTriggerConditionsFrame
-
-
-class TriggerConditionFrame(object):
-    """This class extends ttk.Frame to create a custom GUI widget"""
-
-    def __init__(self, master, trigger, name, populating=False):
-        self.condition = None
-        if not populating:
-            self.condition = trigger.add_tc()
-        self.master  = master
-        self.trigger = trigger
-
-        self.frame = ttk.Frame(master.inner)
-        self.frame.pack(expand=True, fill="x")
-        self.frame.grid_columnconfigure(0, weight=1)
-
-        label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
-
-        self.master.tcFrameList.append(self)
-
-        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_trigger_condition, self))
-        edit_button.grid(row=0, column=1)
-
-        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_trigger_condition, self))
-        delete_button.grid(row=0, column=2)
-    #end init
-
-
-    def cleanup(self):
-        """Remove this widget from the gui"""
-        self.master.delete_trigger_condition(self)
-    #end _cleanup
-
-#end class TriggerConditionFrame
