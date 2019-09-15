@@ -19,3 +19,4 @@ from .PopupWindow import PopupWindow
 from .ScrollingCenterFrame import ScrollingCenterFrame
 from .TypeSelectorWindow import TypeSelectorWindow
 from .ComponentMandOptFrame import ComponentMandOptFrame
+from .ComboComponentFrame import ComboComponentFrame
