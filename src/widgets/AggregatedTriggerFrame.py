@@ -11,7 +11,7 @@
 """
 
 from src.gui.guiutils import *
-from src.widgets import TriggerWindow
+from src.widgets import TriggerWindow, TriggerFrame
 
 
 class AggregatedTriggerFrame(ttk.Frame):
@@ -115,39 +115,3 @@ class AggregatedTriggerFrame(ttk.Frame):
     #def _change_trigger_state
 
 #end class AggregatedTriggerFrame
-
-
-class TriggerFrame(ttk.Frame):
-    """This class extends ttk.Frame to create a custom GUI widget"""
-
-    def __init__(self, master, app, name, populating=False):
-        ttk.Frame.__init__(self, master)
-        self.trigger = None
-        if not populating:
-            self.trigger = app.activeMission.add_trigger()
-        self.master  = master
-
-        self.frame = ttk.Frame(master.inner)
-        self.frame.pack(expand=True, fill="x")
-        self.frame.grid_columnconfigure(0, weight=1)
-
-        name = name.title()
-        label = ttk.Label(self.frame, text=name)
-        label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
-
-        self.master.triggerFrameList.append(self)
-
-        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_trigger, self))
-        edit_button.grid(row=0, column=1)
-
-        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_trigger, self))
-        delete_button.grid(row=0, column=2)
-    #end init
-
-    def _cleanup(self):
-        self.master.delete_trigger(self)
-    #end _cleanup
-
-#end class TriggerFrame
-
-
