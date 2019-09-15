@@ -12,10 +12,8 @@
 
 from ttkthemes import ThemedTk
 
-from src.esmbwidgets import ComponentMandOptFrame
 from src.gui.guiutils import *
-from src.esmbwidgets.ScrollingCenterFrame import ScrollingCenterFrame
-from src.esmbwidgets.AggregatedTriggerFrame import AggregatedTriggerFrame
+from src.esmbwidgets import *
 import src.utils as utils
 
 
