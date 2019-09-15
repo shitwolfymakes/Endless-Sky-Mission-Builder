@@ -288,7 +288,8 @@ class GUI(object):
         logging.debug("\tNew mission options: %s" % str(self.missionNames))
 
         self.missionComboBox['values'] = self.missionNames
-        self.missionComboBox.current(0)
+        current_mission = self.missionNames.index(self.activeMission.missionName)
+        self.missionComboBox.current(current_mission)
 
         self.update_center_frame()
         self.update_mission_frame()

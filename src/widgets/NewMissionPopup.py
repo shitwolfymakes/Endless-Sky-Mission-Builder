@@ -50,7 +50,6 @@ class NewMissionPopup(object):
         app.missionList.append(mission)
         app.missionNameToObjectDict.update({mission.missionName: mission})
         app.activeMission = mission
-        app.missionComboBox.current(len(app.missionComboBox['values'])-1)
         app.update_option_frame()
     # end add_mission
 #end class NewMissionPopup
