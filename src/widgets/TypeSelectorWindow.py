@@ -1,4 +1,5 @@
-from tkinter import Toplevel, ttk, LEFT
+from tkinter import *
+from tkinter import ttk
 
 
 class TypeSelectorWindow(Toplevel):
