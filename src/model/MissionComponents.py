@@ -21,6 +21,7 @@ class MissionComponents(object):
     """This class keeps instances of each different component in one place, for easy access"""
 
     def __init__(self):
+        #TODO: refactor to use Repeat object
         logging.debug("\tMission components initializing...")
 
         self.missionDisplayName = None          # mission <name>
