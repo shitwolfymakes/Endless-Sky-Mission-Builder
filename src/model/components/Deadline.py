@@ -26,9 +26,9 @@ class Deadline(object):
     #end init
 
 
-    def set(self, deadline):
+    def set(self, component_data):
         self.isActive = True
-        for i, data in enumerate(deadline):
+        for i, data in enumerate(component_data):
             self.deadline[i] = data
     #end set
 

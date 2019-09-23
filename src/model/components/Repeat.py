@@ -26,14 +26,14 @@ class Repeat(object):
     #end init
 
 
-    def set(self, data):
+    def set(self, component_data):
         self.isActive = True
-        self.repeat = data
+        self.repeat = component_data
     #end set
 
 
     def reset(self):
         self.isActive = False
-        self.repeat = None
+        self.repeat = [None, None]
     #end reset
 #end class Repeat
