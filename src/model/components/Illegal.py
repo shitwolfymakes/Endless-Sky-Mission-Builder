@@ -21,7 +21,20 @@ class Illegal(object):
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isIllegal = False
-        self.illegal   = [None, None]
+        self.isActive = False
+        self.illegal = [None, None]
     #end init
+
+
+    def set(self, component_data):
+        self.isActive = True
+        for i, data in enumerate(component_data):
+            self.illegal[i] = data
+    #end set
+
+
+    def reset(self):
+        self.isActive = False
+        self.illegal = [None, None]
+    #end reset
 #end class Illegal
