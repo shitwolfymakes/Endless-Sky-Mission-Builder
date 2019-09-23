@@ -31,7 +31,9 @@ class Deadline(object):
         self.deadline = data
     #end set
 
+
     def reset(self):
         self.isActive = False
         self.deadline = [None, None]
+    #end reset
 #end class Deadline
