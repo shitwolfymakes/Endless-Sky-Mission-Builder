@@ -4,41 +4,38 @@ from src.model.Mission import Mission
 
 class ParseMissionTestCase(unittest.TestCase):
     """Tests for `Mission.parse_mission`"""
-    #TODO: move the data storage to a setUp() method
 
-    def test_parse_mission(self):
-        true_output = self.add_all_data_lines()
-        model = Mission("Test Mission 0")
-        # set data in the model
-        model.components.missionDisplayName = "test"
-        model.components.description = "A test mission"
-        model.components.blocked = "Oh piss off!"
-        model.components.deadline.set([2, 1])
-        model.components.cargo.set(["food", 5, 2, 0.1])
-        model.components.passengers.set([5, 5, 0.2])
-        model.components.illegal.set([50, "Soviet citizens need no food comrade"])
-        model.components.isStealth = True
-        model.components.isInvisible = True
-        model.components.priorityLevel = "priority"
-        model.components.whereShown = "job"
-        model.components.isRepeat = True
-        model.components.repeat = 5
-        model.components.clearance.set("You're on the list")
-        model.components.isInfiltrating = True
-        model.components.waypoint = "Sol"
-        model.components.stopover.set("Delve")
-        model.components.source.set("Sol")
-        model.components.destination.set("Delve")
+    def setUp(self):
+        self.model = Mission("Test Mission 0")
+        self.model.components.missionDisplayName = "test"
+        self.model.components.description = "A test mission"
+        self.model.components.blocked = "Oh piss off!"
+        self.model.components.deadline.set([2, 1])
+        self.model.components.cargo.set(["food", 5, 2, 0.1])
+        self.model.components.passengers.set([5, 5, 0.2])
+        self.model.components.illegal.set([50, "Soviet citizens need no food comrade"])
+        self.model.components.isStealth = True
+        self.model.components.isInvisible = True
+        self.model.components.priorityLevel = "priority"
+        self.model.components.whereShown = "job"
+        self.model.components.isRepeat = True
+        self.model.components.repeat = 5
+        self.model.components.clearance.set("You're on the list")
+        self.model.components.isInfiltrating = True
+        self.model.components.waypoint = "Sol"
+        self.model.components.stopover.set("Delve")
+        self.model.components.source.set("Sol")
+        self.model.components.destination.set("Delve")
 
-        model.add_trigger()
-        trigger = model.components.triggerList[0]
+        self.model.add_trigger()
+        trigger = self.model.components.triggerList[0]
         trigger.isActive = True
         trigger.triggerType = "accept"
         trigger.outfit = ["test outfit", 1]
         trigger.require = ["Jump Drive", 1]
 
-        model.add_trigger()
-        trigger = model.components.triggerList[1]
+        self.model.add_trigger()
+        trigger = self.model.components.triggerList[1]
         trigger.isActive = True
         trigger.triggerType = "offer"
         trigger.dialog = "It is Wednesday my dudes"
@@ -61,13 +58,14 @@ class ParseMissionTestCase(unittest.TestCase):
         trigger.logs[0].set(1, ["my mama ain't a ho"])
         trigger.add_log()
         trigger.logs[1].set(3, ["People", "Yo mama", "is a ho"])
+    #end setUp
 
-        # run the method
-        model.parse_mission()
 
-        #test that it worked as expected
-        self.assertEqual(true_output, model.missionLines)
+    def test_parse_mission(self):
+        true_output = self.add_all_data_lines()
 
+        self.model.parse_mission()
+        self.assertEqual(true_output, self.model.missionLines)
     #end test_parse_mission
 
 
@@ -107,9 +105,8 @@ class ParseMissionTestCase(unittest.TestCase):
                 "\t\tlog `my mama ain't a ho`\n",
                 '\t\tlog "People" "Yo mama" `is a ho`\n']
     #end add_all_data_lines
-
-
 #end class ParseMissionTestCase
+
 
 if __name__ == "__main__":
     unittest.main()
