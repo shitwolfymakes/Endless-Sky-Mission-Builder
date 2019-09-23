@@ -34,6 +34,6 @@ class Repeat(object):
 
     def reset(self):
         self.isActive = False
-        self.repeat = [None, None]
+        self.repeat = None
     #end reset
 #end class Repeat
