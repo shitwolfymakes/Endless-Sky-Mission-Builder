@@ -21,7 +21,17 @@ class Deadline(object):
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isDeadline = False
-        self.deadline   = [None, None]
+        self.isActive = False
+        self.deadline = [None, None]
     #end init
+
+
+    def set(self, data):
+        self.isActive = True
+        self.deadline = data
+    #end set
+
+    def reset(self):
+        self.isActive = False
+        self.deadline = [None, None]
 #end class Deadline
