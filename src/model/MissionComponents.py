@@ -35,8 +35,7 @@ class MissionComponents(object):
         self.isInvisible        = False         # invisible
         self.priorityLevel      = None          # (priority | minor)
         self.whereShown         = None          # (job | landing | assisting | boarding)
-        self.isRepeat           = False
-        self.repeat             = None          # repeat [<number>]
+        self.repeat             = components.Repeat()
         self.clearance          = components.Clearance()
         self.isInfiltrating     = False         # infiltrating
         self.waypoint           = None          # waypoint <system>

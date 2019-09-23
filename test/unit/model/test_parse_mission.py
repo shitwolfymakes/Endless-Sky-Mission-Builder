@@ -18,8 +18,7 @@ class ParseMissionTestCase(unittest.TestCase):
         self.model.components.isInvisible = True
         self.model.components.priorityLevel = "priority"
         self.model.components.whereShown = "job"
-        self.model.components.isRepeat = True
-        self.model.components.repeat = 5
+        self.model.components.repeat.set(5)
         self.model.components.clearance.set("You're on the list")
         self.model.components.isInfiltrating = True
         self.model.components.waypoint = "Sol"

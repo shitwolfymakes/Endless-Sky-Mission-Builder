@@ -145,10 +145,10 @@ class Mission(object):
             self.add_line("\t%s" % self.components.whereShown)
 
         # repeat
-        if self.components.isRepeat:
+        if self.components.repeat.isActive:
             line = "\trepeat"
-            if self.components.repeat is not None:
-                line = line + " " + str(self.components.repeat)
+            if self.components.repeat.repeat is not None:
+                line = line + " " + str(self.components.repeat.repeat)
             #end if
             self.add_line(line)
         #end if
