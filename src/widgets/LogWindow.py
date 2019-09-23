@@ -19,6 +19,7 @@ class LogWindow(object):
     """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
     def __init__(self, app, master, log, format_type):
+        #TODO: replace formatType with an integer
         logging.debug("\tBuilding LogWindow...")
 
         self.app        = app
@@ -73,7 +74,7 @@ class LogWindow(object):
         """Store the data from the GUI into the associated Log object"""
         logging.debug("Storing LogWindow data...")
         self.log.clear_log()
-
+        logging.debug("format_type: %s" % self.formatType)
         if self.formatType == "<message>":
             self.log.log[0] = self.message.get()
         else:
