@@ -25,6 +25,19 @@ class Log(object):
     # end init
 
 
+    def set(self, format_type, component_data):
+        self.isActive = True
+
+        if format_type == 1:
+            self.formatType = "<message>"
+        elif format_type == 3:
+            self.formatType = "<type> <name> <message>"
+
+        for i, data in enumerate(component_data):
+            self.log[i] = data
+    #end set
+
+
     def clear_log(self):
         """Zeroes out the data in the Log"""
         self.log = [None, None, None]
