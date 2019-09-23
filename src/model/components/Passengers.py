@@ -21,7 +21,20 @@ class Passengers(object):
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isPassengers = False
-        self.passengers   = [None, None, None]
+        self.isActive = False
+        self.passengers = [None, None, None]
     #end init
+
+
+    def set(self, component_data):
+        self.isActive = True
+        for i, data in enumerate(component_data):
+            self.passengers[i] = data
+    #end set
+
+
+    def reset(self):
+        self.isActive = False
+        self.passengers = [None, None, None]
+    #end reset
 #end class Passengers
