@@ -26,19 +26,18 @@ class Destination(object):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
         self.isActive = False
-        self.destination = [None, None]
+        self.destination = None
     # end init
 
 
     def set(self, component_data):
         self.isActive = True
-        for i, data in enumerate(component_data):
-            self.destination[i] = data
+        self.destination = component_data
     #end set
 
 
     def reset(self):
         self.isActive = False
-        self.destination = [None, None]
+        self.destination = None
     #end reset
 # end class Destination
