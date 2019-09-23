@@ -25,6 +25,14 @@ class TriggerCondition(object):
     # end init
 
 
+    def set(self, condition_type, component_data):
+        self.isActive = True
+        self.conditionType = condition_type
+        for i, data in enumerate(component_data):
+            self.condition[i] = data
+    #end set
+
+
     def clear_condition(self):
         """Zeroes out the data in the TriggerCondition"""
         self.condition = [None, None, None]
