@@ -25,7 +25,20 @@ class Source(object):
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isSource = False
+        self.isActive = False
         self.source   = [None, None]
     # end init
+
+
+    def set(self, component_data):
+        self.isActive = True
+        for i, data in enumerate(component_data):
+            self.source[i] = data
+    #end set
+
+
+    def reset(self):
+        self.isActive = False
+        self.source = [None, None]
+    #end reset
 # end class Source
