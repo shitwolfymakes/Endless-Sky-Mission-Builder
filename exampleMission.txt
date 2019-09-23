@@ -38,7 +38,7 @@ mission "Test Mission 0"
         dialog `It is Wednesday my dudes`
         outfit "Skylance V" 5
         require Hyperdrive 1
-        payment 1500 .2
+        payment 1500 0.2
         "yo mama" += 20
         "no u" ++
         clear "the drugs"
