@@ -26,9 +26,10 @@ class Deadline(object):
     #end init
 
 
-    def set(self, data):
+    def set(self, deadline):
         self.isActive = True
-        self.deadline = data
+        for i, data in enumerate(deadline):
+            self.deadline[i] = data
     #end set
 
 
