@@ -77,19 +77,19 @@ class Mission(object):
             self.add_line("\tblocked \"%s\"" % self.components.blocked)
 
         # deadline
-        if self.components.deadline.isDeadline:
+        if self.components.deadline.isActive:
             line = "\tdeadline"
             if self.components.deadline.deadline[0] is not None:
-                line = line + " " + self.components.deadline.deadline[0]
+                line = line + " " + str(self.components.deadline.deadline[0])
                 if self.components.deadline.deadline[1] is not None:
-                    line = line + " " + self.components.deadline.deadline[1]
+                    line = line + " " + str(self.components.deadline.deadline[1])
                 #end if
             #end if
             self.add_line(line)
         #end if
 
         # cargo
-        if self.components.cargo.isCargo:
+        if self.components.cargo.isActive:
             line = "\tcargo"
             if self.components.cargo.cargo[0] is "random":
                 line = line + " random"
@@ -98,7 +98,7 @@ class Mission(object):
             #end if/else
             for part in self.components.cargo.cargo[1:]:
                 if part is not None:
-                    line = line + " " + part
+                    line = line + " " + str(part)
                 else:
                     break
                 #end if/else
@@ -107,11 +107,11 @@ class Mission(object):
         #end if
 
         # passengers
-        if self.components.passengers.isPassengers:
+        if self.components.passengers.isActive:
             line = "\tpassengers %s" % self.components.passengers.passengers[0]
             for part in self.components.passengers.passengers[1:]:
                 if part is not None:
-                    line = line + " " + part
+                    line = line + " " + str(part)
                 else:
                     break
                 #end if/else
@@ -120,7 +120,7 @@ class Mission(object):
         #end if
 
         # illegal
-        if self.components.illegal.isIllegal:
+        if self.components.illegal.isActive:
             line = "\tillegal %s" % self.components.illegal.illegal[0]
             if self.components.illegal.illegal[1] is not None:
                 line = line + " `" + self.components.illegal.illegal[1] + "`"
@@ -148,14 +148,14 @@ class Mission(object):
         if self.components.isRepeat:
             line = "\trepeat"
             if self.components.repeat is not None:
-                line = line + " " + self.components.repeat
+                line = line + " " + str(self.components.repeat)
             #end if
             self.add_line(line)
         #end if
 
         # clearance
         #TODO: fully implement this when filters are implemented
-        if self.components.clearance.isClearance:
+        if self.components.clearance.isActive:
             self.add_line("\tclearance `%s`" % self.components.clearance.clearance)
 
         # isInfiltrating
@@ -168,17 +168,17 @@ class Mission(object):
 
         # stopover
         #TODO: fully implement this when filters are implemented
-        if self.components.stopover.isStopover:
+        if self.components.stopover.isActive:
             self.add_line("\tstopover \"%s\"" % self.components.stopover.stopover)
 
         # source
         #TODO: fully implement this when filters are implemented
-        if self.components.source.isSource:
+        if self.components.source.isActive:
             self.add_line("\tsource \"%s\"" % self.components.source.source)
 
         # destination
         #TODO: fully implement this when filters are implemented
-        if self.components.destination.isDestination:
+        if self.components.destination.isActive:
             self.add_line("\tdestination \"%s\"" % self.components.destination.destination)
 
         # Trigger(s)
@@ -202,7 +202,7 @@ class Mission(object):
                     for data in trigger.outfit[1:]:
                         if data is None:
                             break
-                        line = line + " " + data
+                        line = line + " " + str(data)
                     #end for
                     self.add_line(line)
                 #end if
@@ -214,7 +214,7 @@ class Mission(object):
                     for data in trigger.require[1:]:
                         if data is None:
                             break
-                        line = line + " " + data
+                        line = line + " " + str(data)
                     # end for
                     self.add_line(line)
                 # end if
@@ -225,7 +225,7 @@ class Mission(object):
                     for data in trigger.payment:
                         if data is None:
                             break
-                        line = line + " " + data
+                        line = line + " " + str(data)
                     # end for
                     self.add_line(line)
                 # end if
@@ -252,7 +252,7 @@ class Mission(object):
                     for data in trigger.event[1:]:
                         if data is None:
                             break
-                        line = line + " " + data
+                        line = line + " " + str(data)
                     # end for
                     self.add_line(line)
                 # end if
