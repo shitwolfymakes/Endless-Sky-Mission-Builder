@@ -4,6 +4,7 @@ from src.model.Mission import Mission
 
 class ParseMissionTestCase(unittest.TestCase):
     """Tests for `Mission.parse_mission`"""
+    #TODO: move the data storage to a setUp() method
 
     def test_parse_mission(self):
         true_output = self.add_all_data_lines()
