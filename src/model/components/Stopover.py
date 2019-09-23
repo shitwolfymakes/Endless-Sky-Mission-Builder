@@ -22,7 +22,19 @@ class Stopover(object):
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isStopover = False
-        self.stopover   = None
+        self.isActive = False
+        self.stopover = None
     #end init
+
+
+    def set(self, component_data):
+        self.isActive = True
+        self.stopover = component_data
+    #end set
+
+
+    def reset(self):
+        self.isActive = False
+        self.stopover = None
+    #end reset
 #end class Conversations
