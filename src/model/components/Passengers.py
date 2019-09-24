@@ -37,4 +37,17 @@ class Passengers(object):
         self.isActive = False
         self.passengers = [None, None, None]
     #end reset
+
+
+    def to_string(self):
+        line = "\tpassengers %s" % self.passengers[0]
+        for part in self.passengers[1:]:
+            if part is not None:
+                line += " %s" % str(part)
+            else:
+                break
+            # end if/else
+        # end for
+        return line
+    #end to_string
 #end class Passengers
