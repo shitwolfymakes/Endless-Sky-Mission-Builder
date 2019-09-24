@@ -322,7 +322,7 @@ class GUI(object):
 
         # deadline
         self.deadlineComponent.reset()
-        if components.deadline.isDeadline is True:
+        if components.deadline.isActive is True:
             self.deadlineComponent.set(0, None, "isDeadlineCheckbutton")
             if components.deadline.deadline[0] is not None:
                 self.deadlineComponent.set(1, 0, components.deadline.deadline[0])
@@ -333,7 +333,7 @@ class GUI(object):
 
         # cargo
         self.cargoComponent.reset()
-        if components.cargo.isCargo is True:
+        if components.cargo.isActive is True:
             self.cargoComponent.set(0, 0, components.cargo.cargo[0])
             self.cargoComponent.set(0, 1, components.cargo.cargo[1])
             if components.cargo.cargo[2] is not None:
@@ -345,7 +345,7 @@ class GUI(object):
 
         # passengers
         self.passengersComponent.reset()
-        if components.passengers.isPassengers is True:
+        if components.passengers.isActive is True:
             self.passengersComponent.set(0, 0, components.passengers.passengers[0])
             if components.passengers.passengers[1] is not None:
                 self.passengersComponent.set(1, 1, components.passengers.passengers[1])
@@ -356,7 +356,7 @@ class GUI(object):
 
         # illegal
         self.illegalComponent.reset()
-        if components.illegal.isIllegal is True:
+        if components.illegal.isActive is True:
             self.illegalComponent.set(0, 0, components.illegal.illegal[0])
             if components.illegal.illegal[1] is not None:
                 self.illegalComponent.set(1, 1, components.illegal.illegal[1])
@@ -385,15 +385,15 @@ class GUI(object):
 
         # repeat
         self.repeatComponent.reset()
-        if components.isRepeat is True:
+        if components.repeat.isActive is True:
             self.repeatComponent.set(0, None, "isRepeatCheckbutton")
-            if components.repeat is not None:
-                self.repeatComponent.set(1, 0, components.repeat)
+            if components.repeat.repeat is not None:
+                self.repeatComponent.set(1, 0, components.repeat.repeat)
         #end if
 
         # clearance
         self.clearanceComponent.reset()
-        if components.clearance.isClearance is True:
+        if components.clearance.isActive is True:
             self.clearanceComponent.set(0, None, "isClearanceCheckbutton")
             if components.clearance.clearance is not None:
                 self.clearanceComponent.set(1, 0, components.clearance.clearance)
@@ -412,17 +412,17 @@ class GUI(object):
 
         # stopover
         self.stopoverComponent.reset()
-        if components.stopover.isStopover is True:
+        if components.stopover.isActive is True:
             self.stopoverComponent.set(0, 0, components.stopover.stopover)
 
         # source
         self.sourceComponent.reset()
-        if components.source.isSource is True:
+        if components.source.isActive is True:
             self.sourceComponent.set(0, 0, components.source.source)
 
         # destination
         self.destinationComponent.reset()
-        if components.destination.isDestination is True:
+        if components.destination.isActive is True:
             self.destinationComponent.set(0, 0, components.destination.destination)
 
         # Clear out the AggregatedTriggerFrame
