@@ -145,19 +145,29 @@ class GUI(object):
             self.missionComboBox.current(0)
 
         # add function buttons
-        new_mission_button = ttk.Button(self.optionFrame, text="New Mission", command=partial(utils.new_mission, self))
+        new_mission_button = ttk.Button(self.optionFrame,
+                                        text="New Mission",
+                                        command=partial(utils.new_mission, self))
         new_mission_button.pack(fill='x')
 
-        save_mission_file_button = ttk.Button(self.optionFrame, text="Save Mission File", command=partial(utils.save_file, self))
+        save_mission_file_button = ttk.Button(self.optionFrame,
+                                              text="Save Mission File",
+                                              command=partial(utils.save_file, self))
         save_mission_file_button.pack(fill='x')
 
-        open_mission_file_button = ttk.Button(self.optionFrame, text="Open Mission File", command=partial(utils.open_file, self))
+        open_mission_file_button = ttk.Button(self.optionFrame,
+                                              text="Open Mission File",
+                                              command=partial(utils.open_file, self))
         open_mission_file_button.pack(fill='x')
 
-        compile_mission_file_button = ttk.Button(self.optionFrame, text="Compile Mission", command=partial(utils.compile_mission, self))
+        compile_mission_file_button = ttk.Button(self.optionFrame,
+                                                 text="Compile Mission",
+                                                 command=partial(utils.compile_mission, self))
         compile_mission_file_button.pack(fill='x')
 
-        help_button = ttk.Button(self.optionFrame, text="Help", command=partial(utils.help_user))
+        help_button = ttk.Button(self.optionFrame,
+                                 text="Help",
+                                 command=partial(utils.help_user))
         help_button.pack(fill='x')
 
         #TODO: Add functionality to change missionName and delete mission. Also, update button grouping to reflect
