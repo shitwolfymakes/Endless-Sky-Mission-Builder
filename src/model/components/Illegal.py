@@ -37,4 +37,12 @@ class Illegal(object):
         self.isActive = False
         self.illegal = [None, None]
     #end reset
+
+
+    def to_string(self):
+        line = "\tillegal %s" % self.illegal[0]
+        if self.illegal[1] is not None:
+            line += " `%s`" % self.illegal[1]
+        return line
+    #end to_string
 #end class Illegal
