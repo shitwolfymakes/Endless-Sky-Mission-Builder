@@ -37,4 +37,14 @@ class Deadline(object):
         self.isActive = False
         self.deadline = [None, None]
     #end reset
+
+
+    def to_string(self):
+        line = "\tdeadline"
+        for data in self.deadline:
+            if data is not None:
+                line = line + " " + str(data)
+        #end for
+        return line
+    #end to_string
 #end class Deadline

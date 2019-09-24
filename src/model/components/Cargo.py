@@ -37,4 +37,14 @@ class Cargo(object):
         self.isActive = False
         self.cargo = [None, None, None, None]
     #end reset
+
+
+    def to_string(self):
+        line = "\tcargo"
+        for data in self.cargo:
+            if data is not None:
+                line = line + " " + str(data)
+        #end for
+        return line
+    #end to_string
 #end class Cargo
