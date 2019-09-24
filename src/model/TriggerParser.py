@@ -22,8 +22,46 @@ class TriggerParser(object):
 
     def run(self, trigger):
         logging.debug("\t\tParsing Trigger...")
-
         self.trigger = trigger
+
+        # triggerType
+        if self._has_trigger_type():
+            logging.debug("\t\t\tParsing ...")
+
+        # dialog
+        if self._has_dialog():
+            logging.debug("\t\t\tParsing ...")
+
+        # TODO: HANDLE CONVERSATIONS HERE
+
+        # outfit
+        if self._has_outfit():
+            logging.debug("\t\t\tParsing ...")
+
+        # request
+        if self._has_request():
+            logging.debug("\t\t\tParsing ...")
+
+        # payment
+        if self._has_payment():
+            logging.debug("\t\t\tParsing ...")
+
+        # Conditions
+        if self._has_conditions():
+            logging.debug("\t\t\tParsing ...")
+
+        # event
+        if self._has_event():
+            logging.debug("\t\t\tParsing ...")
+
+        # fail
+        if self._has_fail():
+            logging.debug("\t\t\tParsing ...")
+
+        # Logs
+        if self._has_logs():
+            logging.debug("\t\t\tParsing ...")
+
     #end run
 
     def _add_line(self, line):
