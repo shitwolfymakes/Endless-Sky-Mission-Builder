@@ -37,4 +37,10 @@ class Stopover(object):
         self.isActive = False
         self.stopover = None
     #end reset
+
+
+    def to_string(self):
+        line = "\tstopover \"%s\"" % self.stopover
+        return line
+    #end to_string
 #end class Conversations
