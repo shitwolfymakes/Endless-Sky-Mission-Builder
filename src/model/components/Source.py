@@ -40,4 +40,10 @@ class Source(object):
         self.isActive = False
         self.source = None
     #end reset
+
+
+    def to_string(self):
+        line = "\tsource \"%s\"" % self.source
+        return line
+    #end to_string
 # end class Source

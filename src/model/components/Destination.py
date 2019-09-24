@@ -40,4 +40,10 @@ class Destination(object):
         self.isActive = False
         self.destination = None
     #end reset
+
+
+    def to_string(self):
+        line = "\tdestination \"%s\"" % self.destination
+        return line
+    #end to_string
 # end class Destination
