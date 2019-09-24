@@ -19,7 +19,6 @@ class Mission(object):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, mission_name):
-        #TODO: remove default case after new parser is complete
         logging.debug("Building mission: %s" % mission_name)
 
         self.components = model.MissionComponents()
