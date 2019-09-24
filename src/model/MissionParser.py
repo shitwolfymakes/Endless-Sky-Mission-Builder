@@ -363,5 +363,4 @@ class MissionParser(object):
             parsed_trigger = trigger_parser.run(trigger)
             self.lines += parsed_trigger
     #end _parse_triggers
-
 #end class MissionParser
