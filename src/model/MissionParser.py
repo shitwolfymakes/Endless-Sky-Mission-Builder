@@ -130,6 +130,9 @@ class MissionParser(object):
     #end add_line
 
 
+    ### methods to check if components are active
+
+
     def _has_mission_display_name(self):
         if self.components.missionDisplayName is None:
             return False
