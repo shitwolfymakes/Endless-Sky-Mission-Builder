@@ -11,6 +11,7 @@
 """
 
 import logging
+import src.model as model
 
 
 class MissionParser(object):
@@ -148,14 +149,14 @@ class MissionParser(object):
 
 
     def _has_passengers(self):
-        if self.components.passenger.isActive is False:
+        if self.components.passengers.isActive is False:
             return False
         return True
     #end _has_passengers
 
 
     def _has_illegal(self):
-        if self.components.illegal.isIllegal is False:
+        if self.components.illegal.isActive is False:
             return False
         return True
     #end _has_illegal
@@ -248,96 +249,119 @@ class MissionParser(object):
     ### methods to parse the data from each component in the model
     def _parse_mission_display_name(self):
         logging.debug("\t\tParsing mission display name...")
+        self._add_line("\tname `%s`" % self.components.missionDisplayName)
     #end _parse_mission_display_name
 
 
     def _parse_description(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing description...")
+        self._add_line("\tdescription `%s`" % self.components.description)
     #end _parse_description
 
 
     def _parse_blocked(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing blocked...")
+        self._add_line("\tblocked \"%s\"" % self.components.blocked)
     #end _parse_blocked
 
 
     def _parse_deadline(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing deadline...")
+        self._add_line(self.components.deadline.to_string())
     #end _parse_deadline
 
 
     def _parse_cargo(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing cargo...")
+        self._add_line(self.components.cargo.to_string())
     #end _parse_cargo
 
 
     def _parse_passengers(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing passengers...")
+        self._add_line(self.components.passengers.to_string())
     #end _parse_passengers
 
 
     def _parse_illegal(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing illegal...")
+        self._add_line(self.components.illegal.to_string())
     #end _parse_illegal
 
 
     def _parse_stealth(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing stealth...")
+        self._add_line("\tstealth")
     #end _parse_stealth
 
 
     def _parse_invisible(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing invisible...")
+        self._add_line("\tinvisible")
     #end _parse_invisible
 
 
     def _parse_priority_level(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing priority level...")
+        self._add_line("\t%s" % self.components.priorityLevel)
     #end _parse_priority_level
 
 
     def _parse_where_shown(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing where shown...")
+        self._add_line("\t%s" % self.components.whereShown)
     #end _parse_where_shown
 
 
     def _parse_repeat(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing repeat...")
+        self._add_line(self.components.repeat.to_string())
     #end _parse_repeat
 
 
     def _parse_clearance(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing clearance...")
+        self._add_line(self.components.clearance.to_string())
     #end _parse_clearance
 
 
     def _parse_infiltrating(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing infiltrating...")
+        self._add_line("\tinfiltrating")
     #end _parse_infiltrating
 
 
     def _parse_waypoint(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing waypoint...")
+        self._add_line("\twaypoint \"%s\"" % self.components.waypoint)
     #end _parse_waypoint
 
 
     def _parse_stopover(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing stopover...")
+        self._add_line(self.components.stopover.to_string())
     #end _parse_stopover
 
 
     def _parse_source(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing source...")
+        self._add_line(self.components.source.to_string())
     #end _parse_source
 
 
     def _parse_destination(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing destination...")
+        self._add_line(self.components.destination.to_string())
     #end _parse_destination
 
 
     def _parse_triggers(self):
-        logging.debug("\t\tParsing ...")
+        logging.debug("\t\tParsing Triggers...")
+
+        trigger_parser = model.TriggerParser(self.mission)
+        for trigger in self.components.triggerList:
+            parsed_trigger = trigger_parser.run(trigger)
+            self.lines += parsed_trigger
     #end _parse_triggers
 
 #end class MissionParser
