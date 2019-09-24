@@ -1,10 +1,9 @@
 import unittest
-from src.model.Mission import Mission
+import src.model as model
 
 
 class ParseMissionTestCase(unittest.TestCase):
     """Tests for `Mission.parse_mission`"""
-
 
     def test_parse_mission(self):
         true_output = self.add_all_data_lines()
@@ -13,8 +12,8 @@ class ParseMissionTestCase(unittest.TestCase):
         self.assertEqual(true_output, self.model.missionLines)
     #end test_parse_mission
 
-
-    def add_all_data_lines(self):
+    @staticmethod
+    def add_all_data_lines():
         return ['mission "Test Mission 0"\n',
                 '\tname `test`\n',
                 '\tdescription `A test mission`\n',
@@ -53,7 +52,7 @@ class ParseMissionTestCase(unittest.TestCase):
 
 
     def setUp(self):
-        self.model = Mission("Test Mission 0")
+        self.model = model.Mission("Test Mission 0")
         self.model.components.missionDisplayName = "test"
         self.model.components.description = "A test mission"
         self.model.components.blocked = "Oh piss off!"
