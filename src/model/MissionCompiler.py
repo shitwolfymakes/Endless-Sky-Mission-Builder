@@ -50,11 +50,11 @@ class MissionCompiler(object):
         #end if
 
         # deadline
-        self.mission.deadline.isDeadline = False
+        self.mission.deadline.isActive = False
         self.mission.deadline.deadline   = [None, None]
         if self.esmb.deadlineComponent.listEntryStates[0].get():
             logging.debug("\t\tFound deadline")
-            self.mission.deadline.isDeadline = True
+            self.mission.deadline.isActive = True
             if self.esmb.deadlineComponent.listEntryStates[1].get():
                 logging.debug("\t\t\tFound deadline days: %s" % self.esmb.deadlineComponent.listEntryData[0].get())
                 self.mission.deadline.deadline[0] = self.esmb.deadlineComponent.listEntryData[0].get()
@@ -66,13 +66,13 @@ class MissionCompiler(object):
         #end if
 
         # cargo
-        self.mission.cargo.isCargo = False
+        self.mission.cargo.isActive = False
         self.mission.cargo.cargo   = [None, None, None, None]
         if self.esmb.cargoComponent.listEntryStates[0].get():
             logging.debug("\t\tFound cargo:")
             logging.debug("\t\t\t%s" % self.esmb.cargoComponent.listEntryData[0].get())
             logging.debug("\t\t\t%s" % self.esmb.cargoComponent.listEntryData[1].get())
-            self.mission.cargo.isCargo = True
+            self.mission.cargo.isActive = True
             self.mission.cargo.cargo[0] = self.esmb.cargoComponent.listEntryData[0].get()
             self.mission.cargo.cargo[1] = self.esmb.cargoComponent.listEntryData[1].get()
             if self.esmb.cargoComponent.listEntryStates[1].get():
@@ -87,11 +87,11 @@ class MissionCompiler(object):
         #end if
 
         # passengers
-        self.mission.passengers.isPassengers = False
+        self.mission.passengers.isActive = False
         self.mission.passengers.passengers   = [None, None, None]
         if self.esmb.passengersComponent.listEntryStates[0].get():
             logging.debug("\t\tFound passengers: %s" % self.esmb.passengersComponent.listEntryData[0].get())
-            self.mission.passengers.isPassengers  = True
+            self.mission.passengers.isActive  = True
             self.mission.passengers.passengers[0] = self.esmb.passengersComponent.listEntryData[0].get()
             if self.esmb.passengersComponent.listEntryStates[1].get():
                 logging.debug("\t\t\tFound passengers optional data:")
@@ -105,11 +105,11 @@ class MissionCompiler(object):
         #end if
 
         # illegal
-        self.mission.illegal.isIllegal = False
+        self.mission.illegal.isActive = False
         self.mission.illegal.illegal   = [None, None]
         if self.esmb.illegalComponent.listEntryStates[0].get():
             logging.debug("\t\tFound illegal: %s" % self.esmb.illegalComponent.listEntryData[0].get())
-            self.mission.illegal.isIllegal  = True
+            self.mission.illegal.isActive  = True
             self.mission.illegal.illegal[0] = self.esmb.illegalComponent.listEntryData[0].get()
             if self.esmb.illegalComponent.listEntryStates[1].get():
                 logging.debug("\t\t\tFound illegal optional modifier: %s" % self.esmb.illegalComponent.listEntryData[1].get())
@@ -146,24 +146,24 @@ class MissionCompiler(object):
         # end if
 
         # repeat
-        self.mission.isRepeat = False
-        self.mission.repeat   = None
+        self.mission.repeat.isActive = False
+        self.mission.repeat.repeat   = None
         if self.esmb.repeatComponent.listEntryStates[0].get():
             logging.debug("\t\tFound repeat")
-            self.mission.isRepeat = True
+            self.mission.repeat.isActive = True
             if self.esmb.repeatComponent.listEntryStates[1].get():
                 logging.debug("\t\t\tFound repeat optionals modifier: %s" % self.esmb.repeatComponent.listEntryData[0].get())
-                self.mission.repeat = self.esmb.repeatComponent.listEntryData[0].get()
+                self.mission.repeat.repeat = self.esmb.repeatComponent.listEntryData[0].get()
             #end if
         #end if
 
         # clearance
         #TODO: fully implement this when filters are implemented
-        self.mission.clearance.isClearance = False
+        self.mission.clearance.isActive = False
         self.mission.clearance.clearance   = None
         if self.esmb.clearanceComponent.listEntryStates[0].get():
             logging.debug("\t\tFound clearance: %s" % self.esmb.clearanceComponent.listEntryData[0].get())
-            self.mission.clearance.isClearance = True
+            self.mission.clearance.isActive = True
             self.mission.clearance.clearance   = self.esmb.clearanceComponent.listEntryData[0].get()
         #end if
 
@@ -183,31 +183,31 @@ class MissionCompiler(object):
 
         # stopover
         #TODO: fully implement this when filters are implemented
-        self.mission.stopover.isStopover = False
+        self.mission.stopover.isActive = False
         self.mission.stopover.stopover   = None
         if self.esmb.stopoverComponent.listEntryStates[0].get():
             logging.debug("\t\tFound stopover: %s" % self.esmb.stopoverComponent.listEntryData[0].get())
-            self.mission.stopover.isStopover = True
+            self.mission.stopover.isActive = True
             self.mission.stopover.stopover   = self.esmb.stopoverComponent.listEntryData[0].get()
         #end if
 
         # source
         #TODO: fully implement this when filters are implemented
-        self.mission.source.isSource = False
+        self.mission.source.isActive = False
         self.mission.source.source   = None
         if self.esmb.sourceComponent.listEntryStates[0].get():
             logging.debug("\t\tFound source: %s" % self.esmb.sourceComponent.listEntryData[0].get())
-            self.mission.source.isSource = True
+            self.mission.source.isActive = True
             self.mission.source.source   = self.esmb.sourceComponent.listEntryData[0].get()
         #end if
 
         # destination
         # TODO: fully implement this when filters are implemented
-        self.mission.destination.isDestination = False
+        self.mission.destination.isActive = False
         self.mission.destination.destination   = None
         if self.esmb.destinationComponent.listEntryStates[0].get():
             logging.debug("\t\tFound source: %s" % self.esmb.destinationComponent.listEntryData[0].get())
-            self.mission.destination.isDestination = True
+            self.mission.destination.isActive = True
             self.mission.destination.destination   = self.esmb.destinationComponent.listEntryData[0].get()
         # end if
 
