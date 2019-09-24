@@ -21,8 +21,13 @@ class TriggerParser(object):
     #end init
 
     def run(self, trigger):
-        logging.debug("\t\tParsing Trigger...")
         self.trigger = trigger
+
+        # isActive
+        if self.trigger.isActive:
+            logging.debug("\t\t\tParsing Trigger...")
+        else:
+            return ""
 
         # triggerType
         if self._has_trigger_type():
@@ -38,8 +43,8 @@ class TriggerParser(object):
         if self._has_outfit():
             logging.debug("\t\t\tParsing ...")
 
-        # request
-        if self._has_request():
+        # require
+        if self._has_require():
             logging.debug("\t\t\tParsing ...")
 
         # payment
@@ -64,7 +69,72 @@ class TriggerParser(object):
 
     #end run
 
+
     def _add_line(self, line):
         self.lines.append(line + "\n")
     # end add_line
+
+
+    ### methods to check if components are active
+    def _has_trigger_type(self):
+        if self.trigger.triggerType is None:
+            return False
+        return True
+    #end _has_trigger_type
+
+
+    def _has_dialog(self):
+        if self.trigger.dialog is None:
+            return False
+        return True
+    #end _has_dialog
+
+
+    def _has_outfit(self):
+        if self.trigger.outfit is None:
+            return False
+        return True
+    #end _has_outfit
+
+
+    def _has_require(self):
+        if self.trigger.require is None:
+            return False
+        return True
+    #end _has_request
+
+
+    def _has_payment(self):
+        if self.trigger.isPayment is False:
+            return False
+        return True
+    #end _has_payment
+
+
+    def _has_conditions(self):
+        if not self.trigger.conditions:
+            return False
+        return True
+    #end _has_conditions
+
+
+    def _has_event(self):
+        if self.trigger.event is None:
+            return False
+        return True
+    #end _has_event
+
+
+    def _has_fail(self):
+        if self.trigger.isFail is False:
+            return False
+        return True
+    #end _has_fail
+
+
+    def _has_logs(self):
+        if not self.trigger.logs:
+            return False
+        return True
+    #end _has_logs
 #end class TriggerParser
