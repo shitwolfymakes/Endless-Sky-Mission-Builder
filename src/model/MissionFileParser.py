@@ -49,19 +49,19 @@ class MissionFileParser(object):
                     mission.components.blocked = tokens[1]
                 elif "deadline" in tokens[0]:
                     logging.debug("\t\tFound deadline")
-                    mission.components.deadline.isDeadline = True
+                    mission.components.deadline.isActive = True
                     self.store_component_data(mission.components.deadline.deadline, tokens[1:])
                 elif "cargo" in tokens[0]:
                     logging.debug("\t\tFound cargo: %s" % tokens[1:])
-                    mission.components.cargo.isCargo = True
+                    mission.components.cargo.isActive = True
                     self.store_component_data(mission.components.cargo.cargo, tokens[1:])
                 elif "passengers" in tokens[0]:
                     logging.debug("\t\tFound passengers: %s" % tokens[1:])
-                    mission.components.passengers.isPassengers = True
+                    mission.components.passengers.isActive = True
                     self.store_component_data(mission.components.passengers.passengers, tokens[1:])
                 elif "illegal" in tokens[0]:
                     logging.debug("\t\tFound illegal modifier: %s" % tokens[1:])
-                    mission.components.illegal.isIllegal = True
+                    mission.components.illegal.isActive = True
                     self.store_component_data(mission.components.illegal.illegal, tokens[1:])
                 elif "stealth" in tokens[0]:
                     logging.debug("\t\tFound stealth modifier")
@@ -77,13 +77,13 @@ class MissionFileParser(object):
                     mission.components.whereShown = tokens[0]
                 elif "repeat" in tokens[0]:
                     logging.debug("\t\tFound repeat")
-                    mission.components.isRepeat = True
+                    mission.components.repeat.isActive = True
                     if len(tokens) > 1:
                         logging.debug("\t\t\tFound repeat optional data: %s" % tokens[1])
-                        mission.components.repeat = tokens[1]
+                        mission.components.repeat.repeat = tokens[1]
                 elif "clearance" in tokens[0]:
                     logging.debug("\t\tFound clearance: %s" % tokens[1])
-                    mission.components.clearance.isClearance = True
+                    mission.components.clearance.isActive = True
                     mission.components.clearance.clearance   = tokens[1]
                 elif "infiltrating" in tokens[0]:
                     logging.debug("\t\tFound infiltrating")
@@ -93,15 +93,15 @@ class MissionFileParser(object):
                     mission.components.waypoint = tokens[1]
                 elif "stopover" in tokens[0]:
                     logging.debug("\t\tFound stopover: %s" % tokens[1])
-                    mission.components.stopover.isStopover = True
+                    mission.components.stopover.isActive = True
                     mission.components.stopover.stopover   = tokens[1]
                 elif "source" in tokens[0]:
                     logging.debug("\t\tFound source: %s" % tokens[1])
-                    mission.components.source.isSource = True
+                    mission.components.source.isActive = True
                     mission.components.source.source   = tokens[1]
                 elif "destination" in tokens[0]:
                     logging.debug("\t\tFound destination: %s" % tokens[1])
-                    mission.components.destination.isDestination = True
+                    mission.components.destination.isActive = True
                     mission.components.destination.destination   = tokens[1]
                 elif "on" in tokens:
                     logging.debug("\t\tFound Trigger: on %s" % tokens[1])
