@@ -29,78 +29,97 @@ class MissionParser(object):
         # mission display name
         if self._has_mission_display_name():
             logging.debug("\t\t")
+            self._parse_mission_display_name()
 
         # description
         if self._has_description():
             logging.debug("\t\t")
+            self._parse_description()
 
         # isBlocked
         if self._has_blocked():
             logging.debug("\t\t")
+            self._parse_blocked()
 
         # deadline
         if self._has_deadline():
             logging.debug("\t\t")
+            self._parse_deadline()
 
         # cargo
         if self._has_cargo():
             logging.debug("\t\t")
+            self._parse_cargo()
 
         # passengers
         if self._has_passengers():
             logging.debug("\t\t")
+            self._parse_passengers()
 
         # illegal
         if self._has_illegal():
             logging.debug("\t\t")
+            self._parse_illegal()
 
         # stealth
         if self._has_stealth():
             logging.debug("\t\t")
+            self._parse_stealth()
 
         # isInvisible
         if self._has_invisible():
             logging.debug("\t\t")
+            self._parse_invisible()
 
         # priorityLevel
         if self._has_priority_level():
             logging.debug("\t\t")
+            self._parse_priority_level()
 
         # whereShown
         if self._has_where_shown():
             logging.debug("\t\t")
+            self._parse_where_shown()
 
         # repeat
         if self._has_repeat():
             logging.debug("\t\t")
+            self._parse_repeat()
 
         # clearance
         if self._has_clearance():
             logging.debug("\t\t")
+            self._parse_clearance()
 
         # isInfiltrating
         if self._has_infiltrating():
             logging.debug("\t\t")
+            self._parse_infiltrating()
 
         # waypoint
         if self._has_waypoint():
             logging.debug("\t\t")
+            self._parse_waypoint()
 
         # stopover
         if self._has_stopover():
             logging.debug("\t\t")
+            self._parse_stopover()
 
         # source
         if self._has_source():
             logging.debug("\t\t")
+            self._parse_source()
 
         # destination
         if self._has_destination():
             logging.debug("\t\t")
+            self._parse_destination()
 
         # Trigger(s)
         if self._has_triggers():
             logging.debug("\t\t")
+            self._parse_triggers()
 
         return self.lines
     #end run
