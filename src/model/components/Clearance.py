@@ -14,6 +14,7 @@ import logging
 
 
 class Clearance(object):
+    # TODO: fully implement this when filters are implemented
     """
     self.clearance = [[None, None],                # clearance [<message>]
                       [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###

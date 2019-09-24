@@ -14,6 +14,7 @@ import logging
 
 
 class Stopover(object):
+    # TODO: fully implement this when filters are implemented
     """
     self.stopover = [[None, None],                # stopover [<planet>]
                      [None, None]]                # attributes ...        ### THIS MAY NEED WORK ###

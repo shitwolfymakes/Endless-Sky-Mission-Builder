@@ -14,6 +14,7 @@ import logging
 
 
 class Destination(object):
+    # TODO: fully implement this when filters are implemented
     """
         Usage:
         (destination) <planet>       # specific planet
