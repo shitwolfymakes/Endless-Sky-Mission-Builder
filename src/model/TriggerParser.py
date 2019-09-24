@@ -17,11 +17,12 @@ class TriggerParser(object):
     def __init__(self, mission):
         self.components = mission.components
         self.trigger = None
-        self.lines = []
+        self.lines = None
     #end init
 
     def run(self, trigger):
         self.trigger = trigger
+        self.lines = []
 
         # isActive
         if self.trigger.isActive:
@@ -242,6 +243,7 @@ class TriggerParser(object):
         if self.trigger.fail is not None:
             line += self._add_quotes(self.trigger.fail)
         # end if
+        self._add_line(line)
     #end _parse_fail
 
 
