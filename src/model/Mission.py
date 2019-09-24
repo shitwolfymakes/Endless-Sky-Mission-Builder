@@ -18,31 +18,16 @@ import src.model as model
 class Mission(object):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
-    def __init__(self, mission_name, default=False):
-        #TODO: remove default case after new paser is complete
+    def __init__(self, mission_name):
+        #TODO: remove default case after new parser is complete
         logging.debug("Building mission: %s" % mission_name)
 
         self.components = model.MissionComponents()
-        self.missionLines = []  # List of the mission text
-        self.convoList = []  # List of lists containing one conversation section per element
+        self.missionName = mission_name
+        self.missionLines = []
 
-        if default is False:
-            self.missionName  = mission_name
-        else:
-            self.missionName = mission_name
-            self.add_line("mission \"%s\"\n" % mission_name)
-        #end if/else
+        self.parse_mission()
     #end init
-
-
-    def add_line(self, line):
-        """
-        Helper method for appending text to missionLines
-
-        :param line: the string to be appended
-        """
-        self.missionLines.append(line + "\n")
-    #end add_line
 
 
     def print_mission_to_console(self):
@@ -62,6 +47,8 @@ class Mission(object):
     def parse_mission(self):
         parser = model.MissionParser(self)
         self.missionLines = parser.run()
+    #end parse_mission
+
 
     def add_trigger(self):
         """Add a trigger object to this mission"""
@@ -76,18 +63,4 @@ class Mission(object):
         #print(trigger)
         self.components.triggerList.remove(trigger)
     #end remove_trigger
-
-
-    @staticmethod
-    def add_quotes(line):
-        """
-        Helper method to add quotes to a string
-
-        :param line: The string to modify
-        """
-        if " " in line:
-            # if there is a space anywhere in the data piece, Endless Sky requires it to be inside quotations
-            line = "\"%s\"" % line
-        return line
-    #end add_quotes
 #end class Mission

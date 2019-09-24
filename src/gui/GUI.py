@@ -34,7 +34,7 @@ class GUI(object):
         self.missionNames = []
 
         if self.debugging:
-            self.missionList = [Mission("Debugging", default=True)]
+            self.missionList = [Mission("Debugging")]
             self.missionNameToObjectDict = {self.missionList[0].missionName: self.missionList[0]}
             self.missionNames.append(self.missionList[0].missionName)
         #end if
