@@ -37,4 +37,9 @@ class Clearance(object):
         self.isActive = False
         self.clearance = None
     #end reset
+
+
+    def to_string(self):
+        line = "\tclearance `%s`" % self.clearance
+        return line
 #end class Clearance
