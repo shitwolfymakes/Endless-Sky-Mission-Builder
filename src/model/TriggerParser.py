@@ -14,14 +14,16 @@ import logging
 
 
 class TriggerParser(object):
-    def __init__(self):
-        self.mission = None
-        self.components = None
+    def __init__(self, mission):
+        self.components = mission.components
+        self.trigger = None
         self.lines = []
     #end init
 
-    def run(self):
+    def run(self, trigger):
         logging.debug("\t\tParsing Trigger...")
+
+        self.trigger = trigger
     #end run
 
     def _add_line(self, line):
