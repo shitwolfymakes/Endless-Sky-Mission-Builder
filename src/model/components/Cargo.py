@@ -41,10 +41,18 @@ class Cargo(object):
 
     def to_string(self):
         line = "\tcargo"
-        for data in self.cargo:
-            if data is not None:
-                line = line + " " + str(data)
-        #end for
+        if self.cargo[0] is "random":
+            line += " random"
+        else:
+            line += " \"%s\"" % self.cargo[0]
+        # end if/else
+        for part in self.cargo[1:]:
+            if part is not None:
+                line += " %s" % str(part)
+            else:
+                break
+            # end if/else
+        # end for
         return line
     #end to_string
 #end class Cargo

@@ -41,10 +41,11 @@ class Deadline(object):
 
     def to_string(self):
         line = "\tdeadline"
-        for data in self.deadline:
-            if data is not None:
-                line = line + " " + str(data)
-        #end for
+        if self.deadline[0] is not None:
+            line += " %s" % str(self.deadline[0])
+            if self.deadline[1] is not None:
+                line += " %s" % str(self.deadline[1])
+        #end if
         return line
     #end to_string
 #end class Deadline
