@@ -36,4 +36,12 @@ class Repeat(object):
         self.isActive = False
         self.repeat = [None, None]
     #end reset
+
+
+    def to_string(self):
+        line = "\trepeat"
+        if self.repeat is not None:
+            line += " %s" % str(self.repeat)
+        return line
+    #end to_string
 #end class Repeat
