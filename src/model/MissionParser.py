@@ -28,97 +28,78 @@ class MissionParser(object):
 
         # mission display name
         if self._has_mission_display_name():
-            logging.debug("\t\t")
             self._parse_mission_display_name()
 
         # description
         if self._has_description():
-            logging.debug("\t\t")
             self._parse_description()
 
         # isBlocked
         if self._has_blocked():
-            logging.debug("\t\t")
             self._parse_blocked()
 
         # deadline
         if self._has_deadline():
-            logging.debug("\t\t")
             self._parse_deadline()
 
         # cargo
         if self._has_cargo():
-            logging.debug("\t\t")
             self._parse_cargo()
 
         # passengers
         if self._has_passengers():
-            logging.debug("\t\t")
             self._parse_passengers()
 
         # illegal
         if self._has_illegal():
-            logging.debug("\t\t")
             self._parse_illegal()
 
         # stealth
         if self._has_stealth():
-            logging.debug("\t\t")
             self._parse_stealth()
 
         # isInvisible
         if self._has_invisible():
-            logging.debug("\t\t")
             self._parse_invisible()
 
         # priorityLevel
         if self._has_priority_level():
-            logging.debug("\t\t")
             self._parse_priority_level()
 
         # whereShown
         if self._has_where_shown():
-            logging.debug("\t\t")
             self._parse_where_shown()
 
         # repeat
         if self._has_repeat():
-            logging.debug("\t\t")
             self._parse_repeat()
 
         # clearance
         if self._has_clearance():
-            logging.debug("\t\t")
             self._parse_clearance()
 
         # isInfiltrating
         if self._has_infiltrating():
-            logging.debug("\t\t")
             self._parse_infiltrating()
 
         # waypoint
         if self._has_waypoint():
-            logging.debug("\t\t")
             self._parse_waypoint()
 
         # stopover
         if self._has_stopover():
-            logging.debug("\t\t")
             self._parse_stopover()
 
         # source
         if self._has_source():
-            logging.debug("\t\t")
             self._parse_source()
 
         # destination
         if self._has_destination():
-            logging.debug("\t\t")
             self._parse_destination()
 
         # Trigger(s)
         if self._has_triggers():
-            logging.debug("\t\t")
             self._parse_triggers()
 
         return self.lines
@@ -131,8 +112,6 @@ class MissionParser(object):
 
 
     ### methods to check if components are active
-
-
     def _has_mission_display_name(self):
         if self.components.missionDisplayName is None:
             return False
@@ -264,5 +243,101 @@ class MissionParser(object):
             return False
         return True
     #end _has_triggers
+
+
+    ### methods to parse the data from each component in the model
+    def _parse_mission_display_name(self):
+        logging.debug("\t\tParsing mission display name...")
+    #end _parse_mission_display_name
+
+
+    def _parse_description(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_description
+
+
+    def _parse_blocked(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_blocked
+
+
+    def _parse_deadline(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_deadline
+
+
+    def _parse_cargo(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_cargo
+
+
+    def _parse_passengers(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_passengers
+
+
+    def _parse_illegal(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_illegal
+
+
+    def _parse_stealth(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_stealth
+
+
+    def _parse_invisible(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_invisible
+
+
+    def _parse_priority_level(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_priority_level
+
+
+    def _parse_where_shown(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_where_shown
+
+
+    def _parse_repeat(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_repeat
+
+
+    def _parse_clearance(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_clearance
+
+
+    def _parse_infiltrating(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_infiltrating
+
+
+    def _parse_waypoint(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_waypoint
+
+
+    def _parse_stopover(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_stopover
+
+
+    def _parse_source(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_source
+
+
+    def _parse_destination(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_destination
+
+
+    def _parse_triggers(self):
+        logging.debug("\t\tParsing ...")
+    #end _parse_triggers
 
 #end class MissionParser
