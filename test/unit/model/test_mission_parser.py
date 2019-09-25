@@ -104,7 +104,7 @@ class MissionParserTestCase(unittest.TestCase):
         test_model.components.deadline.set([2, 1])
         test_model._parse_deadline()
         self.assertEqual(true_output, test_model.lines[0])
-    #end test_parse_blocked
+    #end test_parse_deadline
 
 
     @staticmethod
