@@ -375,6 +375,27 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_stopover
 
 
+    ### source
+    def test_has_source_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.source.set("Sol")
+        self.assertTrue(test_model._has_source())
+    # end test_has_source_true
+
+    def test_has_source_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_source())
+    # end test_has_source_false
+
+    def test_parse_source(self):
+        true_output = '\tsource "Sol"\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.source.set("Sol")
+        test_model._parse_source()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_source
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
