@@ -43,6 +43,11 @@ class Mission(object):
     #end print_mission_lines_to_text
 
 
+    def add_line(self, line):
+        self.missionLines.append(line + "\n")
+    # end add_line
+
+
     def parse_mission(self):
         parser = model.MissionParser(self)
         self.missionLines = parser.run()
