@@ -396,6 +396,27 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_source
 
 
+    ### destination
+    def test_has_destination_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.destination.set("Delve")
+        self.assertTrue(test_model._has_destination())
+    # end test_has_destination_true
+
+    def test_has_destination_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_destination())
+    # end test_has_destination_false
+
+    def test_parse_destination(self):
+        true_output = '\tdestination "Delve"\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.destination.set("Delve")
+        test_model._parse_destination()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_destination
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
