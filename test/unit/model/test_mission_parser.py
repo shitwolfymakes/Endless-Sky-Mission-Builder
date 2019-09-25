@@ -176,6 +176,29 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_illegal
 
 
+    ### stealth
+    def test_has_stealth_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.isStealth = True
+        self.assertTrue(test_model._has_stealth())
+    # end test_has_stealth_true
+
+
+    def test_has_stealth_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_stealth())
+    # end test_has_stealth_false
+
+
+    def test_parse_stealth(self):
+        true_output = '\tstealth\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.isStealth = True
+        test_model._parse_stealth()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_stealth
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
