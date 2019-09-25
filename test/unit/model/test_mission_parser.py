@@ -107,6 +107,29 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_deadline
 
 
+    ### cargo
+    def test_has_cargo_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.cargo.set(["food", 5, 2, 0.1])
+        self.assertTrue(test_model._has_cargo())
+    # end test_has_cargo_true
+
+
+    def test_has_cargo_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._parse_cargo())
+    # end test_has_cargo_false
+
+
+    def test_parse_cargo(self):
+        true_output = '\tcargo "food" 5 2 0.1\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.cargo.set(["food", 5, 2, 0.1])
+        test_model._parse_cargo()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_cargo
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
