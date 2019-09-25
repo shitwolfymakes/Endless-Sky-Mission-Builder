@@ -130,6 +130,29 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_cargo
 
 
+    ### passengers
+    def test_has_passengers_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.passengers.set([5, 5, 0.2])
+        self.assertTrue(test_model._has_passengers())
+    # end test_has_passengers_true
+
+
+    def test_has_passengers_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_passengers())
+    # end test_has_passengers_false
+
+
+    def test_parse_passengers(self):
+        true_output = '\tpassengers 5 5 0.2\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.passengers.set([5, 5, 0.2])
+        test_model._parse_passengers()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_passengers
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
