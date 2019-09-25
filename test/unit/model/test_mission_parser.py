@@ -15,6 +15,19 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_add_line
 
 
+    def test_has_mission_display_name_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.missionDisplayName = "Welcome To The Jungle"
+        self.assertTrue(test_model._has_mission_display_name())
+    #end test_has_mission_display_name_true
+
+
+    def test_has_mission_display_name_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_mission_display_name())
+    #end test_has_mission_display_name_true
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
