@@ -333,6 +333,27 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_infiltrating
 
 
+    ### waypoint
+    def test_has_waypoint_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.waypoint = "Sol"
+        self.assertTrue(test_model._has_waypoint())
+    # end test_has_waypoint_true
+
+    def test_has_waypoint_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_waypoint())
+    # end test_has_waypoint_false
+
+    def test_parse_waypoint(self):
+        true_output = '\twaypoint "Sol"\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.waypoint = "Sol"
+        test_model._parse_waypoint()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_waypoint
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
