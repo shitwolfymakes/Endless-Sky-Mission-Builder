@@ -153,6 +153,29 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_passengers
 
 
+    ### illegal
+    def test_has_illegal_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.illegal.set([50, "Soviet citizens need no food comrade"])
+        self.assertTrue(test_model._has_illegal())
+    # end test_has_illegal_true
+
+
+    def test_has_illegal_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_illegal())
+    # end test_has_illegal_false
+
+
+    def test_parse_illegal(self):
+        true_output = '\tillegal 50 `Soviet citizens need no food comrade`\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.illegal.set([50, "Soviet citizens need no food comrade"])
+        test_model._parse_illegal()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_illegal
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
