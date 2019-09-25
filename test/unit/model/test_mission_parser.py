@@ -417,10 +417,63 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_destination
 
 
+    ### Trigger(s)
+    def test_has_triggers_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.mission.add_trigger()
+        self.assertTrue(test_model._has_triggers())
+    # end test_has_triggers_true
+
+    def test_has_triggers_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_triggers())
+    # end test_has_triggers_false
+
+
+    def test_parse_trigger_active(self):
+        true_output = ['\ton accept\n',
+                       '\t\toutfit "test outfit" 1\n',
+                       '\ton offer\n',
+                       '\t\tdialog `It is Wednesday my dudes`\n']
+        test_model = self.get_loaded_trigger_test_model()
+        test_model._parse_triggers()
+        self.assertEqual(true_output, test_model.lines)
+    # end test_parse_trigger_active
+
+
+    def test_parse_trigger_inactive(self):
+        true_output = ['\ton offer\n',
+                       '\t\tdialog `It is Wednesday my dudes`\n']
+        test_model = self.get_loaded_trigger_test_model()
+        test_model.components.triggerList[0].isActive = False
+        test_model._parse_triggers()
+        self.assertEqual(true_output, test_model.lines)
+    # end test_parse_trigger_inactive
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
     #end get_empty_test_model
+
+    @staticmethod
+    def get_loaded_trigger_test_model():
+        test_model = model.MissionParser(model.Mission("Testing"))
+
+        test_model.mission.add_trigger()
+        trigger = test_model.components.triggerList[0]
+        trigger.isActive = True
+        trigger.triggerType = "accept"
+        trigger.outfit = ["test outfit", 1]
+
+        test_model.mission.add_trigger()
+        trigger = test_model.components.triggerList[1]
+        trigger.isActive = True
+        trigger.triggerType = "offer"
+        trigger.dialog = "It is Wednesday my dudes"
+
+        return test_model
+    #end get_loaded_trigger_test_model()
 
 #end class MissionParserTestCase
 
