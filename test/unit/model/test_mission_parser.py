@@ -199,6 +199,29 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_stealth
 
 
+    ### invisible
+    def test_has_invisible_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.isInvisible = True
+        self.assertTrue(test_model._has_invisible())
+    # end test_has_invisible_true
+
+
+    def test_has_invisible_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_invisible())
+    # end test_has_invisible_false
+
+
+    def test_parse_invisible(self):
+        true_output = '\tinvisible\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.isInvisible = True
+        test_model._parse_invisible()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_invisible
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
