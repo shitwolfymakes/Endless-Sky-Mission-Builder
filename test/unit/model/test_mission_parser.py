@@ -354,6 +354,27 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_waypoint
 
 
+    ### stopover
+    def test_has_stopover_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.stopover.set("Delve")
+        self.assertTrue(test_model._has_stopover())
+    # end test_has_stopover_true
+
+    def test_has_stopover_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_stopover())
+    # end test_has_stopover_false
+
+    def test_parse_stopover(self):
+        true_output = '\tstopover "Delve"\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.stopover.set("Delve")
+        test_model._parse_stopover()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_stopover
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
