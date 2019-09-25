@@ -289,6 +289,29 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_repeat
 
 
+    ### clearance
+    def test_has_clearance_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.clearance.set("You're on the list")
+        self.assertTrue(test_model._has_clearance())
+    # end test_has_clearance_true
+
+
+    def test_has_clearance_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_clearance())
+    # end test_has_clearance_false
+
+
+    def test_parse_clearance(self):
+        true_output = "\tclearance `You're on the list`\n"
+        test_model = self.get_empty_test_model()
+        test_model.components.clearance.set("You're on the list")
+        test_model._parse_clearance()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_clearance
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
