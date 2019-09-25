@@ -67,3 +67,7 @@ class MissionParserTestCase(unittest.TestCase):
     #end get_empty_test_model
 
 #end class MissionParserTestCase
+
+
+if __name__ == "__main__":
+    unittest.main()
