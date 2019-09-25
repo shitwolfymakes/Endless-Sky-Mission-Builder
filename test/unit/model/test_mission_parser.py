@@ -222,6 +222,29 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_invisible
 
 
+    ### priority level
+    def test_has_priority_level_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.priorityLevel = 'priority'
+        self.assertTrue(test_model._has_priority_level())
+    # end test_has_priority_level_true
+
+
+    def test_has_priority_level_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_priority_level())
+    # end test_has_priority_level_false
+
+
+    def test_parse_priority_level(self):
+        true_output = '\tpriority\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.priorityLevel = 'priority'
+        test_model._parse_priority_level()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_priority_level
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
