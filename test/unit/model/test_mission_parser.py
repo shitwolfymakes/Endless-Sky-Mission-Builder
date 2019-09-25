@@ -266,6 +266,29 @@ class MissionParserTestCase(unittest.TestCase):
     # end test_parse_where_shown
 
 
+    ### repeat
+    def test_has_repeat_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.repeat.set(5)
+        self.assertTrue(test_model._has_repeat())
+    # end test_has_repeat_true
+
+
+    def test_has_repeat_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_repeat())
+    # end test_has_repeat_true
+
+
+    def test_parse_repeat(self):
+        true_output = '\trepeat 5\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.repeat.set(5)
+        test_model._parse_repeat()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_repeat
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
