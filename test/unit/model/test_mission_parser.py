@@ -245,6 +245,27 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_priority_level
 
 
+    ### where shown
+    def test_has_where_shown_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.whereShown = 'job'
+        self.assertTrue(test_model._has_where_shown())
+    # end test_has_where_shown_true
+
+    def test_has_where_shown_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_where_shown())
+    # end test_has_where_shown_false
+
+    def test_parse_where_shown(self):
+        true_output = '\tjob\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.whereShown = 'job'
+        test_model._parse_where_shown()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_where_shown
+
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
