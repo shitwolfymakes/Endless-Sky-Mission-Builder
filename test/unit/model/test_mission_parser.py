@@ -61,6 +61,28 @@ class MissionParserTestCase(unittest.TestCase):
     #end test_parse_description
 
 
+    ### blocked
+    def test_has_blocked_true(self):
+        test_model = self.get_empty_test_model()
+        test_model.components.blocked = "Oh piss off!"
+        self.assertTrue(test_model._has_blocked())
+    # end test_has_blocked_true
+
+
+    def test_has_blocked_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_blocked())
+    # end test_has_blocked_false
+
+
+    def test_parse_blocked(self):
+        true_output = '\tblocked "Oh piss off!"\n'
+        test_model = self.get_empty_test_model()
+        test_model.components.blocked = "Oh piss off!"
+        test_model._parse_blocked()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_blocked
+
     @staticmethod
     def get_empty_test_model():
         return model.MissionParser(model.Mission("Testing"))
