@@ -17,7 +17,7 @@ class TriggerParser(object):
     def __init__(self, mission):
         self.components = mission.components
         self.trigger = None
-        self.lines = None
+        self.lines = []
     #end init
 
     def run(self, trigger):
