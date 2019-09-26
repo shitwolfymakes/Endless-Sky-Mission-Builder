@@ -20,6 +20,31 @@ class TriggerParserTestCase(unittest.TestCase):
     #end test_add_quotes_quotes_added
 
 
+    ### triggerType
+    def test_has_trigger_type_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.triggerType = "accept"
+        self.assertTrue(test_model._has_trigger_type())
+    #end test_has_trigger_type_true
+
+
+    def test_has_trigger_type_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_trigger_type())
+    #end test_has_trigger_type_false
+
+
+    def test_parse_trigger_type(self):
+        true_output = '\ton accept\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.triggerType = "accept"
+        test_model._parse_trigger_type()
+        self.assertEqual(true_output, test_model.lines[0])
+    #end test_parse_trigger_type
+
+
     def test_add_quotes_quotes_not_added(self):
         true_output = "Harambe"
         test_output = model.TriggerParser._add_quotes("Harambe")
@@ -32,6 +57,7 @@ class TriggerParserTestCase(unittest.TestCase):
         mission = model.Mission("Testing")
         mission.add_trigger()
         test_model = model.TriggerParser(mission)
+        test_model.trigger = test_model.components.triggerList[0]
         return test_model
     # end get_empty_test_model
 #end class TriggerParserTestCase
