@@ -20,6 +20,13 @@ class TriggerParserTestCase(unittest.TestCase):
     #end test_add_quotes_quotes_added
 
 
+    def test_add_quotes_quotes_not_added(self):
+        true_output = "Harambe"
+        test_output = model.TriggerParser._add_quotes("Harambe")
+        self.assertEqual(true_output, test_output)
+    #end test_add_quotes_quotes_not_added
+
+
     ### triggerType
     def test_has_trigger_type_true(self):
         test_model = self.get_empty_test_model()
@@ -66,13 +73,6 @@ class TriggerParserTestCase(unittest.TestCase):
         test_model._parse_dialog()
         self.assertEqual(true_output, test_model.lines[0])
     # end test_parse_dialog
-
-
-    def test_add_quotes_quotes_not_added(self):
-        true_output = "Harambe"
-        test_output = model.TriggerParser._add_quotes("Harambe")
-        self.assertEqual(true_output, test_output)
-    #end test_add_quotes_quotes_not_added
 
 
     @staticmethod
