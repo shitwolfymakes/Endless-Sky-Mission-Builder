@@ -126,6 +126,32 @@ class TriggerParserTestCase(unittest.TestCase):
     # end test_parse_require
 
 
+    ### payment
+    def test_has_payment_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.isPayment = True
+        self.assertTrue(test_model._has_payment())
+    # end test_has_dialog_true
+
+
+    def test_has_payment_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_payment())
+    # end test_has_payment_false
+
+
+    def test_parse_payment(self):
+        true_output = '\t\tpayment 1500 0.2\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.isPayment = True
+        trigger.payment = [1500, 0.2]
+        test_model._parse_payment()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_payment
+
+
     @staticmethod
     def get_empty_test_model():
         mission = model.Mission("Testing")
