@@ -145,7 +145,6 @@ class TriggerParserTestCase(unittest.TestCase):
         true_output = '\t\tpayment 1500 0.2\n'
         test_model = self.get_empty_test_model()
         trigger = test_model.components.triggerList[0]
-        trigger.isPayment = True
         trigger.payment = [1500, 0.2]
         test_model._parse_payment()
         self.assertEqual(true_output, test_model.lines[0])
@@ -221,6 +220,31 @@ class TriggerParserTestCase(unittest.TestCase):
         trigger = test_model.components.triggerList[0]
         trigger.event = ["blaze it", 420, 4200]
         test_model._parse_event()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_event
+
+
+    ### fail
+    def test_has_fail_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.isFail = True
+        self.assertTrue(test_model._has_fail())
+    # end test_has_fail_true
+
+
+    def test_has_fail_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_fail())
+    # end test_has_fail_false
+
+
+    def test_parse_fail(self):
+        true_output = '\t\tfail "the mission"\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.fail = "the mission"
+        test_model._parse_fail()
         self.assertEqual(true_output, test_model.lines[0])
     # end test_parse_event
 
