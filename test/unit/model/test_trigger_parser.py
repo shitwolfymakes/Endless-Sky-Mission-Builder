@@ -60,10 +60,12 @@ class TriggerParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_dialog())
     # end test_has_dialog_true
 
+
     def test_has_dialog_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_dialog())
     # end test_has_dialog_false
+
 
     def test_parse_dialog(self):
         true_output = '\t\tdialog `It is Wednesday my dudes`\n'
@@ -73,6 +75,31 @@ class TriggerParserTestCase(unittest.TestCase):
         test_model._parse_dialog()
         self.assertEqual(true_output, test_model.lines[0])
     # end test_parse_dialog
+
+
+    ### dialog
+    def test_has_outfit_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.outfit = "Skylance V"
+        self.assertTrue(test_model._has_outfit())
+    # end test_has_outfit_true
+
+
+    def test_has_outfit_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_outfit())
+    # end test_has_outfit_false
+
+
+    def test_parse_outfit(self):
+        true_output = '\t\toutfit "Skylance V" 5\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.outfit = ["Skylance V", 5]
+        test_model._parse_outfit()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_outfit
 
 
     @staticmethod
