@@ -29,12 +29,6 @@ class Mission(object):
     #end init
 
 
-    def print_mission_to_console(self):
-        """Helper method to print out the formatted text of the mission. e.g.: what it will look like when saved"""
-        print(self.missionLines)
-    #end printMission
-
-
     def print_mission_lines_to_text(self):
         """Concatenate all the missionLines together. Used to make a block of text to display in the missionFrame."""
         # Note to self: this is the most efficient and pythonic way to concat all these strings together
