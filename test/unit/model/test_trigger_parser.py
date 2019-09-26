@@ -29,7 +29,10 @@ class TriggerParserTestCase(unittest.TestCase):
 
     @staticmethod
     def get_empty_test_model():
-        return model.MissionParser(model.Mission("Testing"))
+        mission = model.Mission("Testing")
+        mission.add_trigger()
+        test_model = model.TriggerParser(mission)
+        return test_model
     # end get_empty_test_model
 #end class TriggerParserTestCase
 
