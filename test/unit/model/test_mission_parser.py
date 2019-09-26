@@ -7,10 +7,8 @@ class MissionParserTestCase(unittest.TestCase):
 
     def test_add_line(self):
         true_output = ["Harambe died for you\n"]
-
         test_model = self.get_empty_test_model()
         test_model._add_line("Harambe died for you")
-
         self.assertEqual(true_output, test_model.lines)
     #end test_add_line
 
@@ -252,10 +250,12 @@ class MissionParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_where_shown())
     # end test_has_where_shown_true
 
+
     def test_has_where_shown_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_where_shown())
     # end test_has_where_shown_false
+
 
     def test_parse_where_shown(self):
         true_output = '\tjob\n'
@@ -319,10 +319,12 @@ class MissionParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_infiltrating())
     # end test_has_infiltrating_true
 
+
     def test_has_infiltrating_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_infiltrating())
     # end test_has_invisible_false
+
 
     def test_parse_infiltrating(self):
         true_output = '\tinfiltrating\n'
@@ -340,10 +342,12 @@ class MissionParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_waypoint())
     # end test_has_waypoint_true
 
+
     def test_has_waypoint_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_waypoint())
     # end test_has_waypoint_false
+
 
     def test_parse_waypoint(self):
         true_output = '\twaypoint "Sol"\n'
@@ -361,10 +365,12 @@ class MissionParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_stopover())
     # end test_has_stopover_true
 
+
     def test_has_stopover_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_stopover())
     # end test_has_stopover_false
+
 
     def test_parse_stopover(self):
         true_output = '\tstopover "Delve"\n'
@@ -382,10 +388,12 @@ class MissionParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_source())
     # end test_has_source_true
 
+
     def test_has_source_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_source())
     # end test_has_source_false
+
 
     def test_parse_source(self):
         true_output = '\tsource "Sol"\n'
@@ -424,6 +432,7 @@ class MissionParserTestCase(unittest.TestCase):
         self.assertTrue(test_model._has_triggers())
     # end test_has_triggers_true
 
+
     def test_has_triggers_false(self):
         test_model = self.get_empty_test_model()
         self.assertFalse(test_model._has_triggers())
@@ -456,6 +465,7 @@ class MissionParserTestCase(unittest.TestCase):
         return model.MissionParser(model.Mission("Testing"))
     #end get_empty_test_model
 
+
     @staticmethod
     def get_loaded_trigger_test_model():
         test_model = model.MissionParser(model.Mission("Testing"))
@@ -474,7 +484,6 @@ class MissionParserTestCase(unittest.TestCase):
 
         return test_model
     #end get_loaded_trigger_test_model()
-
 #end class MissionParserTestCase
 
 
