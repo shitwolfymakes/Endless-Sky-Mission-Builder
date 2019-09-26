@@ -45,6 +45,29 @@ class TriggerParserTestCase(unittest.TestCase):
     #end test_parse_trigger_type
 
 
+    ### dialog
+    def test_has_dialog_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.dialog = "It is Wednesday my dudes"
+        self.assertTrue(test_model._has_dialog())
+    # end test_has_dialog_true
+
+    def test_has_dialog_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_dialog())
+    # end test_has_dialog_false
+
+    def test_parse_dialog(self):
+        true_output = '\t\tdialog `It is Wednesday my dudes`\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.dialog = "It is Wednesday my dudes"
+        test_model._parse_dialog()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_dialog
+
+
     def test_add_quotes_quotes_not_added(self):
         true_output = "Harambe"
         test_output = model.TriggerParser._add_quotes("Harambe")
