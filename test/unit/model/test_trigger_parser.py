@@ -152,6 +152,54 @@ class TriggerParserTestCase(unittest.TestCase):
     # end test_parse_payment
 
 
+    ### conditions
+    def test_has_conditions_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_condition_to_trigger(trigger)
+        self.assertTrue(test_model._has_conditions())
+    # end test_has_require_true
+
+
+    def test_has_conditions_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_conditions())
+    # end test_has_require_false
+
+
+    def test_parse_conditions_conditionType_0(self):
+        true_output = '\t\t"yo mama" += 20\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_condition_to_trigger(trigger)
+        trigger.conditions[0].set(0, ["yo mama", "+=", 20])
+        test_model._parse_conditions()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_conditions_conditionType_0
+
+
+    def test_parse_conditions_conditionType_1(self):
+        true_output = '\t\t"no u" ++\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_condition_to_trigger(trigger)
+        trigger.conditions[0].set(1, ["no u", "++"])
+        test_model._parse_conditions()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_conditions_conditionType_1
+
+
+    def test_parse_conditions_conditionType_2(self):
+        true_output = '\t\tclear "the drugs"\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_condition_to_trigger(trigger)
+        trigger.conditions[0].set(2, ["clear", "the drugs"])
+        test_model._parse_conditions()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_conditions_conditionType_2
+
+
     @staticmethod
     def get_empty_test_model():
         mission = model.Mission("Testing")
@@ -160,6 +208,12 @@ class TriggerParserTestCase(unittest.TestCase):
         test_model.trigger = test_model.components.triggerList[0]
         return test_model
     # end get_empty_test_model
+
+
+    @staticmethod
+    def add_condition_to_trigger(trigger):
+        trigger.add_tc()
+    #end add_condition_to_trigger
 #end class TriggerParserTestCase
 
 
