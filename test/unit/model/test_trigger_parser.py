@@ -101,6 +101,30 @@ class TriggerParserTestCase(unittest.TestCase):
         self.assertEqual(true_output, test_model.lines[0])
     # end test_parse_outfit
 
+    ### require
+    def test_has_require_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.require = "Hyperdrive"
+        self.assertTrue(test_model._has_require())
+    # end test_has_require_true
+
+
+    def test_has_require_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_require())
+    # end test_has_require_false
+
+
+    def test_parse_require(self):
+        true_output = '\t\trequire Hyperdrive 1\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        trigger.require = ["Hyperdrive", 1]
+        test_model._parse_require()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_require
+
 
     @staticmethod
     def get_empty_test_model():
