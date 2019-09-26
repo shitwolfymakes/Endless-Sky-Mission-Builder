@@ -5,6 +5,50 @@ import src.model as model
 class TriggerParserTestCase(unittest.TestCase):
     """Tests for methods in `TriggerParser.py`"""
 
+    def test_run(self):
+        true_output = ['\ton offer\n',
+                       '\t\tdialog `It is Wednesday my dudes`\n',
+                       '\t\toutfit "Skylance V" 5\n',
+                       '\t\trequire Hyperdrive 1\n',
+                       '\t\tpayment 1500 0.2\n',
+                       '\t\t"yo mama" += 20\n',
+                       '\t\t"no u" ++\n',
+                       '\t\tclear "the drugs"\n',
+                       '\t\tevent "blaze it" 420 4200\n',
+                       '\t\tfail "the mission"\n',
+                       "\t\tlog `my mama ain't a ho`\n",
+                       '\t\tlog "People" "Yo mama" `is a ho`\n']
+        test_model = self.get_empty_test_model()
+
+        trigger = test_model.components.triggerList[0]
+        trigger.isActive = True
+        trigger.triggerType = "offer"
+        trigger.dialog = "It is Wednesday my dudes"
+        trigger.outfit = ["Skylance V", 5]
+        trigger.require = ["Hyperdrive", 1]
+        trigger.isPayment = True
+        trigger.payment = [1500, 0.2]
+        trigger.event = ["blaze it", 420, 4200]
+        trigger.isFail = True
+        trigger.fail = "the mission"
+
+        trigger.add_tc()
+        trigger.conditions[0].set(0, ["yo mama", "+=", 20])
+        trigger.add_tc()
+        trigger.conditions[1].set(1, ["no u", "++"])
+        trigger.add_tc()
+        trigger.conditions[2].set(2, ["clear", "the drugs"])
+
+        trigger.add_log()
+        trigger.logs[0].set(1, ["my mama ain't a ho"])
+        trigger.add_log()
+        trigger.logs[1].set(3, ["People", "Yo mama", "is a ho"])
+
+        test_model.run(trigger)
+        self.assertEqual(true_output, test_model.lines)
+    #end run
+
+
     def test_add_line(self):
         true_output = ["Harambe died for you\n"]
         test_model = self.get_empty_test_model()
@@ -246,7 +290,45 @@ class TriggerParserTestCase(unittest.TestCase):
         trigger.fail = "the mission"
         test_model._parse_fail()
         self.assertEqual(true_output, test_model.lines[0])
-    # end test_parse_event
+    # end test_parse_fail
+
+    ### logs
+    def test_has_logs_true(self):
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_log_to_trigger(trigger)
+        self.assertTrue(test_model._has_logs())
+    # end test_has_require_true
+
+
+    def test_has_logs_false(self):
+        test_model = self.get_empty_test_model()
+        self.assertFalse(test_model._has_logs())
+    # end test_has_require_false
+
+
+    def test_parse_logs_formatType_1(self):
+        true_output = "\t\tlog `my mama ain't a ho`\n"
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_log_to_trigger(trigger)
+        trigger.logs[0].isActive = True
+        trigger.logs[0].set(1, ["my mama ain't a ho"])
+        test_model._parse_logs()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_logs_formatType_1
+
+
+    def test_parse_logs_formatType_3(self):
+        true_output = '\t\tlog "People" "Yo mama" `is a ho`\n'
+        test_model = self.get_empty_test_model()
+        trigger = test_model.components.triggerList[0]
+        self.add_log_to_trigger(trigger)
+        trigger.logs[0].isActive = True
+        trigger.logs[0].set(3, ["People", "Yo mama", "is a ho"])
+        test_model._parse_logs()
+        self.assertEqual(true_output, test_model.lines[0])
+    # end test_parse_logs_formatType_3
 
 
     @staticmethod
@@ -263,6 +345,12 @@ class TriggerParserTestCase(unittest.TestCase):
     def add_condition_to_trigger(trigger):
         trigger.add_tc()
     #end add_condition_to_trigger
+
+
+    @staticmethod
+    def add_log_to_trigger(trigger):
+        trigger.add_log()
+    # end add_log_to_trigger
 #end class TriggerParserTestCase
 
 
