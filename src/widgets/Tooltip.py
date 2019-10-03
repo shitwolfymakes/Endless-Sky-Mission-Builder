@@ -50,7 +50,7 @@ class Tooltip(object):
 
     def _add_tooltip_text(self, tooltip_window):
         tooltip = tk.Text(tooltip_window, relief=tk.SOLID, width=40, wrap=tk.WORD)
-        height = math.ceil(len(self.text) / 40)
+        height = math.ceil(len(self.text) / 40) + self.text.count('\n')
         tooltip.insert(tk.END, self.text)
         tooltip.config(state=tk.DISABLED, height=height)
         tooltip.pack(ipadx=1)
