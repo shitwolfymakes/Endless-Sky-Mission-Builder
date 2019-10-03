@@ -14,6 +14,8 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
+import src.widgets as widgets
+
 
 class LogWindow(object):
     """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
@@ -38,21 +40,25 @@ class LogWindow(object):
         frame.pack(side=TOP)
 
         if format_type == "<message>":
+            label = widgets.TooltipLabel(frame, "log_message_only", text="Log")
+            label.grid(row=0, column=0)
             self.message.set("<message>")
             entry = ttk.Entry(frame, textvariable=self.message)
-            entry.grid(row=0, column=0)
+            entry.grid(row=1, column=0)
         else:
+            label = widgets.TooltipLabel(frame, "log_complex", text="Log")
+            label.grid(row=0, column=0)
             self.logGroup.set("<type>")
             entry = ttk.Entry(frame, textvariable=self.logGroup, width=10)
-            entry.grid(row=0, column=0)
+            entry.grid(row=1, column=0)
 
             self.name.set("<name>")
             entry2 = ttk.Entry(frame, textvariable=self.name, width=10)
-            entry2.grid(row=0, column=1)
+            entry2.grid(row=1, column=1)
 
             self.message.set("<message>")
             entry3 = ttk.Entry(frame, textvariable=self.message, width=30)
-            entry3.grid(row=0, column=2)
+            entry3.grid(row=1, column=2)
         #end if/else
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)

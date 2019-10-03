@@ -49,29 +49,29 @@ class TriggerWindow(object):
         self.actionsList = ["offer", "complete", "accept", "decline", "defer", "fail", "visit", "stopover"]
 
         ### BUILDING LEFT FRAME ###
-        on_label = ttk.Label(self.leftFrame, text="on", width=6)
+        on_label = widgets.TooltipLabel(self.leftFrame, "trigger_on_action", text="on", width=6)
         on_label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
         self.onActionCombobox = ttk.Combobox(self.leftFrame, state="readonly", values=self.actionsList)
         self.onActionCombobox.bind("<<ComboboxSelected>>", self._action_selected)
         self.onActionCombobox.grid(row=0, column=1, sticky="ew")
 
-        self.dialogComponent = widgets.ComponentMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"])
+        self.dialogComponent = widgets.ComponentMandOptFrame(self.leftFrame, "dialog", 1, 0, ["<text>"], "trigger_dialog")
         self.dialogComponent.grid(row=1, column=0, columnspan=2, sticky="ew")
 
-        self.outfitComponent = widgets.ComponentMandOptFrame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"])
+        self.outfitComponent = widgets.ComponentMandOptFrame(self.leftFrame, "outfit", 1, 1, ["<outfit>", "[<number#>]"], "trigger_outfit")
         self.outfitComponent.grid(row=2, column=0, columnspan=2, sticky="ew")
 
-        self.requireComponent = widgets.ComponentMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"])
+        self.requireComponent = widgets.ComponentMandOptFrame(self.leftFrame, "require", 1, 1, ["<outfit>", "[<number#>]"], "trigger_require")
         self.requireComponent.grid(row=3, column=0, columnspan=2, sticky="ew")
 
-        self.paymentComponent = widgets.ComponentMandOptFrame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"])
+        self.paymentComponent = widgets.ComponentMandOptFrame(self.leftFrame, "payment", 0, 2, ["[<base#>]", "[<multiplier#>]"], "trigger_payment")
         self.paymentComponent.grid(row=4, column=0, columnspan=2, sticky="ew")
 
-        self.eventComponent = widgets.ComponentMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"])
+        self.eventComponent = widgets.ComponentMandOptFrame(self.leftFrame, "event", 1, 2, ["<name>", "[<delay#>]", "[<max#>]"], "trigger_event")
         self.eventComponent.grid(row=5, column=0, columnspan=2, sticky="ew")
 
-        self.failComponent = widgets.ComponentMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"])
+        self.failComponent = widgets.ComponentMandOptFrame(self.leftFrame, "fail", 0, 1, ["[<name>]"], "trigger_fail")
         self.failComponent.grid(row=6, column=0, columnspan=2, sticky="ew")
 
         self.logsComponent = widgets.AggregatedLogFrame(self.app, self.leftFrame, self.trigger)

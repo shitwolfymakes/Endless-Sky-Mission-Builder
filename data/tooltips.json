@@ -18,7 +18,16 @@
     "stopover": "<planet> - This specifies a planet that you must visit in order to complete the mission.",
     "source": "<planet> - A planet where the mission will be offered from. If no source is specified, the mission will be offered whenever its to offer conditions are satisfied.",
     "destination": "<planet> - A mission can be offered from a planet or ship, but all missions must have a destination planet. For missions offered on a planet, if no destination is given that same planet is used.",
-    "": "",
-    "": "",
-    "": ""
+    "trigger_on_action": "There are eight events that can trigger a response of some sort:\n\noffer: when the initial mission is offered.\n\ncomplete: when the mission is completed.\n\naccept: if the player agrees to accept a mission.\n\ndecline: if the player decides to decline a mission.\n\ndefer: if the player decides to defer a mission.\n\nfail: if the mission fails.\n\nvisit: you land on the mission's destination, without failing or completing yet.\n\nstopover: you have landed on the last of the planets that are specified as a \"stopover\" point for this mission.",
+    "trigger_dialog": "<text> - This gives a message to be displayed in a dialog message to the user. If the trigger is on offer, the dialog will have \"accept\" and \"decline\" buttons.",
+    "trigger_outfit": "<outfit> - The name of the outfit to be added to the player's ship\n\n[<number#>] - A number of the outfit to be added.",
+    "trigger_require": "<require> - The name of the outfit that the player's ship must have\n\n[<number#>] - A number of the outfit required.",
+    "trigger_payment": "This specifies payment for a mission. If no base or multiplier is given, the default is base = 0, multiplier = 150. The formula can be found on Endless Sky's \"Creating Missions\" page.\n\n[<base#>] - The base amount of money earned.\n\n[<multiplier#>] - A multiplier to increase the amount earned.",
+    "trigger_event": "This specifies that the given event happens at this point in the mission.\n\n<name> - The identifier of the game event.\n\n[<delay#>] - a number of days to wait before the event occurs.\n\n[<max#>] - The maximum delay, if given, the total delay is randomly chosen from between the two.",
+    "trigger_fail": "This causes the named mission (or this mission, if no name is given) to fail immediately.\n\n<name> - the UNIQUE MISSION NAME, NOT the Mission Display name.",
+    "log_message_only": "Adds an entry to the player log.\n\n<message> - A message to add to the logbook.",
+    "log_complex": "Adds an entry to the player log.\n\n<type> - The type of log, e.g. \"Person\".\n\n<name> - The name of the object, e.g. \"Katya\".\n\n<message> - A message to add to the logbook.",
+    "trigger_condition_0": "This is used to adjust the \"conditions\", which form the requirements for other missions.\n\n<condition> - The condition being modified.\n\n(= | += | -=) - Basic mathematical operations.\n\n<value#> - The value used in the calculations.",
+    "trigger_condition_1": "This is used to adjust the \"conditions\", which form the requirements for other missions.\n\n<condition> - The condition being modified.\n\n(++ | --) - As a shortcut, ++ means += 1 and -- means -= 1.",
+    "trigger_condition_2": "This is used to adjust the \"conditions\", which form the requirements for other missions.\n\n(set | clear) - Sets the condition to 1 or 0, respectively.\n\n<condition> - The condition being modified."
 }

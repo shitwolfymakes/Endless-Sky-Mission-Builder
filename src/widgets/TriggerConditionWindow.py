@@ -14,6 +14,8 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
+import src.widgets as widgets
+
 
 class TriggerConditionWindow(object):
     """
@@ -42,37 +44,43 @@ class TriggerConditionWindow(object):
 
         self.condData.set("<condition>")
         if self.conditionType == 0:
+            label = widgets.TooltipLabel(frame, "trigger_condition_0", text="Log")
+            label.grid(row=0, column=0)
             entry = ttk.Entry(frame, textvariable=self.condData)
-            entry.grid(row=0, column=0)
+            entry.grid(row=1, column=0)
 
 
             self.selectedOption = "="
             self.comboOptions = ["=", "+=", "-="]
             self.optionsCombo.configure(values=self.comboOptions, width=5)
             self.optionsCombo.current(0)
-            self.optionsCombo.grid(row=0, column=1)
+            self.optionsCombo.grid(row=1, column=1)
 
             self.value.set("<value>")
             entry2 = ttk.Entry(frame, textvariable=self.value, width=6)
-            entry2.grid(row=0, column=2)
+            entry2.grid(row=1, column=2)
         elif self.conditionType == 1:
+            label = widgets.TooltipLabel(frame, "trigger_condition_1", text="Log")
+            label.grid(row=0, column=0)
             entry = ttk.Entry(frame, textvariable=self.condData)
-            entry.grid(row=0, column=0)
+            entry.grid(row=1, column=0)
 
             self.selectedOption = "++"
             self.comboOptions = ["++", "--"]
             self.optionsCombo.configure(values=self.comboOptions, width=5)
             self.optionsCombo.current(0)
-            self.optionsCombo.grid(row=0, column=1)
+            self.optionsCombo.grid(row=1, column=1)
         elif self.conditionType == 2:
+            label = widgets.TooltipLabel(frame, "trigger_condition_2", text="Log")
+            label.grid(row=0, column=0)
             self.selectedOption = "set"
             self.comboOptions = ["set", "clear"]
             self.optionsCombo.configure(values=self.comboOptions, width=5)
             self.optionsCombo.current(0)
-            self.optionsCombo.grid(row=0, column=0)
+            self.optionsCombo.grid(row=1, column=0)
 
             entry = ttk.Entry(frame, textvariable=self.condData)
-            entry.grid(row=0, column=1)
+            entry.grid(row=1, column=1)
         else:
             logging.error("Invalid conditionType!!")
         #end if/else
