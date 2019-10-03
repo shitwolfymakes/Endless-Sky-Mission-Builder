@@ -18,8 +18,6 @@ class Tooltip(object):
         self.widget = widget
         self.tooltip = None
         self.text = None
-        self.x = 0
-        self.y = 0
     #end init
 
 
