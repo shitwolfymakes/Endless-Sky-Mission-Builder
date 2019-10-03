@@ -9,7 +9,7 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
-
+import math
 import tkinter as tk
 from tkinter import ttk
 
@@ -33,11 +33,10 @@ class Tooltip(object):
         y = y + cy + self.widget.winfo_rooty() + 30
 
         self.tooltip = tooltip_window = tk.Toplevel(self.widget)
-        tooltip_window.wm_overrideredirect(1) # removes the default window hide/maximize/close buttons
+        tooltip_window.wm_overrideredirect(1)   # removes the default window hide/maximize/close buttons
         tooltip_window.wm_geometry("+%d+%d" % (x, y))
 
-        label = ttk.Label(tooltip_window, text=self.text, justify=tk.LEFT, relief=tk.SOLID, borderwidth=1)
-        label.pack(ipadx=1)
+        self._add_tooltip_text(tooltip_window)
     #end show_tooltip
 
     def hide_tooltip(self):
@@ -46,6 +45,15 @@ class Tooltip(object):
         if tooltip_window:
             tooltip_window.destroy()
     #end hide_tooltip
+
+
+    def _add_tooltip_text(self, tooltip_window):
+        tooltip = tk.Text(tooltip_window, relief=tk.SOLID, width=40, wrap=tk.WORD)
+        height = math.ceil(len(self.text) / 40)
+        tooltip.insert(tk.END, self.text)
+        tooltip.config(state=tk.DISABLED, height=height)
+        tooltip.pack(ipadx=1)
+    #end _add_tooltip_text
 #end class Tooltip
 
 
