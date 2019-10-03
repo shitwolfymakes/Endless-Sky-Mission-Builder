@@ -14,6 +14,7 @@ import tkinter as tk
 
 
 class Tooltip(object):
+    """This widget adds a tooltip to a given widget, that displays when the cursor hovers over it"""
     def __init__(self, widget):
         self.widget = widget
         self.tooltip = None
