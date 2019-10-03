@@ -1,5 +1,24 @@
 {
     "tooltip_dict_key": "testing tooltip_dicts!",
-    "mission_display_name": "<name> - The name of the mission that will be displayed",
-    "description": "<text> - A short description of the mission"
+    "display_name": "<name> - The name of the mission that will be displayed",
+    "description": "<text> - A short description of the mission",
+    "is_blocked": "<message> - This is a short message that is displayed to the player if this mission cannot be offered, but only because they do not have enough cargo space or bunks available.",
+    "deadline": "The number of days you have to complete the mission. If the number of days is left out, a default is calculated.\n\n[<days#>] - The number of days to complete the mission\n\n[<multiplier#>] - A multiplier for the number of jumps to the destination, game defaults to 2.",
+    "cargo": "This specifies the cargo that you are carrying.\n\n<(random | <name>)> - If <name> is defined in Endless Sky, it will be replaced with a more specific name, e.g. \"Food\" could become \"grapes\" or \"cheese\". If random is given, then the game will pick a name at runtime. YOU MUST CHOOSE ONE OR THE OTHER.\n\n<number#> - The amount of cargo\n\n[<number#>] - If this number is also given, then a random amount will be chosen between the two.\n\n[<probability#>] - A number the game will use to skew the amount chosen.",
+    "passengers": "This specifies the number of passengers. Just like CARGO, if there are two or three numbers they are used to pick a random number.",
+    "illegal": "If selected, government will fine you the <fine> if they catch you.\n\n<fine#> - The amount of money the player is fined if caught, if the fine is negative and the player is caught the government will become immediately hostile, NO MATTER WHAT.\n\n[<message>] - An optional message the player will receive if caught.",
+    "stealth": "If selected, the mission will fail if you are caught with the cargo or passengers",
+    "invisible": "This specifies that the mission does not show up in the player's list of missions, and cannot be aborted.",
+    "priority_level": "If a mission is marked with priority, only other \"priority\" missions can be offered alongside it.\n\nIf a mission is marked with minor, it will be offered only if no other missions are being offered at the same time.\n\nThe priority marker is only used for the \"intro\" missions, to suppress all other missions while the player is just learning the ropes.",
+    "where_shown": "This specifies where this mission will be shown, if someplace other than the spaceport.\n\njob - will appear only if included in the job board.\n\nlanding - it shows up as soon as you land instead of waiting for you to visit the spaceport.\n\nassisting - will be shown when you repair a friendly ship.\n\nboarding - will be shown when you plunder a hostile ship.",
+    "repeat": "Makes a mission repeatable indefinitely.\n\n[<times#>] - The maximum number of times a mission can be repeated",
+    "clearance": "This gives you landing clearance on the destination planet, even if normally you would not be allowed to land there, or would have to pay a bribe.\n\n[<message>] - When selected, if you hail your destination planet that message will be shown as the initial text, landing permission will be granted, and you will not have to pay a bribe.",
+    "infiltrating": "This indicates that you do not have access to any of the services on the destination planet, including refueling or repairing; all you can do is complete your mission and then leave.",
+    "waypoint": "<system> - This specifies a system which you must fly through in order to complete the mission. You do not have to land on any planets or spend any amount of time there.",
+    "stopover": "<planet> - This specifies a planet that you must visit in order to complete the mission.",
+    "source": "<planet> - A planet where the mission will be offered from. If no source is specified, the mission will be offered whenever its to offer conditions are satisfied.",
+    "destination": "<planet> - A mission can be offered from a planet or ship, but all missions must have a destination planet. For missions offered on a planet, if no destination is given that same planet is used.",
+    "": "",
+    "": "",
+    "": ""
 }
