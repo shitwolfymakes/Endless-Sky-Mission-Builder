@@ -16,11 +16,13 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 
+import src.widgets as widgets
+
 
 class ComponentMandOptFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, parent, component_name, num_mandatory, num_optionals, list_default_entry_data):
+    def __init__(self, parent, component_name, num_mandatory, num_optionals, list_default_entry_data, tooltip_key):
         ttk.Frame.__init__(self, parent)
         # this line makes the frames with no mandatory or optionals fill the frame
         self.columnconfigure(0, weight=1)
@@ -32,6 +34,7 @@ class ComponentMandOptFrame(ttk.Frame):
         self.numMandatory = num_mandatory
         self.numOptionals = num_optionals
         self.listDefaultEntryData = list_default_entry_data
+        self.tooltip_key = tooltip_key
 
         self.rowNum = 0
         self.numMandatory = num_mandatory
@@ -68,7 +71,7 @@ class ComponentMandOptFrame(ttk.Frame):
         +------------------------+
         """
         logging.debug("\t\tBuilding \"%s\"" % self.componentName)
-        label1 = ttk.Label(self, text=self.componentName)
+        label1 = widgets.TooltipLabel(self, self.tooltip_key, text=self.componentName)
         label1.grid(row=0, column=0, sticky="w", padx=(5, 0))
         self.rowNum += 1
 

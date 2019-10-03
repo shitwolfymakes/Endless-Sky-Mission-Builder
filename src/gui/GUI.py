@@ -183,75 +183,75 @@ class GUI(object):
         cf = self.centerFrame.inner
 
         # Display name
-        self.displayNameComponent = widgets.ComponentMandOptFrame(cf, "Mission Display Name", 1, 0, ["<text>"])
+        self.displayNameComponent = widgets.ComponentMandOptFrame(cf, "Mission Display Name", 1, 0, ["<name>"], "mission_display_name")
         self.displayNameComponent.grid(row=0, column=0, sticky="ew")
 
         # Description
-        self.descriptionComponent = widgets.ComponentMandOptFrame(cf, "Description", 1, 0, ["<description>"])
+        self.descriptionComponent = widgets.ComponentMandOptFrame(cf, "Description", 1, 0, ["<text>"], "description")
         self.descriptionComponent.grid(row=1, column=0, sticky="ew")
 
         # isBlocked
-        self.blockedComponent = widgets.ComponentMandOptFrame(cf, "Blocked", 1, 0, ["<message>"])
+        self.blockedComponent = widgets.ComponentMandOptFrame(cf, "Blocked", 1, 0, ["<message>"], "")
         self.blockedComponent.grid(row=2, column=0, sticky="ew")
 
         # Deadline
-        self.deadlineComponent = widgets.ComponentMandOptFrame(cf, "Deadline", 0, 2, ["[<days#>]", "[<multiplier#>]"])
+        self.deadlineComponent = widgets.ComponentMandOptFrame(cf, "Deadline", 0, 2, ["[<days#>]", "[<multiplier#>]"], "")
         self.deadlineComponent.grid(row=3, column=0, sticky="ew")
 
         # Cargo
-        self.cargoComponent = widgets.ComponentMandOptFrame(cf, "Cargo", 2, 2, ["(random | <name>)", "<number#>", "[<number#>]", "[<probability#>]"])
+        self.cargoComponent = widgets.ComponentMandOptFrame(cf, "Cargo", 2, 2, ["(random | <name>)", "<number#>", "[<number#>]", "[<probability#>]"], "")
         self.cargoComponent.grid(row=4, column=0, sticky="ew")
 
         # Passengers
-        self.passengersComponent = widgets.ComponentMandOptFrame(cf, "Passengers", 1, 2, ["<number#>", "[<number#>]", "[<probability#>]"])
+        self.passengersComponent = widgets.ComponentMandOptFrame(cf, "Passengers", 1, 2, ["<number#>", "[<number#>]", "[<probability#>]"], "")
         self.passengersComponent.grid(row=5, column=0, sticky="ew")
 
         # Illegal
-        self.illegalComponent = widgets.ComponentMandOptFrame(cf, "Illegal", 1, 1, ["<fine#>", "[<message>]"])
+        self.illegalComponent = widgets.ComponentMandOptFrame(cf, "Illegal", 1, 1, ["<fine#>", "[<message>]"], "")
         self.illegalComponent.grid(row=6, column=0, sticky="ew")
 
         # Stealth
-        self.stealthComponent = widgets.ComponentMandOptFrame(cf, "Stealth", 0, 0, [])
+        self.stealthComponent = widgets.ComponentMandOptFrame(cf, "Stealth", 0, 0, [], "")
         self.stealthComponent.grid(row=7, column=0, sticky="ew")
 
         # Invisible
-        self.invisibleComponent = widgets.ComponentMandOptFrame(cf, "Invisible", 0, 0, [])
+        self.invisibleComponent = widgets.ComponentMandOptFrame(cf, "Invisible", 0, 0, [], "")
         self.invisibleComponent.grid(row=8, column=0, sticky="ew")
 
         # priorityLevel
-        self.priorityLevelComponent = widgets.ComboComponentFrame(cf, "Priority Level", ["Priority", "Minor"])
+        self.priorityLevelComponent = widgets.ComboComponentFrame(cf, "Priority Level", ["Priority", "Minor"], "")
         self.priorityLevelComponent.grid(row=9, column=0, sticky="ew")
 
         # whereShown
-        self.whereShownComponent = widgets.ComboComponentFrame(cf, "Where Shown", ["Job", "Landing", "Assisting", "Boarding"])
+        self.whereShownComponent = widgets.ComboComponentFrame(cf, "Where Shown", ["Job", "Landing", "Assisting", "Boarding"], "")
         self.whereShownComponent.grid(row=10, column=0, sticky="ew")
 
         # Repeat
-        self.repeatComponent = widgets.ComponentMandOptFrame(cf, "Repeat", 0, 1, ["[<times#>]"])
+        self.repeatComponent = widgets.ComponentMandOptFrame(cf, "Repeat", 0, 1, ["[<times#>]"], "")
         self.repeatComponent.grid(row=11, column=0, sticky="ew")
 
         # Clearance
-        self.clearanceComponent = widgets.ComponentMandOptFrame(cf, "Clearance", 0, 1, ["[<message>]"])
+        self.clearanceComponent = widgets.ComponentMandOptFrame(cf, "Clearance", 0, 1, ["[<message>]"], "")
         self.clearanceComponent.grid(row=12, column=0, sticky="ew")
 
         # Infiltrating
-        self.infiltratingComponent = widgets.ComponentMandOptFrame(cf, "Infiltrating", 0, 0, [])
+        self.infiltratingComponent = widgets.ComponentMandOptFrame(cf, "Infiltrating", 0, 0, [], "")
         self.infiltratingComponent.grid(row=13, column=0, sticky="ew")
 
         # Waypoint
-        self.waypointComponent = widgets.ComponentMandOptFrame(cf, "Waypoint", 1, 0, ["[<system>]"])
+        self.waypointComponent = widgets.ComponentMandOptFrame(cf, "Waypoint", 1, 0, ["[<system>]"], "")
         self.waypointComponent.grid(row=14, column=0, sticky="ew")
 
         # Stopover
-        self.stopoverComponent = widgets.ComponentMandOptFrame(cf, "Stopover", 1, 0, ["[<planet>]"])
+        self.stopoverComponent = widgets.ComponentMandOptFrame(cf, "Stopover", 1, 0, ["[<planet>]"], "")
         self.stopoverComponent.grid(row=15, column=0, sticky="ew")
 
         # Source
-        self.sourceComponent = widgets.ComponentMandOptFrame(cf, "Source", 1, 0, ["[<planet>]"])
+        self.sourceComponent = widgets.ComponentMandOptFrame(cf, "Source", 1, 0, ["[<planet>]"], "")
         self.sourceComponent.grid(row=16, column=0, sticky="ew")
 
         # Destination
-        self.destinationComponent = widgets.ComponentMandOptFrame(cf, "Destination", 1, 0, ["[<planet>]"])
+        self.destinationComponent = widgets.ComponentMandOptFrame(cf, "Destination", 1, 0, ["[<planet>]"], "")
         self.destinationComponent.grid(row=17, column=0, sticky="ew")
 
         # triggers

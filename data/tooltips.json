@@ -1,3 +1,5 @@
 {
-    "tooltip_dict_key": "testing tooltip_dicts!"
+    "tooltip_dict_key": "testing tooltip_dicts!",
+    "mission_display_name": "<name> - The name of the mission that will be displayed",
+    "description": "<text> - A short description of the mission"
 }

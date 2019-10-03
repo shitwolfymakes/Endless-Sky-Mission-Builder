@@ -14,16 +14,18 @@ import logging
 from functools import partial
 from tkinter import ttk, BooleanVar
 
+import src.widgets as widgets
+
 
 class ComboComponentFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, parent, component_name, list_combobox_data):
+    def __init__(self, parent, component_name, list_combobox_data, tooltip_key):
         ttk.Frame.__init__(self, parent)
         self.columnconfigure(0, weight=1)
 
         logging.debug("\t\tBuilding \"%s\"" % component_name)
-        label = ttk.Label(self, text=component_name)
+        label = widgets.TooltipLabel(self, tooltip_key, text=component_name)
         label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
         self.listComboboxData = list_combobox_data
@@ -37,7 +39,6 @@ class ComboComponentFrame(ttk.Frame):
         self.button.configure(command=partial(self._cb_value_changed, self.isActive, [self.combo]))
         self.button.grid(row=0, column=1, sticky="e")
         self.combo.grid(row=1, column=0, sticky="ew", padx=(20,0))
-
     #end init
 
     @staticmethod
