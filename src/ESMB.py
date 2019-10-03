@@ -53,7 +53,6 @@ class ESMB(object):
     @staticmethod
     def load_tooltips():
         config.tooltips_dict = utils.load_tooltips()
-        print(config.tooltips_dict)
         logging.debug("\tTooltips loaded!")
     # end load_tooltips
 #end class ESMB
