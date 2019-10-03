@@ -11,7 +11,6 @@
 """
 import math
 import tkinter as tk
-from tkinter import ttk
 
 
 class Tooltip(object):
@@ -22,6 +21,7 @@ class Tooltip(object):
         self.x = 0
         self.y = 0
     #end init
+
 
     def show_tooltip(self, text):
         self.text = text
@@ -38,6 +38,7 @@ class Tooltip(object):
 
         self._add_tooltip_text(tooltip_window)
     #end show_tooltip
+
 
     def hide_tooltip(self):
         tooltip_window = self.tooltip
