@@ -41,6 +41,7 @@ class ESMB(object):
         self.gui = GUI(debug_mode)
     #end init
 
+
     @staticmethod
     def logger_setup():
         # For some reason this for loop is required to get the outputting to a file working
@@ -49,6 +50,7 @@ class ESMB(object):
             logging.root.removeHandler(handler)
         logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
     # end logger setup
+
 
     @staticmethod
     def load_tooltips():
