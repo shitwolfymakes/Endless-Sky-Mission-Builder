@@ -14,6 +14,8 @@ from .LogFrame import LogFrame
 from .LogWindow import LogWindow
 from .NewMissionPopup import NewMissionPopup
 from .ScrollingCenterFrame import ScrollingCenterFrame
+from .Tooltip import Tooltip
+from .TooltipLabel import TooltipLabel
 from .TriggerConditionWindow import TriggerConditionWindow
 from .TriggerConditionFrame import TriggerConditionFrame
 from .TriggerFrame import TriggerFrame
