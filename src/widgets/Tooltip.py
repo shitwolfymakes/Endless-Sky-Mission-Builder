@@ -61,6 +61,9 @@ def add_tooltip(widget, text):
     tooltip = Tooltip(widget)
 
     def enter(event):
+        print(event)
+        print(event.widget)
+        print("hovering over tooltip")
         tooltip.show_tooltip(text)
     #end enter
 

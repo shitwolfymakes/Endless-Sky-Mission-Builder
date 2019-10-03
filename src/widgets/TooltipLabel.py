@@ -37,7 +37,6 @@ class TooltipLabel(ttk.Label):
 
 
 def main():
-    import src.config
     config.tooltips_dict = {"tooltip_dict_key": "testing tooltip_dicts!"}
     root = Tk()
     label = TooltipLabel(root, "tooltip_dict_key", text="testing")
