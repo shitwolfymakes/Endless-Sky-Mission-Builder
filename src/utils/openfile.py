@@ -79,7 +79,7 @@ def open_file(app):
             tokens      = shlex.split(line)
             cur_mission = Mission(tokens[1])
             app.missionList.append(cur_mission)
-            app.missionNameToObjectDict.update({cur_mission.missionName: cur_mission})
+            app.missionNameToObjectDict.update({cur_mission.name: cur_mission})
             app.missionList[i].add_line(line)
             i += 1
             continue
@@ -96,7 +96,7 @@ def open_file(app):
 
     logging.debug("\t\tMissions loaded:")
     for mission in app.missionList:
-        logging.debug("\t\t%s" % mission.missionName)
+        logging.debug("\t\t%s" % mission.name)
         #mission.printMission()
     # end for
 

@@ -25,7 +25,7 @@ class MissionParser:
 
     def run(self):
         logging.debug("\tParsing mission...")
-        self._add_line("mission \"%s\"" % self.mission.missionName)
+        self._add_line("mission \"%s\"" % self.mission.name)
 
         # mission display name
         if self._has_mission_display_name():

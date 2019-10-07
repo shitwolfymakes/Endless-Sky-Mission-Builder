@@ -35,8 +35,8 @@ class GUI:
 
         if self.debugging:
             self.missionList = [Mission("Debugging")]
-            self.missionNameToObjectDict = {self.missionList[0].missionName: self.missionList[0]}
-            self.missionNames.append(self.missionList[0].missionName)
+            self.missionNameToObjectDict = {self.missionList[0].name: self.missionList[0]}
+            self.missionNames.append(self.missionList[0].name)
         #end if
 
         # Build the application window
@@ -295,11 +295,11 @@ class GUI:
         ml = self.missionList
         self.missionNames = []
         for m in ml:
-            self.missionNames.append(m.missionName)
+            self.missionNames.append(m.name)
         logging.debug("\tNew mission options: %s" % str(self.missionNames))
 
         self.missionComboBox['values'] = self.missionNames
-        current_mission = self.missionNames.index(self.activeMission.missionName)
+        current_mission = self.missionNames.index(self.activeMission.name)
         self.missionComboBox.current(current_mission)
 
         self.update_center_frame()

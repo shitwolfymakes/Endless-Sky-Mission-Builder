@@ -46,9 +46,9 @@ class NewMissionPopup(object):
     def _add_to_mission_list(app, new_mission_name):
         logging.debug("Adding mission: \"%s\"..." % new_mission_name)
 
-        mission = Mission(new_mission_name, default=True)
+        mission = Mission(new_mission_name)
         app.missionList.append(mission)
-        app.missionNameToObjectDict.update({mission.missionName: mission})
+        app.missionNameToObjectDict.update({mission.name: mission})
         app.activeMission = mission
         app.update_option_frame()
     # end add_mission

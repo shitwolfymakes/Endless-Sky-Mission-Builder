@@ -18,12 +18,12 @@ import src.model as model
 class Mission(model.FileObject):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
-    def __init__(self, mission_name):
-        logging.debug("Building mission: %s" % mission_name)
+    def __init__(self, name):
+        logging.debug("Building mission: %s" % name)
 
         super().__init__("mission")
         self.components = model.MissionComponents()
-        self.missionName = mission_name
+        self.name = name
         self.missionLines = []
 
         self.parse_mission()
