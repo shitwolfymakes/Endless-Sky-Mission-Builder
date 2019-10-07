@@ -10,6 +10,7 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
+from tkinter import *
 from tkinter import ttk
 
 import src.config as config
@@ -33,3 +34,17 @@ class TooltipLabel(ttk.Label):
         self.tooltip_text = config.tooltips_dict.get(tooltip_dict_key)
     #end fetch_tooltip_text
 #end class TooltipLabel
+
+
+def main():
+    config.tooltips_dict = {"tooltip_dict_key": "testing tooltip_dicts!"}
+    root = Tk()
+    label = TooltipLabel(root, "tooltip_dict_key", text="testing")
+    label.pack()
+
+    root.mainloop()
+
+
+
+if __name__ == "__main__":
+    main()
