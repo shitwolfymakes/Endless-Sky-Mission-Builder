@@ -25,6 +25,16 @@ class MissionFileObjects(object):
         def __str__(self):
             return repr(self) + str(self.objects_list)
         #end str
+
+
+        def add_object(self, obj):
+            self.objects_list.append(obj)
+        #end add_object
+
+
+        def remove_object(self, obj):
+            self.objects_list.remove(obj)
+        #end remove_object
     #end class __MissionFileObjects
 
     instance = None
