@@ -13,7 +13,7 @@
 import logging
 
 
-class Illegal(object):
+class Illegal():
     """
         self.illegal = [None, None] # illegal <fine> [<message>]
     """

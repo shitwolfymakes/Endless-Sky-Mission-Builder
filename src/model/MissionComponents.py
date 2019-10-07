@@ -17,7 +17,7 @@ import logging
 import src.model.components as components
 
 
-class MissionComponents(object):
+class MissionComponents():
     """This class keeps instances of each different component in one place, for easy access"""
 
     def __init__(self):

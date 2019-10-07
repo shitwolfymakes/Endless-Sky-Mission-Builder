@@ -13,7 +13,7 @@
 import logging
 
 
-class Log(object):
+class Log():
     """This object stores data for Endless Sky logs"""
 
     def __init__(self):

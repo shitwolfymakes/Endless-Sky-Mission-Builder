@@ -13,7 +13,7 @@
 import logging
 
 
-class Deadline(object):
+class Deadline():
     """
         deadline = deadline [<days> [<multiplier>]]
     """

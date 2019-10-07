@@ -13,7 +13,7 @@
 import logging
 
 
-class MissionFileObjects(object):
+class MissionFileObjects():
     """THis class provides a singleton that stores a list of FileObjects"""
     class __MissionFileObjects:
         def __init__(self):

@@ -13,7 +13,7 @@
 import logging
 
 
-class Destination(object):
+class Destination():
     # TODO: fully implement this when filters are implemented
     """
         Usage:

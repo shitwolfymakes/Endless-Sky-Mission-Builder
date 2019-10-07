@@ -13,7 +13,7 @@
 import logging
 
 
-class TriggerCondition(object):
+class TriggerCondition():
     """This object stores data for condition modifiers inside Endless Sky triggers"""
 
     def __init__(self):
