@@ -13,7 +13,7 @@
 import logging
 
 
-class Cargo():
+class Cargo:
     """
     cargo  = [None, None, None, None}    # cargo (random | <name>) <number> [<number> [<probability>]]
     """

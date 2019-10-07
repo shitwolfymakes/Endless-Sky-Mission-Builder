@@ -14,7 +14,7 @@ import logging
 import src.model as model
 
 
-class MissionParser():
+class MissionParser:
     def __init__(self, mission):
         self.mission = mission
         self.components = mission.components

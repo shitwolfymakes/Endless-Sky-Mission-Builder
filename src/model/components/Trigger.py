@@ -16,7 +16,7 @@ from src.model.components.TriggerCondition import TriggerCondition
 from src.model.components.Log import Log
 
 
-class Trigger():
+class Trigger:
     #TODO: Implement this - ~80% Complete
     # still needs on enter [<system>]
     """

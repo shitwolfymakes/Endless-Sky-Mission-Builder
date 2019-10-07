@@ -15,7 +15,7 @@ import re
 import logging
 
 
-class MissionFileParser():
+class MissionFileParser:
     """This takes the data read in from a mission file and stores it in each mission object"""
     def __init__(self, esmb):
         self.esmb     = esmb

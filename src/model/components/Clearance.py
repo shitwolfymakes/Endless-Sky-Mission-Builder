@@ -13,7 +13,7 @@
 import logging
 
 
-class Clearance():
+class Clearance:
     # TODO: fully implement this when filters are implemented
     """
     self.clearance = [[None, None],                # clearance [<message>]

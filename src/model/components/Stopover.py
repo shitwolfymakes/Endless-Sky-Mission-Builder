@@ -13,7 +13,7 @@
 import logging
 
 
-class Stopover():
+class Stopover:
     # TODO: fully implement this when filters are implemented
     """
     self.stopover = [[None, None],                # stopover [<planet>]

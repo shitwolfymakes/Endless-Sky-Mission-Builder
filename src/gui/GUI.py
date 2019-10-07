@@ -20,7 +20,7 @@ from src.model import Mission
 import src.widgets as widgets
 
 
-class GUI():
+class GUI:
     """This handles the GUI for ESMB"""
 
     def __init__(self, debug_mode):

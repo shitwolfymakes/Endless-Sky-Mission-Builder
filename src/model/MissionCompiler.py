@@ -13,7 +13,7 @@
 import logging
 
 
-class MissionCompiler():
+class MissionCompiler:
     """This class compiles the data the user has entered into the current Mission object"""
 
     def __init__(self, esmb):

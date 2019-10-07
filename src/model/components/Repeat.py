@@ -13,7 +13,7 @@
 import logging
 
 
-class Repeat():
+class Repeat:
     """
     self.repeat = None                # repeat [<message>]
     """

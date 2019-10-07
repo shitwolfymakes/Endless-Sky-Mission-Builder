@@ -13,7 +13,7 @@
 import logging
 
 
-class Passengers():
+class Passengers:
     """
         self.passengers = [None, None, None] # passengers <number> [<number> [<probability>]]
     """

@@ -13,7 +13,7 @@
 import logging
 
 
-class TriggerParser():
+class TriggerParser:
     def __init__(self, mission):
         self.components = mission.components
         self.trigger = None
