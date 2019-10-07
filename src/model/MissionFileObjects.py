@@ -10,11 +10,14 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
+import logging
+
 
 class MissionFileObjects(object):
     """THis class provides a singleton that stores a list of FileObjects"""
     class __MissionFileObjects:
         def __init__(self):
+            logging.debug("\tInitializing MissionFileObjects...")
             self.objects_list = []
         #end init
 

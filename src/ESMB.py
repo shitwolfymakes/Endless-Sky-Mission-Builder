@@ -24,23 +24,29 @@ import logging
 from src.gui.GUI import GUI
 import src.utils as utils
 import src.config as config
+import src.model as model
 
 
 #TODO: Have ESMB hold the missionList instead of GUI
 class ESMB(object):
     """The application object"""
     def __init__(self):
-        self.logger_setup()
-        logging.debug("Starting ESMB...")
-
         debug_mode = False
         if "debug=True" in sys.argv:
             debug_mode = True
 
-        self.load_tooltips()
+        self.setup()
+        #TODO: move into setup
         self.gui = GUI(debug_mode)
     #end init
 
+
+    def setup(self):
+        self.logger_setup()
+        logging.debug("Starting ESMB...")
+        self.load_tooltips()
+        self.setup_singletons()
+    #end setup
 
     @staticmethod
     def logger_setup():
@@ -57,6 +63,10 @@ class ESMB(object):
         config.tooltips_dict = utils.load_tooltips()
         logging.debug("\tTooltips loaded!")
     # end load_tooltips
+
+    def setup_singletons(self):
+        config.mission_file_objects = model.MissionFileObjects()
+    #end setup_singletons
 #end class ESMB
 
 
