@@ -14,6 +14,10 @@ from abc import ABC, abstractmethod
 
 
 class FileObject(ABC):
+    def __init__(self, obj_type):
+        self.type = obj_type
+    #end def
+
     @abstractmethod
     def to_string(self):
         pass

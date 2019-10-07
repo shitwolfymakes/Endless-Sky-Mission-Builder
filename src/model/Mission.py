@@ -15,12 +15,13 @@ import logging
 import src.model as model
 
 
-class Mission(object):
+class Mission(model.FileObject):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, mission_name):
         logging.debug("Building mission: %s" % mission_name)
 
+        super().__init__("mission")
         self.components = model.MissionComponents()
         self.missionName = mission_name
         self.missionLines = []
@@ -61,4 +62,9 @@ class Mission(object):
         #print(trigger)
         self.components.triggerList.remove(trigger)
     #end remove_trigger
+
+
+    def to_string(self):
+        return self.__str__()
+    #end to_string
 #end class Mission
