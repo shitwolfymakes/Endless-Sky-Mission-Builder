@@ -24,7 +24,7 @@ import logging
 from src.gui.GUI import GUI
 import src.utils as utils
 import src.config as config
-import src.model as model
+import src.singletons as singletons
 
 
 #TODO: Have ESMB hold the missionList instead of GUI
@@ -48,6 +48,7 @@ class ESMB(object):
         self.setup_singletons()
     #end setup
 
+
     @staticmethod
     def logger_setup():
         # For some reason this for loop is required to get the outputting to a file working
@@ -64,8 +65,10 @@ class ESMB(object):
         logging.debug("\tTooltips loaded!")
     # end load_tooltips
 
-    def setup_singletons(self):
-        config.mission_file_objects = model.MissionFileObjects()
+
+    @staticmethod
+    def setup_singletons():
+        config.mission_file_objects = singletons.MissionFileObjects()
     #end setup_singletons
 #end class ESMB
 
