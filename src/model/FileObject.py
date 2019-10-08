@@ -19,7 +19,14 @@ class FileObject(ABC):
         self.name = None
     #end def
 
+
+    @abstractmethod
+    def print_item_lines_to_text(self):
+        pass
+    #end print_item_lines_to_text
+
     @abstractmethod
     def to_string(self):
         pass
+    #end to_string
 #end class FileObject

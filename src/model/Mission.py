@@ -30,7 +30,7 @@ class Mission(model.FileObject):
     #end init
 
 
-    def print_mission_lines_to_text(self):
+    def print_item_lines_to_text(self):
         """Concatenate all the missionLines together. Used to make a block of text to display in the missionFrame."""
         # Note to self: this is the most efficient and pythonic way to concat all these strings together
         mission_text = "".join(self.missionLines)
