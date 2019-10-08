@@ -24,25 +24,24 @@ class MissionComponents:
         #TODO: refactor to use Repeat object
         logging.debug("\tMission components initializing...")
 
-        self.missionDisplayName = None          # mission <name>
-        self.description        = None          # description <text>
-        self.blocked            = None          # blocked <message>
-        self.deadline           = components.Deadline()
-        self.cargo              = components.Cargo()
-        self.passengers         = components.Passengers()
-        self.illegal            = components.Illegal()
-        self.isStealth          = False
-        self.isInvisible        = False         # invisible
-        self.priorityLevel      = None          # (priority | minor)
-        self.whereShown         = None          # (job | landing | assisting | boarding)
-        self.repeat             = components.Repeat()
-        self.clearance          = components.Clearance()
-        self.isInfiltrating     = False         # infiltrating
-        self.waypoint           = None          # waypoint <system>
-        self.stopover           = components.Stopover()
-        self.source             = components.Source()
-        self.destination        = components.Destination()
-        self.triggerList        = []
+        self.mission_display_name = None            # mission <name>
+        self.description = None                     # description <text>
+        self.blocked = None                         # blocked <message>
+        self.deadline = components.Deadline()
+        self.cargo = components.Cargo()
+        self.passengers = components.Passengers()
+        self.illegal = components.Illegal()
+        self.is_stealth = False
+        self.is_invisible = False                   # invisible
+        self.priority_level = None                  # (priority | minor)
+        self.where_shown = None                     # (job | landing | assisting | boarding)
+        self.repeat = components.Repeat()
+        self.clearance = components.Clearance()
+        self.is_infiltrating = False                # infiltrating
+        self.waypoint = None                        # waypoint <system>
+        self.stopover = components.Stopover()
+        self.source = components.Source()
+        self.destination = components.Destination()
+        self.trigger_list = []
     #end init
-
 #end class MissionComponents

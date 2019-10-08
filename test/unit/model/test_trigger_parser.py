@@ -71,7 +71,7 @@ class TriggerParserTestCase(unittest.TestCase):
     #end test_add_quotes_quotes_not_added
 
 
-    ### triggerType
+    ### trigger_type
     def test_has_trigger_type_true(self):
         test_model = self.get_empty_test_model()
         trigger = test_model.components.triggerList[0]

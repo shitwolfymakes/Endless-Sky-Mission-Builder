@@ -21,7 +21,7 @@ class LogWindow(object):
     """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
     def __init__(self, app, master, log, format_type):
-        #TODO: replace formatType with an integer
+        #TODO: replace format_type with an integer
         logging.debug("\tBuilding LogWindow...")
 
         self.app        = app

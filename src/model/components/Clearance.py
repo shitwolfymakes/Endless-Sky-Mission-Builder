@@ -23,19 +23,19 @@ class Clearance:
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isActive = False
+        self.is_active = False
         self.clearance = None
     #end init
 
 
     def set(self, component_data):
-        self.isActive = True
+        self.is_active = True
         self.clearance = component_data
     #end set
 
 
     def reset(self):
-        self.isActive = False
+        self.is_active = False
         self.clearance = None
     #end reset
 

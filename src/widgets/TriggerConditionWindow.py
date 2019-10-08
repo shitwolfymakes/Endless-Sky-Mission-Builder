@@ -82,7 +82,7 @@ class TriggerConditionWindow(object):
             entry = ttk.Entry(frame, textvariable=self.condData)
             entry.grid(row=1, column=1)
         else:
-            logging.error("Invalid conditionType!!")
+            logging.error("Invalid condition_type!!")
         #end if/else
 
         self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
@@ -119,7 +119,7 @@ class TriggerConditionWindow(object):
             self.condition.condition[1] = self.condData.get()
             logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
         else:
-            logging.error("Invalid TriggerCondition conditionType!!!")
+            logging.error("Invalid TriggerCondition condition_type!!!")
         #end if/else
     #end _store_data
 

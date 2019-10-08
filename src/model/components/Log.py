@@ -19,19 +19,19 @@ class Log:
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isActive   = False
-        self.formatType = None
-        self.log        = [None, None, None]
+        self.is_active = False
+        self.format_type = None
+        self.log = [None, None, None]
     # end init
 
 
     def set(self, format_type, component_data):
-        self.isActive = True
+        self.is_active = True
 
         if format_type == 1:
-            self.formatType = "<message>"
+            self.format_type = "<message>"
         elif format_type == 3:
-            self.formatType = "<type> <name> <message>"
+            self.format_type = "<type> <name> <message>"
 
         for i, data in enumerate(component_data):
             self.log[i] = data
@@ -47,8 +47,8 @@ class Log:
     def print_log(self):
         """Print the data all pretty-like"""
         logging.debug("\t\tLog Data")
-        logging.debug("\t\t\tisActive: %s" % self.isActive)
-        logging.debug("\t\t\tformatType: %s" % self.formatType)
+        logging.debug("\t\t\tis_active: %s" % self.is_active)
+        logging.debug("\t\t\tformat_type: %s" % self.format_type)
         logging.debug("\t\t\tLog: %s" % self.log)
     #end print_log
 # end class Log

@@ -114,7 +114,7 @@ class MissionParser:
 
     ### methods to check if components are active
     def _has_mission_display_name(self):
-        if self.components.missionDisplayName is None:
+        if self.components.mission_display_name is None:
             return False
         return True
     #def _has_mission_display_name
@@ -135,77 +135,77 @@ class MissionParser:
 
 
     def _has_deadline(self):
-        if self.components.deadline.isActive is False:
+        if self.components.deadline.is_active is False:
             return False
         return True
     #def _has_deadline
 
 
     def _has_cargo(self):
-        if self.components.cargo.isActive is False:
+        if self.components.cargo.is_active is False:
             return False
         return True
     #end _has_cargo
 
 
     def _has_passengers(self):
-        if self.components.passengers.isActive is False:
+        if self.components.passengers.is_active is False:
             return False
         return True
     #end _has_passengers
 
 
     def _has_illegal(self):
-        if self.components.illegal.isActive is False:
+        if self.components.illegal.is_active is False:
             return False
         return True
     #end _has_illegal
 
 
     def _has_stealth(self):
-        if self.components.isStealth is False:
+        if self.components.is_stealth is False:
             return False
         return True
     #end _has_stealth
 
 
     def _has_invisible(self):
-        if self.components.isInvisible is False:
+        if self.components.is_invisible is False:
             return False
         return True
     #end _hes_invisible
 
 
     def _has_priority_level(self):
-        if self.components.priorityLevel is None:
+        if self.components.priority_level is None:
             return False
         return True
     #end _has_priority_level
 
 
     def _has_where_shown(self):
-        if self.components.whereShown is None:
+        if self.components.where_shown is None:
             return False
         return True
     #end _has_where_shown
 
 
     def _has_repeat(self):
-        if self.components.repeat.isActive is False:
+        if self.components.repeat.is_active is False:
             return False
         return True
     #end _has_repeat
 
 
     def _has_clearance(self):
-        if self.components.clearance.isActive is False:
+        if self.components.clearance.is_active is False:
             return False
         return True
     #end _has_clearance
 
 
     def _has_infiltrating(self):
-        if self.components.isInfiltrating is False:
+        if self.components.is_infiltrating is False:
             return False
         return True
     #end _has_infiltrating
@@ -219,28 +219,28 @@ class MissionParser:
 
 
     def _has_stopover(self):
-        if self.components.stopover.isActive is False:
+        if self.components.stopover.is_active is False:
             return False
         return True
     # end _has_stopover
 
 
     def _has_source(self):
-        if self.components.source.isActive is False:
+        if self.components.source.is_active is False:
             return False
         return True
     #end _has_source
 
 
     def _has_destination(self):
-        if self.components.destination.isActive is False:
+        if self.components.destination.is_active is False:
             return False
         return True
     #end _has_destination
 
 
     def _has_triggers(self):
-        if not self.components.triggerList:
+        if not self.components.trigger_list:
             return False
         return True
     #end _has_triggers
@@ -249,7 +249,7 @@ class MissionParser:
     ### methods to parse the data from each component in the model
     def _parse_mission_display_name(self):
         logging.debug("\t\tParsing mission display name...")
-        self._add_line("\tname `%s`" % self.components.missionDisplayName)
+        self._add_line("\tname `%s`" % self.components.mission_display_name)
     #end _parse_mission_display_name
 
 
@@ -303,13 +303,13 @@ class MissionParser:
 
     def _parse_priority_level(self):
         logging.debug("\t\tParsing priority level...")
-        self._add_line("\t%s" % self.components.priorityLevel)
+        self._add_line("\t%s" % self.components.priority_level)
     #end _parse_priority_level
 
 
     def _parse_where_shown(self):
         logging.debug("\t\tParsing where shown...")
-        self._add_line("\t%s" % self.components.whereShown)
+        self._add_line("\t%s" % self.components.where_shown)
     #end _parse_where_shown
 
 

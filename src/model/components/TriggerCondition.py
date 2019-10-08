@@ -19,15 +19,15 @@ class TriggerCondition:
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isActive      = False
-        self.conditionType = None
-        self.condition     = [None, None, None]
+        self.is_active      = False
+        self.condition_type = None
+        self.condition      = [None, None, None]
     # end init
 
 
     def set(self, condition_type, component_data):
-        self.isActive = True
-        self.conditionType = condition_type
+        self.is_active = True
+        self.condition_type = condition_type
         for i, data in enumerate(component_data):
             self.condition[i] = data
     #end set
@@ -42,8 +42,8 @@ class TriggerCondition:
     def print_condition(self):
         """Print the data all pretty-like"""
         logging.debug("\t\tCondition Data")
-        logging.debug("\t\t\tisActive: %s" % self.isActive)
-        logging.debug("\t\t\tconditionType: %s" % self.conditionType)
+        logging.debug("\t\t\tis_active: %s" % self.is_active)
+        logging.debug("\t\t\tcondition_type: %s" % self.condition_type)
         logging.debug("\t\t\tCondition: %s" % self.condition)
     #end printCondition
 # end class TriggerCondition

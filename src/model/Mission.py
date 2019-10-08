@@ -52,7 +52,7 @@ class Mission(model.FileItem):
     def add_trigger(self):
         """Add a trigger object to this mission"""
         new_trigger = model.components.Trigger()
-        self.components.triggerList.append(new_trigger)
+        self.components.trigger_list.append(new_trigger)
         return new_trigger
     #end add_trigger
 
@@ -60,7 +60,7 @@ class Mission(model.FileItem):
     def remove_trigger(self, trigger):
         """Remove a trigger object from this mission"""
         #print(trigger)
-        self.components.triggerList.remove(trigger)
+        self.components.trigger_list.remove(trigger)
     #end remove_trigger
 
 

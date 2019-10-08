@@ -41,47 +41,47 @@ class Trigger:
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isActive    = False
-        self.triggerType = None
-        self.dialog      = None
-        self.outfit      = [None, None]
-        self.require     = [None, None]
-        self.isPayment   = False
-        self.payment     = [None, None]
-        self.event       = [None, None, None]
-        self.isFail      = False
-        self.fail        = None
-        self.logs        = []
-        self.conditions  = []
+        self.is_active    = False
+        self.trigger_type = None
+        self.dialog       = None
+        self.outfit       = [None, None]
+        self.require      = [None, None]
+        self.is_payment   = False
+        self.payment      = [None, None]
+        self.event        = [None, None, None]
+        self.is_fail      = False
+        self.fail         = None
+        self.logs         = []
+        self.conditions   = []
     #end init
 
 
     def clear_trigger(self):
         """Zeroes out the data in the Trigger"""
-        self.triggerType = None
-        self.dialog      = None
-        self.outfit      = [None, None]
-        self.require     = [None, None]
-        self.isPayment   = False
-        self.payment     = [None, None]
-        self.event       = [None, None, None]
-        self.isFail      = False
-        self.fail        = None
+        self.trigger_type = None
+        self.dialog       = None
+        self.outfit       = [None, None]
+        self.require      = [None, None]
+        self.is_payment   = False
+        self.payment      = [None, None]
+        self.event        = [None, None, None]
+        self.is_fail      = False
+        self.fail         = None
     #end clear_trigger
 
 
     def print_trigger(self):
         """Print the data all pretty-like"""
         logging.debug("\tTrigger Data")
-        logging.debug("\t\tisActive: %s" % self.isActive)
-        logging.debug("\t\tOn: %s" % self.triggerType)
+        logging.debug("\t\tis_active: %s" % self.is_active)
+        logging.debug("\t\tOn: %s" % self.trigger_type)
         logging.debug("\t\tDialog: %s" % self.dialog)
         logging.debug("\t\tOutfit: %s" % self.outfit)
         logging.debug("\t\tRequire: %s" % self.require)
-        logging.debug("\t\tisPayment: %s" % self.isPayment)
+        logging.debug("\t\tis_payment: %s" % self.is_payment)
         logging.debug("\t\tPayment: %s" % self.payment)
         logging.debug("\t\tEvent: %s" % self.event)
-        logging.debug("\t\tisFail: %s" % self.isFail)
+        logging.debug("\t\tis_fail: %s" % self.is_fail)
         logging.debug("\t\tFail: %s" % self.fail)
         logging.debug("\t\tLogs:")
         for log in self.logs:

@@ -24,14 +24,14 @@ class TriggerParser:
         self.trigger = trigger
         self.lines = []
 
-        # isActive
+        # is_active
         if self.trigger.isActive:
             logging.debug("\t\t\tParsing Trigger...")
         else:
             return ""
         #end if/else
 
-        # triggerType
+        # trigger_type
         if self._has_trigger_type():
             self._parse_trigger_type()
 

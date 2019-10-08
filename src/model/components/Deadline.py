@@ -21,20 +21,20 @@ class Deadline:
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
-        self.isActive = False
+        self.is_active = False
         self.deadline = [None, None]
     #end init
 
 
     def set(self, component_data):
-        self.isActive = True
+        self.is_active = True
         for i, data in enumerate(component_data):
             self.deadline[i] = data
     #end set
 
 
     def reset(self):
-        self.isActive = False
+        self.is_active = False
         self.deadline = [None, None]
     #end reset
 
