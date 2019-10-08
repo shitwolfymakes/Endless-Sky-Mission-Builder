@@ -19,11 +19,13 @@ import src.config as config
 class ScrollingFrame(ttk.Frame):
     """This code provides for the center frame to resize as necessary to fit all the components in a mission"""
 
-    def __init__(self, parent):
+    def __init__(self, parent, title_text):
         ttk.Frame.__init__(self, parent)
-
         self.gui = config.gui
         self.parent = parent
+
+        title = ttk.Label(self, text=title_text)
+        title.pack()
 
         # create canvas and scrollbar
         self.vsb = ttk.Scrollbar(self, orient=VERTICAL)
