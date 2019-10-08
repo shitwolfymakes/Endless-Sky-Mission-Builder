@@ -38,7 +38,7 @@ class GUI:
             self.missionList = [Mission("Debugging")]
             self.missionNameToObjectDict = {self.missionList[0].name: self.missionList[0]}
             self.missionNames.append(self.missionList[0].name)
-            config.mission_file_objects.add_object(Mission("Debugging"))
+            config.mission_file_items.add_item(Mission("Debugging"))
         #end if
 
         # Build the application window

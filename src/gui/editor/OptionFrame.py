@@ -28,9 +28,9 @@ class OptionFrame(ttk.Frame):
         title = ttk.Label(self.option_frame, text="Mission File Items")
         title.pack()
 
-        obj_names = self.mfi.get_names()
-        self.combo_box = ttk.Combobox(self.option_frame, state="readonly", values=obj_names)
-        self.combo_box.bind("<<ComboboxSelected>>", self.obj_selected)
+        item_names = self.mfi.get_names()
+        self.combo_box = ttk.Combobox(self.option_frame, state="readonly", values=item_names)
+        self.combo_box.bind("<<ComboboxSelected>>", self.item_selected)
         self.combo_box.pack()
         if config.debugging:
             self.combo_box.current(0)
@@ -39,11 +39,11 @@ class OptionFrame(ttk.Frame):
     #end init
 
 
-    def obj_selected(self, event=None):
-        """Set active_object to the combobox option selected by the user"""
+    def item_selected(self, event=None):
+        """Set active_item to the combobox option selected by the user"""
         selected_name = self.combo_box.get()
-        logging.debug("Opening object \"%s\"" % selected_name)
-        config.active_object = self.mfo.get_object(selected_name)
+        logging.debug("Opening item \"%s\"" % selected_name)
+        config.active_item = self.mfi.get_item(selected_name)
 
         config.gui.update_center_frame()
         config.gui.update_mission_frame()
@@ -57,15 +57,15 @@ class OptionFrame(ttk.Frame):
         self.add_compile_button()
         self.add_help_button()
         self.add_change_name_button()
-        self.delete_current_object_button()
+        self.delete_current_button()
     #end add_buttons
 
 
     def add_new_button(self):
-        new_button = ttk.Button(self.option_frame,
-                                text="New",
-                                command=partial(utils.new_mission, self))
-        new_button.pack(fill='x')
+        new_item_button = ttk.Button(self.option_frame,
+                                     text="New Item",
+                                     command=partial(utils.new_mission, self))
+        new_item_button.pack(fill='x')
     #end add_new_button
 
 
@@ -86,10 +86,10 @@ class OptionFrame(ttk.Frame):
 
 
     def add_compile_button(self):
-        compile_obj_button = ttk.Button(self.option_frame,
-                                        text="Compile",
-                                        command=partial(utils.compile_mission, self))
-        compile_obj_button.pack(fill='x')
+        compile_item_button = ttk.Button(self.option_frame,
+                                         text="Compile",
+                                         command=partial(utils.compile_mission, self))
+        compile_item_button.pack(fill='x')
     #end add_compile_button
 
 
@@ -104,22 +104,22 @@ class OptionFrame(ttk.Frame):
     def add_change_name_button(self):
         #TODO: Implement this
         pass
-    #end add_change_name_button
+    #end add_change_item_name_button
 
 
-    def delete_current_object_button(self):
+    def delete_current_button(self):
         # TODO: Implement this
         pass
-    #end delete_current_object_button
+    #end delete_current_item_button
 
 
     def update_frame(self):
         logging.debug("Updating option_frame...")
-        logging.debug("\tCombobox options: %s" % str(self.mfo.get_names))
+        logging.debug("\tCombobox options: %s" % str(self.mfi.get_names))
 
-        self.combo_box['values'] = self.mfo.get_names()
-        current_object = self.mfi.items_list.index(config.active_item.name)
-        self.combo_box.current(current_object)
+        self.combo_box['values'] = self.mfi.get_names()
+        current_item = self.mfi.items_list.index(config.active_item.name)
+        self.combo_box.current(current_item)
 
         config.gui.update_center_frame()
         config.gui.update_mission_frame()

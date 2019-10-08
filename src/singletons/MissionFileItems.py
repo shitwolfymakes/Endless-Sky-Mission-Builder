@@ -1,4 +1,4 @@
-""" MissionFileItemsy
+""" MissionFileItems.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -14,8 +14,8 @@ import logging
 
 
 class MissionFileItems:
-    """THis class provides a singleton that stores a list of FileObjects"""
-    class __MissionFileObjects:
+    """This class provides a singleton that stores a list of FileItems"""
+    class __MissionFileItems:
         def __init__(self):
             logging.debug("\tInitializing MissionFileItems...")
             self.items_list = []
@@ -28,8 +28,8 @@ class MissionFileItems:
         #end str
 
 
-        def add_item(self, obj):
-            self.items_list.append(obj)
+        def add_item(self, item):
+            self.items_list.append(item)
             self.update_names()
         #end add_item
 
@@ -41,32 +41,32 @@ class MissionFileItems:
         #end update_names
 
 
-        def remove_item(self, obj):
-            self.items_list.remove(obj)
+        def remove_item(self, item):
+            self.items_list.remove(item)
         #end remove_item
 
 
         def get_names(self):
             name_list = []
-            for obj in self.items_list:
-                name_list.append(obj.name)
+            for item in self.items_list:
+                name_list.append(item.name)
             return name_list
         #end get_names
 
 
         def get_item(self, name):
-            for obj in self.items_list:
-                if obj.name == name:
-                    return obj
+            for item in self.items_list:
+                if item.name == name:
+                    return item
             #end for
         #end get_item
-    #end class __MissionFileObjects
+    #end class __MissionFileItems
 
     instance = None
 
     def __init__(self):
         if not MissionFileItems.instance:
-            MissionFileItems.instance = MissionFileItems.__MissionFileObjects()
+            MissionFileItems.instance = MissionFileItems.__MissionFileItems()
         else:
             pass
         #end if/else
