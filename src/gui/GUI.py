@@ -16,9 +16,9 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 
 from src import utils
+from src.gui.editor import OptionFrame
 from src.model import Mission
 import src.config as config
-import src.gui.editor as editor
 import src.widgets as widgets
 
 
@@ -117,13 +117,13 @@ class GUI:
         center_frame  = widgets.ScrollingCenterFrame(self, window)
         mission_frame = ttk.Frame(window)
 
-        self.optionFrame = editor.OptionFrame(window)
+        self.optionFrame = OptionFrame(window)
         self.optionFrame.grid(row=0, column=0, sticky="ns")
         self.centerFrame  = center_frame
         self.missionFrame = mission_frame
 
         # set up each of the frames
-        self.build_option_frame()
+        #self.build_option_frame()
         self.build_center_frame()
         self.build_mission_frame()
 
