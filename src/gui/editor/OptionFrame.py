@@ -25,7 +25,7 @@ class OptionFrame(ttk.Frame):
         self.mfo = config.mission_file_objects
         self.option_frame = self
 
-        title = ttk.Label(self.option_frame, text="Mission File Objects")
+        title = ttk.Label(self.option_frame, text="Mission File Items")
         title.pack()
 
         obj_names = self.mfo.get_names()
