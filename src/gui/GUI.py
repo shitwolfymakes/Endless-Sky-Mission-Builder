@@ -16,7 +16,7 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 
 from src import utils
-from src.gui.editor import OptionFrame
+from src.gui.editor import OptionFrame, ItemTextFrame
 from src.model import Mission
 import src.config as config
 import src.widgets as widgets
@@ -120,12 +120,14 @@ class GUI:
         self.optionFrame = OptionFrame(window)
         self.optionFrame.grid(row=0, column=0, sticky="ns")
         self.centerFrame  = center_frame
-        self.missionFrame = mission_frame
+        #self.missionFrame = mission_frame
+        self.missionFrame = ItemTextFrame(window)
+        self.missionFrame.grid(row=0, column=2, sticky="nsew")
 
         # set up each of the frames
         #self.build_option_frame()
         self.build_center_frame()
-        self.build_mission_frame()
+        #self.build_mission_frame()
 
         logging.debug("\tGUI built")
     #end build_main_view
@@ -460,7 +462,7 @@ class GUI:
         self.missionTextBox.forget()
         self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
         self.missionTextBox.pack()
-        self.missionTextBox.insert(END, self.activeMission.print_mission_lines_to_text())
+        self.missionTextBox.insert(END, self.activeMission.print_item_lines_to_text())
         self.missionTextBox.config(state=DISABLED)
     #end update_mission_frame
 
