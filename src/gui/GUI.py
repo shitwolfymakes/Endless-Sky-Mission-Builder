@@ -17,8 +17,9 @@ from ttkthemes import ThemedTk
 
 from src import utils
 from src.model import Mission
-import src.widgets as widgets
 import src.config as config
+import src.gui.editor as editor
+import src.widgets as widgets
 
 
 class GUI:
@@ -37,6 +38,7 @@ class GUI:
             self.missionList = [Mission("Debugging")]
             self.missionNameToObjectDict = {self.missionList[0].name: self.missionList[0]}
             self.missionNames.append(self.missionList[0].name)
+            config.mission_file_objects.add_object(Mission("Debugging"))
         #end if
 
         # Build the application window
@@ -111,11 +113,11 @@ class GUI:
         :param window: The ThemedTK object that the rest of the GUI is built off of
         """
         #TODO: convert each of these into encapsulated frames, with no code in GUI
-        option_frame  = ttk.Frame(window)
+        #option_frame  = ttk.Frame(window)
         center_frame  = widgets.ScrollingCenterFrame(self, window)
         mission_frame = ttk.Frame(window)
 
-        self.optionFrame  = option_frame
+        self.optionFrame = editor.OptionFrame(window)
         self.optionFrame.grid(row=0, column=0, sticky="ns")
         self.centerFrame  = center_frame
         self.missionFrame = mission_frame

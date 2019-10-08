@@ -2,7 +2,7 @@
 gui
 ===
 
-Provides the GUI used by ESMB
+Provides the GUI object
 """
 
 from .GUI import GUI
