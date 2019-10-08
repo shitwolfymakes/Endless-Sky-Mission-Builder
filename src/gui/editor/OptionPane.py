@@ -1,4 +1,4 @@
-""" OptionFrame.py
+""" OptionPanepy
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -14,14 +14,15 @@ from functools import partial
 from tkinter import ttk
 
 import src.config as config
+import src.gui.editor as editor
 import src.utils as utils
 
 
-class OptionFrame(ttk.Frame):
+class OptionPane(ttk.Frame, editor.GUIPane):
     """This frame contains user functions for navigating ESMB"""
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
-        logging.debug("\tInitializing OptionFrame...")
+        logging.debug("\tInitializing OptionPane...")
         self.mfi = config.mission_file_items
         self.option_frame = self
 
@@ -113,15 +114,15 @@ class OptionFrame(ttk.Frame):
     #end delete_current_item_button
 
 
-    def update_frame(self):
-        logging.debug("Updating option_frame...")
+    def update_pane(self):
+        logging.debug("Updating option_pane...")
         logging.debug("\tCombobox options: %s" % str(self.mfi.get_names))
 
         self.combo_box['values'] = self.mfi.get_names()
         current_item = self.mfi.items_list.index(config.active_item.name)
         self.combo_box.current(current_item)
 
-        config.gui.update_center_frame()
-        config.gui.update_mission_frame()
-    #end update_frame
-#end class OptionFrame
+        config.gui.update_center_pane()
+        config.gui.update_mission_pane()
+    #end update_pane
+#end class OptionPane

@@ -1,5 +1,4 @@
-""" ItemTextFrame.py
-# Copyright (c) 2019 by Andrew Sneed
+""" ItemTextPane.py# Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
@@ -14,12 +13,13 @@ from tkinter import *
 from tkinter import ttk
 
 import src.config as config
+import src.gui.editor as editor
 
 
-class ItemTextFrame(ttk.Frame):
+class ItemTextPane(ttk.Frame, editor.GUIPane):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
-        logging.debug("\tInitializing OutputTextFrame...")
+        logging.debug("\tInitializing OutputTextPane...")
         self.item_text_frame = self
 
         title = ttk.Label(self.item_text_frame, text="Item Text")
@@ -44,13 +44,13 @@ class ItemTextFrame(ttk.Frame):
     #end _add_welcome_message
 
 
-    def update_frame(self):
-        logging.debug("Updating text_frame...")
+    def update_pane(self):
+        logging.debug("Updating text_pane...")
 
         self.text_box.forget()
         self.text_box = Text(self.item_text_frame, height=50, width=100, wrap=WORD)
         self.text_box.pack()
         self.text_box.insert(END, config.active_item.print_item_lines_to_text())
         self.text_box.config(state=DISABLED)
-    #end update_frame
-#end OutputTextFrame
+    #end update_pane
+#end ItemTextPane

@@ -10,13 +10,10 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 import logging
-from functools import partial
-from tkinter import *
 from tkinter import ttk
 from ttkthemes import ThemedTk
 
-from src import utils
-from src.gui.editor import OptionFrame, ItemTextFrame
+from src.gui.editor import OptionPane, ItemTextPane
 from src.model import Mission
 import src.config as config
 import src.widgets as widgets
@@ -35,9 +32,6 @@ class GUI:
         self.missionNames = []
 
         if config.debugging:
-            self.missionList = [Mission("Debugging")]
-            self.missionNameToObjectDict = {self.missionList[0].name: self.missionList[0]}
-            self.missionNames.append(self.missionList[0].name)
             config.mission_file_items.add_item(Mission("Debugging"))
         #end if
 
@@ -98,8 +92,8 @@ class GUI:
         self.build_main_view(self.gui)
 
         self.activeMission = None
-        if config.debugging:
-            self.activeMission = self.missionList[0]
+        #if config.debugging:
+        #    self.activeMission = self.missionList[0]
 
         config.gui = self
         self.gui.mainloop()
@@ -115,13 +109,14 @@ class GUI:
         #TODO: convert each of these into encapsulated frames, with no code in GUI
         #option_frame  = ttk.Frame(window)
         center_frame  = widgets.ScrollingCenterFrame(self, window)
-        mission_frame = ttk.Frame(window)
+        #mission_frame = ttk.Frame(window)
 
-        self.optionFrame = OptionFrame(window)
+        self.optionFrame = OptionPane(window)
         self.optionFrame.grid(row=0, column=0, sticky="ns")
+
         self.centerFrame  = center_frame
-        #self.missionFrame = mission_frame
-        self.missionFrame = ItemTextFrame(window)
+
+        self.missionFrame = ItemTextPane(window)
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
 
         # set up each of the frames
@@ -131,54 +126,6 @@ class GUI:
 
         logging.debug("\tGUI built")
     #end build_main_view
-
-
-    ### BUILDING FRAMES ###
-
-
-    def build_option_frame(self):
-        """Add widgets to the optionFrame"""
-        logging.debug("\tBuilding optionFrame...")
-        #self.optionFrame.grid(row=0, column=0, sticky="ns")
-
-        of_title = ttk.Label(self.optionFrame, text="Mission")
-        of_title.pack()
-
-        self.missionComboBox = ttk.Combobox(self.optionFrame, state="readonly", values=self.missionNames)
-        self.missionComboBox.bind("<<ComboboxSelected>>", self.mission_selected)
-        self.missionComboBox.pack()
-
-        if config.debugging:
-            self.missionComboBox.current(0)
-
-        # add function buttons
-        new_mission_button = ttk.Button(self.optionFrame,
-                                        text="New Mission",
-                                        command=partial(utils.new_mission, self))
-        new_mission_button.pack(fill='x')
-
-        save_mission_file_button = ttk.Button(self.optionFrame,
-                                              text="Save Mission File",
-                                              command=partial(utils.save_file, self))
-        save_mission_file_button.pack(fill='x')
-
-        open_mission_file_button = ttk.Button(self.optionFrame,
-                                              text="Open Mission File",
-                                              command=partial(utils.open_file, self))
-        open_mission_file_button.pack(fill='x')
-
-        compile_mission_file_button = ttk.Button(self.optionFrame,
-                                                 text="Compile Mission",
-                                                 command=partial(utils.compile_mission, self))
-        compile_mission_file_button.pack(fill='x')
-
-        help_button = ttk.Button(self.optionFrame,
-                                 text="Help",
-                                 command=partial(utils.help_user))
-        help_button.pack(fill='x')
-
-        #TODO: Add functionality to change missionName and delete mission. Also, update button grouping to reflect
-    #end build_option_frame
 
 
     def build_center_frame(self):
@@ -271,47 +218,7 @@ class GUI:
     #end build_center_frame
 
 
-    def build_mission_frame(self):
-        """Add widgets to the missionFrame"""
-        logging.debug("\tBuilding missionFrame...")
-
-        self.missionFrame.grid(row=0, column=2, sticky="nsew")
-        mf_title = ttk.Label(self.missionFrame, text="Mission Text")
-        mf_title.pack()
-
-        self.missionTextBox = Text(self.missionFrame, wrap=WORD, height=50, width=100)
-        self.missionTextBox.pack(expand=1, fill='both')
-        welcome_message = "\n\t\t\tWelcome to Endless Sky Mission Builder!\n"
-        welcome_message += "\n\t - Click \"New Mission\" to get started\n"
-        welcome_message += "\n\t - Click \"Save Mission File\" to save all the missions to a text file\n"
-        welcome_message += "\n\t - Click \"Open Mission File\" to open a mission file for editing\n"
-        welcome_message += "\n\t - Click \"Compile Mission\" to save save the current mission\n"
-        welcome_message += "\n\t - Click \"Help\" to be directed to the Mission Creation wiki\n"
-        self.missionTextBox.insert(END, welcome_message)
-        self.missionTextBox.config(state=DISABLED)
-    #end build_mission_frame
-
-
     ### UPDATING FRAMES ###
-
-
-    def update_option_frame(self):
-        """Update optionFrame to use the most recent data"""
-        logging.debug("Updating optionFrame...")
-
-        ml = self.missionList
-        self.missionNames = []
-        for m in ml:
-            self.missionNames.append(m.name)
-        logging.debug("\tNew mission options: %s" % str(self.missionNames))
-
-        self.missionComboBox['values'] = self.missionNames
-        current_mission = self.missionNames.index(self.activeMission.name)
-        self.missionComboBox.current(current_mission)
-
-        self.update_center_frame()
-        self.update_mission_frame()
-    #end update_option_frame
 
 
     def update_center_frame(self):
@@ -453,30 +360,4 @@ class GUI:
             for trigger in components.triggerList:
                 self.triggersFrame.populate_trigger(trigger)
     #end update_center_frame
-
-
-    def update_mission_frame(self):
-        """Update missionFrame to use the most recent data"""
-        logging.debug("Updating missionFrame...")
-
-        self.missionTextBox.forget()
-        self.missionTextBox = Text(self.missionFrame, height=50, width=100, wrap=WORD)
-        self.missionTextBox.pack()
-        self.missionTextBox.insert(END, self.activeMission.print_item_lines_to_text())
-        self.missionTextBox.config(state=DISABLED)
-    #end update_mission_frame
-
-
-    ### MISC METHODS ###
-
-
-    def mission_selected(self, event=None):
-        """Set activeMission to the combobox option selected by the user"""
-        selected_mission_name = self.missionComboBox.get()
-        logging.debug("Opening mission \"%s\"" % selected_mission_name)
-        self.activeMission = self.missionNameToObjectDict.get(selected_mission_name)
-        self.update_center_frame()
-        self.update_mission_frame()
-    #end mission_selected
-
 #end class GUI
