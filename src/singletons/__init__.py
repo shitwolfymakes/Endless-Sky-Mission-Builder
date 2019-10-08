@@ -5,4 +5,4 @@ singletons
 Provides the singletons used by ESMB
 """
 
-from .MissionFileObjects import MissionFileObjects
+from .MissionFileItems import MissionFileItems

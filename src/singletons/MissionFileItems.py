@@ -1,4 +1,4 @@
-""" MissionFileObjects.py
+""" MissionFileItemsy
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -13,60 +13,60 @@
 import logging
 
 
-class MissionFileObjects:
+class MissionFileItems:
     """THis class provides a singleton that stores a list of FileObjects"""
     class __MissionFileObjects:
         def __init__(self):
-            logging.debug("\tInitializing MissionFileObjects...")
-            self.objects_list = []
-            self.object_names = []
+            logging.debug("\tInitializing MissionFileItems...")
+            self.items_list = []
+            self.item_names = []
         #end init
 
 
         def __str__(self):
-            return repr(self) + str(self.objects_list)
+            return repr(self) + str(self.items_list)
         #end str
 
 
-        def add_object(self, obj):
-            self.objects_list.append(obj)
+        def add_item(self, obj):
+            self.items_list.append(obj)
             self.update_names()
-        #end add_object
+        #end add_item
 
 
         def update_names(self):
-            self.object_names = []
-            for obj in self.objects_list:
-                self.object_names.append(obj.name)
+            self.item_names = []
+            for item in self.items_list:
+                self.item_names.append(item.name)
         #end update_names
 
 
-        def remove_object(self, obj):
-            self.objects_list.remove(obj)
-        #end remove_object
+        def remove_item(self, obj):
+            self.items_list.remove(obj)
+        #end remove_item
 
 
         def get_names(self):
             name_list = []
-            for obj in self.objects_list:
+            for obj in self.items_list:
                 name_list.append(obj.name)
             return name_list
         #end get_names
 
 
-        def get_object(self, name):
-            for obj in self.objects_list:
+        def get_item(self, name):
+            for obj in self.items_list:
                 if obj.name == name:
                     return obj
             #end for
-        #end get_object
+        #end get_item
     #end class __MissionFileObjects
 
     instance = None
 
     def __init__(self):
-        if not MissionFileObjects.instance:
-            MissionFileObjects.instance = MissionFileObjects.__MissionFileObjects()
+        if not MissionFileItems.instance:
+            MissionFileItems.instance = MissionFileItems.__MissionFileObjects()
         else:
             pass
         #end if/else
@@ -76,4 +76,4 @@ class MissionFileObjects:
     def __getattr__(self, name):
         return getattr(self.instance, name)
     #end getattr
-#end class MissionFileObjects
+#end class MissionFileItems

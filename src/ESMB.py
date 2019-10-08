@@ -65,7 +65,7 @@ class ESMB:
 
 
     def setup_singletons(self):
-        config.mission_file_objects = singletons.MissionFileObjects()
+        config.mission_file_items = singletons.MissionFileItems()
         config.esmb = self
     #end setup_singletons
 #end class ESMB

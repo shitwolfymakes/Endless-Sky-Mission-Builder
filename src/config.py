@@ -14,7 +14,7 @@ This file contains ESMB's global variables
 
 debugging = False
 tooltips_dict = {}
-mission_file_objects = None
-active_object = None
+mission_file_items = None
+active_item = None
 esmb = None
 gui = None

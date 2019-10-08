@@ -15,7 +15,7 @@ import logging
 import src.model as model
 
 
-class Mission(model.FileObject):
+class Mission(model.FileItem):
     """The Mission class is the data structure that stores the data for an Endless Sky mission."""
 
     def __init__(self, name):

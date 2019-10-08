@@ -22,13 +22,13 @@ class OptionFrame(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         logging.debug("\tInitializing OptionFrame...")
-        self.mfo = config.mission_file_objects
+        self.mfi = config.mission_file_items
         self.option_frame = self
 
         title = ttk.Label(self.option_frame, text="Mission File Items")
         title.pack()
 
-        obj_names = self.mfo.get_names()
+        obj_names = self.mfi.get_names()
         self.combo_box = ttk.Combobox(self.option_frame, state="readonly", values=obj_names)
         self.combo_box.bind("<<ComboboxSelected>>", self.obj_selected)
         self.combo_box.pack()
@@ -118,7 +118,7 @@ class OptionFrame(ttk.Frame):
         logging.debug("\tCombobox options: %s" % str(self.mfo.get_names))
 
         self.combo_box['values'] = self.mfo.get_names()
-        current_object = self.mfo.objects_list.index(config.active_object.name)
+        current_object = self.mfi.items_list.index(config.active_item.name)
         self.combo_box.current(current_object)
 
         config.gui.update_center_frame()

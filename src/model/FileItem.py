@@ -1,5 +1,4 @@
-""" FileObject.py
-# Copyright (c) 2019 by Andrew Sneed
+""" FileItem.py Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
@@ -13,9 +12,9 @@
 from abc import ABC, abstractmethod
 
 
-class FileObject(ABC):
-    def __init__(self, obj_type):
-        self.type = obj_type
+class FileItem(ABC):
+    def __init__(self, item_type):
+        self.type = item_type
         self.name = None
     #end def
 
@@ -29,4 +28,4 @@ class FileObject(ABC):
     def to_string(self):
         pass
     #end to_string
-#end class FileObject
+#end class FileItem

@@ -20,7 +20,6 @@ class ItemTextFrame(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         logging.debug("\tInitializing OutputTextFrame...")
-        self.mfo = config.mission_file_objects
         self.item_text_frame = self
 
         title = ttk.Label(self.item_text_frame, text="Item Text")
@@ -51,7 +50,7 @@ class ItemTextFrame(ttk.Frame):
         self.text_box.forget()
         self.text_box = Text(self.item_text_frame, height=50, width=100, wrap=WORD)
         self.text_box.pack()
-        self.text_box.insert(END, config.active_object.print_item_lines_to_text())
+        self.text_box.insert(END, config.active_item.print_item_lines_to_text())
         self.text_box.config(state=DISABLED)
     #end update_frame
 #end OutputTextFrame

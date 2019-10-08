@@ -8,7 +8,7 @@ Provides
     2. Take what is entered into the gui and store it into the model
 """
 
-from .FileObject import FileObject
+from .FileItem import FileItem
 from .Mission import Mission
 from .MissionCompiler import MissionCompiler
 from .MissionComponents import MissionComponents
