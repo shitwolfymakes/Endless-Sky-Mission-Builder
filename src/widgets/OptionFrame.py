@@ -21,13 +21,14 @@ class OptionFrame(ttk.Frame):
     """This frame contains user functions for navigating ESMB"""
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
-        logging.debug("\tInitializing optionFrame...")
+        logging.debug("\tInitializing OptionFrame...")
+        self.mfo = config.mission_file_objects
         self.option_frame = self
 
         title = ttk.Label(self.option_frame, text="Mission File Objects")
         title.pack()
 
-        obj_names = config.mission_file_objects.get_names()
+        obj_names = self.mfo.get_names()
         self.combo_box = ttk.Combobox(self.option_frame, state="readonly", values=obj_names)
         self.combo_box.bind("<<ComboboxSelected>>", self.obj_selected)
         self.combo_box.pack()
@@ -40,9 +41,10 @@ class OptionFrame(ttk.Frame):
 
     def obj_selected(self, event=None):
         """Set active_object to the combobox option selected by the user"""
-        selected_mission_name = self.combo_box.get()
-        logging.debug("Opening object \"%s\"" % selected_mission_name)
-        config.active_object = config.mission_file_objects.get_object(selected_mission_name)
+        selected_name = self.combo_box.get()
+        logging.debug("Opening object \"%s\"" % selected_name)
+        config.active_object = self.mfo.get_object(selected_name)
+
         config.gui.update_center_frame()
         config.gui.update_mission_frame()
     #end mission_selected
@@ -109,4 +111,18 @@ class OptionFrame(ttk.Frame):
         # TODO: Implement this
         pass
     #end delete_current_object_button
+
+
+    def update_frame(self):
+        """Update optionFrame to use the most recent data"""
+        logging.debug("Updating option_frame...")
+        logging.debug("\tCombobox options: %s" % str(self.mfo.get_names))
+
+        self.combo_box['values'] = self.mfo.get_names()
+        current_object = self.mfo.objects_list.index(config.active_object.name)
+        self.combo_box.current(current_object)
+
+        config.gui.update_center_frame()
+        config.gui.update_mission_frame()
+    #end update_frame
 #end class OptionFrame
