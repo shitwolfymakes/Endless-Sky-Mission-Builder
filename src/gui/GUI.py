@@ -116,6 +116,7 @@ class GUI:
         mission_frame = ttk.Frame(window)
 
         self.optionFrame  = option_frame
+        self.optionFrame.grid(row=0, column=0, sticky="ns")
         self.centerFrame  = center_frame
         self.missionFrame = mission_frame
 
@@ -134,7 +135,7 @@ class GUI:
     def build_option_frame(self):
         """Add widgets to the optionFrame"""
         logging.debug("\tBuilding optionFrame...")
-        self.optionFrame.grid(row=0, column=0, sticky="ns")
+        #self.optionFrame.grid(row=0, column=0, sticky="ns")
 
         of_title = ttk.Label(self.optionFrame, text="Mission")
         of_title.pack()
