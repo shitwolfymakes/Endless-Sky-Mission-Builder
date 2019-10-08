@@ -114,7 +114,6 @@ class OptionFrame(ttk.Frame):
 
 
     def update_frame(self):
-        """Update optionFrame to use the most recent data"""
         logging.debug("Updating option_frame...")
         logging.debug("\tCombobox options: %s" % str(self.mfo.get_names))
 
