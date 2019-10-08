@@ -14,3 +14,5 @@ This file contains ESMB's global variables
 
 tooltips_dict = {}
 mission_file_objects = None
+esmb = None
+gui = None

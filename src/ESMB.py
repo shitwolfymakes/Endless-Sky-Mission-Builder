@@ -66,9 +66,9 @@ class ESMB:
     # end load_tooltips
 
 
-    @staticmethod
-    def setup_singletons():
+    def setup_singletons(self):
         config.mission_file_objects = singletons.MissionFileObjects()
+        config.esmb = self
     #end setup_singletons
 #end class ESMB
 
