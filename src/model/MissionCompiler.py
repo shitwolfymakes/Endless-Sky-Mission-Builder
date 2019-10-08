@@ -32,25 +32,25 @@ class MissionCompiler:
         self._reset_mission_to_default()
 
         # mission display name
-        if self.editor.display_name_component.listEntryStates[0].get():
+        if self._has_mission_display_name():
             logging.debug("\t\tFound display name: %s" % self.editor.display_name_component.listEntryData[0].get())
             self.mission.mission_display_name = self.editor.display_name_component.listEntryData[0].get()
         #end if
 
         # description
-        if self.editor.description_component.listEntryStates[0].get():
+        if self._has_description():
             logging.debug("\t\tFound description: %s" % self.editor.description_component.listEntryData[0].get())
             self.mission.description = self.editor.description_component.listEntryData[0].get()
         #end if
 
         # isBlocked
-        if self.editor.blocked_component.listEntryStates[0].get():
+        if self._has_blocked():
             logging.debug("\t\tFound block: %s" % self.editor.blocked_component.listEntryData[0].get())
             self.mission.blocked = self.editor.blocked_component.listEntryData[0].get()
         #end if
 
         # deadline
-        if self.editor.deadline_component.listEntryStates[0].get():
+        if self._has_deadline():
             logging.debug("\t\tFound deadline")
             self.mission.deadline.is_active = True
             if self.editor.deadline_component.listEntryStates[1].get():
@@ -64,7 +64,7 @@ class MissionCompiler:
         #end if
 
         # cargo
-        if self.editor.cargo_component.listEntryStates[0].get():
+        if self._has_cargo():
             logging.debug("\t\tFound cargo:")
             logging.debug("\t\t\t%s" % self.editor.cargo_component.listEntryData[0].get())
             logging.debug("\t\t\t%s" % self.editor.cargo_component.listEntryData[1].get())
@@ -83,7 +83,7 @@ class MissionCompiler:
         #end if
 
         # passengers
-        if self.editor.passengers_component.listEntryStates[0].get():
+        if self._has_passengers():
             logging.debug("\t\tFound passengers: %s" % self.editor.passengers_component.listEntryData[0].get())
             self.mission.passengers.is_active = True
             self.mission.passengers.passengers[0] = self.editor.passengers_component.listEntryData[0].get()
@@ -99,7 +99,7 @@ class MissionCompiler:
         #end if
 
         # illegal
-        if self.editor.illegal_component.listEntryStates[0].get():
+        if self._has_illegal():
             logging.debug("\t\tFound illegal: %s" % self.editor.illegal_component.listEntryData[0].get())
             self.mission.illegal.is_active = True
             self.mission.illegal.illegal[0] = self.editor.illegal_component.listEntryData[0].get()
@@ -110,31 +110,31 @@ class MissionCompiler:
         # end if
 
         # stealth
-        if self.editor.stealth_component.listEntryStates[0].get():
+        if self._has_stealth():
             logging.debug("\t\tFound stealth modifier")
             self.mission.is_stealth = True
         # end if
 
         # isInvisible
-        if self.editor.invisible_component.listEntryStates[0].get():
+        if self._has_invisible():
             logging.debug("\t\tFound mission invisible modifier")
             self.mission.is_invisible = True
         #end if
 
         # priorityLevel
-        if self.editor.priority_level_component.is_active.get():
+        if self._has_priority_level():
             logging.debug("\t\tFound priority level: %s" % self.editor.priority_level_component.combo.get().lower())
             self.mission.priority_level = self.editor.priority_level_component.combo.get().lower()
         #end if
 
         # whereShown
-        if self.editor.where_shown_component.is_active.get():
+        if self._has_where_shown():
             logging.debug("\t\tFound where shown: %s" % self.editor.where_shown_component.combo.get().lower())
             self.mission.where_shown = self.editor.where_shown_component.combo.get().lower()
         # end if
 
         # repeat
-        if self.editor.repeat_component.listEntryStates[0].get():
+        if self._has_repeat():
             logging.debug("\t\tFound repeat")
             self.mission.repeat.is_active = True
             if self.editor.repeat_component.listEntryStates[1].get():
@@ -145,27 +145,27 @@ class MissionCompiler:
 
         # clearance
         #TODO: fully implement this when filters are implemented
-        if self.editor.clearance_component.listEntryStates[0].get():
+        if self._has_clearance():
             logging.debug("\t\tFound clearance: %s" % self.editor.clearance_component.listEntryData[0].get())
             self.mission.clearance.is_active = True
             self.mission.clearance.clearance = self.editor.clearance_component.listEntryData[0].get()
         #end if
 
         # infiltrating
-        if self.editor.infiltrating_component.listEntryStates[0].get():
+        if self._has_infiltrating():
             logging.debug("\t\tFound infiltrating")
             self.mission.is_infiltrating = True
         #end if
 
         # waypoint
-        if self.editor.waypoint_component.listEntryStates[0].get():
+        if self._has_waypoint():
             logging.debug("\t\tFound waypoint: %s" % self.editor.waypoint_component.listEntryData[0].get())
             self.mission.waypoint = self.editor.waypoint_component.listEntryData[0].get()
         #end if
 
         # stopover
         #TODO: fully implement this when filters are implemented
-        if self.editor.stopover_component.listEntryStates[0].get():
+        if self._has_stopover():
             logging.debug("\t\tFound stopover: %s" % self.editor.stopover_component.listEntryData[0].get())
             self.mission.stopover.is_active = True
             self.mission.stopover.stopover = self.editor.stopover_component.listEntryData[0].get()
@@ -173,7 +173,7 @@ class MissionCompiler:
 
         # source
         #TODO: fully implement this when filters are implemented
-        if self.editor.source_component.listEntryStates[0].get():
+        if self._has_source():
             logging.debug("\t\tFound source: %s" % self.editor.source_component.listEntryData[0].get())
             self.mission.source.is_active = True
             self.mission.source.source = self.editor.source_component.listEntryData[0].get()
@@ -181,7 +181,7 @@ class MissionCompiler:
 
         # destination
         # TODO: fully implement this when filters are implemented
-        if self.editor.destination_component.listEntryStates[0].get():
+        if self._has_destination():
             logging.debug("\t\tFound source: %s" % self.editor.destination_component.listEntryData[0].get())
             self.mission.destination.is_active = True
             self.mission.destination.destination = self.editor.destination_component.listEntryData[0].get()
@@ -214,4 +214,95 @@ class MissionCompiler:
         self.mission.source.reset()
         self.mission.destination.reset()
     #end _reset_mission_to_default
+
+
+    ### methods to check if components are active
+    def _has_mission_display_name(self):
+        return self.editor.display_name_component.listEntryStates[0].get()
+    #def _has_mission_display_name
+
+
+    def _has_description(self):
+        return self.editor.description_component.listEntryStates[0].get()
+    #end _has_description
+
+
+    def _has_blocked(self):
+        return self.editor.blocked_component.listEntryStates[0].get()
+    #end _has_blocked
+
+
+    def _has_deadline(self):
+        return self.editor.deadline_component.listEntryStates[0].get()
+    #def _has_deadline
+
+
+    def _has_cargo(self):
+        self.editor.cargo_component.listEntryStates[0].get()
+    #end _has_cargo
+
+
+    def _has_passengers(self):
+        return self.editor.passengers_component.listEntryStates[0].get()
+    #end _has_passengers
+
+
+    def _has_illegal(self):
+        return self.editor.illegal_component.listEntryStates[0].get()
+    #end _has_illegal
+
+
+    def _has_stealth(self):
+        return self.editor.stealth_component.listEntryStates[0].get()
+    #end _has_stealth
+
+
+    def _has_invisible(self):
+        return self.editor.invisible_component.listEntryStates[0].get()
+    #end _hes_invisible
+
+
+    def _has_priority_level(self):
+        return self.editor.priority_level_component.is_active.get()
+    #end _has_priority_level
+
+
+    def _has_where_shown(self):
+        return self.editor.where_shown_component.is_active.get()
+    #end _has_where_shown
+
+
+    def _has_repeat(self):
+        return self.editor.repeat_component.listEntryStates[0].get()
+    #end _has_repeat
+
+
+    def _has_clearance(self):
+        return self.editor.clearance_component.listEntryStates[0].get()
+    #end _has_clearance
+
+
+    def _has_infiltrating(self):
+        return self.editor.infiltrating_component.listEntryStates[0].get()
+    #end _has_infiltrating
+
+
+    def _has_waypoint(self):
+        return self.editor.waypoint_component.listEntryStates[0].get()
+    #end _has_waypoint
+
+
+    def _has_stopover(self):
+        self.editor.stopover_component.listEntryStates[0].get()
+    #end _has_stopover
+
+
+    def _has_source(self):
+        self.editor.source_component.listEntryStates[0].get()
+    #end _has_source
+
+
+    def _has_destination(self):
+        self.editor.destination_component.listEntryStates[0].get()
+    #end _has_destination
 #end class MissionCompiler
