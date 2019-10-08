@@ -19,6 +19,7 @@ class MissionFileObjects:
         def __init__(self):
             logging.debug("\tInitializing MissionFileObjects...")
             self.objects_list = []
+            self.object_names = []
         #end init
 
 
@@ -29,6 +30,7 @@ class MissionFileObjects:
 
         def add_object(self, obj):
             self.objects_list.append(obj)
+            self.update_names()
         #end add_object
 
 
@@ -43,6 +45,13 @@ class MissionFileObjects:
                 name_list.append(obj.name)
             return name_list
         #end get_names
+
+
+        def update_names(self):
+            self.object_names = []
+            for obj in self.objects_list:
+                self.object_names.append(obj.name)
+        #end update_names
     #end class __MissionFileObjects
 
     instance = None
