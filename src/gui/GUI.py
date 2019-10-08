@@ -108,7 +108,7 @@ class GUI:
         """
         #TODO: convert each of these into encapsulated frames, with no code in GUI
         #option_frame  = ttk.Frame(window)
-        center_frame  = widgets.ScrollingCenterFrame(self, window)
+        center_frame  = widgets.ScrollingFrame(self, window)
         #mission_frame = ttk.Frame(window)
 
         self.optionFrame = OptionPane(window)

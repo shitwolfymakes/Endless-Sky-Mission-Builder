@@ -13,7 +13,7 @@ from .ComponentMandOptFrame import ComponentMandOptFrame
 from .LogFrame import LogFrame
 from .LogWindow import LogWindow
 from .NewMissionPopup import NewMissionPopup
-from .ScrollingCenterFrame import ScrollingCenterFrame
+from .ScrollingFrame import ScrollingFrame
 from .Tooltip import Tooltip
 from .TooltipLabel import TooltipLabel
 from .TriggerConditionWindow import TriggerConditionWindow

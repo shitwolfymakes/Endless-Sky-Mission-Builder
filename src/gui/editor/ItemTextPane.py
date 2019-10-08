@@ -1,4 +1,5 @@
-""" ItemTextPane.py# Copyright (c) 2019 by Andrew Sneed
+""" ItemTextPane.py
+# Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software

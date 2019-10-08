@@ -1,4 +1,4 @@
-""" ScrollingCenterFrame.py
+""" ScrollingFrame.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -13,17 +13,16 @@
 from tkinter import *
 from tkinter import ttk
 
+import src.config as config
 
-class ScrollingCenterFrame(ttk.Frame):
+
+class ScrollingFrame(ttk.Frame):
     """This code provides for the center frame to resize as necessary to fit all the components in a mission"""
 
-    def __init__(self, app, parent):
+    def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
 
-        cf_title = ttk.Label(self, text="Mission Options")
-        cf_title.pack()
-
-        self.app = app
+        self.gui = config.gui
         self.parent = parent
 
         # create canvas and scrollbar
@@ -43,7 +42,6 @@ class ScrollingCenterFrame(ttk.Frame):
 
         self.inner.bind("<Configure>", self._configure_inner)
         self.canvas.bind("<Configure>", self._configure_canvas)
-
     #end init
 
 
@@ -100,5 +98,4 @@ class ScrollingCenterFrame(ttk.Frame):
             self.canvas.config(width=self.inner.winfo_reqwidth())
         #end if/else
     #end _configureCanvas
-
-#end class ScrollingCenterFrame
+#end class ScrollingFrame
