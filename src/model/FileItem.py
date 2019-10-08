@@ -24,6 +24,13 @@ class FileItem(ABC):
         pass
     #end print_item_lines_to_text
 
+
+    @abstractmethod
+    def parse(self):
+        pass
+    #end parse
+
+
     @abstractmethod
     def to_string(self):
         pass

@@ -3,12 +3,12 @@ import src.model as model
 
 
 class ParseMissionTestCase(unittest.TestCase):
-    """Tests for `Mission.parse_mission`"""
+    """Tests for `Mission.parse`"""
 
     def test_parse_mission(self):
         true_output = self.add_all_data_lines()
 
-        self.model.parse_mission()
+        self.model.parse()
         self.assertEqual(true_output, self.model.missionLines)
     #end test_parse_mission
 

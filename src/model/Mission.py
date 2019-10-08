@@ -26,7 +26,7 @@ class Mission(model.FileItem):
         self.name = name
         self.missionLines = []
 
-        self.parse_mission()
+        self.parse()
     #end init
 
 
@@ -43,10 +43,10 @@ class Mission(model.FileItem):
     # end add_line
 
 
-    def parse_mission(self):
+    def parse(self):
         parser = model.MissionParser(self)
         self.missionLines = parser.run()
-    #end parse_mission
+    #end parse
 
 
     def add_trigger(self):

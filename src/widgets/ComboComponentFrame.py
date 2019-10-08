@@ -29,14 +29,14 @@ class ComboComponentFrame(ttk.Frame):
         label.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
         self.listComboboxData = list_combobox_data
-        self.isActive = BooleanVar()
+        self.is_active = BooleanVar()
         self.option   = None
 
-        self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.isActive)
+        self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.is_active)
         self.combo    = ttk.Combobox(self, state="disabled", values=self.listComboboxData, style='D.TCombobox')
         self.combo.bind("<<ComboboxSelected>>", self.option_selected)
 
-        self.button.configure(command=partial(self._cb_value_changed, self.isActive, [self.combo]))
+        self.button.configure(command=partial(self._cb_value_changed, self.is_active, [self.combo]))
         self.button.grid(row=0, column=1, sticky="e")
         self.combo.grid(row=1, column=0, sticky="ew", padx=(20,0))
     #end init
@@ -77,15 +77,15 @@ class ComboComponentFrame(ttk.Frame):
 
         :param data: The data to be stored
         """
-        self.isActive.set(1)
+        self.is_active.set(1)
         self.combo.current(self.listComboboxData.index(data.title()))
-        self._cb_value_changed(self.isActive, [self.combo])
+        self._cb_value_changed(self.is_active, [self.combo])
     #end set
 
 
     def reset(self):
         """Reset the frame to defaults"""
-        self.isActive.set(0)
+        self.is_active.set(0)
         self.combo.current(None)
         self.combo.config(state='disabled', style='D.TCombobox')
     #end reset
