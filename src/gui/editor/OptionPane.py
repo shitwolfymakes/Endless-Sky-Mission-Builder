@@ -89,7 +89,7 @@ class OptionPane(ttk.Frame, GUIPane):
     def add_compile_button(self):
         compile_item_button = ttk.Button(self.option_frame,
                                          text="Compile",
-                                         command=partial(utils.compile_mission, self))
+                                         command=partial(utils.compile_mission))
         compile_item_button.pack(fill='x')
     #end add_compile_button
 

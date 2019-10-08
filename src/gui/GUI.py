@@ -25,6 +25,9 @@ class GUI:
         logging.debug("\tBuilding GUI...")
         if config.debugging:
             config.mission_file_items.add_item(Mission("Debugging"))
+            config.mission_file_items.items_list[0].type = "mission"
+            config.active_item = config.mission_file_items.items_list[0]
+        #end if
 
         # Build the application window
         self.gui = ThemedTk(theme="plastik")
