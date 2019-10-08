@@ -27,7 +27,6 @@ import src.config as config
 import src.singletons as singletons
 
 
-#TODO: Have ESMB hold the missionList instead of GUI
 class ESMB:
     """The application object"""
     def __init__(self):
