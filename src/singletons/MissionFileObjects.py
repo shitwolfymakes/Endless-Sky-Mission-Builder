@@ -34,6 +34,13 @@ class MissionFileObjects:
         #end add_object
 
 
+        def update_names(self):
+            self.object_names = []
+            for obj in self.objects_list:
+                self.object_names.append(obj.name)
+        #end update_names
+
+
         def remove_object(self, obj):
             self.objects_list.remove(obj)
         #end remove_object
@@ -47,11 +54,12 @@ class MissionFileObjects:
         #end get_names
 
 
-        def update_names(self):
-            self.object_names = []
+        def get_object(self, name):
             for obj in self.objects_list:
-                self.object_names.append(obj.name)
-        #end update_names
+                if obj.name == name:
+                    return obj
+            #end for
+        #end get_object
     #end class __MissionFileObjects
 
     instance = None
