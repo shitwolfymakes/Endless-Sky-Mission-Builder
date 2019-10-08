@@ -13,7 +13,7 @@ import logging
 from tkinter import ttk
 from ttkthemes import ThemedTk
 
-from src.gui.editor import OptionPane, ItemTextPane
+from src.gui.editor import OptionPane, ItemTextPane, MissionEditorPane
 from src.model import Mission
 import src.config as config
 import src.widgets as widgets
@@ -108,20 +108,22 @@ class GUI:
         """
         #TODO: convert each of these into encapsulated frames, with no code in GUI
         #option_frame  = ttk.Frame(window)
-        center_frame  = widgets.ScrollingFrame(self, window)
+        #center_frame  = widgets.ScrollingFrame(self, window)
         #mission_frame = ttk.Frame(window)
 
         self.optionFrame = OptionPane(window)
         self.optionFrame.grid(row=0, column=0, sticky="ns")
 
-        self.centerFrame  = center_frame
+        #self.centerFrame = center_frame
+        self.centerFrame = MissionEditorPane(window)
+        self.centerFrame.grid(row=0, column=1, sticky="ns")
 
         self.missionFrame = ItemTextPane(window)
         self.missionFrame.grid(row=0, column=2, sticky="nsew")
 
         # set up each of the frames
         #self.build_option_frame()
-        self.build_center_frame()
+        #self.build_center_frame()
         #self.build_mission_frame()
 
         logging.debug("\tGUI built")

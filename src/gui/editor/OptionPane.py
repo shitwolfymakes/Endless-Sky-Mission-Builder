@@ -14,11 +14,11 @@ from functools import partial
 from tkinter import ttk
 
 import src.config as config
-import src.gui.editor as editor
 import src.utils as utils
+from src.gui.editor import GUIPane
 
 
-class OptionPane(ttk.Frame, editor.GUIPane):
+class OptionPane(ttk.Frame, GUIPane):
     """This frame contains user functions for navigating ESMB"""
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)

@@ -14,10 +14,10 @@ from tkinter import *
 from tkinter import ttk
 
 import src.config as config
-import src.gui.editor as editor
+from src.gui.editor import GUIPane
 
 
-class ItemTextPane(ttk.Frame, editor.GUIPane):
+class ItemTextPane(ttk.Frame, GUIPane):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         logging.debug("\tInitializing OutputTextPane...")
