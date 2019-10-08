@@ -12,6 +12,7 @@
 This file contains ESMB's global variables
 """
 
+debugging = False
 tooltips_dict = {}
 mission_file_objects = None
 esmb = None

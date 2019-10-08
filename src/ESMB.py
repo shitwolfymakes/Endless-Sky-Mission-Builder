@@ -31,13 +31,11 @@ import src.singletons as singletons
 class ESMB:
     """The application object"""
     def __init__(self):
-        debug_mode = False
         if "debug=True" in sys.argv:
-            debug_mode = True
+            config.debugging = True
 
         self.setup()
-        #TODO: move into setup
-        self.gui = GUI(debug_mode)
+        self.gui = GUI()
     #end init
 
 

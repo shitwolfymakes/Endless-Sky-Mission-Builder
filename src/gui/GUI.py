@@ -24,9 +24,8 @@ import src.config as config
 class GUI:
     """This handles the GUI for ESMB"""
 
-    def __init__(self, debug_mode):
+    def __init__(self):
         logging.debug("\tBuilding GUI...")
-        self.debugging = debug_mode
 
         #TODO: Look into changing this to not need the dictionary
         #TODO: Make missionList an instance variable of ESMB
@@ -34,7 +33,7 @@ class GUI:
         self.missionNameToObjectDict = {}
         self.missionNames = []
 
-        if self.debugging:
+        if config.debugging:
             self.missionList = [Mission("Debugging")]
             self.missionNameToObjectDict = {self.missionList[0].name: self.missionList[0]}
             self.missionNames.append(self.missionList[0].name)
@@ -97,7 +96,7 @@ class GUI:
         self.build_main_view(self.gui)
 
         self.activeMission = None
-        if self.debugging:
+        if config.debugging:
             self.activeMission = self.missionList[0]
 
         config.gui = self
@@ -144,7 +143,7 @@ class GUI:
         self.missionComboBox.bind("<<ComboboxSelected>>", self.mission_selected)
         self.missionComboBox.pack()
 
-        if self.debugging:
+        if config.debugging:
             self.missionComboBox.current(0)
 
         # add function buttons
