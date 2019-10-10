@@ -60,6 +60,10 @@ class MissionFileItems:
                     return item
             #end for
         #end get_item
+
+        def get_last_item(self):
+            return self.items_list[-1]
+        #end get_last_name
     #end class __MissionFileItems
 
     instance = None
