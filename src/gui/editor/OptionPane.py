@@ -65,7 +65,7 @@ class OptionPane(ttk.Frame, GUIPane):
     def add_new_button(self):
         new_item_button = ttk.Button(self.option_frame,
                                      text="New Item",
-                                     command=partial(utils.new_mission, self))
+                                     command=partial(utils.new_mission))
         new_item_button.pack(fill='x')
     #end add_new_button
 
@@ -119,10 +119,10 @@ class OptionPane(ttk.Frame, GUIPane):
         logging.debug("\tCombobox options: %s" % str(self.mfi.get_names))
 
         self.combo_box['values'] = self.mfi.get_names()
-        current_item = self.mfi.items_list.index(config.active_item.name)
+        current_item = self.mfi.items_list.index(config.active_item)
         self.combo_box.current(current_item)
 
         config.gui.update_center_pane()
-        config.gui.update_mission_pane()
+        config.gui.update_item_text_pane()
     #end update_pane
 #end class OptionPane

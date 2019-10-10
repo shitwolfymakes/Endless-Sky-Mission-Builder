@@ -77,4 +77,19 @@ class GUI:
 
         logging.debug("\tGUI built")
     #end build_main_view
+
+
+    def update_option_pane(self):
+        self.option_pane.update_pane()
+    #end update_option_pane
+
+
+    def update_center_pane(self):
+        self.center_pane.update_pane()
+    #end update_center_pane
+
+
+    def update_item_text_pane(self):
+        self.item_text_pane.update_pane()
+    #end update_item_text_pane
 #end class GUI

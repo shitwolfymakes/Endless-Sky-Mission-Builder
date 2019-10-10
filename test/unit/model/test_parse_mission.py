@@ -9,7 +9,7 @@ class ParseMissionTestCase(unittest.TestCase):
         true_output = self.add_all_data_lines()
 
         self.model.parse()
-        self.assertEqual(true_output, self.model.missionLines)
+        self.assertEqual(true_output, self.model.lines)
     #end test_parse_mission
 
     @staticmethod

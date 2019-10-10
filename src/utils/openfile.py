@@ -47,7 +47,7 @@ def open_file(app):
     with open(f.name) as missionfile:
         mission_lines = missionfile.readlines()
         # Print the mission file to the console
-        #print_mission_file(missionLines)
+        #print_mission_file(lines)
 
     # populate the missionList object
     #TODO: refactor this to use enumerate()

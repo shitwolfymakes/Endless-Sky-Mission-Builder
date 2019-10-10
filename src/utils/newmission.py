@@ -15,12 +15,8 @@ import logging
 from src.widgets.NewMissionPopup import NewMissionPopup
 
 
-def new_mission(app):
-    """
-    Prompt the user for the name of a new mission
-
-    :param app: The instance of ESMB
-    """
+def new_mission():
+    """Prompt the user for the name of a new mission"""
     logging.debug("Creating new mission...")
-    NewMissionPopup(app, app.gui, "Enter new mission name:")
+    NewMissionPopup("Enter new mission name:")
 #end new_mission

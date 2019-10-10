@@ -11,19 +11,22 @@
 """
 
 import logging
-from tkinter import ttk, Toplevel
+from tkinter import ttk
+from ttkthemes import ThemedTk
 
+from src import config
 from src.model import Mission
 
 
 class NewMissionPopup(object):
     """This class creates a custom pop-up window for use when creating a new Mission object"""
 
-    def __init__(self, app, master, text):
-        self.app = app
-        self.top = Toplevel(master)
+    def __init__(self, text):
+        self.top = ThemedTk(theme="plastik")
         self.top.title("New Mission")
         self.top.grab_set()             # freezes the app until the user enters or cancels
+
+        self.mfi = config.mission_file_items
 
         self.label = ttk.Label(self.top, text=text, background='white')
         self.label.pack()
@@ -31,25 +34,27 @@ class NewMissionPopup(object):
         self.e.pack()
         self.b = ttk.Button(self.top, text='Ok', command=self._cleanup)
         self.b.pack()
+
+        self.top.mainloop()
     #end init
 
 
     def _cleanup(self):
         """Clean up the window we created"""
         name = self.e.get()
-        self._add_to_mission_list(self.app, name)
+        self._add_to_items_list(name)
         self.top.grab_release()         # HAVE TO RELEASE
         self.top.destroy()
     #end _cleanup
 
+
     @staticmethod
-    def _add_to_mission_list(app, new_mission_name):
+    def _add_to_items_list(new_mission_name):
         logging.debug("Adding mission: \"%s\"..." % new_mission_name)
 
         mission = Mission(new_mission_name)
-        app.missionList.append(mission)
-        app.missionNameToObjectDict.update({mission.name: mission})
-        app.activeMission = mission
-        app.update_option_frame()
-    # end add_mission
+        config.mission_file_items.add_item(mission)
+        config.active_item = mission
+        config.gui.update_option_pane()
+    #end _add_to_items_list
 #end class NewMissionPopup
