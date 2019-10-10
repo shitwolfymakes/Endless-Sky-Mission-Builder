@@ -21,7 +21,6 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
     def __init__(self, parent):
         widgets.ScrollingFrame.__init__(self, parent, "Mission Options")
         logging.debug("\tInitializing MissionEditorPane...")
-        self.mission_editor_frame = self
 
         self.mission_editor_frame = self.inner
 
@@ -168,7 +167,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_mission_display_name(self, components):
         self.display_name_component.reset()
-        if components.missionDisplayName is not None:
+        if components.mission_display_name is not None:
             self.display_name_component.set(0, 0, components.mission_display_name)
     #end _update_mission_display_name
 
@@ -191,7 +190,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_deadline(self, components):
         self.deadline_component.reset()
-        if components.deadline.isActive is True:
+        if components.deadline.is_active is True:
             self.deadline_component.set(0, None, "isDeadlineCheckbutton")
             if components.deadline.deadline[0] is not None:
                 self.deadline_component.set(1, 0, components.deadline.deadline[0])
@@ -204,7 +203,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_cargo(self, components):
         self.cargo_component.reset()
-        if components.cargo.isActive is True:
+        if components.cargo.is_active is True:
             self.cargo_component.set(0, 0, components.cargo.cargo[0])
             self.cargo_component.set(0, 1, components.cargo.cargo[1])
             if components.cargo.cargo[2] is not None:
@@ -218,7 +217,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_passengers(self, components):
         self.passengers_component.reset()
-        if components.passengers.isActive is True:
+        if components.passengers.is_active is True:
             self.passengers_component.set(0, 0, components.passengers.passengers[0])
             if components.passengers.passengers[1] is not None:
                 self.passengers_component.set(1, 1, components.passengers.passengers[1])
@@ -231,7 +230,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_illegal(self, components):
         self.illegal_component.reset()
-        if components.illegal.isActive is True:
+        if components.illegal.is_active is True:
             self.illegal_component.set(0, 0, components.illegal.illegal[0])
             if components.illegal.illegal[1] is not None:
                 self.illegal_component.set(1, 1, components.illegal.illegal[1])
@@ -242,35 +241,35 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_stealth(self, components):
         self.stealth_component.reset()
-        if components.isStealth is True:
+        if components.is_stealth is True:
             self.stealth_component.set(0, None, "stealthCheckbutton")
     #end _update_stealth
 
 
     def _update_invisible(self, components):
         self.invisible_component.reset()
-        if components.isInvisible is True:
+        if components.is_invisible is True:
             self.invisible_component.set(0, None, "isInvisibleCheckbutton")
     #end _update_invisible
 
 
     def _update_priority_level(self, components):
         self.priority_level_component.reset()
-        if components.priorityLevel is not None:
+        if components.priority_level is not None:
             self.priority_level_component.set(components.priorityLevel)
     #end _update_priority_level
 
 
     def _update_where_shown(self, components):
         self.where_shown_component.reset()
-        if components.whereShown is not None:
+        if components.where_shown is not None:
             self.where_shown_component.set(components.whereShown)
     #end _update_where_shown
 
 
     def _update_repeat(self, components):
         self.repeat_component.reset()
-        if components.repeat.isActive is True:
+        if components.repeat.is_active is True:
             self.repeat_component.set(0, None, "isRepeatCheckbutton")
             if components.repeat.repeat is not None:
                 self.repeat_component.set(1, 0, components.repeat.repeat)
@@ -280,7 +279,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_clearance(self, components):
         self.clearance_component.reset()
-        if components.clearance.isActive is True:
+        if components.clearance.is_active is True:
             self.clearance_component.set(0, None, "isClearanceCheckbutton")
             if components.clearance.clearance is not None:
                 self.clearance_component.set(1, 0, components.clearance.clearance)
@@ -290,7 +289,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_infiltrating(self, components):
         self.infiltrating_component.reset()
-        if components.isInfiltrating is True:
+        if components.is_infiltrating is True:
             self.infiltrating_component.set(0, None, "isInfiltratingCheckbutton")
     #end _update_infiltrating
 
@@ -304,21 +303,21 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
 
     def _update_stopover(self, components):
         self.stopover_component.reset()
-        if components.stopover.isActive is True:
+        if components.stopover.is_active is True:
             self.stopover_component.set(0, 0, components.stopover.stopover)
     #end _update_stopover
 
 
     def _update_source(self, components):
         self.source_component.reset()
-        if components.source.isActive is True:
+        if components.source.is_active is True:
             self.source_component.set(0, 0, components.source.source)
     #end _update_source
 
 
     def _update_destination(self, components):
         self.destination_component.reset()
-        if components.destination.isActive is True:
+        if components.destination.is_active is True:
             self.destination_component.set(0, 0, components.destination.destination)
     #end _update_destination
 
@@ -326,13 +325,13 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
     def _update_triggers(self, components):
         # Clear out the AggregatedTriggerFrame
         self.triggers_frame.grid_forget()
-        self.triggers_frame = widgets.AggregatedTriggerFrame(self, self.mission_editor_frame.inner)
+        self.triggers_frame = widgets.AggregatedTriggerFrame(self, self.mission_editor_frame)
         self.triggers_frame.grid(row=18, column=0, sticky="ew")
 
         # Triggers
-        if components.triggerList:
+        if components.trigger_list:
             logging.debug("\tTriggers found")
-            for trigger in components.triggerList:
+            for trigger in components.trigger_list:
                 self.triggers_frame.populate_trigger(trigger)
         #end if
     #end _update_triggers
