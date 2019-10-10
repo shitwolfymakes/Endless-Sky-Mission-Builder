@@ -24,28 +24,27 @@ class Mission(model.FileItem):
         super().__init__("mission")
         self.components = model.MissionComponents()
         self.name = name
-        self.missionLines = []
 
         self.parse()
     #end init
 
 
     def print_item_lines_to_text(self):
-        """Concatenate all the missionLines together. Used to make a block of text to display in the item_text_pane."""
+        """Concatenate all the lines together. Used to make a block of text to display in the item_text_pane."""
         # Note to self: this is the most efficient and pythonic way to concat all these strings together
-        mission_text = "".join(self.missionLines)
+        mission_text = "".join(self.lines)
         return mission_text
     #end print_mission_lines_to_text
 
 
     def add_line(self, line):
-        self.missionLines.append(line + "\n")
+        self.lines.append(line + "\n")
     # end add_line
 
 
     def parse(self):
         parser = model.MissionParser(self)
-        self.missionLines = parser.run()
+        self.lines = parser.run()
     #end parse
 
 

@@ -39,34 +39,34 @@ class ESMB:
 
 
     def setup(self):
-        self.logger_setup()
+        self._logger_setup()
         logging.debug("Starting ESMB...")
-        self.load_tooltips()
-        self.setup_singletons()
+        self._load_tooltips()
+        self._setup_singletons()
     #end setup
 
 
     @staticmethod
-    def logger_setup():
+    def _logger_setup():
         # For some reason this for loop is required to get the outputting to a file working
         # See here: https://stackoverflow.com/a/49202811
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
         logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
-    # end logger setup
+    # end _logger_setup
 
 
     @staticmethod
-    def load_tooltips():
+    def _load_tooltips():
         config.tooltips_dict = utils.load_tooltips()
         logging.debug("\tTooltips loaded!")
-    # end load_tooltips
+    # end _load_tooltips
 
 
     @staticmethod
-    def setup_singletons():
+    def _setup_singletons():
         config.mission_file_items = singletons.MissionFileItems()
-    #end setup_singletons
+    #end _setup_singletons
 #end class ESMB
 
 

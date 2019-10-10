@@ -16,6 +16,7 @@ class FileItem(ABC):
     def __init__(self, item_type):
         self.type = item_type
         self.name = None
+        self.lines = []
     #end def
 
 
