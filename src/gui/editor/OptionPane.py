@@ -81,7 +81,7 @@ class OptionPane(ttk.Frame, GUIPane):
     def add_open_file_button(self):
         open_file_button = ttk.Button(self.option_frame,
                                       text="Open Mission File",
-                                      command=partial(utils.open_file, self))
+                                      command=partial(utils.open_file))
         open_file_button.pack(fill='x')
     #end add_open_file_button
 

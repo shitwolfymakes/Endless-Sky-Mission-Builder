@@ -14,224 +14,114 @@
 import re
 import logging
 
+from src.model.FileMissionItemParser import FileMissionItemParser
+
 
 class MissionFileParser:
     """This takes the data read in from a mission file and stores it in each mission object"""
-    def __init__(self, esmb):
-        self.esmb     = esmb
-        self.missions = esmb.missionList
+    def __init__(self, mission_lines):
+        self.lines = mission_lines
+        self.file_items = []
 
-        self.logMessagePattern = re.compile(r'^ *')
+        self.match_mission = re.compile(r'^ *mission')
+        self.match_event = re.compile(r'^event')
+        self.match_phrase = re.compile(r'^phrase')
+        self.match_npc = re.compile(r'^npc')
+        self.match_government = re.compile(r'^government')
     #end init
 
     def run(self):
         """Runs the parser"""
         logging.debug("\tParsing Mission file...")
 
-        for mission in self.missions:
-            logging.debug("\tParsing mission: \"%s\"" % mission.missionName)
-            lines = enumerate(mission.missionLines)
-            for i, line in lines:
-                line = line.rstrip()
-                tokens = self.tokenize(line)
+        #TODO: break this into multiple functions
+        enum_lines = enumerate(self.lines)
+        for i, line in enum_lines:
+            #print(i, line)
+            line.rstrip()
+            if line == "" or line == "\n":
+                continue
 
-                # determine which attribute we've got
-                if "mission" in tokens[0]:
-                    continue
-                elif "name" in tokens[0]:
-                    logging.debug("\t\tFound mission display name: \"%s\"" % tokens[1])
-                    mission.components.missionDisplayName = tokens[1]
-                elif "description" in tokens[0]:
-                    logging.debug("\t\tFound description: %s" % tokens[1])
-                    mission.components.description = tokens[1]
-                elif "blocked" in tokens[0]:
-                    logging.debug("\t\tFound blocked: %s" % tokens[1])
-                    mission.components.blocked = tokens[1]
-                elif "deadline" in tokens[0]:
-                    logging.debug("\t\tFound deadline")
-                    mission.components.deadline.isActive = True
-                    self.store_component_data(mission.components.deadline.deadline, tokens[1:])
-                elif "cargo" in tokens[0]:
-                    logging.debug("\t\tFound cargo: %s" % tokens[1:])
-                    mission.components.cargo.isActive = True
-                    self.store_component_data(mission.components.cargo.cargo, tokens[1:])
-                elif "passengers" in tokens[0]:
-                    logging.debug("\t\tFound passengers: %s" % tokens[1:])
-                    mission.components.passengers.isActive = True
-                    self.store_component_data(mission.components.passengers.passengers, tokens[1:])
-                elif "illegal" in tokens[0]:
-                    logging.debug("\t\tFound illegal modifier: %s" % tokens[1:])
-                    mission.components.illegal.isActive = True
-                    self.store_component_data(mission.components.illegal.illegal, tokens[1:])
-                elif "stealth" in tokens[0]:
-                    logging.debug("\t\tFound stealth modifier")
-                    mission.components.isStealth = True
-                elif "invisible" in tokens[0]:
-                    logging.debug("\t\tFound invisible modifier")
-                    mission.components.isInvisible = True
-                elif tokens[0] in ["priority", "minor"]:
-                    logging.debug("\t\tFound priority level")
-                    mission.components.priorityLevel = tokens[0]
-                elif tokens[0] in ["job", "landing", "assisting", "boarding"]:
-                    logging.debug("\t\tFound where shown")
-                    mission.components.whereShown = tokens[0]
-                elif "repeat" in tokens[0]:
-                    logging.debug("\t\tFound repeat")
-                    mission.components.repeat.isActive = True
-                    if len(tokens) > 1:
-                        logging.debug("\t\t\tFound repeat optional data: %s" % tokens[1])
-                        mission.components.repeat.repeat = tokens[1]
-                elif "clearance" in tokens[0]:
-                    logging.debug("\t\tFound clearance: %s" % tokens[1])
-                    mission.components.clearance.isActive = True
-                    mission.components.clearance.clearance   = tokens[1]
-                elif "infiltrating" in tokens[0]:
-                    logging.debug("\t\tFound infiltrating")
-                    mission.components.isInfiltrating = True
-                elif "waypoint" in tokens[0]:
-                    logging.debug("\t\tFound waypoint: %s" % tokens[1])
-                    mission.components.waypoint = tokens[1]
-                elif "stopover" in tokens[0]:
-                    logging.debug("\t\tFound stopover: %s" % tokens[1])
-                    mission.components.stopover.isActive = True
-                    mission.components.stopover.stopover   = tokens[1]
-                elif "source" in tokens[0]:
-                    logging.debug("\t\tFound source: %s" % tokens[1])
-                    mission.components.source.isActive = True
-                    mission.components.source.source   = tokens[1]
-                elif "destination" in tokens[0]:
-                    logging.debug("\t\tFound destination: %s" % tokens[1])
-                    mission.components.destination.isActive = True
-                    mission.components.destination.destination   = tokens[1]
-                elif "on" in tokens:
-                    logging.debug("\t\tFound Trigger: on %s" % tokens[1])
-                    trigger             = mission.add_trigger()
-                    trigger.isActive    = True
-                    trigger.triggerType = tokens[1]
+            if re.search(self.match_mission, line):
+                logging.debug("MISSION FOUND: %s" % line)
+                print("MISSION FOUND: %s" % line)
+                self.store_item_for_parsing(i, line, "mission")
+            elif re.search(self.match_event, line):
+                logging.debug("EVENT FOUND: %s" % line)
+                print("EVENT FOUND: %s" % line)
+                self.store_item_for_parsing(i, line, "event")
+            elif re.search(self.match_phrase, line):
+                logging.debug("PHRASE FOUND: %s" % line)
+                print("PHRASE FOUND: %s" % line)
+                self.store_item_for_parsing(i, line, "phrase")
+            elif re.search(self.match_npc, line):
+                logging.debug("NPC FOUND: %s" % line)
+                print("NPC FOUND: %s" % line)
+                self.store_item_for_parsing(i, line, "npc")
+            elif re.search(self.match_government, line):
+                logging.debug("GOVERNMENT FOUND: %s" % line)
+                print("GOVERNMENT FOUND: %s" % line)
+                self.store_item_for_parsing(i, line, "government")
+            #end elif
+        #end for
 
-                    cur = self.get_indent_level(mission.missionLines[i])
-                    nxt = self.get_indent_level((mission.missionLines[i + 1]))
-                    while True:
-                        if nxt <= cur:
-                            break
-                        i, line = lines.__next__()
-                        line = line.rstrip()
-                        tokens = self.tokenize(line)
-
-                        # dialog
-                        if "dialog" in tokens[0]:
-                            logging.debug("\t\t\tFound Dialog: %s" % tokens[1])
-                            trigger.dialog = tokens[1]
-                        elif "outfit" in tokens[0]:
-                            logging.debug("\t\t\tFound Outfit: %s" % tokens)
-                            self.store_component_data(trigger.outfit, tokens[1:])
-                        elif "require" in tokens[0]:
-                            logging.debug("\t\t\tFound Require: %s" % tokens)
-                            self.store_component_data(trigger.require, tokens[1:])
-                        elif "payment" in tokens[0]:
-                            logging.debug("\t\t\tFound Outfit: %s" % tokens)
-                            trigger.isPayment = True
-                            self.store_component_data(trigger.payment, tokens[1:])
-                        elif "event" in tokens[0]:
-                            logging.debug("\t\t\tFound Event: %s" % tokens)
-                            self.store_component_data(trigger.event, tokens[1:])
-                        elif "fail" in tokens[0]:
-                            logging.debug("\t\t\tFound Event: %s" % tokens[1])
-                            trigger.isFail = True
-                            trigger.fail   = tokens[1]
-                        elif "log" in tokens[0] and len(tokens) == 2:
-                            logging.debug("\t\t\tFound Log: %s" % tokens)
-                            new_log            = trigger.add_log()
-                            new_log.isActive   = True
-                            new_log.formatType = "<message>"
-                            new_log.log[0]     = tokens[1]
-                        elif "log" in tokens[0]:
-                            logging.debug("\t\t\tFound Log: %s" % tokens)
-                            new_log            = trigger.add_log()
-                            new_log.isActive   = True
-                            new_log.formatType = "<type> <name> <message>"
-                            self.store_component_data(new_log.log, tokens[1:])
-                        elif tokens[1] in ["=", "+=", "-="]:
-                            logging.debug("\t\t\tFound TriggerCondition: %s" % tokens)
-                            new_tc               = trigger.add_tc()
-                            new_tc.isActive      = True
-                            new_tc.conditionType = 0
-                            self.store_component_data(new_tc.condition, tokens)
-                        elif tokens[1] in ["++", "--"]:
-                            logging.debug("\t\t\tFound TriggerCondition: %s" % tokens)
-                            new_tc               = trigger.add_tc()
-                            new_tc.isActive      = True
-                            new_tc.conditionType = 1
-                            self.store_component_data(new_tc.condition, tokens)
-                        elif tokens[0] in ["set", "clear"]:
-                            logging.debug("\t\t\tFound TriggerCondition: %s" % tokens)
-                            new_tc               = trigger.add_tc()
-                            new_tc.isActive      = True
-                            new_tc.conditionType = 2
-                            self.store_component_data(new_tc.condition, tokens)
-                        else:
-                            logging.debug("Trigger component no found: ", i, line)
-                        #end if/elif/else
-
-                        try:
-                            nxt = self.get_indent_level(mission.missionLines[i + 1])
-                        except IndexError:
-                            break
-                    #end while
-                else:
-                    logging.debug("ERROR: No tokens found on line %d: %s" % (i, line))
-                #end if/else
-                for trigger in mission.components.triggerList:
-                    trigger.print_trigger()
-            #end for
+        for item in self.file_items:
+            if item[0] is "mission":
+                parser = FileMissionItemParser(item[1])
+                parser.run()
+            elif item[0] is "event":
+                pass
+            elif item[0] is "phrase":
+                pass
+            elif item[0] is "npc":
+                pass
+            elif item[0] is "government":
+                pass
+            #end if/else
         #end for
 
         logging.debug("File parsing complete.")
     #end run
 
-    @staticmethod
-    def tokenize(line):
-        """
-        Break the line into a list of tokens, saving anything inside quotes as a single token
 
-        :param line: the String to be tokenized
-        """
-        pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
-        tokens = re.findall(pattern, line)
-        for i, token in enumerate(tokens):
-            if token.startswith("`"):
-                tokens[i] = token[1:-1]
-            elif token.startswith("\""):
-                tokens[i] = token[1:-1]
-        return tokens
-    #end tokenize
-
-    @staticmethod
-    def get_indent_level(line):
-        """
-        Counts the number of tabs at the beginning of the string
-
-        :param line: The string to be checked
-        """
-        tab_count = len(line) - len(line.lstrip(' '))
-        return tab_count
-    #end get_indent_level
-
-    @staticmethod
-    def store_component_data(component, tokens):
-        """
-        Store the tokens in the given component
-
-        :param component: The component the data will be stored in
-        :param tokens: The tokens to store
-        """
-        for i, token in enumerate(tokens):
-            if token is not None:
-                component[i] = token
-            else:
+    def store_item_for_parsing(self, i, line, item_type):
+        item_lines = [line]
+        lines = self.lines[i+1:]
+        for i, line in enumerate(lines):
+            if self.end_of_item_condition(line) or self.is_eof(i, lines):
+                self.file_items.append((item_type, item_lines))
                 break
-            # end if/else
-        # end for
-    #end store_component_data
+            #end if
+            item_lines.append(line)
+        #end for
+    #end store_item_for_parsing
 
+
+    def end_of_item_condition(self, line):
+        is_end = False
+
+        if re.match(self.match_mission, line):
+            is_end = True
+        elif re.match(self.match_event, line):
+            is_end = True
+        elif re.match(self.match_phrase, line):
+            is_end = True
+        elif re.match(self.match_npc, line):
+            is_end = True
+        elif re.match(self.match_government, line):
+            is_end = True
+        #end if/else
+
+        return is_end
+    #end end_of_item_condition
+
+
+    @staticmethod
+    def is_eof(i, lines):
+        try:
+            if lines[i+1]:
+                return True
+        except IndexError:
+            return False
+    #end not_EOF
 #end class MissionFileParser

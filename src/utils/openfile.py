@@ -11,14 +11,12 @@
 """
 
 import logging
-import re
-import shlex
 from tkinter import filedialog
 
-from src.model import Mission, MissionFileParser
+from src.model import MissionFileParser
 
 
-def open_file(app):
+def open_file():
     """
     This method handles reading in Endless Sky mission files.
     It creates a mission object for each mission it finds,
@@ -26,87 +24,20 @@ def open_file(app):
 
     :param app: The instance of ESMB
     """
-
-    #TODO: add handling for "event" items inside missionfile
-    #    NOTE: EVENTS ARE STORED IN THE MISSION FILE, BUT ARE
-    #    COMPLETELY SEPARATE FROM MISSIONS. SAVE HANDLING
-    #    THESE FOR LATER
-
     #TODO: Add handling for mission preamble(license text)
-
-    # empty the missionList
-    app.missionList             = []
-    app.missionNameToObjectDict = {}
 
     logging.debug("Selecting mission file...")
     f = filedialog.askopenfile()
-    if f is None:  # askopenasfile return `None` if dialog closed with "cancel".
+    if f is None:  # askopenfile() returns `None` if dialog closed with "cancel".
         return
     logging.debug("Opening file: %s" % f.name)
 
-    with open(f.name) as missionfile:
-        mission_lines = missionfile.readlines()
-        # Print the mission file to the console
-        #print_mission_file(lines)
+    with open(f.name) as infile:
+        mission_lines = infile.readlines()
+    infile.close()
 
-    # populate the missionList object
-    #TODO: refactor this to use enumerate()
-    i = 0
-    event_line = False
-    match_mission = re.compile(r'^ *mission')
-    match_event = re.compile(r'^event')
-    for line in mission_lines:
-        # print(line, end="")
-        line = line.rstrip()
-        # quick and dirty, may need validation later
-        if "#" in line:
-            # print(line, end="")
-            continue
-        # end if
-
-        # quick and dirty, may need validation later
-        if line == "" or line == "\n":
-            # print(line, end="")
-            continue
-        # end if
-
-        # EVENTLINE SENTINEL IS NECESSARY TO KEEP EVENT OBJECTS FROM BEING ADDED TO
-        #     MISSIONFILE ERRONEOUSLY
-
-        if re.search(match_mission, line):
-            event_line = False
-            #print(line)
-            tokens      = shlex.split(line)
-            cur_mission = Mission(tokens[1])
-            app.missionList.append(cur_mission)
-            app.missionNameToObjectDict.update({cur_mission.name: cur_mission})
-            app.missionList[i].add_line(line)
-            i += 1
-            continue
-        elif re.search(match_event, line):
-            logging.debug("EVENT FOUND IN FILE")
-            event_line = True
-            continue
-        else:
-            if event_line is True:
-                continue
-            app.missionList[i - 1].add_line(line)
-        # end if/else
-    # end for
-
-    logging.debug("\t\tMissions loaded:")
-    for mission in app.missionList:
-        logging.debug("\t\t%s" % mission.name)
-        #mission.printMission()
-    # end for
-
-    missionfile.close()
-
-    parser = MissionFileParser(app)
+    parser = MissionFileParser(mission_lines)
     parser.run()
-
-    app.activeMission = app.missionList[0]
-    app.update_option_frame()
 #end open_file
 
 
