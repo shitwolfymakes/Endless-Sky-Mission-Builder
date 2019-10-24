@@ -8,13 +8,13 @@ class MissionFileParserTestCase(unittest.TestCase):
 
 
     def setUp(self):
-        self.test_lines = ['mission "Test"\n', 'name "Testing"\n', "\n", "\n", "\n", 'event "Testing end"']
+        self.test_lines = ['mission "Test"\n', '\tname "Testing"\n', "\n", "\n", "\n", 'event "Testing end"']
         self.parser = MissionFileParser(self.test_lines)
     #end set_up_parser
 
 
     def test_store_item_for_parsing(self):
-        passing_lines = ['mission "Test"\n', 'name "Testing"\n', "\n", "\n", "\n"]
+        passing_lines = ['mission "Test"\n', '\tname "Testing"\n', "\n", "\n", "\n"]
         self.parser.store_item_for_parsing(0, self.test_lines[0], "mission")
         self.assertEqual(self.parser.file_items[0], ("mission", passing_lines))
     #end test_store_item_for_parsing
