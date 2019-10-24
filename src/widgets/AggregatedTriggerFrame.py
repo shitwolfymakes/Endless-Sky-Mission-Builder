@@ -101,7 +101,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         cb.configure(command=partial(self._change_trigger_state, state, trigger))
         cb.grid(row=0, column=3, sticky="e")
 
-        if trigger.isActive:
+        if trigger.is_active:
             state.set(1)
             self._change_trigger_state(state, trigger)
     #end populate_trigger

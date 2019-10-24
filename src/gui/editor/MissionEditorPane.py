@@ -256,14 +256,14 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
     def _update_priority_level(self, components):
         self.priority_level_component.reset()
         if components.priority_level is not None:
-            self.priority_level_component.set(components.priorityLevel)
+            self.priority_level_component.set(components.priority_level)
     #end _update_priority_level
 
 
     def _update_where_shown(self, components):
         self.where_shown_component.reset()
         if components.where_shown is not None:
-            self.where_shown_component.set(components.whereShown)
+            self.where_shown_component.set(components.where_shown)
     #end _update_where_shown
 
 

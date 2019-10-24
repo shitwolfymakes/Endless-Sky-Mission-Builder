@@ -134,8 +134,8 @@ class MissionFileParser:
     def is_eof(i, lines):
         try:
             if lines[i+1]:
-                return True
+                return False
         except IndexError:
-            return False
+            return True
     #end not_EOF
 #end class MissionFileParser
