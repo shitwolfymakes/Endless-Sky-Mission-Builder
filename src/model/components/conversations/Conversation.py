@@ -18,7 +18,9 @@ class Conversation:
     def __init__(self):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
 
+        self.name = None
         self.scene_image = None
         self.convo_parts_list = []
+        self.lines = []
     #end init
 #end class Conversation
