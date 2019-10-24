@@ -21,7 +21,7 @@ class TriggerParserTestCase(unittest.TestCase):
         test_model = self.get_empty_test_model()
 
         trigger = test_model.components.trigger_list[0]
-        trigger.isActive = True
+        trigger.is_active = True
         trigger.trigger_type = "offer"
         trigger.dialog = "It is Wednesday my dudes"
         trigger.outfit = ["Skylance V", 5]
