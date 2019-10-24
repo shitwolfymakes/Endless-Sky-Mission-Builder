@@ -13,6 +13,7 @@ import logging
 import re
 import shlex
 
+from src import config
 from src.model import Mission
 from src.model.components.conversations import Conversation
 
@@ -249,6 +250,8 @@ class FileMissionItemParser:
                 trigger.print_trigger()
             #end for
         #end for
+
+        config.mission_file_items.add_item(self.mission)
         self.mission.print_item_lines_to_text()
     #end run
 

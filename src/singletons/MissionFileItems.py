@@ -61,9 +61,16 @@ class MissionFileItems:
             #end for
         #end get_item
 
+
         def get_last_item(self):
             return self.items_list[-1]
         #end get_last_name
+
+
+        def empty(self):
+            self.items_list = []
+            self.item_names = []
+        #end empty
     #end class __MissionFileItems
 
     instance = None

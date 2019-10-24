@@ -13,6 +13,7 @@
 import logging
 from tkinter import filedialog
 
+from src import config
 from src.model import MissionFileParser
 
 
@@ -36,8 +37,12 @@ def open_file():
         mission_lines = infile.readlines()
     infile.close()
 
+    config.mission_file_items.empty()
     parser = MissionFileParser(mission_lines)
     parser.run()
+
+    config.active_item = config.mission_file_items.items_list[0]
+    config.gui.update_option_pane()
 #end open_file
 
 

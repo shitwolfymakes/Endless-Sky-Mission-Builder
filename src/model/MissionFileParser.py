@@ -14,6 +14,7 @@
 import re
 import logging
 
+from src import config
 from src.model.FileMissionItemParser import FileMissionItemParser
 
 
@@ -49,19 +50,19 @@ class MissionFileParser:
             elif re.search(self.match_event, line):
                 logging.debug("EVENT FOUND: %s" % line)
                 print("EVENT FOUND: %s" % line)
-                self.store_item_for_parsing(i, line, "event")
+                self.store_unhandled_items_for_parsing(i, line, "event")
             elif re.search(self.match_phrase, line):
                 logging.debug("PHRASE FOUND: %s" % line)
                 print("PHRASE FOUND: %s" % line)
-                self.store_item_for_parsing(i, line, "phrase")
+                self.store_unhandled_items_for_parsing(i, line, "phrase")
             elif re.search(self.match_npc, line):
                 logging.debug("NPC FOUND: %s" % line)
                 print("NPC FOUND: %s" % line)
-                self.store_item_for_parsing(i, line, "npc")
+                self.store_unhandled_items_for_parsing(i, line, "npc")
             elif re.search(self.match_government, line):
                 logging.debug("GOVERNMENT FOUND: %s" % line)
                 print("GOVERNMENT FOUND: %s" % line)
-                self.store_item_for_parsing(i, line, "government")
+                self.store_unhandled_items_for_parsing(i, line, "government")
             #end elif
         #end for
 
@@ -90,6 +91,19 @@ class MissionFileParser:
         for i, line in enumerate(lines):
             if self.end_of_item_condition(line) or self.is_eof(i, lines):
                 self.file_items.append((item_type, item_lines))
+                break
+            #end if
+            item_lines.append(line)
+        #end for
+    #end store_item_for_parsing
+
+    #TODO: Remove this once all item types are handled
+    def store_unhandled_items_for_parsing(self, i, line, item_type):
+        item_lines = [line]
+        lines = self.lines[i+1:]
+        for i, line in enumerate(lines):
+            if self.end_of_item_condition(line) or self.is_eof(i, lines):
+                #self.file_items.append((item_type, item_lines))
                 break
             #end if
             item_lines.append(line)

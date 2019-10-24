@@ -116,7 +116,7 @@ class OptionPane(ttk.Frame, GUIPane):
 
     def update_pane(self):
         logging.debug("Updating option_pane...")
-        logging.debug("\tCombobox options: %s" % str(self.mfi.get_names))
+        logging.debug("\tCombobox options: %s" % str(self.mfi.get_names()))
 
         self.combo_box['values'] = self.mfi.get_names()
         current_item = self.mfi.items_list.index(config.active_item)
