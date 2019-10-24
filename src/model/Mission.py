@@ -59,6 +59,6 @@ class Mission(model.FileItem):
 
 
     def to_string(self):
-        return "\n".join(self.lines)
+        return "".join(self.lines)
     #end to_string
 #end class Mission
