@@ -14,7 +14,6 @@
 import re
 import logging
 
-from src import config
 from src.model.FileMissionItemParser import FileMissionItemParser
 
 
