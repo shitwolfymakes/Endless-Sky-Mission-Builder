@@ -53,43 +53,43 @@ class ParseMissionTestCase(unittest.TestCase):
 
     def setUp(self):
         self.model = model.Mission("Test Mission 0")
-        self.model.components.missionDisplayName = "test"
+        self.model.components.mission_display_name = "test"
         self.model.components.description = "A test mission"
         self.model.components.blocked = "Oh piss off!"
         self.model.components.deadline.set([2, 1])
         self.model.components.cargo.set(["food", 5, 2, 0.1])
         self.model.components.passengers.set([5, 5, 0.2])
         self.model.components.illegal.set([50, "Soviet citizens need no food comrade"])
-        self.model.components.isStealth = True
-        self.model.components.isInvisible = True
-        self.model.components.priorityLevel = "priority"
-        self.model.components.whereShown = "job"
+        self.model.components.is_stealth = True
+        self.model.components.is_invisible = True
+        self.model.components.priority_level = "priority"
+        self.model.components.where_shown = "job"
         self.model.components.repeat.set(5)
         self.model.components.clearance.set("You're on the list")
-        self.model.components.isInfiltrating = True
+        self.model.components.is_infiltrating = True
         self.model.components.waypoint = "Sol"
         self.model.components.stopover.set("Delve")
         self.model.components.source.set("Sol")
         self.model.components.destination.set("Delve")
 
         self.model.add_trigger()
-        trigger = self.model.components.triggerList[0]
-        trigger.isActive = True
-        trigger.triggerType = "accept"
+        trigger = self.model.components.trigger_list[0]
+        trigger.is_active = True
+        trigger.trigger_type = "accept"
         trigger.outfit = ["test outfit", 1]
         trigger.require = ["Jump Drive", 1]
 
         self.model.add_trigger()
-        trigger = self.model.components.triggerList[1]
-        trigger.isActive = True
-        trigger.triggerType = "offer"
+        trigger = self.model.components.trigger_list[1]
+        trigger.is_active = True
+        trigger.trigger_type = "offer"
         trigger.dialog = "It is Wednesday my dudes"
         trigger.outfit = ["Skylance V", 5]
         trigger.require = ["Hyperdrive", 1]
-        trigger.isPayment = True
+        trigger.is_payment = True
         trigger.payment = [1500, 0.2]
         trigger.event = ["blaze it", 420, 4200]
-        trigger.isFail = True
+        trigger.is_fail = True
         trigger.fail = "the mission"
 
         trigger.add_tc()
