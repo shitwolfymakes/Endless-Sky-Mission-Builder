@@ -34,7 +34,7 @@ class Mission(model.FileItem):
         # Note to self: this is the most efficient and pythonic way to concat all these strings together
         mission_text = "".join(self.lines)
         return mission_text
-    #end print_mission_lines_to_text
+    #end print_item_lines_to_text
 
 
     def add_line(self, line):
