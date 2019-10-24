@@ -49,7 +49,7 @@ class AggregatedLogFrame(ttk.Frame):
         """
         logging.debug("Adding Trigger...")
 
-        lf = widgets.LogFrame(self, self.trigger, "log")
+        lf = widgets.LogFrame(self, self.trigger)
         widgets.TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
         logging.debug("Log format type selected: %s" % lf.log.format_type)
         if lf.log.format_type == "cancelled":
@@ -100,7 +100,7 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param log: the log containing the data to be populated
         """
-        lf = widgets.LogFrame(self, self.trigger, "log", populating=True)
+        lf = widgets.LogFrame(self, self.trigger, populating=True)
         lf.log = log
 
         state = BooleanVar()
@@ -133,6 +133,6 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param format_type:
         """
-        self.log_frame_list[-1].log.formatType = format_type
+        self.log_frame_list[-1].log.format_type = format_type
     #end _set_format_type
 # end class AggregatedLogFrame

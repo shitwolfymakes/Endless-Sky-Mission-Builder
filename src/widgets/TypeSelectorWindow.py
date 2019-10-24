@@ -21,9 +21,9 @@ class TypeSelectorWindow(Toplevel):
         self.callback = callback
         super().__init__(master, **kwargs)
 
-        self.optionList = ttk.Combobox(self, values=options, state="readonly", width=25)
-        self.optionList.current(0)
-        self.optionList.pack()
+        self.option_list = ttk.Combobox(self, values=options, state="readonly", width=25)
+        self.option_list.current(0)
+        self.option_list.pack()
 
         buttons = ttk.Frame(self)
         ok = ttk.Button(buttons, text="OK", command=self._cleanup)
@@ -41,7 +41,7 @@ class TypeSelectorWindow(Toplevel):
 
     def _cleanup(self):
         """Clean up whatever popups we've created"""
-        self.callback(self.optionList.get())
+        self.callback(self.option_list.get())
         self.destroy()
     #end _cleanup
 

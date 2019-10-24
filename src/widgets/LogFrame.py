@@ -17,7 +17,7 @@ from tkinter import ttk
 class LogFrame(object):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, master, trigger, name, populating=False):
+    def __init__(self, master, trigger, populating=False):
         self.log = None
         if not populating:
             self.log = trigger.add_log()
@@ -28,10 +28,10 @@ class LogFrame(object):
         self.frame.pack(expand=True, fill="x")
         self.frame.grid_columnconfigure(0, weight=1)
 
-        label = ttk.Label(self.frame, text=name)
+        label = ttk.Label(self.frame, text="log")
         label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
-        self.master.logFrameList.append(self)
+        self.master.log_frame_list.append(self)
 
         edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_log, self))
         edit_button.grid(row=0, column=1)

@@ -26,11 +26,11 @@ class LogWindow(object):
         #TODO: replace format_type with an integer
         logging.debug("\tBuilding LogWindow...")
 
-        self.log        = log
-        self.formatType = format_type
-        self.logGroup   = StringVar()
-        self.name       = StringVar()
-        self.message    = StringVar()
+        self.log = log
+        self.format_type = format_type
+        self.log_group = StringVar()
+        self.name = StringVar()
+        self.message = StringVar()
 
         self.top = ThemedTk(theme="plastik")
         self.top.title("Edit Log")
@@ -39,8 +39,8 @@ class LogWindow(object):
 
         frame = ttk.Frame(self.top)
         frame.pack(side=TOP)
-
         if format_type == "<message>":
+            print("in here")
             label = widgets.TooltipLabel(frame, "log_message_only", text="Log")
             label.grid(row=0, column=0)
             self.message.set("<message>")
@@ -49,8 +49,8 @@ class LogWindow(object):
         else:
             label = widgets.TooltipLabel(frame, "log_complex", text="Log")
             label.grid(row=0, column=0)
-            self.logGroup.set("<type>")
-            entry = ttk.Entry(frame, textvariable=self.logGroup, width=10)
+            self.log_group.set("<type>")
+            entry = ttk.Entry(frame, textvariable=self.log_group, width=10)
             entry.grid(row=1, column=0)
 
             self.name.set("<name>")
@@ -62,8 +62,8 @@ class LogWindow(object):
             entry3.grid(row=1, column=2)
         #end if/else
 
-        self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
-        self.closeButton.pack(side=BOTTOM)
+        self.close_button = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.close_button.pack(side=BOTTOM)
 
         self.populate_log_window()
     #end init
@@ -71,6 +71,7 @@ class LogWindow(object):
 
     def cleanup(self):
         """Clean up whatever popups we've created"""
+        print(self.message.get())
         self._store_data()
         self.top.grab_release()  # HAVE TO RELEASE
         self.top.destroy()
@@ -81,11 +82,11 @@ class LogWindow(object):
         """Store the data from the GUI into the associated Log object"""
         logging.debug("Storing LogWindow data...")
         self.log.clear_log()
-        logging.debug("format_type: %s" % self.formatType)
-        if self.formatType == "<message>":
+        logging.debug("format_type: %s" % self.format_type)
+        if self.format_type == "<message>":
             self.log.log[0] = self.message.get()
         else:
-            self.log.log[0] = self.logGroup.get()
+            self.log.log[0] = self.log_group.get()
             self.log.log[1] = self.name.get()
             self.log.log[2] = self.message.get()
         #end if/else
@@ -96,12 +97,12 @@ class LogWindow(object):
         """Take the associated Trigger object, and populate each of the widgets in the window with the data inside"""
         logging.debug("Populating TriggerWindow...")
 
-        if self.formatType == "<message>":
+        if self.format_type == "<message>":
             if self.log.log[0] is not None:
                 self.message.set(self.log.log[0].lstrip('`').rstrip('`'))
         else:
             if self.log.log[0] is not None:
-                self.logGroup.set(self.log.log[0])
+                self.log_group.set(self.log.log[0])
             if self.log.log[1] is not None:
                 self.name.set(self.log.log[1])
             if self.log.log[2] is not None:
