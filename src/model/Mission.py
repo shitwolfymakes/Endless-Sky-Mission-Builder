@@ -37,11 +37,6 @@ class Mission(model.FileItem):
     #end print_item_lines_to_text
 
 
-    def add_line(self, line):
-        self.lines.append(line + "\n")
-    # end add_line
-
-
     def parse(self):
         parser = model.MissionParser(self)
         self.lines = parser.run()

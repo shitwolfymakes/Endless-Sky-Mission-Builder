@@ -20,6 +20,11 @@ class FileItem(ABC):
     #end def
 
 
+    def add_line(self, line):
+        self.lines.append(line + "\n")
+    # end add_line
+
+
     @abstractmethod
     def print_item_lines_to_text(self):
         pass
