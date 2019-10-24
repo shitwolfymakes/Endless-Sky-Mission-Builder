@@ -128,7 +128,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
         self.destination_component.grid(row=17, column=0, sticky="ew")
 
         # triggers
-        self.triggers_frame = widgets.AggregatedTriggerFrame(self, me)
+        self.triggers_frame = widgets.AggregatedTriggerFrame(me)
         self.triggers_frame.grid(row=18, column=0, sticky="ew")
 
         # add a blank label to pad the bottom of the frame
@@ -325,7 +325,7 @@ class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
     def _update_triggers(self, components):
         # Clear out the AggregatedTriggerFrame
         self.triggers_frame.grid_forget()
-        self.triggers_frame = widgets.AggregatedTriggerFrame(self, self.mission_editor_frame)
+        self.triggers_frame = widgets.AggregatedTriggerFrame(self.mission_editor_frame)
         self.triggers_frame.grid(row=18, column=0, sticky="ew")
 
         # Triggers
