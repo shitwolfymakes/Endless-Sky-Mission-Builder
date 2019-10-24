@@ -21,13 +21,12 @@ import src.widgets as widgets
 class AggregatedLogFrame(ttk.Frame):
     """This class extends ttk.Frame, allowing the user to add an arbitrary number of LogFrame widgets to the GUI."""
 
-    def __init__(self, app, parent, trigger):
+    def __init__(self, parent, trigger):
         ttk.Frame.__init__(self, parent)
 
-        self.app          = app
-        self.parent       = parent
-        self.trigger      = trigger
-        self.logFrameList = []
+        self.parent = parent
+        self.trigger = trigger
+        self.log_frame_list = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -52,16 +51,16 @@ class AggregatedLogFrame(ttk.Frame):
 
         lf = widgets.LogFrame(self, self.trigger, "log")
         widgets.TypeSelectorWindow(self, ["<type> <name> <message>", "<message>"], self._set_format_type)
-        logging.debug("Log format type selected: %s" % lf.log.formatType)
-        if lf.log.formatType == "cancelled":
+        logging.debug("Log format type selected: %s" % lf.log.format_type)
+        if lf.log.format_type == "cancelled":
             lf.cleanup()
             return
         #end if
-        self.edit_log(self.logFrameList[-1])
+        self.edit_log(self.log_frame_list[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(lf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self._change_log_state, state, self.logFrameList[-1].log))
+        cb.configure(command=partial(self._change_log_state, state, self.log_frame_list[-1].log))
         cb.grid(row=0, column=3, sticky="e")
     #end _add_log
 
@@ -74,7 +73,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log_frame: The LogFrame containing the log to be edited
         """
         logging.debug("Editing %s..." % str(log_frame.log))
-        widgets.LogWindow(self.app, self.app.gui, log_frame.log, log_frame.log.formatType)
+        widgets.LogWindow(log_frame.log, log_frame.log.format_type)
     #end edit_log
 
 
@@ -87,7 +86,7 @@ class AggregatedLogFrame(ttk.Frame):
         """
         self.trigger.remove_log(log_frame.log)
 
-        self.logFrameList.remove(log_frame)
+        self.log_frame_list.remove(log_frame)
         log_frame.frame.pack_forget()
         log_frame.frame.destroy()
 
@@ -134,6 +133,6 @@ class AggregatedLogFrame(ttk.Frame):
 
         :param format_type:
         """
-        self.logFrameList[-1].log.formatType = format_type
+        self.log_frame_list[-1].log.formatType = format_type
     #end _set_format_type
 # end class AggregatedLogFrame

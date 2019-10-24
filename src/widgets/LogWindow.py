@@ -14,24 +14,25 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
+from ttkthemes import ThemedTk
+
 import src.widgets as widgets
 
 
 class LogWindow(object):
     """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
-    def __init__(self, app, master, log, format_type):
+    def __init__(self, log, format_type):
         #TODO: replace format_type with an integer
         logging.debug("\tBuilding LogWindow...")
 
-        self.app        = app
         self.log        = log
         self.formatType = format_type
         self.logGroup   = StringVar()
         self.name       = StringVar()
         self.message    = StringVar()
 
-        self.top = Toplevel(master)
+        self.top = ThemedTk(theme="plastik")
         self.top.title("Edit Log")
         self.top.configure(bg="#ededed")
         self.top.grab_set()  # freezes the app until the user enters or cancels

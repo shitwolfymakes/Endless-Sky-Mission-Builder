@@ -58,7 +58,7 @@ class ComponentMandOptFrame(ttk.Frame):
 
         For example:
 
-        ComponentMandOptFrame(self.leftFrame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"])
+        ComponentMandOptFrame(self.left_frame, "fail", 2, 3, ["<test0>", "<test1>", "[<name>]", "[<test2>]", "[<test3>]"])
 
         becomes:
 

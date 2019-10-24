@@ -13,15 +13,17 @@
 from functools import partial
 from tkinter import ttk
 
+from src import config
+
 
 class TriggerFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, master, app, name, populating=False):
+    def __init__(self, master, name, populating=False):
         ttk.Frame.__init__(self, master)
         self.trigger = None
         if not populating:
-            self.trigger = app.activeMission.add_trigger()
+            self.trigger = config.active_item.add_trigger()
         self.master = master
 
         self.frame = ttk.Frame(master.inner)
@@ -32,7 +34,7 @@ class TriggerFrame(ttk.Frame):
         label = ttk.Label(self.frame, text=name)
         label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
-        self.master.triggerFrameList.append(self)
+        self.master.trigger_frame_list.append(self)
 
         edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_trigger, self))
         edit_button.grid(row=0, column=1)

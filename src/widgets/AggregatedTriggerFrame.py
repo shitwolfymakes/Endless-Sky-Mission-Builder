@@ -16,6 +16,7 @@ from tkinter import *
 from tkinter import ttk
 
 import src.widgets as widgets
+from src import config
 
 
 class AggregatedTriggerFrame(ttk.Frame):
@@ -23,12 +24,11 @@ class AggregatedTriggerFrame(ttk.Frame):
     This class extends ttk.Frame, allowing the user to add an arbitrary number of TriggerFrame widgets to the GUI.
     """
 
-    def __init__(self, app, parent):
+    def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
 
-        self.app              = app
-        self.parent           = parent
-        self.triggerFrameList = []
+        self.parent = parent
+        self.trigger_frame_list = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -48,12 +48,12 @@ class AggregatedTriggerFrame(ttk.Frame):
         """Add a trigger to the activeMission"""
         logging.debug("Adding Trigger...")
 
-        tf = widgets.TriggerFrame(self, self.app, "trigger")
-        self.edit_trigger(self.triggerFrameList[-1])
+        tf = widgets.TriggerFrame(self, "trigger")
+        self.edit_trigger(self.trigger_frame_list[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self._change_trigger_state, state, self.triggerFrameList[-1].trigger))
+        cb.configure(command=partial(self._change_trigger_state, state, self.trigger_frame_list[-1].trigger))
         cb.grid(row=0, column=3, sticky="e")
     #end _add_trigger
 
@@ -67,9 +67,9 @@ class AggregatedTriggerFrame(ttk.Frame):
         """
         logging.debug(str.format("Removing %s from Triggers" % trigger_frame.trigger))
 
-        self.app.activeMission.remove_trigger(trigger_frame.trigger)
+        config.active_item.remove_trigger(trigger_frame.trigger)
 
-        self.triggerFrameList.remove(trigger_frame)
+        self.trigger_frame_list.remove(trigger_frame)
         trigger_frame.frame.pack_forget()
         trigger_frame.frame.destroy()
     #end delete_trigger
@@ -83,7 +83,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
         logging.debug("Editing %s..." % str(trigger_frame.trigger))
-        widgets.TriggerWindow(self.app, self.app.gui, trigger_frame.trigger)
+        widgets.TriggerWindow(trigger_frame.trigger)
     #end edit_trigger
 
 
@@ -93,7 +93,7 @@ class AggregatedTriggerFrame(ttk.Frame):
 
         :param trigger: the trigger containing the data to be populated
         """
-        tf = widgets.TriggerFrame(self, self.app, "trigger", populating=True)
+        tf = widgets.TriggerFrame(self, "trigger", populating=True)
         tf.trigger = trigger
 
         state = BooleanVar()
