@@ -25,7 +25,7 @@ class TriggerParser:
         self.lines = []
 
         # is_active
-        if self.trigger.isActive:
+        if self.trigger.is_active:
             logging.debug("\t\t\tParsing Trigger...")
         else:
             return ""
@@ -89,7 +89,7 @@ class TriggerParser:
 
     ### methods to check if components are active
     def _has_trigger_type(self):
-        if self.trigger.triggerType is None:
+        if self.trigger.trigger_type is None:
             return False
         return True
     #end _has_trigger_type
@@ -117,7 +117,7 @@ class TriggerParser:
 
 
     def _has_payment(self):
-        if self.trigger.isPayment is False:
+        if self.trigger.is_payment is False:
             return False
         return True
     #end _has_payment
@@ -138,7 +138,7 @@ class TriggerParser:
 
 
     def _has_fail(self):
-        if self.trigger.isFail is False:
+        if self.trigger.is_fail is False:
             return False
         return True
     #end _has_fail
@@ -154,7 +154,7 @@ class TriggerParser:
     ### methods to parse the data from each component in the model
     def _parse_trigger_type(self):
         logging.debug("\t\t\tParsing trigger type...")
-        self._add_line("\ton %s" % self.trigger.triggerType)
+        self._add_line("\ton %s" % self.trigger.trigger_type)
     #end _parse_trigger_type
 
 
@@ -205,15 +205,15 @@ class TriggerParser:
     def _parse_conditions(self):
         logging.debug("\t\t\tParsing conditions...")
         for condition in self.trigger.conditions:
-            if condition.isActive:
-                if condition.conditionType == 0:
+            if condition.is_active:
+                if condition.condition_type == 0:
                     self._add_line("\t\t\"%s\" %s %s" % (condition.condition[0],
                                                          condition.condition[1],
                                                          condition.condition[2]))
-                elif condition.conditionType == 1:
+                elif condition.condition_type == 1:
                     self._add_line("\t\t\"%s\" %s" % (condition.condition[0],
                                                       condition.condition[1]))
-                elif condition.conditionType == 2:
+                elif condition.condition_type == 2:
                     self._add_line("\t\t%s \"%s\"" % (condition.condition[0],
                                                       condition.condition[1]))
                 else:
@@ -250,9 +250,9 @@ class TriggerParser:
     def _parse_logs(self):
         logging.debug("\t\t\tParsing logs...")
         for log in self.trigger.logs:
-            if log.isActive:
+            if log.is_active:
                 line = "\t\tlog"
-                if log.formatType == "<message>":
+                if log.format_type == "<message>":
                     self._add_line("%s `%s`" % (line, log.log[0]))
                     continue
                 # end if

@@ -20,16 +20,16 @@ class TriggerParserTestCase(unittest.TestCase):
                        '\t\tlog "People" "Yo mama" `is a ho`\n']
         test_model = self.get_empty_test_model()
 
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.isActive = True
-        trigger.triggerType = "offer"
+        trigger.trigger_type = "offer"
         trigger.dialog = "It is Wednesday my dudes"
         trigger.outfit = ["Skylance V", 5]
         trigger.require = ["Hyperdrive", 1]
-        trigger.isPayment = True
+        trigger.is_payment = True
         trigger.payment = [1500, 0.2]
         trigger.event = ["blaze it", 420, 4200]
-        trigger.isFail = True
+        trigger.is_fail = True
         trigger.fail = "the mission"
 
         trigger.add_tc()
@@ -74,8 +74,8 @@ class TriggerParserTestCase(unittest.TestCase):
     ### trigger_type
     def test_has_trigger_type_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
-        trigger.triggerType = "accept"
+        trigger = test_model.components.trigger_list[0]
+        trigger.trigger_type = "accept"
         self.assertTrue(test_model._has_trigger_type())
     #end test_has_trigger_type_true
 
@@ -89,8 +89,8 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_trigger_type(self):
         true_output = '\ton accept\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
-        trigger.triggerType = "accept"
+        trigger = test_model.components.trigger_list[0]
+        trigger.trigger_type = "accept"
         test_model._parse_trigger_type()
         self.assertEqual(true_output, test_model.lines[0])
     #end test_parse_trigger_type
@@ -99,7 +99,7 @@ class TriggerParserTestCase(unittest.TestCase):
     ### dialog
     def test_has_dialog_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.dialog = "It is Wednesday my dudes"
         self.assertTrue(test_model._has_dialog())
     # end test_has_dialog_true
@@ -114,7 +114,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_dialog(self):
         true_output = '\t\tdialog `It is Wednesday my dudes`\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.dialog = "It is Wednesday my dudes"
         test_model._parse_dialog()
         self.assertEqual(true_output, test_model.lines[0])
@@ -124,7 +124,7 @@ class TriggerParserTestCase(unittest.TestCase):
     ### outfit
     def test_has_outfit_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.outfit = "Skylance V"
         self.assertTrue(test_model._has_outfit())
     # end test_has_outfit_true
@@ -139,7 +139,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_outfit(self):
         true_output = '\t\toutfit "Skylance V" 5\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.outfit = ["Skylance V", 5]
         test_model._parse_outfit()
         self.assertEqual(true_output, test_model.lines[0])
@@ -148,7 +148,7 @@ class TriggerParserTestCase(unittest.TestCase):
     ### require
     def test_has_require_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.require = "Hyperdrive"
         self.assertTrue(test_model._has_require())
     # end test_has_require_true
@@ -163,7 +163,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_require(self):
         true_output = '\t\trequire Hyperdrive 1\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.require = ["Hyperdrive", 1]
         test_model._parse_require()
         self.assertEqual(true_output, test_model.lines[0])
@@ -173,8 +173,8 @@ class TriggerParserTestCase(unittest.TestCase):
     ### payment
     def test_has_payment_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
-        trigger.isPayment = True
+        trigger = test_model.components.trigger_list[0]
+        trigger.is_payment = True
         self.assertTrue(test_model._has_payment())
     # end test_has_payment_true
 
@@ -188,7 +188,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_payment(self):
         true_output = '\t\tpayment 1500 0.2\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.payment = [1500, 0.2]
         test_model._parse_payment()
         self.assertEqual(true_output, test_model.lines[0])
@@ -198,7 +198,7 @@ class TriggerParserTestCase(unittest.TestCase):
     ### conditions
     def test_has_conditions_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_condition_to_trigger(trigger)
         self.assertTrue(test_model._has_conditions())
     # end test_has_require_true
@@ -213,7 +213,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_conditions_conditionType_0(self):
         true_output = '\t\t"yo mama" += 20\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_condition_to_trigger(trigger)
         trigger.conditions[0].set(0, ["yo mama", "+=", 20])
         test_model._parse_conditions()
@@ -224,7 +224,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_conditions_conditionType_1(self):
         true_output = '\t\t"no u" ++\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_condition_to_trigger(trigger)
         trigger.conditions[0].set(1, ["no u", "++"])
         test_model._parse_conditions()
@@ -235,7 +235,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_conditions_conditionType_2(self):
         true_output = '\t\tclear "the drugs"\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_condition_to_trigger(trigger)
         trigger.conditions[0].set(2, ["clear", "the drugs"])
         test_model._parse_conditions()
@@ -246,7 +246,7 @@ class TriggerParserTestCase(unittest.TestCase):
     ### event
     def test_has_event_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.event = ["blaze it", 420, 4200]
         self.assertTrue(test_model._has_event())
     # end test_has_event_true
@@ -261,7 +261,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_event(self):
         true_output = '\t\tevent "blaze it" 420 4200\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.event = ["blaze it", 420, 4200]
         test_model._parse_event()
         self.assertEqual(true_output, test_model.lines[0])
@@ -271,8 +271,8 @@ class TriggerParserTestCase(unittest.TestCase):
     ### fail
     def test_has_fail_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
-        trigger.isFail = True
+        trigger = test_model.components.trigger_list[0]
+        trigger.is_fail = True
         self.assertTrue(test_model._has_fail())
     # end test_has_fail_true
 
@@ -286,7 +286,7 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_fail(self):
         true_output = '\t\tfail "the mission"\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         trigger.fail = "the mission"
         test_model._parse_fail()
         self.assertEqual(true_output, test_model.lines[0])
@@ -295,7 +295,7 @@ class TriggerParserTestCase(unittest.TestCase):
     ### logs
     def test_has_logs_true(self):
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_log_to_trigger(trigger)
         self.assertTrue(test_model._has_logs())
     # end test_has_require_true
@@ -310,9 +310,9 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_logs_formatType_1(self):
         true_output = "\t\tlog `my mama ain't a ho`\n"
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_log_to_trigger(trigger)
-        trigger.logs[0].isActive = True
+        trigger.logs[0].is_active = True
         trigger.logs[0].set(1, ["my mama ain't a ho"])
         test_model._parse_logs()
         self.assertEqual(true_output, test_model.lines[0])
@@ -322,9 +322,9 @@ class TriggerParserTestCase(unittest.TestCase):
     def test_parse_logs_formatType_3(self):
         true_output = '\t\tlog "People" "Yo mama" `is a ho`\n'
         test_model = self.get_empty_test_model()
-        trigger = test_model.components.triggerList[0]
+        trigger = test_model.components.trigger_list[0]
         self.add_log_to_trigger(trigger)
-        trigger.logs[0].isActive = True
+        trigger.logs[0].is_active = True
         trigger.logs[0].set(3, ["People", "Yo mama", "is a ho"])
         test_model._parse_logs()
         self.assertEqual(true_output, test_model.lines[0])
@@ -336,7 +336,7 @@ class TriggerParserTestCase(unittest.TestCase):
         mission = model.Mission("Testing")
         mission.add_trigger()
         test_model = model.TriggerParser(mission)
-        test_model.trigger = test_model.components.triggerList[0]
+        test_model.trigger = test_model.components.trigger_list[0]
         return test_model
     # end get_empty_test_model
 

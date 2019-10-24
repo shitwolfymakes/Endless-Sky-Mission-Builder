@@ -359,7 +359,7 @@ class MissionParser:
         logging.debug("\t\tParsing Triggers...")
 
         trigger_parser = model.TriggerParser(self.mission)
-        for trigger in self.components.triggerList:
+        for trigger in self.components.trigger_list:
             parsed_trigger = trigger_parser.run(trigger)
             self.lines += parsed_trigger
     #end _parse_triggers
