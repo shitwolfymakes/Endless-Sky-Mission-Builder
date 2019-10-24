@@ -14,6 +14,8 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
+from ttkthemes import ThemedTk
+
 import src.widgets as widgets
 
 
@@ -22,64 +24,63 @@ class TriggerConditionWindow(object):
     This class creates a custom pop-up window to display and edit the data in an associated TriggerCondition object
     """
 
-    def __init__(self, app, master, condition):
+    def __init__(self, condition):
         logging.debug("\tBuilding TriggerConditionWindow...")
 
-        self.app            = app
-        self.condition      = condition
-        self.conditionType  = condition.conditionType
-        self.condData       = StringVar()
-        self.value          = StringVar()
-        self.selectedOption = None
+        self.condition = condition
+        self.condition_type = condition.condition_type
+        self.cond_data = StringVar()
+        self.value = StringVar()
+        self.selected_option = None
 
-        self.top = Toplevel(master)
+        self.top = ThemedTk(theme="plastik")
         self.top.title("Edit Condition")
         self.top.configure(bg="#ededed")
         self.top.grab_set()  # freezes the app until the user enters or cancels
 
         frame = ttk.Frame(self.top)
         frame.pack(side=TOP)
-        self.optionsCombo  = ttk.Combobox(frame, state="readonly")
-        self.optionsCombo.bind("<<ComboboxSelected>>", self._combo_callback)
+        self.options_combo = ttk.Combobox(frame, state="readonly")
+        self.options_combo.bind("<<ComboboxSelected>>", self._combo_callback)
 
-        self.condData.set("<condition>")
-        if self.conditionType == 0:
+        self.cond_data.set("<condition>")
+        if self.condition_type == 0:
             label = widgets.TooltipLabel(frame, "trigger_condition_0", text="Log")
             label.grid(row=0, column=0)
-            entry = ttk.Entry(frame, textvariable=self.condData)
+            entry = ttk.Entry(frame, textvariable=self.cond_data)
             entry.grid(row=1, column=0)
 
-            self.selectedOption = "="
-            self.comboOptions = ["=", "+=", "-="]
-            self.optionsCombo.configure(values=self.comboOptions, width=5)
-            self.optionsCombo.current(0)
-            self.optionsCombo.grid(row=1, column=1)
+            self.selected_option = "="
+            self.combo_options = ["=", "+=", "-="]
+            self.options_combo.configure(values=self.combo_options, width=5)
+            self.options_combo.current(0)
+            self.options_combo.grid(row=1, column=1)
             self.value.set("<value>")
 
             entry2 = ttk.Entry(frame, textvariable=self.value, width=6)
             entry2.grid(row=1, column=2)
-        elif self.conditionType == 1:
+        elif self.condition_type == 1:
             label = widgets.TooltipLabel(frame, "trigger_condition_1", text="Log")
             label.grid(row=0, column=0)
-            entry = ttk.Entry(frame, textvariable=self.condData)
+            entry = ttk.Entry(frame, textvariable=self.cond_data)
             entry.grid(row=1, column=0)
 
-            self.selectedOption = "++"
-            self.comboOptions = ["++", "--"]
-            self.optionsCombo.configure(values=self.comboOptions, width=5)
-            self.optionsCombo.current(0)
-            self.optionsCombo.grid(row=1, column=1)
-        elif self.conditionType == 2:
+            self.selected_option = "++"
+            self.combo_options = ["++", "--"]
+            self.options_combo.configure(values=self.combo_options, width=5)
+            self.options_combo.current(0)
+            self.options_combo.grid(row=1, column=1)
+        elif self.condition_type == 2:
             label = widgets.TooltipLabel(frame, "trigger_condition_2", text="Log")
             label.grid(row=0, column=0)
 
-            self.selectedOption = "set"
-            self.comboOptions = ["set", "clear"]
-            self.optionsCombo.configure(values=self.comboOptions, width=5)
-            self.optionsCombo.current(0)
-            self.optionsCombo.grid(row=1, column=0)
+            self.selected_option = "set"
+            self.combo_options = ["set", "clear"]
+            self.options_combo.configure(values=self.combo_options, width=5)
+            self.options_combo.current(0)
+            self.options_combo.grid(row=1, column=0)
 
-            entry = ttk.Entry(frame, textvariable=self.condData)
+            entry = ttk.Entry(frame, textvariable=self.cond_data)
             entry.grid(row=1, column=1)
         else:
             logging.error("Invalid condition_type!!")
@@ -105,19 +106,19 @@ class TriggerConditionWindow(object):
         logging.debug("\t\tStoring TriggerConditionWindow data...")
         self.condition.clear_condition()
 
-        if self.conditionType == 0:
-            self.condition.condition[0] = self.condData.get()
-            self.condition.condition[1] = self.selectedOption
+        if self.condition_type == 0:
+            self.condition.condition[0] = self.cond_data.get()
+            self.condition.condition[1] = self.selected_option
             self.condition.condition[2] = self.value.get()
-            logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
-        elif self.conditionType == 1:
-            self.condition.condition[0] = self.condData.get()
-            self.condition.condition[1] = self.selectedOption
-            logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
-        elif self.conditionType == 2:
-            self.condition.condition[0] = self.selectedOption
-            self.condition.condition[1] = self.condData.get()
-            logging.debug("\t\t\tCondition type %d: %s" % (self.conditionType, str(self.condition.condition)))
+            logging.debug("\t\t\tCondition type %d: %s" % (self.condition_type, str(self.condition.condition)))
+        elif self.condition_type == 1:
+            self.condition.condition[0] = self.cond_data.get()
+            self.condition.condition[1] = self.selected_option
+            logging.debug("\t\t\tCondition type %d: %s" % (self.condition_type, str(self.condition.condition)))
+        elif self.condition_type == 2:
+            self.condition.condition[0] = self.selected_option
+            self.condition.condition[1] = self.cond_data.get()
+            logging.debug("\t\t\tCondition type %d: %s" % (self.condition_type, str(self.condition.condition)))
         else:
             logging.error("Invalid TriggerCondition condition_type!!!")
         #end if/else
@@ -131,30 +132,30 @@ class TriggerConditionWindow(object):
         """
         logging.debug("\t\tPopulating TriggerWindow...")
 
-        if self.conditionType == 0:
+        if self.condition_type == 0:
             if self.condition.condition[0] is not None:
-                self.condData.set(self.condition.condition[0])
-                index = self.comboOptions.index(self.condition.condition[1])
-                self.optionsCombo.current(index)
+                self.cond_data.set(self.condition.condition[0])
+                index = self.combo_options.index(self.condition.condition[1])
+                self.options_combo.current(index)
                 self.value.set(self.condition.condition[2])
 
-                self.selectedOption = self.condition.condition[1]
+                self.selected_option = self.condition.condition[1]
             #end if
-        elif self.conditionType == 1:
+        elif self.condition_type == 1:
             if self.condition.condition[0] is not None:
-                self.condData.set(self.condition.condition[0])
-                index = self.comboOptions.index(self.condition.condition[1])
-                self.optionsCombo.current(index)
+                self.cond_data.set(self.condition.condition[0])
+                index = self.combo_options.index(self.condition.condition[1])
+                self.options_combo.current(index)
 
-                self.selectedOption = self.condition.condition[1]
+                self.selected_option = self.condition.condition[1]
             #end if
-        elif self.conditionType == 2:
+        elif self.condition_type == 2:
             if self.condition.condition[0] is not None:
-                index = self.comboOptions.index(self.condition.condition[0])
-                self.optionsCombo.current(index)
-                self.condData.set(self.condition.condition[1])
+                index = self.combo_options.index(self.condition.condition[0])
+                self.options_combo.current(index)
+                self.cond_data.set(self.condition.condition[1])
 
-                self.selectedOption = self.condition.condition[0]
+                self.selected_option = self.condition.condition[0]
             #end if
         else:
             logging.error("Data corrupted!!!")
@@ -164,6 +165,6 @@ class TriggerConditionWindow(object):
 
     def _combo_callback(self, event=None):
         """Store the combobox option selected by the user"""
-        self.selectedOption = self.optionsCombo.get()
+        self.selected_option = self.options_combo.get()
     #end _combo_callback
 #end class TriggerConditionWindow

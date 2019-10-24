@@ -24,13 +24,12 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
     number of TriggerConditionFrame widgets to the GUI.
     """
 
-    def __init__(self, app, parent, trigger):
+    def __init__(self, parent, trigger):
         ttk.Frame.__init__(self, parent)
 
-        self.app          = app
-        self.parent       = parent
-        self.trigger      = trigger
-        self.tcFrameList  = []
+        self.parent = parent
+        self.trigger = trigger
+        self.tc_frame_list = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -58,12 +57,12 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
             tc.cleanup()
             return
         #end if
-        self.edit_trigger_condition(self.tcFrameList[-1])
+        self.edit_trigger_condition(self.tc_frame_list[-1])
 
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self._change_tc_state, state, self.tcFrameList[-1].condition))
+        cb.configure(command=partial(self._change_tc_state, state, self.tc_frame_list[-1].condition))
         cb.grid(row=0, column=3, sticky="e")
     #end _add_trigger_condition
 
@@ -76,7 +75,7 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
         logging.debug("Editing  %s" % str(tc_frame.condition))
-        widgets.TriggerConditionWindow(self.app, self.app.gui, tc_frame.condition)
+        widgets.TriggerConditionWindow(tc_frame.condition)
     #end edit_trigger_condition
 
 
@@ -88,7 +87,7 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param tc_frame: The TriggerConditionFrame to be removed
         """
         self.trigger.remove_tc(tc_frame.condition)
-        self.tcFrameList.remove(tc_frame)
+        self.tc_frame_list.remove(tc_frame)
         tc_frame.frame.pack_forget()
         tc_frame.frame.destroy()
 
@@ -136,9 +135,9 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param format_type: the format type
         """
         if format_type == "cancelled":
-            self.tcFrameList[-1].condition.conditionType = "cancelled"
+            self.tc_frame_list[-1].condition.conditionType = "cancelled"
             return
         ft = self.condTypes.index(format_type)
-        self.tcFrameList[-1].condition.conditionType = ft
+        self.tc_frame_list[-1].condition.conditionType = ft
     #end _set_format_type
 #end class AggregatedTriggerConditionFrame
