@@ -31,7 +31,7 @@ class FileMissionItemParser:
 
 
     def run(self):
-        print("Parsing %s from file..." % self.mission.name)
+        logging.debug("\t\tParsing %s from file..." % self.mission.name)
 
         self.strip_ending_whitespace_from_lines()
         enum_lines = enumerate(self.lines)
@@ -45,76 +45,76 @@ class FileMissionItemParser:
             if "mission" in tokens[0]:
                 continue
             elif "name" in tokens[0]:
-                logging.debug("\t\tFound mission display name: \"%s\"" % tokens[1])
+                logging.debug("\t\t\tFound mission display name: \"%s\"" % tokens[1])
                 self.mission.components.mission_display_name = tokens[1]
             elif "description" in tokens[0]:
-                logging.debug("\t\tFound description: %s" % tokens[1])
+                logging.debug("\t\t\tFound description: %s" % tokens[1])
                 self.mission.components.description = tokens[1]
             elif "blocked" in tokens[0]:
-                logging.debug("\t\tFound blocked: %s" % tokens[1])
+                logging.debug("\t\t\tFound blocked: %s" % tokens[1])
                 self.mission.components.blocked = tokens[1]
             elif "deadline" in tokens[0]:
-                logging.debug("\t\tFound deadline")
+                logging.debug("\t\t\tFound deadline")
                 self.mission.components.deadline.is_active = True
                 self.store_component_data(self.mission.components.deadline.deadline, tokens[1:])
             elif "cargo" in tokens[0]:
-                logging.debug("\t\tFound cargo: %s" % tokens[1:])
+                logging.debug("\t\t\tFound cargo: %s" % tokens[1:])
                 self.mission.components.cargo.is_active = True
                 self.store_component_data(self.mission.components.cargo.cargo, tokens[1:])
             elif "passengers" in tokens[0]:
-                logging.debug("\t\tFound passengers: %s" % tokens[1:])
+                logging.debug("\t\t\tFound passengers: %s" % tokens[1:])
                 self.mission.components.passengers.is_active = True
                 self.store_component_data(self.mission.components.passengers.passengers, tokens[1:])
             elif "illegal" in tokens[0]:
-                logging.debug("\t\tFound illegal modifier: %s" % tokens[1:])
+                logging.debug("\t\t\tFound illegal modifier: %s" % tokens[1:])
                 self.mission.components.illegal.is_active = True
                 self.store_component_data(self.mission.components.illegal.illegal, tokens[1:])
             elif "stealth" in tokens[0]:
-                logging.debug("\t\tFound stealth modifier")
+                logging.debug("\t\t\tFound stealth modifier")
                 self.mission.components.is_stealth = True
             elif "invisible" in tokens[0]:
-                logging.debug("\t\tFound invisible modifier")
+                logging.debug("\t\t\tFound invisible modifier")
                 self.mission.components.is_invisible = True
             elif tokens[0] in ["priority", "minor"]:
-                logging.debug("\t\tFound priority level")
+                logging.debug("\t\t\tFound priority level")
                 self.mission.components.priority_level = tokens[0]
             elif tokens[0] in ["job", "landing", "assisting", "boarding"]:
-                logging.debug("\t\tFound where shown")
+                logging.debug("\t\t\tFound where shown")
                 self.mission.components.where_shown = tokens[0]
             elif "repeat" in tokens[0]:
-                logging.debug("\t\tFound repeat")
+                logging.debug("\t\t\tFound repeat")
                 self.mission.components.repeat.is_active = True
                 if len(tokens) > 1:
-                    logging.debug("\t\t\tFound repeat optional data: %s" % tokens[1])
+                    logging.debug("\t\t\t\tFound repeat optional data: %s" % tokens[1])
                     self.mission.components.repeat.repeat = tokens[1]
             elif "clearance" in tokens[0]:
-                logging.debug("\t\tFound clearance: %s" % tokens[1])
+                logging.debug("\t\t\tFound clearance: %s" % tokens[1])
                 self.mission.components.clearance.is_active = True
                 self.mission.components.clearance.clearance   = tokens[1]
             elif "infiltrating" in tokens[0]:
-                logging.debug("\t\tFound infiltrating")
+                logging.debug("\t\t\tFound infiltrating")
                 self.mission.components.is_infiltrating = True
             elif "waypoint" in tokens[0]:
-                logging.debug("\t\tFound waypoint: %s" % tokens[1])
+                logging.debug("\t\t\tFound waypoint: %s" % tokens[1])
                 self.mission.components.waypoint = tokens[1]
             elif "stopover" in tokens[0]:
-                logging.debug("\t\tFound stopover: %s" % tokens[1])
+                logging.debug("\t\t\tFound stopover: %s" % tokens[1])
                 self.mission.components.stopover.is_active = True
                 self.mission.components.stopover.stopover   = tokens[1]
             elif "source" in tokens[0]:
                 if len(tokens) == 2:
-                    logging.debug("\t\tFound source: %s" % tokens[1])
+                    logging.debug("\t\t\tFound source: %s" % tokens[1])
                     self.mission.components.source.is_active = True
                     self.mission.components.source.source   = tokens[1]
                 else:
                     logging.error("COMPLEX SOURCE HANDLING NOT YET IMPLEMENTED")
             elif "destination" in tokens[0]:
                 if len(tokens) == 2:
-                    logging.debug("\t\tFound destination: %s" % tokens[1])
+                    logging.debug("\t\t\tFound destination: %s" % tokens[1])
                     self.mission.components.destination.is_active = True
                     self.mission.components.destination.destination = tokens[1]
             elif "on" in tokens:
-                logging.debug("\t\tFound Trigger: on %s" % tokens[1])
+                logging.debug("\t\t\tFound Trigger: on %s" % tokens[1])
                 trigger = self.mission.add_trigger()
                 trigger.is_active = True
                 trigger.trigger_type = tokens[1]
@@ -154,7 +154,7 @@ class FileMissionItemParser:
                         # end while
                     elif "dialog" in tokens[0]:
                         if len(tokens) == 2:
-                            logging.debug("\t\t\tFound Dialog: %s" % tokens[1])
+                            logging.debug("\t\t\t\tFound Dialog: %s" % tokens[1])
                             trigger.dialog = tokens[1]
                         else:
                             logging.error("COMPLEX DIALOG HANDLING NOT YET IMPLEMENTED")
@@ -171,51 +171,51 @@ class FileMissionItemParser:
                                     break
                             # end while
                     elif "outfit" in tokens[0]:
-                        logging.debug("\t\t\tFound Outfit: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
                         self.store_component_data(trigger.outfit, tokens[1:])
                     elif "require" in tokens[0]:
-                        logging.debug("\t\t\tFound Require: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Require: %s" % tokens)
                         self.store_component_data(trigger.require, tokens[1:])
                     elif "payment" in tokens[0]:
-                        logging.debug("\t\t\tFound Outfit: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
                         trigger.is_payment = True
                         self.store_component_data(trigger.payment, tokens[1:])
                     elif "event" in tokens[0]:
-                        logging.debug("\t\t\tFound Event: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Event: %s" % tokens)
                         self.store_component_data(trigger.event, tokens[1:])
                     elif "fail" in tokens[0]:
-                        logging.debug("\t\t\tFound Fail: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Fail: %s" % tokens)
                         trigger.is_fail = True
                         if len(tokens) == 2:
                             trigger.fail = tokens[1]
                         else:
                             logging.error("COMPLEX FAIL HANDLING NOT YET IMPLEMENTED")
                     elif "log" in tokens[0] and len(tokens) == 2:
-                        logging.debug("\t\t\tFound Log: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Log: %s" % tokens)
                         new_log             = trigger.add_log()
                         new_log.is_active   = True
                         new_log.format_type = "<message>"
                         new_log.log[0]      = tokens[1]
                     elif "log" in tokens[0]:
-                        logging.debug("\t\t\tFound Log: %s" % tokens)
+                        logging.debug("\t\t\t\tFound Log: %s" % tokens)
                         new_log             = trigger.add_log()
                         new_log.is_active   = True
                         new_log.format_type = "<type> <name> <message>"
                         self.store_component_data(new_log.log, tokens[1:])
                     elif tokens[1] in ["=", "+=", "-="]:
-                        logging.debug("\t\t\tFound TriggerCondition: %s" % tokens)
+                        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
                         new_tc                = trigger.add_tc()
                         new_tc.is_active      = True
                         new_tc.condition_type = 0
                         self.store_component_data(new_tc.condition, tokens)
                     elif tokens[1] in ["++", "--"]:
-                        logging.debug("\t\t\tFound TriggerCondition: %s" % tokens)
+                        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
                         new_tc                = trigger.add_tc()
                         new_tc.is_active      = True
                         new_tc.condition_type = 1
                         self.store_component_data(new_tc.condition, tokens)
                     elif tokens[0] in ["set", "clear"]:
-                        logging.debug("\t\t\tFound TriggerCondition: %s" % tokens)
+                        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
                         new_tc                = trigger.add_tc()
                         new_tc.is_active      = True
                         new_tc.condition_type = 2

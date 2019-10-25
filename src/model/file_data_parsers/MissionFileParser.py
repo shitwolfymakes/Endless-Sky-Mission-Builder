@@ -37,30 +37,25 @@ class MissionFileParser:
         #TODO: break this into multiple functions
         enum_lines = enumerate(self.lines)
         for i, line in enum_lines:
-            #print(i, line)
             line.rstrip()
             if line == "" or line == "\n":
                 continue
 
+            line = line.rstrip("\n")
             if re.search(self.match_mission, line):
-                logging.debug("MISSION FOUND: %s" % line)
-                print("MISSION FOUND: %s" % line)
+                logging.debug("\t\tMISSION FOUND: %s" % line)
                 self.store_item_for_parsing(i, line, "mission")
             elif re.search(self.match_event, line):
-                logging.debug("EVENT FOUND: %s" % line)
-                print("EVENT FOUND: %s" % line)
+                logging.debug("\t\tEVENT FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "event")
             elif re.search(self.match_phrase, line):
-                logging.debug("PHRASE FOUND: %s" % line)
-                print("PHRASE FOUND: %s" % line)
+                logging.debug("\t\tPHRASE FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "phrase")
             elif re.search(self.match_npc, line):
-                logging.debug("NPC FOUND: %s" % line)
-                print("NPC FOUND: %s" % line)
+                logging.debug("\t\tNPC FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "npc")
             elif re.search(self.match_government, line):
-                logging.debug("GOVERNMENT FOUND: %s" % line)
-                print("GOVERNMENT FOUND: %s" % line)
+                logging.debug("\t\tGOVERNMENT FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "government")
             #end elif
         #end for
