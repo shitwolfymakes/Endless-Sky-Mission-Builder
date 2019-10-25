@@ -34,7 +34,6 @@ class Mission(model.FileItem):
     def parse(self):
         parser = MissionParser(self)
         self.lines = parser.run()
-        print(self.lines)
     #end parse
 
 
