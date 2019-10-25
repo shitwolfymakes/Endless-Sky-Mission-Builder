@@ -31,17 +31,10 @@ class Mission(model.FileItem):
     #end init
 
 
-    def print_item_lines_to_text(self):
-        """Concatenate all the lines together. Used to make a block of text to display in the item_text_pane."""
-        # Note to self: this is the most efficient and pythonic way to concat all these strings together
-        mission_text = "".join(self.lines)
-        return mission_text
-    #end print_item_lines_to_text
-
-
     def parse(self):
         parser = MissionParser(self)
         self.lines = parser.run()
+        print(self.lines)
     #end parse
 
 
@@ -55,7 +48,6 @@ class Mission(model.FileItem):
 
     def remove_trigger(self, trigger):
         """Remove a trigger object from this mission"""
-        #print(trigger)
         self.components.trigger_list.remove(trigger)
     #end remove_trigger
 

@@ -252,7 +252,6 @@ class FileMissionItemParser:
         #end for
 
         config.mission_file_items.add_item(self.mission)
-        self.mission.print_item_lines_to_text()
     #end run
 
 

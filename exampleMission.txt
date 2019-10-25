@@ -13,7 +13,7 @@
 
 
 mission "Test Mission 0"
-    name `test`
+	name `test`
 	description `A test mission`
 	blocked "Oh piss off!"
 	deadline 2 1
@@ -50,6 +50,6 @@ mission "Test Mission 0"
 
 
 mission "Test Mission 1"
-    name "test 2"
+	name "test 2"
 	description `A second test mission`
 	repeat

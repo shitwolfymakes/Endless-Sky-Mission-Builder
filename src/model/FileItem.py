@@ -26,12 +26,6 @@ class FileItem(ABC):
 
 
     @abstractmethod
-    def print_item_lines_to_text(self):
-        pass
-    #end print_item_lines_to_text
-
-
-    @abstractmethod
     def parse(self):
         pass
     #end parse

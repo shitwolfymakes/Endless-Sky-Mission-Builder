@@ -80,7 +80,7 @@ class MissionFileParser:
 
 
     def store_item_for_parsing(self, i, line, item_type):
-        item_lines = [line]
+        item_lines = [line + "\n"]
         lines = self.lines[i+1:]
         for i, line in enumerate(lines):
             if self.end_of_item_condition(line):
