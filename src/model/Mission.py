@@ -12,6 +12,8 @@
 
 import logging
 
+from src.model.model_data_parsers import MissionParser
+
 import src.model as model
 
 
@@ -38,7 +40,7 @@ class Mission(model.FileItem):
 
 
     def parse(self):
-        parser = model.MissionParser(self)
+        parser = MissionParser(self)
         self.lines = parser.run()
     #end parse
 

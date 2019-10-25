@@ -14,7 +14,7 @@ import logging
 from tkinter import filedialog
 
 from src import config
-from src.model import MissionFileParser
+from src.model.file_data_parsers import MissionFileParser
 
 
 def open_file():
@@ -22,8 +22,6 @@ def open_file():
     This method handles reading in Endless Sky mission files.
     It creates a mission object for each mission it finds,
     and then calls the parser to parse the data
-
-    :param app: The instance of ESMB
     """
     #TODO: Add handling for mission preamble(license text)
 
