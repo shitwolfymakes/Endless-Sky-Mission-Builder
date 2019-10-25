@@ -75,7 +75,7 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
         logging.debug("Editing  %s" % str(tc_frame.condition))
-        widgets.TriggerConditionWindow(tc_frame.condition)
+        widgets.TriggerConditionWindow(self, tc_frame.condition)
     #end edit_trigger_condition
 
 

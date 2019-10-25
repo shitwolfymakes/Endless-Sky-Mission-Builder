@@ -19,13 +19,14 @@ from ttkthemes import ThemedTk
 import src.widgets as widgets
 
 
-class TriggerConditionWindow(object):
+class TriggerConditionWindow(Toplevel):
     """
     This class creates a custom pop-up window to display and edit the data in an associated TriggerCondition object
     """
 
-    def __init__(self, condition):
+    def __init__(self, master, condition):
         logging.debug("\tBuilding TriggerConditionWindow...")
+        super().__init__(master)
 
         self.condition = condition
         self.condition_type = condition.condition_type
@@ -33,12 +34,11 @@ class TriggerConditionWindow(object):
         self.value = StringVar()
         self.selected_option = None
 
-        self.top = ThemedTk(theme="plastik")
-        self.top.title("Edit Condition")
-        self.top.configure(bg="#ededed")
-        self.top.grab_set()  # freezes the app until the user enters or cancels
+        self.title("Edit Condition")
+        self.configure(bg="#ededed")
+        self.grab_set()  # freezes the app until the user enters or cancels
 
-        frame = ttk.Frame(self.top)
+        frame = ttk.Frame(self)
         frame.pack(side=TOP)
         self.options_combo = ttk.Combobox(frame, state="readonly")
         self.options_combo.bind("<<ComboboxSelected>>", self._combo_callback)
@@ -86,7 +86,7 @@ class TriggerConditionWindow(object):
             logging.error("Invalid condition_type!!")
         #end if/else
 
-        self.closeButton = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.closeButton = ttk.Button(self, text="Ok", command=self.cleanup)
         self.closeButton.pack(side=BOTTOM)
 
         self._populate_tc_window()
@@ -96,8 +96,8 @@ class TriggerConditionWindow(object):
     def cleanup(self):
         """Clean up whatever popups we've created"""
         self._store_data()
-        self.top.grab_release()  # HAVE TO RELEASE
-        self.top.destroy()
+        self.grab_release()  # HAVE TO RELEASE
+        self.destroy()
     #end _cleanup
 
 
