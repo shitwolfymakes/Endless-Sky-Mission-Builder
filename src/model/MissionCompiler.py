@@ -158,7 +158,7 @@ class MissionCompiler:
 
 
     def _has_cargo(self):
-        self.editor.cargo_component.list_entry_states[0].get()
+        return self.editor.cargo_component.list_entry_states[0].get()
     #end _has_cargo
 
 
@@ -213,17 +213,17 @@ class MissionCompiler:
 
 
     def _has_stopover(self):
-        self.editor.stopover_component.list_entry_states[0].get()
+        return self.editor.stopover_component.list_entry_states[0].get()
     #end _has_stopover
 
 
     def _has_source(self):
-        self.editor.source_component.list_entry_states[0].get()
+        return self.editor.source_component.list_entry_states[0].get()
     #end _has_source
 
 
     def _has_destination(self):
-        self.editor.destination_component.list_entry_states[0].get()
+        return self.editor.destination_component.list_entry_states[0].get()
     #end _has_destination
 
 
