@@ -14,8 +14,9 @@ from abc import ABC, abstractmethod
 
 
 class GUIPane(ABC):
+    #TODO: see if you can get frames inside Aggregated* frames to change their label to reflect their type
     @abstractmethod
     def update_pane(self):
         pass
-    #end print_item_lines_to_text
+    #end update_pane
 #end class GUIPane
