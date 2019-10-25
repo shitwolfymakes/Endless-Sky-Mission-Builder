@@ -73,7 +73,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log_frame: The LogFrame containing the log to be edited
         """
         logging.debug("Editing %s..." % str(log_frame.log))
-        widgets.LogWindow(log_frame.log, log_frame.log.format_type)
+        widgets.LogWindow(self, log_frame.log)
     #end edit_log
 
 
