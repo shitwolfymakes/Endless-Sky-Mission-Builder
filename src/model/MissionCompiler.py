@@ -16,6 +16,7 @@ from src import config
 
 
 class MissionCompiler:
+    #TODO: WRITE UNIT TEST FOR THIS
     """This class compiles the data the user has entered into the current Mission object"""
 
     def __init__(self):
