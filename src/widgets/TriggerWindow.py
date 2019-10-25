@@ -14,27 +14,25 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
-from ttkthemes import ThemedTk
-
 import src.widgets as widgets
 from src import config
 
 
-class TriggerWindow(object):
+class TriggerWindow(Toplevel):
     """This class creates a custom pop-up window to display and edit the data in an associated Trigger object"""
 
-    def __init__(self, trigger):
+    def __init__(self, master, trigger):
         logging.debug("\tBuilding TriggerWindow...")
+        super().__init__(master)
 
         self.trigger = trigger
         config.active_trigger = trigger
 
-        self.top = ThemedTk(theme="plastik")
-        self.top.title("Edit Trigger")
-        self.top.configure(bg="#ededed")
-        self.top.grab_set()  # freezes the app until the user enters or cancels
+        self.title("Edit Trigger")
+        self.configure(bg="#ededed")
+        self.grab_set()  # freezes the app until the user enters or cancels
 
-        outer = ttk.Frame(self.top)
+        outer = ttk.Frame(self)
         outer.pack(side=TOP)
 
         self.left_frame = ttk.Frame(outer)
@@ -43,7 +41,7 @@ class TriggerWindow(object):
         self.right_frame = ttk.Frame(outer)
         self.right_frame.pack(side=RIGHT, anchor=N)
 
-        self.close_button = ttk.Button(self.top, text="Ok", command=self._cleanup)
+        self.close_button = ttk.Button(self, text="Ok", command=self._cleanup)
         self.close_button.pack(side=BOTTOM)
 
         #TODO: find a way to support "on enter <system>"
@@ -98,8 +96,8 @@ class TriggerWindow(object):
         """Clean up whatever popups we've created"""
         self._store_data()
         config.active_trigger = None
-        self.top.grab_release()  # HAVE TO RELEASE
-        self.top.destroy()
+        self.grab_release()  # HAVE TO RELEASE
+        self.destroy()
     #end _cleanup
 
 
@@ -187,6 +185,7 @@ class TriggerWindow(object):
 
         # action
         if self.trigger.trigger_type is not None:
+            logging.debug("\t\t\tPopulating trigger_type: %s" % self.trigger.trigger_type)
             self.action = self.trigger.trigger_type
             index = self.actions_list.index(self.trigger.trigger_type)
             self.on_action_combobox.current(index)
@@ -195,6 +194,7 @@ class TriggerWindow(object):
         # dialog
         component = self.dialog_component
         if self.trigger.dialog is not None:
+            logging.debug("\t\t\tPopulating %s..." % self.trigger.dialog)
             component.list_entry_states[0].set(1)
             component.cb_value_changed(self.dialog_component.list_entry_states[0], [self.dialog_component.list_entries[0]])
             component.list_entry_data[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
@@ -204,6 +204,7 @@ class TriggerWindow(object):
         component = self.outfit_component
         for i, data in enumerate(self.trigger.outfit):
             if data is not None:
+                logging.debug("\t\t\tPopulating outfit: %s" % self.trigger.outfit[i])
                 component.list_entry_states[i].set(1)
                 component.cb_value_changed(component.list_entry_states[i], [component.list_entries[i]])
                 component.list_entry_data[i].set(data)
@@ -216,6 +217,7 @@ class TriggerWindow(object):
         component = self.require_component
         for i, data in enumerate(self.trigger.require):
             if data is not None:
+                logging.debug("\t\t\tPopulating require: %s" % self.trigger.require[i])
                 component.list_entry_states[i].set(1)
                 component.cb_value_changed(component.list_entry_states[i], [component.list_entries[i]])
                 component.list_entry_data[i].set(data)
@@ -232,6 +234,7 @@ class TriggerWindow(object):
 
             for i, data in enumerate(self.trigger.payment):
                 if data is not None:
+                    logging.debug("\t\t\tPopulating payment: %s" % self.trigger.payment[i])
                     component.list_entry_states[i + 1].set(1)
                     component.cb_value_changed(component.list_entry_states[i + 1], [component.list_entries[i]])
                     component.list_entry_data[i].set(data)
@@ -245,6 +248,7 @@ class TriggerWindow(object):
         component = self.event_component
         for i, data in enumerate(self.trigger.event):
             if data is not None:
+                logging.debug("\t\t\tPopulating event: %s" % self.trigger.event[i])
                 component.list_entry_states[i].set(1)
                 component.cb_value_changed(component.list_entry_states[i], [component.list_entries[i]])
                 component.list_entry_data[i].set(data)
@@ -260,6 +264,7 @@ class TriggerWindow(object):
             component.cb_value_changed(component.list_entry_states[0], [component.component_name])
 
             if self.trigger.fail is not None:
+                logging.debug("\t\t\tPopulating fail: %s" % self.trigger.fail)
                 component.list_entry_states[1].set(1)
                 component.cb_value_changed(component.list_entry_states[1], [component.list_entries[0]])
                 component.list_entry_data[0].set(self.trigger.fail)

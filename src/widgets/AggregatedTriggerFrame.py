@@ -83,7 +83,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param trigger_frame: The TriggerFrame containing the trigger to be edited
         """
         logging.debug("Editing %s..." % str(trigger_frame.trigger))
-        widgets.TriggerWindow(trigger_frame.trigger)
+        widgets.TriggerWindow(self, trigger_frame.trigger)
     #end edit_trigger
 
 
