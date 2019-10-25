@@ -88,11 +88,16 @@ class MissionFileParser:
         item_lines = [line]
         lines = self.lines[i+1:]
         for i, line in enumerate(lines):
-            if self.end_of_item_condition(line) or self.is_eof(i, lines):
+            if self.end_of_item_condition(line):
                 self.file_items.append((item_type, item_lines))
                 break
             #end if
+
             item_lines.append(line)
+            if self.is_eof(i, lines):
+                self.file_items.append((item_type, item_lines))
+                break
+            #end if
         #end for
     #end store_item_for_parsing
 
