@@ -1,4 +1,4 @@
-""" helpuser.py
+""" es_wiki.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -13,7 +13,7 @@
 import webbrowser
 
 
-def help_user():
-    """Open the user documentation for Endless Sky Mission Builder"""
-    webbrowser.open_new(r"https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/wiki")
-# end help_user
+def es_wiki():
+    """Open the Creating Mission documentation for Endless Sky"""
+    webbrowser.open_new(r"https://github.com/endless-sky/endless-sky/wiki/CreatingMissions")
+# end es_wiki

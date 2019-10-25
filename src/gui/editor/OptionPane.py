@@ -57,6 +57,7 @@ class OptionPane(ttk.Frame, GUIPane):
         self.add_open_file_button()
         self.add_compile_button()
         self.add_help_button()
+        self.add_es_wiki_button()
         self.add_change_name_button()
         self.delete_current_button()
     #end add_buttons
@@ -73,7 +74,7 @@ class OptionPane(ttk.Frame, GUIPane):
     def add_save_file_button(self):
         save_file_button = ttk.Button(self.option_frame,
                                       text="Save Mission File",
-                                      command=partial(utils.save_file, self))
+                                      command=partial(utils.save_file))
         save_file_button.pack(fill='x')
     #end add_save_file_button
 
@@ -101,6 +102,13 @@ class OptionPane(ttk.Frame, GUIPane):
         help_button.pack(fill='x')
     #end add_help_button
 
+
+    def add_es_wiki_button(self):
+        help_button = ttk.Button(self.option_frame,
+                                 text="ES Wiki",
+                                 command=partial(utils.es_wiki))
+        help_button.pack(fill='x')
+    #end add_es_wiki_button
 
     def add_change_name_button(self):
         #TODO: Implement this
