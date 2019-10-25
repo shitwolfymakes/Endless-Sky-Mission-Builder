@@ -17,7 +17,7 @@ from tkinter import ttk
 class TriggerConditionFrame(object):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, master, trigger, name, populating=False):
+    def __init__(self, master, trigger, populating=False):
         self.condition = None
         if not populating:
             self.condition = trigger.add_tc()
@@ -28,7 +28,7 @@ class TriggerConditionFrame(object):
         self.frame.pack(expand=True, fill="x")
         self.frame.grid_columnconfigure(0, weight=1)
 
-        label = ttk.Label(self.frame, text=str(name + "\t\t"))
+        label = ttk.Label(self.frame, text=str("trigger" + "\t\t"))
         label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
         self.master.tc_frame_list.append(self)

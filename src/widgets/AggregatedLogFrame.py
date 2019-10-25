@@ -108,7 +108,7 @@ class AggregatedLogFrame(ttk.Frame):
         cb.configure(command=partial(self._change_log_state, state, log))
         cb.grid(row=0, column=3, sticky="e")
 
-        if log.isActive:
+        if log.is_active:
             state.set(1)
             self._change_log_state(state, log)
     #end populate_log
