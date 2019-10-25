@@ -115,8 +115,8 @@ class FileMissionItemParser:
                     self.mission.components.destination.destination = tokens[1]
             elif "on" in tokens:
                 logging.debug("\t\tFound Trigger: on %s" % tokens[1])
-                trigger              = self.mission.add_trigger()
-                trigger.is_active    = True
+                trigger = self.mission.add_trigger()
+                trigger.is_active = True
                 trigger.trigger_type = tokens[1]
 
                 cur = self.get_indent_level(self.mission.lines[i])
