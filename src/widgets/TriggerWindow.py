@@ -115,66 +115,66 @@ class TriggerWindow(object):
         #end if
 
         # dialog
-        if self.dialog_component.listEntryStates[0].get():
-            logging.debug("\t\tDialog: %s" % self.dialog_component.listEntryData[0].get())
-            self.trigger.dialog = self.dialog_component.listEntryData[0].get()
+        if self.dialog_component.list_entry_states[0].get():
+            logging.debug("\t\tDialog: %s" % self.dialog_component.list_entry_data[0].get())
+            self.trigger.dialog = self.dialog_component.list_entry_data[0].get()
         #end if
 
         # outfit
-        if self.outfit_component.listEntryStates[0].get():
-            logging.debug("\t\tOutfit: %s" % self.outfit_component.listEntryData[0].get())
-            self.trigger.outfit[0] = self.outfit_component.listEntryData[0].get()
-            if self.outfit_component.listEntryStates[1].get():
-                logging.debug("\t\t\tOutfit Optional: %s" % self.outfit_component.listEntryData[1].get())
-                self.trigger.outfit[1] = self.outfit_component.listEntryData[1].get()
+        if self.outfit_component.list_entry_states[0].get():
+            logging.debug("\t\tOutfit: %s" % self.outfit_component.list_entry_data[0].get())
+            self.trigger.outfit[0] = self.outfit_component.list_entry_data[0].get()
+            if self.outfit_component.list_entry_states[1].get():
+                logging.debug("\t\t\tOutfit Optional: %s" % self.outfit_component.list_entry_data[1].get())
+                self.trigger.outfit[1] = self.outfit_component.list_entry_data[1].get()
             #end if
         #end if
 
         # require
-        if self.require_component.listEntryStates[0].get():
-            logging.debug("\t\tRequire: %s" % self.require_component.listEntryData[0].get())
-            self.trigger.require[0] = self.require_component.listEntryData[0].get()
-            if self.require_component.listEntryStates[1].get():
-                logging.debug("\t\t\tRequire Optional: %s" % self.require_component.listEntryData[1].get())
-                self.trigger.require[1] = self.require_component.listEntryData[1].get()
+        if self.require_component.list_entry_states[0].get():
+            logging.debug("\t\tRequire: %s" % self.require_component.list_entry_data[0].get())
+            self.trigger.require[0] = self.require_component.list_entry_data[0].get()
+            if self.require_component.list_entry_states[1].get():
+                logging.debug("\t\t\tRequire Optional: %s" % self.require_component.list_entry_data[1].get())
+                self.trigger.require[1] = self.require_component.list_entry_data[1].get()
             # end if
         # end if
 
         # payment
-        if self.payment_component.listEntryStates[0].get():
-            logging.debug("\t\tPayment: %s" % self.payment_component.componentName)
+        if self.payment_component.list_entry_states[0].get():
+            logging.debug("\t\tPayment: %s" % self.payment_component.component_name)
             self.trigger.is_payment = True
-            if self.payment_component.listEntryStates[1].get():
-                logging.debug("\t\t\tPayment Optional 1: %s" % self.payment_component.listEntryData[0].get())
-                self.trigger.payment[0] = self.payment_component.listEntryData[0].get()
-                if self.payment_component.listEntryStates[2].get():
-                    logging.debug("\t\t\tPayment Optional 2: %s" % self.payment_component.listEntryData[1].get())
-                    self.trigger.payment[1] = self.payment_component.listEntryData[1].get()
+            if self.payment_component.list_entry_states[1].get():
+                logging.debug("\t\t\tPayment Optional 1: %s" % self.payment_component.list_entry_data[0].get())
+                self.trigger.payment[0] = self.payment_component.list_entry_data[0].get()
+                if self.payment_component.list_entry_states[2].get():
+                    logging.debug("\t\t\tPayment Optional 2: %s" % self.payment_component.list_entry_data[1].get())
+                    self.trigger.payment[1] = self.payment_component.list_entry_data[1].get()
                 #end if
             #end if
         #end if
 
         # event
-        if self.event_component.listEntryStates[0].get():
-            logging.debug("\t\tEvent: %s" % self.event_component.listEntryData[0].get())
-            self.trigger.event[0] = self.event_component.listEntryData[0].get()
-            if self.event_component.listEntryStates[1].get():
-                logging.debug("\t\t\tEvent Optional 1: %s" % self.event_component.listEntryData[1].get())
-                self.trigger.event[1] = self.event_component.listEntryData[1].get()
-                if self.event_component.listEntryStates[2].get():
-                    logging.debug("\t\t\tEvent Optional 2: %s" % self.event_component.listEntryData[2].get())
-                    self.trigger.event[2] = self.event_component.listEntryData[2].get()
+        if self.event_component.list_entry_states[0].get():
+            logging.debug("\t\tEvent: %s" % self.event_component.list_entry_data[0].get())
+            self.trigger.event[0] = self.event_component.list_entry_data[0].get()
+            if self.event_component.list_entry_states[1].get():
+                logging.debug("\t\t\tEvent Optional 1: %s" % self.event_component.list_entry_data[1].get())
+                self.trigger.event[1] = self.event_component.list_entry_data[1].get()
+                if self.event_component.list_entry_states[2].get():
+                    logging.debug("\t\t\tEvent Optional 2: %s" % self.event_component.list_entry_data[2].get())
+                    self.trigger.event[2] = self.event_component.list_entry_data[2].get()
                 # end if
             # end if
         # end if
 
         # fail
-        if self.fail_component.listEntryStates[0].get():
-            logging.debug("\t\tPayment: %s" % self.fail_component.componentName)
+        if self.fail_component.list_entry_states[0].get():
+            logging.debug("\t\tPayment: %s" % self.fail_component.component_name)
             self.trigger.is_fail = True
-            if self.fail_component.listEntryStates[1].get():
-                logging.debug("\t\t\tPayment Optional 1: %s" % self.fail_component.listEntryData[0].get())
-                self.trigger.fail = self.fail_component.listEntryData[0].get()
+            if self.fail_component.list_entry_states[1].get():
+                logging.debug("\t\t\tPayment Optional 1: %s" % self.fail_component.list_entry_data[0].get())
+                self.trigger.fail = self.fail_component.list_entry_data[0].get()
             #end if
         #end if
 
@@ -195,43 +195,49 @@ class TriggerWindow(object):
         # dialog
         component = self.dialog_component
         if self.trigger.dialog is not None:
-            component.listEntryStates[0].set(1)
-            component.cb_value_changed(self.dialog_component.listEntryStates[0], [self.dialog_component.listEntries[0]])
-            component.listEntryData[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
+            component.list_entry_states[0].set(1)
+            component.cb_value_changed(self.dialog_component.list_entry_states[0], [self.dialog_component.list_entries[0]])
+            component.list_entry_data[0].set(self.trigger.dialog.lstrip('`').rstrip('`'))
         #end if
 
         # outfit
         component = self.outfit_component
         for i, data in enumerate(self.trigger.outfit):
             if data is not None:
-                component.listEntryStates[i].set(1)
-                component.cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
-                component.listEntryData[i].set(data)
-            #end if
+                component.list_entry_states[i].set(1)
+                component.cb_value_changed(component.list_entry_states[i], [component.list_entries[i]])
+                component.list_entry_data[i].set(data)
+            else:
+                break
+            #end if/else
         #end for
 
         # require
         component = self.require_component
         for i, data in enumerate(self.trigger.require):
             if data is not None:
-                component.listEntryStates[i].set(1)
-                component.cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
-                component.listEntryData[i].set(data)
-            #end if
+                component.list_entry_states[i].set(1)
+                component.cb_value_changed(component.list_entry_states[i], [component.list_entries[i]])
+                component.list_entry_data[i].set(data)
+            else:
+                break
+            #end if/else
         #end for
 
         # payment
         if self.trigger.is_payment:
             component = self.payment_component
-            component.listEntryStates[0].set(1)
-            component.cb_value_changed(component.listEntryStates[0], [component.componentName])
+            component.list_entry_states[0].set(1)
+            component.cb_value_changed(component.list_entry_states[0], [component.component_name])
 
             for i, data in enumerate(self.trigger.payment):
                 if data is not None:
-                    component.listEntryStates[i+1].set(1)
-                    component.cb_value_changed(component.listEntryStates[i + 1], [component.listEntries[i]])
-                    component.listEntryData[i].set(data)
-                # end if
+                    component.list_entry_states[i + 1].set(1)
+                    component.cb_value_changed(component.list_entry_states[i + 1], [component.list_entries[i]])
+                    component.list_entry_data[i].set(data)
+                else:
+                    break
+                #end if/else
             # end for
         #end if
 
@@ -239,22 +245,24 @@ class TriggerWindow(object):
         component = self.event_component
         for i, data in enumerate(self.trigger.event):
             if data is not None:
-                component.listEntryStates[i].set(1)
-                component.cb_value_changed(component.listEntryStates[i], [component.listEntries[i]])
-                component.listEntryData[i].set(data)
-            #end if
+                component.list_entry_states[i].set(1)
+                component.cb_value_changed(component.list_entry_states[i], [component.list_entries[i]])
+                component.list_entry_data[i].set(data)
+            else:
+                break
+            #end if/else
         #end for
 
         # fail
         component = self.fail_component
         if self.trigger.is_fail:
-            component.listEntryStates[0].set(1)
-            component.cb_value_changed(component.listEntryStates[0], [component.componentName])
+            component.list_entry_states[0].set(1)
+            component.cb_value_changed(component.list_entry_states[0], [component.component_name])
 
             if self.trigger.fail is not None:
-                component.listEntryStates[1].set(1)
-                component.cb_value_changed(component.listEntryStates[1], [component.listEntries[0]])
-                component.listEntryData[0].set(self.trigger.fail)
+                component.list_entry_states[1].set(1)
+                component.cb_value_changed(component.list_entry_states[1], [component.list_entries[0]])
+                component.list_entry_data[0].set(self.trigger.fail)
             #end if
         #end if
 
