@@ -37,8 +37,8 @@ class AggregatedLogFrame(ttk.Frame):
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        add_button = ttk.Button(self.outer, text="Add Log", command=self._add_log)
-        add_button.pack(expand=True, fill="x")
+        self.add_button = ttk.Button(self.outer, text="Add Log", command=self._add_log)
+        self.add_button.pack(expand=True, fill="x")
     #end init
 
 

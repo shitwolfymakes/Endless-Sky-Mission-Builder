@@ -49,11 +49,11 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         """Add a condition to the current trigger"""
         logging.debug("Adding TriggerCondition...")
 
-        tc = widgets.TriggerConditionFrame(self, self.trigger, "log")
+        tc = widgets.TriggerConditionFrame(self, self.trigger, "trigger")
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
         widgets.TypeSelectorWindow(self, self.condTypes, self._set_format_type)
 
-        if tc.condition.conditionType == "cancelled":
+        if tc.condition.condition_type == "cancelled":
             tc.cleanup()
             return
         #end if
