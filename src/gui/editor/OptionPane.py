@@ -46,8 +46,8 @@ class OptionPane(ttk.Frame, GUIPane):
         logging.debug("Opening item \"%s\"" % selected_name)
         config.active_item = self.mfi.get_item(selected_name)
 
-        config.gui.update_center_frame()
-        config.gui.update_mission_frame()
+        config.gui.update_center_pane()
+        config.gui.update_item_text_pane()
     #end mission_selected
 
 
