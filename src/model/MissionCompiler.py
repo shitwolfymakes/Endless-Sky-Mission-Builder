@@ -138,47 +138,47 @@ class MissionCompiler:
 
     ### methods to check if components are active
     def _has_mission_display_name(self):
-        return self.editor.display_name_component.listEntryStates[0].get()
+        return self.editor.display_name_component.list_entry_states[0].get()
     #def _has_mission_display_name
 
 
     def _has_description(self):
-        return self.editor.description_component.listEntryStates[0].get()
+        return self.editor.description_component.list_entry_states[0].get()
     #end _has_description
 
 
     def _has_blocked(self):
-        return self.editor.blocked_component.listEntryStates[0].get()
+        return self.editor.blocked_component.list_entry_states[0].get()
     #end _has_blocked
 
 
     def _has_deadline(self):
-        return self.editor.deadline_component.listEntryStates[0].get()
+        return self.editor.deadline_component.list_entry_states[0].get()
     #def _has_deadline
 
 
     def _has_cargo(self):
-        self.editor.cargo_component.listEntryStates[0].get()
+        self.editor.cargo_component.list_entry_states[0].get()
     #end _has_cargo
 
 
     def _has_passengers(self):
-        return self.editor.passengers_component.listEntryStates[0].get()
+        return self.editor.passengers_component.list_entry_states[0].get()
     #end _has_passengers
 
 
     def _has_illegal(self):
-        return self.editor.illegal_component.listEntryStates[0].get()
+        return self.editor.illegal_component.list_entry_states[0].get()
     #end _has_illegal
 
 
     def _has_stealth(self):
-        return self.editor.stealth_component.listEntryStates[0].get()
+        return self.editor.stealth_component.list_entry_states[0].get()
     #end _has_stealth
 
 
     def _has_invisible(self):
-        return self.editor.invisible_component.listEntryStates[0].get()
+        return self.editor.invisible_component.list_entry_states[0].get()
     #end _hes_invisible
 
 
@@ -193,69 +193,69 @@ class MissionCompiler:
 
 
     def _has_repeat(self):
-        return self.editor.repeat_component.listEntryStates[0].get()
+        return self.editor.repeat_component.list_entry_states[0].get()
     #end _has_repeat
 
 
     def _has_clearance(self):
-        return self.editor.clearance_component.listEntryStates[0].get()
+        return self.editor.clearance_component.list_entry_states[0].get()
     #end _has_clearance
 
 
     def _has_infiltrating(self):
-        return self.editor.infiltrating_component.listEntryStates[0].get()
+        return self.editor.infiltrating_component.list_entry_states[0].get()
     #end _has_infiltrating
 
 
     def _has_waypoint(self):
-        return self.editor.waypoint_component.listEntryStates[0].get()
+        return self.editor.waypoint_component.list_entry_states[0].get()
     #end _has_waypoint
 
 
     def _has_stopover(self):
-        self.editor.stopover_component.listEntryStates[0].get()
+        self.editor.stopover_component.list_entry_states[0].get()
     #end _has_stopover
 
 
     def _has_source(self):
-        self.editor.source_component.listEntryStates[0].get()
+        self.editor.source_component.list_entry_states[0].get()
     #end _has_source
 
 
     def _has_destination(self):
-        self.editor.destination_component.listEntryStates[0].get()
+        self.editor.destination_component.list_entry_states[0].get()
     #end _has_destination
 
 
     ### methods to compile the data from each component in the model
     def _compile_mission_display_name(self):
-        logging.debug("\t\tFound display name: %s" % self.editor.display_name_component.listEntryData[0].get())
-        self.mission.mission_display_name = self.editor.display_name_component.listEntryData[0].get()
+        logging.debug("\t\tFound display name: %s" % self.editor.display_name_component.list_entry_data[0].get())
+        self.mission.mission_display_name = self.editor.display_name_component.list_entry_data[0].get()
     # end _compile_mission_display_name
 
 
     def _compile_description(self):
-        logging.debug("\t\tFound description: %s" % self.editor.description_component.listEntryData[0].get())
-        self.mission.description = self.editor.description_component.listEntryData[0].get()
+        logging.debug("\t\tFound description: %s" % self.editor.description_component.list_entry_data[0].get())
+        self.mission.description = self.editor.description_component.list_entry_data[0].get()
     # end _compile_description
 
 
     def _compile_blocked(self):
-        logging.debug("\t\tFound block: %s" % self.editor.blocked_component.listEntryData[0].get())
-        self.mission.blocked = self.editor.blocked_component.listEntryData[0].get()
+        logging.debug("\t\tFound block: %s" % self.editor.blocked_component.list_entry_data[0].get())
+        self.mission.blocked = self.editor.blocked_component.list_entry_data[0].get()
     # end _compile_blocked
 
 
     def _compile_deadline(self):
         logging.debug("\t\tFound deadline")
         self.mission.deadline.is_active = True
-        if self.editor.deadline_component.listEntryStates[1].get():
-            logging.debug("\t\t\tFound deadline days: %s" % self.editor.deadline_component.listEntryData[0].get())
-            self.mission.deadline.deadline[0] = self.editor.deadline_component.listEntryData[0].get()
-            if self.editor.deadline_component.listEntryStates[2].get():
+        if self.editor.deadline_component.list_entry_states[1].get():
+            logging.debug("\t\t\tFound deadline days: %s" % self.editor.deadline_component.list_entry_data[0].get())
+            self.mission.deadline.deadline[0] = self.editor.deadline_component.list_entry_data[0].get()
+            if self.editor.deadline_component.list_entry_states[2].get():
                 logging.debug(
-                    "\t\t\tFound deadline message: %s" % self.editor.deadline_component.listEntryData[1].get())
-                self.mission.deadline.deadline[1] = self.editor.deadline_component.listEntryData[1].get()
+                    "\t\t\tFound deadline message: %s" % self.editor.deadline_component.list_entry_data[1].get())
+                self.mission.deadline.deadline[1] = self.editor.deadline_component.list_entry_data[1].get()
             # end if
         # end if
     # end _compile_deadline
@@ -263,47 +263,47 @@ class MissionCompiler:
 
     def _compile_cargo(self):
         logging.debug("\t\tFound cargo:")
-        logging.debug("\t\t\t%s" % self.editor.cargo_component.listEntryData[0].get())
-        logging.debug("\t\t\t%s" % self.editor.cargo_component.listEntryData[1].get())
+        logging.debug("\t\t\t%s" % self.editor.cargo_component.list_entry_data[0].get())
+        logging.debug("\t\t\t%s" % self.editor.cargo_component.list_entry_data[1].get())
         self.mission.cargo.is_active = True
-        self.mission.cargo.cargo[0] = self.editor.cargo_component.listEntryData[0].get()
-        self.mission.cargo.cargo[1] = self.editor.cargo_component.listEntryData[1].get()
-        if self.editor.cargo_component.listEntryStates[1].get():
+        self.mission.cargo.cargo[0] = self.editor.cargo_component.list_entry_data[0].get()
+        self.mission.cargo.cargo[1] = self.editor.cargo_component.list_entry_data[1].get()
+        if self.editor.cargo_component.list_entry_states[1].get():
             logging.debug("\t\t\tFound cargo optional modifiers:")
-            logging.debug("\t\t\t\t%s" % self.editor.cargo_component.listEntryData[2].get())
-            self.mission.cargo.cargo[2] = self.editor.cargo_component.listEntryData[2].get()
-            if self.editor.cargo_component.listEntryStates[2].get():
-                logging.debug("\t\t\t\t%s" % self.editor.cargo_component.listEntryData[3].get())
-                self.mission.cargo.cargo[3] = self.editor.cargo_component.listEntryData[3].get()
+            logging.debug("\t\t\t\t%s" % self.editor.cargo_component.list_entry_data[2].get())
+            self.mission.cargo.cargo[2] = self.editor.cargo_component.list_entry_data[2].get()
+            if self.editor.cargo_component.list_entry_states[2].get():
+                logging.debug("\t\t\t\t%s" % self.editor.cargo_component.list_entry_data[3].get())
+                self.mission.cargo.cargo[3] = self.editor.cargo_component.list_entry_data[3].get()
             # end if
         # end if
     # end _compile_cargo
 
 
     def _compile_passengers(self):
-        logging.debug("\t\tFound passengers: %s" % self.editor.passengers_component.listEntryData[0].get())
+        logging.debug("\t\tFound passengers: %s" % self.editor.passengers_component.list_entry_data[0].get())
         self.mission.passengers.is_active = True
-        self.mission.passengers.passengers[0] = self.editor.passengers_component.listEntryData[0].get()
-        if self.editor.passengers_component.listEntryStates[1].get():
+        self.mission.passengers.passengers[0] = self.editor.passengers_component.list_entry_data[0].get()
+        if self.editor.passengers_component.list_entry_states[1].get():
             logging.debug("\t\t\tFound passengers optional data:")
-            logging.debug("\t\t\t\t%s" % self.editor.passengers_component.listEntryData[1].get())
-            self.mission.passengers.passengers[1] = self.editor.passengers_component.listEntryData[1].get()
-            if self.editor.passengers_component.listEntryStates[2].get():
-                logging.debug("\t\t\t\t%s" % self.editor.passengers_component.listEntryData[2].get())
-                self.mission.passengers.passengers[2] = self.editor.passengers_component.listEntryData[2].get()
+            logging.debug("\t\t\t\t%s" % self.editor.passengers_component.list_entry_data[1].get())
+            self.mission.passengers.passengers[1] = self.editor.passengers_component.list_entry_data[1].get()
+            if self.editor.passengers_component.list_entry_states[2].get():
+                logging.debug("\t\t\t\t%s" % self.editor.passengers_component.list_entry_data[2].get())
+                self.mission.passengers.passengers[2] = self.editor.passengers_component.list_entry_data[2].get()
             # end if
         # end if
     # end _compile_passengers
 
 
     def _compile_illegal(self):
-        logging.debug("\t\tFound illegal: %s" % self.editor.illegal_component.listEntryData[0].get())
+        logging.debug("\t\tFound illegal: %s" % self.editor.illegal_component.list_entry_data[0].get())
         self.mission.illegal.is_active = True
-        self.mission.illegal.illegal[0] = self.editor.illegal_component.listEntryData[0].get()
-        if self.editor.illegal_component.listEntryStates[1].get():
+        self.mission.illegal.illegal[0] = self.editor.illegal_component.list_entry_data[0].get()
+        if self.editor.illegal_component.list_entry_states[1].get():
             logging.debug(
-                "\t\t\tFound illegal optional modifier: %s" % self.editor.illegal_component.listEntryData[1].get())
-            self.mission.illegal.illegal[1] = self.editor.illegal_component.listEntryData[1].get()
+                "\t\t\tFound illegal optional modifier: %s" % self.editor.illegal_component.list_entry_data[1].get())
+            self.mission.illegal.illegal[1] = self.editor.illegal_component.list_entry_data[1].get()
         # end if
     # end _compile_illegal
 
@@ -335,18 +335,17 @@ class MissionCompiler:
     def _compile_repeat(self):
         logging.debug("\t\tFound repeat")
         self.mission.repeat.is_active = True
-        if self.editor.repeat_component.listEntryStates[1].get():
-            logging.debug(
-                "\t\t\tFound repeat optionals modifier: %s" % self.editor.repeat_component.listEntryData[0].get())
-            self.mission.repeat.repeat = self.editor.repeat_component.listEntryData[0].get()
+        if self.editor.repeat_component.list_entry_states[1].get():
+            logging.debug("\t\t\tFound repeat optionals modifier: %s" % self.editor.repeat_component.list_entry_data[0].get())
+            self.mission.repeat.repeat = self.editor.repeat_component.list_entry_data[0].get()
         # end if
     # end _compile_repeat
 
 
     def _compile_clearance(self):
-        logging.debug("\t\tFound clearance: %s" % self.editor.clearance_component.listEntryData[0].get())
+        logging.debug("\t\tFound clearance: %s" % self.editor.clearance_component.list_entry_data[0].get())
         self.mission.clearance.is_active = True
-        self.mission.clearance.clearance = self.editor.clearance_component.listEntryData[0].get()
+        self.mission.clearance.clearance = self.editor.clearance_component.list_entry_data[0].get()
     # end _compile_clearance
 
 
@@ -357,28 +356,28 @@ class MissionCompiler:
 
 
     def _compile_waypoint(self):
-        logging.debug("\t\tFound waypoint: %s" % self.editor.waypoint_component.listEntryData[0].get())
-        self.mission.waypoint = self.editor.waypoint_component.listEntryData[0].get()
+        logging.debug("\t\tFound waypoint: %s" % self.editor.waypoint_component.list_entry_data[0].get())
+        self.mission.waypoint = self.editor.waypoint_component.list_entry_data[0].get()
     # end _compile_waypoint
 
 
     def _compile_stopover(self):
-        logging.debug("\t\tFound stopover: %s" % self.editor.stopover_component.listEntryData[0].get())
+        logging.debug("\t\tFound stopover: %s" % self.editor.stopover_component.list_entry_data[0].get())
         self.mission.stopover.is_active = True
-        self.mission.stopover.stopover = self.editor.stopover_component.listEntryData[0].get()
+        self.mission.stopover.stopover = self.editor.stopover_component.list_entry_data[0].get()
     # end _compile_stopover
 
 
     def _compile_source(self):
-        logging.debug("\t\tFound source: %s" % self.editor.source_component.listEntryData[0].get())
+        logging.debug("\t\tFound source: %s" % self.editor.source_component.list_entry_data[0].get())
         self.mission.source.is_active = True
-        self.mission.source.source = self.editor.source_component.listEntryData[0].get()
+        self.mission.source.source = self.editor.source_component.list_entry_data[0].get()
     # end _compile_source
 
 
     def _compile_destination(self):
-        logging.debug("\t\tFound source: %s" % self.editor.destination_component.listEntryData[0].get())
+        logging.debug("\t\tFound source: %s" % self.editor.destination_component.list_entry_data[0].get())
         self.mission.destination.is_active = True
-        self.mission.destination.destination = self.editor.destination_component.listEntryData[0].get()
+        self.mission.destination.destination = self.editor.destination_component.list_entry_data[0].get()
     # end _compile_destination
 #end class MissionCompiler
