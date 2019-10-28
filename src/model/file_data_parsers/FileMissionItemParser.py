@@ -108,11 +108,7 @@ class FileMissionItemParser:
 
     @staticmethod
     def tokenize(line):
-        """
-        Break the line into a list of tokens, saving anything inside quotes as a single token
-
-        :param line: the String to be tokenized
-        """
+        """Break the line into a list of tokens, saving anything inside quotes as a single token"""
         pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
         tokens = re.findall(pattern, line)
         for i, token in enumerate(tokens):
