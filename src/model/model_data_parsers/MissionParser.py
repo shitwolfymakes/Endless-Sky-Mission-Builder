@@ -11,7 +11,8 @@
 """
 
 import logging
-import src.model as model
+
+from src.model.model_data_parsers.TriggerParser import TriggerParser
 
 
 class MissionParser:
@@ -358,7 +359,7 @@ class MissionParser:
     def _parse_triggers(self):
         logging.debug("\t\tParsing Triggers...")
 
-        trigger_parser = model.TriggerParser(self.mission)
+        trigger_parser = TriggerParser(self.mission)
         for trigger in self.components.trigger_list:
             parsed_trigger = trigger_parser.run(trigger)
             self.lines += parsed_trigger

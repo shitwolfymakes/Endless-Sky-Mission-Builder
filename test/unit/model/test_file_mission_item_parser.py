@@ -1,7 +1,7 @@
 import unittest
 
 from src.model import MissionComponents
-from src.model.FileMissionItemParser import FileMissionItemParser
+from src.model.file_data_parsers.FileMissionItemParser import FileMissionItemParser
 
 
 class FileMissionItemParserTestCase(unittest.TestCase):

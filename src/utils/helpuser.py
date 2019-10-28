@@ -14,7 +14,6 @@ import webbrowser
 
 
 def help_user():
-    """Open the Creating Mission documentation for Endless Sky"""
-    #TODO: Replace this with a link to ESMB user documentation once it's completed
-    webbrowser.open_new(r"https://github.com/endless-sky/endless-sky/wiki/CreatingMissions")
+    """Open the user documentation for Endless Sky Mission Builder"""
+    webbrowser.open_new(r"https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/wiki")
 # end help_user

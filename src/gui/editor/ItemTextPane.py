@@ -51,7 +51,7 @@ class ItemTextPane(ttk.Frame, GUIPane):
         self.text_box.forget()
         self.text_box = Text(self.item_text_frame, height=50, width=100, wrap=WORD)
         self.text_box.pack()
-        self.text_box.insert(END, config.active_item.print_item_lines_to_text())
+        self.text_box.insert(END, config.active_item.to_string())
         self.text_box.config(state=DISABLED)
     #end update_pane
 #end ItemTextPane

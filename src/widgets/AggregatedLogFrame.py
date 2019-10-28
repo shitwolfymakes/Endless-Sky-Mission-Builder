@@ -37,8 +37,8 @@ class AggregatedLogFrame(ttk.Frame):
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        add_button = ttk.Button(self.outer, text="Add Log", command=self._add_log)
-        add_button.pack(expand=True, fill="x")
+        self.add_button = ttk.Button(self.outer, text="Add Log", command=self._add_log)
+        self.add_button.pack(expand=True, fill="x")
     #end init
 
 
@@ -73,7 +73,7 @@ class AggregatedLogFrame(ttk.Frame):
         :param log_frame: The LogFrame containing the log to be edited
         """
         logging.debug("Editing %s..." % str(log_frame.log))
-        widgets.LogWindow(log_frame.log, log_frame.log.format_type)
+        widgets.LogWindow(self, log_frame.log)
     #end edit_log
 
 
@@ -108,7 +108,7 @@ class AggregatedLogFrame(ttk.Frame):
         cb.configure(command=partial(self._change_log_state, state, log))
         cb.grid(row=0, column=3, sticky="e")
 
-        if log.isActive:
+        if log.is_active:
             state.set(1)
             self._change_log_state(state, log)
     #end populate_log

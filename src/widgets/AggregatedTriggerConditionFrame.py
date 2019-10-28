@@ -49,11 +49,11 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         """Add a condition to the current trigger"""
         logging.debug("Adding TriggerCondition...")
 
-        tc = widgets.TriggerConditionFrame(self, self.trigger, "log")
+        tc = widgets.TriggerConditionFrame(self, self.trigger)
         self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
         widgets.TypeSelectorWindow(self, self.condTypes, self._set_format_type)
 
-        if tc.condition.conditionType == "cancelled":
+        if tc.condition.condition_type == "cancelled":
             tc.cleanup()
             return
         #end if
@@ -75,7 +75,7 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param tc_frame: The TriggerConditionFrame containing the condition to be edited
         """
         logging.debug("Editing  %s" % str(tc_frame.condition))
-        widgets.TriggerConditionWindow(tc_frame.condition)
+        widgets.TriggerConditionWindow(self, tc_frame.condition)
     #end edit_trigger_condition
 
 
@@ -101,7 +101,7 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
 
         :param condition: the TriggerCondition containing the data to be populated
         """
-        tc = widgets.TriggerConditionFrame(self, self.trigger, "log", populating=True)
+        tc = widgets.TriggerConditionFrame(self, self.trigger, populating=True)
         tc.condition = condition
 
         state = BooleanVar()
@@ -109,7 +109,7 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         cb.configure(command=partial(self._change_tc_state, state, tc))
         cb.grid(row=0, column=3, sticky="e")
 
-        if condition.isActive:
+        if condition.is_active:
             state.set(1)
             self._change_tc_state(state, condition)
     #end populate_trigger_condition

@@ -13,43 +13,43 @@
 
 
 mission "Test Mission 0"
-    name "test"
-    description `A test mission`
-    blocked "Oh piss off!"
-    deadline 2 1
-    cargo "food" 5 2 0.1
-    passengers 5 5 0.2
-    illegal 50 `Soviet citizens need no food comrade`
-    stealth
-    invisible
-    priority
-    job
-    repeat 5
-    clearance `You're on the list`
-    infiltrating
-    waypoint "Sol"
-    stopover "Delve"
-    source "Sol"
-    destination "Delve"
-    on accept
-        outfit "test outfit" 1
-        require "Jump Drive" 1
-    on offer
-        dialog `It is Wednesday my dudes`
-        outfit "Skylance V" 5
-        require Hyperdrive 1
-        payment 1500 0.2
-        "yo mama" += 20
-        "no u" ++
-        clear "the drugs"
-        event "blaze it" 420 4200
-        fail "the mission"
-        log `my mama ain't a ho`
-        log "People" "Yo mama" `is a ho`
+	name `test`
+	description `A test mission`
+	blocked "Oh piss off!"
+	deadline 2 1
+	cargo "food" 5 2 0.1
+	passengers 5 5 0.2
+	illegal 50 `Soviet citizens need no food comrade`
+	stealth
+	invisible
+	priority
+	job
+	repeat 5
+	clearance `You're on the list`
+	infiltrating
+	waypoint "Sol"
+	stopover "Delve"
+	source "Sol"
+	destination "Delve"
+	on accept
+		outfit "test outfit" 1
+		require "Jump Drive" 1
+	on offer
+		dialog `It is Wednesday my dudes`
+		outfit "Skylance V" 5
+		require Hyperdrive 1
+		payment 1500 0.2
+		"yo mama" += 20
+		"no u" ++
+		clear "the drugs"
+		event "blaze it" 420 4200
+		fail "the mission"
+		log `my mama ain't a ho`
+		log "People" "Yo mama" `is a ho`
 
 
 
 mission "Test Mission 1"
-    name "test 2"
-    description `A second test mission`
-    repeat
+	name "test 2"
+	description `A second test mission`
+	repeat

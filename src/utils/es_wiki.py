@@ -1,4 +1,5 @@
-""" FileItem.py Copyright (c) 2019 by Andrew Sneed
+""" es_wiki.py
+# Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
@@ -9,30 +10,10 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-from abc import ABC, abstractmethod
+import webbrowser
 
 
-class FileItem(ABC):
-    def __init__(self, item_type):
-        self.type = item_type
-        self.name = None
-        self.lines = []
-    #end def
-
-
-    def add_line(self, line):
-        self.lines.append(line + "\n")
-    # end add_line
-
-
-    @abstractmethod
-    def parse(self):
-        pass
-    #end parse
-
-
-    @abstractmethod
-    def to_string(self):
-        pass
-    #end to_string
-#end class FileItem
+def es_wiki():
+    """Open the Creating Mission documentation for Endless Sky"""
+    webbrowser.open_new(r"https://github.com/endless-sky/endless-sky/wiki/CreatingMissions")
+# end es_wiki

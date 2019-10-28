@@ -13,27 +13,25 @@
 import logging
 from tkinter import filedialog
 
+from src import config
 from src.utils.compilemission import compile_mission
 
 
-def save_file(app):
-    """
-    This method saves the data to a mission file
-
-    :param app: The instance of ESMB
-    """
+def save_file():
+    """This method saves the data to a mission file"""
     #TODO: Expand this to save every part of the mission file:
     #   - Comments/Copyright
     #   - Mission
     #   - Events
     logging.debug("Saving selected file...")
-    compile_mission(app)
+    compile_mission()
+
     f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
         return
-    for mission in app.missionList:
-        for line in mission.missionLines:
-            f.write(line)
+
+    for item in config.mission_file_items.items_list:
+        f.write(item.to_string())
         f.write("\n\n\n")       # add whitespace between missions, per the Creating Missions guidelines
     f.close()
 

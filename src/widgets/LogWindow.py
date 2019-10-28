@@ -14,32 +14,30 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
-from ttkthemes import ThemedTk
-
 import src.widgets as widgets
 
 
-class LogWindow(object):
+class LogWindow(Toplevel):
     """This class creates a custom pop-up window to display and edit the data in an associated Log object"""
 
-    def __init__(self, log, format_type):
+    def __init__(self, master, log):
         #TODO: replace format_type with an integer
         logging.debug("\tBuilding LogWindow...")
+        super().__init__(master)
 
         self.log = log
-        self.format_type = format_type
+        self.format_type = log.format_type
         self.log_group = StringVar()
         self.name = StringVar()
         self.message = StringVar()
 
-        self.top = ThemedTk(theme="plastik")
-        self.top.title("Edit Log")
-        self.top.configure(bg="#ededed")
-        self.top.grab_set()  # freezes the app until the user enters or cancels
+        self.title("Edit Log")
+        self.configure(bg="#ededed")
+        self.grab_set()  # freezes the app until the user enters or cancels
 
-        frame = ttk.Frame(self.top)
+        frame = ttk.Frame(self)
         frame.pack(side=TOP)
-        if format_type == "<message>":
+        if self.format_type == "<message>":
             print("in here")
             label = widgets.TooltipLabel(frame, "log_message_only", text="Log")
             label.grid(row=0, column=0)
@@ -62,7 +60,7 @@ class LogWindow(object):
             entry3.grid(row=1, column=2)
         #end if/else
 
-        self.close_button = ttk.Button(self.top, text="Ok", command=self.cleanup)
+        self.close_button = ttk.Button(self, text="Ok", command=self.cleanup)
         self.close_button.pack(side=BOTTOM)
 
         self.populate_log_window()
@@ -73,8 +71,8 @@ class LogWindow(object):
         """Clean up whatever popups we've created"""
         print(self.message.get())
         self._store_data()
-        self.top.grab_release()  # HAVE TO RELEASE
-        self.top.destroy()
+        self.grab_release()  # HAVE TO RELEASE
+        self.destroy()
     #end _cleanup
 
 
