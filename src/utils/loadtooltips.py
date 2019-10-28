@@ -12,11 +12,14 @@
 
 import logging
 import json
+import os
 
 
 def load_tooltips():
     logging.debug("\tLoading tooltips...")
-    with open("../data/tooltips.json") as data_file:
+    json_path = os.path.join(os.path.dirname(os.path.realpath("ESMB.py")), "../data/tooltips.json")
+    print(json_path)
+    with open(json_path) as data_file:
         logging.debug("\t\tTooltips JSON file opened...")
         data = json.load(data_file)
     #end with open
