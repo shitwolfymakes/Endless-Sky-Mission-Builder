@@ -17,9 +17,9 @@ import os
 
 def load_tooltips():
     logging.debug("\tLoading tooltips...")
-    json_path = os.path.join(os.path.dirname(os.path.realpath("ESMB.py")), "../data/tooltips.json")
-    print(json_path)
-    with open(json_path) as data_file:
+    data_folder = os.path.dirname(os.path.dirname(os.path.abspath("ESMB.py")))
+    file_path = os.path.join(data_folder, "data", "tooltips.json")
+    with open(file_path) as data_file:
         logging.debug("\t\tTooltips JSON file opened...")
         data = json.load(data_file)
     #end with open
