@@ -16,7 +16,7 @@ import json
 
 def load_tooltips():
     logging.debug("\tLoading tooltips...")
-    with open("data/tooltips.json") as data_file:
+    with open("../data/tooltips.json") as data_file:
         logging.debug("\t\tTooltips JSON file opened...")
         data = json.load(data_file)
     #end with open
