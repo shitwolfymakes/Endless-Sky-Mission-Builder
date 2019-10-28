@@ -39,7 +39,8 @@ class TriggerParser:
         if self._has_dialog():
             self._parse_dialog()
 
-        # TODO: HANDLE CONVERSATIONS HERE
+        if self._has_convo():
+            self._parse_convo()
 
         # outfit
         if self._has_outfit():
@@ -93,6 +94,13 @@ class TriggerParser:
             return False
         return True
     #end _has_trigger_type
+
+
+    def _has_convo(self):
+        if not self.trigger.convo_list:
+            return False
+        return True
+    #end _has_convo
 
 
     def _has_dialog(self):
@@ -156,6 +164,18 @@ class TriggerParser:
         logging.debug("\t\t\tParsing trigger type...")
         self._add_line("\ton %s" % self.trigger.trigger_type)
     #end _parse_trigger_type
+
+
+    def _parse_convo(self):
+        logging.debug("\t\t\tParsing conversation...")
+        for convo in self.trigger.convo_list:
+            convo_title_line = "\t\tconversation"
+            if convo.name is not None:
+                convo_title_line += " %s" % convo.name
+            self._add_line(convo_title_line)
+            for line in convo.lines:
+                self._add_line(line)
+    #end _parse_convo
 
 
     def _parse_dialog(self):

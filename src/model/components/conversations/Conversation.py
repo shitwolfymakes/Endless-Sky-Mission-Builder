@@ -23,4 +23,9 @@ class Conversation:
         self.convo_parts_list = []
         self.lines = []
     #end init
+
+
+    def to_string(self):
+        return "".join(self.lines)
+    #end to_string
 #end class Conversation
