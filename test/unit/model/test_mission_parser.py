@@ -1,5 +1,8 @@
 import unittest
-import src.model as model
+
+from src.model import Mission
+
+import src.model.model_data_parsers as parsers
 
 
 class MissionParserTestCase(unittest.TestCase):
@@ -462,13 +465,13 @@ class MissionParserTestCase(unittest.TestCase):
 
     @staticmethod
     def get_empty_test_model():
-        return model.MissionParser(model.Mission("Testing"))
+        return parsers.MissionParser(Mission("Testing"))
     #end get_empty_test_model
 
 
     @staticmethod
     def get_loaded_trigger_test_model():
-        test_model = model.MissionParser(model.Mission("Testing"))
+        test_model = parsers.MissionParser(Mission("Testing"))
 
         test_model.mission.add_trigger()
         trigger = test_model.components.trigger_list[0]
