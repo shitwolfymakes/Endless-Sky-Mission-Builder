@@ -53,6 +53,7 @@ class Trigger:
         self.fail         = None
         self.logs         = []
         self.conditions   = []
+        self.convo_list   = []
     #end init
 
 
@@ -122,4 +123,10 @@ class Trigger:
         logging.debug("\tRemoving %s from %s..." % (condition, str(self)))
         self.conditions.remove(condition)
     #end remove_log
+
+
+    def add_convo(self, convo):
+        self.convo_list.append(convo)
+        logging.debug("\t\tConversation %s added to %s" % (convo.name, str(self)))
+    #end add_convo
 #end class Trigger

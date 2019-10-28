@@ -21,7 +21,8 @@ class MissionCompiler:
 
     def __init__(self):
         self.editor = config.gui.center_pane
-        self.mission = config.active_item.components
+        self.active_item = config.active_item
+        self.mission = self.active_item.components
     #end init
 
 

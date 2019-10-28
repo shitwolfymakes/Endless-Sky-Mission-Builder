@@ -43,6 +43,5 @@ class MissionComponents:
         self.source = components.Source()
         self.destination = components.Destination()
         self.trigger_list = []
-        self.convo_list = []
     #end init
 #end class MissionComponents

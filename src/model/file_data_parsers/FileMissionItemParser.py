@@ -131,13 +131,15 @@ class FileMissionItemParser:
                     if "conversation" in tokens[0]:
                         #TODO: Store the conversation in the trigger
                         convo = Conversation()
+
                         if len(tokens) is 2:
                             convo.name = tokens[1]
+
                         in_convo = True
                         while in_convo:
                             i, line = enum_lines.__next__()
                             line = line.rstrip()
-                            tokens = self.tokenize(line)
+                            #tokens = self.tokenize(line)
                             convo.lines.append(line)
 
                             # check if next line is outside of convo
@@ -152,6 +154,8 @@ class FileMissionItemParser:
                             if tokens[0] in ["on", "to", "mission", "event", "phrase"]:
                                 in_convo = False
                         # end while
+
+                        self.mission.components.trigger_list[-1].add_convo(convo)
                     elif "dialog" in tokens[0]:
                         if len(tokens) == 2:
                             logging.debug("\t\t\t\tFound Dialog: %s" % tokens[1])
