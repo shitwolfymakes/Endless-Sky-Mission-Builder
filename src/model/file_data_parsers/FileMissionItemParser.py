@@ -26,6 +26,10 @@ class FileMissionItemParser:
         self.mission.lines = lines
         self.lines = self.mission.lines
 
+        self.i = None
+        self.line = None
+        self.enum_lines = enumerate(self.lines)
+
         self.logMessagePattern = re.compile(r'^ *')
     #end init
 
@@ -34,10 +38,9 @@ class FileMissionItemParser:
         logging.debug("\t\tParsing %s from file..." % self.mission.name)
 
         self.strip_ending_whitespace_from_lines()
-        enum_lines = enumerate(self.lines)
-        for i, line in enum_lines:
-            line = line.rstrip()
-            tokens = self.tokenize(line)
+        for self.i, self.line in self.enum_lines:
+            self.line = self.line.rstrip()
+            tokens = self.tokenize(self.line)
 
             # determine which attribute we've got
             if not tokens:
@@ -86,14 +89,14 @@ class FileMissionItemParser:
                 trigger.is_active = True
                 trigger.trigger_type = tokens[1]
 
-                cur = self.get_indent_level(self.mission.lines[i])
-                nxt = self.get_indent_level(self.mission.lines[i+1])
+                cur = self.get_indent_level(self.mission.lines[self.i])
+                nxt = self.get_indent_level(self.mission.lines[self.i+1])
                 while True:
                     if nxt <= cur:
                         break
-                    i, line = enum_lines.__next__()
-                    line = line.rstrip()
-                    tokens = self.tokenize(line)
+                    self.i, self.line = self.enum_lines.__next__()
+                    self.line = self.line.rstrip()
+                    tokens = self.tokenize(self.line)
 
                     if "conversation" in tokens[0]:
                         #TODO: Store the conversation in the trigger
@@ -104,14 +107,13 @@ class FileMissionItemParser:
 
                         in_convo = True
                         while in_convo:
-                            i, line = enum_lines.__next__()
-                            line = line.rstrip()
-                            #tokens = self.tokenize(line)
-                            convo.lines.append(line)
+                            self.i, self.line = self.enum_lines.__next__()
+                            self.line = self.line.rstrip()
+                            convo.lines.append(self.line)
 
                             # check if next line is outside of convo
                             try:
-                                next_line = self.mission.lines[i+1]
+                                next_line = self.mission.lines[self.i+1]
                             except IndexError:
                                 break
 
@@ -129,15 +131,15 @@ class FileMissionItemParser:
                             trigger.dialog = tokens[1]
                         else:
                             logging.error("COMPLEX DIALOG HANDLING NOT YET IMPLEMENTED")
-                            cur = self.get_indent_level(self.mission.lines[i])
-                            nxt = self.get_indent_level(self.mission.lines[i + 1])
+                            cur = self.get_indent_level(self.mission.lines[self.i])
+                            nxt = self.get_indent_level(self.mission.lines[self.i + 1])
                             while True:
                                 if nxt <= cur:
                                     break
-                                i, line = enum_lines.__next__()
+                                self.i, self.line = self.enum_lines.__next__()
 
                                 try:
-                                    nxt = self.get_indent_level(self.mission.lines[i + 1])
+                                    nxt = self.get_indent_level(self.mission.lines[self.i + 1])
                                 except IndexError:
                                     break
                             # end while
@@ -192,30 +194,30 @@ class FileMissionItemParser:
                         new_tc.condition_type = 2
                         self.store_component_data(new_tc.condition, tokens)
                     else:
-                        logging.debug("Trigger component no found: ", i, line)
+                        logging.debug("Trigger component no found: ", self.i, self.line)
                     #end if/elif/else
 
                     try:
-                        nxt = self.get_indent_level(self.mission.lines[i+1])
+                        nxt = self.get_indent_level(self.mission.lines[self.i+1])
                     except IndexError:
                         break
                 #end while
             elif "to" in tokens:
                 #TODO: Handle these
-                cur = self.get_indent_level(self.mission.lines[i])
-                nxt = self.get_indent_level(self.mission.lines[i+1])
+                cur = self.get_indent_level(self.mission.lines[self.i])
+                nxt = self.get_indent_level(self.mission.lines[self.i+1])
                 while True:
                     if nxt <= cur:
                         break
-                    i, line = enum_lines.__next__()
+                    self.i, self.line = self.enum_lines.__next__()
 
                     try:
-                        nxt = self.get_indent_level(self.mission.lines[i+1])
+                        nxt = self.get_indent_level(self.mission.lines[self.i+1])
                     except IndexError:
                         break
                 # end while
             else:
-                logging.debug("ERROR: No tokens found on line %d: %s" % (i, line))
+                logging.debug("ERROR: No tokens found on line %d: %s" % (self.i, self.line))
             #end if/else
             for trigger in self.mission.components.trigger_list:
                 trigger.print_trigger()
