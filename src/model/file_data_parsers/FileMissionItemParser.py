@@ -291,100 +291,29 @@ class FileMissionItemParser:
             tokens = self.tokenize(self.line)
 
             if "conversation" in tokens[0]:
-                # TODO: Store the conversation in the trigger
-                convo = Conversation()
-
-                if len(tokens) is 2:
-                    convo.name = tokens[1]
-
-                in_convo = True
-                while in_convo:
-                    self.i, self.line = self.enum_lines.__next__()
-                    self.line = self.line.rstrip()
-                    convo.lines.append(self.line)
-
-                    # check if next line is outside of convo
-                    try:
-                        next_line = self.mission.lines[self.i + 1]
-                    except IndexError:
-                        break
-
-                    tokens = self.tokenize(next_line)
-                    if not tokens:
-                        continue
-                    if tokens[0] in ["on", "to", "mission", "event", "phrase"]:
-                        in_convo = False
-                # end while
-
-                self.mission.components.trigger_list[-1].add_convo(convo)
+                self._parse_conversation(tokens)
             elif "dialog" in tokens[0]:
-                if len(tokens) == 2:
-                    logging.debug("\t\t\t\tFound Dialog: %s" % tokens[1])
-                    trigger.dialog = tokens[1]
-                else:
-                    logging.error("COMPLEX DIALOG HANDLING NOT YET IMPLEMENTED")
-                    cur = self.get_indent_level(self.mission.lines[self.i])
-                    nxt = self.get_indent_level(self.mission.lines[self.i + 1])
-                    while True:
-                        if nxt <= cur:
-                            break
-                        self.i, self.line = self.enum_lines.__next__()
-
-                        try:
-                            nxt = self.get_indent_level(self.mission.lines[self.i + 1])
-                        except IndexError:
-                            break
-                    # end while
+                self._parse_dialog(trigger, tokens)
             elif "outfit" in tokens[0]:
-                logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
-                self.store_component_data(trigger.outfit, tokens[1:])
+                self._parse_outfit(trigger, tokens)
             elif "require" in tokens[0]:
-                logging.debug("\t\t\t\tFound Require: %s" % tokens)
-                self.store_component_data(trigger.require, tokens[1:])
+                self._parse_require(trigger, tokens)
             elif "payment" in tokens[0]:
-                logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
-                trigger.is_payment = True
-                self.store_component_data(trigger.payment, tokens[1:])
+                self._parse_payment(trigger, tokens)
             elif "event" in tokens[0]:
-                logging.debug("\t\t\t\tFound Event: %s" % tokens)
-                self.store_component_data(trigger.event, tokens[1:])
+                self._parse_event(trigger, tokens)
             elif "fail" in tokens[0]:
-                logging.debug("\t\t\t\tFound Fail: %s" % tokens)
-                trigger.is_fail = True
-                if len(tokens) == 2:
-                    trigger.fail = tokens[1]
-                else:
-                    logging.error("COMPLEX FAIL HANDLING NOT YET IMPLEMENTED")
+                self._parse_fail(trigger, tokens)
             elif "log" in tokens[0] and len(tokens) == 2:
-                logging.debug("\t\t\t\tFound Log: %s" % tokens)
-                new_log = trigger.add_log()
-                new_log.is_active = True
-                new_log.format_type = "<message>"
-                new_log.log[0] = tokens[1]
+                self._parse_log_type_1(trigger, tokens)
             elif "log" in tokens[0]:
-                logging.debug("\t\t\t\tFound Log: %s" % tokens)
-                new_log = trigger.add_log()
-                new_log.is_active = True
-                new_log.format_type = "<type> <name> <message>"
-                self.store_component_data(new_log.log, tokens[1:])
+                self._parse_log_type_3(trigger, tokens)
             elif tokens[1] in ["=", "+=", "-="]:
-                logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
-                new_tc = trigger.add_tc()
-                new_tc.is_active = True
-                new_tc.condition_type = 0
-                self.store_component_data(new_tc.condition, tokens)
+                self._parse_condition_type_0(trigger, tokens)
             elif tokens[1] in ["++", "--"]:
-                logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
-                new_tc = trigger.add_tc()
-                new_tc.is_active = True
-                new_tc.condition_type = 1
-                self.store_component_data(new_tc.condition, tokens)
+                self._parse_condition_type_1(trigger, tokens)
             elif tokens[0] in ["set", "clear"]:
-                logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
-                new_tc = trigger.add_tc()
-                new_tc.is_active = True
-                new_tc.condition_type = 2
-                self.store_component_data(new_tc.condition, tokens)
+                self._parse_condition_type_2(trigger, tokens)
             else:
                 logging.debug("Trigger component no found: ", self.i, self.line)
             # end if/elif/else
@@ -395,6 +324,138 @@ class FileMissionItemParser:
                 break
         # end while
     #end _parse_trigger
+
+
+    def _parse_conversation(self, tokens):
+        convo = Conversation()
+
+        if len(tokens) is 2:
+            convo.name = tokens[1]
+
+        in_convo = True
+        while in_convo:
+            self.i, self.line = self.enum_lines.__next__()
+            self.line = self.line.rstrip()
+            convo.lines.append(self.line)
+
+            # check if next line is outside of convo
+            try:
+                next_line = self.mission.lines[self.i + 1]
+            except IndexError:
+                break
+
+            tokens = self.tokenize(next_line)
+            if not tokens:
+                continue
+            if tokens[0] in ["on", "to", "mission", "event", "phrase"]:
+                in_convo = False
+        # end while
+
+        self.mission.components.trigger_list[-1].add_convo(convo)
+    #end _parse_conversation
+
+
+    def _parse_dialog(self, trigger, tokens):
+        if len(tokens) == 2:
+            logging.debug("\t\t\t\tFound Dialog: %s" % tokens[1])
+            trigger.dialog = tokens[1]
+        else:
+            logging.error("COMPLEX DIALOG HANDLING NOT YET IMPLEMENTED")
+            cur = self.get_indent_level(self.mission.lines[self.i])
+            nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+            while True:
+                if nxt <= cur:
+                    break
+                self.i, self.line = self.enum_lines.__next__()
+
+                try:
+                    nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+                except IndexError:
+                    break
+            # end while
+        # end if/else
+    #end _parse_dialog
+
+
+    def _parse_outfit(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
+        self.store_component_data(trigger.outfit, tokens[1:])
+    #end _parse_outfit
+
+
+    def _parse_require(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Require: %s" % tokens)
+        self.store_component_data(trigger.require, tokens[1:])
+    #end _parse_require
+
+
+    def _parse_payment(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
+        trigger.is_payment = True
+        self.store_component_data(trigger.payment, tokens[1:])
+    #end _parse_payment
+
+
+    def _parse_event(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Event: %s" % tokens)
+        self.store_component_data(trigger.event, tokens[1:])
+    #end _parse_event
+
+
+    def _parse_fail(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Fail: %s" % tokens)
+        trigger.is_fail = True
+        if len(tokens) == 2:
+            trigger.fail = tokens[1]
+        else:
+            logging.error("COMPLEX FAIL HANDLING NOT YET IMPLEMENTED")
+        # end if/else
+    #end _parse_fail
+
+
+    def _parse_log_type_1(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Log: %s" % tokens)
+        new_log = trigger.add_log()
+        new_log.is_active = True
+        new_log.format_type = "<message>"
+        new_log.log[0] = tokens[1]
+    #end _parse_log_type_1
+
+
+    def _parse_log_type_3(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound Log: %s" % tokens)
+        new_log = trigger.add_log()
+        new_log.is_active = True
+        new_log.format_type = "<type> <name> <message>"
+        self.store_component_data(new_log.log, tokens[1:])
+    #end _parse_log_type_3
+
+
+    def _parse_condition_type_0(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
+        new_tc = trigger.add_tc()
+        new_tc.is_active = True
+        new_tc.condition_type = 0
+        self.store_component_data(new_tc.condition, tokens)
+    #end _parse_condition_type_0
+
+
+    def _parse_condition_type_1(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
+        new_tc = trigger.add_tc()
+        new_tc.is_active = True
+        new_tc.condition_type = 1
+        self.store_component_data(new_tc.condition, tokens)
+    #end _parse_condition_type_1
+
+
+    def _parse_condition_type_2(self, trigger, tokens):
+        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
+        new_tc = trigger.add_tc()
+        new_tc.is_active = True
+        new_tc.condition_type = 2
+        self.store_component_data(new_tc.condition, tokens)
+    #end _parse_condition_type_2
 
 
     def _parse_condition(self):
