@@ -1,5 +1,8 @@
 import unittest
-import src.model as model
+
+from src.model import Mission
+
+import src.model.model_data_parsers as parsers
 
 
 class TriggerParserTestCase(unittest.TestCase):
@@ -59,14 +62,14 @@ class TriggerParserTestCase(unittest.TestCase):
 
     def test_add_quotes_quotes_added(self):
         true_output = "\"Michael Reeves is the Elon Musk of bad ideas\""
-        test_output = model.TriggerParser._add_quotes("Michael Reeves is the Elon Musk of bad ideas")
+        test_output = parsers.TriggerParser._add_quotes("Michael Reeves is the Elon Musk of bad ideas")
         self.assertEqual(true_output, test_output)
     #end test_add_quotes_quotes_added
 
 
     def test_add_quotes_quotes_not_added(self):
         true_output = "Harambe"
-        test_output = model.TriggerParser._add_quotes("Harambe")
+        test_output = parsers.TriggerParser._add_quotes("Harambe")
         self.assertEqual(true_output, test_output)
     #end test_add_quotes_quotes_not_added
 
@@ -333,9 +336,9 @@ class TriggerParserTestCase(unittest.TestCase):
 
     @staticmethod
     def get_empty_test_model():
-        mission = model.Mission("Testing")
+        mission = Mission("Testing")
         mission.add_trigger()
-        test_model = model.TriggerParser(mission)
+        test_model = parsers.TriggerParser(mission)
         test_model.trigger = test_model.components.trigger_list[0]
         return test_model
     # end get_empty_test_model
