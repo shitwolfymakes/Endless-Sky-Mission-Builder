@@ -62,9 +62,9 @@ class FileMissionItemParser:
             elif "illegal" in tokens[0]:
                 self._parse_illegal(tokens)
             elif "stealth" in tokens[0]:
-                self._parse_stealth(tokens)
+                self._parse_stealth()
             elif "invisible" in tokens[0]:
-                self._parse_invisible(tokens)
+                self._parse_invisible()
             elif tokens[0] in ["priority", "minor"]:
                 self._parse_priority_level(tokens)
             elif tokens[0] in ["job", "landing", "assisting", "boarding"]:
@@ -74,7 +74,7 @@ class FileMissionItemParser:
             elif "clearance" in tokens[0]:
                 self._parse_clearance(tokens)
             elif "infiltrating" in tokens[0]:
-                self._parse_infiltrating(tokens)
+                self._parse_infiltrating()
             elif "waypoint" in tokens[0]:
                 self._parse_waypoint(tokens)
             elif "stopover" in tokens[0]:
@@ -84,141 +84,13 @@ class FileMissionItemParser:
             elif "destination" in tokens[0]:
                 self._parse_destination(tokens)
             elif "on" in tokens:
-                logging.debug("\t\t\tFound Trigger: on %s" % tokens[1])
-                trigger = self.mission.add_trigger()
-                trigger.is_active = True
-                trigger.trigger_type = tokens[1]
-
-                cur = self.get_indent_level(self.mission.lines[self.i])
-                nxt = self.get_indent_level(self.mission.lines[self.i+1])
-                while True:
-                    if nxt <= cur:
-                        break
-                    self.i, self.line = self.enum_lines.__next__()
-                    self.line = self.line.rstrip()
-                    tokens = self.tokenize(self.line)
-
-                    if "conversation" in tokens[0]:
-                        #TODO: Store the conversation in the trigger
-                        convo = Conversation()
-
-                        if len(tokens) is 2:
-                            convo.name = tokens[1]
-
-                        in_convo = True
-                        while in_convo:
-                            self.i, self.line = self.enum_lines.__next__()
-                            self.line = self.line.rstrip()
-                            convo.lines.append(self.line)
-
-                            # check if next line is outside of convo
-                            try:
-                                next_line = self.mission.lines[self.i+1]
-                            except IndexError:
-                                break
-
-                            tokens = self.tokenize(next_line)
-                            if not tokens:
-                                continue
-                            if tokens[0] in ["on", "to", "mission", "event", "phrase"]:
-                                in_convo = False
-                        # end while
-
-                        self.mission.components.trigger_list[-1].add_convo(convo)
-                    elif "dialog" in tokens[0]:
-                        if len(tokens) == 2:
-                            logging.debug("\t\t\t\tFound Dialog: %s" % tokens[1])
-                            trigger.dialog = tokens[1]
-                        else:
-                            logging.error("COMPLEX DIALOG HANDLING NOT YET IMPLEMENTED")
-                            cur = self.get_indent_level(self.mission.lines[self.i])
-                            nxt = self.get_indent_level(self.mission.lines[self.i + 1])
-                            while True:
-                                if nxt <= cur:
-                                    break
-                                self.i, self.line = self.enum_lines.__next__()
-
-                                try:
-                                    nxt = self.get_indent_level(self.mission.lines[self.i + 1])
-                                except IndexError:
-                                    break
-                            # end while
-                    elif "outfit" in tokens[0]:
-                        logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
-                        self.store_component_data(trigger.outfit, tokens[1:])
-                    elif "require" in tokens[0]:
-                        logging.debug("\t\t\t\tFound Require: %s" % tokens)
-                        self.store_component_data(trigger.require, tokens[1:])
-                    elif "payment" in tokens[0]:
-                        logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
-                        trigger.is_payment = True
-                        self.store_component_data(trigger.payment, tokens[1:])
-                    elif "event" in tokens[0]:
-                        logging.debug("\t\t\t\tFound Event: %s" % tokens)
-                        self.store_component_data(trigger.event, tokens[1:])
-                    elif "fail" in tokens[0]:
-                        logging.debug("\t\t\t\tFound Fail: %s" % tokens)
-                        trigger.is_fail = True
-                        if len(tokens) == 2:
-                            trigger.fail = tokens[1]
-                        else:
-                            logging.error("COMPLEX FAIL HANDLING NOT YET IMPLEMENTED")
-                    elif "log" in tokens[0] and len(tokens) == 2:
-                        logging.debug("\t\t\t\tFound Log: %s" % tokens)
-                        new_log             = trigger.add_log()
-                        new_log.is_active   = True
-                        new_log.format_type = "<message>"
-                        new_log.log[0]      = tokens[1]
-                    elif "log" in tokens[0]:
-                        logging.debug("\t\t\t\tFound Log: %s" % tokens)
-                        new_log             = trigger.add_log()
-                        new_log.is_active   = True
-                        new_log.format_type = "<type> <name> <message>"
-                        self.store_component_data(new_log.log, tokens[1:])
-                    elif tokens[1] in ["=", "+=", "-="]:
-                        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
-                        new_tc                = trigger.add_tc()
-                        new_tc.is_active      = True
-                        new_tc.condition_type = 0
-                        self.store_component_data(new_tc.condition, tokens)
-                    elif tokens[1] in ["++", "--"]:
-                        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
-                        new_tc                = trigger.add_tc()
-                        new_tc.is_active      = True
-                        new_tc.condition_type = 1
-                        self.store_component_data(new_tc.condition, tokens)
-                    elif tokens[0] in ["set", "clear"]:
-                        logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
-                        new_tc                = trigger.add_tc()
-                        new_tc.is_active      = True
-                        new_tc.condition_type = 2
-                        self.store_component_data(new_tc.condition, tokens)
-                    else:
-                        logging.debug("Trigger component no found: ", self.i, self.line)
-                    #end if/elif/else
-
-                    try:
-                        nxt = self.get_indent_level(self.mission.lines[self.i+1])
-                    except IndexError:
-                        break
-                #end while
+                self._parse_trigger(tokens)
             elif "to" in tokens:
-                #TODO: Handle these
-                cur = self.get_indent_level(self.mission.lines[self.i])
-                nxt = self.get_indent_level(self.mission.lines[self.i+1])
-                while True:
-                    if nxt <= cur:
-                        break
-                    self.i, self.line = self.enum_lines.__next__()
-
-                    try:
-                        nxt = self.get_indent_level(self.mission.lines[self.i+1])
-                    except IndexError:
-                        break
-                # end while
+                self._parse_condition()
             else:
                 logging.debug("ERROR: No tokens found on line %d: %s" % (self.i, self.line))
-            #end if/else
+            #end if/elif/else
+
             for trigger in self.mission.components.trigger_list:
                 trigger.print_trigger()
             #end for
@@ -323,13 +195,13 @@ class FileMissionItemParser:
     #end _parse_illegal
 
 
-    def _parse_stealth(self, tokens):
+    def _parse_stealth(self):
         logging.debug("\t\t\tFound stealth modifier")
         self.mission.components.is_stealth = True
     #end _parse_stealth
 
 
-    def _parse_invisible(self, tokens):
+    def _parse_invisible(self):
         logging.debug("\t\t\tFound invisible modifier")
         self.mission.components.is_invisible = True
     #end _parse_invisible
@@ -364,7 +236,7 @@ class FileMissionItemParser:
     #end _parse_clearance
 
 
-    def _parse_infiltrating(self, tokens):
+    def _parse_infiltrating(self):
         logging.debug("\t\t\tFound infiltrating")
         self.mission.components.is_infiltrating = True
     #end _parse_infiltrating
@@ -404,11 +276,140 @@ class FileMissionItemParser:
 
 
     def _parse_trigger(self, tokens):
-        pass
+        logging.debug("\t\t\tFound Trigger: on %s" % tokens[1])
+        trigger = self.mission.add_trigger()
+        trigger.is_active = True
+        trigger.trigger_type = tokens[1]
+
+        cur = self.get_indent_level(self.mission.lines[self.i])
+        nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+        while True:
+            if nxt <= cur:
+                break
+            self.i, self.line = self.enum_lines.__next__()
+            self.line = self.line.rstrip()
+            tokens = self.tokenize(self.line)
+
+            if "conversation" in tokens[0]:
+                # TODO: Store the conversation in the trigger
+                convo = Conversation()
+
+                if len(tokens) is 2:
+                    convo.name = tokens[1]
+
+                in_convo = True
+                while in_convo:
+                    self.i, self.line = self.enum_lines.__next__()
+                    self.line = self.line.rstrip()
+                    convo.lines.append(self.line)
+
+                    # check if next line is outside of convo
+                    try:
+                        next_line = self.mission.lines[self.i + 1]
+                    except IndexError:
+                        break
+
+                    tokens = self.tokenize(next_line)
+                    if not tokens:
+                        continue
+                    if tokens[0] in ["on", "to", "mission", "event", "phrase"]:
+                        in_convo = False
+                # end while
+
+                self.mission.components.trigger_list[-1].add_convo(convo)
+            elif "dialog" in tokens[0]:
+                if len(tokens) == 2:
+                    logging.debug("\t\t\t\tFound Dialog: %s" % tokens[1])
+                    trigger.dialog = tokens[1]
+                else:
+                    logging.error("COMPLEX DIALOG HANDLING NOT YET IMPLEMENTED")
+                    cur = self.get_indent_level(self.mission.lines[self.i])
+                    nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+                    while True:
+                        if nxt <= cur:
+                            break
+                        self.i, self.line = self.enum_lines.__next__()
+
+                        try:
+                            nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+                        except IndexError:
+                            break
+                    # end while
+            elif "outfit" in tokens[0]:
+                logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
+                self.store_component_data(trigger.outfit, tokens[1:])
+            elif "require" in tokens[0]:
+                logging.debug("\t\t\t\tFound Require: %s" % tokens)
+                self.store_component_data(trigger.require, tokens[1:])
+            elif "payment" in tokens[0]:
+                logging.debug("\t\t\t\tFound Outfit: %s" % tokens)
+                trigger.is_payment = True
+                self.store_component_data(trigger.payment, tokens[1:])
+            elif "event" in tokens[0]:
+                logging.debug("\t\t\t\tFound Event: %s" % tokens)
+                self.store_component_data(trigger.event, tokens[1:])
+            elif "fail" in tokens[0]:
+                logging.debug("\t\t\t\tFound Fail: %s" % tokens)
+                trigger.is_fail = True
+                if len(tokens) == 2:
+                    trigger.fail = tokens[1]
+                else:
+                    logging.error("COMPLEX FAIL HANDLING NOT YET IMPLEMENTED")
+            elif "log" in tokens[0] and len(tokens) == 2:
+                logging.debug("\t\t\t\tFound Log: %s" % tokens)
+                new_log = trigger.add_log()
+                new_log.is_active = True
+                new_log.format_type = "<message>"
+                new_log.log[0] = tokens[1]
+            elif "log" in tokens[0]:
+                logging.debug("\t\t\t\tFound Log: %s" % tokens)
+                new_log = trigger.add_log()
+                new_log.is_active = True
+                new_log.format_type = "<type> <name> <message>"
+                self.store_component_data(new_log.log, tokens[1:])
+            elif tokens[1] in ["=", "+=", "-="]:
+                logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
+                new_tc = trigger.add_tc()
+                new_tc.is_active = True
+                new_tc.condition_type = 0
+                self.store_component_data(new_tc.condition, tokens)
+            elif tokens[1] in ["++", "--"]:
+                logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
+                new_tc = trigger.add_tc()
+                new_tc.is_active = True
+                new_tc.condition_type = 1
+                self.store_component_data(new_tc.condition, tokens)
+            elif tokens[0] in ["set", "clear"]:
+                logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
+                new_tc = trigger.add_tc()
+                new_tc.is_active = True
+                new_tc.condition_type = 2
+                self.store_component_data(new_tc.condition, tokens)
+            else:
+                logging.debug("Trigger component no found: ", self.i, self.line)
+            # end if/elif/else
+
+            try:
+                nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+            except IndexError:
+                break
+        # end while
     #end _parse_trigger
 
 
-    def _parse_condition(self, tokens):
-        pass
+    def _parse_condition(self):
+        # TODO: Handle these
+        cur = self.get_indent_level(self.mission.lines[self.i])
+        nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+        while True:
+            if nxt <= cur:
+                break
+            self.i, self.line = self.enum_lines.__next__()
+
+            try:
+                nxt = self.get_indent_level(self.mission.lines[self.i + 1])
+            except IndexError:
+                break
+        # end while
     #end _parse_condition
 #end FileMissionItemParser
