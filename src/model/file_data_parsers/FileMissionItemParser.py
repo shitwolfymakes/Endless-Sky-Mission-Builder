@@ -45,74 +45,41 @@ class FileMissionItemParser:
             if "mission" in tokens[0]:
                 continue
             elif "name" in tokens[0]:
-                logging.debug("\t\t\tFound mission display name: \"%s\"" % tokens[1])
-                self.mission.components.mission_display_name = tokens[1]
+                self._parse_name(tokens)
             elif "description" in tokens[0]:
-                logging.debug("\t\t\tFound description: %s" % tokens[1])
-                self.mission.components.description = tokens[1]
+                self._parse_description(tokens)
             elif "blocked" in tokens[0]:
-                logging.debug("\t\t\tFound blocked: %s" % tokens[1])
-                self.mission.components.blocked = tokens[1]
+                self._parse_blocked(tokens)
             elif "deadline" in tokens[0]:
-                logging.debug("\t\t\tFound deadline")
-                self.mission.components.deadline.is_active = True
-                self.store_component_data(self.mission.components.deadline.deadline, tokens[1:])
+                self._parse_deadline(tokens)
             elif "cargo" in tokens[0]:
-                logging.debug("\t\t\tFound cargo: %s" % tokens[1:])
-                self.mission.components.cargo.is_active = True
-                self.store_component_data(self.mission.components.cargo.cargo, tokens[1:])
+                self._parse_cargo(tokens)
             elif "passengers" in tokens[0]:
-                logging.debug("\t\t\tFound passengers: %s" % tokens[1:])
-                self.mission.components.passengers.is_active = True
-                self.store_component_data(self.mission.components.passengers.passengers, tokens[1:])
+                self._parse_passengers(tokens)
             elif "illegal" in tokens[0]:
-                logging.debug("\t\t\tFound illegal modifier: %s" % tokens[1:])
-                self.mission.components.illegal.is_active = True
-                self.store_component_data(self.mission.components.illegal.illegal, tokens[1:])
+                self._parse_illegal(tokens)
             elif "stealth" in tokens[0]:
-                logging.debug("\t\t\tFound stealth modifier")
-                self.mission.components.is_stealth = True
+                self._parse_stealth(tokens)
             elif "invisible" in tokens[0]:
-                logging.debug("\t\t\tFound invisible modifier")
-                self.mission.components.is_invisible = True
+                self._parse_invisible(tokens)
             elif tokens[0] in ["priority", "minor"]:
-                logging.debug("\t\t\tFound priority level")
-                self.mission.components.priority_level = tokens[0]
+                self._parse_priority_level(tokens)
             elif tokens[0] in ["job", "landing", "assisting", "boarding"]:
-                logging.debug("\t\t\tFound where shown")
-                self.mission.components.where_shown = tokens[0]
+                self._parse_where_shown(tokens)
             elif "repeat" in tokens[0]:
-                logging.debug("\t\t\tFound repeat")
-                self.mission.components.repeat.is_active = True
-                if len(tokens) > 1:
-                    logging.debug("\t\t\t\tFound repeat optional data: %s" % tokens[1])
-                    self.mission.components.repeat.repeat = tokens[1]
+                self._parse_repeat(tokens)
             elif "clearance" in tokens[0]:
-                logging.debug("\t\t\tFound clearance: %s" % tokens[1])
-                self.mission.components.clearance.is_active = True
-                self.mission.components.clearance.clearance   = tokens[1]
+                self._parse_clearance(tokens)
             elif "infiltrating" in tokens[0]:
-                logging.debug("\t\t\tFound infiltrating")
-                self.mission.components.is_infiltrating = True
+                self._parse_infiltrating(tokens)
             elif "waypoint" in tokens[0]:
-                logging.debug("\t\t\tFound waypoint: %s" % tokens[1])
-                self.mission.components.waypoint = tokens[1]
+                self._parse_waypoint(tokens)
             elif "stopover" in tokens[0]:
-                logging.debug("\t\t\tFound stopover: %s" % tokens[1])
-                self.mission.components.stopover.is_active = True
-                self.mission.components.stopover.stopover   = tokens[1]
+                self._parse_stopover(tokens)
             elif "source" in tokens[0]:
-                if len(tokens) == 2:
-                    logging.debug("\t\t\tFound source: %s" % tokens[1])
-                    self.mission.components.source.is_active = True
-                    self.mission.components.source.source   = tokens[1]
-                else:
-                    logging.error("COMPLEX SOURCE HANDLING NOT YET IMPLEMENTED")
+                self._parse_source(tokens)
             elif "destination" in tokens[0]:
-                if len(tokens) == 2:
-                    logging.debug("\t\t\tFound destination: %s" % tokens[1])
-                    self.mission.components.destination.is_active = True
-                    self.mission.components.destination.destination = tokens[1]
+                self._parse_destination(tokens)
             elif "on" in tokens:
                 logging.debug("\t\t\tFound Trigger: on %s" % tokens[1])
                 trigger = self.mission.add_trigger()
@@ -306,4 +273,140 @@ class FileMissionItemParser:
             # end if/else
         # end for
     # end store_component_data
+
+
+    def _parse_name(self, tokens):
+        logging.debug("\t\t\tFound mission display name: \"%s\"" % tokens[1])
+        self.mission.components.mission_display_name = tokens[1]
+    #end _parse_name
+
+
+    def _parse_description(self, tokens):
+        logging.debug("\t\t\tFound description: %s" % tokens[1])
+        self.mission.components.description = tokens[1]
+    #end _parse_description
+
+
+    def _parse_blocked(self, tokens):
+        logging.debug("\t\t\tFound blocked: %s" % tokens[1])
+        self.mission.components.blocked = tokens[1]
+    #end _parse_blocked
+
+
+    def _parse_deadline(self, tokens):
+        logging.debug("\t\t\tFound deadline")
+        self.mission.components.deadline.is_active = True
+        self.store_component_data(self.mission.components.deadline.deadline, tokens[1:])
+    #end _parse_deadline
+
+
+    def _parse_cargo(self, tokens):
+        logging.debug("\t\t\tFound cargo: %s" % tokens[1:])
+        self.mission.components.cargo.is_active = True
+        self.store_component_data(self.mission.components.cargo.cargo, tokens[1:])
+    #end _parse_cargo
+
+
+    def _parse_passengers(self, tokens):
+        logging.debug("\t\t\tFound passengers: %s" % tokens[1:])
+        self.mission.components.passengers.is_active = True
+        self.store_component_data(self.mission.components.passengers.passengers, tokens[1:])
+    #end _parse_passengers
+
+
+    def _parse_illegal(self, tokens):
+        logging.debug("\t\t\tFound illegal modifier: %s" % tokens[1:])
+        self.mission.components.illegal.is_active = True
+        self.store_component_data(self.mission.components.illegal.illegal, tokens[1:])
+    #end _parse_illegal
+
+
+    def _parse_stealth(self, tokens):
+        logging.debug("\t\t\tFound stealth modifier")
+        self.mission.components.is_stealth = True
+    #end _parse_stealth
+
+
+    def _parse_invisible(self, tokens):
+        logging.debug("\t\t\tFound invisible modifier")
+        self.mission.components.is_invisible = True
+    #end _parse_invisible
+
+
+    def _parse_priority_level(self, tokens):
+        logging.debug("\t\t\tFound priority level")
+        self.mission.components.priority_level = tokens[0]
+    #end _parse_priority_level
+
+
+    def _parse_where_shown(self, tokens):
+        logging.debug("\t\t\tFound where shown")
+        self.mission.components.where_shown = tokens[0]
+    #end _parse_where_shown
+
+
+    def _parse_repeat(self, tokens):
+        logging.debug("\t\t\tFound repeat")
+        self.mission.components.repeat.is_active = True
+        if len(tokens) > 1:
+            logging.debug("\t\t\t\tFound repeat optional data: %s" % tokens[1])
+            self.mission.components.repeat.repeat = tokens[1]
+        # end if
+    #end _parse_repeat
+
+
+    def _parse_clearance(self, tokens):
+        logging.debug("\t\t\tFound clearance: %s" % tokens[1])
+        self.mission.components.clearance.is_active = True
+        self.mission.components.clearance.clearance = tokens[1]
+    #end _parse_clearance
+
+
+    def _parse_infiltrating(self, tokens):
+        logging.debug("\t\t\tFound infiltrating")
+        self.mission.components.is_infiltrating = True
+    #end _parse_infiltrating
+
+
+    def _parse_waypoint(self, tokens):
+        logging.debug("\t\t\tFound waypoint: %s" % tokens[1])
+        self.mission.components.waypoint = tokens[1]
+    #end _parse_waypoint
+
+
+    def _parse_stopover(self, tokens):
+        logging.debug("\t\t\tFound stopover: %s" % tokens[1])
+        self.mission.components.stopover.is_active = True
+        self.mission.components.stopover.stopover = tokens[1]
+    #end _parse_stopover
+
+
+    def _parse_source(self, tokens):
+        if len(tokens) == 2:
+            logging.debug("\t\t\tFound source: %s" % tokens[1])
+            self.mission.components.source.is_active = True
+            self.mission.components.source.source = tokens[1]
+        else:
+            logging.error("COMPLEX SOURCE HANDLING NOT YET IMPLEMENTED")
+        # end if/else
+    #end _parse_source
+
+
+    def _parse_destination(self, tokens):
+        if len(tokens) == 2:
+            logging.debug("\t\t\tFound destination: %s" % tokens[1])
+            self.mission.components.destination.is_active = True
+            self.mission.components.destination.destination = tokens[1]
+        # end if
+    #end _parse_destination
+
+
+    def _parse_trigger(self, tokens):
+        pass
+    #end _parse_trigger
+
+
+    def _parse_condition(self, tokens):
+        pass
+    #end _parse_condition
 #end FileMissionItemParser
