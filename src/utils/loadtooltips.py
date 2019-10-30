@@ -12,14 +12,16 @@
 
 import logging
 import json
+import os
 import sys
 
 
 def load_tooltips():
     logging.debug("\tLoading tooltips...")
-    #print(os.getcwd())
+    print(os.getcwd())
     print(sys.path[0])
-    with open("data/tooltips.json") as data_file:
+    file_path = os.path.join(sys.path[0], "data", "tooltips.json")
+    with open(file_path) as data_file:
         logging.debug("\tTooltips JSON file opened...")
         data = json.load(data_file)
     #end with open
