@@ -39,15 +39,15 @@ mission "Test Mission 0"
 			scene "testing testing"
 			`A Navy officer asks if you can do a job for him.`
 			choice
-				`    "Sure, I'd love to."`
+				`	"Sure, I'd love to."`
 					accept
-				`    "Sorry, I'm on an urgent cargo mission."`
+				`	"Sorry, I'm on an urgent cargo mission."`
 					decline
 				`(Attack him.)`
 					goto "bad idea"
 			label "bad idea"
-			`    You shout "Death to all tyrants!" and go for your gun.`
-			`    Unfortunately, he pulls his own gun first.`
+			`	You shout "Death to all tyrants!" and go for your gun.`
+			`	Unfortunately, he pulls his own gun first.`
 				die
 			name
 			`	testing testing`
