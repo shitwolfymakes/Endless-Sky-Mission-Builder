@@ -11,6 +11,8 @@ class FileMissionItemParserTestCase(unittest.TestCase):
     def setUp(self):
         self.test_lines = ['mission "Testing testing"\n', '\tcargo "scanning equipment" 8"\n', "\n", "\n", "\n"]
         self.parser = FileMissionItemParser(self.test_lines)
+        self.parser.mission.add_trigger()
+        self.trigger = self.parser.mission.components.trigger_list[-1]
     #end setUp
 
 
@@ -163,4 +165,78 @@ class FileMissionItemParserTestCase(unittest.TestCase):
         self.parser._parse_destination(tokens)
         self.assertEqual(tokens[1], self.parser.mission.components.destination.destination)
     #end test_parse_destination
+
+
+    def test_parse_trigger(self):
+        pass
+    #end test_parse_trigger
+
+
+    def test_parse_dialog(self):
+        tokens = ["dialog", "It is Wednesday my dudes"]
+        self.parser._parse_dialog(self.trigger, tokens)
+        self.assertEqual(tokens[1], self.trigger.dialog)
+    #end test_parse_dialog
+
+
+    def test_parse_outfit(self):
+        tokens = ["outfit", "Skylance V", "5"]
+        self.parser._parse_outfit(self.trigger, tokens)
+        self.assertEqual(tokens[1:], self.trigger.outfit)
+    #end test_parse_outfit
+
+
+    def test_parse_require(self):
+        tokens = ["require", "Hyperdrive", "1"]
+        self.parser._parse_require(self.trigger, tokens)
+        self.assertEqual(tokens[1:], self.trigger.require)
+    #end test_parse_require
+
+
+    def test_parse_payment(self):
+        tokens = ["payment", "1500", "0.2"]
+        self.parser._parse_payment(self.trigger, tokens)
+        self.assertTrue(self.trigger.is_payment)
+        self.assertEqual(tokens[1:], self.trigger.payment)
+    # end test_parse_payment
+
+
+    def test_parse_require(self):
+        tokens = ["require", "Hyperdrive", "1"]
+        self.parser._parse_require(self.trigger, tokens)
+        self.assertEqual(tokens[1:], self.trigger.require)
+    #end test_parse_require
+
+
+    @staticmethod
+    def _get_trigger_lines():
+        lines = ["\ton offer\n",
+                 "\t\tconversation\n",
+                 "\t\t\tscene \"testing testing\"\n",
+                 "\t\t\t`A Navy officer asks if you can do a job for him.`\n",
+                 "\t\t\tchoice\n",
+                 "\t\t\t\t`	\"Sure, I'd love to.\"`\n",
+                 "\t\t\t\t\taccept\n",
+                 "\t\t\t\t`	\"Sorry, I'm on an urgent cargo mission.\"`\n",
+                 "\t\t\t\t\tdecline\n",
+                 "\t\t\t\t`(Attack him.)`\n", "\t\t\t\t\tgoto \"bad idea\"\n",
+                 "\t\t\tlabel \"bad idea\"\n",
+                 "\t\t\t`	You shout \"Death to all tyrants!\" and go for your gun.`\n",
+                 "\t\t\t`	Unfortunately, he pulls his own gun first.`\n",
+                 "\t\t\t\tdie\n",
+                 "\t\t\tname\n",
+                 "\t\t\t`	testing testing`\n",
+                 "\t\tdialog `It is Wednesday my dudes`\n",
+                 "\t\toutfit \"Skylance V\" 5\n",
+                 "\t\trequire Hyperdrive 1\n",
+                 "\t\tpayment 1500 0.2\n",
+                 "\t\t\"yo mama\" += 20\n",
+                 "\t\t\"no u\" ++\n",
+                 "\t\tclear \"the drugs\"\n",
+                 "\t\tevent \"blaze it\" 420 4200\n",
+                 "\t\tfail \"the mission\"\n",
+                 "\t\tlog `my mama ain't a ho`\n",
+                 "\t\tlog \"People\" \"Yo mama\" `is a ho`\n"]
+        return lines
+    #end _get_trigger_lines
 #end class FileMissionItemParser
