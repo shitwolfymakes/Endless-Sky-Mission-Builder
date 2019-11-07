@@ -39,11 +39,12 @@ class ItemTextPane(ttk.Frame, GUIPane):
 
     def _add_welcome_message(self):
         welcome_message = "\n\t\t\tWelcome to Endless Sky Mission Builder!\n"
-        welcome_message += "\n\t - Click \"New Mission\" to get started\n"
-        welcome_message += "\n\t - Click \"Save Mission File\" to save all the missions to a text file\n"
+        welcome_message += "\n\t - Click \"New Item\" to create a new mission\n"
+        welcome_message += "\n\t - Click \"Save Mission File\" to save all everything to a text file\n"
         welcome_message += "\n\t - Click \"Open Mission File\" to open a mission file for editing\n"
-        welcome_message += "\n\t - Click \"Compile Mission\" to save save the current mission\n"
-        welcome_message += "\n\t - Click \"Help\" to be directed to the Mission Creation wiki\n"
+        welcome_message += "\n\t - Click \"Compile\" to save save the current mission\n"
+        welcome_message += "\n\t - Click \"Help\" to be directed to the ESMB User Documentation\n"
+        welcome_message += "\n\t - Click \"ES Wiki\" to be directed to the Endless Sky Mission Creation wiki\n"
         self.text_box.insert(END, welcome_message)
     #end _add_welcome_message
 
