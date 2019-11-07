@@ -90,10 +90,6 @@ class FileMissionItemParser:
             else:
                 logging.debug("ERROR: No tokens found on line %d: %s" % (self.i, self.line))
             #end if/elif/else
-
-            for trigger in self.mission.components.trigger_list:
-                trigger.print_trigger()
-            #end for
         #end for
 
         config.mission_file_items.add_item(self.mission)
@@ -319,6 +315,7 @@ class FileMissionItemParser:
             except IndexError:
                 break
         # end while
+        trigger.print_trigger()
     #end _parse_trigger
 
 
@@ -327,6 +324,8 @@ class FileMissionItemParser:
 
         if len(tokens) is 2:
             convo.name = tokens[1]
+
+        convo_level = self.get_indent_level(self.line)
 
         in_convo = True
         while in_convo:
@@ -337,14 +336,17 @@ class FileMissionItemParser:
             # check if next line is outside of convo
             try:
                 next_line = self.mission.lines[self.i + 1]
+                nxt = self.get_indent_level(next_line)
             except IndexError:
                 break
 
             tokens = self.tokenize(next_line)
             if not tokens:
                 continue
-            if tokens[0] in ["on", "to", "mission", "event", "phrase"]:
-                in_convo = False
+            if nxt <= convo_level:  # THIS GOES AFTER THE CHECK FOR A NEWLINE BECAUSE THERE ARE NEWLINES AFTER CHOICE
+                break
+            #if tokens[0] in ["on", "to", "mission", "event", "phrase", "dialog"]:
+            #    in_convo = False
         # end while
 
         self.mission.components.trigger_list[-1].add_convo(convo)
