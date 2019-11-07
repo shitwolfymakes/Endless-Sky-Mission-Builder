@@ -5,16 +5,16 @@ pip3 install nuitka PyInstaller
 pip3 install -r requirements.txt
 
 # Nuitka Compilation
-python3 -m nuitka --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=appveyor/ttkthemes_nuitka_plugin.py ESMB.py
+python3 -m nuitka --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=appveyor/ttkthemes_nuitka_plugin.py src/ESMB.py
 mv ESMB.dist ESMB
 tar -czvf ESMB-ubuntu-amd64-nuitka.tar.gz ESMB/
 rm -rf ESMB
 
 # PyInstaller
-pyinstaller -D -y -w --hidden-import ttkthemes ESMB.py
+pyinstaller -D -y -w --hidden-import ttkthemes src/ESMB.py
 tar -czvf ESMB-ubuntu-amd64-pyinstaller.tar.gz dist/ESMB/
 rm -rf dist
 
-pyinstaller -F -y -w --hidden-import ttkthemes ESMB.py
+pyinstaller -F -y -w --hidden-import ttkthemes src/ESMB.py
 cp dist/ESMB ESMB-ubuntu-amd64-pyinstaller
 rm -rf dist
