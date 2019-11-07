@@ -398,7 +398,8 @@ class FileMissionItemParser:
     #end _parse_event
 
 
-    def _parse_fail(self, trigger, tokens):
+    @staticmethod
+    def _parse_fail(trigger, tokens):
         logging.debug("\t\t\t\tFound Fail: %s" % tokens)
         trigger.is_fail = True
         if len(tokens) == 2:
