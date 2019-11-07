@@ -43,6 +43,7 @@ class ESMB:
         self._setup_singletons()
 
         if "debug=True" in sys.argv:
+            config.debugging = True
             config.mission_file_items.add_item(Mission("Debugging"))
             config.mission_file_items.items_list[0].type = "mission"
             config.active_item = config.mission_file_items.items_list[0]
