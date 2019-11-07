@@ -114,7 +114,7 @@ class AggregatedTriggerFrame(ttk.Frame):
         :param state: the state of the trigger
         :param trigger: the trigger
         """
-        trigger.isActive = state.get()
-        logging.debug("%s is now %s" % (str(trigger), str(trigger.isActive)))
+        trigger.is_active = state.get()
+        logging.debug("%s is now %s" % (str(trigger), str(trigger.is_active)))
     #def _change_trigger_state
 #end class AggregatedTriggerFrame

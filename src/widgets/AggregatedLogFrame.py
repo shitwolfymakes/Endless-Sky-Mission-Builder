@@ -122,8 +122,8 @@ class AggregatedLogFrame(ttk.Frame):
         :param state: the state of the log
         :param log: the log
         """
-        log.isActive = state.get()
-        logging.debug("%s is now %s" % (str(log), str(log.isActive)))
+        log.is_active = state.get()
+        logging.debug("%s is now %s" % (str(log), str(log.is_active)))
     #def _change_trigger_state
 
 

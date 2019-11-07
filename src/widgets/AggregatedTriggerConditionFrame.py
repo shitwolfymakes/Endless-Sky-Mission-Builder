@@ -123,8 +123,8 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param state: the state of the condition
         :param tc: the trigger condition
         """
-        tc.isActive = state.get()
-        logging.debug("%s is now %s", str(tc), str(tc.isActive))
+        tc.is_active = state.get()
+        logging.debug("%s is now %s", str(tc), str(tc.is_active))
     #def changeTriggerConditionsState
 
 
