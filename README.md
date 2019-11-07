@@ -24,7 +24,7 @@ Future supported mission options:
 
 ## System requirements
 - Any computer from the last 10 years
-- Windows, Linux, or macOS
+- Windows an Linux
 
 ## Contributing/Support
 If you'd like to contribute, or contact the dev, join me in [the Discord](https://discord.gg/MakYJSF)
