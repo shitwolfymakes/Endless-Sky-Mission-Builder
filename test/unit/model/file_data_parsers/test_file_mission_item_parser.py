@@ -211,13 +211,27 @@ class FileMissionItemParserTestCase(unittest.TestCase):
     def test_parse_fail(self):
         tokens = ["fail", "the mission"]
         self.parser._parse_fail(self.trigger, tokens)
+        self.assertTrue(self.trigger.is_fail)
         self.assertEqual(tokens[1], self.trigger.fail)
     #end test_parse_fail
 
 
     def test_parse_log_type_1(self):
         tokens = ["log", "my mama ain't a ho"]
+        self.parser._parse_log_type_1(self.trigger, tokens)
+        self.assertTrue(self.trigger.logs[0].is_active)
+        self.assertEqual("<message>", self.trigger.logs[0].format_type)
+        self.assertEqual([tokens[1], None, None], self.trigger.logs[0].log)
     #end test_parse_log_type_1
+
+
+    def test_parse_log_type_3(self):
+        tokens = ["log", "People", "Yo mama", "is a ho"]
+        self.parser._parse_log_type_3(self.trigger, tokens)
+        self.assertTrue(self.trigger.logs[0].is_active)
+        self.assertEqual("<type> <name> <message>", self.trigger.logs[0].format_type)
+        self.assertEqual(tokens[1:], self.trigger.logs[0].log)
+    #end test_parse_log_type_3
 
 
     @staticmethod
@@ -231,7 +245,8 @@ class FileMissionItemParserTestCase(unittest.TestCase):
                  "\t\t\t\t\taccept\n",
                  "\t\t\t\t`	\"Sorry, I'm on an urgent cargo mission.\"`\n",
                  "\t\t\t\t\tdecline\n",
-                 "\t\t\t\t`(Attack him.)`\n", "\t\t\t\t\tgoto \"bad idea\"\n",
+                 "\t\t\t\t`(Attack him.)`\n",
+                 "\t\t\t\t\tgoto \"bad idea\"\n",
                  "\t\t\tlabel \"bad idea\"\n",
                  "\t\t\t`	You shout \"Death to all tyrants!\" and go for your gun.`\n",
                  "\t\t\t`	Unfortunately, he pulls his own gun first.`\n",
