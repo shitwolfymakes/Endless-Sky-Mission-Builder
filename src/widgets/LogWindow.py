@@ -69,7 +69,6 @@ class LogWindow(Toplevel):
 
     def cleanup(self):
         """Clean up whatever popups we've created"""
-        print(self.message.get())
         self._store_data()
         self.grab_release()  # HAVE TO RELEASE
         self.destroy()
