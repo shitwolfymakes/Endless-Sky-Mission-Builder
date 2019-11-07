@@ -21,6 +21,7 @@ Endless Sky Github: https://github.com/endless-sky/endless-sky
 import sys
 import logging
 
+from model import Mission
 from src.gui.GUI import GUI
 import src.utils as utils
 import src.config as config
@@ -30,9 +31,6 @@ import src.singletons as singletons
 class ESMB:
     """The application object"""
     def __init__(self):
-        if "debug=True" in sys.argv:
-            config.debugging = True
-
         self.setup()
         self.gui = GUI()
     #end init
@@ -43,6 +41,12 @@ class ESMB:
         logging.debug("Starting ESMB...")
         self._load_tooltips()
         self._setup_singletons()
+
+        if "debug=True" in sys.argv:
+            config.mission_file_items.add_item(Mission("Debugging"))
+            config.mission_file_items.items_list[0].type = "mission"
+            config.active_item = config.mission_file_items.items_list[0]
+        # end if
     #end setup
 
 

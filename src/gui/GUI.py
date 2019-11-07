@@ -14,7 +14,6 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 
 from src.gui.editor import OptionPane, ItemTextPane, MissionEditorPane
-from src.model import Mission
 import src.config as config
 
 
@@ -23,11 +22,6 @@ class GUI:
 
     def __init__(self):
         logging.debug("\tBuilding GUI...")
-        if config.debugging:
-            config.mission_file_items.add_item(Mission("Debugging"))
-            config.mission_file_items.items_list[0].type = "mission"
-            config.active_item = config.mission_file_items.items_list[0]
-        #end if
 
         # Build the application window
         self.gui = ThemedTk(theme="plastik")
