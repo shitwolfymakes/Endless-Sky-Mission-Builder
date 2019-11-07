@@ -14,10 +14,10 @@ tar -czvf ESMB-ubuntu-amd64-nuitka.tar.gz ESMB/
 rm -rf ESMB
 
 # PyInstaller
-pythom -m pyinstaller -D -y -w --hidden-import ttkthemes ESMB.py
+python -m pyinstaller -D -y -w --hidden-import ttkthemes ESMB.py
 tar -czvf ESMB-ubuntu-amd64-pyinstaller.tar.gz dist/ESMB/
 rm -rf dist
 
-pythom -m pyinstaller -F -y -w --hidden-import ttkthemes ESMB.py
+python -m pyinstaller -F -y -w --hidden-import ttkthemes ESMB.py
 cp dist/ESMB ESMB-ubuntu-amd64-pyinstaller
 rm -rf dist
