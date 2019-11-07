@@ -2,7 +2,7 @@ REM Setup
 C:\Python37-x64\python -m pip install nuitka PyInstaller
 C:\Python37-x64\python -m pip install -r requirements.txt
 
-cd src
+PUSHD ".\src"
 
 REM Nuitka Compilation
 C:\Python37-x64\python -m nuitka --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=appveyor/ttkthemes_nuitka_plugin.py --plugin-enable=tk-inter --windows-disable-console --windows-icon=icon.ico ESMB.py
