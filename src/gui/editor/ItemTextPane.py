@@ -18,6 +18,8 @@ from src.gui.editor import GUIPane
 
 
 class ItemTextPane(ttk.Frame, GUIPane):
+    #TODO: add vertical and horizontal scrollbars
+    #TODO: make it not wrap on word
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         logging.debug("\tInitializing OutputTextPane...")
@@ -28,6 +30,7 @@ class ItemTextPane(ttk.Frame, GUIPane):
 
         self.text_box = Text(self.item_text_frame, wrap=WORD, height=50, width=100)
         self.text_box.pack(expand=1, fill='both')
+
         #TODO: Rewrite welcome message
         self._add_welcome_message()
         self.text_box.config(state=DISABLED)
@@ -50,7 +53,7 @@ class ItemTextPane(ttk.Frame, GUIPane):
 
         self.text_box.forget()
         self.text_box = Text(self.item_text_frame, height=50, width=100, wrap=WORD)
-        self.text_box.pack()
+        self.text_box.pack(expand=1, fill='both')
         self.text_box.insert(END, config.active_item.to_string())
         self.text_box.config(state=DISABLED)
     #end update_pane
