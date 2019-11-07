@@ -234,6 +234,33 @@ class FileMissionItemParserTestCase(unittest.TestCase):
     #end test_parse_log_type_3
 
 
+    def test_parse_condition_type_0(self):
+        tokens = ["yo mama", "+=", "20"]
+        self.parser._parse_condition_type_0(self.trigger, tokens)
+        self.assertTrue(self.trigger.conditions[0].is_active)
+        self.assertEqual(0, self.trigger.conditions[0].condition_type)
+        self.assertEqual(tokens, self.trigger.conditions[0].condition)
+    #end test_parse_condition_type_0
+
+
+    def test_parse_condition_type_1(self):
+        tokens = ["no u", "++"]
+        self.parser._parse_condition_type_1(self.trigger, tokens)
+        self.assertTrue(self.trigger.conditions[0].is_active)
+        self.assertEqual(1, self.trigger.conditions[0].condition_type)
+        self.assertEqual([tokens[0], tokens[1], None], self.trigger.conditions[0].condition)
+    #end test_parse_condition_type_1
+
+
+    def test_parse_condition_type_2(self):
+        tokens = ["clear", "the drugs"]
+        self.parser._parse_condition_type_2(self.trigger, tokens)
+        self.assertTrue(self.trigger.conditions[0].is_active)
+        self.assertEqual(2, self.trigger.conditions[0].condition_type)
+        self.assertEqual([tokens[0], tokens[1], None], self.trigger.conditions[0].condition)
+    #end test_parse_condition_type_2
+
+
     @staticmethod
     def _get_trigger_lines():
         lines = ["\ton offer\n",
