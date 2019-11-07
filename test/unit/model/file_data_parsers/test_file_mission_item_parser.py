@@ -201,11 +201,23 @@ class FileMissionItemParserTestCase(unittest.TestCase):
     # end test_parse_payment
 
 
-    def test_parse_require(self):
-        tokens = ["require", "Hyperdrive", "1"]
-        self.parser._parse_require(self.trigger, tokens)
-        self.assertEqual(tokens[1:], self.trigger.require)
-    #end test_parse_require
+    def test_parse_event(self):
+        tokens = ["event", "blaze it", "420", "4200"]
+        self.parser._parse_event(self.trigger, tokens)
+        self.assertEqual(tokens[1:], self.trigger.event)
+    #end test_parse_event
+
+
+    def test_parse_fail(self):
+        tokens = ["fail", "the mission"]
+        self.parser._parse_fail(self.trigger, tokens)
+        self.assertEqual(tokens[1], self.trigger.fail)
+    #end test_parse_fail
+
+
+    def test_parse_log_type_1(self):
+        tokens = ["log", "my mama ain't a ho"]
+    #end test_parse_log_type_1
 
 
     @staticmethod

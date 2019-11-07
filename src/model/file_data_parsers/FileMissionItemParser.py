@@ -412,18 +412,14 @@ class FileMissionItemParser:
     def _parse_log_type_1(self, trigger, tokens):
         logging.debug("\t\t\t\tFound Log: %s" % tokens)
         new_log = trigger.add_log()
-        new_log.is_active = True
-        new_log.format_type = "<message>"
-        new_log.log[0] = tokens[1]
+        new_log.set(1, tokens[1:])
     #end _parse_log_type_1
 
 
     def _parse_log_type_3(self, trigger, tokens):
         logging.debug("\t\t\t\tFound Log: %s" % tokens)
         new_log = trigger.add_log()
-        new_log.is_active = True
-        new_log.format_type = "<type> <name> <message>"
-        self.store_component_data(new_log.log, tokens[1:])
+        new_log.set(3, tokens[1:])
     #end _parse_log_type_3
 
 
