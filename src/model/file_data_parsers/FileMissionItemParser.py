@@ -408,45 +408,43 @@ class FileMissionItemParser:
         # end if/else
     #end _parse_fail
 
-
-    def _parse_log_type_1(self, trigger, tokens):
+    @staticmethod
+    def _parse_log_type_1(trigger, tokens):
         logging.debug("\t\t\t\tFound Log: %s" % tokens)
         new_log = trigger.add_log()
         new_log.set(1, tokens[1:])
     #end _parse_log_type_1
 
 
-    def _parse_log_type_3(self, trigger, tokens):
+    @staticmethod
+    def _parse_log_type_3(trigger, tokens):
         logging.debug("\t\t\t\tFound Log: %s" % tokens)
         new_log = trigger.add_log()
         new_log.set(3, tokens[1:])
     #end _parse_log_type_3
 
 
-    def _parse_condition_type_0(self, trigger, tokens):
+    @staticmethod
+    def _parse_condition_type_0(trigger, tokens):
         logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
         new_tc = trigger.add_tc()
-        new_tc.is_active = True
-        new_tc.condition_type = 0
-        self.store_component_data(new_tc.condition, tokens)
+        new_tc.set(0, tokens)
     #end _parse_condition_type_0
 
 
-    def _parse_condition_type_1(self, trigger, tokens):
+    @staticmethod
+    def _parse_condition_type_1(trigger, tokens):
         logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
         new_tc = trigger.add_tc()
-        new_tc.is_active = True
-        new_tc.condition_type = 1
-        self.store_component_data(new_tc.condition, tokens)
+        new_tc.set(1, tokens)
     #end _parse_condition_type_1
 
 
-    def _parse_condition_type_2(self, trigger, tokens):
+    @staticmethod
+    def _parse_condition_type_2(trigger, tokens):
         logging.debug("\t\t\t\tFound TriggerCondition: %s" % tokens)
         new_tc = trigger.add_tc()
-        new_tc.is_active = True
-        new_tc.condition_type = 2
-        self.store_component_data(new_tc.condition, tokens)
+        new_tc.set(2, tokens)
     #end _parse_condition_type_2
 
 
