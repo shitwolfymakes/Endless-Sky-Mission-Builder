@@ -29,7 +29,7 @@ class GUI:
         self.gui.configure(bg="orange")
 
         # enable window resizing
-        self.gui.columnconfigure(0, weight=1)
+        self.gui.columnconfigure(2, weight=1)
         self.gui.rowconfigure(0, weight=1)
 
         # set disabled styles
