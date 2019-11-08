@@ -8,7 +8,7 @@ pip3 install -r requirements.txt
 #cd src
 
 # Nuitka Compilation
-python3 -m nuitka --include-package=src --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=./appveyor/ttkthemes_nuitka_plugin.py src/ESMB.py
+python3 -m nuitka --include-package=src --follow-imports --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=./appveyor/ttkthemes_nuitka_plugin.py src/ESMB.py
 ls
 mv ESMB.dist ESMB
 tar -czvf ESMB-ubuntu-amd64-nuitka.tar.gz ESMB/
