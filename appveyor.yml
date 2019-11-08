@@ -11,7 +11,7 @@ build_script:
 - sh: chmod +x appveyor/build.sh && ./appveyor/build.sh
 
 artifacts:
-- path: src/ESMB-*64*
+- path: ESMB-*64*
 
 deploy:
 - provider: GitHub
