@@ -21,7 +21,7 @@ Endless Sky Github: https://github.com/endless-sky/endless-sky
 import sys
 import logging
 
-from model import Mission
+from src.model import Mission
 from src.gui.GUI import GUI
 import src.utils as utils
 import src.config as config

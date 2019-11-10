@@ -19,6 +19,12 @@ import sys
 def load_tooltips():
     logging.debug("\tLoading tooltips...")
     file_path = os.path.join(sys.path[0], "data", "tooltips.json")
+
+    # When packaged with PyInstaller, all code is placed in a base_library.zip,
+    # while the data files are placed next to this zip.
+    if not os.path.exists(file_path):
+        file_path = os.path.join(sys.path[0], "..", "data", "tooltips.json")
+
     with open(file_path) as data_file:
         logging.debug("\tTooltips JSON file opened...")
         data = json.load(data_file)
