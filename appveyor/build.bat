@@ -11,9 +11,8 @@ PUSHD .\src
 REM Now that we are in ".\src", paths relative to the top level have to be prefixed with "..\", e.g. "..\icon.ico"
 
 REM Nuitka Compilation
-REM We use "--mingw64" because i trust in it to be available more than clang, which would be the default
 REM The two plugin-related arguments are responsible for copying all required tkinter- and ttkthemes-files to the final distribution folder
-python -m nuitka --assume-yes-for-downloads --standalone --show-progress --mingw64 --show-scons --user-plugin=..\appveyor\ttkthemes_nuitka_plugin.py --plugin-enable=tk-inter --windows-disable-console --windows-icon=..\icon.ico .\ESMB.py
+python -m nuitka --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=..\appveyor\ttkthemes_nuitka_plugin.py --plugin-enable=tk-inter --windows-disable-console --windows-icon=..\icon.ico .\ESMB.py
 MOVE .\ESMB.dist .\ESMB
 REM Archive with maximum zip compression
 7z a -tzip -mx9 -y ..\ESMB-win64-nuitka.zip .\ESMB\
