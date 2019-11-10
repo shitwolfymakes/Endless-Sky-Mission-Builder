@@ -4,7 +4,7 @@ REM Also add its "Scripts" folder, which will contain the PyInstaller executable
 set PATH=C:\Python37-x64;C:\Python37-x64\Scripts;%PATH%
 
 REM Setup required Packages
-python -m pip install nuitka
+python -m pip install PyInstaller
 python -m pip install -r requirements.txt
 
 REM Build a directory distribution ("-D") with PyInstaller
