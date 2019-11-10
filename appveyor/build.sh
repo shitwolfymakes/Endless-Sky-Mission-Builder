@@ -1,4 +1,4 @@
-sudo apt-get update && sudo apt-get -y install python3-pip python3-tk
+sudo apt-get update && sudo apt-get -y install python3-pip python3-tk python3.7 python3.7-dev
 python3.7 --version # Make sure we are using the right version - it HAS to be 3.7+, otherwise PyInstaller binaries will have import errors
 
 # Setup required python packages
