@@ -1,19 +1,11 @@
 REM Add our desired Python installation the *beginning* of the PATH, so the "python" command refers to this executable.
+REM It HAS to be 3.7+, otherwise PyInstaller binaries will have import errors.
 REM Also add its "Scripts" folder, which will contain the PyInstaller executable once installed.
 set PATH=C:\Python37-x64;C:\Python37-x64\Scripts;%PATH%
 
 REM Setup required Packages
-python -m pip install nuitka PyInstaller
+python -m pip install nuitka
 python -m pip install -r requirements.txt
-
-REM Nuitka Compilation
-REM The two plugin-related arguments are responsible for copying all required tkinter- and ttkthemes-files to the final distribution folder
-REM python -m nuitka --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=.\appveyor\ttkthemes_nuitka_plugin.py --plugin-enable=tk-inter --windows-disable-console --windows-icon=.\icon.ico .\src\ESMB.py
-MOVE .\ESMB.dist .\ESMB
-REM Archive with maximum zip compression
-7z a -tzip -mx9 -y .\ESMB-win64-nuitka.zip .\ESMB\
-REM Cleanup
-RD /S /Q ESMB
 
 REM Build a directory distribution ("-D") with PyInstaller
 REM We have to add the data folder here since it won't be added automatically. See utils/loadtooltips.py for an example of how to access it
