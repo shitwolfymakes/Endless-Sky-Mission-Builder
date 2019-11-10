@@ -1,5 +1,5 @@
 REM Add our desired Python installation the *beginning* of the PATH, so the "python" command refers to this executable.
-REM It HAS to be 3.7+, otherwise PyInstaller binaries will have import errors.
+REM It HAS to be 3.7+, otherwise PyInstaller binaries will have import errors for some reason.
 REM Also add its "Scripts" folder, which will contain the PyInstaller executable once installed.
 set PATH=C:\Python37-x64;C:\Python37-x64\Scripts;%PATH%
 

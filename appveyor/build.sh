@@ -1,5 +1,6 @@
+# Install pip, python3-tk (tkinter package), python3.7 and python3.7-dev (to have libraries available)
+# Python HAS to be version 3.7+, otherwise PyInstaller binaries will have import errors for some reason
 sudo apt-get update && sudo apt-get -y install python3-pip python3-tk python3.7 python3.7-dev
-python3.7 --version # Make sure we are using the right version - it HAS to be 3.7+, otherwise PyInstaller binaries will have import errors
 
 # Setup required python packages
 python3.7 -m pip install PyInstaller
