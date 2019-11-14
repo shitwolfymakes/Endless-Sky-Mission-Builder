@@ -35,6 +35,8 @@ class TriggerParser:
         if self._has_trigger_type():
             self._parse_trigger_type()
 
+        #TODO: this is where the conversation is getting printed after dialog. Handle convos here
+
         # dialog
         if self._has_dialog():
             self._parse_dialog()
@@ -173,8 +175,10 @@ class TriggerParser:
             if convo.name is not None:
                 convo_title_line += " %s" % convo.name
             self._add_line(convo_title_line)
+
             for line in convo.lines:
                 self._add_line(line)
+        #end for
     #end _parse_convo
 
 
