@@ -18,7 +18,9 @@ from src.model.components.Log import Log
 
 class Trigger:
     #TODO: Implement this - ~80% Complete
-    # still needs on enter [<system>]
+    # - still needs on enter [<system>]
+
+    #TODO: Update to log conversations
     """
         Triggers:
 
