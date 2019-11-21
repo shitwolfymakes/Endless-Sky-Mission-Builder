@@ -12,7 +12,7 @@ If you are posting a pull request, please:
 
 * Do not combine multiple unrelated changes into a single pull.
 * Check the diff and make sure the pull request does not contain unintended changes.
-* If changing the Python code, follow the [coding standard]().
+* If changing the Python code, follow the [style guide](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/blob/master/style_guide.md).
 
 If proposing a major pull request, start by posting an issue and discussing the best way to implement it. Often the first strategy that occurs to you will not be the cleanest or most effective way to implement a new feature. I will not merge pull requests that are too large for me to read through the diff and check that the change will not introduce bugs.
 
