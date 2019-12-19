@@ -13,7 +13,7 @@ import logging
 from tkinter import ttk
 from ttkthemes import ThemedTk
 
-from src.gui.editor import OptionPane, ItemTextPane, MissionEditorPane
+import src.gui.editor as editor
 import src.config as config
 
 
@@ -40,38 +40,18 @@ class GUI:
         config.disabled_combobox_style.configure('Disabled.TCombobox', background='#D3D3D3')
 
         # Declare the frames
-        self.option_pane = OptionPane(self.gui)
+        self.option_pane = editor.OptionPane(self.gui)
         self.option_pane.grid(row=0, column=0, sticky="ns")
 
-        self.center_pane = MissionEditorPane(self.gui)
+        self.center_pane = editor.MissionEditorPane(self.gui)
         self.center_pane.grid(row=0, column=1, sticky="ns")
 
-        self.item_text_pane = ItemTextPane(self.gui)
+        self.item_text_pane = editor.ItemTextPane(self.gui)
         self.item_text_pane.grid(row=0, column=2, sticky="nsew")
 
         config.gui = self
         self.gui.mainloop()
     #end init
-
-
-    def build_main_view(self, window):
-        """
-        Instantiate the three major frames
-
-        :param window: The ThemedTK object that the rest of the GUI is built off of
-        """
-
-        self.option_pane = OptionPane(window)
-        self.option_pane.grid(row=0, column=0, sticky="ns")
-
-        self.center_pane = MissionEditorPane(window)
-        self.center_pane.grid(row=0, column=1, sticky="ns")
-
-        self.item_text_pane = ItemTextPane(window)
-        self.item_text_pane.grid(row=0, column=2, sticky="nsew")
-
-        logging.debug("\tGUI built")
-    #end build_main_view
 
 
     def update_option_pane(self):
