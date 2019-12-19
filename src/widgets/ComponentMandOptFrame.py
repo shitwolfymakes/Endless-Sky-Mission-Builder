@@ -16,6 +16,7 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 
+import src.config as config
 import src.widgets as widgets
 
 
@@ -26,9 +27,6 @@ class ComponentMandOptFrame(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         # this line makes the frames with no mandatory or optionals fill the frame
         self.columnconfigure(0, weight=1)
-
-        disabled_entry_style = ttk.Style()
-        disabled_entry_style.configure('D.TEntry', background='#D3D3D3')
 
         self.component_name = component_name
         self.num_mandatory = num_mandatory
@@ -96,7 +94,8 @@ class ComponentMandOptFrame(ttk.Frame):
             self.list_entry_data.append(StringVar())
             self.list_entry_data[0].set(self.list_default_entry_data[0])
 
-            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[0], state=DISABLED, style='D.TEntry', width=30))
+            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[0], state=DISABLED,
+                                               style='Disabled.TEntry', width=30))
             self.list_entries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.list_entry_states[0]))
@@ -114,7 +113,8 @@ class ComponentMandOptFrame(ttk.Frame):
             self.list_entry_data.append(StringVar())
             self.list_entry_data[0].set(self.list_default_entry_data[0])
 
-            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[0], state=DISABLED, style='D.TEntry', width=30))
+            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[0], state=DISABLED,
+                                               style='Disabled.TEntry', width=30))
             self.list_entries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.list_entry_states[0]))
@@ -127,7 +127,8 @@ class ComponentMandOptFrame(ttk.Frame):
                 self.list_entry_data.append(StringVar())
                 self.list_entry_data[-1].set(self.list_default_entry_data[i])
 
-                self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[-1], state=DISABLED, style='D.TEntry', width=30))
+                self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[-1], state=DISABLED,
+                                                   style='Disabled.TEntry', width=30))
                 self.list_entries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
                 self.rowNum += 1
@@ -144,7 +145,8 @@ class ComponentMandOptFrame(ttk.Frame):
             self.list_entry_data.append(StringVar())
             self.list_entry_data[-1].set(self.list_default_entry_data[i])
 
-            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[-1], state=DISABLED, style="D.TEntry", width=30))
+            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[-1], state=DISABLED,
+                                               style='', width=30))
             self.list_entries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             # We have to use functools.partial here because lambda can't be used
@@ -175,7 +177,7 @@ class ComponentMandOptFrame(ttk.Frame):
             elif entry_state.get() is True:
                 widget.config(state='enabled', style='TEntry')
             elif entry_state.get() is False:
-                widget.config(state='disabled', style='D.TEntry')
+                widget.config(state='disabled', style='Disabled.TEntry')
             #end if/else
         # end for
     # end cb_value_changed
@@ -211,7 +213,7 @@ class ComponentMandOptFrame(ttk.Frame):
         for i, entry in enumerate(self.list_entry_data):
             entry.set(self.list_default_entry_data[i])
         for entry in self.list_entries:
-            entry.config(state='disabled', style='D.TEntry')
+            entry.config(state='disabled', style='Disabled.TEntry')
     #end reset
 
 

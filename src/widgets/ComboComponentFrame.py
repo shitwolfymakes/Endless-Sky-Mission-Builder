@@ -33,7 +33,7 @@ class ComboComponentFrame(ttk.Frame):
         self.option   = None
 
         self.button   = ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.is_active)
-        self.combo    = ttk.Combobox(self, state="disabled", values=self.listComboboxData, style='D.TCombobox')
+        self.combo    = ttk.Combobox(self, state="disabled", values=self.listComboboxData, style='Disabled.TCombobox')
         self.combo.bind("<<ComboboxSelected>>", self.option_selected)
 
         self.button.configure(command=partial(self._cb_value_changed, self.is_active, [self.combo]))
@@ -56,7 +56,7 @@ class ComboComponentFrame(ttk.Frame):
             elif entry_state.get() is True:
                 widget.config(state='readonly', style='TCombobox')
             elif entry_state.get() is False:
-                widget.config(state='disabled', style='D.TCombobox')
+                widget.config(state='disabled', style='Disabled.TCombobox')
             # end if/else
         # end for
     # end cb_value_changed
@@ -87,6 +87,6 @@ class ComboComponentFrame(ttk.Frame):
         """Reset the frame to defaults"""
         self.is_active.set(0)
         self.combo.current(None)
-        self.combo.config(state='disabled', style='D.TCombobox')
+        self.combo.config(state='disabled', style='Disabled.TCombobox')
     #end reset
 #end class ComboComponentFrame
