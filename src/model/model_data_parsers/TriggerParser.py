@@ -35,14 +35,12 @@ class TriggerParser:
         if self._has_trigger_type():
             self._parse_trigger_type()
 
-        #TODO: this is where the conversation is getting printed after dialog. Handle convos here
+        if self._has_convo():
+            self._parse_convo()
 
         # dialog
         if self._has_dialog():
             self._parse_dialog()
-
-        if self._has_convo():
-            self._parse_convo()
 
         # outfit
         if self._has_outfit():

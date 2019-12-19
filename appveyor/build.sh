@@ -1,20 +1,22 @@
-# Setup
-# chrpath can be required for nuitka's scons command, to adjust shared library paths
-sudo apt-get update && sudo apt-get -y install python3-pip python3-tk chrpath
-pip3 install nuitka PyInstaller
-pip3 install -r requirements.txt
+# Install pip, python3-tk (tkinter package), python3.7 and python3.7-dev (to have libraries available)
+# Python HAS to be version 3.7+, otherwise PyInstaller binaries will have import errors for some reason
+sudo apt-get update && sudo apt-get -y install python3-pip python3-tk python3.7 python3.7-dev
 
-# Nuitka Compilation
-python3 -m nuitka --assume-yes-for-downloads --standalone --show-progress --show-scons --user-plugin=appveyor/ttkthemes_nuitka_plugin.py ESMB.py
-mv ESMB.dist ESMB
-tar -czvf ESMB-ubuntu-amd64-nuitka.tar.gz ESMB/
-rm -rf ESMB
+# Setup required python packages
+python3.7 -m pip install PyInstaller
+python3.7 -m pip install -r requirements.txt
 
-# PyInstaller
-pyinstaller -D -y -w --hidden-import ttkthemes ESMB.py
-tar -czvf ESMB-ubuntu-amd64-pyinstaller.tar.gz dist/ESMB/
-rm -rf dist
+# Build a directory distribution ("-D") with PyInstaller
+# We have to add the data folder here since it won't be added automatically. See utils/loadtooltips.py for an example of how to access it
+python3.7 -m PyInstaller -D --noconfirm --hidden-import ttkthemes --add-data "src/data:data" src/ESMB.py
+# Archive with maximum zip compression
+env GZIP=-9 tar -czf ./ESMB-ubuntu-amd64-pyinstaller.tar.gz dist/ESMB/
+# Cleanup
+rm -rf dist/
 
-pyinstaller -F -y -w --hidden-import ttkthemes ESMB.py
+# Build a OneFile executable ("-F") with PyInstaller
+# We have to add the data folder here since it won't be added automatically. See utils/loadtooltips.py for an example of how to access it
+python3.7 -m PyInstaller -F --noconfirm --hidden-import ttkthemes --add-data "src/data:data" src/ESMB.py
 cp dist/ESMB ESMB-ubuntu-amd64-pyinstaller
-rm -rf dist
+# Cleanup
+rm -rf dist/
