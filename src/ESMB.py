@@ -22,7 +22,8 @@ import sys
 import logging
 
 from src.model import Mission
-from src.gui.GUI import GUI
+
+import src.gui as gui
 import src.utils as utils
 import src.config as config
 import src.singletons as singletons
@@ -32,7 +33,7 @@ class ESMB:
     """The application object"""
     def __init__(self):
         self.setup()
-        self.gui = GUI()
+        self.gui = gui.GUI()
     #end init
 
 
