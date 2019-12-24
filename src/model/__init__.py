@@ -14,3 +14,6 @@ from .MissionCompiler import MissionCompiler
 from .MissionComponents import MissionComponents
 
 import src.model.components
+import src.model.events
+import src.model.file_data_parsers
+import src.model.model_data_parsers

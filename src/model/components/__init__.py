@@ -17,3 +17,5 @@ from .Source import Source
 from .Stopover import Stopover
 from .Trigger import Trigger
 from .TriggerCondition import TriggerCondition
+
+import src.model.components.conversations
