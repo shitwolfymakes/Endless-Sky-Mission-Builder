@@ -12,7 +12,7 @@ class DefaultTextEntry(ttk.Entry):
 
         self.bind('<FocusIn>', self._on_entry_click)
         self.bind('<FocusOut>', self._on_focus_out)
-        self.config(foreground='#D3D3D3')
+        self.config(foreground='#A9A9A9')
     # end init
 
 
@@ -29,7 +29,7 @@ class DefaultTextEntry(ttk.Entry):
     def _on_focus_out(self, event):
         if self.get() == '':
             self.insert(0, self.default_text)
-            self.config(foreground='#D3D3D3')
+            self.config(foreground='#A9A9A9')
         #end if
     #end _on_focus_out
 # end class DefaultTextEntry

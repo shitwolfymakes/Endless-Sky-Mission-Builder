@@ -10,6 +10,7 @@ from .AggregatedTriggerFrame import AggregatedTriggerFrame
 from .AggregatedTriggerConditionFrame import AggregatedTriggerConditionFrame
 from .ComboComponentFrame import ComboComponentFrame
 from .ComponentMandOptFrame import ComponentMandOptFrame
+from .DefaultTextEntry import DefaultTextEntry
 from .LogFrame import LogFrame
 from .LogWindow import LogWindow
 from .NewMissionPopup import NewMissionPopup
