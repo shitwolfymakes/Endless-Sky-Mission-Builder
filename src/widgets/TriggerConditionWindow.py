@@ -18,7 +18,6 @@ import src.widgets as widgets
 
 
 class TriggerConditionWindow(Toplevel):
-    #TODO: refactor to use DefaultTextEntry
     """
     This class creates a custom pop-up window to display and edit the data in an associated TriggerCondition object
     """
