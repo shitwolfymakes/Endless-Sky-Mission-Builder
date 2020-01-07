@@ -50,15 +50,14 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         logging.debug("Adding TriggerCondition...")
 
         tc = widgets.TriggerConditionFrame(self, self.trigger)
-        self.condTypes = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
-        widgets.TypeSelectorWindow(self, self.condTypes, self._set_format_type)
-
+        self.cond_types = ["<condition> (= | += | -=) <value>", "<condition> (++ | --)", "(set | clear) <condition>"]
+        widgets.TypeSelectorWindow(self, self.cond_types, self._set_format_type)
+        logging.debug("TriggerCondition format type selected: %s" % tc.condition.condition_type)
         if tc.condition.condition_type == "cancelled":
             tc.cleanup()
             return
         #end if
         self.edit_trigger_condition(self.tc_frame_list[-1])
-
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tc.frame, onvalue=1, offvalue=0, variable=state)
@@ -135,9 +134,9 @@ class AggregatedTriggerConditionFrame(ttk.Frame):
         :param format_type: the format type
         """
         if format_type == "cancelled":
-            self.tc_frame_list[-1].condition.conditionType = "cancelled"
+            self.tc_frame_list[-1].condition.condition_type = "cancelled"
             return
-        ft = self.condTypes.index(format_type)
-        self.tc_frame_list[-1].condition.conditionType = ft
+        ft = self.cond_types.index(format_type)
+        self.tc_frame_list[-1].condition.condition_type = ft
     #end _set_format_type
 #end class AggregatedTriggerConditionFrame
