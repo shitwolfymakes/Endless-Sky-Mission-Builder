@@ -59,6 +59,10 @@ class ESMB:
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
         logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
+
+        if "debug=True" in sys.argv:
+            stdout_handler = logging.StreamHandler(sys.stdout)
+            logging.getLogger().addHandler(stdout_handler)
     # end _logger_setup
 
 
