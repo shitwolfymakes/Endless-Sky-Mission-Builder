@@ -32,6 +32,12 @@ class DefaultTextEntry(ttk.Entry):
             self.config(foreground='#A9A9A9')
         #end if
     #end _on_focus_out
+
+    def set(self, data):
+        self.delete(0, "end")
+        self.insert(0, data)
+        self.config(foreground='black')
+    #end set
 # end class DefaultTextEntry
 
 
