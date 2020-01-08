@@ -30,6 +30,9 @@ class LogWindow(Toplevel):
         self.log_group = StringVar()
         self.name = StringVar()
         self.message = StringVar()
+        self.group_entry = None
+        self.name_entry = None
+        self.message_entry = None
 
         self.title("Edit Log")
         self.configure(bg="#ededed")
@@ -41,23 +44,21 @@ class LogWindow(Toplevel):
             print("in here")
             label = widgets.TooltipLabel(frame, "log_message_only", text="Log")
             label.grid(row=0, column=0)
-            self.message.set("<message>")
-            entry = ttk.Entry(frame, textvariable=self.message)
-            entry.grid(row=1, column=0)
+
+            self.message_entry = widgets.DefaultTextEntry(frame, "message", textvariable=self.message, width=30)
+            self.message_entry.grid(row=1, column=0)
         else:
             label = widgets.TooltipLabel(frame, "log_complex", text="Log")
             label.grid(row=0, column=0)
-            self.log_group.set("<type>")
-            entry = ttk.Entry(frame, textvariable=self.log_group, width=10)
-            entry.grid(row=1, column=0)
 
-            self.name.set("<name>")
-            entry2 = ttk.Entry(frame, textvariable=self.name, width=10)
-            entry2.grid(row=1, column=1)
+            self.group_entry = widgets.DefaultTextEntry(frame, "<type>", textvariable=self.log_group, width=10)
+            self.group_entry.grid(row=1, column=0)
 
-            self.message.set("<message>")
-            entry3 = ttk.Entry(frame, textvariable=self.message, width=30)
-            entry3.grid(row=1, column=2)
+            self.name_entry = widgets.DefaultTextEntry(frame, "name", textvariable=self.name, width=10)
+            self.name_entry.grid(row=1, column=1)
+
+            self.message_entry = widgets.DefaultTextEntry(frame, "message", textvariable=self.message, width=30)
+            self.message_entry.grid(row=1, column=2)
         #end if/else
 
         self.close_button = ttk.Button(self, text="Ok", command=self.cleanup)
@@ -96,14 +97,14 @@ class LogWindow(Toplevel):
 
         if self.format_type == "<message>":
             if self.log.log[0] is not None:
-                self.message.set(self.log.log[0].lstrip('`').rstrip('`'))
+                self.message_entry.set(self.log.log[0].lstrip('`').rstrip('`'))
         else:
             if self.log.log[0] is not None:
-                self.log_group.set(self.log.log[0])
+                self.group_entry.set(self.log.log[0])
             if self.log.log[1] is not None:
-                self.name.set(self.log.log[1])
+                self.name_entry.set(self.log.log[1])
             if self.log.log[2] is not None:
-                self.message.set(self.log.log[2].lstrip('`').rstrip('`'))
+                self.message_entry.set(self.log.log[2].lstrip('`').rstrip('`'))
         #end if/else
     #end populate_log_window
 #end class LogWindow
