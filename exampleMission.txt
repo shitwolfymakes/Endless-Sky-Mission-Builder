@@ -69,3 +69,24 @@ mission "Test Mission 1"
 	name "test 2"
 	description `A second test mission`
 	repeat
+
+
+
+event "Giga Bitch"
+	date 4 20 69
+	visit "Heaven"
+	unvisit "Big Chungus"
+	"visit planet" Harambe
+	"unvisit planet" "Absolute Unit"
+	galaxy "My Ass"
+	system "Eat It"
+	link Heaven Sol
+	unlink "Big Chungus" "Beta Capriconi"
+	government "Elon Musk"
+	fleet "Harambe's Bois"
+	planet "Heaven 2"
+	news "Harambe Alive"
+	shipyard "Bog Standard"
+	outfitter "Marcus Munitions"
+
+
