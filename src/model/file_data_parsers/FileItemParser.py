@@ -1,4 +1,4 @@
-""" FileEventItemParser.py
+""" FileItemParser.py
 # Copyright (c) 2020 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -9,28 +9,13 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
-import logging
-import shlex
-
-from src import config
-from src.model import Mission
+from abc import ABC, abstractmethod
 
 
-class FileEventItemParser:
-    """Parses an event item from a file"""
-    def __init__(self, lines):
-        tokens = shlex.split(lines)
-        self.mission = Mission(tokens[1])
-        self.mission.lines = lines
-        self.lines = self.mission.lines
-
-        self.i = None
-        self.line = None
-        self.enum_lines = enumerate(self.lines)
-    #end init
-
+class FileItemParser(ABC):
+    """Contains methods common to the various file parsers"""
+    @abstractmethod
     def run(self):
-        logging.debug("\t\tParsing %s from file..." % self.mission.name)
         pass
     #end run
-#end class FileEventItemParser
+#end class FileItemParser
