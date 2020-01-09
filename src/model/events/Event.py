@@ -40,6 +40,6 @@ class Event(model.FileItem):
 
 
     def to_string(self):
-        pass
+        return "".join(self.lines)
     #end to_string
 #end class Event
