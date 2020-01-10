@@ -14,7 +14,7 @@
 import re
 import logging
 
-from src.model.file_data_parsers.FileMissionItemParser import FileMissionItemParser
+import src.model.file_data_parsers as parsers
 
 
 class MissionFileParser:
@@ -62,10 +62,11 @@ class MissionFileParser:
 
         for item in self.file_items:
             if item[0] is "mission":
-                parser = FileMissionItemParser(item[1])
+                parser = parsers.FileMissionItemParser(item[1])
                 parser.run()
             elif item[0] is "event":
-                pass
+                parser = parsers.FileEventItemParser(item[1])
+                parser.run()
             elif item[0] is "phrase":
                 pass
             elif item[0] is "npc":
@@ -96,13 +97,13 @@ class MissionFileParser:
         #end for
     #end store_item_for_parsing
 
-    #TODO: Remove this once all item types are handled
+
     def store_unhandled_items_for_parsing(self, i, line, item_type):
         item_lines = [line]
         lines = self.lines[i+1:]
         for i, line in enumerate(lines):
             if self.end_of_item_condition(line) or self.is_eof(i, lines):
-                #self.file_items.append((item_type, item_lines))
+                self.file_items.append((item_type, item_lines))
                 break
             #end if
             item_lines.append(line)

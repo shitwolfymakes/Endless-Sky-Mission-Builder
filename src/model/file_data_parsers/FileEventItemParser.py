@@ -12,17 +12,20 @@
 import logging
 import shlex
 
+from src import config
+from src.model.events import Event
 from src.model.file_data_parsers import FileItemParser
-from src.model import Mission
 
 
 class FileEventItemParser(FileItemParser):
     """Parses an event item from a file"""
     def __init__(self, lines):
         tokens = shlex.split(lines[0])
-        self.mission = Mission(tokens[1])
-        self.mission.lines = lines
-        self.lines = self.mission.lines
+        self.event = Event(tokens[1])
+        self.event.lines = lines
+        self.lines = self.event.lines
+        # TODO: Remove this when EventParser is implemented
+        self.lines[0] += "\n"
 
         self.i = None
         self.line = None
@@ -31,6 +34,17 @@ class FileEventItemParser(FileItemParser):
 
 
     def run(self):
-        logging.debug("\t\tParsing %s from file..." % self.mission.name)
+        logging.debug("\t\tParsing %s from file..." % self.event.name)
+
+        self.strip_ending_whitespace(self.lines)
+        for self.i, self.line in self.enum_lines:
+            self.line = self.line.rstrip()
+            tokens = self.tokenize(self.line)
+
+            #TODO: Deal with processing this stuff out later
+            pass
+        #end for
+
+        config.mission_file_items.add_item(self.event)
     #end run
 #end class FileEventItemParser
