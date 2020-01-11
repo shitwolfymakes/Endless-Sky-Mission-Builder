@@ -47,7 +47,7 @@ class MissionFileParser:
                 self.store_item_for_parsing(i, line, "mission")
             elif re.search(self.match_event, line):
                 logging.debug("\t\tEVENT FOUND: %s" % line)
-                self.store_unhandled_items_for_parsing(i, line, "event")
+                self.store_item_for_parsing(i, line, "event")
             elif re.search(self.match_phrase, line):
                 logging.debug("\t\tPHRASE FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "phrase")
@@ -103,7 +103,7 @@ class MissionFileParser:
         lines = self.lines[i+1:]
         for i, line in enumerate(lines):
             if self.end_of_item_condition(line) or self.is_eof(i, lines):
-                self.file_items.append((item_type, item_lines))
+                #self.file_items.append((item_type, item_lines))
                 break
             #end if
             item_lines.append(line)

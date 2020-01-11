@@ -24,8 +24,6 @@ class FileEventItemParser(FileItemParser):
         self.event = Event(tokens[1])
         self.event.lines = lines
         self.lines = self.event.lines
-        # TODO: Remove this when EventParser is implemented
-        self.lines[0] += "\n"
 
         self.i = None
         self.line = None
