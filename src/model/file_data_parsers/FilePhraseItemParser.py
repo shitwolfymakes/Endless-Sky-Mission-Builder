@@ -18,12 +18,12 @@ from model.file_data_parsers import FileItemParser
 
 
 class FilePhraseItemParser(FileItemParser):
-    """Parses a phrases item from a file"""
+    """Parses a phrase item from a file"""
     def __init__(self, lines):
         tokens = shlex.split(lines[0])
-        self.event = Phrase(tokens[1])
-        self.event.lines = lines
-        self.lines = self.event.lines
+        self.phrase = Phrase(tokens[1])
+        self.phrase.lines = lines
+        self.lines = self.phrase.lines
 
         self.i = None
         self.line = None
@@ -31,6 +31,17 @@ class FilePhraseItemParser(FileItemParser):
     #end init
 
     def run(self):
-        pass
+        logging.debug("\t\tParsing %s from file..." % self.phrase.name)
+
+        self.strip_ending_whitespace(self.lines)
+        for self.i, self.line in self.enum_lines:
+            self.line = self.line.rstrip()
+            tokens = self.tokenize(self.line)
+
+            # TODO: Deal with processing this stuff out later
+            pass
+        # end for
+
+        config.mission_file_items.add_item(self.phrase)
     #end run
 #end FilePhraseItemParser
