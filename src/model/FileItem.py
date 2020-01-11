@@ -31,7 +31,6 @@ class FileItem(ABC):
     #end parse
 
 
-    @abstractmethod
     def to_string(self):
         """Concatenate all the lines together. Used to make a block of text to display in the item_text_pane."""
         # Note to self: this is the most efficient and pythonic way to concat all these strings together
