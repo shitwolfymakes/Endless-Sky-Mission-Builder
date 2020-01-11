@@ -9,12 +9,25 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
+import logging
+import shlex
+
+from src import config
+from src.model.npcs import NPC
 from model.file_data_parsers import FileItemParser
 
 
 class FileNPCItemParser(FileItemParser):
-    def __init__(self):
-        pass
+    """Parses an npc item from a file"""
+    def __init__(self, lines):
+        tokens = shlex.split(lines[0])
+        self.npc = NPC(tokens[1])
+        self.npc.lines = lines
+        self.lines = self.npc.lines
+
+        self.i = None
+        self.line = None
+        self.enum_lines = enumerate(self.lines)
     #end init
 
     def run(self):
