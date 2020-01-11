@@ -33,6 +33,9 @@ class FileItem(ABC):
 
     @abstractmethod
     def to_string(self):
-        pass
+        """Concatenate all the lines together. Used to make a block of text to display in the item_text_pane."""
+        # Note to self: this is the most efficient and pythonic way to concat all these strings together
+        item_text = "".join(self.lines)
+        return item_text
     #end to_string
 #end class FileItem
