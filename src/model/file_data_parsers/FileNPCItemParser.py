@@ -31,6 +31,17 @@ class FileNPCItemParser(FileItemParser):
     #end init
 
     def run(self):
-        pass
+        logging.debug("\t\tParsing %s from file..." % self.npc.name)
+
+        self.strip_ending_whitespace(self.lines)
+        for self.i, self.line in self.enum_lines:
+            self.line = self.line.rstrip()
+            tokens = self.tokenize(self.line)
+
+            # TODO: Deal with processing this stuff out later
+            pass
+        # end for
+
+        config.mission_file_items.add_item(self.npc)
     #end run
 #end FileNPCItemParser
