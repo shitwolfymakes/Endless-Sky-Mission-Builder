@@ -50,7 +50,7 @@ class MissionFileParser:
                 self.store_item_for_parsing(i, line, "event")
             elif re.search(self.match_phrase, line):
                 logging.debug("\t\tPHRASE FOUND: %s" % line)
-                self.store_unhandled_items_for_parsing(i, line, "phrase")
+                self.store_item_for_parsing(i, line, "phrase")
             elif re.search(self.match_npc, line):
                 logging.debug("\t\tNPC FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "npc")
@@ -68,7 +68,8 @@ class MissionFileParser:
                 parser = parsers.FileEventItemParser(item[1])
                 parser.run()
             elif item[0] is "phrase":
-                pass
+                parser = parsers.FilePhraseItemParser(item[1])
+                parser.run()
             elif item[0] is "npc":
                 pass
             elif item[0] is "government":
