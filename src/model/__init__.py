@@ -7,7 +7,7 @@ Provides
     2. Ways to read in and write out mission data to files
     2. Take what is entered into the gui and store it into the model
 """
-#TODO: restructure this package to have a subpackage for mission, event, and phrase
+#TODO: restructure this package to have a subpackage for phrases, npcs, and governments
 from .FileItem import FileItem
 from .Mission import Mission
 from .MissionCompiler import MissionCompiler
@@ -17,3 +17,4 @@ import src.model.components
 import src.model.events
 import src.model.file_data_parsers
 import src.model.model_data_parsers
+import src.model.phrases
