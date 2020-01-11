@@ -29,9 +29,4 @@ class Event(model.FileItem):
     def parse(self):
         pass
     #end parse
-
-
-    def to_string(self):
-        return "".join(self.lines)
-    #end to_string
 #end class Event
