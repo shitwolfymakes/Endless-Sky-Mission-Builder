@@ -90,3 +90,9 @@ event "Giga Bitch"
 	outfitter "Marcus Munitions"
 
 
+
+phrase "Harambe 1"
+	word
+		`Harambe died for you`
+
+
