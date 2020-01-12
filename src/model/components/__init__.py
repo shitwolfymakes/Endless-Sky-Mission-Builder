@@ -19,3 +19,4 @@ from .Trigger import Trigger
 from .TriggerCondition import TriggerCondition
 
 import src.model.components.conversations
+import src.model.components.npcs
