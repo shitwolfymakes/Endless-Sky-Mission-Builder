@@ -36,6 +36,10 @@ class FileMissionItemParser(FileItemParser):
 
 
     def run(self):
+        """
+        Run the parsers, checking for tokens
+        Reference: https://github.com/endless-sky/endless-sky/blob/49a387d848e88dc734c93b34013af81f873e70c1/source/Mission.cpp#L106-L259
+        """
         logging.debug("\t\tParsing %s from file..." % self.mission.name)
 
         self.strip_ending_whitespace(self.lines)
