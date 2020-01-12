@@ -53,7 +53,7 @@ class MissionFileParser:
                 logging.debug("\t\tPHRASE FOUND: %s" % line)
                 self.store_item_for_parsing(i, line, "phrase")
             elif re.search(self.match_npc, line):
-                logging.debug("\t\tNPC FOUND: %s" % line)
+                logging.debug("\t\tNPC FOUND: %s" % line)       # NOT A ROOT LEVEL NODE
                 self.store_unhandled_items_for_parsing(i, line, "npc")
             elif re.search(self.match_ship, line):
                 logging.debug("\t\tSHIP FOUND: %s" % line)
