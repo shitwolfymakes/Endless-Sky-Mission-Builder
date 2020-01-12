@@ -27,6 +27,7 @@ class MissionFileParser:
         self.match_event = re.compile(r'^event')
         self.match_phrase = re.compile(r'^phrase')
         self.match_npc = re.compile(r'^npc')
+        self.match_ship = re.compile(r'ship')
         self.match_government = re.compile(r'^government')
     #end init
 
@@ -54,6 +55,9 @@ class MissionFileParser:
             elif re.search(self.match_npc, line):
                 logging.debug("\t\tNPC FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "npc")
+            elif re.search(self.match_ship, line):
+                logging.debug("\t\tSHIP FOUND: %s" % line)
+                self.store_unhandled_items_for_parsing(i, line, "ship")
             elif re.search(self.match_government, line):
                 logging.debug("\t\tGOVERNMENT FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "government")
@@ -71,6 +75,8 @@ class MissionFileParser:
                 parser = parsers.FilePhraseItemParser(item[1])
                 parser.run()
             elif item[0] is "npc":
+                pass
+            elif item[0] is "ship":
                 pass
             elif item[0] is "government":
                 pass
