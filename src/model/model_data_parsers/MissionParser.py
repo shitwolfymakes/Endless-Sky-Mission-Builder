@@ -104,6 +104,8 @@ class MissionParser:
         if self._has_triggers():
             self._parse_triggers()
 
+        #TODO: handle npcs
+
         return self.lines
     #end run
 

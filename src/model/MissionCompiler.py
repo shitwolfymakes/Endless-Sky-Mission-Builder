@@ -111,6 +111,8 @@ class MissionCompiler:
 
         # Trigger data is compiled when TriggerWindow is closed
 
+        #TODO: handle npcs
+
         # call the parser to save the new data
         config.active_item.parse()
     #end run

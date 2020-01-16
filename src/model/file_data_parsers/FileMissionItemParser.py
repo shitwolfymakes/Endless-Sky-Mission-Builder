@@ -92,6 +92,9 @@ class FileMissionItemParser(FileItemParser):
                 self._parse_trigger(tokens)
             elif "to" in tokens:
                 self._parse_condition()
+            elif "npc" in tokens:
+                # TODO: handle npcs
+                pass
             else:
                 logging.debug("ERROR: No tokens found on line %d: %s" % (self.i, self.line))
             #end if/elif/else
