@@ -13,10 +13,12 @@ import logging
 
 
 class NPC:
+    """This object stores data for npc objects inside Endless Sky mission objects"""
     #TODO: implement this
     def __init__(self, name):
         logging.debug("\t\tComponent %s initializing..." % self.__class__)
+
         self.is_active = False
         self.name = name
     #end init
-#end class Event
+#end class NPC
