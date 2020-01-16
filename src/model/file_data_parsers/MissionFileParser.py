@@ -26,7 +26,6 @@ class MissionFileParser:
         self.match_mission = re.compile(r'^ *mission')
         self.match_event = re.compile(r'^event')
         self.match_phrase = re.compile(r'^phrase')
-        self.match_npc = re.compile(r'^npc')
         self.match_ship = re.compile(r'ship')
         self.match_government = re.compile(r'^government')
     #end init
@@ -42,6 +41,7 @@ class MissionFileParser:
             if line == "" or line == "\n":
                 continue
 
+            """Reference: https://github.com/endless-sky/endless-sky/blob/49a387d848e88dc734c93b34013af81f873e70c1/source/GameData.cpp#L918-L1009"""
             line = line.rstrip("\n")
             if re.search(self.match_mission, line):
                 logging.debug("\t\tMISSION FOUND: %s" % line)
@@ -52,9 +52,6 @@ class MissionFileParser:
             elif re.search(self.match_phrase, line):
                 logging.debug("\t\tPHRASE FOUND: %s" % line)
                 self.store_item_for_parsing(i, line, "phrase")
-            elif re.search(self.match_npc, line):
-                logging.debug("\t\tNPC FOUND: %s" % line)       # NOT A ROOT LEVEL NODE
-                self.store_unhandled_items_for_parsing(i, line, "npc")
             elif re.search(self.match_ship, line):
                 logging.debug("\t\tSHIP FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "ship")
@@ -74,8 +71,6 @@ class MissionFileParser:
             elif item[0] is "phrase":
                 parser = parsers.FilePhraseItemParser(item[1])
                 parser.run()
-            elif item[0] is "npc":
-                pass
             elif item[0] is "ship":
                 pass
             elif item[0] is "government":
@@ -126,8 +121,6 @@ class MissionFileParser:
         elif re.match(self.match_event, line):
             is_end = True
         elif re.match(self.match_phrase, line):
-            is_end = True
-        elif re.match(self.match_npc, line):
             is_end = True
         elif re.match(self.match_government, line):
             is_end = True

@@ -11,22 +11,12 @@
 """
 import logging
 
-import src.model as model
 
-
-class NPC(model.FileItem):
+class NPC:
     #TODO: implement this
     def __init__(self, name):
-        logging.debug("Building npc %s", name)
-
-        super().__init__("npc")
+        logging.debug("\t\tComponent %s initializing..." % self.__class__)
+        self.is_active = False
         self.name = name
-
-        self.parse()
     #end init
-
-
-    def parse(self):
-        pass
-    #end parse
 #end class Event

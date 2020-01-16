@@ -11,6 +11,7 @@ from .Deadline import Deadline
 from .Destination import Destination
 from .Illegal import Illegal
 from .Log import Log
+from .NPC import NPC
 from .Passengers import Passengers
 from .Repeat import Repeat
 from .Source import Source
@@ -19,4 +20,3 @@ from .Trigger import Trigger
 from .TriggerCondition import TriggerCondition
 
 import src.model.components.conversations
-import src.model.components.npcs
