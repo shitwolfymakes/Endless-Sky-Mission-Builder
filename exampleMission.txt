@@ -62,6 +62,18 @@ mission "Test Mission 0"
 		fail "the mission"
 		log `my mama ain't a ho`
 		log "People" "Yo mama" `is a ho`
+	npc save
+		government "Free Worlds"
+		personality derelict
+		confusion 20
+		system
+			system "Yo Mama's House"
+			government dunkey
+			near Sol 2 5
+			distance 2 5
+		dialog `Harambe died for our sins, remember that always`
+		ship Shuttle Dinghy
+		fleet "Starbridge Boogaloo" 50
 
 
 
