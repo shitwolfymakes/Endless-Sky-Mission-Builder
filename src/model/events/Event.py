@@ -11,13 +11,22 @@
 """
 import logging
 
+import src.model as model
 
-class Event:
+
+class Event(model.FileItem):
     #TODO: implement this
     def __init__(self, name):
-        logging.debug("\t\tComponent %s initializing..." % self.__class__)
+        logging.debug("Building event %s", name)
 
-        self.is_active = False
+        super().__init__("event")
         self.name = name
+
+        self.parse()
     #end init
+
+
+    def parse(self):
+        pass
+    #end parse
 #end class Event
