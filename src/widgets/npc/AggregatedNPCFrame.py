@@ -15,7 +15,7 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 
-import src.widgets as widgets
+import src.widgets.npc as widgets
 from src import config
 
 
@@ -48,14 +48,14 @@ class AggregatedNPCFrame(ttk.Frame):
         """Add an NPC to the activeMission"""
         logging.debug("Adding NPC...")
 
-        tf = widgets.npc.NPCFrame(self, "npc")
+        item = widgets.NPCFrame(self, "npc")
         self.edit_item(self.npc_frame_list[-1])
 
         state = BooleanVar()
-        cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
+        cb = ttk.Checkbutton(item.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_state, state, self.npc_frame_list[-1].npc))
         cb.grid(row=0, column=3, sticky="e")
-    #end _add_trigger
+    #end _add_npc
 
 
     def delete_item(self, npc_frame):
@@ -65,9 +65,9 @@ class AggregatedNPCFrame(ttk.Frame):
 
         :param npc_frame: The NPCFrame to be removed
         """
-        logging.debug(str.format("Removing %s from Triggers" % npc_frame.trigger))
+        logging.debug(str.format("Removing %s from NPCs" % npc_frame.npc))
 
-        config.active_item.remove_trigger(npc_frame.trigger)
+        config.active_item.remove_npc(npc_frame.npc)
 
         self.npc_frame_list.remove(npc_frame)
         npc_frame.frame.pack_forget()
@@ -77,13 +77,12 @@ class AggregatedNPCFrame(ttk.Frame):
 
     def edit_item(self, npc_frame):
         """
-        This method uses the data stored in the npc_frame to edit_item the data stored in the associated
-        NPC object.
+        This method uses the data stored in the npc_frame to edit the data stored in the associated NPC object.
 
         :param npc_frame: The NPCFrame containing the npc to be edited
         """
-        logging.debug("Editing %s..." % str(npc_frame.trigger))
-        widgets.npc.NPCWindow(self, npc_frame.trigger)
+        logging.debug("Editing %s..." % str(npc_frame.npc))
+        widgets.NPCWindow(self, npc_frame.npc)
     #end edit_item
 
 
@@ -93,11 +92,11 @@ class AggregatedNPCFrame(ttk.Frame):
 
         :param npc: the NPC containing the data to be populated
         """
-        tf = widgets.TriggerFrame(self, "npc", populating=True)
-        tf.trigger = npc
+        item = widgets.NPCFrame(self, "npc", populating=True)
+        item.npc = npc
 
         state = BooleanVar()
-        cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
+        cb = ttk.Checkbutton(item.frame, onvalue=1, offvalue=0, variable=state)
         cb.configure(command=partial(self._change_state, state, npc))
         cb.grid(row=0, column=3, sticky="e")
 
@@ -110,7 +109,8 @@ class AggregatedNPCFrame(ttk.Frame):
     @staticmethod
     def _change_state(state, npc):
         """
-        Set npc to state
+        Log the change of npc to state
+
         :param state: the state of the npc
         :param npc: the npc
         """
