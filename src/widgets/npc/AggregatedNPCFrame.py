@@ -39,17 +39,17 @@ class AggregatedNPCFrame(ttk.Frame):
         self.inner = ttk.Frame(self.outer)
         self.inner.pack(expand=True, fill="x")
 
-        add_button = ttk.Button(self.outer, text="Add NPC", command=self._add_npc)
+        add_button = ttk.Button(self.outer, text="Add NPC", command=self._add_item)
         add_button.pack(expand=True, fill="x")
     #end init
 
 
-    def _add_npc(self):
+    def _add_item(self):
         """Add an NPC to the activeMission"""
         logging.debug("Adding NPC...")
 
         tf = widgets.npc.NPCFrame(self, "npc")
-        self.edit_npc(self.npc_frame_list[-1])
+        self.edit_item(self.npc_frame_list[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(tf.frame, onvalue=1, offvalue=0, variable=state)
@@ -58,7 +58,7 @@ class AggregatedNPCFrame(ttk.Frame):
     #end _add_trigger
 
 
-    def delete_npc(self, npc_frame):
+    def delete_item(self, npc_frame):
         """
         This method uses the data stored in the npc_frame to remove the associated NPC object from the
             activeMission. Once that is completed, it removes the npc_frame from the GUI.
@@ -72,22 +72,22 @@ class AggregatedNPCFrame(ttk.Frame):
         self.npc_frame_list.remove(npc_frame)
         npc_frame.frame.pack_forget()
         npc_frame.frame.destroy()
-    #end delete_npc
+    #end delete_item
 
 
-    def edit_npc(self, npc_frame):
+    def edit_item(self, npc_frame):
         """
-        This method uses the data stored in the npc_frame to edit_npc the data stored in the associated
+        This method uses the data stored in the npc_frame to edit_item the data stored in the associated
         NPC object.
 
         :param npc_frame: The NPCFrame containing the npc to be edited
         """
         logging.debug("Editing %s..." % str(npc_frame.trigger))
         widgets.npc.NPCWindow(self, npc_frame.trigger)
-    #end edit_npc
+    #end edit_item
 
 
-    def populate_npc(self, npc):
+    def populate_item(self, npc):
         """
         This method populates the GUI with a NPCFrame widget, then stores the data from NPC inside it
 
@@ -104,7 +104,7 @@ class AggregatedNPCFrame(ttk.Frame):
         if npc.is_active:
             state.set(1)
             self._change_state(state, npc)
-    #end populate_npc
+    #end populate_item
 
 
     @staticmethod
