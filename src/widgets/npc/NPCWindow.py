@@ -61,4 +61,14 @@ class NPCWindow(Toplevel):
         self.grab_release()  # HAVE TO RELEASE
         self.destroy()
     #end _cleanup
+
+
+    def _store_data(self):
+        pass
+    #end _store_data
+
+
+    def _populate_window(self):
+        pass
+    #end _populate_window
 #end class NPCWindow
