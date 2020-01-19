@@ -52,4 +52,13 @@ class NPCWindow(Toplevel):
 
         self._populate_window()
     #end init
+
+
+    def _cleanup(self):
+        """Clean up whatever popups we've created"""
+        self._store_data()
+        config.active_trigger = None
+        self.grab_release()  # HAVE TO RELEASE
+        self.destroy()
+    #end _cleanup
 #end class NPCWindow
