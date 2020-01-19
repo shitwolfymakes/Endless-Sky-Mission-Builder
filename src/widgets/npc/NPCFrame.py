@@ -21,9 +21,9 @@ class NPCFrame(ttk.Frame):
 
     def __init__(self, master, name, populating=False):
         ttk.Frame.__init__(self, master)
-        self.trigger = None
+        self.npc = None
         if not populating:
-            self.trigger = config.active_item.add_item()
+            self.npc = config.active_item.add_item()
         self.master = master
 
         self.frame = ttk.Frame(master.inner)
