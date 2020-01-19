@@ -6,3 +6,4 @@ This package contains all custom tkinter widgets that are directly related to np
 """
 
 from .AggregatedNPCFrame import AggregatedNPCFrame
+from .NPCFrame import NPCFrame
