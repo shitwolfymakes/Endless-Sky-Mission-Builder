@@ -11,10 +11,12 @@
 """
 
 import logging
+from functools import partial
 from tkinter import *
 from tkinter import ttk
 
 import src.widgets as widgets
+from model.components import NPC
 from src import config
 
 
@@ -72,3 +74,19 @@ class NPCWindow(Toplevel):
         pass
     #end _populate_window
 #end class NPCWindow
+
+
+def main():
+    root = Tk()
+    npc = NPC("test npc")
+    button = Button(root, text="test window", command=partial(open_window, root, npc))
+    button.pack()
+    root.mainloop()
+
+
+def open_window(root, npc):
+    NPCWindow(root, npc)
+
+
+if __name__ == "__main__":
+    main()
