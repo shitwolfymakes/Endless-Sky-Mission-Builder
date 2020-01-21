@@ -30,7 +30,7 @@ class NPCWindow(Toplevel):
         self.npc = npc
         config.active_item = npc
 
-        self.title("Edit Trigger")
+        self.title("Edit NPC")
         self.configure(bg="#ededed")
         self.grab_set()  # freezes the app until the user enters or cancels
 
@@ -48,6 +48,9 @@ class NPCWindow(Toplevel):
 
         ### BUILDING LEFT FRAME ###
         #TODO: implement this
+        tags_list = ["save", "kill", "board", "assist", "disable", "scan cargo", "scan outfits", "evade", "accompany"]
+        self.tags_frame = widgets.MultiOptionFrame(self.left_frame, "NPC tags", tags_list)
+        self.tags_frame.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
         ### BUILDING RIGHT FRAME###
         # TODO: implement this
@@ -77,15 +80,9 @@ class NPCWindow(Toplevel):
 
 
 def main():
-    root = Tk()
     npc = NPC("test npc")
-    button = Button(root, text="test window", command=partial(open_window, root, npc))
-    button.pack()
-    root.mainloop()
-
-
-def open_window(root, npc):
-    NPCWindow(root, npc)
+    window = NPCWindow(Tk(), npc)
+    window.mainloop()
 
 
 if __name__ == "__main__":
