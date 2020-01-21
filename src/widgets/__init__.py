@@ -13,6 +13,7 @@ from .ComponentMandOptFrame import ComponentMandOptFrame
 from .DefaultTextEntry import DefaultTextEntry
 from .LogFrame import LogFrame
 from .LogWindow import LogWindow
+from .MultiOptionFrame import MultiOptionFrame
 from .NewMissionPopup import NewMissionPopup
 from .ScrollingFrame import ScrollingFrame
 from .Tooltip import Tooltip
