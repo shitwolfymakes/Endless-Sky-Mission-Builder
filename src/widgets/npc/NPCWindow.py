@@ -80,9 +80,15 @@ class NPCWindow(Toplevel):
 
 
 def main():
+    root = Tk()
+    button = ttk.Button(root, text="test NPCWindow", command=partial(pressed, root))
+    button.pack()
+    root.mainloop()
+
+
+def pressed(root):
     npc = NPC("test npc")
-    window = NPCWindow(Tk(), npc)
-    window.mainloop()
+    window = NPCWindow(root, npc)
 
 
 if __name__ == "__main__":
