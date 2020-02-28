@@ -5,9 +5,9 @@
 
 Endless Sky Mission Builder, or ESMB, is a multiplatform RAD tool to help decrease the time it takes to create missions for Endless Sky.
 
-Want to know how to use ESMB? Check [the Wiki](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/wiki)!
+Want to download ESMB? Check [the Releases](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/releases) for the most recent executables!
 
-To run, extract the archive and double-click on ESMB
+Want to learn how to use ESMB? Check [the Wiki](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/wiki)!
 
 Current supported mission options:
   - Basic mission characteristics
