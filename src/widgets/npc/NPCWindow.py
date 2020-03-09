@@ -47,7 +47,6 @@ class NPCWindow(Toplevel):
         self.close_button.pack(side=BOTTOM)
 
         ### BUILDING LEFT FRAME ###
-        #TODO: implement this
         tags_list = ["save", "kill", "board", "assist", "disable", "scan cargo", "scan outfits", "evade", "accompany"]
         self.tags_frame = widgets.MultiOptionFrame(self.left_frame, "NPC tags", tags_list)
         self.tags_frame.grid(row=0, column=0, sticky="w", padx=(5, 0))
@@ -56,12 +55,21 @@ class NPCWindow(Toplevel):
         self.personalities_frame = widgets.MultiOptionFrame(self.left_frame, "Personality Types", personalities_list)
         self.personalities_frame.grid(row=1, column=0, sticky="w", padx=(5, 0))
 
-        self.confusion_component = widgets.ComponentMandOptFrame(self.left_frame, "confusion", 1, 0, ["<#amount>"], "npc_confusion")
+        self.confusion_component = widgets.ComponentMandOptFrame(self.left_frame, "Confusion", 1, 0, ["<#amount>"], "npc_confusion")
         self.confusion_component.grid(row=2, column=0, sticky="ew", padx=(5, 0))
 
 
         ### BUILDING RIGHT FRAME###
-        # TODO: implement this
+        #TODO: add system filter
+
+        self.planet = widgets.ComponentMandOptFrame(self.right_frame, "Planet", 1, 0, ["<name>"], "npc_planet")
+        self.planet.grid(row=1, column=0, sticky="ew", padx=(5, 0))
+
+        #TODO: add Dialog widget
+        #TODO: add Conversation widget
+
+        self.ship = widgets.ComponentMandOptFrame(self.right_frame, "Ship", 2, 0, ["<model>", "<name>"], "npc_ship")
+        self.ship.grid(row=2, column=0, sticky="ew", padx=(5, 0))
 
         self._populate_window()
     #end init
