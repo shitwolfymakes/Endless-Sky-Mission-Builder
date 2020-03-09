@@ -56,6 +56,10 @@ class NPCWindow(Toplevel):
         self.personalities_frame = widgets.MultiOptionFrame(self.left_frame, "Personality Types", personalities_list)
         self.personalities_frame.grid(row=1, column=0, sticky="w", padx=(5, 0))
 
+        self.confusion_component = widgets.ComponentMandOptFrame(self.left_frame, "confusion", 1, 0, ["<#amount>"], "npc_confusion")
+        self.confusion_component.grid(row=2, column=0, sticky="ew", padx=(5, 0))
+
+
         ### BUILDING RIGHT FRAME###
         # TODO: implement this
 
