@@ -23,6 +23,14 @@ class ComponentMandOptFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, component_name, num_mandatory, num_optionals, list_default_entry_data, tooltip_key):
+        """
+        :param parent: the parent widget
+        :param component_name: a string to be displayed by the widget label
+        :param num_mandatory: number of mandatory fields
+        :param num_optionals: number of optional fields
+        :param list_default_entry_data: the data to be stored in the entries
+        :param tooltip_key: the key that stores the tooltip data
+        """
         ttk.Frame.__init__(self, parent)
         # this line makes the frames with no mandatory or optionals fill the frame
         self.columnconfigure(0, weight=1)
