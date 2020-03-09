@@ -19,14 +19,14 @@ from src import config
 class TriggerFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, master, name, populating=False):
-        ttk.Frame.__init__(self, master)
+    def __init__(self, parent, name, populating=False):
+        ttk.Frame.__init__(self, parent)
         self.trigger = None
         if not populating:
             self.trigger = config.active_item.add_trigger()
-        self.master = master
+        self.parent = parent
 
-        self.frame = ttk.Frame(master.inner)
+        self.frame = ttk.Frame(parent.inner)
         self.frame.pack(expand=True, fill="x")
         self.frame.grid_columnconfigure(0, weight=1)
 
@@ -34,16 +34,16 @@ class TriggerFrame(ttk.Frame):
         label = ttk.Label(self.frame, text=name)
         label.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
-        self.master.trigger_frame_list.append(self)
+        self.parent.trigger_frame_list.append(self)
 
-        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.master.edit_trigger, self))
+        edit_button = ttk.Button(self.frame, text="edit", width=3, command=partial(self.parent.edit_trigger, self))
         edit_button.grid(row=0, column=1)
 
-        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.master.delete_trigger, self))
+        delete_button = ttk.Button(self.frame, text="X", width=0, command=partial(self.parent.delete_trigger, self))
         delete_button.grid(row=0, column=2)
     #end init
 
     def _cleanup(self):
-        self.master.delete_trigger(self)
+        self.parent.delete_trigger(self)
     #end _cleanup
 #end class TriggerFrame
