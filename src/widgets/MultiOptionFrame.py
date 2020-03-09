@@ -33,34 +33,37 @@ class MultiOptionFrame(ttk.Frame):
 
 
     def _build(self):
+        logging.debug("Creating MultiOptionFrame using: ", self.options_list)
         # add frame label and checkbutton
         self.label = ttk.Label(self, text=self.name, width=30)
         self.label.grid(row=self.row_num, column=0, sticky="w", padx=(5, 0))
-        #self.list_entry_states.append(BooleanVar())
-        #self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.list_entry_states[0]))
-        #self.list_checkbuttons[0].configure(command=partial(self.cb_value_changed, self.list_entry_states[0], [self.name]))
-        #self.list_checkbuttons[0].grid(row=0, column=1, sticky="e")
         self.row_num += 1
 
         # add the options
         for option in self.options_list:
-            self.list_entry_states.append(BooleanVar())
             label = ttk.Label(self, text=option)
             label.grid(row=self.row_num, column=0, sticky="ew", padx=(20, 0))
-
-            print(option)
+            self.list_entry_states.append(BooleanVar())
+            self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0,
+                                                          variable=self.list_entry_states[-1]))
+            self.list_checkbuttons[-1].configure(command=partial(self.cb_value_changed,
+                                                                 self.list_entry_states[-1],
+                                                                 option))
+            self.list_checkbuttons[-1].grid(row=self.row_num, column=1, sticky="e")
             self.row_num += 1
         #end for
     #end _build
 
-    @staticmethod
-    def _change_state(state, option):
-        """
-        Log the change of option to state
 
-        :param state: the state of the npc
-        :param option: the option
+    @staticmethod
+    def cb_value_changed(entry_state, modified_widget):
         """
-        logging.debug("%s is now %s" % (str(option), str(option.is_active)))
-    # def _change_state
+        Log the change of the entry_state of a given widget
+
+        :param entry_state: The boolean value of the entry
+        :param modified_widget: The widget modified
+        """
+        logging.debug("The value of %s is: %s" % (modified_widget, entry_state.get()))
+        print("The value of %s is: %s" % (modified_widget, entry_state.get()))
+    # end cb_value_changed
 #end class MultiOptionFrame
