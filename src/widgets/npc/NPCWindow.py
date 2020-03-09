@@ -68,7 +68,7 @@ class NPCWindow(Toplevel):
         self.ship = widgets.ComponentMandOptFrame(self.right_frame, "Ship", 2, 0, ["<model>", "<name>"], "npc_ship")
         self.ship.grid(row=2, column=0, sticky="ew", padx=(5, 0))
 
-        self.dialog = widgets.DialogFrame(self.right_frame, "Dialog")
+        self.dialog = widgets.AggregatedDialogFrame(self.right_frame)
         self.dialog.grid(row=3, column=0, sticky="ew", padx=(5, 0))
         # TODO: add Conversation widget
 
