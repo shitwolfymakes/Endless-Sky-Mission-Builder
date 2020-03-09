@@ -64,6 +64,5 @@ class MultiOptionFrame(ttk.Frame):
         :param modified_widget: The widget modified
         """
         logging.debug("The value of %s is: %s" % (modified_widget, entry_state.get()))
-        print("The value of %s is: %s" % (modified_widget, entry_state.get()))
     # end cb_value_changed
 #end class MultiOptionFrame
