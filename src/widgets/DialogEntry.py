@@ -10,7 +10,6 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-from functools import partial
 from tkinter import *
 from tkinter import ttk
 
@@ -23,5 +22,7 @@ class DialogEntry(ttk.Entry):
     def __init__(self, master):
         ttk.Entry.__init__(self, master)
         self.data = StringVar()
+        entry = widgets.DefaultTextEntry(self, "dialog", textvariable=self.data, width=30)
+        entry.pack(expand=True, fill="x")
     #end init
 #end class
