@@ -19,7 +19,15 @@ class MultiOptionFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, name, options_list):
+        """
+
+        :param parent: the parent widget
+        :param name: a string to be displayed by the widget label
+        :param options_list: a list of different options the frame will offer
+        """
         ttk.Frame.__init__(self, parent)
+        # this line makes the frames with no mandatory or optionals fill the frame
+        self.columnconfigure(0, weight=1)
 
         self.name = name
         self.options_list = options_list
@@ -33,7 +41,7 @@ class MultiOptionFrame(ttk.Frame):
 
 
     def _build(self):
-        logging.debug("Creating MultiOptionFrame using: ", self.options_list)
+        logging.debug("\t\tCreating MultiOptionFrame using: ", self.options_list)
         # add frame label and checkbutton
         self.label = ttk.Label(self, text=self.name, width=30)
         self.label.grid(row=self.row_num, column=0, sticky="w", padx=(5, 0))
@@ -49,7 +57,7 @@ class MultiOptionFrame(ttk.Frame):
             self.list_checkbuttons[-1].configure(command=partial(self.cb_value_changed,
                                                                  self.list_entry_states[-1],
                                                                  option))
-            self.list_checkbuttons[-1].grid(row=self.row_num, column=1, sticky="e")
+            self.list_checkbuttons[-1].grid(row=self.row_num, column=1, sticky="e", padx=(20, 0))
             self.row_num += 1
         #end for
     #end _build
