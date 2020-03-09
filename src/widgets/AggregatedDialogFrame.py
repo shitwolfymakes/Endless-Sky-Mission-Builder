@@ -28,18 +28,24 @@ class AggregatedDialogFrame(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         logging.debug("\t\tBuilding AggregatedDialogFrame")
         self.dialog_list = []
+        self.entry_state = BooleanVar()
 
         self.outer = ttk.Frame(self)
-        self.outer.pack(expand=True, fill="x")
+        self.outer.grid()
+        self.outer.grid_columnconfigure(0, weight=1)
 
-        section_name_label = ttk.Label(self.outer, text="Dialog", anchor="w")
-        section_name_label.pack(expand=True, fill="x", padx=(5, 0))
+        section_name_label = ttk.Label(self.outer, text="  Dialog", anchor="w", width=30)
+        section_name_label.grid(row=0, column=0, sticky="ew")
+
+        cb = ttk.Checkbutton(self.outer, onvalue=1, offvalue=0, variable=self.entry_state)
+        cb.configure(command=partial(self.cb_value_changed, self.entry_state, self))
+        cb.grid(row=0, column=1, sticky="e", padx=(20, 0))
 
         self.inner = ttk.Frame(self.outer)
-        self.inner.pack(expand=True, fill="x")
+        self.inner.grid(row=1, column=0, columnspan=2, sticky="nsew")
 
         add_button = ttk.Button(self.outer, text="Add Dialog", command=self._add_dialog)
-        add_button.pack(expand=True, fill="x")
+        add_button.grid(row=2, column=0, columnspan=2, sticky="ew")
     #end init
 
 
@@ -58,4 +64,16 @@ class AggregatedDialogFrame(ttk.Frame):
         for d in self.dialog_list:
             print(d.data.get())
     #end _delete_dialog
+
+
+    @staticmethod
+    def cb_value_changed(entry_state, modified_widget):
+        """
+        Log the change of the entry_state of a given widget
+
+        :param entry_state: The boolean value of the entry
+        :param modified_widget: The widget modified
+        """
+        logging.debug("The value of %s is: %s" % (modified_widget, entry_state.get()))
+    # end cb_value_changed
 #end class
