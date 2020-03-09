@@ -52,6 +52,10 @@ class NPCWindow(Toplevel):
         self.tags_frame = widgets.MultiOptionFrame(self.left_frame, "NPC tags", tags_list)
         self.tags_frame.grid(row=0, column=0, sticky="w", padx=(5, 0))
 
+        personalities_list = ["staying", "entering", "waiting", "launching", "fleeing", "derelict", "uninterested"]
+        self.personalities_frame = widgets.MultiOptionFrame(self.left_frame, "Personality Types", personalities_list)
+        self.personalities_frame.grid(row=1, column=0, sticky="w", padx=(5, 0))
+
         ### BUILDING RIGHT FRAME###
         # TODO: implement this
 
