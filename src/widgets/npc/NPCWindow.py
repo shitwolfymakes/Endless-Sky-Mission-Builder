@@ -65,11 +65,12 @@ class NPCWindow(Toplevel):
         self.planet = widgets.ComponentMandOptFrame(self.right_frame, "Planet", 1, 0, ["<name>"], "npc_planet")
         self.planet.grid(row=1, column=0, sticky="ew", padx=(5, 0))
 
-        #TODO: add Dialog widget
-        #TODO: add Conversation widget
-
         self.ship = widgets.ComponentMandOptFrame(self.right_frame, "Ship", 2, 0, ["<model>", "<name>"], "npc_ship")
         self.ship.grid(row=2, column=0, sticky="ew", padx=(5, 0))
+
+        self.dialog = widgets.DialogFrame(self.right_frame, "Dialog")
+        self.dialog.grid(row=3, column=0, sticky="ew", padx=(5, 0))
+        # TODO: add Conversation widget
 
         self._populate_window()
     #end init
