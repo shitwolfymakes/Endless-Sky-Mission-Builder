@@ -33,7 +33,7 @@ class AggregatedDialogFrame(ttk.Frame):
         self.outer.grid()
         self.outer.grid_columnconfigure(0, weight=1)
 
-        section_name_label = ttk.Label(self.outer, text="  Dialog", anchor="w", width=30)
+        section_name_label = ttk.Label(self.outer, text="Dialog", anchor="w", width=30)
         section_name_label.grid(row=0, column=0, sticky="ew")
 
         cb = ttk.Checkbutton(self.outer, onvalue=1, offvalue=0, variable=self.entry_state)
