@@ -1,4 +1,4 @@
-""" DialogFrame.py
+""" EditorFrame.py
 # Copyright (c) 2020 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -44,4 +44,4 @@ class DialogFrame(ttk.Frame):
         dialog_entry = widgets.DefaultTextEntry(self.editor_frame, self.title.lower(), textvariable=self.data[-1], width=30)
         dialog_entry.pack()
     #end _build
-#end class DialogFrame
+#end class EditorFrame
