@@ -19,10 +19,32 @@ class AggregatedComponentMandOptFrame(ttk.Frame):
     number of ComponentMandOptFrame widgets to the GUI.
     """
 
-    def __init__(self, parent):
+    def __init__(self, parent, title):
         ttk.Frame.__init__(self, parent)
 
         self.parent = parent
         self.cmof_frame_list = []
+
+        self.outer = ttk.Frame(self)
+        self.outer.pack(expand=True, fill="x")
+
+        section_name_label = ttk.Label(self.outer, text=title, anchor="center")
+        section_name_label.pack()
+
+        self.inner = ttk.Frame(self.outer)
+        self.inner.pack(expand=True, fill="x")
+
+        add_button = ttk.Button(self.outer, text="Add %s" % title, command=self._add_cmof)
+        add_button.pack(expand=True, fill="x")
     #end init
+
+
+    def _add_cmof(self):
+        pass
+    #end _add_cmof
+
+
+    def remove_cmof(self):
+        pass
+    #end remove_cmof
 #end AggregatedComponentMandOptFrame
