@@ -23,17 +23,18 @@ class AggregatedDialogFrame(ttk.Frame):
     This class extends ttk.Frame, allowing the user to add an arbitrary number of TriggerFrame widgets to the GUI.
     """
 
-    def __init__(self, parent):
+    def __init__(self, parent, title):
         ttk.Frame.__init__(self, parent)
-        logging.debug("\t\tBuilding AggregatedDialogFrame")
-        self.dialog_list = []
+        logging.debug("\t\tBuilding AggregatedEditorFrame for %s" % title)
+        self.title = title
+        self.editor_frames = []
         self.entry_state = BooleanVar()
 
         self.outer = ttk.Frame(self)
         self.outer.grid()
         self.outer.grid_columnconfigure(0, weight=1)
 
-        section_name_label = ttk.Label(self.outer, text="Dialog", anchor="w", width=30)
+        section_name_label = ttk.Label(self.outer, text=self.title, anchor="w", width=30)
         section_name_label.grid(row=0, column=0, sticky="ew")
 
         cb = ttk.Checkbutton(self.outer, onvalue=1, offvalue=0, variable=self.entry_state)
@@ -43,25 +44,26 @@ class AggregatedDialogFrame(ttk.Frame):
         self.inner = ttk.Frame(self.outer)
         self.inner.grid(row=1, column=0, columnspan=2, sticky="nsew")
 
-        add_button = ttk.Button(self.outer, text="Add Dialog", command=self._add_dialog)
+        add_button = ttk.Button(self.outer, text="Add %s" % self.title, command=self._add_editor)
         add_button.grid(row=2, column=0, columnspan=2, sticky="ew")
     #end init
 
 
-    def _add_dialog(self):
-        df = widgets.DialogFrame(self)
-        self.dialog_list.append(df)
-        print(self.dialog_list)
+    def _add_editor(self):
+        df = widgets.DialogFrame(self, self.title)
+        self.editor_frames.append(df)
+        print(self.editor_frames)
     #end _add_dialog
 
 
-    def delete_dialog(self, dialog_frame):
-        self.dialog_list.remove(dialog_frame)
-        dialog_frame.frame.pack_forget()
-        dialog_frame.frame.destroy()
-        print(self.dialog_list)
-        for d in self.dialog_list:
-            print(d.data.get())
+    def remove_editor(self, editor_frame):
+        self.editor_frames.remove(editor_frame)
+        editor_frame.outer.pack_forget()
+        editor_frame.outer.destroy()
+        print(self.editor_frames)
+        for d in self.editor_frames:
+            for data in d.data:
+                print(data.get())
     #end _delete_dialog
 
 

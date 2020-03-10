@@ -20,19 +20,28 @@ import src.widgets as widgets
 class DialogFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, parent):
+    def __init__(self, parent, title):
         ttk.Frame.__init__(self, parent)
         self.parent = parent
-        self.data = StringVar()
+        self.title = title
+        self.data = []
 
-        self.frame = ttk.Frame(parent.inner)
-        self.frame.pack(expand=True, fill="x")
-        self.frame.grid_columnconfigure(0, weight=1)
+        self.outer = ttk.Frame(parent.inner)
+        self.outer.pack(expand=True, fill="x")
+        self.outer.grid_columnconfigure(0, weight=1)
 
-        dialog_entry = widgets.DefaultTextEntry(self.frame, "dialog", textvariable=self.data, width=30)
-        dialog_entry.grid(row=0, column=1, sticky="ew")
+        self.editor_frame = ttk.Frame(self.outer)
+        self._build()
+        self.editor_frame.grid(row=0, column=1, sticky="ew")
 
-        delete_button = ttk.Button(self.frame, text="X", width=2, command=partial(self.parent.delete_dialog, self))
+        delete_button = ttk.Button(self.outer, text="X", width=2, command=partial(self.parent.remove_editor, self))
         delete_button.grid(row=0, column=2, sticky="w")
     #end init
+
+
+    def _build(self):
+        self.data.append(StringVar())
+        dialog_entry = widgets.DefaultTextEntry(self.editor_frame, self.title.lower(), textvariable=self.data[-1], width=30)
+        dialog_entry.pack()
+    #end _build
 #end class DialogFrame
