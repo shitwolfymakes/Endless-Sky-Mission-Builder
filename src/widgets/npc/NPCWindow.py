@@ -58,18 +58,18 @@ class NPCWindow(Toplevel):
         self.confusion_component = widgets.ComponentMandOptFrame(self.left_frame, "Confusion", 1, 0, ["<#amount>"], "npc_confusion")
         self.confusion_component.grid(row=2, column=0, sticky="ew", padx=(5, 0))
 
+        self.planet = widgets.ComponentMandOptFrame(self.left_frame, "Planet", 1, 0, ["<name>"], "npc_planet")
+        self.planet.grid(row=3, column=0, sticky="ew", padx=(5, 0))
+
+        self.ship = widgets.ComponentMandOptFrame(self.left_frame, "Ship", 2, 0, ["<model>", "<name>"], "npc_ship")
+        self.ship.grid(row=4, column=0, sticky="ew", padx=(5, 0))
 
         ### BUILDING RIGHT FRAME###
-        #TODO: add system filter
-
-        self.planet = widgets.ComponentMandOptFrame(self.right_frame, "Planet", 1, 0, ["<name>"], "npc_planet")
-        self.planet.grid(row=1, column=0, sticky="ew", padx=(5, 0))
-
-        self.ship = widgets.ComponentMandOptFrame(self.right_frame, "Ship", 2, 0, ["<model>", "<name>"], "npc_ship")
-        self.ship.grid(row=2, column=0, sticky="ew", padx=(5, 0))
+        # TODO: add system filter
 
         self.dialog = widgets.AggregatedDialogFrame(self.right_frame)
         self.dialog.grid(row=3, column=0, sticky="ew", padx=(5, 0))
+
         # TODO: add Conversation widget
 
         self._populate_window()
