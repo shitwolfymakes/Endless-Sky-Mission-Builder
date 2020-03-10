@@ -5,14 +5,14 @@ widgets
 Provides custom widgets to encapsulate complex, common parts of ESMB's gui
 """
 
-from .AggregatedEditorFrame import AggregatedDialogFrame
+from .AggregatedDialogFrame import AggregatedDialogFrame
 from .AggregatedLogFrame import AggregatedLogFrame
 from .AggregatedTriggerFrame import AggregatedTriggerFrame
 from .AggregatedTriggerConditionFrame import AggregatedTriggerConditionFrame
 from .ComboComponentFrame import ComboComponentFrame
 from .ComponentMandOptFrame import ComponentMandOptFrame
 from .DefaultTextEntry import DefaultTextEntry
-from .EditorFrame import DialogFrame
+from .DialogFrame import DialogFrame
 from .LogFrame import LogFrame
 from .LogWindow import LogWindow
 from .MultiOptionFrame import MultiOptionFrame
