@@ -12,11 +12,10 @@
 
 import logging
 from functools import partial
-from tkinter import *
+from tkinter import BooleanVar
 from tkinter import ttk
 
 import src.widgets as widgets
-from src import config
 
 
 class AggregatedDialogFrame(ttk.Frame):
