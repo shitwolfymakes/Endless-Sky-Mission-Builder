@@ -10,6 +10,9 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
+import logging
+from functools import partial
+from tkinter import BooleanVar
 from tkinter import ttk
 
 
@@ -24,18 +27,24 @@ class AggregatedComponentMandOptFrame(ttk.Frame):
 
         self.parent = parent
         self.cmof_frame_list = []
+        self.entry_state = BooleanVar()
 
         self.outer = ttk.Frame(self)
-        self.outer.pack(expand=True, fill="x")
+        self.outer.grid()
+        self.outer.grid_columnconfigure(0, weight=1)
 
-        section_name_label = ttk.Label(self.outer, text=title, anchor="center")
-        section_name_label.pack()
+        section_name_label = ttk.Label(self.outer, text=title, anchor="w", width=30)
+        section_name_label.grid(row=0, column=0, sticky="ew")
+
+        cb = ttk.Checkbutton(self.outer, onvalue=1, offvalue=0, variable=self.entry_state)
+        cb.configure(command=partial(self.cb_value_changed, self.entry_state, self))
+        cb.grid(row=0, column=1, sticky="e", padx=(20, 0))
 
         self.inner = ttk.Frame(self.outer)
-        self.inner.pack(expand=True, fill="x")
+        self.inner.grid(row=1, column=0, columnspan=2, sticky="nsew")
 
         add_button = ttk.Button(self.outer, text="Add %s" % title, command=self._add_cmof)
-        add_button.pack(expand=True, fill="x")
+        add_button.grid(row=2, column=0, columnspan=2, sticky="ew")
     #end init
 
 
@@ -47,4 +56,16 @@ class AggregatedComponentMandOptFrame(ttk.Frame):
     def remove_cmof(self):
         pass
     #end remove_cmof
+
+
+    @staticmethod
+    def cb_value_changed(entry_state, modified_widget):
+        """
+        Log the change of the entry_state of a given widget
+
+        :param entry_state: The boolean value of the entry
+        :param modified_widget: The widget modified
+        """
+        logging.debug("The value of %s is: %s" % (modified_widget, entry_state.get()))
+    # end cb_value_changed
 #end AggregatedComponentMandOptFrame
