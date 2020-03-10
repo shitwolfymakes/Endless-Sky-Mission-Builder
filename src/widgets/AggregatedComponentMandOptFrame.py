@@ -14,5 +14,15 @@ from tkinter import ttk
 
 
 class AggregatedComponentMandOptFrame(ttk.Frame):
-    pass
+    """
+    This class extends ttk.Frame, allowing the user to add an arbitrary
+    number of ComponentMandOptFrame widgets to the GUI.
+    """
+
+    def __init__(self, parent):
+        ttk.Frame.__init__(self, parent)
+
+        self.parent = parent
+        self.cmof_frame_list = []
+    #end init
 #end AggregatedComponentMandOptFrame
