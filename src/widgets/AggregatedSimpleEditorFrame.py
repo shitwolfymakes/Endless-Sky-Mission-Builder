@@ -1,4 +1,4 @@
-""" AggregatedComponentMandOptFrame.py
+""" AggregatedSimpleEditorFrame.py
 # Copyright (c) 2020 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -13,6 +13,6 @@
 from tkinter import ttk
 
 
-class AggregatedComponentMandOptFrame(ttk.Frame):
+class AggregatedSimpleEditorFrame(ttk.Frame):
     pass
-#end AggregatedComponentMandOptFrame
+#end AggregatedSimpleEditorFrame
