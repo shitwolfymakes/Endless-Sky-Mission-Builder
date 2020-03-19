@@ -1,4 +1,4 @@
-""" EditorFrame.py
+""" SimpleEditorFrame.py
 # Copyright (c) 2020 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -17,7 +17,7 @@ from tkinter import ttk
 import src.widgets as widgets
 
 
-class EditorFrame(ttk.Frame):
+class SimpleEditorFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, title):

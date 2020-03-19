@@ -15,7 +15,7 @@ from .ComboComponentFrame import ComboComponentFrame
 from .ComponentMandOptFrame import ComponentMandOptFrame
 from .DefaultTextEntry import DefaultTextEntry
 from .DialogFrame import DialogFrame
-from .EditorFrame import EditorFrame
+from .SimpleEditorFrame import SimpleEditorFrame
 from .LogFrame import LogFrame
 from .LogWindow import LogWindow
 from .MultiOptionFrame import MultiOptionFrame
