@@ -5,6 +5,7 @@ widgets
 Provides custom widgets to encapsulate complex, common parts of ESMB's gui
 """
 
+from .AggregatorFrame import AggregatorFrame
 from .AggregatedDialogFrame import AggregatedDialogFrame
 from .AggregatedLogFrame import AggregatedLogFrame
 from .AggregatedSimpleEditorFrame import AggregatedSimpleEditorFrame
