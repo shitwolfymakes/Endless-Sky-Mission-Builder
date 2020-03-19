@@ -17,7 +17,7 @@ from tkinter import ttk
 import src.widgets as widgets
 
 
-class DialogFrame(ttk.Frame):
+class EditorFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, title):
