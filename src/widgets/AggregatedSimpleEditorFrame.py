@@ -10,9 +10,28 @@
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-from tkinter import ttk
+import logging
+import src.widgets as widgets
 
 
-class AggregatedSimpleEditorFrame(ttk.Frame):
-    pass
+class AggregatedSimpleEditorFrame(widgets.AggregatorFrame):
+    def __init__(self, parent, title):
+        logging.debug("\t\tBuilding AggregatedSimpleEditorFrame")
+        widgets.AggregatorFrame.__init__(self, parent, title)
+    #end init
+
+
+    def add_frame(self):
+        pass
+    #end add_frame
+
+
+    def delete_frame(self, frame):
+        pass
+    #end delete_frame
+
+
+    def configure_frame(self):
+        pass
+    #end configure_frame
 #end AggregatedSimpleEditorFrame
