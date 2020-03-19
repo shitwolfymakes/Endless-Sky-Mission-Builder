@@ -17,7 +17,7 @@ import src.widgets as widgets
 
 class AggregatedDialogFrame(widgets.AggregatorFrame):
     """
-    This class extends ttk.Frame, allowing the user to add an arbitrary number of TriggerFrame widgets to the GUI.
+    This class extends ttk.Frame, allowing the user to add an arbitrary number of DialogFrame widgets to the GUI.
     """
 
     def __init__(self, parent):
@@ -29,7 +29,7 @@ class AggregatedDialogFrame(widgets.AggregatorFrame):
     def add_frame(self):
         df = widgets.DialogFrame(self)
         self.frame_list.append(df)
-        print(self.frame_list)
+        #print(self.frame_list)
     #end _add_dialog
 
 
@@ -37,8 +37,10 @@ class AggregatedDialogFrame(widgets.AggregatorFrame):
         self.frame_list.remove(frame)
         frame.frame.pack_forget()
         frame.frame.destroy()
+        """
         print(self.frame_list)
         for d in self.frame_list:
             print(d.data.get())
+        """
     #end _delete_dialog
 #end class
