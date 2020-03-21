@@ -3,7 +3,11 @@ widgets
 ===========
 
 Provides custom widgets to encapsulate complex, common parts of ESMB's gui
+
+NOTE: the top level of this module should only contain classes that are use or inherited
+by the classes in any submodules
 """
+#TODO: Move the Trigger stuff to a submodule, like I have with NPC
 
 from .AggregatorFrame import AggregatorFrame
 from .AggregatedDialogFrame import AggregatedDialogFrame
