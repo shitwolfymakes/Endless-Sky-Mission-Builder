@@ -20,21 +20,21 @@ import src.widgets as widgets
 class SimpleEditorFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
-    def __init__(self, parent, title):
+    def __init__(self, parent, title, num_fields, num_optional):
         ttk.Frame.__init__(self, parent)
         self.parent = parent
         self.title = title
         self.data = []
 
-        self.outer = ttk.Frame(parent.inner)
-        self.outer.pack(expand=True, fill="x")
-        self.outer.grid_columnconfigure(0, weight=1)
+        self.frame = ttk.Frame(parent.inner)
+        self.frame.pack(expand=True, fill="x")
+        self.frame.grid_columnconfigure(0, weight=1)
 
-        self.editor_frame = ttk.Frame(self.outer)
+        self.editor_frame = ttk.Frame(self.frame)
         self._build()
         self.editor_frame.grid(row=0, column=1, sticky="ew")
 
-        delete_button = ttk.Button(self.outer, text="X", width=2, command=partial(self.parent.remove_editor, self))
+        delete_button = ttk.Button(self.frame, text="X", width=2, command=partial(self.parent.delete_frame, self))
         delete_button.grid(row=0, column=2, sticky="w")
     #end init
 
