@@ -20,15 +20,10 @@ class AggregatedSimpleEditorFrame(widgets.AggregatorFrame):
         widgets.AggregatorFrame.__init__(self, parent, title)
     #end init
 
-
     def add_frame(self):
-        pass
-    #end add_frame
-
-
-    def delete_frame(self, frame):
-        pass
-    #end delete_frame
+        sef = widgets.SimpleEditorFrame(self, "Ship", 2, 0)
+        self.frame_list.append(sef)
+    # end add_frame
 
 
     def configure_frame(self):
