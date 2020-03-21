@@ -51,8 +51,9 @@ class AggregatorFrame(ttk.Frame):
 
 
     def delete_frame(self, frame):
-        """ Provided method declaration for the subclass to implement """
-        pass
+        self.frame_list.remove(frame)
+        frame.frame.pack_forget()
+        frame.frame.destroy()
     #end delete_frame
 
 

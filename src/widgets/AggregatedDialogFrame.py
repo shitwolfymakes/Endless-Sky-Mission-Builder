@@ -30,17 +30,5 @@ class AggregatedDialogFrame(widgets.AggregatorFrame):
         df = widgets.DialogFrame(self)
         self.frame_list.append(df)
         #print(self.frame_list)
-    #end _add_dialog
-
-
-    def delete_frame(self, frame):
-        self.frame_list.remove(frame)
-        frame.frame.pack_forget()
-        frame.frame.destroy()
-        """
-        print(self.frame_list)
-        for d in self.frame_list:
-            print(d.data.get())
-        """
-    #end _delete_dialog
+    #end add_frame
 #end class
