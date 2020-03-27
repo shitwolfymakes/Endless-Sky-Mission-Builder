@@ -23,7 +23,7 @@ Future supported mission options:
   - Phrases
 
 ## System requirements
-- Any computer from the last 10 years
+- If you can run [the game itself](https://github.com/endless-sky/endless-sky), you can run this 
 - Windows and Linux
 
 ## Contributing/Support
