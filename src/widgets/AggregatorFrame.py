@@ -29,6 +29,7 @@ class AggregatorFrame(ttk.Frame):
         self.outer.grid()
         self.outer.grid_columnconfigure(0, weight=1)
 
+        #TODO: convert to tooltip_label
         section_name_label = ttk.Label(self.outer, text=title, width=28)
         section_name_label.grid(row=0, column=0, sticky="ew", padx=(2, 0))
 
