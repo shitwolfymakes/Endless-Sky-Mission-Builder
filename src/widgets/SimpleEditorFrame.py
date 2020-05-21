@@ -11,20 +11,21 @@
 """
 
 from functools import partial
-from tkinter import StringVar
 from tkinter import ttk
 
 import src.widgets as widgets
 
 
 class SimpleEditorFrame(ttk.Frame):
-    """This class extends ttk.Frame to create a custom GUI widget"""
-
-    def __init__(self, parent, title, num_fields, num_optional):
+    """This class wraps a ComponentMandOptFrame with a delete button, to facilitate aggregation"""
+    def __init__(self, parent, title, num_fields, num_optional, default_entry_data, tooltip_key):
         ttk.Frame.__init__(self, parent)
         self.parent = parent
         self.title = title
-        self.data = []
+        self.num_fields = num_fields
+        self.num_optional = num_optional
+        self.default_entry_data = default_entry_data
+        self.tooltip_key = tooltip_key
 
         self.frame = ttk.Frame(parent.inner)
         self.frame.pack(expand=True, fill="x")
@@ -32,16 +33,16 @@ class SimpleEditorFrame(ttk.Frame):
 
         self.editor_frame = ttk.Frame(self.frame)
         self._build()
-        self.editor_frame.grid(row=0, column=1, sticky="ew")
+        self.editor_frame.grid(row=0, column=0, sticky="ew")
 
         delete_button = ttk.Button(self.frame, text="X", width=2, command=partial(self.parent.delete_frame, self))
-        delete_button.grid(row=0, column=2, sticky="w")
+        delete_button.grid(row=0, column=1, sticky="w")
     #end init
 
 
     def _build(self):
-        self.data.append(StringVar())
-        dialog_entry = widgets.DefaultTextEntry(self.editor_frame, self.title.lower(), textvariable=self.data[-1], width=30)
-        dialog_entry.pack()
+        cmof = widgets.ComponentMandOptFrame(self.editor_frame, self.title, self.num_fields, self.num_optional,
+                                             self.default_entry_data, self.tooltip_key)
+        cmof.pack()
     #end _build
 #end class EditorFrame
