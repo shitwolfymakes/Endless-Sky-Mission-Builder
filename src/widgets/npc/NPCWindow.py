@@ -74,8 +74,11 @@ class NPCWindow(Toplevel):
 
         ### BUILDING RIGHT FRAME###
         #TODO: add tooltips to each of these
-        self.ship = widgets.AggregatedSimpleEditorFrame(self.right_frame, "Ships", 2, 1, ["model", "name", "test"], None)
-        self.ship.grid(row=1, column=0, sticky="ew", padx=(5, 0))
+        self.ship = widgets.AggregatedSimpleEditorFrame(self.right_frame, "Ships", 2, 0, ["model", "name"], None)
+        self.ship.grid(row=0, column=0, sticky="ew", padx=(5, 0))
+
+        self.fleet = widgets.AggregatedSimpleEditorFrame(self.right_frame, "Fleets", 1, 1, ["name", "<count#>"], None)
+        self.fleet.grid(row=1, column=0, sticky="ew", padx=(5, 0))
 
         self._populate_window()
     #end init

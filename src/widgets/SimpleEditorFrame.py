@@ -33,7 +33,7 @@ class SimpleEditorFrame(ttk.Frame):
 
         self.editor_frame = ttk.Frame(self.frame)
         self._build()
-        self.editor_frame.grid(row=0, column=0, sticky="ew")
+        self.editor_frame.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
         delete_button = ttk.Button(self.frame, text="X", width=2, command=partial(self.parent.delete_frame, self))
         delete_button.grid(row=0, column=1, sticky="w")

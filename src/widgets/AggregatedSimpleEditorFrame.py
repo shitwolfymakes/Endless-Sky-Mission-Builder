@@ -18,6 +18,7 @@ class AggregatedSimpleEditorFrame(widgets.AggregatorFrame):
     def __init__(self, parent, title, num_fields, num_optional, default_text_data, tooltip_key):
         logging.debug("\t\tBuilding AggregatedSimpleEditorFrame: \"%s\"" % title)
         widgets.AggregatorFrame.__init__(self, parent, title)
+        title = title[:-1]
         self.title = title
         self.num_fields = num_fields
         self.num_optional = num_optional
