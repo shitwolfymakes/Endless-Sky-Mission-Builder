@@ -15,13 +15,19 @@ import src.widgets as widgets
 
 
 class AggregatedSimpleEditorFrame(widgets.AggregatorFrame):
-    def __init__(self, parent, title):
-        logging.debug("\t\tBuilding AggregatedSimpleEditorFrame")
+    def __init__(self, parent, title, num_fields, num_optional, default_text_data, tooltip_key):
+        logging.debug("\t\tBuilding AggregatedSimpleEditorFrame: \"%s\"" % title)
         widgets.AggregatorFrame.__init__(self, parent, title)
+        self.title = title
+        self.num_fields = num_fields
+        self.num_optional = num_optional
+        self.default_text_data = default_text_data
+        self.tooltip_key = tooltip_key
     #end init
 
     def add_frame(self):
-        sef = widgets.SimpleEditorFrame(self, "Ship", 2, 0)
+        sef = widgets.SimpleEditorFrame(self, self.title, self.num_fields, self.num_optional,
+                                        self.default_text_data, self.tooltip_key)
         self.frame_list.append(sef)
     # end add_frame
 
