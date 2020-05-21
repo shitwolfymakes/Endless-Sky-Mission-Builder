@@ -80,6 +80,8 @@ class NPCWindow(Toplevel):
         self.fleet = widgets.AggregatedSimpleEditorFrame(self.right_frame, "Fleets", 1, 1, ["name", "<count#>"], None)
         self.fleet.grid(row=1, column=0, sticky="ew", padx=(5, 0))
 
+        #TODO: add custom fleets
+
         self._populate_window()
     #end init
 
