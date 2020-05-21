@@ -43,6 +43,9 @@ class NPCWindow(Toplevel):
         self.right_frame = ttk.Frame(outer)
         self.right_frame.pack(side=RIGHT, anchor=N)
 
+        self.center_frame = ttk.Frame(outer)
+        self.center_frame.pack(side=RIGHT, anchor=N)
+
         self.close_button = ttk.Button(self, text="Ok", command=self._cleanup)
         self.close_button.pack(side=BOTTOM)
 
@@ -61,16 +64,18 @@ class NPCWindow(Toplevel):
         self.planet = widgets.ComponentMandOptFrame(self.left_frame, "Planet", 1, 0, ["<name>"], "npc_planet")
         self.planet.grid(row=3, column=0, sticky="ew", padx=(5, 0))
 
-        self.ship = widgets.ComponentMandOptFrame(self.left_frame, "Ship", 2, 0, ["<model>", "<name>"], "npc_ship")
-        self.ship.grid(row=4, column=0, sticky="ew", padx=(5, 0))
-
-        ### BUILDING RIGHT FRAME###
+        ### BUILDING CENTER FRAME###
         # TODO: add system filter
 
-        self.dialog = widgets.AggregatedDialogFrame(self.right_frame)
-        self.dialog.grid(row=3, column=0, sticky="ew", padx=(5, 0))
+        self.dialog = widgets.AggregatedDialogFrame(self.center_frame)
+        self.dialog.grid(row=0, column=0, sticky="ew", padx=(5, 0))
 
         # TODO: add Conversation widget
+
+        ### BUILDING RIGHT FRAME###
+        #TODO: add tooltips to each of these
+        self.ship = widgets.AggregatedSimpleEditorFrame(self.right_frame, "Ships", 2, 1, ["model", "name", "test"], None)
+        self.ship.grid(row=1, column=0, sticky="ew", padx=(5, 0))
 
         self._populate_window()
     #end init
