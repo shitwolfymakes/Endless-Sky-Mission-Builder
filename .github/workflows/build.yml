@@ -30,7 +30,8 @@ jobs:
       run: ./ci/build.sh
     - name: Build (MacOS)
       if: runner.os == 'macOS'
-      uses: mxschmitt/action-tmate@v2
+      run: ./ci/build_macos.sh
+      #uses: mxschmitt/action-tmate@v2
 
     - uses: actions/upload-artifact@v2
       with:
