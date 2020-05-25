@@ -1,0 +1,48 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - master
+      - indev
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: 
+          #- macos-latest
+          - windows-latest
+          - ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Build (Windows)
+      if: runner.os == 'Windows'
+      run: ci\build.bat
+    - name: Build (Linux)
+      if: runner.os == 'Linux'
+      run: ./ci/build.sh
+    - name: Build (MacOS)
+      if: runner.os == 'macOS'
+      run: exit 1 # Not supported yet
+
+    - uses: actions/upload-artifact@v2
+      with:
+        path: ESMB-*
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          ESMB-ubuntu-amd64-pyinstaller
+          ESMB-ubuntu-amd64-pyinstaller.tar.gz
+          ESMB-win64-pyinstaller.exe
+          ESMB-win64-pyinstaller.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
