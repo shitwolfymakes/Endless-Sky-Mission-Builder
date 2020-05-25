@@ -30,7 +30,7 @@ jobs:
       run: ./ci/build.sh
     - name: Build (MacOS)
       if: runner.os == 'macOS'
-      run: exit 1 # Not supported yet
+      uses: mxschmitt/action-tmate@v2
 
     - uses: actions/upload-artifact@v2
       with:
