@@ -3,6 +3,7 @@
 sudo apt-get update && sudo apt-get -y install python3-pip python3-tk python3.7 python3.7-dev
 
 # Setup required python packages
+python3.7 -m pip install setuptools wheel
 python3.7 -m pip install PyInstaller
 python3.7 -m pip install -r requirements.txt
 
