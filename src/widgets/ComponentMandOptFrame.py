@@ -23,12 +23,17 @@ class ComponentMandOptFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""
 
     def __init__(self, parent, component_name, num_mandatory, num_optionals, list_default_entry_data, tooltip_key):
+        """
+        :param parent: the parent widget
+        :param component_name: a string to be displayed by the widget label
+        :param num_mandatory: number of mandatory fields
+        :param num_optionals: number of optional fields
+        :param list_default_entry_data: the data to be stored in the entries
+        :param tooltip_key: the key that stores the tooltip data
+        """
         ttk.Frame.__init__(self, parent)
         # this line makes the frames with no mandatory or optionals fill the frame
         self.columnconfigure(0, weight=1)
-
-        disabled_entry_style = ttk.Style()
-        disabled_entry_style.configure('D.TEntry', background='#D3D3D3')
 
         self.component_name = component_name
         self.num_mandatory = num_mandatory
@@ -96,7 +101,7 @@ class ComponentMandOptFrame(ttk.Frame):
             self.list_entry_data.append(StringVar())
             self.list_entry_data[0].set(self.list_default_entry_data[0])
 
-            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[0], state=DISABLED, style='D.TEntry', width=30))
+            self._add_entry(self.list_default_entry_data[0], self.list_entry_data[0])
             self.list_entries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.list_entry_states[0]))
@@ -114,7 +119,7 @@ class ComponentMandOptFrame(ttk.Frame):
             self.list_entry_data.append(StringVar())
             self.list_entry_data[0].set(self.list_default_entry_data[0])
 
-            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[0], state=DISABLED, style='D.TEntry', width=30))
+            self._add_entry(self.list_default_entry_data[0], self.list_entry_data[0])
             self.list_entries[0].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.list_entry_states[0]))
@@ -127,7 +132,7 @@ class ComponentMandOptFrame(ttk.Frame):
                 self.list_entry_data.append(StringVar())
                 self.list_entry_data[-1].set(self.list_default_entry_data[i])
 
-                self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[-1], state=DISABLED, style='D.TEntry', width=30))
+                self._add_entry(self.list_default_entry_data[-1], self.list_entry_data[-1])
                 self.list_entries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
                 self.rowNum += 1
@@ -144,11 +149,11 @@ class ComponentMandOptFrame(ttk.Frame):
             self.list_entry_data.append(StringVar())
             self.list_entry_data[-1].set(self.list_default_entry_data[i])
 
-            self.list_entries.append(ttk.Entry(self, textvariable=self.list_entry_data[-1], state=DISABLED, style="D.TEntry", width=30))
+            self._add_entry(self.list_default_entry_data[-1], self.list_entry_data[-1])
             self.list_entries[-1].grid(row=self.rowNum, column=0, sticky="ew", padx=(20, 0))
 
             # We have to use functools.partial here because lambda can't be used
-            # inside a loop(the bound lambda will use the last assigned values)
+            # inside a loop(the bound lambda would use the last assigned values)
             self.list_checkbuttons.append(ttk.Checkbutton(self, onvalue=1, offvalue=0, variable=self.list_entry_states[-1]))
             self.list_checkbuttons[-1].configure(command=partial(self.cb_value_changed,
                                                                  self.list_entry_states[-1],
@@ -175,10 +180,18 @@ class ComponentMandOptFrame(ttk.Frame):
             elif entry_state.get() is True:
                 widget.config(state='enabled', style='TEntry')
             elif entry_state.get() is False:
-                widget.config(state='disabled', style='D.TEntry')
+                widget.config(state='disabled', style='Disabled.TEntry')
             #end if/else
         # end for
     # end cb_value_changed
+
+
+    def _add_entry(self, default_text, entry_stringvar):
+        """This method creates a DefaultTextEntry widget and adds it to the list of entry widgets"""
+        entry = widgets.DefaultTextEntry(self, default_text, textvariable=entry_stringvar,
+                                         state='disabled', style='Disabled.TEntry', width=30)
+        self.list_entries.append(entry)
+    #end _add_entry
 
 
     def set(self, entry_state_num, entry_num, data):
@@ -211,7 +224,7 @@ class ComponentMandOptFrame(ttk.Frame):
         for i, entry in enumerate(self.list_entry_data):
             entry.set(self.list_default_entry_data[i])
         for entry in self.list_entries:
-            entry.config(state='disabled', style='D.TEntry')
+            entry.config(state='disabled', style='Disabled.TEntry')
     #end reset
 
 

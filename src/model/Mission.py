@@ -49,9 +49,4 @@ class Mission(model.FileItem):
         """Remove a trigger object from this mission"""
         self.components.trigger_list.remove(trigger)
     #end remove_trigger
-
-
-    def to_string(self):
-        return "".join(self.lines)
-    #end to_string
 #end class Mission

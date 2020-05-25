@@ -16,13 +16,15 @@ class FileMissionItemParserTestCase(unittest.TestCase):
     #end setUp
 
 
-    def test_strip_ending_whitespace_from_lines(self):
+    #TODO: Move this to a test_file_item_parser.py
+    def test_strip_ending_whitespace(self):
         passing_lines = ['mission "Testing testing"\n', '\tcargo "scanning equipment" 8"\n']
-        self.parser.strip_ending_whitespace_from_lines()
-        self.assertEqual(self.parser.lines, passing_lines)
-    #end test_strip_ending_whitespace_from_lines
+        self.parser.strip_ending_whitespace(self.test_lines)
+        self.assertEqual(self.test_lines, passing_lines)
+    #end test_strip_ending_whitespace
 
 
+    # TODO: Move this to a test_file_item_parser.py
     def test_tokenize(self):
         tokens = FileMissionItemParser.tokenize('mission "Testing testing"\n')
         passing_tokens = ["mission", "Testing testing"]
@@ -30,12 +32,14 @@ class FileMissionItemParserTestCase(unittest.TestCase):
     #end test_tokenize
 
 
+    # TODO: Move this to a test_file_item_parser.py
     def test_get_indent_level(self):
         passing_data = 0
         self.assertEqual(FileMissionItemParser.get_indent_level(self.test_lines[0]), passing_data)
     #end test_get_indent_level
 
 
+    # TODO: Move this to a test_file_item_parser.py
     def test_store_component_data(self):
         passing_data = ["scanning equipment", "8", None, None]
         component = MissionComponents()

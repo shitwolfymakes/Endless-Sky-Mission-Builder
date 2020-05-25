@@ -18,3 +18,7 @@ mission_file_items = None
 active_item = None
 active_trigger = None
 gui = None
+
+# styles
+disabled_combobox_style = None  # 'Disabled.TCombobox'
+disabled_entry_style = None     # 'Disabled.TEntry'

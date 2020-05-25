@@ -14,11 +14,12 @@ import re
 import shlex
 
 from src import config
+from src.model.file_data_parsers import FileItemParser
 from src.model import Mission
 from src.model.components.conversations import Conversation
 
 
-class FileMissionItemParser:
+class FileMissionItemParser(FileItemParser):
     """Parses a mission item from a file"""
     def __init__(self, lines):
         tokens = shlex.split(lines[0])
@@ -35,9 +36,13 @@ class FileMissionItemParser:
 
 
     def run(self):
+        """
+        Run the parsers, checking for tokens
+        Reference: https://github.com/endless-sky/endless-sky/blob/49a387d848e88dc734c93b34013af81f873e70c1/source/Mission.cpp#L106-L259
+        """
         logging.debug("\t\tParsing %s from file..." % self.mission.name)
 
-        self.strip_ending_whitespace_from_lines()
+        self.strip_ending_whitespace(self.lines)
         for self.i, self.line in self.enum_lines:
             self.line = self.line.rstrip()
             tokens = self.tokenize(self.line)
@@ -87,6 +92,9 @@ class FileMissionItemParser:
                 self._parse_trigger(tokens)
             elif "to" in tokens:
                 self._parse_condition()
+            elif "npc" in tokens:
+                # TODO: handle npcs
+                pass
             else:
                 logging.debug("ERROR: No tokens found on line %d: %s" % (self.i, self.line))
             #end if/elif/else
@@ -94,51 +102,6 @@ class FileMissionItemParser:
 
         config.mission_file_items.add_item(self.mission)
     #end run
-
-
-    def strip_ending_whitespace_from_lines(self):
-        while self.lines[-1] == "" or self.lines[-1] == "\n":
-            del self.lines[-1]
-    #end strip_ending_whitespace_from_lines
-
-
-    @staticmethod
-    def tokenize(line):
-        """Break the line into a list of tokens, saving anything inside quotes as a single token"""
-        pattern = re.compile(r'((?:".*?")|(?:`.*?`)|[^\"\s]+)')
-        tokens = re.findall(pattern, line)
-        for i, token in enumerate(tokens):
-            if token.startswith("`"):
-                tokens[i] = token[1:-1]
-            elif token.startswith("\""):
-                tokens[i] = token[1:-1]
-        return tokens
-    # end tokenize
-
-
-    @staticmethod
-    def get_indent_level(line):
-        tab_count = len(line) - len(line.lstrip('\t'))
-        return tab_count
-    # end get_indent_level
-
-
-    @staticmethod
-    def store_component_data(component, tokens):
-        """
-        Store the tokens in the given component
-
-        :param component: The component the data will be stored in
-        :param tokens: The tokens to store
-        """
-        for i, token in enumerate(tokens):
-            if token is not None:
-                component[i] = token
-            else:
-                break
-            # end if/else
-        # end for
-    # end store_component_data
 
 
     def _parse_name(self, tokens):

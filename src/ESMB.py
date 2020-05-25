@@ -22,7 +22,8 @@ import sys
 import logging
 
 from src.model import Mission
-from src.gui.GUI import GUI
+
+import src.gui as gui
 import src.utils as utils
 import src.config as config
 import src.singletons as singletons
@@ -32,7 +33,7 @@ class ESMB:
     """The application object"""
     def __init__(self):
         self.setup()
-        self.gui = GUI()
+        self.gui = gui.GUI()
     #end init
 
 
@@ -58,6 +59,10 @@ class ESMB:
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
         logging.basicConfig(filename='log.txt', filemode='w', level=logging.DEBUG)
+
+        if "debug=True" in sys.argv:
+            stdout_handler = logging.StreamHandler(sys.stdout)
+            logging.getLogger().addHandler(stdout_handler)
     # end _logger_setup
 
 

@@ -22,16 +22,15 @@ class ItemTextPane(ttk.Frame, GUIPane):
     #TODO: make it not wrap on word
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
-        logging.debug("\tInitializing OutputTextPane...")
+        logging.debug("\tInitializing ItemTextPane...")
         self.item_text_frame = self
 
         title = ttk.Label(self.item_text_frame, text="Item Text")
         title.pack()
 
-        self.text_box = Text(self.item_text_frame, wrap=WORD, height=50, width=100)
+        self.text_box = self._build_text_widget()
         self.text_box.pack(expand=1, fill='both')
 
-        #TODO: Rewrite welcome message
         self._add_welcome_message()
         self.text_box.config(state=DISABLED)
     #end def
@@ -53,9 +52,14 @@ class ItemTextPane(ttk.Frame, GUIPane):
         logging.debug("Updating text_pane...")
 
         self.text_box.forget()
-        self.text_box = Text(self.item_text_frame, height=50, width=100, wrap=WORD)
+        self.text_box = self._build_text_widget()
         self.text_box.pack(expand=1, fill='both')
         self.text_box.insert(END, config.active_item.to_string())
         self.text_box.config(state=DISABLED)
     #end update_pane
+
+    def _build_text_widget(self):
+        text = Text(self.item_text_frame, height=50, width=100, wrap=WORD)#, wrap=NONE)
+        return text
+    #end _build_text_widget
 #end ItemTextPane

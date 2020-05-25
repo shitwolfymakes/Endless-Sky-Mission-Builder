@@ -1,4 +1,4 @@
-""" Event.py
+""" Phrase.py
 # Copyright (c) 2019 by Andrew Sneed
 #
 # Endless Sky Mission Builder is free software: you can redistribute it and/or modify it under the
@@ -14,12 +14,12 @@ import logging
 import src.model as model
 
 
-class Event(model.FileItem):
+class Phrase(model.FileItem):
     #TODO: implement this
     def __init__(self, name):
-        logging.debug("Building event %s", name)
+        logging.debug("Building phrase %s", name)
 
-        super().__init__("event")
+        super().__init__("phrase")
         self.name = name
 
         self.parse()

@@ -21,8 +21,9 @@ def save_file():
     """This method saves the data to a mission file"""
     #TODO: Expand this to save every part of the mission file:
     #   - Comments/Copyright
-    #   - Mission
-    #   - Events
+    #   - Phrase
+    #   - NPC
+    #   - Government
     logging.debug("Saving selected file...")
     compile_mission()
 

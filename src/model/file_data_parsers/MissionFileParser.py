@@ -14,7 +14,7 @@
 import re
 import logging
 
-from src.model.file_data_parsers.FileMissionItemParser import FileMissionItemParser
+import src.model.file_data_parsers as parsers
 
 
 class MissionFileParser:
@@ -26,7 +26,7 @@ class MissionFileParser:
         self.match_mission = re.compile(r'^ *mission')
         self.match_event = re.compile(r'^event')
         self.match_phrase = re.compile(r'^phrase')
-        self.match_npc = re.compile(r'^npc')
+        self.match_ship = re.compile(r'ship')
         self.match_government = re.compile(r'^government')
     #end init
 
@@ -41,19 +41,20 @@ class MissionFileParser:
             if line == "" or line == "\n":
                 continue
 
+            """Reference: https://github.com/endless-sky/endless-sky/blob/49a387d848e88dc734c93b34013af81f873e70c1/source/GameData.cpp#L918-L1009"""
             line = line.rstrip("\n")
             if re.search(self.match_mission, line):
                 logging.debug("\t\tMISSION FOUND: %s" % line)
                 self.store_item_for_parsing(i, line, "mission")
             elif re.search(self.match_event, line):
                 logging.debug("\t\tEVENT FOUND: %s" % line)
-                self.store_unhandled_items_for_parsing(i, line, "event")
+                self.store_item_for_parsing(i, line, "event")
             elif re.search(self.match_phrase, line):
                 logging.debug("\t\tPHRASE FOUND: %s" % line)
-                self.store_unhandled_items_for_parsing(i, line, "phrase")
-            elif re.search(self.match_npc, line):
-                logging.debug("\t\tNPC FOUND: %s" % line)
-                self.store_unhandled_items_for_parsing(i, line, "npc")
+                self.store_item_for_parsing(i, line, "phrase")
+            elif re.search(self.match_ship, line):
+                logging.debug("\t\tSHIP FOUND: %s" % line)
+                self.store_unhandled_items_for_parsing(i, line, "ship")
             elif re.search(self.match_government, line):
                 logging.debug("\t\tGOVERNMENT FOUND: %s" % line)
                 self.store_unhandled_items_for_parsing(i, line, "government")
@@ -62,13 +63,15 @@ class MissionFileParser:
 
         for item in self.file_items:
             if item[0] is "mission":
-                parser = FileMissionItemParser(item[1])
+                parser = parsers.FileMissionItemParser(item[1])
                 parser.run()
             elif item[0] is "event":
-                pass
+                parser = parsers.FileEventItemParser(item[1])
+                parser.run()
             elif item[0] is "phrase":
-                pass
-            elif item[0] is "npc":
+                parser = parsers.FilePhraseItemParser(item[1])
+                parser.run()
+            elif item[0] is "ship":
                 pass
             elif item[0] is "government":
                 pass
@@ -96,7 +99,7 @@ class MissionFileParser:
         #end for
     #end store_item_for_parsing
 
-    #TODO: Remove this once all item types are handled
+
     def store_unhandled_items_for_parsing(self, i, line, item_type):
         item_lines = [line]
         lines = self.lines[i+1:]
@@ -118,8 +121,6 @@ class MissionFileParser:
         elif re.match(self.match_event, line):
             is_end = True
         elif re.match(self.match_phrase, line):
-            is_end = True
-        elif re.match(self.match_npc, line):
             is_end = True
         elif re.match(self.match_government, line):
             is_end = True

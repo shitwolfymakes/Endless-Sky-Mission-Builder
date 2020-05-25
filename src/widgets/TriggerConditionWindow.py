@@ -14,8 +14,6 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
-from ttkthemes import ThemedTk
-
 import src.widgets as widgets
 
 
@@ -30,7 +28,9 @@ class TriggerConditionWindow(Toplevel):
 
         self.condition = condition
         self.condition_type = condition.condition_type
+        self.entry = None
         self.cond_data = StringVar()
+        self.entry2 = None
         self.value = StringVar()
         self.selected_option = None
 
@@ -43,31 +43,29 @@ class TriggerConditionWindow(Toplevel):
         self.options_combo = ttk.Combobox(frame, state="readonly")
         self.options_combo.bind("<<ComboboxSelected>>", self._combo_callback)
 
-        self.cond_data.set("<condition>")
         if self.condition_type == 0:
             label = widgets.TooltipLabel(frame, "trigger_condition_0", text="Log")
             label.grid(row=0, column=0)
-            entry = ttk.Entry(frame, textvariable=self.cond_data)
-            entry.grid(row=1, column=0)
+            self.entry = widgets.DefaultTextEntry(frame, "<condition>", textvariable=self.cond_data)
+            self.entry.grid(row=1, column=0)
 
             self.selected_option = "="
             self.combo_options = ["=", "+=", "-="]
             self.options_combo.configure(values=self.combo_options, width=5)
             self.options_combo.current(0)
             self.options_combo.grid(row=1, column=1)
-            self.value.set("<value>")
 
-            entry2 = ttk.Entry(frame, textvariable=self.value, width=6)
-            entry2.grid(row=1, column=2)
+            self.entry2 = widgets.DefaultTextEntry(frame, "<value>", textvariable=self.value, width=8)
+            self.entry2.grid(row=1, column=2)
         elif self.condition_type == 1:
             label = widgets.TooltipLabel(frame, "trigger_condition_1", text="Log")
             label.grid(row=0, column=0)
-            entry = ttk.Entry(frame, textvariable=self.cond_data)
-            entry.grid(row=1, column=0)
+            self.entry = widgets.DefaultTextEntry(frame, "<condition>", textvariable=self.cond_data)
+            self.entry.grid(row=1, column=0)
 
             self.selected_option = "++"
             self.combo_options = ["++", "--"]
-            self.options_combo.configure(values=self.combo_options, width=5)
+            self.options_combo.configure(values=self.combo_options, width=6)
             self.options_combo.current(0)
             self.options_combo.grid(row=1, column=1)
         elif self.condition_type == 2:
@@ -76,12 +74,12 @@ class TriggerConditionWindow(Toplevel):
 
             self.selected_option = "set"
             self.combo_options = ["set", "clear"]
-            self.options_combo.configure(values=self.combo_options, width=5)
+            self.options_combo.configure(values=self.combo_options, width=6)
             self.options_combo.current(0)
             self.options_combo.grid(row=1, column=0)
 
-            entry = ttk.Entry(frame, textvariable=self.cond_data)
-            entry.grid(row=1, column=1)
+            self.entry = widgets.DefaultTextEntry(frame, "<condition>", textvariable=self.cond_data)
+            self.entry.grid(row=1, column=1)
         else:
             logging.error("Invalid condition_type!!")
         #end if/else
@@ -134,16 +132,16 @@ class TriggerConditionWindow(Toplevel):
 
         if self.condition_type == 0:
             if self.condition.condition[0] is not None:
-                self.cond_data.set(self.condition.condition[0])
+                self.entry.set(self.condition.condition[0])
                 index = self.combo_options.index(self.condition.condition[1])
                 self.options_combo.current(index)
-                self.value.set(self.condition.condition[2])
+                self.entry2.set(self.condition.condition[2])
 
                 self.selected_option = self.condition.condition[1]
             #end if
         elif self.condition_type == 1:
             if self.condition.condition[0] is not None:
-                self.cond_data.set(self.condition.condition[0])
+                self.entry.set(self.condition.condition[0])
                 index = self.combo_options.index(self.condition.condition[1])
                 self.options_combo.current(index)
 
@@ -153,7 +151,7 @@ class TriggerConditionWindow(Toplevel):
             if self.condition.condition[0] is not None:
                 index = self.combo_options.index(self.condition.condition[0])
                 self.options_combo.current(index)
-                self.cond_data.set(self.condition.condition[1])
+                self.entry.set(self.condition.condition[1])
 
                 self.selected_option = self.condition.condition[0]
             #end if

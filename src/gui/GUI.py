@@ -13,7 +13,7 @@ import logging
 from tkinter import ttk
 from ttkthemes import ThemedTk
 
-import src.gui.editor as editor
+import gui.editor as editor
 import src.config as config
 
 
@@ -33,10 +33,11 @@ class GUI:
         self.gui.rowconfigure(0, weight=1)
 
         # set disabled styles
-        self.disabledEntryStyle = ttk.Style()
-        self.disabledEntryStyle.configure('D.TEntry', background='#D3D3D3')
-        self.disabledComboboxStyle = ttk.Style()
-        self.disabledComboboxStyle.configure('D.TCombobox', background='#D3D3D3')
+        config.disabled_entry_style = ttk.Style()
+        config.disabled_entry_style.configure('Disabled.TEntry', background='#D3D3D3')
+
+        config.disabled_combobox_style = ttk.Style()
+        config.disabled_combobox_style.configure('Disabled.TCombobox', background='#D3D3D3')
 
         # Declare the frames
         self.option_pane = editor.OptionPane(self.gui)
