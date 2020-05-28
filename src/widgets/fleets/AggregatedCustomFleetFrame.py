@@ -28,7 +28,7 @@ class AggregatedCustomFleetFrame(ttk.Frame):
 
         self.parent = parent
         self.npc = npc
-        self.custom_fleets = []
+        self.custom_fleet_frames = []
 
         self.outer = ttk.Frame(self)
         self.outer.pack(expand=True, fill="x")
@@ -49,11 +49,11 @@ class AggregatedCustomFleetFrame(ttk.Frame):
         logging.debug("Adding CustomFleet...")
 
         cf = widgets.CustomFleetFrame(self, self.npc)
-        self.edit_fleet(self.custom_fleets[-1])
+        self.edit_fleet(self.custom_fleet_frames[-1])
 
         state = BooleanVar()
         cb = ttk.Checkbutton(cf.frame, onvalue=1, offvalue=0, variable=state)
-        cb.configure(command=partial(self._change_fleet_state, state, self.custom_fleets[-1].custom_fleet))
+        cb.configure(command=partial(self._change_fleet_state, state, self.custom_fleet_frames[-1].custom_fleet))
         cb.grid(row=0, column=3, sticky="e")
     #end _add_fleet
 
@@ -78,7 +78,7 @@ class AggregatedCustomFleetFrame(ttk.Frame):
         :param cf_frame: The CustomFleetFrame to be removed
         """
         self.npc.remove_(cf_frame.custom_fleet)
-        self.custom_fleets.remove(cf_frame)
+        self.custom_fleet_frames.remove(cf_frame)
         cf_frame.frame.pack_forget()
         cf_frame.frame.destroy()
 
