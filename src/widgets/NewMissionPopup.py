@@ -14,9 +14,8 @@ import logging
 from tkinter import ttk
 from ttkthemes import ThemedTk
 
-from src import config
-from src.model import Mission
-
+import config
+from model import Mission
 
 class NewMissionPopup(object):
     """This class creates a custom pop-up window for use when creating a new Mission object"""

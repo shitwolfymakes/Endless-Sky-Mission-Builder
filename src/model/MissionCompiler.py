@@ -12,7 +12,7 @@
 
 import logging
 
-from src import config
+import config
 
 
 class MissionCompiler:

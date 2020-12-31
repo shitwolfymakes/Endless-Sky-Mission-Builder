@@ -12,9 +12,8 @@
 
 import logging
 
-from src.model.components.TriggerCondition import TriggerCondition
-from src.model.components.Log import Log
-
+from model.components.TriggerCondition import TriggerCondition
+from model.components.Log import Log
 
 class Trigger:
     #TODO: Implement this - ~80% Complete

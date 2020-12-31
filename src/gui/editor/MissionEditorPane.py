@@ -12,10 +12,9 @@
 import logging
 from tkinter import ttk
 
-import src.config as config
-import src.widgets as widgets
-from src.gui.editor import GUIPane
-
+import config
+import widgets
+from gui.editor import GUIPane
 
 class MissionEditorPane(widgets.ScrollingFrame, GUIPane):
     def __init__(self, parent):

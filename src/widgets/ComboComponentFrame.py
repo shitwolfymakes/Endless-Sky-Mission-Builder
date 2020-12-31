@@ -14,8 +14,7 @@ import logging
 from functools import partial
 from tkinter import ttk, BooleanVar
 
-import src.widgets as widgets
-
+import widgets
 
 class ComboComponentFrame(ttk.Frame):
     """This class extends ttk.Frame to create a custom GUI widget"""

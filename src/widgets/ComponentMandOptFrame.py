@@ -16,7 +16,7 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 
-import src.widgets as widgets
+import widgets
 
 
 class ComponentMandOptFrame(ttk.Frame):

@@ -13,8 +13,8 @@
 import logging
 from tkinter import filedialog
 
-from src import config
-from src.model.file_data_parsers import MissionFileParser
+import config
+from model.file_data_parsers import MissionFileParser
 
 
 def open_file():

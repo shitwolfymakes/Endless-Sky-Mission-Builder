@@ -22,13 +22,13 @@ import sys
 import logging
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
-from src.model import Mission
-from src.gui.GUI import GUI
-import src.utils as utils
-import src.config as config
-import src.singletons as singletons
+from model import Mission
+from gui.GUI import GUI
+import utils as utils
+import config as config
+import singletons as singletons
 
 
 class ESMB:

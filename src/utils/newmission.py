@@ -12,7 +12,7 @@
 
 import logging
 
-from src.widgets.NewMissionPopup import NewMissionPopup
+from widgets.NewMissionPopup import NewMissionPopup
 
 
 def new_mission():

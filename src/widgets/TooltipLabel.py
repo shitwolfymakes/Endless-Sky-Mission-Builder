@@ -13,8 +13,8 @@
 from tkinter import *
 from tkinter import ttk
 
-import src.config as config
-from src.widgets.Tooltip import add_tooltip
+import config
+from widgets.Tooltip import add_tooltip
 
 
 class TooltipLabel(ttk.Label):

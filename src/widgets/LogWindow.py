@@ -14,7 +14,7 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
-import src.widgets as widgets
+import widgets
 
 
 class LogWindow(Toplevel):

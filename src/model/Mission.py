@@ -12,9 +12,10 @@
 
 import logging
 
-from src.model.model_data_parsers import MissionParser
+from model.model_data_parsers import MissionParser
 
-import src.model as model
+import model
+
 
 
 class Mission(model.FileItem):

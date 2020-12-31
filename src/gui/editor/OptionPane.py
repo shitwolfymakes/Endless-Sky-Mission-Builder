@@ -13,9 +13,9 @@ import logging
 from functools import partial
 from tkinter import ttk
 
-import src.config as config
-import src.utils as utils
-from src.gui.editor import GUIPane
+import config
+import utils
+from gui.editor import GUIPane
 
 
 class OptionPane(ttk.Frame, GUIPane):

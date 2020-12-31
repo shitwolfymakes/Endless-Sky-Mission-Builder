@@ -13,9 +13,8 @@
 import logging
 from tkinter import filedialog
 
-from src import config
-from src.utils.compilemission import compile_mission
-
+import config
+from utils.compilemission import compile_mission
 
 def save_file():
     """This method saves the data to a mission file"""
