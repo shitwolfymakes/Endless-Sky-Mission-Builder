@@ -20,6 +20,9 @@ Endless Sky Github: https://github.com/endless-sky/endless-sky
 """
 import sys
 import logging
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 from src.model import Mission
 from src.gui.GUI import GUI
