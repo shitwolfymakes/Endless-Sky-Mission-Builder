@@ -22,8 +22,6 @@ import sys
 import logging
 import os
 
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-
 from model import Mission
 from gui.GUI import GUI
 import utils as utils
