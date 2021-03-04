@@ -20,12 +20,13 @@ Endless Sky Github: https://github.com/endless-sky/endless-sky
 """
 import sys
 import logging
+import os
 
-from src.model import Mission
-from src.gui.GUI import GUI
-import src.utils as utils
-import src.config as config
-import src.singletons as singletons
+from model import Mission
+from gui.GUI import GUI
+import utils as utils
+import config as config
+import singletons as singletons
 
 
 class ESMB:

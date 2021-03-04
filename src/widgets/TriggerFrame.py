@@ -13,7 +13,7 @@
 from functools import partial
 from tkinter import ttk
 
-from src import config
+import config
 
 
 class TriggerFrame(ttk.Frame):

@@ -9,8 +9,8 @@
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
-from src import config
-from src.model import MissionCompiler
+import config
+from model import MissionCompiler
 
 
 def compile_mission():

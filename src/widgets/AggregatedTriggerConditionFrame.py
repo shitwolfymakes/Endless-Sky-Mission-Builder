@@ -15,7 +15,7 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 
-from src import widgets as widgets
+import widgets
 
 
 class AggregatedTriggerConditionFrame(ttk.Frame):

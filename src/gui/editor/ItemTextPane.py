@@ -13,9 +13,8 @@ import logging
 from tkinter import *
 from tkinter import ttk
 
-import src.config as config
-from src.gui.editor import GUIPane
-
+import config as config
+from gui.editor import GUIPane
 
 class ItemTextPane(ttk.Frame, GUIPane):
     #TODO: add vertical and horizontal scrollbars

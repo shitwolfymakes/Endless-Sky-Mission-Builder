@@ -14,7 +14,7 @@
 import re
 import logging
 
-from src.model.file_data_parsers.FileMissionItemParser import FileMissionItemParser
+from model.file_data_parsers.FileMissionItemParser import FileMissionItemParser
 
 
 class MissionFileParser:

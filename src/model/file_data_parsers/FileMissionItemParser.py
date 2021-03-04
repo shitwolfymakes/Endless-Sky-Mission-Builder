@@ -13,9 +13,9 @@ import logging
 import re
 import shlex
 
-from src import config
-from src.model import Mission
-from src.model.components.conversations import Conversation
+import config
+from model import Mission
+from model.components.conversations import Conversation
 
 
 class FileMissionItemParser:

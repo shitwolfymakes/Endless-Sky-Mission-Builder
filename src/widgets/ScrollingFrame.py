@@ -13,7 +13,7 @@
 from tkinter import *
 from tkinter import ttk
 
-import src.config as config
+import config
 
 
 class ScrollingFrame(ttk.Frame):

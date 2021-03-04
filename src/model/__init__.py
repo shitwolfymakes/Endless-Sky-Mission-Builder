@@ -13,4 +13,4 @@ from .Mission import Mission
 from .MissionCompiler import MissionCompiler
 from .MissionComponents import MissionComponents
 
-import src.model.components
+import model.components

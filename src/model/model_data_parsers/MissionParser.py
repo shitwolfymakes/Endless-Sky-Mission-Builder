@@ -12,7 +12,7 @@
 
 import logging
 
-from src.model.model_data_parsers.TriggerParser import TriggerParser
+from model.model_data_parsers.TriggerParser import TriggerParser
 
 
 class MissionParser:

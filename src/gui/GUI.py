@@ -13,8 +13,8 @@ import logging
 from tkinter import ttk
 from ttkthemes import ThemedTk
 
-import src.gui.editor as editor
-import src.config as config
+import gui.editor as editor
+import config
 
 
 class GUI:

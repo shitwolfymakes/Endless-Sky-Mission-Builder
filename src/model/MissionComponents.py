@@ -14,8 +14,7 @@ This file contains the classes defining the components of a mission
 
 import logging
 
-import src.model.components as components
-
+import model.components as components
 
 class MissionComponents:
     """This class keeps instances of each different component in one place, for easy access"""

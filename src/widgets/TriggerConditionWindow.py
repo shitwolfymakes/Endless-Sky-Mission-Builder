@@ -16,7 +16,7 @@ from tkinter import ttk
 
 from ttkthemes import ThemedTk
 
-import src.widgets as widgets
+import widgets
 
 
 class TriggerConditionWindow(Toplevel):
