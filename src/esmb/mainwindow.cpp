@@ -28,3 +28,8 @@ void MainWindow::on_actionOpen_triggered()
     file.close();
 }
 
+
+void MainWindow::on_actionQuit_triggered()
+{
+    QApplication::quit();
+}
