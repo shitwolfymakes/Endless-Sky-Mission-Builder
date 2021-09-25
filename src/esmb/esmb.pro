@@ -10,12 +10,14 @@ CONFIG += c++11
 
 SOURCES += \
     esmbapplication.cpp \
+    fileitem.cpp \
     main.cpp \
     mainwindow.cpp \
     parsers/datafileparser.cpp
 
 HEADERS += \
     esmbapplication.h \
+    fileitem.h \
     mainwindow.h \
     parsers/datafileparser.h
 
