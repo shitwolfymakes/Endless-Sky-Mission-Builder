@@ -16,7 +16,8 @@ void DataFileParser::printRawData() {
     const QStringList lines = toList();
     qDebug() << "BEGIN RAW DATA";
     for(const QString &line: lines){
-        qDebug() << line;
+        //need to use qUtf8Printable to preserve the formatting
+        qDebug("%s", qUtf8Printable(line));
     }
     qDebug() << "END RAW DATA";
 }
