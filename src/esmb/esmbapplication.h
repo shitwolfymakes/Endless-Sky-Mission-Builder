@@ -20,11 +20,7 @@ private:
 
 public:
     // controlled instantiation
-    static ESMBApplication& getInstance() {
-        // static objects are constructed only once
-        static ESMBApplication esmb;
-        return esmb;
-    }
+    static ESMBApplication& getInstance();
 
     // public methods
     QStringList getNames();
