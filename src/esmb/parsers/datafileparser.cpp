@@ -1,8 +1,8 @@
 #include "datafileparser.h"
 
-DataFileParser::DataFileParser(QString text)
+DataFileParser::DataFileParser(QString rawData)
 {
-    rawData = text;
+    this->rawData = rawData;
     printRawData();
 }
 
