@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include "parsers/datafileparser.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,6 +26,7 @@ void MainWindow::on_actionOpen_triggered()
     }
     QTextStream in(&file);
     QString text = in.readAll();
+    DataFileParser parser = DataFileParser(text);
     ui->textDisplay->setText(text);
     file.close();
 }
