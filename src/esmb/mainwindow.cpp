@@ -27,6 +27,7 @@ void MainWindow::on_actionOpen_triggered()
     QTextStream in(&file);
     QString text = in.readAll();
     DataFileParser parser = DataFileParser(text);
+    parser.run();
     ui->textDisplay->setText(text);
     file.close();
 }
