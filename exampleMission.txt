@@ -62,6 +62,18 @@ mission "Test Mission 0"
 		fail "the mission"
 		log `my mama ain't a ho`
 		log "People" "Yo mama" `is a ho`
+	npc save
+		government "Free Worlds"
+		personality derelict
+		confusion 20
+		system
+			system "Yo Mama's House"
+			government dunkey
+			near Sol 2 5
+			distance 2 5
+		dialog `Harambe died for our sins, remember that always`
+		ship Shuttle Dinghy
+		fleet "Starbridge Boogaloo" 50
 
 
 
@@ -69,3 +81,30 @@ mission "Test Mission 1"
 	name "test 2"
 	description `A second test mission`
 	repeat
+
+
+
+event "Giga Bitch"
+	date 4 20 69
+	visit "Heaven"
+	unvisit "Big Chungus"
+	"visit planet" Harambe
+	"unvisit planet" "Absolute Unit"
+	galaxy "My Ass"
+	system "Eat It"
+	link Heaven Sol
+	unlink "Big Chungus" "Beta Capriconi"
+	government "Elon Musk"
+	fleet "Harambe's Bois"
+	planet "Heaven 2"
+	news "Harambe Alive"
+	shipyard "Bog Standard"
+	outfitter "Marcus Munitions"
+
+
+
+phrase "Harambe 1"
+	word
+		`Harambe died for you`
+
+
