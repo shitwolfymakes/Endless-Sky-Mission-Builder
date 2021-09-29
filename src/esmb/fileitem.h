@@ -7,7 +7,7 @@
 class FileItem
 {
 public:
-    enum ItemType { Event, Phrase, Mission };
+    enum ItemType { Event, Government, Mission, Phrase, Ship };
 
 private:
     ItemType itemType;

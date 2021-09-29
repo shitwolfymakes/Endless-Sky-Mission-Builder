@@ -14,26 +14,29 @@ void FileItem::setType(FileItem::ItemType itemType) {
     this->itemType = itemType;
 }
 
-QString FileItem::getName() {
+string FileItem::getName() {
     return name;
 }
 
-void FileItem::setName(QString name) {
+void FileItem::setName(string name) {
     this->name = name;
 }
 
-void FileItem::appendLines(QString line) {
-    this->lines.append(line);
+void FileItem::appendLines(string line) {
+    this->lines.push_back(line);
 }
 
-QStringList FileItem::getLines() {
+vector<string> FileItem::getLines() {
     return lines;
 }
 
-void FileItem::setLines(QStringList lines) {
+void FileItem::setLines(vector<string> lines) {
     this->lines = lines;
 }
 
-QString FileItem::toString() {
-    return lines.join("\n");
+string FileItem::toString() {
+    // this is O(n), whereas std::accumulate is O(n^2) for strings
+    std::string str;
+    for (const auto &piece: lines) str += piece;
+    return str;
 }
