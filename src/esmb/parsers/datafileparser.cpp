@@ -87,7 +87,7 @@ void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemT
         case Government :
             fileItem = new ItemGovernment();
         case Mission :
-            ;
+            fileItem = new ItemMission();
         case Phrase :
             ;
         case Ship :

@@ -19,6 +19,7 @@
 #include "model/fileitem.h"
 #include "model/itemevent.h"
 #include "model/itemgovernment.h"
+#include "model/itemmission.h"
 #include "model/fileitemconstants.h"
 
 class DataFileParser

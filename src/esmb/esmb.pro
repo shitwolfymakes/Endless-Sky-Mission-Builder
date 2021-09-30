@@ -15,6 +15,7 @@ SOURCES += \
     model/fileitem.cpp \
     model/itemevent.cpp \
     model/itemgovernment.cpp \
+    model/itemmission.cpp \
     parsers/datafileparser.cpp
 
 HEADERS += \
@@ -24,6 +25,7 @@ HEADERS += \
     model/fileitemconstants.h \
     model/itemevent.h \
     model/itemgovernment.h \
+    model/itemmission.h \
     parsers/datafileparser.h
 
 FORMS += \
