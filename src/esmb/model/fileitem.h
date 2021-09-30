@@ -32,7 +32,7 @@ public:
     void setLines(vector<string>);
 
     string toString();
-    void printItem();
+    void printLines();
 
     virtual void parse() = 0;
 };

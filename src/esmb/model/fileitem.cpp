@@ -36,7 +36,7 @@ string FileItem::toString() {
     return str;
 }
 
-void FileItem::printItem() {
+void FileItem::printLines() {
     qDebug() << "Item Data:";
     for (const std::string &line: lines) {
         QString qLine = QString::fromStdString(line);

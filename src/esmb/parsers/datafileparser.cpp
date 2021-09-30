@@ -74,7 +74,7 @@ void DataFileParser::run() {
     }
 
     for (const auto &item: fileItems) {
-        item->printItem();
+        item->printLines();
     }
 }
 
