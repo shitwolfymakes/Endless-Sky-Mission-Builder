@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- * itemgovernment.cpp
+ * itemship.cpp
  *
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#include "itemgovernment.h"
+#include "itemship.h"
 
-ItemGovernment::ItemGovernment()
+ItemShip::ItemShip()
 {
 
 }
 
-void ItemGovernment::parse() {
+void ItemShip::parse() {
 
 }

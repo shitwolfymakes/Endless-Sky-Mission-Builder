@@ -86,14 +86,16 @@ void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemT
             break;
         case Government :
             fileItem = new ItemGovernment();
+            break;
         case Mission :
             fileItem = new ItemMission();
+            break;
         case Phrase :
-        fileItem = new ItemPhrase();
+            fileItem = new ItemPhrase();
+            break;
         case Ship :
-            ;
-        default:
-            fileItem = new ItemEvent();
+            fileItem = new ItemShip();
+            break;
     }
     fileItem->appendLine(line);
 

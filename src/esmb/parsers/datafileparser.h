@@ -21,6 +21,7 @@
 #include "model/itemgovernment.h"
 #include "model/itemmission.h"
 #include "model/itemphrase.h"
+#include "model/itemship.h"
 #include "model/fileitemconstants.h"
 
 class DataFileParser
