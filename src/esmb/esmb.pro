@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     esmbapplication.cpp \
+    event.cpp \
     fileitem.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     esmbapplication.h \
+    event.h \
     fileitem.h \
     fileitemregex.h \
     mainwindow.h \

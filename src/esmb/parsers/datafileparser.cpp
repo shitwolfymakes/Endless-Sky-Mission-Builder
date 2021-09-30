@@ -73,14 +73,29 @@ void DataFileParser::run() {
         i++;
     }
 
-    for (FileItem item: fileItems) {
-        item.printItem();
+    for (const auto &item: fileItems) {
+        item->printItem();
     }
 }
 
 void DataFileParser::storeItemForParsing(int i, std::string line, FileItem::ItemType itemType) {
-    FileItem fileItem = FileItem(itemType);
-    fileItem.appendLine(line);
+    FileItem *fileItem;
+    switch (itemType) {
+        case FileItem::Event :
+            fileItem = new Event();
+            break;
+        case FileItem::Government :
+            ;
+        case FileItem::Mission :
+            ;
+        case FileItem::Phrase :
+            ;
+        case FileItem::Ship :
+            ;
+        default:
+            fileItem = new Event();
+    }
+    fileItem->appendLine(line);
 
     // safer to cast i to size_t as the loop calling this only increments,
     // whereas the mission file could in theory have more than MAX_INT
@@ -91,15 +106,15 @@ void DataFileParser::storeItemForParsing(int i, std::string line, FileItem::Item
         if (isFileItemStartLine(line)) {
             // check if current line is the start of a new FileItem
             // add the fileItem to the list of FileItems
-            fileItems.push_back(fileItem);
+            fileItems.push_back(std::unique_ptr<FileItem>(fileItem));
             return;
         } else if (line == "") {
             // if the current line is blank
             // add the fileItem to the list of FileItems
-            fileItems.push_back(fileItem);
+            fileItems.push_back(std::unique_ptr<FileItem>(fileItem));
             return;
         } else {
-            fileItem.appendLine(line);
+            fileItem->appendLine(line);
         }
     }
 }

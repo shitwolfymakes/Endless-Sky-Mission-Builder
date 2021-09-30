@@ -21,18 +21,10 @@ class FileItem
 public:
     enum ItemType { Event, Government, Mission, Phrase, Ship };
 
-private:
-    ItemType itemType;
     string name;
     vector<string> lines;
 
-public:
-
     FileItem();
-    FileItem(ItemType);
-
-    ItemType getType();
-    void setType(ItemType);
 
     string getName();
     void setName(string);
@@ -44,7 +36,7 @@ public:
     string toString();
     void printItem();
 
-    virtual void parse() {};
+    virtual void parse() = 0;
 };
 
 #endif // FILEITEM_H

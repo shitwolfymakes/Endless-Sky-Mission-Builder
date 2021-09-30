@@ -16,7 +16,7 @@
 #include <QString>
 #include <QStringList>
 
-#include "fileitem.h"
+#include "event.h"
 #include "fileitemregex.h"
 
 class DataFileParser
@@ -27,7 +27,7 @@ private:
     const QStringList qLines;
     const std::vector<std::string> lines;
 
-    std::vector<FileItem> fileItems;
+    std::vector<std::unique_ptr<FileItem>> fileItems;
 
 public:
     DataFileParser(QString);

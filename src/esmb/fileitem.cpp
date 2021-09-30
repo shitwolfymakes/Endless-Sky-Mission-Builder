@@ -9,18 +9,6 @@
 
 FileItem::FileItem() {};
 
-FileItem::FileItem(ItemType itemType) {
-    this->itemType = itemType;
-}
-
-FileItem::ItemType FileItem::getType() {
-    return itemType;
-}
-
-void FileItem::setType(FileItem::ItemType itemType) {
-    this->itemType = itemType;
-}
-
 string FileItem::getName() {
     return name;
 }
