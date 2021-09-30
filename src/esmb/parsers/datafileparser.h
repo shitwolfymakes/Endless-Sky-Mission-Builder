@@ -16,8 +16,9 @@
 #include <QString>
 #include <QStringList>
 
-#include "event.h"
-#include "fileitemregex.h"
+#include "fileitemconstants.h"
+#include "fileitem.h"
+#include "itemevent.h"
 
 class DataFileParser
 {
@@ -36,7 +37,7 @@ public:
     std::vector<std::string> toStdStringVector();
     void printRawData();
     void run();
-    void storeItemForParsing(int, std::string, FileItem::ItemType);
+    void storeItemForParsing(int, std::string, ItemType);
     bool isFileItemStartLine(std::string);
 };
 

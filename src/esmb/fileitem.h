@@ -19,8 +19,6 @@ using namespace std;
 class FileItem
 {
 public:
-    enum ItemType { Event, Government, Mission, Phrase, Ship };
-
     string name;
     vector<string> lines;
 

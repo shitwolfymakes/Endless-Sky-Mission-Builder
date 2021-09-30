@@ -47,27 +47,27 @@ void DataFileParser::run() {
         {
             QString qLine = QString::fromStdString(line);
             qDebug("\tEVENT FOUND: %s", qUtf8Printable(qLine));
-            storeItemForParsing(i, line, FileItem::Event);
+            storeItemForParsing(i, line, Event);
         }
         else if (std::regex_match(line, matchGovernment)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tGOVERNMENT FOUND: %s", qUtf8Printable(qLine));
-            storeItemForParsing(i, line, FileItem::Government);
+            storeItemForParsing(i, line, Government);
         }
         else if (std::regex_match(line, matchMission)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tMISSION FOUND: %s", qUtf8Printable(qLine));
-            storeItemForParsing(i, line, FileItem::Mission);
+            storeItemForParsing(i, line, Mission);
         }
         else if (std::regex_match(line, matchPhrase)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tPHRASE FOUND: %s", qUtf8Printable(qLine));
-            storeItemForParsing(i, line, FileItem::Phrase);
+            storeItemForParsing(i, line, Phrase);
         }
         else if (std::regex_match(line, matchShip)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tSHIP FOUND: %s", qUtf8Printable(qLine));
-            storeItemForParsing(i, line, FileItem::Ship);
+            storeItemForParsing(i, line, Ship);
         }
 
         i++;
@@ -78,22 +78,22 @@ void DataFileParser::run() {
     }
 }
 
-void DataFileParser::storeItemForParsing(int i, std::string line, FileItem::ItemType itemType) {
+void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemType) {
     FileItem *fileItem;
     switch (itemType) {
-        case FileItem::Event :
-            fileItem = new Event();
+        case Event :
+            fileItem = new ItemEvent();
             break;
-        case FileItem::Government :
+        case Government :
             ;
-        case FileItem::Mission :
+        case Mission :
             ;
-        case FileItem::Phrase :
+        case Phrase :
             ;
-        case FileItem::Ship :
+        case Ship :
             ;
         default:
-            fileItem = new Event();
+            fileItem = new ItemEvent();
     }
     fileItem->appendLine(line);
 

@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- * event.cpp
+ * itemevent.cpp
  *
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#include "event.h"
+#include "itemevent.h"
 
-Event::Event()
+ItemEvent::ItemEvent()
 {
 
 }
 
-void Event::parse() {
+void ItemEvent::parse() {
 
 }

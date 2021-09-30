@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- * event.h
+ * itemevent.h
  *
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#ifndef EVENT_H
-#define EVENT_H
+#ifndef ITEMEVENT_H
+#define ITEMEVENT_H
 
 #include "fileitem.h"
 
-class Event : public FileItem
+class ItemEvent : public FileItem
 {
 public:
-    Event();
+    ItemEvent();
 
     void parse();
 };
 
-#endif // EVENT_H
+#endif // ITEMEVENT_H
