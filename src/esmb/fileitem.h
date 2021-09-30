@@ -1,8 +1,20 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * fileitem.h
+ *
+ * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
+
 #ifndef FILEITEM_H
 #define FILEITEM_H
 
+#include <string>
+#include <vector>
+
+#include <QDebug>
 #include <QString>
-#include <QStringList>
+
+using namespace std;
 
 class FileItem
 {
@@ -11,8 +23,8 @@ public:
 
 private:
     ItemType itemType;
-    QString name;
-    QStringList lines;
+    string name;
+    vector<string> lines;
 
 public:
 
@@ -22,14 +34,15 @@ public:
     ItemType getType();
     void setType(ItemType);
 
-    QString getName();
-    void setName(QString);
+    string getName();
+    void setName(string);
 
-    void appendLines(QString);
-    QStringList getLines();
-    void setLines(QStringList);
+    void appendLine(string);
+    vector<string> getLines();
+    void setLines(vector<string>);
 
-    QString toString();
+    string toString();
+    void printItem();
 
     virtual void parse() {};
 };

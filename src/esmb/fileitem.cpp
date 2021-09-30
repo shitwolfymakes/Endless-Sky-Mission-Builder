@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * fileitem.cpp
+ *
+ * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
+
 #include "fileitem.h"
 
 FileItem::FileItem() {};
@@ -22,7 +29,7 @@ void FileItem::setName(string name) {
     this->name = name;
 }
 
-void FileItem::appendLines(string line) {
+void FileItem::appendLine(string line) {
     this->lines.push_back(line);
 }
 
@@ -39,4 +46,12 @@ string FileItem::toString() {
     std::string str;
     for (const auto &piece: lines) str += piece;
     return str;
+}
+
+void FileItem::printItem() {
+    qDebug() << "Item Data:";
+    for (const std::string &line: lines) {
+        QString qLine = QString::fromStdString(line);
+        qDebug("\t%s", qUtf8Printable(qLine));
+    }
 }

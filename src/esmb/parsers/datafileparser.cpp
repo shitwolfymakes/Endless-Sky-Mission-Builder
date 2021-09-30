@@ -1,10 +1,18 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * datafileparser.cpp
+ *
+ * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
+
 #include "datafileparser.h"
 
 DataFileParser::DataFileParser(QString rawData)
-    : qLines(rawData.split("\n"))
+    : qLines(rawData.split("\n")),
+      lines(toStdStringVector())
 {
     this->rawData = rawData;
-    printRawData();
+    //printRawData();
 }
 
 std::vector<std::string> DataFileParser::toStdStringVector() {
@@ -14,13 +22,6 @@ std::vector<std::string> DataFileParser::toStdStringVector() {
     }
     return lines;
 }
-
-/*
-const QStringList DataFileParser::toList() {
-    const QStringList lines = rawData.split("\n");
-    return lines;
-}
-*/
 
 void DataFileParser::printRawData() {
     qDebug() << "BEGIN RAW DATA";
@@ -32,46 +33,89 @@ void DataFileParser::printRawData() {
 }
 
 void DataFileParser::run() {
-    // convert lines to vector
-    std::vector<std::string> lines = toStdStringVector();
-
-    // define regex matches
-    std::regex matchEvent       (eventPattern);
-    std::regex matchGovernment  (governmentPattern);
-    std::regex matchMission     (missionPattern);
-    std::regex matchPhrase      (phrasePattern);
-    std::regex matchShip        (shipPattern);
-
     qDebug() << "Parsing data file...";
     int i = 0;
-    for(std::string &line: lines) {
+    for (const std::string &line: lines) {
         // account for whitespace between file items
         if (line == "") {
-            qDebug() << "skipping blank line";
             i++;
             continue;
         }
 
         // search for lines starting file items
-        if (std::regex_match(line, matchEvent)) {
+        if (std::regex_match(line, matchEvent))
+        {
             QString qLine = QString::fromStdString(line);
             qDebug("\tEVENT FOUND: %s", qUtf8Printable(qLine));
-        } else if (std::regex_match(line, matchGovernment)) {
+            storeItemForParsing(i, line, FileItem::Event);
+        }
+        else if (std::regex_match(line, matchGovernment)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tGOVERNMENT FOUND: %s", qUtf8Printable(qLine));
-        } else if (std::regex_match(line, matchMission)) {
+            storeItemForParsing(i, line, FileItem::Government);
+        }
+        else if (std::regex_match(line, matchMission)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tMISSION FOUND: %s", qUtf8Printable(qLine));
-        } else if (std::regex_match(line, matchPhrase)) {
+            storeItemForParsing(i, line, FileItem::Mission);
+        }
+        else if (std::regex_match(line, matchPhrase)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tPHRASE FOUND: %s", qUtf8Printable(qLine));
-        } else if (std::regex_match(line, matchShip)) {
+            storeItemForParsing(i, line, FileItem::Phrase);
+        }
+        else if (std::regex_match(line, matchShip)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tSHIP FOUND: %s", qUtf8Printable(qLine));
-        } else {
-            continue;
+            storeItemForParsing(i, line, FileItem::Ship);
         }
 
         i++;
     }
+
+    for (FileItem item: fileItems) {
+        item.printItem();
+    }
+}
+
+void DataFileParser::storeItemForParsing(int i, std::string line, FileItem::ItemType itemType) {
+    FileItem fileItem = FileItem(itemType);
+    fileItem.appendLine(line);
+
+    // safer to cast i to size_t as the loop calling this only increments,
+    // whereas the mission file could in theory have more than MAX_INT
+    // number of lines
+    i += 1;
+    for (size_t j = i; j < lines.size(); j++) {
+        const std::string line = lines.at(j);
+        if (isFileItemStartLine(line)) {
+            // check if current line is the start of a new FileItem
+            // add the fileItem to the list of FileItems
+            fileItems.push_back(fileItem);
+            return;
+        } else if (line == "") {
+            // if the current line is blank
+            // add the fileItem to the list of FileItems
+            fileItems.push_back(fileItem);
+            return;
+        } else {
+            fileItem.appendLine(line);
+        }
+    }
+}
+
+bool DataFileParser::isFileItemStartLine(std::string line) {
+    // search for lines starting file items
+    if (std::regex_match(line, matchEvent)) {
+        return true;
+    } else if (std::regex_match(line, matchGovernment)) {
+        return true;
+    } else if (std::regex_match(line, matchMission)) {
+        return true;
+    } else if (std::regex_match(line, matchPhrase)) {
+        return true;
+    } else if (std::regex_match(line, matchShip)) {
+        return true;
+    }
+    return false;
 }

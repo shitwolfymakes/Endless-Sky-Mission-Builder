@@ -18,6 +18,7 @@ SOURCES += \
 HEADERS += \
     esmbapplication.h \
     fileitem.h \
+    fileitemregex.h \
     mainwindow.h \
     parsers/datafileparser.h
 
