@@ -89,7 +89,7 @@ void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemT
         case Mission :
             fileItem = new ItemMission();
         case Phrase :
-            ;
+        fileItem = new ItemPhrase();
         case Ship :
             ;
         default:

@@ -16,6 +16,7 @@ SOURCES += \
     model/itemevent.cpp \
     model/itemgovernment.cpp \
     model/itemmission.cpp \
+    model/itemphrase.cpp \
     parsers/datafileparser.cpp
 
 HEADERS += \
@@ -26,6 +27,7 @@ HEADERS += \
     model/itemevent.h \
     model/itemgovernment.h \
     model/itemmission.h \
+    model/itemphrase.h \
     parsers/datafileparser.h
 
 FORMS += \
