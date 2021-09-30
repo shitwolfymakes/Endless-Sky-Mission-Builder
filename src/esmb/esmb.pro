@@ -10,18 +10,20 @@ CONFIG += c++11
 
 SOURCES += \
     esmbapplication.cpp \
-    fileitem.cpp \
-    itemevent.cpp \
     main.cpp \
     mainwindow.cpp \
+    model/fileitem.cpp \
+    model/itemevent.cpp \
+    model/itemgovernment.cpp \
     parsers/datafileparser.cpp
 
 HEADERS += \
     esmbapplication.h \
-    fileitem.h \
-    fileitemconstants.h \
-    itemevent.h \
     mainwindow.h \
+    model/fileitem.h \
+    model/fileitemconstants.h \
+    model/itemevent.h \
+    model/itemgovernment.h \
     parsers/datafileparser.h
 
 FORMS += \

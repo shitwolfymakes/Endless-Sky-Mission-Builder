@@ -16,9 +16,10 @@
 #include <QString>
 #include <QStringList>
 
-#include "fileitemconstants.h"
-#include "fileitem.h"
-#include "itemevent.h"
+#include "model/fileitem.h"
+#include "model/itemevent.h"
+#include "model/itemgovernment.h"
+#include "model/fileitemconstants.h"
 
 class DataFileParser
 {
