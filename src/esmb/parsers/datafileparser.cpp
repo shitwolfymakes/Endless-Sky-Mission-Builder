@@ -76,6 +76,8 @@ void DataFileParser::run() {
     for (const auto &item: fileItems) {
         item->printLines();
     }
+
+    // loop through fileItems, calling the parser for each one
 }
 
 void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemType) {
