@@ -13,5 +13,5 @@ ItemGovernment::ItemGovernment()
 }
 
 void ItemGovernment::parse() {
-
+    qDebug() << "Government parsing not yet implemented";
 }

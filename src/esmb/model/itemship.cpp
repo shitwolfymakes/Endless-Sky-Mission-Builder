@@ -13,5 +13,5 @@ ItemShip::ItemShip()
 }
 
 void ItemShip::parse() {
-
+    qDebug() << "Ship parsing not yet implemented";
 }

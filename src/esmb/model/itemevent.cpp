@@ -13,5 +13,5 @@ ItemEvent::ItemEvent()
 }
 
 void ItemEvent::parse() {
-
+    qDebug() << "Event parsing not yet implemented";
 }
