@@ -42,3 +42,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES +=
+
+INCLUDEPATH += C:/cpp_libs/boost/boost_1_77_0
+LIBS += -L/cpp_libs/boost/boost_1_77_0/stage/lib
