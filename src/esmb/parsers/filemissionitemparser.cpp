@@ -20,8 +20,7 @@ void FileMissionItemParser::run() {
             qDebug("\tERROR: NO TOKENS FOUND ON LINE: %s", qUtf8Printable(qLine));
         }
         else if (tokens.at(0).compare("mission") == 0) {
-            //setName(tokens.at(1));
-            qDebug("\tMission ID is: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            parseId(tokens);
         }
         else if (tokens.at(0).compare("name") == 0) {
             // this will get nabbed and crash if name token appears inside a conversation block
@@ -106,4 +105,9 @@ void FileMissionItemParser::run() {
             qDebug("\tERROR - No tokens found in line: %s", qUtf8Printable(QString::fromStdString(line)));
         }
     }
+}
+
+void FileMissionItemParser::parseId(std::vector<std::string> tokens) {
+    qDebug("\tMission ID is: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["id"] = tokens.at(1);
 }
