@@ -8,6 +8,11 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
 
+#include "nlohmann/json.hpp"
+
+// for convenience
+using json = nlohmann::json;
+
 class FileItemParser
 {
 protected:
