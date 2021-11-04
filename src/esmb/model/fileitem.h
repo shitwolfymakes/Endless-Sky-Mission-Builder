@@ -11,8 +11,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/tokenizer.hpp>
 #include <QDebug>
 #include <QString>
 
@@ -37,8 +35,6 @@ public:
     void printLines();
 
     virtual void parse() = 0;
-    vector<string> tokenize(string);
-    bool isOneOf(string, vector<string>);
 };
 
 #endif // FILEITEM_H

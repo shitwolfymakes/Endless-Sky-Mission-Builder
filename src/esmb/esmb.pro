@@ -18,7 +18,9 @@ SOURCES += \
     model/itemmission.cpp \
     model/itemphrase.cpp \
     model/itemship.cpp \
-    parsers/datafileparser.cpp
+    parsers/datafileparser.cpp \
+    parsers/fileitemparser.cpp \
+    parsers/filemissionitemparser.cpp
 
 HEADERS += \
     esmbapplication.h \
@@ -30,7 +32,9 @@ HEADERS += \
     model/itemmission.h \
     model/itemphrase.h \
     model/itemship.h \
-    parsers/datafileparser.h
+    parsers/datafileparser.h \
+    parsers/fileitemparser.h \
+    parsers/filemissionitemparser.h
 
 FORMS += \
     mainwindow.ui

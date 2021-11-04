@@ -9,6 +9,7 @@
 #define ITEMMISSION_H
 
 #include "fileitem.h"
+#include "parsers/filemissionitemparser.h"
 
 class ItemMission : public FileItem
 {

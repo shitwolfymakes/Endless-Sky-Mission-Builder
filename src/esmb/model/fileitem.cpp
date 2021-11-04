@@ -43,33 +43,3 @@ void FileItem::printLines() {
         qDebug("\t%s", qUtf8Printable(qLine));
     }
 }
-
-vector<string> FileItem::tokenize(string line) {
-    // strip whitespace/tabs from line
-    boost::trim(line);
-    boost::trim_if(line, boost::is_any_of("\t"));
-
-    vector<string> tokens;
-
-    // define the separators
-    string separator1("");//dont let quoted arguments escape themselves
-    string separator2(" ");//split on spaces
-    string separator3("`\"");//let it have quoted arguments
-
-    boost::escaped_list_separator<char> els(separator1,separator2,separator3);
-    boost::tokenizer<boost::escaped_list_separator<char>> tok(line, els);
-    for(boost::tokenizer<boost::escaped_list_separator<char>>::iterator beg=tok.begin(); beg!=tok.end();++beg)
-    {
-        tokens.push_back(*beg);
-    }
-    return tokens;
-}
-
-bool FileItem::isOneOf(string token, vector<string> options) {
-    for (string &option: options) {
-        if (token.compare(option) == 0) {
-            return true;
-        }
-    }
-    return false;
-}
