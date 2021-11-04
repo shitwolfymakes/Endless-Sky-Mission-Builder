@@ -49,5 +49,7 @@ RESOURCES += \
 
 DISTFILES +=
 
-INCLUDEPATH += C:/cpp_libs/boost/boost_1_77_0
+INCLUDEPATH += \
+    C:/cpp_libs/boost/boost_1_77_0 \
+    C:/cpp_libs/nlohmann_json/3.10.4/
 LIBS += -L/cpp_libs/boost/boost_1_77_0/stage/lib
