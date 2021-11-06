@@ -71,7 +71,7 @@ void FileMissionItemParser::run() {
             if (tokens.size() == 2) {
                 parseClearance(tokens);
             } else {
-                //qDebug("COMPLEX CLEARANCE HANDLING NOT YET IMPLEMENTED");
+                qDebug("COMPLEX CLEARANCE HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
@@ -82,7 +82,7 @@ void FileMissionItemParser::run() {
             if (tokens.size() == 2) {
                 parseWaypoint(tokens);
             } else {
-                //qDebug("COMPLEX WAYPOINT HANDLING NOT YET IMPLEMENTED");
+                qDebug("COMPLEX WAYPOINT HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
@@ -90,15 +90,15 @@ void FileMissionItemParser::run() {
             if (tokens.size() == 2) {
                 parseStopover(tokens);
             } else {
-                //qDebug("COMPLEX STOPOVER HANDLING NOT YET IMPLEMENTED");
+                qDebug("COMPLEX STOPOVER HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
-                //qDebug("\tFound source: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+                parseSource(tokens);
             } else {
-                //qDebug("COMPLEX SOURCE HANDLING NOT YET IMPLEMENTED");
+                qDebug("COMPLEX SOURCE HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
@@ -231,10 +231,15 @@ void FileMissionItemParser::parseInfiltrating() {
 
 void FileMissionItemParser::parseWaypoint(std::vector<std::string> tokens) {
     qDebug("\tFound waypoint: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["waypoint"]["system"] = tokens.at(1);
+    mission["waypoint"] = tokens.at(1);
 }
 
 void FileMissionItemParser::parseStopover(std::vector<std::string> tokens) {
     qDebug("\tFound stopover: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["stopover"]["planet"] = tokens.at(1);
+    mission["stopover"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseSource(std::vector<std::string> tokens) {
+    qDebug("\tFound source: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["source"] = tokens.at(1);
 }
