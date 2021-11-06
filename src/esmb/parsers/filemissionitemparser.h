@@ -29,6 +29,7 @@ public:
     void parseIllegal(std::vector<std::string>);
     void parseStealth();
     void parseInvisible();
+    void parsePriorityLevel(std::string);
 };
 
 #endif // FILEMISSIONITEMPARSER_H

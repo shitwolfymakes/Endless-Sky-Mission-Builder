@@ -59,7 +59,7 @@ void FileMissionItemParser::run() {
             parseInvisible();
         }
         else if (isOneOf(tokens.at(0), {"priority", "minor"})) {
-            //qDebug("\tFound priority: %s", qUtf8Printable(QString::fromStdString(tokens.at(0))));
+            parsePriorityLevel(tokens.at(0));
         }
         else if (isOneOf(tokens.at(0), {"job", "landing", "assisting", "boarding"})) {
             //qDebug("\tFound where shown: %s", qUtf8Printable(QString::fromStdString(tokens.at(0))));
@@ -184,4 +184,9 @@ void FileMissionItemParser::parseStealth() {
 void FileMissionItemParser::parseInvisible() {
     qDebug("\tFound invisible field");
     mission["invisible"] = true;
+}
+
+void FileMissionItemParser::parsePriorityLevel(std::string token) {
+    qDebug("\tFound priority level: %s", qUtf8Printable(QString::fromStdString(token)));
+    mission["priority_level"] = token;
 }
