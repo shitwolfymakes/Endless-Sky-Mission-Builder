@@ -71,15 +71,20 @@ void FileMissionItemParser::run() {
             if (tokens.size() == 2) {
                 parseClearance(tokens);
             } else {
-                //qDebug("COMPLEX clearance HANDLING NOT YET IMPLEMENTED");
+                //qDebug("COMPLEX CLEARANCE HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
         else if (tokens.at(0).compare("infiltrating") == 0) {
-            //qDebug("\tFound infiltrating");
+            parseInfiltrating();
         }
         else if (tokens.at(0).compare("waypoint") == 0) {
-            //qDebug("\tFound waypoint: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            if (tokens.size() == 2) {
+                parseWaypoint(tokens);
+            } else {
+                //qDebug("COMPLEX WAYPOINT HANDLING NOT YET IMPLEMENTED");
+                continue;
+            }
         }
         else if (tokens.at(0).compare("stopover") == 0) {
             //qDebug("\tFound stopover: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
@@ -212,4 +217,14 @@ void FileMissionItemParser::parseRepeat(std::vector<std::string> tokens) {
 void FileMissionItemParser::parseClearance(std::vector<std::string> tokens) {
     qDebug("\tFound clearance: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["clearance"]["message"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseInfiltrating() {
+    qDebug("\tFound infiltrating field");
+    mission["infiltrating"] = true;
+}
+
+void FileMissionItemParser::parseWaypoint(std::vector<std::string> tokens) {
+    qDebug("\tFound waypoint: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["waypoint"]["system"] = tokens.at(1);
 }
