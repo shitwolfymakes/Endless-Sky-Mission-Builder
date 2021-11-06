@@ -65,7 +65,7 @@ void FileMissionItemParser::run() {
             parseWhereShown(tokens.at(0));
         }
         else if (tokens.at(0).compare("repeat") == 0) {
-            //qDebug("\tFound repeat: %s", qUtf8Printable(QString::fromStdString(line)));
+            parseRepeat(tokens);
         }
         else if (tokens.at(0).compare("clearance") == 0) {
             //qDebug("\tFound clearance: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
@@ -194,4 +194,12 @@ void FileMissionItemParser::parsePriorityLevel(std::string token) {
 void FileMissionItemParser::parseWhereShown(std::string token) {
     qDebug("\tFound where shown: %s", qUtf8Printable(QString::fromStdString(token)));
     mission["where_shown"] = token;
+}
+
+void FileMissionItemParser::parseRepeat(std::vector<std::string> tokens) {
+    qDebug("\tFound repeat: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    mission["repeat"]["is_active"] = true;
+    if (tokens.size() == 2) {
+        mission["repeat"]["amount"] = tokens.at(1);
+    }
 }
