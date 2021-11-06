@@ -50,7 +50,7 @@ void FileMissionItemParser::run() {
             parsePassengers(tokens);
         }
         else if (tokens.at(0).compare("illegal") == 0) {
-            //qDebug("\tFound illegal: %s", qUtf8Printable(QString::fromStdString(line)));
+            parseIllegal(tokens);
         }
         else if (tokens.at(0).compare("stealth") == 0) {
             //qDebug("\tFound stealth");
@@ -165,5 +165,13 @@ void FileMissionItemParser::parsePassengers(std::vector<std::string> tokens) {
         if (tokens.size() == 4) {
             mission["passengers"]["probability"] = tokens.at(3);
         }
+    }
+}
+
+void FileMissionItemParser::parseIllegal(std::vector<std::string> tokens) {
+    qDebug("\tFound illegal: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    mission["illegal"]["fine"] = tokens.at(1);
+    if (tokens.size() == 3) {
+        mission["illegal"]["message"] = tokens.at(2);
     }
 }
