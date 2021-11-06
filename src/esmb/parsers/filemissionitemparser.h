@@ -22,6 +22,7 @@ public:
     void parseId(std::vector<std::string>);
     void parseName(std::vector<std::string>);
     void parseDescription(std::vector<std::string>);
+    void parseBlocked(std::vector<std::string>);
 };
 
 #endif // FILEMISSIONITEMPARSER_H
