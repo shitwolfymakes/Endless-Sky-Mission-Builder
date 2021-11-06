@@ -32,6 +32,7 @@ public:
     void parsePriorityLevel(std::string);
     void parseWhereShown(std::string);
     void parseRepeat(std::vector<std::string>);
+    void parseClearance(std::vector<std::string>);
 };
 
 #endif // FILEMISSIONITEMPARSER_H

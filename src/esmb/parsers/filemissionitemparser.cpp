@@ -68,7 +68,12 @@ void FileMissionItemParser::run() {
             parseRepeat(tokens);
         }
         else if (tokens.at(0).compare("clearance") == 0) {
-            //qDebug("\tFound clearance: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            if (tokens.size() == 2) {
+                parseClearance(tokens);
+            } else {
+                //qDebug("COMPLEX clearance HANDLING NOT YET IMPLEMENTED");
+                continue;
+            }
         }
         else if (tokens.at(0).compare("infiltrating") == 0) {
             //qDebug("\tFound infiltrating");
@@ -202,4 +207,9 @@ void FileMissionItemParser::parseRepeat(std::vector<std::string> tokens) {
     if (tokens.size() == 2) {
         mission["repeat"]["amount"] = tokens.at(1);
     }
+}
+
+void FileMissionItemParser::parseClearance(std::vector<std::string> tokens) {
+    qDebug("\tFound clearance: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["clearance"]["message"] = tokens.at(1);
 }
