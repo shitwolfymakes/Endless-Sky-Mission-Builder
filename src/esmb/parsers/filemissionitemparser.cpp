@@ -35,7 +35,7 @@ void FileMissionItemParser::run() {
             parseName(tokens);
         }
         else if (tokens.at(0).compare("description") == 0) {
-            qDebug("\tFound description: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            parseDescription(tokens);
         }
         else if (tokens.at(0).compare("blocked") == 0) {
             qDebug("\tFound blocked: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
@@ -122,4 +122,9 @@ void FileMissionItemParser::parseId(std::vector<std::string> tokens) {
 void FileMissionItemParser::parseName(std::vector<std::string> tokens) {
     qDebug("\tMission mission display name is: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["name"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseDescription(std::vector<std::string> tokens) {
+    qDebug("\tFound description: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["description"] = tokens.at(1);
 }
