@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * filemissionitemparser.h
+ *
+ * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
 #ifndef FILEMISSIONITEMPARSER_H
 #define FILEMISSIONITEMPARSER_H
 
@@ -14,6 +20,7 @@ public:
     void run();
 
     void parseId(std::vector<std::string>);
+    void parseName(std::vector<std::string>);
 };
 
 #endif // FILEMISSIONITEMPARSER_H

@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * filemissionitemparser.cpp
+ *
+ * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
+
 #include "filemissionitemparser.h"
 
 FileMissionItemParser::FileMissionItemParser(std::vector<std::string> lines)
@@ -25,7 +32,7 @@ void FileMissionItemParser::run() {
         else if (tokens.at(0).compare("name") == 0) {
             // this will get nabbed and crash if name token appears inside a conversation block
             if (tokens.size() != 2) { continue; } // TODO: remove this after conversation blocks are handled
-            qDebug("\tFound mission display name: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            parseName(tokens);
         }
         else if (tokens.at(0).compare("description") == 0) {
             qDebug("\tFound description: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
@@ -110,4 +117,9 @@ void FileMissionItemParser::run() {
 void FileMissionItemParser::parseId(std::vector<std::string> tokens) {
     qDebug("\tMission ID is: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["id"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseName(std::vector<std::string> tokens) {
+    qDebug("\tMission mission display name is: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["name"] = tokens.at(1);
 }
