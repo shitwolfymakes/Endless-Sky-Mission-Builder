@@ -62,7 +62,7 @@ void FileMissionItemParser::run() {
             parsePriorityLevel(tokens.at(0));
         }
         else if (isOneOf(tokens.at(0), {"job", "landing", "assisting", "boarding"})) {
-            //qDebug("\tFound where shown: %s", qUtf8Printable(QString::fromStdString(tokens.at(0))));
+            parseWhereShown(tokens.at(0));
         }
         else if (tokens.at(0).compare("repeat") == 0) {
             //qDebug("\tFound repeat: %s", qUtf8Printable(QString::fromStdString(line)));
@@ -189,4 +189,9 @@ void FileMissionItemParser::parseInvisible() {
 void FileMissionItemParser::parsePriorityLevel(std::string token) {
     qDebug("\tFound priority level: %s", qUtf8Printable(QString::fromStdString(token)));
     mission["priority_level"] = token;
+}
+
+void FileMissionItemParser::parseWhereShown(std::string token) {
+    qDebug("\tFound where shown: %s", qUtf8Printable(QString::fromStdString(token)));
+    mission["where_shown"] = token;
 }

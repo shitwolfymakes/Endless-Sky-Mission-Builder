@@ -30,6 +30,7 @@ public:
     void parseStealth();
     void parseInvisible();
     void parsePriorityLevel(std::string);
+    void parseWhereShown(std::string);
 };
 
 #endif // FILEMISSIONITEMPARSER_H
