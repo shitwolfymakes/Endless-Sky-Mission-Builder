@@ -87,7 +87,12 @@ void FileMissionItemParser::run() {
             }
         }
         else if (tokens.at(0).compare("stopover") == 0) {
-            //qDebug("\tFound stopover: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            if (tokens.size() == 2) {
+                parseStopover(tokens);
+            } else {
+                //qDebug("COMPLEX STOPOVER HANDLING NOT YET IMPLEMENTED");
+                continue;
+            }
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
@@ -227,4 +232,9 @@ void FileMissionItemParser::parseInfiltrating() {
 void FileMissionItemParser::parseWaypoint(std::vector<std::string> tokens) {
     qDebug("\tFound waypoint: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["waypoint"]["system"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseStopover(std::vector<std::string> tokens) {
+    qDebug("\tFound stopover: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["stopover"]["planet"] = tokens.at(1);
 }

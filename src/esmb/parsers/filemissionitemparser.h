@@ -35,6 +35,7 @@ public:
     void parseClearance(std::vector<std::string>);
     void parseInfiltrating();
     void parseWaypoint(std::vector<std::string>);
+    void parseStopover(std::vector<std::string>);
 };
 
 #endif // FILEMISSIONITEMPARSER_H
