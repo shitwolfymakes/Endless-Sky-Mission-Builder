@@ -41,7 +41,7 @@ void FileMissionItemParser::run() {
             parseBlocked(tokens);
         }
         else if (tokens.at(0).compare("deadline") == 0) {
-            //qDebug("\tFound deadline: %s", qUtf8Printable(QString::fromStdString(line)));
+            parseDeadline(tokens);
         }
         else if (tokens.at(0).compare("cargo") == 0) {
             //qDebug("\tFound cargo: %s", qUtf8Printable(QString::fromStdString(line)));
@@ -132,4 +132,15 @@ void FileMissionItemParser::parseDescription(std::vector<std::string> tokens) {
 void FileMissionItemParser::parseBlocked(std::vector<std::string> tokens) {
     qDebug("\tFound blocked: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["blocked"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseDeadline(std::vector<std::string> tokens) {
+    qDebug("\tFound deadline: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    mission["deadline"]["is_active"] = true;
+    if (tokens.size() > 1) {
+        mission["deadline"]["days"] = tokens.at(1);
+        if (tokens.size() == 3) {
+            mission["deadline"]["multiplier"] = tokens.at(1);
+        }
+    }
 }

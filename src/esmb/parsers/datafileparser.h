@@ -15,6 +15,7 @@
 #include <QDebug>
 #include <QString>
 #include <QStringList>
+#include "boost/algorithm/string/join.hpp"
 
 #include "model/fileitem.h"
 #include "model/itemevent.h"
