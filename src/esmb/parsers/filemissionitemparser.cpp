@@ -44,7 +44,7 @@ void FileMissionItemParser::run() {
             parseDeadline(tokens);
         }
         else if (tokens.at(0).compare("cargo") == 0) {
-            //qDebug("\tFound cargo: %s", qUtf8Printable(QString::fromStdString(line)));
+            parseCargo(tokens);
         }
         else if (tokens.at(0).compare("passengers") == 0) {
             //qDebug("\tFound passengers: %s", qUtf8Printable(QString::fromStdString(line)));
@@ -140,7 +140,19 @@ void FileMissionItemParser::parseDeadline(std::vector<std::string> tokens) {
     if (tokens.size() > 1) {
         mission["deadline"]["days"] = tokens.at(1);
         if (tokens.size() == 3) {
-            mission["deadline"]["multiplier"] = tokens.at(1);
+            mission["deadline"]["multiplier"] = tokens.at(2);
+        }
+    }
+}
+
+void FileMissionItemParser::parseCargo(std::vector<std::string> tokens) {
+    qDebug("\tFound cargo: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    mission["cargo"]["cargo"] = tokens.at(1);
+    mission["cargo"]["tonnage"] = tokens.at(2);
+    if (tokens.size() > 3) {
+        mission["cargo"]["tonnage_range"] = tokens.at(3);
+        if (tokens.size() == 5) {
+            mission["cargo"]["multiplier"] = tokens.at(4);
         }
     }
 }

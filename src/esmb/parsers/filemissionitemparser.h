@@ -24,6 +24,7 @@ public:
     void parseDescription(std::vector<std::string>);
     void parseBlocked(std::vector<std::string>);
     void parseDeadline(std::vector<std::string>);
+    void parseCargo(std::vector<std::string>);
 };
 
 #endif // FILEMISSIONITEMPARSER_H
