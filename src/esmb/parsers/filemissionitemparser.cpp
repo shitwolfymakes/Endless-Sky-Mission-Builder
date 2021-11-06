@@ -104,9 +104,9 @@ void FileMissionItemParser::run() {
         }
         else if (tokens.at(0).compare("destination") == 0) {
             if (tokens.size() == 2) {
-                //qDebug("\tFound destination: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+                parseDestination(tokens);
             } else {
-                //qDebug("COMPLEX DESTINATION HANDLING NOT YET IMPLEMENTED");
+                qDebug("COMPLEX DESTINATION HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
@@ -242,4 +242,9 @@ void FileMissionItemParser::parseStopover(std::vector<std::string> tokens) {
 void FileMissionItemParser::parseSource(std::vector<std::string> tokens) {
     qDebug("\tFound source: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["source"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
+    qDebug("\tFound destination: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+    mission["destination"] = tokens.at(1);
 }
