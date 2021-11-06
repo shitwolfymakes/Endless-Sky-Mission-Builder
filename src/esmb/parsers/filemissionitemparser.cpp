@@ -53,10 +53,10 @@ void FileMissionItemParser::run() {
             parseIllegal(tokens);
         }
         else if (tokens.at(0).compare("stealth") == 0) {
-            //qDebug("\tFound stealth");
+            parseStealth();
         }
         else if (tokens.at(0).compare("invisible") == 0) {
-            //qDebug("\tFound invisible");
+            parseInvisible();
         }
         else if (isOneOf(tokens.at(0), {"priority", "minor"})) {
             //qDebug("\tFound priority: %s", qUtf8Printable(QString::fromStdString(tokens.at(0))));
@@ -174,4 +174,14 @@ void FileMissionItemParser::parseIllegal(std::vector<std::string> tokens) {
     if (tokens.size() == 3) {
         mission["illegal"]["message"] = tokens.at(2);
     }
+}
+
+void FileMissionItemParser::parseStealth() {
+    qDebug("\tFound stealth field");
+    mission["stealth"] = true;
+}
+
+void FileMissionItemParser::parseInvisible() {
+    qDebug("\tFound invisible field");
+    mission["invisible"] = true;
 }
