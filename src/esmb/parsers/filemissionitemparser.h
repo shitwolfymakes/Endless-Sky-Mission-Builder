@@ -38,6 +38,7 @@ public:
     void parseStopover(std::vector<std::string>);
     void parseSource(std::vector<std::string>);
     void parseDestination(std::vector<std::string>);
+    void parseTrigger(std::vector<std::string>::const_iterator);
 };
 
 #endif // FILEMISSIONITEMPARSER_H

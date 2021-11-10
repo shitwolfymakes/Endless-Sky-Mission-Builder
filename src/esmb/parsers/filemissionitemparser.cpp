@@ -18,12 +18,15 @@ void FileMissionItemParser::run() {
     // for line in ItemMission->lines
 
     std::vector<std::string> tokens;
-    for (const std::string &line: lines) {
+    std::vector<std::string>::const_iterator line;
+    for (line = lines.begin(); line != lines.end(); ++line) {
         // start by tokenizing each line
-        tokens = tokenize(line);
+        // TODO: add a count for the number of tab chars
+        tokens = tokenize(*line);
+        qDebug() << "LINE: " << QString::fromStdString(tokens.at(0));
 
         if (tokens.size() == 0) {
-            QString qLine = QString::fromStdString(line);
+            QString qLine = QString::fromStdString(*line);
             qDebug("\tERROR: NO TOKENS FOUND ON LINE: %s", qUtf8Printable(qLine));
         }
         else if (tokens.at(0).compare("mission") == 0) {
@@ -112,7 +115,7 @@ void FileMissionItemParser::run() {
         }
         // elif "on" in tokens
         else if (tokens.at(0).compare("on") == 0) {
-            //qDebug("\tFound triggers: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            parseTrigger(line);
         }
         // elif "to" in tokens
         else if (tokens.at(0).compare("to") == 0) {
@@ -247,4 +250,9 @@ void FileMissionItemParser::parseSource(std::vector<std::string> tokens) {
 void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
     qDebug("\tFound destination: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
     mission["destination"] = tokens.at(1);
+}
+
+void FileMissionItemParser::parseTrigger(std::vector<std::string>::const_iterator line) {
+    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(*line)));
+    mission["where_shown"] = *line;
 }
