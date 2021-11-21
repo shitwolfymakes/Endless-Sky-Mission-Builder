@@ -264,8 +264,6 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
 
         index++;
         std::vector<std::string> tokens = tokenize(lines.at(index));
-        qDebug("\tLine in trigger: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-
         // parse the content of this line in the trigger
         if (tokens.at(0).compare("conversation") == 0) {
             index = parseConversation(missionLines, index);
@@ -275,6 +273,10 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             } else {
                 index = parseDialog(missionLines, index);
             }
+        } else if (tokens.at(0).compare("outfit") == 0) {
+            qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (tokens.at(0).compare("require") == 0) {
+            qDebug("\tFound require: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         }
 
         // handle getting the depth of the next line
