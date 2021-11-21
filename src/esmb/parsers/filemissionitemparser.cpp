@@ -269,6 +269,12 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         // parse the content of this line in the trigger
         if (tokens.at(0).compare("conversation") == 0) {
             index = parseConversation(missionLines, index);
+        } else if (tokens.at(0).compare("dialog") == 0) {
+            if (tokens.size() == 2) {
+                qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            } else {
+                index = parseDialog(missionLines, index);
+            }
         }
 
         // handle getting the depth of the next line
@@ -296,6 +302,32 @@ int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLi
         index++;
         std::vector<std::string> tokens = tokenize(lines.at(index));
         qDebug("\tLine in conversation: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    return index;
+}
+
+int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, int startingIndex) {
+    qDebug("\tParsing dialog: %s", qUtf8Printable(QString::fromStdString(missionLines->at(startingIndex))));
+    std::vector<std::string> lines = *missionLines;
+    int index = startingIndex;
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+
+        index++;
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        qDebug("\tLine in dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
 
         // handle getting the depth of the next line
         try {
