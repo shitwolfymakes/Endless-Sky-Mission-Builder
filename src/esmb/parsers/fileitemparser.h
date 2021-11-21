@@ -17,12 +17,13 @@ using json = nlohmann::json;
 class FileItemParser
 {
 protected:
-    const std::vector<std::string> lines;
+    std::vector<std::string> lines;
 
     FileItemParser(std::vector<std::string>);
 
     virtual void run() = 0;
     std::vector<std::string> tokenize(std::string);
+    int getIndentLevel(std::string);
     bool isOneOf(std::string, std::vector<std::string>);
 };
 

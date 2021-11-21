@@ -27,6 +27,18 @@ std::vector<std::string> FileItemParser::tokenize(std::string line) {
     return tokens;
 }
 
+int FileItemParser::getIndentLevel(std::string line) {
+    int level = 0;
+    for (char c: line) {
+        if (c == '\t') {
+            level++;
+        } else {
+            break;
+        }
+    }
+    return level;
+}
+
 bool FileItemParser::isOneOf(std::string token, std::vector<std::string> options) {
     for (std::string &option: options) {
         if (token.compare(option) == 0) {
