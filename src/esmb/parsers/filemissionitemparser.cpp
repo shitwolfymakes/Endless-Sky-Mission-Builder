@@ -268,7 +268,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         if (tokens.at(0).compare("conversation") == 0) {
             index = parseConversation(missionLines, index);
         } else if (tokens.at(0).compare("dialog") == 0) {
-            if (tokens.size() == 2) {
+            if (tokens.size() == 3) {
+                qDebug("\tFound dialog phrase: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            } else if (tokens.size() == 2) {
                 qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             } else {
                 index = parseDialog(missionLines, index);

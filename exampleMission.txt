@@ -51,6 +51,7 @@ mission "Test Mission 0"
 				die
 			name
 			`	testing testing`
+		dialog phrase "Harambe 1"
 		dialog `It is Wednesday my dudes`
 		outfit "Skylance V" 5
 		require Hyperdrive 1
