@@ -279,6 +279,8 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("require") == 0) {
             qDebug("\tFound require: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
+            qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("payment") == 0) {
             qDebug("\tFound payment: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("event") == 0) {
