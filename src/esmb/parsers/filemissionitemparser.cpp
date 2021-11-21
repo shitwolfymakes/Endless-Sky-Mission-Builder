@@ -291,6 +291,14 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("log") == 0 && tokens.size() == 4) {
             qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
+            qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (isOneOf(tokens.at(1), {"++", "--"})) {
+            qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (isOneOf(tokens.at(0), {"set", "clear"})) {
+            qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else {
+            qDebug("\tTrigger component not found: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         }
 
         // handle getting the depth of the next line
