@@ -16,17 +16,15 @@ FileMissionItemParser::FileMissionItemParser(std::vector<std::string> lines)
 void FileMissionItemParser::run() {
     // for self.i, self.line in self.enum_lines:
     // for line in ItemMission->lines
-
     std::vector<std::string> tokens;
-    std::vector<std::string>::const_iterator line;
-    for (line = lines.begin(); line != lines.end(); ++line) {
+    for (int i = 0; i < static_cast<int>(lines.size()); i++) {
         // start by tokenizing each line
         // TODO: add a count for the number of tab chars
-        tokens = tokenize(*line);
-        qDebug() << "LINE: " << QString::fromStdString(tokens.at(0));
+        tokens = tokenize(lines.at(i));
+        //qDebug() << "LINE: " << QString::fromStdString(tokens.at(0));
 
         if (tokens.size() == 0) {
-            QString qLine = QString::fromStdString(*line);
+            QString qLine = QString::fromStdString(lines.at(i));
             qDebug("\tERROR: NO TOKENS FOUND ON LINE: %s", qUtf8Printable(qLine));
         }
         else if (tokens.at(0).compare("mission") == 0) {
@@ -115,7 +113,7 @@ void FileMissionItemParser::run() {
         }
         // elif "on" in tokens
         else if (tokens.at(0).compare("on") == 0) {
-            parseTrigger(line);
+            i = parseTrigger(&lines, i);
         }
         // elif "to" in tokens
         else if (tokens.at(0).compare("to") == 0) {
@@ -252,7 +250,59 @@ void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
     mission["destination"] = tokens.at(1);
 }
 
-void FileMissionItemParser::parseTrigger(std::vector<std::string>::const_iterator line) {
-    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(*line)));
-    mission["where_shown"] = *line;
+int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, int startingIndex) {
+    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(missionLines->at(startingIndex))));
+    std::vector<std::string> lines = *missionLines;
+    int index = startingIndex;
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+
+        index++;
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        qDebug("\tLine in trigger: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+
+        // parse the content of this line in the trigger
+        if (tokens.at(0).compare("conversation") == 0) {
+            index = parseConversation(missionLines, index);
+        }
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    return index;
+}
+
+int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLines, int startingIndex) {
+    qDebug("\tParsing conversation: %s", qUtf8Printable(QString::fromStdString(missionLines->at(startingIndex))));
+    std::vector<std::string> lines = *missionLines;
+    int index = startingIndex;
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+
+        index++;
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        qDebug("\tLine in conversation: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    return index;
 }
