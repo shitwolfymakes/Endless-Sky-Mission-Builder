@@ -283,6 +283,10 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("fail") == 0) {
             qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (tokens.at(0).compare("log") == 0 && tokens.size() == 2) {
+            qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (tokens.at(0).compare("log") == 0 && tokens.size() == 4) {
+            qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         }
 
         // handle getting the depth of the next line
