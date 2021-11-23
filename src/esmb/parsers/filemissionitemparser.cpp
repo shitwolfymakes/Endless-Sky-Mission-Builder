@@ -314,16 +314,23 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (tokens.at(0).compare("fine") == 0) {
             qDebug("\tFound fine: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             trigger["fine"] = tokens.at(1);
-        } else if (tokens.at(0).compare("event") == 0) {
-            qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-        } else if (tokens.at(0).compare("fail") == 0) {
-            qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
             qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (isOneOf(tokens.at(1), {"++", "--"})) {
             qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (isOneOf(tokens.at(0), {"set", "clear"})) {
             qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        } else if (tokens.at(0).compare("event") == 0) {
+            qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["event"]["name"] = tokens.at(1);
+            if (tokens.size() > 2) {
+                trigger["event"]["delay"] = tokens.at(2);
+                if (tokens.size() == 4) {
+                    trigger["event"]["max"] = tokens.at(3);
+                }
+            }
+        } else if (tokens.at(0).compare("fail") == 0) {
+            qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else {
             qDebug("\tTrigger component not found: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         }
