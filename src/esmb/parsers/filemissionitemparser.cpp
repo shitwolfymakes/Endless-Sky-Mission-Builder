@@ -267,7 +267,20 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         index++;
         std::vector<std::string> tokens = tokenize(lines.at(index));
         // parse the content of this line in the trigger
-        if (tokens.at(0).compare("conversation") == 0) {
+        if (tokens.at(0).compare("log") == 0) {
+            qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            if (tokens.size() == 4) {
+                json log;
+                log["category"] = tokens.at(1);
+                log["header"] = tokens.at(2);
+                log["text"] = tokens.at(3);
+                trigger["logs"].emplace_back(log);
+            } else {
+                json log;
+                log["text"] = tokens.at(1);
+                trigger["logs"].emplace_back(log);
+            }
+        } else if (tokens.at(0).compare("conversation") == 0) {
             index = parseConversation(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("dialog") == 0) {
             index = parseDialog(missionLines, index, &trigger);
@@ -302,10 +315,6 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("fail") == 0) {
             qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-        } else if (tokens.at(0).compare("log") == 0 && tokens.size() == 2) {
-            qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-        } else if (tokens.at(0).compare("log") == 0 && tokens.size() == 4) {
-            qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
             qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (isOneOf(tokens.at(1), {"++", "--"})) {

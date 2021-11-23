@@ -35,6 +35,8 @@ mission "Test Mission 0"
 		outfit "test outfit" 1
 		require "Jump Drive" 1
 	on offer
+		log "People" "Yo mama" `is a ho`
+		log `my mama ain't a ho`
 		conversation
 			scene "testing testing"
 			`A Navy officer asks if you can do a job for him.`
@@ -62,8 +64,6 @@ mission "Test Mission 0"
 		clear "the drugs"
 		event "blaze it" 420 4200
 		fail "the mission"
-		log `my mama ain't a ho`
-		log "People" "Yo mama" `is a ho`
 	npc save
 		government "Free Worlds"
 		personality derelict
