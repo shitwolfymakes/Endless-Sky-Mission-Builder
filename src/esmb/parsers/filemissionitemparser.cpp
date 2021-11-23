@@ -273,8 +273,16 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             index = parseDialog(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("outfit") == 0) {
             qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["outfit"]["outfit"] = tokens.at(1);
+            if (tokens.size() == 3) {
+                trigger["outfit"]["quantity"] = tokens.at(2);
+            }
         } else if (tokens.at(0).compare("require") == 0) {
             qDebug("\tFound require: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["require"]["outfit"] = tokens.at(1);
+            if (tokens.size() == 3) {
+                trigger["require"]["quantity"] = tokens.at(2);
+            }
         } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
             qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("payment") == 0) {
