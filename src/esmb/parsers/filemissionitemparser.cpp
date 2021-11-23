@@ -31,8 +31,6 @@ void FileMissionItemParser::run() {
             parseId(tokens);
         }
         else if (tokens.at(0).compare("name") == 0) {
-            // this will get nabbed and crash if name token appears inside a conversation block
-            if (tokens.size() != 2) { continue; } // TODO: remove this after conversation blocks are handled
             parseName(tokens);
         }
         else if (tokens.at(0).compare("description") == 0) {
@@ -128,6 +126,8 @@ void FileMissionItemParser::run() {
             //qDebug("\tERROR - No tokens found in line: %s", qUtf8Printable(QString::fromStdString(line)));
         }
     }
+    // qDebug may occassionally truncate strings output, but the data is still there
+    // (https://bugreports.qt.io/browse/QTCREATORBUG-24649)
     qDebug("Mission data: %s", qUtf8Printable(QString::fromStdString(mission.dump(4))));
 }
 
