@@ -331,6 +331,10 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             }
         } else if (tokens.at(0).compare("fail") == 0) {
             qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["fail"]["is_active"] = true;
+            if (tokens.size() == 2) {
+                trigger["fail"]["name"] = tokens.at(1);
+            }
         } else {
             qDebug("\tTrigger component not found: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         }
