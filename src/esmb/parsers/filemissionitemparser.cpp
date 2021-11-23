@@ -280,10 +280,10 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
                 log["text"] = tokens.at(1);
                 trigger["logs"].emplace_back(log);
             }
-        } else if (tokens.at(0).compare("conversation") == 0) {
-            index = parseConversation(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("dialog") == 0) {
             index = parseDialog(missionLines, index, &trigger);
+        } else if (tokens.at(0).compare("conversation") == 0) {
+            index = parseConversation(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("outfit") == 0) {
             qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             trigger["outfit"]["outfit"] = tokens.at(1);
@@ -311,6 +311,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
                     trigger["payment"]["multiplier"] = tokens.at(2);
                 }
             }
+        } else if (tokens.at(0).compare("fine") == 0) {
+            qDebug("\tFound fine: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["fine"] = tokens.at(1);
         } else if (tokens.at(0).compare("event") == 0) {
             qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("fail") == 0) {

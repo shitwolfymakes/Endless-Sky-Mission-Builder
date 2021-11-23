@@ -59,6 +59,7 @@ mission "Test Mission 0"
 		require Hyperdrive 1
 		give ship "Black Diamond" "Stormheart"
 		payment 1500 0.2
+		fine 42069
 		"yo mama" += 20
 		"no u" ++
 		clear "the drugs"
