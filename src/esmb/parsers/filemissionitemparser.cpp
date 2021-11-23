@@ -291,6 +291,13 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             }
         } else if (tokens.at(0).compare("payment") == 0) {
             qDebug("\tFound payment: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["payment"]["is_active"] = true;
+            if (tokens.size() > 1) {
+                trigger["payment"]["base"] = tokens.at(1);
+                if (tokens.size() == 3) {
+                    trigger["payment"]["multiplier"] = tokens.at(2);
+                }
+            }
         } else if (tokens.at(0).compare("event") == 0) {
             qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("fail") == 0) {
