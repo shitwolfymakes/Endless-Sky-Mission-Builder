@@ -128,6 +128,7 @@ void FileMissionItemParser::run() {
             //qDebug("\tERROR - No tokens found in line: %s", qUtf8Printable(QString::fromStdString(line)));
         }
     }
+    qDebug("Mission data: %s", qUtf8Printable(QString::fromStdString(mission.dump(4))));
 }
 
 void FileMissionItemParser::parseId(std::vector<std::string> tokens) {
@@ -251,12 +252,13 @@ void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
 }
 
 int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, int startingIndex) {
-    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(missionLines->at(startingIndex))));
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
+    json trigger; // create a json obect to store trigger data, pass ref to this when necessary
+
+    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
     int cur = getIndentLevel(lines.at(index));
     int nxt = getIndentLevel(lines.at(index + 1));
-
     while (true) {
         if (nxt <= cur) {
             break;
@@ -266,15 +268,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         std::vector<std::string> tokens = tokenize(lines.at(index));
         // parse the content of this line in the trigger
         if (tokens.at(0).compare("conversation") == 0) {
-            index = parseConversation(missionLines, index);
+            index = parseConversation(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("dialog") == 0) {
-            if (tokens.size() == 3) {
-                qDebug("\tFound dialog phrase: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            } else if (tokens.size() == 2) {
-                qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            } else {
-                index = parseDialog(missionLines, index);
-            }
+            index = parseDialog(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("outfit") == 0) {
             qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("require") == 0) {
@@ -308,24 +304,29 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             break;
         }
     }
+    mission["triggers"].emplace_back(trigger);
+    qDebug("\tTrigger data: %s", qUtf8Printable(QString::fromStdString(trigger.dump(4))));
     return index;
 }
 
-int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLines, int startingIndex) {
-    qDebug("\tParsing conversation: %s", qUtf8Printable(QString::fromStdString(missionLines->at(startingIndex))));
+int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLines, int startingIndex, json *trigger) {
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
+    json convo;
+
+    qDebug("\tParsing conversation: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
     int cur = getIndentLevel(lines.at(index));
     int nxt = getIndentLevel(lines.at(index + 1));
-
     while (true) {
         if (nxt <= cur) {
             break;
         }
-
         index++;
+
         std::vector<std::string> tokens = tokenize(lines.at(index));
         qDebug("\tLine in conversation: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        // TODO: add parsing for conversations
+        convo.emplace_back(lines.at(index));
 
         // handle getting the depth of the next line
         try {
@@ -334,31 +335,53 @@ int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLi
             break;
         }
     }
+    (*trigger)["conversation"].emplace_back(convo);
+    //qDebug("\tConversation data: %s", qUtf8Printable(QString::fromStdString((*trigger)["conversation"].dump())));
     return index;
 }
 
-int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, int startingIndex) {
-    qDebug("\tParsing dialog: %s", qUtf8Printable(QString::fromStdString(missionLines->at(startingIndex))));
+int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, int startingIndex, json *trigger) {
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
-    int cur = getIndentLevel(lines.at(index));
-    int nxt = getIndentLevel(lines.at(index + 1));
+    json dialog;
 
-    while (true) {
-        if (nxt <= cur) {
-            break;
+    // Check if dialog is phrase, single line, or multiline
+    std::vector<std::string> tokens = tokenize(lines.at(index));
+    if (tokens.size() == 3) {
+        qDebug("\tFound dialog phrase: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        (*trigger)["dialog_phrase"].emplace_back(tokens.at(2));
+       // qDebug("\tDialog phrase data: %s", qUtf8Printable(QString::fromStdString((*trigger)["dialog_phrase"].dump(4))));
+        return startingIndex;
+    } else if (tokens.size() == 2) {
+        qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        (*trigger)["dialog"].emplace_back(tokens.at(1));
+    } else {
+        qDebug("\tParsing complex dialog node: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        int cur = getIndentLevel(lines.at(index));
+        int nxt = getIndentLevel(lines.at(index + 1));
+        while (true) {
+            if (nxt <= cur) {
+                break;
+            }
+            index++;
+
+            std::vector<std::string> tokens = tokenize(lines.at(index));
+            qDebug("\tLine in dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            // TODO: handle inline phrase declarations
+            //  dialog
+            //      phrase
+            //          ...
+            dialog.emplace_back(lines.at(index));
+
+            // handle getting the depth of the next line
+            try {
+                nxt = getIndentLevel(lines.at(index + 1));
+            }  catch (const std::out_of_range& ex) {
+                break;
+            }
         }
-
-        index++;
-        std::vector<std::string> tokens = tokenize(lines.at(index));
-        qDebug("\tLine in dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-
-        // handle getting the depth of the next line
-        try {
-            nxt = getIndentLevel(lines.at(index + 1));
-        }  catch (const std::out_of_range& ex) {
-            break;
-        }
+        (*trigger)["dialog"].emplace_back(dialog);
     }
+    //qDebug("\tDialog data: %s", qUtf8Printable(QString::fromStdString((*trigger)["dialog"].dump(4))));
     return index;
 }

@@ -39,8 +39,8 @@ public:
     void parseSource(std::vector<std::string>);
     void parseDestination(std::vector<std::string>);
     int parseTrigger(std::vector<std::string> *, int);
-    int parseConversation(std::vector<std::string> *, int);
-    int parseDialog(std::vector<std::string> *, int);
+    int parseConversation(std::vector<std::string> *, int, json *);
+    int parseDialog(std::vector<std::string> *, int, json *);
 };
 
 #endif // FILEMISSIONITEMPARSER_H
