@@ -123,12 +123,12 @@ void FileMissionItemParser::run() {
         }
         // else error
         else {
-            //qDebug("\tERROR - No tokens found in line: %s", qUtf8Printable(QString::fromStdString(line)));
+            qDebug("\tERROR - No tokens found in line: %s", qUtf8Printable(QString::fromStdString(lines.at(i))));
         }
     }
     // qDebug may occassionally truncate strings output, but the data is still there
     // (https://bugreports.qt.io/browse/QTCREATORBUG-24649)
-    qDebug("Mission data: %s", qUtf8Printable(QString::fromStdString(mission.dump(4))));
+    //qDebug("Mission data: %s", qUtf8Printable(QString::fromStdString(mission.dump(4))));
 }
 
 void FileMissionItemParser::parseId(std::vector<std::string> tokens) {
@@ -285,6 +285,10 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             }
         } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
             qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            trigger["give_ship"]["model"] = tokens.at(2);
+            if (tokens.size() == 4) {
+                trigger["give_ship"]["name"] = tokens.at(3);
+            }
         } else if (tokens.at(0).compare("payment") == 0) {
             qDebug("\tFound payment: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("event") == 0) {
