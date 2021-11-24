@@ -115,7 +115,8 @@ void FileMissionItemParser::run() {
         }
         // elif "to" in tokens
         else if (tokens.at(0).compare("to") == 0) {
-            //qDebug("\tFound condition: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            qDebug("\tFound condition: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            i = parseCondition(&lines, i);
         }
         // elif "npc" in tokens
         else if (tokens.at(0).compare("npc") == 0) {
@@ -252,6 +253,7 @@ void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
 }
 
 int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, int startingIndex) {
+    // TODO: add check to prevent multiple triggers of the same type (except for on enter)
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
     json trigger; // create a json obect to store trigger data, pass ref to this when necessary
@@ -425,5 +427,37 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
         (*trigger)["dialog"].emplace_back(dialog);
     }
     //qDebug("\tDialog data: %s", qUtf8Printable(QString::fromStdString((*trigger)["dialog"].dump(4))));
+    return index;
+}
+
+int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {
+    // TODO: add check to prevent multiple conditions of the same type
+    std::vector<std::string> lines = *missionLines;
+    int index = startingIndex;
+    json condition;
+
+    qDebug("\tParsing condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        qDebug("\tLine in condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        // TODO: add parsing for conversations
+        condition.emplace_back(lines.at(index));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    mission["conditions"].emplace_back(condition);
+    //qDebug("\tConversation data: %s", qUtf8Printable(QString::fromStdString((*trigger)["conversation"].dump())));
     return index;
 }

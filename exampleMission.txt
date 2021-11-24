@@ -31,6 +31,16 @@ mission "Test Mission 0"
 	stopover "Delve"
 	source "Sol"
 	destination "Delve"
+	to offer
+		random < 60
+		"combat rating" < 6
+		and
+			"combat rating" > 0
+	to complete
+		random < 40
+		"combat rating" < 6
+		or
+			"combat rating" > 0
 	on accept
 		outfit "test outfit" 1
 		require "Jump Drive" 1
