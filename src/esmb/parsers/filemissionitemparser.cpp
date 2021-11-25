@@ -115,12 +115,11 @@ void FileMissionItemParser::run() {
         }
         // elif "to" in tokens (Conditions)
         else if (tokens.at(0).compare("to") == 0) {
-            qDebug("\tFound condition: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
             i = parseCondition(&lines, i);
         }
         // elif "npc" in tokens
         else if (tokens.at(0).compare("npc") == 0) {
-            //qDebug("\tFound NPC: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
+            i = parseNpc(&lines, i);
         }
         // else error
         else {
@@ -458,7 +457,6 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
 }
 
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {
-    // TODO: add check to prevent multiple conditions of the same type
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
     json condition;
@@ -510,6 +508,38 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
         }
     }
     mission["conditions"].emplace_back(condition);
-    //qDebug("\tConversation data: %s", qUtf8Printable(QString::fromStdString((*trigger)["conversation"].dump())));
+    //qDebug("\tCondition data: %s", qUtf8Printable(QString::fromStdString(condition.dump(4))));
+    return index;
+}
+
+int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int startingIndex) {
+    std::vector<std::string> lines = *missionLines;
+    int index = startingIndex;
+    json npc;
+
+    qDebug("\tParsing NPC: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+    // TODO: store the npc tags without storing duplicates
+
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        qDebug("\tLine in npc: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        npc["data"].emplace_back(lines.at(index));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    mission["npcs"].emplace_back(npc);
+    //qDebug("\tNPC data: %s", qUtf8Printable(QString::fromStdString(npc.dump(4))));
     return index;
 }

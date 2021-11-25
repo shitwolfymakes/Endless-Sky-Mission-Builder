@@ -42,6 +42,7 @@ public:
     int parseConversation(std::vector<std::string> *, int, json *);
     int parseDialog(std::vector<std::string> *, int, json *);
     int parseCondition(std::vector<std::string> *, int);
+    int parseNpc(std::vector<std::string> *, int);
 };
 
 #endif // FILEMISSIONITEMPARSER_H
