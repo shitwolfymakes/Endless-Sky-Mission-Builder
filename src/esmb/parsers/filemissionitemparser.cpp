@@ -273,7 +273,8 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
                 if (nxt <= cur) {
                     break;
                 }
-                index++;// handle getting the depth of the next line
+                index++;
+                // handle getting the depth of the next line
                 try {
                     nxt = getIndentLevel(lines.at(index + 1));
                 }  catch (const std::out_of_range& ex) {
@@ -462,7 +463,33 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
     int index = startingIndex;
     json condition;
 
+    std::string conditionType = tokenize(lines.at(index)).at(1);
     qDebug("\tParsing condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+
+    // check to prevent multiple conditions of the same type
+    for (auto& t: mission["conditions"]) {
+        if (conditionType.compare(t["type"]) == 0) {
+            qDebug("\tERROR: second condition using: %s, skipping...",
+                   qUtf8Printable(QString::fromStdString(conditionType)));
+            int cur = getIndentLevel(lines.at(index));
+            int nxt = getIndentLevel(lines.at(index + 1));
+            while (true) {
+                if (nxt <= cur) {
+                    break;
+                }
+                index++;
+                // handle getting the depth of the next line
+                try {
+                    nxt = getIndentLevel(lines.at(index + 1));
+                }  catch (const std::out_of_range& ex) {
+                    break;
+                }
+            }
+            return index;
+        }
+    }
+
+    condition["type"] = conditionType;
     int cur = getIndentLevel(lines.at(index));
     int nxt = getIndentLevel(lines.at(index + 1));
     while (true) {
@@ -473,8 +500,7 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
 
         std::vector<std::string> tokens = tokenize(lines.at(index));
         qDebug("\tLine in condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-        // TODO: add parsing for conversations
-        condition.emplace_back(lines.at(index));
+        condition["data"].emplace_back(lines.at(index));
 
         // handle getting the depth of the next line
         try {
