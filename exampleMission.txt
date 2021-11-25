@@ -41,6 +41,11 @@ mission "Test Mission 0"
 		"combat rating" < 6
 		or
 			"combat rating" > 0
+	to offer
+		random < 60
+		"combat rating" < 6
+		and
+			"combat rating" > 0
 	on accept
 		outfit "test outfit" 1
 		require "Jump Drive" 1
@@ -75,6 +80,9 @@ mission "Test Mission 0"
 		clear "the drugs"
 		event "blaze it" 420 4200
 		fail "the mission"
+	on accept
+		outfit "test outfit" 1
+		require "Jump Drive" 1
 	npc save
 		government "Free Worlds"
 		personality derelict

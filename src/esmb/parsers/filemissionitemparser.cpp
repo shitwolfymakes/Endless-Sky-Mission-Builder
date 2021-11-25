@@ -109,11 +109,11 @@ void FileMissionItemParser::run() {
                 continue;
             }
         }
-        // elif "on" in tokens
+        // elif "on" in tokens (Trigger)
         else if (tokens.at(0).compare("on") == 0) {
             i = parseTrigger(&lines, i);
         }
-        // elif "to" in tokens
+        // elif "to" in tokens (Conditions)
         else if (tokens.at(0).compare("to") == 0) {
             qDebug("\tFound condition: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
             i = parseCondition(&lines, i);
@@ -253,12 +253,38 @@ void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
 }
 
 int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, int startingIndex) {
-    // TODO: add check to prevent multiple triggers of the same type (except for on enter)
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
     json trigger; // create a json obect to store trigger data, pass ref to this when necessary
 
-    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+    std::string triggerType = tokenize(lines.at(index)).at(1);
+    qDebug("\tFound trigger: %s", qUtf8Printable(QString::fromStdString(triggerType)));
+
+    // check to prevent multiple triggers of the same type (except for on enter)
+    for (auto& t: mission["triggers"]) {
+        if (triggerType.compare("enter") == 0) {
+            break;
+        } else if (triggerType.compare(t["type"]) == 0) {
+            qDebug("\tERROR: second trigger using: %s, skipping...",
+                   qUtf8Printable(QString::fromStdString(triggerType)));
+            int cur = getIndentLevel(lines.at(index));
+            int nxt = getIndentLevel(lines.at(index + 1));
+            while (true) {
+                if (nxt <= cur) {
+                    break;
+                }
+                index++;// handle getting the depth of the next line
+                try {
+                    nxt = getIndentLevel(lines.at(index + 1));
+                }  catch (const std::out_of_range& ex) {
+                    break;
+                }
+            }
+            return index;
+        }
+    }
+
+    trigger["type"] = triggerType;
     int cur = getIndentLevel(lines.at(index));
     int nxt = getIndentLevel(lines.at(index + 1));
     while (true) {

@@ -8,8 +8,9 @@
 #include <QString>
 #include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
-
 #include "nlohmann/json.hpp"
+
+#include "model/fileitemconstants.h"
 
 // for convenience
 using json = nlohmann::json;
