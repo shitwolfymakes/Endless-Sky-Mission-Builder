@@ -25,6 +25,8 @@ private:
     // member data
     QStringList itemNames;
 
+    // TODO: store json data here
+
 public:
     // controlled instantiation
     static ESMBApplication& getInstance();

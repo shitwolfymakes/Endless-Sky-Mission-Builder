@@ -26,6 +26,7 @@ protected:
     std::vector<std::string> tokenize(std::string);
     int getIndentLevel(std::string);
     bool isOneOf(std::string, std::vector<std::string>);
+    // TODO: Implement parseFilter here
 };
 
 #endif // FILEITEMPARSER_H

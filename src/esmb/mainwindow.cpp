@@ -36,6 +36,7 @@ void MainWindow::on_actionOpen_triggered()
     DataFileParser parser = DataFileParser(text);
     parser.run();
     ui->textDisplay->setText(text);
+    // TODO: Dump JSON to the text display
     file.close();
 }
 
