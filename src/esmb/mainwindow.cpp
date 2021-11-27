@@ -41,6 +41,7 @@ void MainWindow::on_actionOpen_triggered()
     ESMBApplication& esmb = ESMBApplication::getInstance();
     esmb.setJsonItems(parser.getJsonItems());
 
+    // TODO: set the spinbox to display the data for a selected mission
     ui->textDisplay->setText(text);
     QString jsonText = QString::fromStdString(esmb.getJsonItems().dump(4));
     ui->jsonDisplay->setText(jsonText);
