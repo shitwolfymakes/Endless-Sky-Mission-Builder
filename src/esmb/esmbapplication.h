@@ -10,6 +10,10 @@
 
 #include <QStringList>
 
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
+
 class ESMBApplication
 {
 private:
@@ -24,8 +28,7 @@ private:
 
     // member data
     QStringList itemNames;
-
-    // TODO: store json data here
+    json jsonItems;
 
 public:
     // controlled instantiation
@@ -33,6 +36,8 @@ public:
 
     // public methods
     QStringList getNames();
+    void setJsonItems(json);
+    json getJsonItems();
 
 };
 

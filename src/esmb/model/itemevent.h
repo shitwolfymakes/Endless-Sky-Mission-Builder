@@ -15,7 +15,7 @@ class ItemEvent : public FileItem
 public:
     ItemEvent();
 
-    void parse();
+    json parse();
 };
 
 #endif // ITEMEVENT_H

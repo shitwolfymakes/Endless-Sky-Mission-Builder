@@ -12,6 +12,8 @@ ItemEvent::ItemEvent()
 
 }
 
-void ItemEvent::parse() {
+json ItemEvent::parse() {
     qDebug() << "Event parsing not yet implemented";
+    json event;
+    return event;
 }

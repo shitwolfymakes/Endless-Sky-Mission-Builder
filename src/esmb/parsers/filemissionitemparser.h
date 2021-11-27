@@ -17,7 +17,7 @@ private:
 public:
     FileMissionItemParser(std::vector<std::string>);
 
-    void run();
+    json run();
 
     void parseId(std::vector<std::string>);
     void parseName(std::vector<std::string>);

@@ -22,7 +22,7 @@ protected:
 
     FileItemParser(std::vector<std::string>);
 
-    virtual void run() = 0;
+    virtual json run() = 0;
     std::vector<std::string> tokenize(std::string);
     int getIndentLevel(std::string);
     bool isOneOf(std::string, std::vector<std::string>);

@@ -15,7 +15,7 @@ class ItemGovernment : public FileItem
 public:
     ItemGovernment();
 
-    void parse();
+    json parse();
 };
 
 #endif // ITEMGOVERNMENT_H

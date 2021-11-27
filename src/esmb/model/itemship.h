@@ -15,7 +15,7 @@ class ItemShip : public FileItem
 public:
     ItemShip();
 
-    void parse();
+    json parse();
 };
 
 #endif // ITEMSHIP_H

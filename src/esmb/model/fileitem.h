@@ -14,27 +14,29 @@
 #include <QDebug>
 #include <QString>
 
-using namespace std;
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
 
 class FileItem
 {
 public:
-    string name;
-    vector<string> lines;
+    std::string name;
+    std::vector<std::string> lines;
 
     FileItem();
 
-    string getName();
-    void setName(string);
+    std::string getName();
+    void setName(std::string);
 
-    void appendLine(string);
-    vector<string> getLines();
-    void setLines(vector<string>);
+    void appendLine(std::string);
+    std::vector<std::string> getLines();
+    void setLines(std::vector<std::string>);
 
-    string toString();
+    std::string toString();
     void printLines();
 
-    virtual void parse() = 0;
+    virtual json parse() = 0;
 };
 
 #endif // FILEITEM_H

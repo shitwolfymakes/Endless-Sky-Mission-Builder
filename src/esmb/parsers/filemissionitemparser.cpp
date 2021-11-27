@@ -13,7 +13,7 @@ FileMissionItemParser::FileMissionItemParser(std::vector<std::string> lines)
 
 }
 
-void FileMissionItemParser::run() {
+json FileMissionItemParser::run() {
     // for self.i, self.line in self.enum_lines:
     // for line in ItemMission->lines
     std::vector<std::string> tokens;
@@ -129,6 +129,7 @@ void FileMissionItemParser::run() {
     // qDebug may occassionally truncate strings output, but the data is still there
     // (https://bugreports.qt.io/browse/QTCREATORBUG-24649)
     //qDebug("Mission data: %s", qUtf8Printable(QString::fromStdString(mission.dump(4))));
+    return mission;
 }
 
 void FileMissionItemParser::parseId(std::vector<std::string> tokens) {

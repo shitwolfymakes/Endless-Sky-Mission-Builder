@@ -16,3 +16,11 @@ ESMBApplication& ESMBApplication::getInstance() {
 QStringList ESMBApplication::getNames() {
     return itemNames;
 }
+
+void ESMBApplication::setJsonItems(json jsonItems) {
+    this->jsonItems = jsonItems;
+}
+
+json ESMBApplication::getJsonItems() {
+    return jsonItems;
+}

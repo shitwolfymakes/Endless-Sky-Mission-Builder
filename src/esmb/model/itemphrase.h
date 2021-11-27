@@ -15,7 +15,7 @@ class ItemPhrase : public FileItem
 public:
     ItemPhrase();
 
-    void parse();
+    json parse();
 };
 
 #endif // ITEMPHRASE_H

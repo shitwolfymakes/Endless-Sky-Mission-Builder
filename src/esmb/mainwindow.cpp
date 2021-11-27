@@ -8,6 +8,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include "esmbapplication.h"
 #include "parsers/datafileparser.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -35,8 +36,14 @@ void MainWindow::on_actionOpen_triggered()
     QString text = in.readAll();
     DataFileParser parser = DataFileParser(text);
     parser.run();
+
+    // store the parsed data in the singleton
+    ESMBApplication& esmb = ESMBApplication::getInstance();
+    esmb.setJsonItems(parser.getJsonItems());
+
     ui->textDisplay->setText(text);
-    // TODO: Dump JSON to the text display
+    QString jsonText = QString::fromStdString(esmb.getJsonItems().dump(4));
+    ui->jsonDisplay->setText(jsonText);
     file.close();
 }
 

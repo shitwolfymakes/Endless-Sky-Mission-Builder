@@ -79,7 +79,7 @@ void DataFileParser::run() {
 
     // loop through fileItems, calling the parser for each one
     for (const auto &item: fileItems) {
-        item->parse();
+        jsonItems.emplace_back(item->parse());
     }
 }
 
@@ -140,4 +140,8 @@ bool DataFileParser::isFileItemStartLine(std::string line) {
         return true;
     }
     return false;
+}
+
+json DataFileParser::getJsonItems() {
+    return jsonItems;
 }

@@ -34,6 +34,7 @@ private:
     const std::vector<std::string> lines;
 
     std::vector<std::unique_ptr<FileItem>> fileItems;
+    json jsonItems;
 
 public:
     DataFileParser(QString);
@@ -44,6 +45,8 @@ public:
     void run();
     void storeItemForParsing(int, std::string, ItemType);
     bool isFileItemStartLine(std::string);
+
+    json getJsonItems();
 };
 
 #endif // DATAFILEPARSER_H

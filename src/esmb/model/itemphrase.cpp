@@ -12,6 +12,8 @@ ItemPhrase::ItemPhrase()
 
 }
 
-void ItemPhrase::parse() {
+json ItemPhrase::parse() {
     qDebug() << "Phrase parsing not yet implemented";
+    json phrase;
+    return phrase;
 }

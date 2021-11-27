@@ -9,36 +9,36 @@
 
 FileItem::FileItem() {};
 
-string FileItem::getName() {
+std::string FileItem::getName() {
     return name;
 }
 
-void FileItem::setName(string name) {
+void FileItem::setName(std::string name) {
     this->name = name;
 }
 
-void FileItem::appendLine(string line) {
+void FileItem::appendLine(std::string line) {
     this->lines.push_back(line);
 }
 
-vector<string> FileItem::getLines() {
+std::vector<std::string> FileItem::getLines() {
     return lines;
 }
 
-void FileItem::setLines(vector<string> lines) {
+void FileItem::setLines(std::vector<std::string> lines) {
     this->lines = lines;
 }
 
-string FileItem::toString() {
+std::string FileItem::toString() {
     // this is O(n), whereas std::accumulate is O(n^2) for strings
-    string str;
+    std::string str;
     for (const auto &piece: lines) str += piece;
     return str;
 }
 
 void FileItem::printLines() {
     qDebug() << "Item Data:";
-    for (const string &line: lines) {
+    for (const std::string &line: lines) {
         QString qLine = QString::fromStdString(line);
         qDebug("\t%s", qUtf8Printable(qLine));
     }

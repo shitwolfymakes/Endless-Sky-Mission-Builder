@@ -12,6 +12,8 @@ ItemShip::ItemShip()
 
 }
 
-void ItemShip::parse() {
+json ItemShip::parse() {
     qDebug() << "Ship parsing not yet implemented";
+    json ship;
+    return ship;
 }

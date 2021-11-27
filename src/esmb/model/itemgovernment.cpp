@@ -12,6 +12,8 @@ ItemGovernment::ItemGovernment()
 
 }
 
-void ItemGovernment::parse() {
+json ItemGovernment::parse() {
     qDebug() << "Government parsing not yet implemented";
+    json govt;
+    return govt;
 }

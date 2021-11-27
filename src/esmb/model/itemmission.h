@@ -16,7 +16,7 @@ class ItemMission : public FileItem
 public:
     ItemMission();
 
-    void parse();
+    json parse();
 };
 
 #endif // ITEMMISSION_H
