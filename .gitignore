@@ -9,6 +9,7 @@
 *.so.*
 *.dll
 *.dylib
+build/
 
 # Qt-es
 object_script.*.Release
@@ -54,3 +55,8 @@ compile_commands.json
 *_qmlcache.qrc
 
 .github
+
+# Binaries
+# --------
+*.dll
+*.exe
