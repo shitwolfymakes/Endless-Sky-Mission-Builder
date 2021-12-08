@@ -1,10 +1,21 @@
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+find_package(QT NAMES Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets REQUIRED)
+set(QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+
+# ---- Add source files ----
+
 set(SOURCES
     esmbapplication.cpp
-    main.cpp
     mainwindow.cpp
 
     model/fileitem.cpp
@@ -44,23 +55,33 @@ set(RESOURCES resources.qrc)
 
 link_directories(${Boost_LIBRARY_DIRS})
 
-add_library(esmb_lib STATIC
+find_package(Threads)
+
+if (WIN32)
+    set(BOOST_ROOT C:/cpp_libs/boost/boost_1_77_0)
+endif()
+find_package(Boost REQUIRED)
+
+# Library
+add_library(esmb_src OBJECT
     ${SOURCES}
     ${HEADERS}
     ${MOC}
     ${UIC}
-    ${QRC}
-)
+    ${QRC})
 
-target_include_directories(esmb_lib SYSTEM PUBLIC
+target_include_directories(esmb_src SYSTEM PUBLIC
     ${Boost_INCLUDE_DIRS}
 )
 
-add_executable(esmb main.cpp)
-target_link_libraries(esmb PUBLIC ${QT_LIBRARIES})
+target_include_directories(esmb_src PUBLIC ${ESMB_SOURCE_DIR}/src)
 
-set_target_properties(esmb PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER shitwolfymakes.com
-)
 
-target_link_libraries(esmb PRIVATE esmb_lib nlohmann_json::nlohmann_json)
+# Executable
+add_executable(esmb_exec main.cpp)
+target_link_libraries(esmb_exec PUBLIC esmb_src ${QT_LIBRARIES})
+set_target_properties(esmb_exec PROPERTIES OUTPUT_NAME esmb)
+
+add_subdirectory(${ESMB_EXTERNAL_DIR} ${ESMB_BINARY_DIR}/external)
+
+target_link_libraries(esmb_src PUBLIC nlohmann_json)

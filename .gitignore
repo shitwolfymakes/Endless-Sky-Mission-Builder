@@ -9,7 +9,10 @@
 *.so.*
 *.dll
 *.dylib
-build/
+build/*
+/build*
+/cpm_modules
+.DS_Store
 
 # Qt-es
 object_script.*.Release

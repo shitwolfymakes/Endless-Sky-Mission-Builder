@@ -1,50 +1,70 @@
-# ESMB root CMakeLists.txt
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(esmb)
+# ---- Project ----
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(QT_COMPONENTS Core Gui Widgets)
-find_package(QT NAMES Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets REQUIRED)
-set(QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
-include_directories(${Qt5Widgets_INCLUDE_DIRS})
-
-find_package(Threads)
-
-if (WIN32)
-    set(BOOST_ROOT C:/cpp_libs/boost/boost_1_77_0)
-endif()
-find_package(Boost REQUIRED)
-
-# Use FetchContent to get dependencies on windows
-include(FetchContent)
-
-# Get googletest dependency
-FetchContent_Declare(
-    googletest
-    # Specify the commit you depend on and update it regularly.
-    URL https://github.com/google/googletest/archive/d61d4d8e64c08a662055e82904bbf90e108a704f.zip
+# Note: update this to your new project's name and version
+project(
+  ESMB
+  VERSION 1.0
+  LANGUAGES CXX
 )
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-include_directories(${googletest_SOURCE_DIR}/include)
 
-# Get JSON dependency
-FetchContent_Declare(json
-    GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
-    GIT_TAG v3.10.4
-)
-FetchContent_GetProperties(json)
-if(NOT json_POPULATED)
-    FetchContent_Populate(json)
-    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
+# ---- Include guards ----
+
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+  message(
+    FATAL_ERROR
+      "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+  )
 endif()
-include_directories(${json_SOURCE_DIR}/include) # necessary as explained by https://stackoverflow.com/a/56593741/9820346
 
+# ---- Add dependencies via CPM ----
+# see https://github.com/TheLartians/CPM.cmake for more info
+
+include(cmake/CPM.cmake)
+set(CPM_USE_LOCAL_PACKAGES OFF)
+set(CPM_LOCAL_PACKAGES_ONLY OFF)
+
+# PackageProject.cmake will be used to make our target installable
+#CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
+
+# ---- Create library ----
+
+# Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
+# target: add_library(${PROJECT_NAME} INTERFACE)
+#add_library(${PROJECT_NAME} ${headers} ${sources})
+
+#set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+
+# being a cross-platform target, we enforce standards conformance on MSVC
+#target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
+
+# Link dependencies
+#target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+
+#target_include_directories(
+#  ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+#                         $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+#)
+
+# ---- Create an installable target ----
+# this allows users to install and find the library via `find_package()`.
+
+# the location where the project's version header will be placed should match the project's regular
+# header paths
+#string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
+
+#packageProject(
+#  NAME ${PROJECT_NAME}
+#  VERSION ${PROJECT_VERSION}
+#  NAMESPACE ${PROJECT_NAME}
+#  BINARY_DIR ${PROJECT_BINARY_DIR}
+#  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+#  INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
+#  VERSION_HEADER "${VERSION_HEADER_LOCATION}"
+#  COMPATIBILITY SameMajorVersion
+#  DEPENDENCIES "fmt 7.1.3"
+#)
+
+set(ESMB_EXTERNAL_DIR ${ESMB_SOURCE_DIR}/external)
 add_subdirectory(src)
-add_subdirectory(test)
