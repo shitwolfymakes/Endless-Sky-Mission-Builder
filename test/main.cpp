@@ -5,7 +5,7 @@
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#include "tst_testcasename.h"
+#include "testing/tst_testcasename.h"
 
 #include <gtest/gtest.h>
 

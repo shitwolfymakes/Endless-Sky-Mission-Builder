@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project (ESMB_Tests LANGUAGES CXX)
+project (ESMB_Tests)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -Wno-c++11-narrowing")
 
 # Thanks to clementine-player for having a clear and concise CMakeLists for this
-#include_directories(${GMOCK_INCLUDE_DIRS} ${GTEST_INCLUDE_DIRS})
-enable_testing()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${CMAKE_BINARY_DIR}/src)
@@ -22,21 +22,21 @@ add_custom_target(build_tests
 add_dependencies(esmb_test build_tests)
 
 add_library(test_gui_main STATIC EXCLUDE_FROM_ALL main.cpp)
-target_link_libraries(test_gui_main esmb_lib)
+target_link_libraries(test_gui_main esmb_lib gtest gtest_main gmock)
 set_target_properties(test_gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
 
 add_library(test_main STATIC EXCLUDE_FROM_ALL main.cpp)
-target_link_libraries(test_main esmb_lib)
+target_link_libraries(test_main esmb_lib gtest gtest_main gmock)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
-macro(add_test_file test_source gui_required)
+macro(add_test_file file_path test_source gui_required)
     get_filename_component(TEST_NAME ${test_source} NAME_WE)
     add_executable(${TEST_NAME}
-        EXCLUDE_FROM_ALL
-        ${test_source}
+        #EXCLUDE_FROM_ALL # this prevents the test from being built (when targeting ALL)
+        ${file_path}/${test_source}
     )
 
-    target_link_libraries(${TEST_NAME} gtest_main esmb_lib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt5::Test)# ${GMOCK_LIBRARIES} clementine_lib test_utils Qt5::Test)
+    target_link_libraries(${TEST_NAME} gtest gtest_main gmock esmb_lib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt5::Test)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
         target_link_libraries(${TEST_NAME} test_gui_main)
@@ -55,4 +55,4 @@ macro(add_test_file test_source gui_required)
 endmacro (add_test_file)
 
 
-add_test_file(parsers/filemissionitemparser_tests.cpp false)
+add_test_file(parsers filemissionitemparser_tests.cpp false)
