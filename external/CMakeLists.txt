@@ -7,13 +7,6 @@ elseif(${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
 endif()
 
 CPMAddPackage(
-  NAME fmt
-  GIT_TAG 7.1.3
-  GITHUB_REPOSITORY fmtlib/fmt
-  OPTIONS "FMT_INSTALL YES" # create an installable target
-)
-
-CPMAddPackage(
     NAME nlohmann_json
     GITHUB_REPOSITORY nlohmann/json
     VERSION 3.10.4
@@ -25,3 +18,13 @@ if (nlohmann_json_ADDED)
     add_library(nlohmann_json INTERFACE)
     target_include_directories(nlohmann_json SYSTEM INTERFACE "${nlohmann_json_SOURCE_DIR}/include")
 endif()
+
+CPMAddPackage(
+    NAME googletest
+    GITHUB_REPOSITORY google/googletest
+    GIT_TAG release-1.11.0
+    VERSION 1.11.0
+    OPTIONS
+        "INSTALL_GTEST OFF"
+        "gtest_force_shared_crt ON"
+)
