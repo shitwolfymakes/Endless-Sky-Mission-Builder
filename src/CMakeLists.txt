@@ -7,13 +7,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(QT NAMES Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets REQUIRED)
-set(QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
-include_directories(${Qt5Widgets_INCLUDE_DIRS})
-
 # ---- Add source files ----
-
 set(SOURCES
     esmbapplication.cpp
     mainwindow.cpp
@@ -63,25 +57,26 @@ endif()
 find_package(Boost REQUIRED)
 
 # Library
-add_library(esmb_src OBJECT
+add_library(esmb_lib STATIC
     ${SOURCES}
     ${HEADERS}
     ${MOC}
     ${UIC}
-    ${QRC})
+    ${QRC}
+)
 
-target_include_directories(esmb_src SYSTEM PUBLIC
+
+target_include_directories(esmb_lib SYSTEM PUBLIC
     ${Boost_INCLUDE_DIRS}
 )
 
-target_include_directories(esmb_src PUBLIC ${ESMB_SOURCE_DIR}/src)
+target_include_directories(esmb_lib PUBLIC ${ESMB_SOURCE_DIR}/src)
 
 
 # Executable
-add_executable(esmb_exec main.cpp)
-target_link_libraries(esmb_exec PUBLIC esmb_src ${QT_LIBRARIES})
-set_target_properties(esmb_exec PROPERTIES OUTPUT_NAME esmb)
+add_executable(esmb main.cpp)
+target_link_libraries(esmb esmb_lib)
 
 add_subdirectory(${ESMB_EXTERNAL_DIR} ${ESMB_BINARY_DIR}/external)
 
-target_link_libraries(esmb_src PUBLIC nlohmann_json)
+target_link_libraries(esmb_lib PUBLIC nlohmann_json ${QT_LIBRARIES})

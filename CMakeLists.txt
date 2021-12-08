@@ -1,16 +1,8 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-# ---- Project ----
-
-# Note: update this to your new project's name and version
-project(
-  ESMB
-  VERSION 0.1
-  LANGUAGES CXX
-)
+project(ESMB VERSION 0.1 LANGUAGES CXX)
 
 # ---- Include guards ----
-
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   message(
     FATAL_ERROR
@@ -18,7 +10,15 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   )
 endif()
 
-set(BUILD_TESTS ON)
+# includes and top level flags
+include(CheckCXXCompilerFlag)
+set(ESMB_BUILD_TESTS ON)
+
+# QT
+set(QT_MIN_VERSION 5.15.0)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Widgets Test)
+
+set(QT_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets)
 
 # setup CPM for package management
 include(cmake/CPM.cmake)
@@ -31,5 +31,5 @@ add_subdirectory(src)
 
 # add the test subproject
 if (ESMB_BUILD_TESTS)
-  add_subdirectory(test)
+    add_subdirectory(test)
 endif()
