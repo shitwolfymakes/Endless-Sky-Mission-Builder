@@ -7,7 +7,7 @@
 
 #include "fileitem.h"
 
-FileItem::FileItem() {};
+FileItem::FileItem() {}
 
 std::string FileItem::getName() {
     return name;
