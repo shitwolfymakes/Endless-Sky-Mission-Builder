@@ -150,4 +150,25 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers)
     ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage)
+{
+    std::vector<std::string> tokens = {"illegal", "50", "Soviet citizens need no food comrade"};
+    json illegal;
+    illegal["fine"] = 50;
+    illegal["message"] = "Soviet citizens need no food comrade";
+
+    parser.parseIllegal(tokens);
+    ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine)
+{
+    std::vector<std::string> tokens = {"illegal", "50"};
+    json illegal;
+    illegal["fine"] = 50;
+
+    parser.parseIllegal(tokens);
+    ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
+}
+
 } // namespace parsertests

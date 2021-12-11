@@ -188,7 +188,7 @@ void FileMissionItemParser::parsePassengers(std::vector<std::string> tokens) {
 
 void FileMissionItemParser::parseIllegal(std::vector<std::string> tokens) {
     qDebug("\tFound illegal: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
-    mission["illegal"]["fine"] = tokens.at(1);
+    mission["illegal"]["fine"] = std::stoi(tokens.at(1));
     if (tokens.size() == 3) {
         mission["illegal"]["message"] = tokens.at(2);
     }
