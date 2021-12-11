@@ -218,7 +218,7 @@ void FileMissionItemParser::parseRepeat(std::vector<std::string> tokens) {
     qDebug("\tFound repeat: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
     mission["repeat"]["is_active"] = true;
     if (tokens.size() == 2) {
-        mission["repeat"]["amount"] = tokens.at(1);
+        mission["repeat"]["amount"] = std::stoi(tokens.at(1));
     }
 }
 

@@ -10,36 +10,31 @@ using namespace testing;
 
 namespace parsertests {
 
-TEST_F(FileMissionItemParserTest, StoreEngineMissionId)
-{
+TEST_F(FileMissionItemParserTest, StoreEngineMissionId) {
     std::vector<std::string> tokens = {"mission", "FileMissionItemParserTest"};
     parser.parseId(tokens);
     ASSERT_EQ(parser.get_mission()["id"], "FileMissionItemParserTest");
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionName)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionName) {
     std::vector<std::string> tokens = {"name", "Mission 1"};
     parser.parseName(tokens);
     ASSERT_EQ(parser.get_mission()["name"], "Mission 1");
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionDescription)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionDescription) {
     std::vector<std::string> tokens = {"description", "A test mission"};
     parser.parseDescription(tokens);
     ASSERT_EQ(parser.get_mission()["description"], "A test mission");
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionBlocked)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionBlocked) {
     std::vector<std::string> tokens = {"blocked", "Oh piss off!"};
     parser.parseBlocked(tokens);
     ASSERT_EQ(parser.get_mission()["blocked"], "Oh piss off!");
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplier)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplier) {
     std::vector<std::string> tokens = {"deadline", "2", "1"};
     json deadline;
     deadline["is_active"] = true;
@@ -50,8 +45,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplie
     ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays) {
     std::vector<std::string> tokens = {"deadline", "2"};
     json deadline;
     deadline["is_active"] = true;
@@ -61,8 +55,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays)
     ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly) {
     std::vector<std::string> tokens = {"deadline"};
     json deadline;
     deadline["is_active"] = true;
@@ -71,8 +64,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly)
     ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRangeAndProbability)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRangeAndProbability) {
     std::vector<std::string> tokens = {"cargo", "food", "5", "2", "0.1"};
     json cargo;
     cargo["cargo"] = "food";
@@ -84,8 +76,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndR
     ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRange)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRange) {
     std::vector<std::string> tokens = {"cargo", "food", "5", "2"};
     json cargo;
     cargo["cargo"] = "food";
@@ -96,8 +87,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndR
     ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage) {
     std::vector<std::string> tokens = {"cargo", "food", "5"};
     json cargo;
     cargo["cargo"] = "food";
@@ -107,8 +97,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage)
     ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRangeAndProbability)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRangeAndProbability) {
     std::vector<std::string> tokens = {"passengers", "10", "5", "0.2"};
     json passengers;
     passengers["passengers"] = 10;
@@ -119,8 +108,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndR
     ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRange)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRange) {
     std::vector<std::string> tokens = {"passengers", "10", "5"};
     json passengers;
     passengers["passengers"] = 10;
@@ -130,8 +118,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndR
     ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers) {
     std::vector<std::string> tokens = {"passengers", "10"};
     json passengers;
     passengers["passengers"] = 10;
@@ -140,8 +127,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers)
     ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage) {
     std::vector<std::string> tokens = {"illegal", "50", "Soviet citizens need no food comrade"};
     json illegal;
     illegal["fine"] = 50;
@@ -151,8 +137,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage)
     ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine) {
     std::vector<std::string> tokens = {"illegal", "50"};
     json illegal;
     illegal["fine"] = 50;
@@ -161,28 +146,43 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine)
     ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionStealthFlag)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionStealthFlag) {
     parser.parseStealth();
     ASSERT_EQ(parser.get_mission()["stealth"], true);
 }
 
-TEST_F(FileMissionItemParserTest, StoreMissionInvisibleFlag)
-{
+TEST_F(FileMissionItemParserTest, StoreMissionInvisibleFlag) {
     parser.parseInvisible();
     ASSERT_EQ(parser.get_mission()["invisible"], true);
 }
 
-TEST_P(MissionPriorityParameterizedTestFixture, StoreMissionPriorityLevel)
-{
+TEST_P(MissionPriorityParameterizedTestFixture, StoreMissionPriorityLevel) {
     parser.parsePriorityLevel(GetParam());
     ASSERT_EQ(parser.get_mission()["priority_level"], GetParam());
 }
 
-TEST_P(MissionWhereShownParameterizedTestFixture, StoreMissionWhereShown)
-{
+TEST_P(MissionWhereShownParameterizedTestFixture, StoreMissionWhereShown) {
     parser.parseWhereShown(GetParam());
     ASSERT_EQ(parser.get_mission()["where_shown"], GetParam());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionRepeatContainingAmount) {
+    std::vector<std::string> tokens = {"repeat", "5"};
+    json repeat;
+    repeat["is_active"] = true;
+    repeat["amount"] = 5;
+
+    parser.parseRepeat(tokens);
+    ASSERT_EQ(parser.get_mission()["repeat"].dump(), repeat.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionRepeatOnly) {
+    std::vector<std::string> tokens = {"repeat"};
+    json repeat;
+    repeat["is_active"] = true;
+
+    parser.parseRepeat(tokens);
+    ASSERT_EQ(parser.get_mission()["repeat"].dump(), repeat.dump());
 }
 
 } // namespace parsertests
