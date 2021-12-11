@@ -60,4 +60,25 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplie
     ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays)
+{
+    std::vector<std::string> tokens = {"deadline", "2"};
+    json deadline;
+    deadline["is_active"] = true;
+    deadline["days"] = 2;
+
+    parser.parseDeadline(tokens);
+    ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly)
+{
+    std::vector<std::string> tokens = {"deadline"};
+    json deadline;
+    deadline["is_active"] = true;
+
+    parser.parseDeadline(tokens);
+    ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
+}
+
 } // namespace parsertests
