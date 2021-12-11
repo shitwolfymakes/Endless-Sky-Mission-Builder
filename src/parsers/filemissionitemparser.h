@@ -43,6 +43,8 @@ public:
     int parseDialog(std::vector<std::string> *, int, json *);
     int parseCondition(std::vector<std::string> *, int);
     int parseNpc(std::vector<std::string> *, int);
+
+    json get_mission();
 };
 
 #endif // FILEMISSIONITEMPARSER_H

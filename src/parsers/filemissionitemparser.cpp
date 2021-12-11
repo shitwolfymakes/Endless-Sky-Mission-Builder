@@ -543,3 +543,7 @@ int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int 
     qDebug("\tNPC data: %s", qUtf8Printable(QString::fromStdString(npc.dump(4))));
     return index;
 }
+
+json FileMissionItemParser::get_mission() {
+    return mission;
+}

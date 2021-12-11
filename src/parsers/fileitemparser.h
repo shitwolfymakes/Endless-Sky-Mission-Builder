@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * fileitemparser.h
+ *
+ * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
 #ifndef FILEITEMPARSER_H
 #define FILEITEMPARSER_H
 

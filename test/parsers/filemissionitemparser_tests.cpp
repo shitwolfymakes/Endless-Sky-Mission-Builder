@@ -6,12 +6,32 @@
  */
 
 #include <gtest/gtest.h>
-#include <gmock/gmock-matchers.h>
+#include <gmock/gmock.h>
+
+#include "parsers/filemissionitemparser.h"
 
 using namespace testing;
 
-TEST(TestSuiteName, TestCaseName)
+namespace parsertests {
+
+class FileMissionItemParserTest : public ::testing::Test {
+protected:
+    std::vector<std::string> minimum_mission_node_lines = {"mission \"FileMissionItemParserTest\""};
+    FileMissionItemParser parser = FileMissionItemParser(minimum_mission_node_lines);
+};
+
+TEST_F(FileMissionItemParserTest, StoreEngineMissionId)
 {
-    EXPECT_EQ(1, 1);
-    ASSERT_THAT(1, Eq(0));
+    std::vector<std::string> tokens = {"mission", "FileMissionItemParserTest"};
+    parser.parseId(tokens);
+    ASSERT_THAT(parser.get_mission()["id"], "FileMissionItemParserTest");
 }
+
+TEST_F(FileMissionItemParserTest, StoreMissionName)
+{
+    std::vector<std::string> tokens = {"name", "Mission 1"};
+    parser.parseName(tokens);
+    ASSERT_THAT(parser.get_mission()["name"], "Mission 1");
+}
+
+} // namespace parsertests
