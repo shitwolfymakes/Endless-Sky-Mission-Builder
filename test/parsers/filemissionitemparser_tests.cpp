@@ -34,4 +34,18 @@ TEST_F(FileMissionItemParserTest, StoreMissionName)
     ASSERT_THAT(parser.get_mission()["name"], "Mission 1");
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionDescription)
+{
+    std::vector<std::string> tokens = {"description", "A test mission"};
+    parser.parseDescription(tokens);
+    ASSERT_THAT(parser.get_mission()["description"], "A test mission");
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionBlocked)
+{
+    std::vector<std::string> tokens = {"blocked", "Oh piss off!"};
+    parser.parseBlocked(tokens);
+    ASSERT_THAT(parser.get_mission()["blocked"], "Oh piss off!");
+}
+
 } // namespace parsertests
