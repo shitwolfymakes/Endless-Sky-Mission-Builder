@@ -204,4 +204,9 @@ TEST_F(FileMissionItemParserTest, StoreMissionClearanceOnly) {
     ASSERT_EQ(parser.get_mission()["clearance"].dump(), clearance.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionInfiltratingFlag) {
+    parser.parseInfiltrating();
+    ASSERT_EQ(parser.get_mission()["infiltrating"], true);
+}
+
 } // namespace parsertests
