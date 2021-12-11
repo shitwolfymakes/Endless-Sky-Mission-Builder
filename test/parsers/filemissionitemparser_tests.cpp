@@ -24,28 +24,40 @@ TEST_F(FileMissionItemParserTest, StoreEngineMissionId)
 {
     std::vector<std::string> tokens = {"mission", "FileMissionItemParserTest"};
     parser.parseId(tokens);
-    ASSERT_THAT(parser.get_mission()["id"], "FileMissionItemParserTest");
+    ASSERT_EQ(parser.get_mission()["id"], "FileMissionItemParserTest");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionName)
 {
     std::vector<std::string> tokens = {"name", "Mission 1"};
     parser.parseName(tokens);
-    ASSERT_THAT(parser.get_mission()["name"], "Mission 1");
+    ASSERT_EQ(parser.get_mission()["name"], "Mission 1");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDescription)
 {
     std::vector<std::string> tokens = {"description", "A test mission"};
     parser.parseDescription(tokens);
-    ASSERT_THAT(parser.get_mission()["description"], "A test mission");
+    ASSERT_EQ(parser.get_mission()["description"], "A test mission");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionBlocked)
 {
     std::vector<std::string> tokens = {"blocked", "Oh piss off!"};
     parser.parseBlocked(tokens);
-    ASSERT_THAT(parser.get_mission()["blocked"], "Oh piss off!");
+    ASSERT_EQ(parser.get_mission()["blocked"], "Oh piss off!");
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplier)
+{
+    std::vector<std::string> tokens = {"deadline", "2", "1"};
+    json deadline;
+    deadline["is_active"] = true;
+    deadline["days"] = 2;
+    deadline["multiplier"] = 1;
+
+    parser.parseDeadline(tokens);
+    ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
 }
 
 } // namespace parsertests

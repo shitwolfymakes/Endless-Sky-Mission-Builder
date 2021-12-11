@@ -156,9 +156,9 @@ void FileMissionItemParser::parseDeadline(std::vector<std::string> tokens) {
     qDebug("\tFound deadline: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
     mission["deadline"]["is_active"] = true;
     if (tokens.size() > 1) {
-        mission["deadline"]["days"] = tokens.at(1);
+        mission["deadline"]["days"] = std::stoi(tokens.at(1));
         if (tokens.size() == 3) {
-            mission["deadline"]["multiplier"] = tokens.at(2);
+            mission["deadline"]["multiplier"] = std::stoi(tokens.at(2));
         }
     }
 }
