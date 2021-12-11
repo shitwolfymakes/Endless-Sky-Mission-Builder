@@ -117,4 +117,37 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage)
     ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRangeAndProbability)
+{
+    std::vector<std::string> tokens = {"passengers", "10", "5", "0.2"};
+    json passengers;
+    passengers["passengers"] = 10;
+    passengers["passengers_range"] = 5;
+    passengers["probability"] = 0.2;
+
+    parser.parsePassengers(tokens);
+    ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRange)
+{
+    std::vector<std::string> tokens = {"passengers", "10", "5"};
+    json passengers;
+    passengers["passengers"] = 10;
+    passengers["passengers_range"] = 5;
+
+    parser.parsePassengers(tokens);
+    ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers)
+{
+    std::vector<std::string> tokens = {"passengers", "10"};
+    json passengers;
+    passengers["passengers"] = 10;
+
+    parser.parsePassengers(tokens);
+    ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
+}
+
 } // namespace parsertests

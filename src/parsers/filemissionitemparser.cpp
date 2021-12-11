@@ -177,11 +177,11 @@ void FileMissionItemParser::parseCargo(std::vector<std::string> tokens) {
 
 void FileMissionItemParser::parsePassengers(std::vector<std::string> tokens) {
     qDebug("\tFound passengers: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
-    mission["passengers"]["passengers"] = tokens.at(1);
+    mission["passengers"]["passengers"] = std::stoi(tokens.at(1));
     if (tokens.size() > 2) {
-        mission["passengers"]["passengers_range"] = tokens.at(2);
+        mission["passengers"]["passengers_range"] = std::stoi(tokens.at(2));
         if (tokens.size() == 4) {
-            mission["passengers"]["probability"] = tokens.at(3);
+            mission["passengers"]["probability"] = std::stod(tokens.at(3));
         }
     }
 }

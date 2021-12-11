@@ -18,7 +18,7 @@ mission "Test Mission 0"
 	blocked "Oh piss off!"
 	deadline 2 1
 	cargo "food" 5 2 0.1
-	passengers 5 5 0.2
+        passengers 10 5 0.2
 	illegal 50 `Soviet citizens need no food comrade`
 	stealth
 	invisible
