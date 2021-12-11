@@ -4,21 +4,11 @@
  *
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
-
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-
-#include "parsers/filemissionitemparser.h"
+#include "filemissionitemparser_tests.h"
 
 using namespace testing;
 
 namespace parsertests {
-
-class FileMissionItemParserTest : public ::testing::Test {
-protected:
-    std::vector<std::string> minimum_mission_node_lines = {"mission \"FileMissionItemParserTest\""};
-    FileMissionItemParser parser = FileMissionItemParser(minimum_mission_node_lines);
-};
 
 TEST_F(FileMissionItemParserTest, StoreEngineMissionId)
 {
@@ -181,6 +171,12 @@ TEST_F(FileMissionItemParserTest, StoreMissionInvisibleFlag)
 {
     parser.parseInvisible();
     ASSERT_EQ(parser.get_mission()["invisible"], true);
+}
+
+TEST_P(MissionPriorityParameterizedTestFixture, StoreMissionPriorityLevel)
+{
+    parser.parsePriorityLevel(GetParam());
+    ASSERT_EQ(parser.get_mission()["priority_level"], GetParam());
 }
 
 } // namespace parsertests
