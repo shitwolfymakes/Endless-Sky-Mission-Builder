@@ -67,12 +67,9 @@ json FileMissionItemParser::run() {
             parseRepeat(tokens);
         }
         else if (tokens.at(0).compare("clearance") == 0) {
-            if (tokens.size() == 2) {
-                parseClearance(tokens);
-            } else {
-                qDebug("COMPLEX CLEARANCE HANDLING NOT YET IMPLEMENTED");
-                continue;
-            }
+            // TODO: convert this to handle filters the same way parseTrigger works
+            // e.g. i = parseNodeWithFilter(&lines, i);
+            parseClearance(tokens);
         }
         else if (tokens.at(0).compare("infiltrating") == 0) {
             parseInfiltrating();
@@ -81,22 +78,23 @@ json FileMissionItemParser::run() {
             if (tokens.size() == 2) {
                 parseWaypoint(tokens);
             } else {
+                // TODO: convert this to handle filters the same way parseTrigger works
+                // e.g. i = parseNodeWithFilter(&lines, i);
                 qDebug("COMPLEX WAYPOINT HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
         }
         else if (tokens.at(0).compare("stopover") == 0) {
-            if (tokens.size() == 2) {
-                parseStopover(tokens);
-            } else {
-                qDebug("COMPLEX STOPOVER HANDLING NOT YET IMPLEMENTED");
-                continue;
-            }
+            // TODO: convert this to handle filters the same way parseTrigger works
+            // e.g. i = parseNodeWithFilter(&lines, i);
+            parseStopover(tokens);
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
                 parseSource(tokens);
             } else {
+                // TODO: convert this to handle filters the same way parseTrigger works
+                // e.g. i = parseNodeWithFilter(&lines, i);
                 qDebug("COMPLEX SOURCE HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
@@ -105,6 +103,8 @@ json FileMissionItemParser::run() {
             if (tokens.size() == 2) {
                 parseDestination(tokens);
             } else {
+                // TODO: convert this to handle filters the same way parseTrigger works
+                // e.g. i = parseNodeWithFilter(&lines, i);
                 qDebug("COMPLEX DESTINATION HANDLING NOT YET IMPLEMENTED");
                 continue;
             }
@@ -223,8 +223,11 @@ void FileMissionItemParser::parseRepeat(std::vector<std::string> tokens) {
 }
 
 void FileMissionItemParser::parseClearance(std::vector<std::string> tokens) {
-    qDebug("\tFound clearance: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["clearance"]["message"] = tokens.at(1);
+    qDebug("\tFound clearance: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    mission["clearance"]["is_active"] = true;
+    if (tokens.size() == 2) {
+        mission["clearance"]["message"] = tokens.at(1);
+    }
 }
 
 void FileMissionItemParser::parseInfiltrating() {

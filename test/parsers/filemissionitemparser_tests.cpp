@@ -185,4 +185,23 @@ TEST_F(FileMissionItemParserTest, StoreMissionRepeatOnly) {
     ASSERT_EQ(parser.get_mission()["repeat"].dump(), repeat.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionClearanceContainingMessage) {
+    std::vector<std::string> tokens = {"clearance", "You're on the list"};
+    json clearance;
+    clearance["is_active"] = true;
+    clearance["message"] = "You're on the list";
+
+    parser.parseClearance(tokens);
+    ASSERT_EQ(parser.get_mission()["clearance"].dump(), clearance.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionClearanceOnly) {
+    std::vector<std::string> tokens = {"clearance"};
+    json clearance;
+    clearance["is_active"] = true;
+
+    parser.parseClearance(tokens);
+    ASSERT_EQ(parser.get_mission()["clearance"].dump(), clearance.dump());
+}
+
 } // namespace parsertests
