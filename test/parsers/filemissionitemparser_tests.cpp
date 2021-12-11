@@ -81,4 +81,40 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly)
     ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRangeAndProbability)
+{
+    std::vector<std::string> tokens = {"cargo", "food", "5", "2", "0.1"};
+    json cargo;
+    cargo["cargo"] = "food";
+    cargo["tonnage"] = 5;
+    cargo["tonnage_range"] = 2;
+    cargo["probability"] = 0.1;
+
+    parser.parseCargo(tokens);
+    ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRange)
+{
+    std::vector<std::string> tokens = {"cargo", "food", "5", "2"};
+    json cargo;
+    cargo["cargo"] = "food";
+    cargo["tonnage"] = 5;
+    cargo["tonnage_range"] = 2;
+
+    parser.parseCargo(tokens);
+    ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage)
+{
+    std::vector<std::string> tokens = {"cargo", "food", "5"};
+    json cargo;
+    cargo["cargo"] = "food";
+    cargo["tonnage"] = 5;
+
+    parser.parseCargo(tokens);
+    ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
+}
+
 } // namespace parsertests

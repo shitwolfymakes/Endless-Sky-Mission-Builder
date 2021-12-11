@@ -166,11 +166,11 @@ void FileMissionItemParser::parseDeadline(std::vector<std::string> tokens) {
 void FileMissionItemParser::parseCargo(std::vector<std::string> tokens) {
     qDebug("\tFound cargo: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
     mission["cargo"]["cargo"] = tokens.at(1);
-    mission["cargo"]["tonnage"] = tokens.at(2);
+    mission["cargo"]["tonnage"] = std::stoi(tokens.at(2));
     if (tokens.size() > 3) {
-        mission["cargo"]["tonnage_range"] = tokens.at(3);
+        mission["cargo"]["tonnage_range"] = std::stoi(tokens.at(3));
         if (tokens.size() == 5) {
-            mission["cargo"]["probability"] = tokens.at(4);
+            mission["cargo"]["probability"] = std::stod(tokens.at(4));
         }
     }
 }
