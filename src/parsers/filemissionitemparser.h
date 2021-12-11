@@ -34,7 +34,7 @@ public:
     void parseRepeat(std::vector<std::string>);
     void parseClearance(std::vector<std::string>);
     void parseInfiltrating();
-    void parseWaypoint(std::vector<std::string>);
+    void parseWaypoint(std::string);
     void parseStopover(std::vector<std::string>);
     void parseSource(std::vector<std::string>);
     void parseDestination(std::vector<std::string>);

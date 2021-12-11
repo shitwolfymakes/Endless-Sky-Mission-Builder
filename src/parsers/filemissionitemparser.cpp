@@ -76,7 +76,7 @@ json FileMissionItemParser::run() {
         }
         else if (tokens.at(0).compare("waypoint") == 0) {
             if (tokens.size() == 2) {
-                parseWaypoint(tokens);
+                parseWaypoint(tokens.at(1));
             } else {
                 // TODO: convert this to handle filters the same way parseTrigger works
                 // e.g. i = parseNodeWithFilter(&lines, i);
@@ -235,9 +235,11 @@ void FileMissionItemParser::parseInfiltrating() {
     mission["infiltrating"] = true;
 }
 
-void FileMissionItemParser::parseWaypoint(std::vector<std::string> tokens) {
-    qDebug("\tFound waypoint: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["waypoint"] = tokens.at(1);
+void FileMissionItemParser::parseWaypoint(std::string token) {
+    qDebug("\tFound waypoint: %s", qUtf8Printable(QString::fromStdString(token)));
+    json waypoint;
+    waypoint["system"] = token;
+    mission["waypoints"].emplace_back(waypoint);
 }
 
 void FileMissionItemParser::parseStopover(std::vector<std::string> tokens) {

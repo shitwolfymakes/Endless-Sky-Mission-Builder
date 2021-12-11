@@ -209,4 +209,18 @@ TEST_F(FileMissionItemParserTest, StoreMissionInfiltratingFlag) {
     ASSERT_EQ(parser.get_mission()["infiltrating"], true);
 }
 
+
+
+TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
+    std::string token = {"Sol"};
+    json expected;
+    json waypoint;
+    waypoint["system"] = "Sol";
+    expected.emplace_back(waypoint);
+
+    parser.parseWaypoint(token);
+    ASSERT_EQ(parser.get_mission()["waypoints"].dump(), expected.dump());
+}
+
+
 } // namespace parsertests
