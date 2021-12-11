@@ -179,4 +179,10 @@ TEST_P(MissionPriorityParameterizedTestFixture, StoreMissionPriorityLevel)
     ASSERT_EQ(parser.get_mission()["priority_level"], GetParam());
 }
 
+TEST_P(MissionWhereShownParameterizedTestFixture, StoreMissionWhereShown)
+{
+    parser.parseWhereShown(GetParam());
+    ASSERT_EQ(parser.get_mission()["where_shown"], GetParam());
+}
+
 } // namespace parsertests
