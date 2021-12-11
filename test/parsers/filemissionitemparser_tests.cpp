@@ -171,4 +171,16 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine)
     ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionStealthFlag)
+{
+    parser.parseStealth();
+    ASSERT_EQ(parser.get_mission()["stealth"], true);
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionInvisibleFlag)
+{
+    parser.parseInvisible();
+    ASSERT_EQ(parser.get_mission()["invisible"], true);
+}
+
 } // namespace parsertests
