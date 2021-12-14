@@ -39,6 +39,8 @@ public:
     void parseSource(std::string);
     void parseDestination(std::string);
     int parseTrigger(std::vector<std::string> *, int);
+    void parseLog(std::vector<std::string>, json *);
+    void parseLog(std::string, json *);
     int parseConversation(std::vector<std::string> *, int, json *);
     int parseDialog(std::vector<std::string> *, int, json *);
     int parseCondition(std::vector<std::string> *, int);

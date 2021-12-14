@@ -10,6 +10,7 @@ using namespace testing;
 
 namespace parsertests {
 
+// Test top level field parsing
 TEST_F(FileMissionItemParserTest, StoreEngineMissionId) {
     std::vector<std::string> tokens = {"mission", "FileMissionItemParserTest"};
     parser.parseId(tokens);
@@ -239,6 +240,34 @@ TEST_F(FileMissionItemParserTest, StoreMissionSourceWithPlanet) {
 TEST_F(FileMissionItemParserTest, StoreMissionDestinationWithPlanet) {
     parser.parseDestination("Delve");
     ASSERT_EQ(parser.get_mission()["destination"], "Delve");
+}
+
+
+// Test trigger parsing
+//TEST_F(FileMissionItemParserTest, StoreMissionTrigger) {}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerLogWithCategoryAndHeaderAndText) {
+    std::vector<std::string> tokens = {"log", "People", "Yo mama", "is a ho"};
+    json expected;
+    json log;
+    log["category"] = "People";
+    log["header"] = "Yo mama";
+    log["text"] = "is a ho";
+    expected.emplace_back(log);
+
+    parser.parseLog(tokens, &trigger);
+    ASSERT_EQ(trigger["logs"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerLogWithText) {
+    std::string token = "my mama ain't a ho";
+    json expected;
+    json log;
+    log["text"] = "my mama ain't a ho";
+    expected.emplace_back(log);
+
+    parser.parseLog(token, &trigger);
+    ASSERT_EQ(trigger["logs"].dump(), expected.dump());
 }
 
 

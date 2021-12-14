@@ -311,15 +311,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         if (tokens.at(0).compare("log") == 0) {
             qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             if (tokens.size() == 4) {
-                json log;
-                log["category"] = tokens.at(1);
-                log["header"] = tokens.at(2);
-                log["text"] = tokens.at(3);
-                trigger["logs"].emplace_back(log);
+                parseLog(tokens, &trigger);
             } else {
-                json log;
-                log["text"] = tokens.at(1);
-                trigger["logs"].emplace_back(log);
+                parseLog(tokens.at(1), &trigger);
             }
         } else if (tokens.at(0).compare("dialog") == 0) {
             index = parseDialog(missionLines, index, &trigger);
@@ -390,6 +384,22 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
     mission["triggers"].emplace_back(trigger);
     qDebug("\tTrigger data: %s", qUtf8Printable(QString::fromStdString(trigger.dump(4))));
     return index;
+}
+
+void FileMissionItemParser::parseLog(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    json log;
+    log["category"] = tokens.at(1);
+    log["header"] = tokens.at(2);
+    log["text"] = tokens.at(3);
+    (*trigger)["logs"].emplace_back(log);
+}
+
+void FileMissionItemParser::parseLog(std::string token, json *trigger) {
+    qDebug("\tFound log: %s", qUtf8Printable(QString::fromStdString(token)));
+    json log;
+    log["text"] = token;
+    (*trigger)["logs"].emplace_back(log);
 }
 
 int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLines, int startingIndex, json *trigger) {
