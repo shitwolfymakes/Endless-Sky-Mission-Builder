@@ -438,7 +438,7 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
     int index = startingIndex;
     json dialog;
 
-    // Check if dialog is phrase, single line, or multiline
+    // Check if dialog is phrase
     std::vector<std::string> tokens = tokenize(lines.at(index));
     if (tokens.size() == 3) {
         qDebug("\tFound dialog phrase: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
@@ -447,6 +447,14 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
     } else {
         qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         dialog.emplace_back(tokens.at(1));
+
+        // check if next line exists
+        try {
+            getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            (*trigger)["dialog"].emplace_back(dialog);
+            return index;
+        }
 
         int cur = getIndentLevel(lines.at(index));
         int nxt = getIndentLevel(lines.at(index + 1));
@@ -463,7 +471,10 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
             //  dialog
             //      phrase
             //          ...
-            dialog.emplace_back(lines.at(index));
+            if (tokens.at(0).compare("phrase") == 0) {
+                break;
+            }
+            dialog.emplace_back(tokens.at(0));
 
             // handle getting the depth of the next line
             try {

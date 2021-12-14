@@ -12,6 +12,7 @@ std::vector<std::string> FileItemParser::tokenize(std::string line) {
     boost::trim_if(line, boost::is_any_of("\t"));
 
     std::vector<std::string> tokens;
+    std::string token;
 
     // define the separators
     std::string separator1("");//dont let quoted arguments escape themselves
@@ -22,7 +23,9 @@ std::vector<std::string> FileItemParser::tokenize(std::string line) {
     boost::tokenizer<boost::escaped_list_separator<char>> tok(line, els);
     for(boost::tokenizer<boost::escaped_list_separator<char>>::iterator beg=tok.begin(); beg!=tok.end();++beg)
     {
-        tokens.push_back(*beg);
+        token = *beg;
+        boost::trim(token);
+        tokens.push_back(token);
     }
     return tokens;
 }

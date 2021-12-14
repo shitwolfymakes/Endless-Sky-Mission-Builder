@@ -283,6 +283,38 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogPhrase) {
     ASSERT_EQ(trigger["dialog_phrase"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogSingleLine) {
+    json expected;
+    json dialogLines;
+    dialogLines.emplace_back("It is Wednesday my dudes");
+    expected.emplace_back(dialogLines);
+
+    int index = 0;
+    std::vector<std::string> lines = minimum_trigger_node_lines;
+    lines.emplace_back("\t\tdialog `It is Wednesday my dudes`");
+
+    index = parser.parseDialog(&lines, 1, &trigger);
+    ASSERT_EQ(index, 1);
+    ASSERT_EQ(trigger["dialog"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogMutlipleLines) {
+    json expected;
+    json dialogLines;
+    dialogLines.emplace_back("It's flat fuck friday");
+    dialogLines.emplace_back("You fucking losers");
+    expected.emplace_back(dialogLines);
+
+    int index = 0;
+    std::vector<std::string> lines = minimum_trigger_node_lines;
+    lines.emplace_back("\t\tdialog `It's flat fuck friday`");
+    lines.emplace_back("\t\t\t`\tYou fucking losers`");
+
+    index = parser.parseDialog(&lines, 1, &trigger);
+    ASSERT_EQ(index, 2);
+    ASSERT_EQ(trigger["dialog"].dump(), expected.dump());
+}
+
 //TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConvoWithoutParsing) {}
 
 
