@@ -209,8 +209,6 @@ TEST_F(FileMissionItemParserTest, StoreMissionInfiltratingFlag) {
     ASSERT_EQ(parser.get_mission()["infiltrating"], true);
 }
 
-
-
 TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
     std::string token = {"Sol"};
     json expected;
@@ -220,6 +218,17 @@ TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
 
     parser.parseWaypoint(token);
     ASSERT_EQ(parser.get_mission()["waypoints"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
+    std::string token = {"Earth"};
+    json expected;
+    json stopover;
+    stopover["planet"] = "Earth";
+    expected.emplace_back(stopover);
+
+    parser.parseStopover(token);
+    ASSERT_EQ(parser.get_mission()["stopovers"].dump(), expected.dump());
 }
 
 

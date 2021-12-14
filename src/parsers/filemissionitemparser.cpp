@@ -85,9 +85,14 @@ json FileMissionItemParser::run() {
             }
         }
         else if (tokens.at(0).compare("stopover") == 0) {
-            // TODO: convert this to handle filters the same way parseTrigger works
-            // e.g. i = parseNodeWithFilter(&lines, i);
-            parseStopover(tokens);
+            if (tokens.size() == 2) {
+                parseStopover(tokens.at(1));
+            } else {
+                // TODO: convert this to handle filters the same way parseTrigger works
+                // e.g. i = parseNodeWithFilter(&lines, i);
+                qDebug("COMPLEX STOPOVER HANDLING NOT YET IMPLEMENTED");
+                continue;
+            }
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
@@ -242,9 +247,11 @@ void FileMissionItemParser::parseWaypoint(std::string token) {
     mission["waypoints"].emplace_back(waypoint);
 }
 
-void FileMissionItemParser::parseStopover(std::vector<std::string> tokens) {
-    qDebug("\tFound stopover: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["stopover"] = tokens.at(1);
+void FileMissionItemParser::parseStopover(std::string token) {
+    qDebug("\tFound stopover: %s", qUtf8Printable(QString::fromStdString(token)));
+    json stopover;
+    stopover["planet"] = token;
+    mission["stopovers"].emplace_back(stopover);
 }
 
 void FileMissionItemParser::parseSource(std::vector<std::string> tokens) {
