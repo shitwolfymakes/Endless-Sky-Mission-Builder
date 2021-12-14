@@ -29,7 +29,7 @@ mission "Test Mission 0"
 	infiltrating
 	waypoint "Sol"
 	stopover "Delve"
-	source "Sol"
+        source "Earth"
 	destination "Delve"
 	to offer
 		random < 60

@@ -231,5 +231,15 @@ TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
     ASSERT_EQ(parser.get_mission()["stopovers"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemParserTest, StoreMissionSourceWithPlanet) {
+    parser.parseSource("Earth");
+    ASSERT_EQ(parser.get_mission()["source"], "Earth");
+}
+
+TEST_F(FileMissionItemParserTest, StoreMissionDestinationWithPlanet) {
+    parser.parseDestination("Delve");
+    ASSERT_EQ(parser.get_mission()["destination"], "Delve");
+}
+
 
 } // namespace parsertests

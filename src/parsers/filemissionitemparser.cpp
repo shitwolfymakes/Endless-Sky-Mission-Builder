@@ -96,7 +96,7 @@ json FileMissionItemParser::run() {
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
-                parseSource(tokens);
+                parseSource(tokens.at(1));
             } else {
                 // TODO: convert this to handle filters the same way parseTrigger works
                 // e.g. i = parseNodeWithFilter(&lines, i);
@@ -106,7 +106,7 @@ json FileMissionItemParser::run() {
         }
         else if (tokens.at(0).compare("destination") == 0) {
             if (tokens.size() == 2) {
-                parseDestination(tokens);
+                parseDestination(tokens.at(1));
             } else {
                 // TODO: convert this to handle filters the same way parseTrigger works
                 // e.g. i = parseNodeWithFilter(&lines, i);
@@ -254,14 +254,14 @@ void FileMissionItemParser::parseStopover(std::string token) {
     mission["stopovers"].emplace_back(stopover);
 }
 
-void FileMissionItemParser::parseSource(std::vector<std::string> tokens) {
-    qDebug("\tFound source: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["source"] = tokens.at(1);
+void FileMissionItemParser::parseSource(std::string token) {
+    qDebug("\tFound source: %s", qUtf8Printable(QString::fromStdString(token)));
+    mission["source"] = token;
 }
 
-void FileMissionItemParser::parseDestination(std::vector<std::string> tokens) {
-    qDebug("\tFound destination: %s", qUtf8Printable(QString::fromStdString(tokens.at(1))));
-    mission["destination"] = tokens.at(1);
+void FileMissionItemParser::parseDestination(std::string token) {
+    qDebug("\tFound destination: %s", qUtf8Printable(QString::fromStdString(token)));
+    mission["destination"] = token;
 }
 
 int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, int startingIndex) {
