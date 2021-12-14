@@ -444,11 +444,10 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
         qDebug("\tFound dialog phrase: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         (*trigger)["dialog_phrase"].emplace_back(tokens.at(2));
         return startingIndex;
-    } else if (tokens.size() == 2) {
-        qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-        (*trigger)["dialog"].emplace_back(tokens.at(1));
     } else {
-        qDebug("\tParsing complex dialog node: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        qDebug("\tFound dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        dialog.emplace_back(tokens.at(1));
+
         int cur = getIndentLevel(lines.at(index));
         int nxt = getIndentLevel(lines.at(index + 1));
         while (true) {
@@ -456,9 +455,10 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
                 break;
             }
             index++;
+            qDebug("\tParsing complex dialog node...");
 
             std::vector<std::string> tokens = tokenize(lines.at(index));
-            qDebug("\tLine in dialog: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            qDebug("\tLine in dialog node: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             // TODO: handle inline phrase declarations
             //  dialog
             //      phrase

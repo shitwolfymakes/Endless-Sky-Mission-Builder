@@ -9,6 +9,7 @@
 namespace parsertests {
 
 std::vector<std::string> minimum_mission_node_lines = {"mission \"FileMissionItemParserTest\""};
+std::vector<std::string> minimum_trigger_node_lines = {"\ton offer"};
 
 // Fixture for testing a mission's top level fields
 class FileMissionItemParserTest : public ::testing::Test {

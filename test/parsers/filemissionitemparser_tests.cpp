@@ -270,5 +270,23 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerLogWithText) {
     ASSERT_EQ(trigger["logs"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogPhrase) {
+    json expected;
+    expected.emplace_back("Harambe 1");
+
+    int index = 0;
+    std::vector<std::string> lines = minimum_mission_node_lines;
+    lines.emplace_back("\t\tdialog phrase \"Harambe 1\"");
+
+    index = parser.parseDialog(&lines, 1, &trigger);
+    ASSERT_EQ(index, 1);
+    ASSERT_EQ(trigger["dialog_phrase"].dump(), expected.dump());
+}
+
+
+
+//TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConvoWithoutParsing) {}
+
+
 
 } // namespace parsertests
