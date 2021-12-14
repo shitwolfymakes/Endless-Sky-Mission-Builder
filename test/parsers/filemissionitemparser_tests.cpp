@@ -210,7 +210,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionInfiltratingFlag) {
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
-    std::string token = {"Sol"};
+    std::string token = "Sol";
     json expected;
     json waypoint;
     waypoint["system"] = "Sol";
@@ -221,7 +221,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
-    std::string token = {"Earth"};
+    std::string token = "Earth";
     json expected;
     json stopover;
     stopover["planet"] = "Earth";
