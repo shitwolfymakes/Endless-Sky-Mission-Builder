@@ -322,11 +322,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (tokens.at(0).compare("outfit") == 0) {
             parseOutfit(tokens, &trigger);
         } else if (tokens.at(0).compare("require") == 0) {
-            qDebug("\tFound require: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["require"]["outfit"] = tokens.at(1);
-            if (tokens.size() == 3) {
-                trigger["require"]["quantity"] = std::stoi(tokens.at(2));
-            }
+            parseRequire(tokens, &trigger);
         } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
             qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             trigger["give_ship"]["model"] = tokens.at(2);
@@ -496,10 +492,24 @@ void FileMissionItemParser::parseOutfit(std::vector<std::string> tokens, json *t
         if (quantity != 0) {
             outfit["quantity"] = quantity;
         } else {
-            // call parse require to handle require nodes handling the `outfit <outfit> 0` functionality
+            // TODO: call parse require to handle require nodes handling the `outfit <outfit> 0` functionality
         }*/
     }
     (*trigger)["outfits"].emplace_back(outfit);
+}
+
+void FileMissionItemParser::parseRequire(std::vector<std::string> tokens, json *trigger) {
+    // TODO: record negative quantity as invalid
+    qDebug("\tFound require: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    json require;
+    require["name"] = tokens.at(1);
+    if (tokens.size() == 3) {
+        int quantity = std::stoi(tokens.at(2));
+        if (quantity != 1) {
+            require["quantity"] = quantity;
+        }
+    }
+    (*trigger)["requires"].emplace_back(require);
 }
 
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {

@@ -44,6 +44,7 @@ public:
     int parseConversation(std::vector<std::string> *, int, json *);
     int parseDialog(std::vector<std::string> *, int, json *);
     void parseOutfit(std::vector<std::string>, json *);
+    void parseRequire(std::vector<std::string>, json *);
     int parseCondition(std::vector<std::string> *, int);
     int parseNpc(std::vector<std::string> *, int);
 

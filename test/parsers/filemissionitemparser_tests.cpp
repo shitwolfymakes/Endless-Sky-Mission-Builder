@@ -340,4 +340,38 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingName) {
     ASSERT_EQ(trigger["outfits"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQuantity) {
+    std::vector<std::string> tokens = {"require", "Hyperdrive", "5"};
+    json expected;
+    json require;
+    require["name"] = "Hyperdrive";
+    require["quantity"] = 5;
+    expected.emplace_back(require);
+
+    parser.parseRequire(tokens, &trigger);
+    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQuantityOfOne) {
+    std::vector<std::string> tokens = {"require", "Hyperdrive", "1"};
+    json expected;
+    json require;
+    require["name"] = "Hyperdrive";
+    expected.emplace_back(require);
+
+    parser.parseRequire(tokens, &trigger);
+    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingName) {
+    std::vector<std::string> tokens = {"require", "Hyperdrive"};
+    json expected;
+    json require;
+    require["name"] = "Hyperdrive";
+    expected.emplace_back(require);
+
+    parser.parseRequire(tokens, &trigger);
+    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+}
+
 } // namespace parsertests
