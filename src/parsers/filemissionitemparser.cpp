@@ -320,16 +320,12 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (tokens.at(0).compare("conversation") == 0) {
             index = parseConversation(missionLines, index, &trigger);
         } else if (tokens.at(0).compare("outfit") == 0) {
-            qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["outfit"]["outfit"] = tokens.at(1);
-            if (tokens.size() == 3) {
-                trigger["outfit"]["quantity"] = tokens.at(2);
-            }
+            parseOutfit(tokens, &trigger);
         } else if (tokens.at(0).compare("require") == 0) {
             qDebug("\tFound require: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             trigger["require"]["outfit"] = tokens.at(1);
             if (tokens.size() == 3) {
-                trigger["require"]["quantity"] = tokens.at(2);
+                trigger["require"]["quantity"] = std::stoi(tokens.at(2));
             }
         } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
             qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
@@ -487,6 +483,23 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
     }
     qDebug("\tDialog data: %s", qUtf8Printable(QString::fromStdString((*trigger)["dialog"].dump(4))));
     return index;
+}
+
+void FileMissionItemParser::parseOutfit(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound outfit: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    json outfit;
+    outfit["name"] = tokens.at(1);
+    if (tokens.size() == 3) {
+        int quantity = std::stoi(tokens.at(2));
+        outfit["quantity"] = quantity;
+        /*
+        if (quantity != 0) {
+            outfit["quantity"] = quantity;
+        } else {
+            // call parse require to handle require nodes handling the `outfit <outfit> 0` functionality
+        }*/
+    }
+    (*trigger)["outfits"].emplace_back(outfit);
 }
 
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {

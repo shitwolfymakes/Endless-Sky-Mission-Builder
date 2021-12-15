@@ -317,6 +317,27 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogMutlipleLines) {
 
 //TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConvoWithoutParsing) {}
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingNameAndQuantity) {
+    std::vector<std::string> tokens = {"outfit", "Skylance V", "5"};
+    json expected;
+    json outfit;
+    outfit["name"] = "Skylance V";
+    outfit["quantity"] = 5;
+    expected.emplace_back(outfit);
 
+    parser.parseOutfit(tokens, &trigger);
+    ASSERT_EQ(trigger["outfits"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingName) {
+    std::vector<std::string> tokens = {"outfit", "Skylance V"};
+    json expected;
+    json outfit;
+    outfit["name"] = "Skylance V";
+    expected.emplace_back(outfit);
+
+    parser.parseOutfit(tokens, &trigger);
+    ASSERT_EQ(trigger["outfits"].dump(), expected.dump());
+}
 
 } // namespace parsertests
