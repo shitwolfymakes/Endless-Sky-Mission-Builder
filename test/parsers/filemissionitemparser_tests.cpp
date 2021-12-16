@@ -43,7 +43,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplie
     deadline["multiplier"] = 1;
 
     parser.parseDeadline(tokens);
-    ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
+    ASSERT_EQ(parser.get_mission()["deadline"], deadline);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays) {
@@ -53,7 +53,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays) {
     deadline["days"] = 2;
 
     parser.parseDeadline(tokens);
-    ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
+    ASSERT_EQ(parser.get_mission()["deadline"], deadline);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly) {
@@ -62,7 +62,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly) {
     deadline["is_active"] = true;
 
     parser.parseDeadline(tokens);
-    ASSERT_EQ(parser.get_mission()["deadline"].dump(), deadline.dump());
+    ASSERT_EQ(parser.get_mission()["deadline"], deadline);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRangeAndProbability) {
@@ -74,7 +74,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndR
     cargo["probability"] = 0.1;
 
     parser.parseCargo(tokens);
-    ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
+    ASSERT_EQ(parser.get_mission()["cargo"], cargo);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRange) {
@@ -85,7 +85,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndR
     cargo["tonnage_range"] = 2;
 
     parser.parseCargo(tokens);
-    ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
+    ASSERT_EQ(parser.get_mission()["cargo"], cargo);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage) {
@@ -95,7 +95,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage) {
     cargo["tonnage"] = 5;
 
     parser.parseCargo(tokens);
-    ASSERT_EQ(parser.get_mission()["cargo"].dump(), cargo.dump());
+    ASSERT_EQ(parser.get_mission()["cargo"], cargo);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRangeAndProbability) {
@@ -106,7 +106,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndR
     passengers["probability"] = 0.2;
 
     parser.parsePassengers(tokens);
-    ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
+    ASSERT_EQ(parser.get_mission()["passengers"], passengers);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRange) {
@@ -116,7 +116,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndR
     passengers["passengers_range"] = 5;
 
     parser.parsePassengers(tokens);
-    ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
+    ASSERT_EQ(parser.get_mission()["passengers"], passengers);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers) {
@@ -125,7 +125,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers) {
     passengers["passengers"] = 10;
 
     parser.parsePassengers(tokens);
-    ASSERT_EQ(parser.get_mission()["passengers"].dump(), passengers.dump());
+    ASSERT_EQ(parser.get_mission()["passengers"], passengers);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage) {
@@ -135,7 +135,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage) {
     illegal["message"] = "Soviet citizens need no food comrade";
 
     parser.parseIllegal(tokens);
-    ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
+    ASSERT_EQ(parser.get_mission()["illegal"], illegal);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine) {
@@ -144,7 +144,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine) {
     illegal["fine"] = 50;
 
     parser.parseIllegal(tokens);
-    ASSERT_EQ(parser.get_mission()["illegal"].dump(), illegal.dump());
+    ASSERT_EQ(parser.get_mission()["illegal"], illegal);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionStealthFlag) {
@@ -174,7 +174,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionRepeatContainingAmount) {
     repeat["amount"] = 5;
 
     parser.parseRepeat(tokens);
-    ASSERT_EQ(parser.get_mission()["repeat"].dump(), repeat.dump());
+    ASSERT_EQ(parser.get_mission()["repeat"], repeat);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionRepeatOnly) {
@@ -183,7 +183,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionRepeatOnly) {
     repeat["is_active"] = true;
 
     parser.parseRepeat(tokens);
-    ASSERT_EQ(parser.get_mission()["repeat"].dump(), repeat.dump());
+    ASSERT_EQ(parser.get_mission()["repeat"], repeat);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionClearanceContainingMessage) {
@@ -193,7 +193,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionClearanceContainingMessage) {
     clearance["message"] = "You're on the list";
 
     parser.parseClearance(tokens);
-    ASSERT_EQ(parser.get_mission()["clearance"].dump(), clearance.dump());
+    ASSERT_EQ(parser.get_mission()["clearance"], clearance);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionClearanceOnly) {
@@ -202,7 +202,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionClearanceOnly) {
     clearance["is_active"] = true;
 
     parser.parseClearance(tokens);
-    ASSERT_EQ(parser.get_mission()["clearance"].dump(), clearance.dump());
+    ASSERT_EQ(parser.get_mission()["clearance"], clearance);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionInfiltratingFlag) {
@@ -218,7 +218,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
     expected.emplace_back(waypoint);
 
     parser.parseWaypoint(token);
-    ASSERT_EQ(parser.get_mission()["waypoints"].dump(), expected.dump());
+    ASSERT_EQ(parser.get_mission()["waypoints"], expected);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
@@ -229,7 +229,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
     expected.emplace_back(stopover);
 
     parser.parseStopover(token);
-    ASSERT_EQ(parser.get_mission()["stopovers"].dump(), expected.dump());
+    ASSERT_EQ(parser.get_mission()["stopovers"], expected);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionSourceWithPlanet) {
@@ -256,7 +256,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerLogWithCategoryAndHeaderAnd
     expected.emplace_back(log);
 
     parser.parseLog(tokens, &trigger);
-    ASSERT_EQ(trigger["logs"].dump(), expected.dump());
+    ASSERT_EQ(trigger["logs"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerLogWithText) {
@@ -267,12 +267,12 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerLogWithText) {
     expected.emplace_back(log);
 
     parser.parseLog(token, &trigger);
-    ASSERT_EQ(trigger["logs"].dump(), expected.dump());
+    ASSERT_EQ(trigger["logs"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogPhrase) {
-    json expected;
-    expected.emplace_back("Harambe 1");
+    json dialoguePhrase;
+    dialoguePhrase.emplace_back("Harambe 1");
 
     int index = 0;
     std::vector<std::string> lines = minimum_trigger_node_lines;
@@ -280,7 +280,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogPhrase) {
 
     index = parser.parseDialog(&lines, 1, &trigger);
     ASSERT_EQ(index, 1);
-    ASSERT_EQ(trigger["dialog_phrase"].dump(), expected.dump());
+    ASSERT_EQ(trigger["dialog_phrase"], dialoguePhrase);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogSingleLine) {
@@ -295,7 +295,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogSingleLine) {
 
     index = parser.parseDialog(&lines, 1, &trigger);
     ASSERT_EQ(index, 1);
-    ASSERT_EQ(trigger["dialog"].dump(), expected.dump());
+    ASSERT_EQ(trigger["dialog"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogMutlipleLines) {
@@ -312,7 +312,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerDialogMutlipleLines) {
 
     index = parser.parseDialog(&lines, 1, &trigger);
     ASSERT_EQ(index, 2);
-    ASSERT_EQ(trigger["dialog"].dump(), expected.dump());
+    ASSERT_EQ(trigger["dialog"], expected);
 }
 
 //TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConvoWithoutParsing) {}
@@ -326,7 +326,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingNameAndQuan
     expected.emplace_back(outfit);
 
     parser.parseOutfit(tokens, &trigger);
-    ASSERT_EQ(trigger["outfits"].dump(), expected.dump());
+    ASSERT_EQ(trigger["outfits"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingName) {
@@ -337,7 +337,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingName) {
     expected.emplace_back(outfit);
 
     parser.parseOutfit(tokens, &trigger);
-    ASSERT_EQ(trigger["outfits"].dump(), expected.dump());
+    ASSERT_EQ(trigger["outfits"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitDeprecated) {
@@ -350,7 +350,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitDeprecated) {
     expected.emplace_back(require);
 
     parser.parseOutfit(tokens, &trigger);
-    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+    ASSERT_EQ(trigger["requires"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQuantity) {
@@ -362,7 +362,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQua
     expected.emplace_back(require);
 
     parser.parseRequire(tokens, &trigger);
-    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+    ASSERT_EQ(trigger["requires"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQuantityOfOne) {
@@ -373,7 +373,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQua
     expected.emplace_back(require);
 
     parser.parseRequire(tokens, &trigger);
-    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+    ASSERT_EQ(trigger["requires"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingName) {
@@ -384,60 +384,60 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingName) {
     expected.emplace_back(require);
 
     parser.parseRequire(tokens, &trigger);
-    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+    ASSERT_EQ(trigger["requires"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModelAndName) {
     std::vector<std::string> tokens = {"give", "ship", "Black Diamond", "Stormheart"};
     json expected;
-    json give_ship;
-    give_ship["model"] = "Black Diamond";
-    give_ship["name"] = "Stormheart";
-    expected.emplace_back(give_ship);
+    json giveShip;
+    giveShip["model"] = "Black Diamond";
+    giveShip["name"] = "Stormheart";
+    expected.emplace_back(giveShip);
 
     parser.parseGiveShip(tokens, &trigger);
-    ASSERT_EQ(trigger["give_ships"].dump(), expected.dump());
+    ASSERT_EQ(trigger["give_ships"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModel) {
     std::vector<std::string> tokens = {"give", "ship", "Black Diamond"};
     json expected;
-    json give_ship;
-    give_ship["model"] = "Black Diamond";
-    expected.emplace_back(give_ship);
+    json giveShip;
+    giveShip["model"] = "Black Diamond";
+    expected.emplace_back(giveShip);
 
     parser.parseGiveShip(tokens, &trigger);
-    ASSERT_EQ(trigger["give_ships"].dump(), expected.dump());
+    ASSERT_EQ(trigger["give_ships"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmountAndMultiplier) {
     std::vector<std::string> tokens = {"payment", "1500", "20"};
-    json expected;
-    expected["is_active"] = true;
-    expected["base"] = 1500;
-    expected["multiplier"] = 20;
+    json payment;
+    payment["is_active"] = true;
+    payment["base"] = 1500;
+    payment["multiplier"] = 20;
 
     parser.parsePayment(tokens, &trigger);
-    ASSERT_EQ(trigger["payment"], expected);
+    ASSERT_EQ(trigger["payment"], payment);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmount) {
     std::vector<std::string> tokens = {"payment", "1500"};
-    json expected;
-    expected["is_active"] = true;
-    expected["base"] = 1500;
+    json payment;
+    payment["is_active"] = true;
+    payment["base"] = 1500;
 
     parser.parsePayment(tokens, &trigger);
-    ASSERT_EQ(trigger["payment"], expected);
+    ASSERT_EQ(trigger["payment"], payment);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentOnly) {
     std::vector<std::string> tokens = {"payment"};
-    json expected;
-    expected["is_active"] = true;
+    json payment;
+    payment["is_active"] = true;
 
     parser.parsePayment(tokens, &trigger);
-    ASSERT_EQ(trigger["payment"], expected);
+    ASSERT_EQ(trigger["payment"], payment);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFine) {
@@ -458,7 +458,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelay
     expected.emplace_back(event);
 
     parser.parseEvent(tokens, &trigger);
-    ASSERT_EQ(trigger["events"].dump(), expected.dump());
+    ASSERT_EQ(trigger["events"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelay) {
@@ -470,7 +470,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelay
     expected.emplace_back(event);
 
     parser.parseEvent(tokens, &trigger);
-    ASSERT_EQ(trigger["events"].dump(), expected.dump());
+    ASSERT_EQ(trigger["events"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingName) {
@@ -481,7 +481,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingName) {
     expected.emplace_back(event);
 
     parser.parseEvent(tokens, &trigger);
-    ASSERT_EQ(trigger["events"].dump(), expected.dump());
+    ASSERT_EQ(trigger["events"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFailContainingMissionId) {
@@ -490,7 +490,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFailContainingMissionId) {
     fails.emplace_back("the mission");
 
     parser.parseFail(tokens, &trigger);
-    ASSERT_EQ(trigger["fails"].dump(), fails.dump());
+    ASSERT_EQ(trigger["fails"], fails);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFailOnly) {
@@ -501,7 +501,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFailOnly) {
     // set the mission id before it is referenced by parseEvent
     parser.set_mission_id("fail this mission");
     parser.parseFail(tokens, &trigger);
-    ASSERT_EQ(trigger["fails"].dump(), fails.dump());
+    ASSERT_EQ(trigger["fails"], fails);
 }
 
 } // namespace parsertests
