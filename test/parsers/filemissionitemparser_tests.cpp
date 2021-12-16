@@ -413,37 +413,31 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModel) {
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmountAndMultiplier) {
     std::vector<std::string> tokens = {"payment", "1500", "20"};
     json expected;
-    json payment;
-    payment["is_active"] = true;
-    payment["base"] = 1500;
-    payment["multiplier"] = 20;
-    expected.emplace_back(payment);
+    expected["is_active"] = true;
+    expected["base"] = 1500;
+    expected["multiplier"] = 20;
 
     parser.parsePayment(tokens, &trigger);
-    ASSERT_EQ(trigger["payment"].dump(), expected.dump());
+    ASSERT_EQ(trigger["payment"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmount) {
     std::vector<std::string> tokens = {"payment", "1500"};
     json expected;
-    json payment;
-    payment["is_active"] = true;
-    payment["base"] = 1500;
-    expected.emplace_back(payment);
+    expected["is_active"] = true;
+    expected["base"] = 1500;
 
     parser.parsePayment(tokens, &trigger);
-    ASSERT_EQ(trigger["payment"].dump(), expected.dump());
+    ASSERT_EQ(trigger["payment"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentOnly) {
     std::vector<std::string> tokens = {"payment"};
     json expected;
-    json payment;
-    payment["is_active"] = true;
-    expected.emplace_back(payment);
+    expected["is_active"] = true;
 
     parser.parsePayment(tokens, &trigger);
-    ASSERT_EQ(trigger["payment"].dump(), expected.dump());
+    ASSERT_EQ(trigger["payment"], expected);
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFine) {

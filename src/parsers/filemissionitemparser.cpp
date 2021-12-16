@@ -519,7 +519,7 @@ void FileMissionItemParser::parsePayment(std::vector<std::string> tokens, json *
             payment["multiplier"] = std::stoi(tokens.at(2));
         }
     }
-    (*trigger)["payment"].emplace_back(payment);
+    (*trigger)["payment"] = payment;
 }
 
 
