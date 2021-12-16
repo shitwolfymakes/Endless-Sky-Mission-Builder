@@ -336,14 +336,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (isOneOf(tokens.at(0), {"set", "clear"})) {
             qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (tokens.at(0).compare("event") == 0) {
-            qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["event"]["name"] = tokens.at(1);
-            if (tokens.size() > 2) {
-                trigger["event"]["delay"] = tokens.at(2);
-                if (tokens.size() == 4) {
-                    trigger["event"]["max"] = tokens.at(3);
-                }
-            }
+            parseEvent(tokens, &trigger);
         } else if (tokens.at(0).compare("fail") == 0) {
             qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             trigger["fail"]["is_active"] = true;
@@ -526,6 +519,19 @@ void FileMissionItemParser::parsePayment(std::vector<std::string> tokens, json *
 void FileMissionItemParser::parseFine(std::string token, json *trigger) {
     qDebug("\tFound fine: %s", qUtf8Printable(QString::fromStdString(token)));
     (*trigger)["fine"] = std::stoi(token);
+}
+
+void FileMissionItemParser::parseEvent(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound event: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    json event;
+    event["name"] = tokens.at(1);
+    if (tokens.size() > 2) {
+        event["delay"] = std::stoi(tokens.at(2));
+        if (tokens.size() == 4) {
+            event["max_delay"] = std::stoi(tokens.at(3));
+        }
+    }
+    (*trigger)["events"].emplace_back(event);
 }
 
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {

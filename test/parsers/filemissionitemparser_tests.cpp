@@ -448,4 +448,17 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFine) {
     ASSERT_EQ(trigger["fine"], fine);
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelayAndRange) {
+    std::vector<std::string> tokens = {"event", "blaze it", "420", "4200"};
+    json expected;
+    json event;
+    event["name"] = "blaze it";
+    event["delay"] = 420;
+    event["max_delay"] = 4200;
+    expected.emplace_back(event);
+
+    parser.parseEvent(tokens, &trigger);
+    ASSERT_EQ(trigger["events"].dump(), expected.dump());
+}
+
 } // namespace parsertests
