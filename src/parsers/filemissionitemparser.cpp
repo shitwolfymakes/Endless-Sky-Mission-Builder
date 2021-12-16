@@ -324,11 +324,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (tokens.at(0).compare("require") == 0) {
             parseRequire(tokens, &trigger);
         } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
-            qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["give_ship"]["model"] = tokens.at(2);
-            if (tokens.size() == 4) {
-                trigger["give_ship"]["name"] = tokens.at(3);
-            }
+            parseGiveShip(tokens, &trigger);
         } else if (tokens.at(0).compare("payment") == 0) {
             qDebug("\tFound payment: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
             trigger["payment"]["is_active"] = true;
@@ -509,6 +505,16 @@ void FileMissionItemParser::parseRequire(std::vector<std::string> tokens, json *
         }
     }
     (*trigger)["requires"].emplace_back(require);
+}
+
+void FileMissionItemParser::parseGiveShip(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound give ship: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    json give_ship;
+    give_ship["model"] = tokens.at(2);
+    if (tokens.size() == 4) {
+        give_ship["name"] = tokens.at(3);
+    }
+    (*trigger)["give_ship"].emplace_back(give_ship);
 }
 
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {

@@ -387,4 +387,27 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingName) {
     ASSERT_EQ(trigger["requires"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModelAndName) {
+    std::vector<std::string> tokens = {"give", "ship", "Black Diamond", "Stormheart"};
+    json expected;
+    json give_ship;
+    give_ship["model"] = "Black Diamond";
+    give_ship["name"] = "Stormheart";
+    expected.emplace_back(give_ship);
+
+    parser.parseGiveShip(tokens, &trigger);
+    ASSERT_EQ(trigger["give_ship"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModel) {
+    std::vector<std::string> tokens = {"give", "ship", "Black Diamond"};
+    json expected;
+    json give_ship;
+    give_ship["model"] = "Black Diamond";
+    expected.emplace_back(give_ship);
+
+    parser.parseGiveShip(tokens, &trigger);
+    ASSERT_EQ(trigger["give_ship"].dump(), expected.dump());
+}
+
 } // namespace parsertests
