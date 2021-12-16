@@ -329,12 +329,15 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             parsePayment(tokens, &trigger);
         } else if (tokens.at(0).compare("fine") == 0) {
             parseFine(tokens.at(1), &trigger);
-        } else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
-            qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+        }
+        // TODO: Add support for Value Expressions
+        // https://github.com/endless-sky/endless-sky/wiki/Player-Conditions#value-expressions
+        else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
+            parseTriggerConditionType1(tokens, &trigger);
         } else if (isOneOf(tokens.at(1), {"++", "--"})) {
-            qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            parseTriggerConditionType2(tokens, &trigger);
         } else if (isOneOf(tokens.at(0), {"set", "clear"})) {
-            qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+            parseTriggerConditionType3(tokens, &trigger);
         } else if (tokens.at(0).compare("event") == 0) {
             parseEvent(tokens, &trigger);
         } else if (tokens.at(0).compare("fail") == 0) {
@@ -515,6 +518,35 @@ void FileMissionItemParser::parsePayment(std::vector<std::string> tokens, json *
 void FileMissionItemParser::parseFine(std::string token, json *trigger) {
     qDebug("\tFound fine: %s", qUtf8Printable(QString::fromStdString(token)));
     (*trigger)["fine"] = std::stoi(token);
+}
+
+void FileMissionItemParser::parseTriggerConditionType1(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, ""))));
+    json conditionSet;
+    conditionSet["condition"] = tokens.at(0);
+    conditionSet["operand"] = tokens.at(1);
+    // easier to leave as a string during ingest instead of checking if it's a double or int
+    conditionSet["value"] = tokens.at(2);
+
+    (*trigger)["condition_sets"].emplace_back(conditionSet);
+}
+
+void FileMissionItemParser::parseTriggerConditionType2(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, ""))));
+    json conditionSet;
+    conditionSet["condition"] = tokens.at(0);
+    conditionSet["operand"] = tokens.at(1);
+
+    (*trigger)["condition_sets"].emplace_back(conditionSet);
+}
+
+void FileMissionItemParser::parseTriggerConditionType3(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, ""))));
+    json conditionSet;
+    conditionSet["tag"] = tokens.at(0);
+    conditionSet["condition"] = tokens.at(1);
+
+    (*trigger)["condition_sets"].emplace_back(conditionSet);
 }
 
 void FileMissionItemParser::parseEvent(std::vector<std::string> tokens, json *trigger) {

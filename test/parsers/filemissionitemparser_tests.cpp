@@ -448,6 +448,93 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFine) {
     ASSERT_EQ(trigger["fine"], fine);
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetEquals) {
+    std::vector<std::string> tokens = {"my rep", "=", "420"};
+    json expected;
+    json conditionSet;
+    conditionSet["condition"] = "my rep";
+    conditionSet["operand"] = "=";
+    conditionSet["value"] = "420";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType1(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetPlusEquals) {
+    std::vector<std::string> tokens = {"my rep", "+=", "69"};
+    json expected;
+    json conditionSet;
+    conditionSet["condition"] = "my rep";
+    conditionSet["operand"] = "+=";
+    conditionSet["value"] = "69";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType1(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetMinusEquals) {
+    std::vector<std::string> tokens = {"my rep", "-=", "69"};
+    json expected;
+    json conditionSet;
+    conditionSet["condition"] = "my rep";
+    conditionSet["operand"] = "-=";
+    conditionSet["value"] = "69";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType1(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetPlusPlus) {
+    std::vector<std::string> tokens = {"my rep", "++"};
+    json expected;
+    json conditionSet;
+    conditionSet["condition"] = "my rep";
+    conditionSet["operand"] = "++";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType2(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetMinusMinus) {
+    std::vector<std::string> tokens = {"my rep", "--"};
+    json expected;
+    json conditionSet;
+    conditionSet["condition"] = "my rep";
+    conditionSet["operand"] = "--";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType2(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetTagSet) {
+    std::vector<std::string> tokens = {"set", "the tone"};
+    json expected;
+    json conditionSet;
+    conditionSet["tag"] = "set";
+    conditionSet["condition"] = "the tone";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType3(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerConditionSetTagClear) {
+    std::vector<std::string> tokens = {"clear", "the drugs"};
+    json expected;
+    json conditionSet;
+    conditionSet["tag"] = "clear";
+    conditionSet["condition"] = "the drugs";
+    expected.emplace_back(conditionSet);
+
+    parser.parseTriggerConditionType3(tokens, &trigger);
+    ASSERT_EQ(trigger["condition_sets"], expected);
+}
+
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelayAndRange) {
     std::vector<std::string> tokens = {"event", "blaze it", "420", "4200"};
     json expected;

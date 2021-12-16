@@ -48,6 +48,9 @@ public:
     void parseGiveShip(std::vector<std::string>, json *);
     void parsePayment(std::vector<std::string>, json *);
     void parseFine(std::string, json *);
+    void parseTriggerConditionType1(std::vector<std::string>, json *);
+    void parseTriggerConditionType2(std::vector<std::string>, json *);
+    void parseTriggerConditionType3(std::vector<std::string>, json *);
     void parseEvent(std::vector<std::string>, json *);
     void parseFail(std::vector<std::string>, json *);
     int parseCondition(std::vector<std::string> *, int);
