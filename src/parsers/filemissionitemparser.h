@@ -49,10 +49,13 @@ public:
     void parsePayment(std::vector<std::string>, json *);
     void parseFine(std::string, json *);
     void parseEvent(std::vector<std::string>, json *);
+    void parseFail(std::vector<std::string>, json *);
     int parseCondition(std::vector<std::string> *, int);
     int parseNpc(std::vector<std::string> *, int);
 
     json get_mission();
+    void set_mission_id(std::string);
+    std::string get_mission_id();
 };
 
 #endif // FILEMISSIONITEMPARSER_H

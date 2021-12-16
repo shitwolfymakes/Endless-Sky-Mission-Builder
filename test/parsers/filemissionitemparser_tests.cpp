@@ -484,4 +484,24 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingName) {
     ASSERT_EQ(trigger["events"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFailContainingMissionId) {
+    std::vector<std::string> tokens = {"event", "the mission"};
+    json fails;
+    fails.emplace_back("the mission");
+
+    parser.parseFail(tokens, &trigger);
+    ASSERT_EQ(trigger["fails"].dump(), fails.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFailOnly) {
+    std::vector<std::string> tokens = {"event"};
+    json fails;
+    fails.emplace_back("fail this mission");
+
+    // set the mission id before it is referenced by parseEvent
+    parser.set_mission_id("fail this mission");
+    parser.parseFail(tokens, &trigger);
+    ASSERT_EQ(trigger["fails"].dump(), fails.dump());
+}
+
 } // namespace parsertests

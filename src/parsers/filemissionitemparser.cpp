@@ -338,11 +338,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (tokens.at(0).compare("event") == 0) {
             parseEvent(tokens, &trigger);
         } else if (tokens.at(0).compare("fail") == 0) {
-            qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["fail"]["is_active"] = true;
-            if (tokens.size() == 2) {
-                trigger["fail"]["name"] = tokens.at(1);
-            }
+            parseFail(tokens, &trigger);
         } else {
             qDebug("\tTrigger component not found: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         }
@@ -534,6 +530,15 @@ void FileMissionItemParser::parseEvent(std::vector<std::string> tokens, json *tr
     (*trigger)["events"].emplace_back(event);
 }
 
+void FileMissionItemParser::parseFail(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound fail: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    if (tokens.size() == 2) {
+        (*trigger)["fails"].emplace_back(tokens.at(1));
+    } else {
+        (*trigger)["fails"].emplace_back(get_mission_id());
+    }
+}
+
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
@@ -624,4 +629,12 @@ int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int 
 
 json FileMissionItemParser::get_mission() {
     return mission;
+}
+
+void FileMissionItemParser::set_mission_id(std::string id) {
+    mission["id"] = id;
+}
+
+std::string FileMissionItemParser::get_mission_id() {
+    return mission["id"];
 }
