@@ -326,17 +326,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
             parseGiveShip(tokens, &trigger);
         } else if (tokens.at(0).compare("payment") == 0) {
-            qDebug("\tFound payment: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["payment"]["is_active"] = true;
-            if (tokens.size() > 1) {
-                trigger["payment"]["base"] = tokens.at(1);
-                if (tokens.size() == 3) {
-                    trigger["payment"]["multiplier"] = tokens.at(2);
-                }
-            }
+            parsePayment(tokens, &trigger);
         } else if (tokens.at(0).compare("fine") == 0) {
-            qDebug("\tFound fine: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-            trigger["fine"] = tokens.at(1);
+            parseFine(tokens.at(1), &trigger);
         } else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
             qDebug("\tFound trigger condition: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
         } else if (isOneOf(tokens.at(1), {"++", "--"})) {
@@ -515,6 +507,25 @@ void FileMissionItemParser::parseGiveShip(std::vector<std::string> tokens, json 
         give_ship["name"] = tokens.at(3);
     }
     (*trigger)["give_ship"].emplace_back(give_ship);
+}
+
+void FileMissionItemParser::parsePayment(std::vector<std::string> tokens, json *trigger) {
+    qDebug("\tFound payment: %s", qUtf8Printable(QString::fromStdString(boost::join(tokens, " "))));
+    json payment;
+    payment["is_active"] = true;
+    if (tokens.size() > 1) {
+        payment["base"] = std::stoi(tokens.at(1));
+        if (tokens.size() == 3) {
+            payment["multiplier"] = std::stoi(tokens.at(2));
+        }
+    }
+    (*trigger)["payment"].emplace_back(payment);
+}
+
+
+void FileMissionItemParser::parseFine(std::string token, json *trigger) {
+    qDebug("\tFound fine: %s", qUtf8Printable(QString::fromStdString(token)));
+    (*trigger)["fine"] = std::stoi(token);
 }
 
 int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines, int startingIndex) {

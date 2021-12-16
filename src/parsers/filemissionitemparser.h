@@ -46,6 +46,8 @@ public:
     void parseOutfit(std::vector<std::string>, json *);
     void parseRequire(std::vector<std::string>, json *);
     void parseGiveShip(std::vector<std::string>, json *);
+    void parsePayment(std::vector<std::string>, json *);
+    void parseFine(std::string, json *);
     int parseCondition(std::vector<std::string> *, int);
     int parseNpc(std::vector<std::string> *, int);
 

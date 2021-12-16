@@ -71,11 +71,11 @@ mission "Test Mission 0"
 		dialog phrase "Harambe 1"
 		dialog `It is Wednesday my dudes`
                 dialog `It's flat fuck friday`
-                        `	You fucking losers`
+			`	You fucking losers`
 		outfit "Skylance V" 5
 		require Hyperdrive 1
 		give ship "Black Diamond" "Stormheart"
-		payment 1500 0.2
+		payment 1500 20
 		fine 42069
 		"yo mama" += 20
 		"no u" ++

@@ -410,4 +410,48 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModel) {
     ASSERT_EQ(trigger["give_ship"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmountAndMultiplier) {
+    std::vector<std::string> tokens = {"payment", "1500", "20"};
+    json expected;
+    json payment;
+    payment["is_active"] = true;
+    payment["base"] = 1500;
+    payment["multiplier"] = 20;
+    expected.emplace_back(payment);
+
+    parser.parsePayment(tokens, &trigger);
+    ASSERT_EQ(trigger["payment"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmount) {
+    std::vector<std::string> tokens = {"payment", "1500"};
+    json expected;
+    json payment;
+    payment["is_active"] = true;
+    payment["base"] = 1500;
+    expected.emplace_back(payment);
+
+    parser.parsePayment(tokens, &trigger);
+    ASSERT_EQ(trigger["payment"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentOnly) {
+    std::vector<std::string> tokens = {"payment"};
+    json expected;
+    json payment;
+    payment["is_active"] = true;
+    expected.emplace_back(payment);
+
+    parser.parsePayment(tokens, &trigger);
+    ASSERT_EQ(trigger["payment"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerFine) {
+    std::string token = "42069";
+    int fine = 42069;
+
+    parser.parseFine(token, &trigger);
+    ASSERT_EQ(trigger["fine"], fine);
+}
+
 } // namespace parsertests
