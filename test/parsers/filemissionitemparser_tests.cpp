@@ -461,4 +461,27 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelay
     ASSERT_EQ(trigger["events"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingNameAndDelay) {
+    std::vector<std::string> tokens = {"event", "blaze it", "420"};
+    json expected;
+    json event;
+    event["name"] = "blaze it";
+    event["delay"] = 420;
+    expected.emplace_back(event);
+
+    parser.parseEvent(tokens, &trigger);
+    ASSERT_EQ(trigger["events"].dump(), expected.dump());
+}
+
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerEventContainingName) {
+    std::vector<std::string> tokens = {"event", "blaze it"};
+    json expected;
+    json event;
+    event["name"] = "blaze it";
+    expected.emplace_back(event);
+
+    parser.parseEvent(tokens, &trigger);
+    ASSERT_EQ(trigger["events"].dump(), expected.dump());
+}
+
 } // namespace parsertests
