@@ -396,7 +396,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModelAndN
     expected.emplace_back(give_ship);
 
     parser.parseGiveShip(tokens, &trigger);
-    ASSERT_EQ(trigger["give_ship"].dump(), expected.dump());
+    ASSERT_EQ(trigger["give_ships"].dump(), expected.dump());
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModel) {
@@ -407,7 +407,7 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerGiveShipContainingModel) {
     expected.emplace_back(give_ship);
 
     parser.parseGiveShip(tokens, &trigger);
-    ASSERT_EQ(trigger["give_ship"].dump(), expected.dump());
+    ASSERT_EQ(trigger["give_ships"].dump(), expected.dump());
 }
 
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerPaymentContainingBaseAmountAndMultiplier) {

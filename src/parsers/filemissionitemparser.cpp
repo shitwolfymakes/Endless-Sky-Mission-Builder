@@ -499,7 +499,7 @@ void FileMissionItemParser::parseGiveShip(std::vector<std::string> tokens, json 
     if (tokens.size() == 4) {
         give_ship["name"] = tokens.at(3);
     }
-    (*trigger)["give_ship"].emplace_back(give_ship);
+    (*trigger)["give_ships"].emplace_back(give_ship);
 }
 
 void FileMissionItemParser::parsePayment(std::vector<std::string> tokens, json *trigger) {
