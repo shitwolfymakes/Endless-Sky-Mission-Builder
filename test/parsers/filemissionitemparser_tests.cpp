@@ -340,6 +340,19 @@ TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitContainingName) {
     ASSERT_EQ(trigger["outfits"].dump(), expected.dump());
 }
 
+TEST_F(FileMissionItemTriggerParserTest, StoreTriggerOutfitDeprecated) {
+    // outfit <outfit> 0 is deprecated, replaced by require <outfit>
+    // test silent fix on file ingest
+    std::vector<std::string> tokens = {"outfit", "Skylance V", "0"};
+    json expected;
+    json require;
+    require["name"] = "Skylance V";
+    expected.emplace_back(require);
+
+    parser.parseOutfit(tokens, &trigger);
+    ASSERT_EQ(trigger["requires"].dump(), expected.dump());
+}
+
 TEST_F(FileMissionItemTriggerParserTest, StoreTriggerRequireContainingNameAndQuantity) {
     std::vector<std::string> tokens = {"require", "Hyperdrive", "5"};
     json expected;

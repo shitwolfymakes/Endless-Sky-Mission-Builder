@@ -487,13 +487,12 @@ void FileMissionItemParser::parseOutfit(std::vector<std::string> tokens, json *t
     outfit["name"] = tokens.at(1);
     if (tokens.size() == 3) {
         int quantity = std::stoi(tokens.at(2));
-        outfit["quantity"] = quantity;
-        /*
         if (quantity != 0) {
             outfit["quantity"] = quantity;
         } else {
-            // TODO: call parse require to handle require nodes handling the `outfit <outfit> 0` functionality
-        }*/
+            // Silently fix deprecated usage
+            parseRequire({"require", tokens.at(1)}, trigger);
+        }
     }
     (*trigger)["outfits"].emplace_back(outfit);
 }
