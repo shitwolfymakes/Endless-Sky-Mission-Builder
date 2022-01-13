@@ -98,7 +98,7 @@ json FileMissionItemParser::run() {
             // TODO: Implement this as a root node and leverage here
             qDebug("SUBSTITUTIONS NODE HANDLING NOT YET IMPLEMENTED");
             continue;
-            //i = parseSubstitutions(&lines, i);
+            i = parseSubstitutions(&lines, i);
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
@@ -258,6 +258,39 @@ void FileMissionItemParser::parseStopover(std::string token) {
     json stopover;
     stopover["planet"] = token;
     mission["stopovers"].emplace_back(stopover);
+}
+
+int FileMissionItemParser::parseSubstitutions(std::vector<std::string> *missionLines, int startingIndex) {
+    std::vector<std::string> lines = *missionLines;
+    int index = startingIndex;
+    json substitutions;
+
+    // pass the missionLines, index, and address to a json object that will store the parsed JSON data
+    /*index = collectNodeLines(missionLines, index, &substitutions);
+    qDebug("\tCollecting lines in node: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        (*substitutions)["node_lines"].emplace_back(lines.at(index));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }*/
+
+    // invoke the parser
+    // run the parser
+    // store the returned json data
+
+    return index;
 }
 
 void FileMissionItemParser::parseSource(std::string token) {

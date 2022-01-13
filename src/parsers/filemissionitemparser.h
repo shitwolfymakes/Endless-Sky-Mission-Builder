@@ -36,6 +36,7 @@ public:
     void parseInfiltrating();
     void parseWaypoint(std::string);
     void parseStopover(std::string);
+    int parseSubstitutions(std::vector<std::string> *, int);
     void parseSource(std::string);
     void parseDestination(std::string);
     int parseTrigger(std::vector<std::string> *, int);

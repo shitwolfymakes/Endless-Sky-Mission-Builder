@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/*
+ * filemissionitemparser_tests.h
+ *
+ * Copyright (c) 2022, Andrew Sneed <wolfy@shitwolfymakes.com>
+ */
+
 #ifndef FILEMISSIONITEMPARSER_TESTS_H
 #define FILEMISSIONITEMPARSER_TESTS_H
 

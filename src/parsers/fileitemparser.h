@@ -33,6 +33,9 @@ protected:
     int getIndentLevel(std::string);
     bool isOneOf(std::string, std::vector<std::string>);
     // TODO: Implement parseFilter here
+
+public:
+    static int collectNodeLines(std::vector<std::string> *, int, json *);
 };
 
 #endif // FILEITEMPARSER_H

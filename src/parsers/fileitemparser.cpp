@@ -57,3 +57,8 @@ bool FileItemParser::isOneOf(std::string token, std::vector<std::string> options
     }
     return false;
 }
+
+int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int startingIndex, json *nodeLines) {
+    return startingIndex;
+}
+

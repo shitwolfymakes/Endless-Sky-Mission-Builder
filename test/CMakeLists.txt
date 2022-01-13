@@ -11,6 +11,10 @@ include_directories(${CMAKE_BINARY_DIR}/src)
 
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
+set(HEADERS
+    parsers/filemissionitemparser_tests.h
+    parsers/fileitemparser_tests.h
+)
 
 add_custom_target(esmb_test
     echo "Running ESMB tests"
@@ -21,11 +25,11 @@ add_custom_target(build_tests
 )
 add_dependencies(esmb_test build_tests)
 
-add_library(test_gui_main STATIC EXCLUDE_FROM_ALL main.cpp)
+add_library(test_gui_main STATIC EXCLUDE_FROM_ALL main.cpp ${HEADERS})
 target_link_libraries(test_gui_main esmb_lib gtest gtest_main gmock)
 set_target_properties(test_gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
 
-add_library(test_main STATIC EXCLUDE_FROM_ALL main.cpp)
+add_library(test_main STATIC EXCLUDE_FROM_ALL main.cpp ${HEADERS})
 target_link_libraries(test_main esmb_lib gtest gtest_main gmock)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
@@ -56,3 +60,4 @@ endmacro (add_test_file)
 
 
 add_test_file(parsers filemissionitemparser_tests.cpp false)
+add_test_file(parsers fileitemparser_tests.cpp false)
