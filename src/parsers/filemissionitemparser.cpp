@@ -359,7 +359,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         }
     }
     mission["triggers"].emplace_back(trigger);
-    qDebug("\tTrigger data: %s", qUtf8Printable(QString::fromStdString(trigger.dump(4))));
+    //qDebug("\tTrigger data: %s", qUtf8Printable(QString::fromStdString(trigger.dump(4))));
     return index;
 }
 
@@ -406,7 +406,7 @@ int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLi
         }
     }
     (*trigger)["conversation"].emplace_back(convo);
-    qDebug("\tConversation data: %s", qUtf8Printable(QString::fromStdString((*trigger)["conversation"].dump())));
+    //qDebug("\tConversation data: %s", qUtf8Printable(QString::fromStdString((*trigger)["conversation"].dump(4))));
     return index;
 }
 
@@ -462,7 +462,7 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
         }
         (*trigger)["dialog"].emplace_back(dialog);
     }
-    qDebug("\tDialog data: %s", qUtf8Printable(QString::fromStdString((*trigger)["dialog"].dump(4))));
+    //qDebug("\tDialog data: %s", qUtf8Printable(QString::fromStdString((*trigger)["dialog"].dump(4))));
     return index;
 }
 
@@ -628,7 +628,7 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
         }
     }
     mission["conditions"].emplace_back(condition);
-    qDebug("\tCondition data: %s", qUtf8Printable(QString::fromStdString(condition.dump(4))));
+    //qDebug("\tCondition data: %s", qUtf8Printable(QString::fromStdString(condition.dump(4))));
     return index;
 }
 
@@ -660,7 +660,7 @@ int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int 
         }
     }
     mission["npcs"].emplace_back(npc);
-    qDebug("\tNPC data: %s", qUtf8Printable(QString::fromStdString(npc.dump(4))));
+    //qDebug("\tNPC data: %s", qUtf8Printable(QString::fromStdString(npc.dump(4))));
     return index;
 }
 

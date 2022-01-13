@@ -75,7 +75,7 @@ mission "Test Mission 0"
 			`	testing testing`
 		dialog phrase "Harambe 1"
 		dialog `It is Wednesday my dudes`
-                dialog `It's flat fuck friday`
+		dialog `It's flat fuck friday`
 			`	You fucking losers`
 		outfit "Skylance V" 5
 		require Hyperdrive 1

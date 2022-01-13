@@ -14,9 +14,7 @@ ItemSubstitution::ItemSubstitution()
 
 json ItemSubstitution::parse() {
     // TODO: Implement this
-    qDebug() << "parsing mission item to JSON";
-    FileSubstitutionItemParser parser = FileSubstitutionItemParser(lines);
-    json mission = parser.run();
-    qDebug() << "finished parsing mission";
-    return mission;
+    qDebug() << "Substitution parsing not yet implemented";
+    json substitution;
+    return substitution;
 }
