@@ -28,10 +28,12 @@ set(SOURCES
     model/itemmission.cpp
     model/itemphrase.cpp
     model/itemship.cpp
+    model/itemsubstitution.cpp
 
     parsers/datafileparser.cpp
     parsers/fileitemparser.cpp
     parsers/filemissionitemparser.cpp
+    parsers/filesubstitutionitemparser.cpp
 )
 
 set(HEADERS
@@ -45,10 +47,12 @@ set(HEADERS
     model/itemmission.h
     model/itemphrase.h
     model/itemship.h
+    model/itemsubstitution.h
 
     parsers/datafileparser.h
     parsers/fileitemparser.h
     parsers/filemissionitemparser.h
+    parsers/filesubstitutionitemparser.h
 )
 
 set(UI

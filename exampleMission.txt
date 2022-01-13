@@ -29,6 +29,11 @@ mission "Test Mission 0"
 	infiltrating
 	waypoint "Sol"
 	stopover "Delve"
+	substitutions
+		"<title>" "Bossmang"
+		"<title>" "Inner"
+			"reputation: Inyalowda" > 100
+			"reputation: Beltalowda" < 100
         source "Earth"
 	destination "Delve"
 	to offer
@@ -104,6 +109,13 @@ mission "Test Mission 1"
 	name "test 2"
 	description `A second test mission`
 	repeat
+
+
+substitutions
+	"<title>" "Captain"
+	"<title>" "Warlord"
+		"reputation: Pirate" > 100
+		"reputation: Merchant" < 100
 
 
 
