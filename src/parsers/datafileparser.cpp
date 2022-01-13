@@ -69,10 +69,10 @@ void DataFileParser::run() {
             qDebug("\tSHIP FOUND: %s", qUtf8Printable(qLine));
             storeItemForParsing(i, line, Ship);
         }
-        else if (std::regex_match(line, matchSubstitution)) {
+        else if (std::regex_match(line, matchSubstitutions)) {
             QString qLine = QString::fromStdString(line);
             qDebug("\tSUBSTITUTION FOUND: %s", qUtf8Printable(qLine));
-            storeItemForParsing(i, line, Substitution);
+            storeItemForParsing(i, line, Substitutions);
         }
 
         i++;
@@ -106,8 +106,8 @@ void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemT
         case Ship :
             fileItem = new ItemShip();
             break;
-        case Substitution :
-            fileItem = new ItemSubstitution();
+        case Substitutions :
+            fileItem = new ItemSubstitutions();
             break;
     }
     fileItem->appendLine(line);
@@ -146,7 +146,7 @@ bool DataFileParser::isFileItemStartLine(std::string line) {
         return true;
     } else if (std::regex_match(line, matchShip)) {
         return true;
-    } else if (std::regex_match(line, matchSubstitution)) {
+    } else if (std::regex_match(line, matchSubstitutions)) {
         return true;
     }
     return false;

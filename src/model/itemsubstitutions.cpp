@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- * itemsubstitution.cpp
+ * itemsubstitutions.cpp
  *
  * Copyright (c) 2022, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#include "itemsubstitution.h"
+#include "itemsubstitutions.h"
 
-ItemSubstitution::ItemSubstitution()
+ItemSubstitutions::ItemSubstitutions()
 {
 
 }
 
-json ItemSubstitution::parse() {
+json ItemSubstitutions::parse() {
     // TODO: Implement this
     qDebug() << "Substitution parsing not yet implemented";
-    json substitution;
-    return substitution;
+    json substitutions;
+    return substitutions;
 }

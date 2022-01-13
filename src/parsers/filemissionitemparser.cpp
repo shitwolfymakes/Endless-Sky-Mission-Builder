@@ -94,10 +94,11 @@ json FileMissionItemParser::run() {
                 continue;
             }
         }
-        else if (tokens.at(0).compare("substitution") == 0) {
+        else if (tokens.at(0).compare("substitutions") == 0) {
             // TODO: Implement this as a root node and leverage here
-            qDebug("SUBSTITUTION NODE HANDLING NOT YET IMPLEMENTED");
+            qDebug("SUBSTITUTIONS NODE HANDLING NOT YET IMPLEMENTED");
             continue;
+            //i = parseSubstitutions(&lines, i);
         }
         else if (tokens.at(0).compare("source") == 0) {
             if (tokens.size() == 2) {
