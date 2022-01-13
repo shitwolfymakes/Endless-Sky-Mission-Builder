@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- * filesubstitutionitemparser.h
+ * filesubstitutionitemparser.cpp
  *
  * Copyright (c) 2022, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
@@ -11,4 +11,8 @@ FileSubstitutionItemParser::FileSubstitutionItemParser(std::vector<std::string> 
     : FileItemParser(lines)
 {
 
+}
+
+json FileSubstitutionItemParser::run() {
+    return substitution;
 }

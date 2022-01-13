@@ -11,13 +11,14 @@
 #include <regex>
 
 // define the types of File Items
-enum ItemType { Event, Government, Mission, Phrase, Ship };
+enum ItemType { Event, Government, Mission, Phrase, Ship, Substitution };
 
 // define regex matches
-static const std::regex matchEvent      ("^event.*$");
-static const std::regex matchGovernment ("^government.*$");
-static const std::regex matchMission    ("^mission.*$");
-static const std::regex matchPhrase     ("^phrase.*$");
-static const std::regex matchShip       ("^ship.*$");
+static const std::regex matchEvent("^event.*$");
+static const std::regex matchGovernment("^government.*$");
+static const std::regex matchMission("^mission.*$");
+static const std::regex matchPhrase("^phrase.*$");
+static const std::regex matchShip("^ship.*$");
+static const std::regex matchSubstitution("^substitution.*$");
 
 #endif // FILEITEMCONSTANTS_H

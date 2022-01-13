@@ -23,6 +23,7 @@
 #include "model/itemmission.h"
 #include "model/itemphrase.h"
 #include "model/itemship.h"
+#include "model/itemsubstitution.h"
 #include "model/fileitemconstants.h"
 
 class DataFileParser
