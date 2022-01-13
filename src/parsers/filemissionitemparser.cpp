@@ -266,25 +266,7 @@ int FileMissionItemParser::parseSubstitutions(std::vector<std::string> *missionL
     json substitutions;
 
     // pass the missionLines, index, and address to a json object that will store the parsed JSON data
-    /*index = collectNodeLines(missionLines, index, &substitutions);
-    qDebug("\tCollecting lines in node: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
-    int cur = getIndentLevel(lines.at(index));
-    int nxt = getIndentLevel(lines.at(index + 1));
-    while (true) {
-        if (nxt <= cur) {
-            break;
-        }
-        index++;
-
-        (*substitutions)["node_lines"].emplace_back(lines.at(index));
-
-        // handle getting the depth of the next line
-        try {
-            nxt = getIndentLevel(lines.at(index + 1));
-        }  catch (const std::out_of_range& ex) {
-            break;
-        }
-    }*/
+    index = collectNodeLines(missionLines, index, &substitutions);
 
     // invoke the parser
     // run the parser

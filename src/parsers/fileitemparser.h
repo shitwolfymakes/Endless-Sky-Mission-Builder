@@ -30,11 +30,11 @@ protected:
 
     virtual json run() = 0;
     std::vector<std::string> tokenize(std::string);
-    int getIndentLevel(std::string);
     bool isOneOf(std::string, std::vector<std::string>);
     // TODO: Implement parseFilter here
 
 public:
+    static int getIndentLevel(std::string);
     static int collectNodeLines(std::vector<std::string> *, int, json *);
 };
 

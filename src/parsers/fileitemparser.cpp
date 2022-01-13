@@ -59,6 +59,30 @@ bool FileItemParser::isOneOf(std::string token, std::vector<std::string> options
 }
 
 int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int startingIndex, json *nodeLines) {
-    return startingIndex;
+    int index = startingIndex;
+    qDebug("\tCollecting lines in node: %s", qUtf8Printable(QString::fromStdString(lines->at(index))));
+
+    // collect the first line in the node
+    (*nodeLines)["node_lines"].emplace_back(lines->at(index));
+
+    int cur = getIndentLevel(lines->at(index));
+    int nxt = getIndentLevel(lines->at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        (*nodeLines)["node_lines"].emplace_back(lines->at(index));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines->at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+
+    return index;
 }
 
