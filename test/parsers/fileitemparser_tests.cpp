@@ -36,7 +36,7 @@ TEST_F(FileItemParserTest, TestCollectNodeLines) {
 
 
     ASSERT_EQ(index, 6);
-    ASSERT_EQ(nodeLines["node_lines"], expected);
+    ASSERT_EQ(nodeLines, expected);
 }
 
 

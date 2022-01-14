@@ -63,7 +63,7 @@ int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int starti
     qDebug("\tCollecting lines in node: %s", qUtf8Printable(QString::fromStdString(lines->at(index))));
 
     // collect the first line in the node
-    (*nodeLines)["node_lines"].emplace_back(lines->at(index));
+    (*nodeLines).emplace_back(lines->at(index));
 
     int cur = getIndentLevel(lines->at(index));
     int nxt = getIndentLevel(lines->at(index + 1));
@@ -73,7 +73,7 @@ int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int starti
         }
         index++;
 
-        (*nodeLines)["node_lines"].emplace_back(lines->at(index));
+        (*nodeLines).emplace_back(lines->at(index));
 
         // handle getting the depth of the next line
         try {
@@ -82,7 +82,7 @@ int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int starti
             break;
         }
     }
-
+    nodeLines->dump(4);
     return index;
 }
 

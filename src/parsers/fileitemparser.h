@@ -4,6 +4,7 @@
  *
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
+
 #ifndef FILEITEMPARSER_H
 #define FILEITEMPARSER_H
 
