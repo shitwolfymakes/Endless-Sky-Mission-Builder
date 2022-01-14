@@ -82,6 +82,6 @@ int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int starti
             break;
         }
     }
-    nodeLines->dump(4);
+    //qDebug("\tNode Lines: %s", qUtf8Printable(QString::fromStdString(nodeLines->dump(4))));
     return index;
 }

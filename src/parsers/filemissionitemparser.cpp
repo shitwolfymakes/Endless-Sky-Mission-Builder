@@ -95,9 +95,6 @@ json FileMissionItemParser::run() {
             }
         }
         else if (tokens.at(0).compare("substitutions") == 0) {
-            // TODO: Implement this as a root node and leverage here
-            qDebug("SUBSTITUTIONS NODE HANDLING NOT YET IMPLEMENTED");
-            continue;
             i = parseSubstitutions(&lines, i);
         }
         else if (tokens.at(0).compare("source") == 0) {
@@ -272,8 +269,8 @@ int FileMissionItemParser::parseSubstitutions(std::vector<std::string> *missionL
     index = collectNodeLines(missionLines, index, &nodeLines);
 
     // instantiate and run the substitution parser
-    FileSubstitutionsItemParser parser = FileSubstitutionsItemParser(nodeLines);
-    parser.run();
+    //FileSubstitutionsItemParser parser = FileSubstitutionsItemParser(nodeLines);
+    //parser.run();
 
     // store the returned json data
 
