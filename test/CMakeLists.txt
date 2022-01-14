@@ -12,8 +12,9 @@ include_directories(${CMAKE_BINARY_DIR}/src)
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
 set(HEADERS
-    parsers/filemissionitemparser_tests.h
     parsers/fileitemparser_tests.h
+    parsers/filemissionitemparser_tests.h
+    parsers/filesubstitutionsitemparser_tests.h
 )
 
 add_custom_target(esmb_test
@@ -59,5 +60,6 @@ macro(add_test_file file_path test_source gui_required)
 endmacro (add_test_file)
 
 
-add_test_file(parsers filemissionitemparser_tests.cpp false)
 add_test_file(parsers fileitemparser_tests.cpp false)
+add_test_file(parsers filemissionitemparser_tests.cpp false)
+add_test_file(parsers filesubstitutionsitemparser_tests.cpp false)
