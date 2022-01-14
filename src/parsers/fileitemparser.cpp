@@ -85,4 +85,3 @@ int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int starti
     nodeLines->dump(4);
     return index;
 }
-

@@ -19,6 +19,7 @@ public:
     FileSubstitutionsItemParser(std::vector<std::string>);
 
     json run();
+    json get_data();
 };
 
 #endif // FILESUBSTITUTIONSITEMPARSER_H

@@ -16,3 +16,7 @@ FileSubstitutionsItemParser::FileSubstitutionsItemParser(std::vector<std::string
 json FileSubstitutionsItemParser::run() {
     return substitutions;
 }
+
+json FileSubstitutionsItemParser::get_data() {
+    return substitutions;
+}

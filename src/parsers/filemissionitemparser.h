@@ -4,10 +4,12 @@
  *
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
+
 #ifndef FILEMISSIONITEMPARSER_H
 #define FILEMISSIONITEMPARSER_H
 
 #include "parsers/fileitemparser.h"
+#include "parsers/filesubstitutionsitemparser.h"
 
 class FileMissionItemParser : public FileItemParser
 {
@@ -57,7 +59,7 @@ public:
     int parseCondition(std::vector<std::string> *, int);
     int parseNpc(std::vector<std::string> *, int);
 
-    json get_mission();
+    json get_data();
     void set_mission_id(std::string);
     std::string get_mission_id();
 };

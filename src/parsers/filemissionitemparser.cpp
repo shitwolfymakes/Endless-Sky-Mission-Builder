@@ -264,12 +264,17 @@ int FileMissionItemParser::parseSubstitutions(std::vector<std::string> *missionL
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
     json substitutions;
+    json nodeLines;
+
+    qDebug("\tFound substitution: %s", qUtf8Printable(QString::fromStdString(lines.at(index))));
 
     // pass the missionLines, index, and address to a json object that will store the parsed JSON data
-    index = collectNodeLines(missionLines, index, &substitutions);
+    index = collectNodeLines(missionLines, index, &nodeLines);
 
-    // invoke the parser
-    // run the parser
+    // instantiate and run the substitution parser
+    FileSubstitutionsItemParser parser = FileSubstitutionsItemParser(nodeLines);
+    parser.run();
+
     // store the returned json data
 
     return index;
@@ -680,7 +685,7 @@ int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int 
     return index;
 }
 
-json FileMissionItemParser::get_mission() {
+json FileMissionItemParser::get_data() {
     return mission;
 }
 

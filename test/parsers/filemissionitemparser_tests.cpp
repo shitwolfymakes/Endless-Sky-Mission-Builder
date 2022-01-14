@@ -14,25 +14,25 @@ namespace parsertests {
 TEST_F(FileMissionItemParserTest, StoreEngineMissionId) {
     std::vector<std::string> tokens = {"mission", "FileMissionItemParserTest"};
     parser.parseId(tokens);
-    ASSERT_EQ(parser.get_mission()["id"], "FileMissionItemParserTest");
+    ASSERT_EQ(parser.get_data()["id"], "FileMissionItemParserTest");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionName) {
     std::vector<std::string> tokens = {"name", "Mission 1"};
     parser.parseName(tokens);
-    ASSERT_EQ(parser.get_mission()["name"], "Mission 1");
+    ASSERT_EQ(parser.get_data()["name"], "Mission 1");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDescription) {
     std::vector<std::string> tokens = {"description", "A test mission"};
     parser.parseDescription(tokens);
-    ASSERT_EQ(parser.get_mission()["description"], "A test mission");
+    ASSERT_EQ(parser.get_data()["description"], "A test mission");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionBlocked) {
     std::vector<std::string> tokens = {"blocked", "Oh piss off!"};
     parser.parseBlocked(tokens);
-    ASSERT_EQ(parser.get_mission()["blocked"], "Oh piss off!");
+    ASSERT_EQ(parser.get_data()["blocked"], "Oh piss off!");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplier) {
@@ -43,7 +43,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDaysAndMultiplie
     deadline["multiplier"] = 1;
 
     parser.parseDeadline(tokens);
-    ASSERT_EQ(parser.get_mission()["deadline"], deadline);
+    ASSERT_EQ(parser.get_data()["deadline"], deadline);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays) {
@@ -53,7 +53,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineContainingDays) {
     deadline["days"] = 2;
 
     parser.parseDeadline(tokens);
-    ASSERT_EQ(parser.get_mission()["deadline"], deadline);
+    ASSERT_EQ(parser.get_data()["deadline"], deadline);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly) {
@@ -62,7 +62,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionDeadlineOnly) {
     deadline["is_active"] = true;
 
     parser.parseDeadline(tokens);
-    ASSERT_EQ(parser.get_mission()["deadline"], deadline);
+    ASSERT_EQ(parser.get_data()["deadline"], deadline);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRangeAndProbability) {
@@ -74,7 +74,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndR
     cargo["probability"] = 0.1;
 
     parser.parseCargo(tokens);
-    ASSERT_EQ(parser.get_mission()["cargo"], cargo);
+    ASSERT_EQ(parser.get_data()["cargo"], cargo);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndRange) {
@@ -85,7 +85,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnageAndR
     cargo["tonnage_range"] = 2;
 
     parser.parseCargo(tokens);
-    ASSERT_EQ(parser.get_mission()["cargo"], cargo);
+    ASSERT_EQ(parser.get_data()["cargo"], cargo);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage) {
@@ -95,7 +95,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionCargoContainingCargoAndTonnage) {
     cargo["tonnage"] = 5;
 
     parser.parseCargo(tokens);
-    ASSERT_EQ(parser.get_mission()["cargo"], cargo);
+    ASSERT_EQ(parser.get_data()["cargo"], cargo);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRangeAndProbability) {
@@ -106,7 +106,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndR
     passengers["probability"] = 0.2;
 
     parser.parsePassengers(tokens);
-    ASSERT_EQ(parser.get_mission()["passengers"], passengers);
+    ASSERT_EQ(parser.get_data()["passengers"], passengers);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndRange) {
@@ -116,7 +116,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengersAndR
     passengers["passengers_range"] = 5;
 
     parser.parsePassengers(tokens);
-    ASSERT_EQ(parser.get_mission()["passengers"], passengers);
+    ASSERT_EQ(parser.get_data()["passengers"], passengers);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers) {
@@ -125,7 +125,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionPassengersContainingPassengers) {
     passengers["passengers"] = 10;
 
     parser.parsePassengers(tokens);
-    ASSERT_EQ(parser.get_mission()["passengers"], passengers);
+    ASSERT_EQ(parser.get_data()["passengers"], passengers);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage) {
@@ -135,7 +135,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFineAndMessage) {
     illegal["message"] = "Soviet citizens need no food comrade";
 
     parser.parseIllegal(tokens);
-    ASSERT_EQ(parser.get_mission()["illegal"], illegal);
+    ASSERT_EQ(parser.get_data()["illegal"], illegal);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine) {
@@ -144,27 +144,27 @@ TEST_F(FileMissionItemParserTest, StoreMissionIllegalContainingFine) {
     illegal["fine"] = 50;
 
     parser.parseIllegal(tokens);
-    ASSERT_EQ(parser.get_mission()["illegal"], illegal);
+    ASSERT_EQ(parser.get_data()["illegal"], illegal);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionStealthFlag) {
     parser.parseStealth();
-    ASSERT_EQ(parser.get_mission()["stealth"], true);
+    ASSERT_EQ(parser.get_data()["stealth"], true);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionInvisibleFlag) {
     parser.parseInvisible();
-    ASSERT_EQ(parser.get_mission()["invisible"], true);
+    ASSERT_EQ(parser.get_data()["invisible"], true);
 }
 
 TEST_P(MissionPriorityParameterizedTestFixture, StoreMissionPriorityLevel) {
     parser.parsePriorityLevel(GetParam());
-    ASSERT_EQ(parser.get_mission()["priority_level"], GetParam());
+    ASSERT_EQ(parser.get_data()["priority_level"], GetParam());
 }
 
 TEST_P(MissionWhereShownParameterizedTestFixture, StoreMissionWhereShown) {
     parser.parseWhereShown(GetParam());
-    ASSERT_EQ(parser.get_mission()["where_shown"], GetParam());
+    ASSERT_EQ(parser.get_data()["where_shown"], GetParam());
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionRepeatContainingAmount) {
@@ -174,7 +174,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionRepeatContainingAmount) {
     repeat["amount"] = 5;
 
     parser.parseRepeat(tokens);
-    ASSERT_EQ(parser.get_mission()["repeat"], repeat);
+    ASSERT_EQ(parser.get_data()["repeat"], repeat);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionRepeatOnly) {
@@ -183,7 +183,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionRepeatOnly) {
     repeat["is_active"] = true;
 
     parser.parseRepeat(tokens);
-    ASSERT_EQ(parser.get_mission()["repeat"], repeat);
+    ASSERT_EQ(parser.get_data()["repeat"], repeat);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionClearanceContainingMessage) {
@@ -193,7 +193,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionClearanceContainingMessage) {
     clearance["message"] = "You're on the list";
 
     parser.parseClearance(tokens);
-    ASSERT_EQ(parser.get_mission()["clearance"], clearance);
+    ASSERT_EQ(parser.get_data()["clearance"], clearance);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionClearanceOnly) {
@@ -202,12 +202,12 @@ TEST_F(FileMissionItemParserTest, StoreMissionClearanceOnly) {
     clearance["is_active"] = true;
 
     parser.parseClearance(tokens);
-    ASSERT_EQ(parser.get_mission()["clearance"], clearance);
+    ASSERT_EQ(parser.get_data()["clearance"], clearance);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionInfiltratingFlag) {
     parser.parseInfiltrating();
-    ASSERT_EQ(parser.get_mission()["infiltrating"], true);
+    ASSERT_EQ(parser.get_data()["infiltrating"], true);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
@@ -218,7 +218,7 @@ TEST_F(FileMissionItemParserTest, StoreMissionWaypointWithSystem) {
     expected.emplace_back(waypoint);
 
     parser.parseWaypoint(token);
-    ASSERT_EQ(parser.get_mission()["waypoints"], expected);
+    ASSERT_EQ(parser.get_data()["waypoints"], expected);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
@@ -229,17 +229,17 @@ TEST_F(FileMissionItemParserTest, StoreMissionStopoverWithSystem) {
     expected.emplace_back(stopover);
 
     parser.parseStopover(token);
-    ASSERT_EQ(parser.get_mission()["stopovers"], expected);
+    ASSERT_EQ(parser.get_data()["stopovers"], expected);
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionSourceWithPlanet) {
     parser.parseSource("Earth");
-    ASSERT_EQ(parser.get_mission()["source"], "Earth");
+    ASSERT_EQ(parser.get_data()["source"], "Earth");
 }
 
 TEST_F(FileMissionItemParserTest, StoreMissionDestinationWithPlanet) {
     parser.parseDestination("Delve");
-    ASSERT_EQ(parser.get_mission()["destination"], "Delve");
+    ASSERT_EQ(parser.get_data()["destination"], "Delve");
 }
 
 

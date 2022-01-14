@@ -26,15 +26,18 @@ class FileItemParser
 {
 protected:
     std::vector<std::string> lines;
+    json data;
 
     FileItemParser(std::vector<std::string>);
 
-    virtual json run() = 0;
     std::vector<std::string> tokenize(std::string);
     bool isOneOf(std::string, std::vector<std::string>);
     // TODO: Implement parseFilter here
 
 public:
+    virtual json run() = 0;
+    virtual json get_data() = 0;
+
     static int getIndentLevel(std::string);
     static int collectNodeLines(std::vector<std::string> *, int, json *);
 };
