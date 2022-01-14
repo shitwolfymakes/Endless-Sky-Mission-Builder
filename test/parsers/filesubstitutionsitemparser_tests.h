@@ -15,14 +15,12 @@
 
 namespace parsertests {
 
-std::vector<std::string> sample_substitution_node = {"mission \"TestCollectNodeLines\"",
-                                                     "\tsubstitutions",
+std::vector<std::string> sample_substitution_node = {"\tsubstitutions",
                                                      "\t\t\"<title>\" \"Bossmang\"",
                                                      "\t\t\"<title>\" \"Inner\"",
                                                      "\t\t\t\"reputation: Inyalowda\" > 100",
                                                      "\t\t\t\"reputation: Beltalowda\" < 100",
-                                                     "\t\t\"<name>\" \"Anderson Dawes\"",
-                                                     "\tinfiltrating"};
+                                                     "\t\t\"<name>\" \"Anderson Dawes\""};
 
 // Fixture for testing a substitution node
 class FileSubstititionsItemParserTest : public ::testing::Test {
