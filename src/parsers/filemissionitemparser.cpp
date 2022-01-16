@@ -19,7 +19,6 @@ json FileMissionItemParser::run() {
     std::vector<std::string> tokens;
     for (int i = 0; i < static_cast<int>(lines.size()); i++) {
         // start by tokenizing each line
-        // TODO: add a count for the number of tab chars
         tokens = tokenize(lines.at(i));
         //qDebug() << "LINE: " << QString::fromStdString(tokens.at(0));
 
