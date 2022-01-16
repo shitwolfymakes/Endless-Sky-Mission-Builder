@@ -13,7 +13,6 @@ ItemMission::ItemMission()
 }
 
 json ItemMission::parse() {
-    // TODO: Implement this
     qDebug() << "parsing mission item to JSON";
     FileMissionItemParser parser = FileMissionItemParser(lines);
     json mission = parser.run();
