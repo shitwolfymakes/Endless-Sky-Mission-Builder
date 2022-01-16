@@ -13,8 +13,8 @@ ItemSubstitutions::ItemSubstitutions()
 }
 
 json ItemSubstitutions::parse() {
-    // TODO: Implement this
-    qDebug() << "Substitution parsing not yet implemented";
-    json substitutions;
+    FileSubstitutionsItemParser parser = FileSubstitutionsItemParser(lines);
+    json substitutions = parser.run();
+    qDebug() << "finished parsing substitutions";
     return substitutions;
 }

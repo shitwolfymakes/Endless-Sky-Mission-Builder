@@ -14,7 +14,64 @@ FileSubstitutionsItemParser::FileSubstitutionsItemParser(std::vector<std::string
 }
 
 json FileSubstitutionsItemParser::run() {
+    qDebug() << "Parsing substitutions node to JSON";
+    std::vector<std::string> tokens;
+    for (int i = 1; i < static_cast<int>(lines.size()); i++) {
+        tokens = tokenize(lines.at(i));
+        //qDebug() << "LINE: " << QString::fromStdString(tokens.at(0));
+        if (tokens.size() != 2) {
+            QString qLine = QString::fromStdString(lines.at(i));
+            qDebug("\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: %s", qUtf8Printable(qLine));
+        }
+
+        i = parseSubstitution(&lines, i);
+    }
+
     return substitutions;
+}
+
+int FileSubstitutionsItemParser::parseSubstitution(std::vector<std::string> *nodeLines, int startingIndex) {
+    qDebug("Parsing substitution: %s", qUtf8Printable(QString::fromStdString(lines.at(startingIndex))));
+    std::vector<std::string> lines = *nodeLines;
+    int index = startingIndex;
+    json substitution; // create a json obect to store trigger data, pass ref to this when necessary
+
+
+    std::vector<std::string> tokens = tokenize(lines.at(index));
+    substitution["key"] = tokens.at(0);
+    substitution["replacement_text"] = tokens.at(1);
+
+    // check if next line exists
+    try {
+        getIndentLevel(lines.at(index + 1));
+    }  catch (const std::out_of_range& ex) {
+        substitutions.emplace_back(substitution);
+        return index;
+    }
+
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        std::string conditionSet = lines.at(index);
+        boost::trim(conditionSet);
+        qDebug("\tFound condition set: %s", qUtf8Printable(QString::fromStdString(conditionSet)));
+        substitution["condition_sets"].emplace_back(conditionSet);
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    substitutions.emplace_back(substitution);
+
+    return index;
 }
 
 json FileSubstitutionsItemParser::get_data() {
