@@ -44,15 +44,21 @@ void MainWindow::on_actionOpen_triggered()
     ESMBApplication& esmb = ESMBApplication::getInstance();
     esmb.setJsonItems(parser.getJsonItems());
 
-    // TODO: set the spinbox to display the data for a selected mission
+    // update combobox
+    updateComboBoxData();
+
+    // TODO: set the text to display the data for a selected mission
     ui->textDisplay->setText(text);
     QString jsonText = QString::fromStdString(esmb.getJsonItems().dump(4));
     ui->jsonDisplay->setText(jsonText);
     file.close();
 }
 
-
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
+}
+
+void MainWindow::updateComboBoxData() {
+    // TODO: Implement this
 }
