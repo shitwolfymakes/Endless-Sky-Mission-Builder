@@ -32,7 +32,7 @@ void MainWindow::on_actionOpen_triggered()
     }
     QFile file(filename);
     currentFile = filename;
-    if (!file.open(QIODevice::ReadOnly | QFile::Text)){
+    if (!file.open(QIODevice::ReadOnly | QFile::Text)) {
         QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
     }
     QTextStream in(&file);
@@ -61,4 +61,12 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::updateComboBoxData() {
     // TODO: Implement this
+
+    // unordered data
+    // TODO: create map variable in ESMBApplication, and below update function
+    // populate a map class var
+    // fill the map with the key="id", value=mission for each item in getJsonItems
+
+    // ordered data
+    // get qstringlist populated with the ids in getJsonItems
 }
