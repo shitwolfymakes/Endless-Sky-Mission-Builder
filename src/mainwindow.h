@@ -27,7 +27,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    static void updateComboBoxData();
+    void updateComboBoxData();
 
 private slots:
     void on_actionOpen_triggered();

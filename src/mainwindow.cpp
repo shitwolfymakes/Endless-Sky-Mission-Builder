@@ -60,13 +60,11 @@ void MainWindow::on_actionQuit_triggered()
 }
 
 void MainWindow::updateComboBoxData() {
-    // TODO: Implement this
+    // update the map of ids and their associated items
+    ESMBApplication& esmb = ESMBApplication::getInstance();
+    esmb.updateIdMap();
 
-    // unordered data
-    // TODO: create map variable in ESMBApplication, and below update function
-    // populate a map class var
-    // fill the map with the key="id", value=mission for each item in getJsonItems
-
-    // ordered data
-    // get qstringlist populated with the ids in getJsonItems
+    // update the combobox with the new itemNames
+    ui->comboBox->clear();
+    ui->comboBox->insertItems(0, esmb.getNames());
 }

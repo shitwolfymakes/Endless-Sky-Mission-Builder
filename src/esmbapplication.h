@@ -29,16 +29,21 @@ private:
     // member data
     QStringList itemNames;
     json jsonItems;
+    std::map<std::string, json> idMap;
 
 public:
     // controlled instantiation
     static ESMBApplication& getInstance();
 
     // public methods
+    void setNames(QStringList);
     QStringList getNames();
+    void updateItemNames();
+
     void setJsonItems(json);
     json getJsonItems();
 
+    void updateIdMap();
 };
 
 #endif // ESMBAPPLICATION_H
