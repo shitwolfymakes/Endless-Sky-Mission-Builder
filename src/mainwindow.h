@@ -31,8 +31,9 @@ public:
 
 private slots:
     void on_actionOpen_triggered();
-
     void on_actionQuit_triggered();
+
+    void comboBoxUpdated();
 
 private:
     Ui::MainWindow *ui;

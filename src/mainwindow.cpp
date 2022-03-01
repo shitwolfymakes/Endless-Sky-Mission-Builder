@@ -17,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->centralwidget);
+
+    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxUpdated()));
+    //connect(ui->comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+    //    [=](int index){ on_comboBox_update(index); });
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +61,11 @@ void MainWindow::on_actionOpen_triggered()
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
+}
+
+void MainWindow::comboBoxUpdated() {
+    int index = ui->comboBox->currentIndex();
+    qDebug("%s: %d", "COMBOBOX UPDATED", index);
 }
 
 void MainWindow::updateComboBoxData() {
