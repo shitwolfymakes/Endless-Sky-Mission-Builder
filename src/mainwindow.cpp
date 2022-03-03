@@ -42,14 +42,11 @@ void MainWindow::on_actionOpen_triggered()
     DataFileParser parser = DataFileParser(text);
     parser.run();
 
-    // store the parsed data in the singleton
     ESMBApplication& esmb = ESMBApplication::getInstance();
     esmb.setJsonItems(parser.getJsonItems());
 
-    // update combobox
     updateComboBoxData();
 
-    // TODO: set the text to display the data for a selected mission
     QString jsonText = QString::fromStdString(esmb.getCurrentItem()->dump(4));
     ui->jsonDisplay->setText(jsonText);
     ui->textDisplay->setText(text);
@@ -63,15 +60,11 @@ void MainWindow::on_actionQuit_triggered()
 }
 
 void MainWindow::comboBoxChanged() {
-    // TODO: Implement this
     ESMBApplication& esmb = ESMBApplication::getInstance();
     int index = ui->comboBox->currentIndex();
     qDebug("%s: %d", "COMBOBOX INDEX SELECTED", index);
 
-    // get the id at the index
     std::string id = ui->comboBox->itemText(index).toStdString();
-
-    // set esmb *currentItem to the json *
     esmb.setCurrentItem(esmb.getJsonItemById(id)); // TODO: add handling for when a nullptr is returned
 
     // store the json text as a QString and update the json display widget

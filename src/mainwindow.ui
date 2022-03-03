@@ -14,6 +14,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -25,6 +28,16 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QTextEdit" name="jsonDisplay">
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QTextEdit" name="textDisplay">
        <property name="lineWrapMode">
         <enum>QTextEdit::NoWrap</enum>
@@ -34,16 +47,6 @@
        </property>
        <property name="tabStopDistance">
         <double>40.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="jsonDisplay">
-       <property name="lineWrapMode">
-        <enum>QTextEdit::NoWrap</enum>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -93,12 +96,9 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Text</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::AutoText</enum>
+        <string>JSON</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -106,9 +106,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>JSON</string>
+        <string>Text</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

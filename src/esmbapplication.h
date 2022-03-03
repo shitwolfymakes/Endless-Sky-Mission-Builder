@@ -46,8 +46,6 @@ public:
     void setJsonItems(json);
     json* getJsonItems();
     json* getJsonItemById(std::string);
-
-    void updateIdMap();
 };
 
 #endif // ESMBAPPLICATION_H
