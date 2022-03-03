@@ -23,39 +23,42 @@ QStringList ESMBApplication::getNames() {
 
 void ESMBApplication::updateItemNames() {
     QStringList ids;
-    json j = getJsonItems();
-    for (auto it = j.begin(); it != j.end(); ++it) {
-        json item = *it;
+    json *j = getJsonItems();
+    for (auto it = j->begin(); it != j->end(); ++it) {
         if (!it->contains("id")) {
             continue;
         }
-        std::string id = item["id"];
-        ids.append(QString::fromStdString(id));
+        ids.append(QString::fromStdString((*it)["id"]));
     }
     setNames(ids);
+}
+
+void ESMBApplication::setCurrentItem(json *j) {
+    this->currentItem = j;
+}
+
+json* ESMBApplication::getCurrentItem() {
+    return currentItem;
 }
 
 void ESMBApplication::setJsonItems(json jsonItems) {
     this->jsonItems = jsonItems;
 }
 
-json ESMBApplication::getJsonItems() {
-    return jsonItems;
+json* ESMBApplication::getJsonItems() {
+    return &jsonItems;
 }
 
-void ESMBApplication::updateIdMap() {
-    // WARNING: this code assumes there are no duplicate items
-    idMap.clear();
-    // populate a map class var
-    // fill the map with the key="id", value=<mission obj reference> for each item in getJsonItems
-    json j = getJsonItems();
-    for (auto it = j.begin(); it != j.end(); ++it) {
+json* ESMBApplication::getJsonItemById(std::string id) {
+    json *j = getJsonItems();
+    for (auto it = j->begin(); it != j->end(); ++it) {
         json item = *it;
         if (!it->contains("id")) {
             continue;
         }
-        std::string id = item["id"];
-        idMap.emplace(id, std::ref(item));
+        if (id.compare((*it)["id"]) == 0) {
+            return &(*it);
+        }
     }
-    updateItemNames();
+    return nullptr;
 }

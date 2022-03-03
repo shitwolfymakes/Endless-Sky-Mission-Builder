@@ -28,8 +28,8 @@ private:
 
     // member data
     QStringList itemNames;
+    json *currentItem = nullptr;
     json jsonItems;
-    std::map<std::string, json> idMap;
 
 public:
     // controlled instantiation
@@ -40,8 +40,12 @@ public:
     QStringList getNames();
     void updateItemNames();
 
+    void setCurrentItem(json *);
+    json* getCurrentItem();
+
     void setJsonItems(json);
-    json getJsonItems();
+    json* getJsonItems();
+    json* getJsonItemById(std::string);
 
     void updateIdMap();
 };

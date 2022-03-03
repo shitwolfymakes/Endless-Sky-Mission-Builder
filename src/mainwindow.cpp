@@ -18,9 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setCentralWidget(ui->centralwidget);
 
-    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxUpdated()));
-    //connect(ui->comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-    //    [=](int index){ on_comboBox_update(index); });
+    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxChanged()));
 }
 
 MainWindow::~MainWindow()
@@ -52,9 +50,10 @@ void MainWindow::on_actionOpen_triggered()
     updateComboBoxData();
 
     // TODO: set the text to display the data for a selected mission
-    ui->textDisplay->setText(text);
-    QString jsonText = QString::fromStdString(esmb.getJsonItems().dump(4));
+    QString jsonText = QString::fromStdString(esmb.getCurrentItem()->dump(4));
     ui->jsonDisplay->setText(jsonText);
+    ui->textDisplay->setText(text);
+
     file.close();
 }
 
@@ -63,15 +62,26 @@ void MainWindow::on_actionQuit_triggered()
     QApplication::quit();
 }
 
-void MainWindow::comboBoxUpdated() {
+void MainWindow::comboBoxChanged() {
+    // TODO: Implement this
+    ESMBApplication& esmb = ESMBApplication::getInstance();
     int index = ui->comboBox->currentIndex();
-    qDebug("%s: %d", "COMBOBOX UPDATED", index);
+    qDebug("%s: %d", "COMBOBOX INDEX SELECTED", index);
+
+    // get the id at the index
+    std::string id = ui->comboBox->itemText(index).toStdString();
+
+    // set esmb *currentItem to the json *
+    esmb.setCurrentItem(esmb.getJsonItemById(id)); // TODO: add handling for when a nullptr is returned
+
+    // store the json text as a QString and update the json display widget
+    QString jsonText = QString::fromStdString(esmb.getCurrentItem()->dump(4));
+    ui->jsonDisplay->setText(jsonText);
 }
 
 void MainWindow::updateComboBoxData() {
-    // update the map of ids and their associated items
     ESMBApplication& esmb = ESMBApplication::getInstance();
-    esmb.updateIdMap();
+    esmb.updateItemNames();
 
     // update the combobox with the new itemNames
     ui->comboBox->clear();
