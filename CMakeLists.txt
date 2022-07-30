@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16)
 
 project(ESMB VERSION 0.1 LANGUAGES CXX)
 
@@ -15,10 +15,10 @@ include(CheckCXXCompilerFlag)
 set(ESMB_BUILD_TESTS ON)
 
 # QT
-set(QT_MIN_VERSION 5.15.0)
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Widgets Test)
+#set(QT_MIN_VERSION 5.15.0)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Test)
 
-set(QT_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets)
+set(QT_LIBRARIES Qt6::Core Qt6::Gui Qt6::Widgets)
 
 # setup CPM for package management
 include(cmake/CPM.cmake)

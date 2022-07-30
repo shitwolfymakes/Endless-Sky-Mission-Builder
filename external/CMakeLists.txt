@@ -1,4 +1,4 @@
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-pedantic -Wno-unused-function")
@@ -14,6 +14,7 @@ CPMAddPackage(
     GIT_SHALLOW ON
 )
 
+#CPMAddPackage("gh:nlohmann/json@3.10.5")
 if (nlohmann_json_ADDED)
     add_library(nlohmann_json INTERFACE)
     target_include_directories(nlohmann_json SYSTEM INTERFACE "${nlohmann_json_SOURCE_DIR}/include")

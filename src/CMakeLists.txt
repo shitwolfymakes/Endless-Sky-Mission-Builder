@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
@@ -64,11 +64,15 @@ set(RESOURCES resources.qrc)
 link_directories(${Boost_LIBRARY_DIRS})
 
 find_package(Threads)
+find_package(Boost 1.71 REQUIRED)
 
-if (WIN32)
-    set(BOOST_ROOT C:/cpp_libs/boost/boost_1_77_0)
-endif()
-find_package(Boost REQUIRED)
+# Executable
+add_executable(esmb main.cpp)
+target_compile_features(esmb PRIVATE cxx_std_17)
+set_target_properties(esmb PROPERTIES
+    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE ON
+)
 
 # Library
 add_library(esmb_lib STATIC
@@ -78,19 +82,11 @@ add_library(esmb_lib STATIC
     ${UIC}
     ${QRC}
 )
+target_include_directories(esmb_lib SYSTEM PUBLIC ${Boost_INCLUDE_DIRS})
 
-
-target_include_directories(esmb_lib SYSTEM PUBLIC
-    ${Boost_INCLUDE_DIRS}
-)
-
+target_link_libraries(esmb_lib PRIVATE ${QT_LIBRARIES})
 target_include_directories(esmb_lib PUBLIC ${ESMB_SOURCE_DIR}/src)
-
-
-# Executable
-add_executable(esmb main.cpp)
-target_link_libraries(esmb esmb_lib)
-
 add_subdirectory(${ESMB_EXTERNAL_DIR} ${ESMB_BINARY_DIR}/external)
+target_link_libraries(esmb_lib PUBLIC nlohmann_json)
 
-target_link_libraries(esmb_lib PUBLIC nlohmann_json ${QT_LIBRARIES})
+target_link_libraries(esmb PRIVATE esmb_lib ${QT_LIBRARIES})

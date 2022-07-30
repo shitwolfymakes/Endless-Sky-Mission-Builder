@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16s)
 
 project (ESMB_Tests)
 
@@ -41,7 +41,7 @@ macro(add_test_file file_path test_source gui_required)
         ${file_path}/${test_source}
     )
 
-    target_link_libraries(${TEST_NAME} gtest gtest_main gmock esmb_lib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt5::Test)
+    target_link_libraries(${TEST_NAME} gtest gtest_main gmock esmb_lib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt6::Test)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
         target_link_libraries(${TEST_NAME} test_gui_main)
