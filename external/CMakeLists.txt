@@ -9,12 +9,10 @@ endif()
 CPMAddPackage(
     NAME nlohmann_json
     GITHUB_REPOSITORY nlohmann/json
-    VERSION 3.10.4
+    VERSION 3.11.0
     DOWNLOAD_ONLY YES
     GIT_SHALLOW ON
 )
-
-#CPMAddPackage("gh:nlohmann/json@3.10.5")
 if (nlohmann_json_ADDED)
     add_library(nlohmann_json INTERFACE)
     target_include_directories(nlohmann_json SYSTEM INTERFACE "${nlohmann_json_SOURCE_DIR}/include")
