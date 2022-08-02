@@ -39,7 +39,7 @@ void MainWindow::on_actionOpen_triggered()
     }
     QTextStream in(&file);
     QString text = in.readAll();
-    DataFileParser parser = DataFileParser(text);
+    DataFileParser parser = DataFileParser(text.toStdString());
     parser.run();
 
     ESMBApplication& esmb = ESMBApplication::getInstance();

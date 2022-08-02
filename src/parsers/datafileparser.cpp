@@ -7,26 +7,21 @@
 
 #include "datafileparser.h"
 
-DataFileParser::DataFileParser(QString rawData)
-    : qLines(rawData.split("\n")),
-      lines(toStdStringVector())
+DataFileParser::DataFileParser(std::string rawData)
 {
     this->rawData = rawData;
-    //printRawData();
-}
 
-std::vector<std::string> DataFileParser::toStdStringVector() {
-    std::vector<std::string> lines;
-    for(const QString &line: qLines) {
-        lines.push_back(line.toStdString());
-    }
-    return lines;
+    std::vector<std::string> result;
+    boost::split(result, rawData, boost::is_any_of("\n"));
+    this->lines = result;
+
+    //printRawData();
 }
 
 void DataFileParser::printRawData() {
     std::cout << "BEGIN RAW DATA" << std::endl;
-    for(const QString &line: qLines){
-        std::cout << line.toStdString() << std::endl;
+    for(const std::string &line: lines){
+        std::cout << line << std::endl;
     }
     std::cout << "END RAW DATA" << std::endl;
 }

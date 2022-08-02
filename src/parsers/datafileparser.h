@@ -13,8 +13,6 @@
 #include <string>
 #include <vector>
 
-#include <QString>
-#include <QStringList>
 #include "boost/algorithm/string/join.hpp"
 
 #include "model/fileitem.h"
@@ -30,15 +28,14 @@ class DataFileParser
 {
 private:
     // store the file data in different formats
-    QString rawData;
-    const QStringList qLines;
-    const std::vector<std::string> lines;
+    std::string rawData;
+    std::vector<std::string> lines;
 
     std::vector<std::unique_ptr<FileItem>> fileItems;
     json jsonItems;
 
 public:
-    DataFileParser(QString);
+    DataFileParser(std::string);
 
     //const QStringList toList();
     std::vector<std::string> toStdStringVector();

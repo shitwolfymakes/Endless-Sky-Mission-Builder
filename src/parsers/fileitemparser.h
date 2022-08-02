@@ -8,10 +8,10 @@
 #ifndef FILEITEMPARSER_H
 #define FILEITEMPARSER_H
 
+#include <iostream>
 #include <string>
 #include <vector>
 
-#include <iostream>
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/tokenizer.hpp>
