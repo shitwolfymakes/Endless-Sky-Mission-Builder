@@ -24,16 +24,15 @@ std::vector<std::string> DataFileParser::toStdStringVector() {
 }
 
 void DataFileParser::printRawData() {
-    qDebug() << "BEGIN RAW DATA";
+    std::cout << "BEGIN RAW DATA" << std::endl;
     for(const QString &line: qLines){
-        //need to use qUtf8Printable to preserve the formatting
-        qDebug("%s", qUtf8Printable(line));
+        std::cout << line.toStdString() << std::endl;
     }
-    qDebug() << "END RAW DATA";
+    std::cout << "END RAW DATA" << std::endl;
 }
 
 void DataFileParser::run() {
-    qDebug() << "Parsing data file...";
+    std::cout << "Parsing data file..." << std::endl;
     int i = 0;
     for (const std::string &line: lines) {
         // account for whitespace between file items
@@ -45,33 +44,27 @@ void DataFileParser::run() {
         // search for lines starting file items
         if (std::regex_match(line, matchEvent))
         {
-            QString qLine = QString::fromStdString(line);
-            qDebug("\tEVENT FOUND: %s", qUtf8Printable(qLine));
+            std::cout << "\tEVENT FOUND: " << line << std::endl;
             storeItemForParsing(i, line, Event);
         }
         else if (std::regex_match(line, matchGovernment)) {
-            QString qLine = QString::fromStdString(line);
-            qDebug("\tGOVERNMENT FOUND: %s", qUtf8Printable(qLine));
+            std::cout << "\tGOVERNMENT FOUND: " << line << std::endl;
             storeItemForParsing(i, line, Government);
         }
         else if (std::regex_match(line, matchMission)) {
-            QString qLine = QString::fromStdString(line);
-            qDebug("\tMISSION FOUND: %s", qUtf8Printable(qLine));
+            std::cout << "\tMISSION FOUND: " << line << std::endl;
             storeItemForParsing(i, line, Mission);
         }
         else if (std::regex_match(line, matchPhrase)) {
-            QString qLine = QString::fromStdString(line);
-            qDebug("\tPHRASE FOUND: %s", qUtf8Printable(qLine));
+            std::cout << "\tPHRASE FOUND: " << line << std::endl;
             storeItemForParsing(i, line, Phrase);
         }
         else if (std::regex_match(line, matchShip)) {
-            QString qLine = QString::fromStdString(line);
-            qDebug("\tSHIP FOUND: %s", qUtf8Printable(qLine));
+            std::cout << "\tSHIP FOUND: " << line << std::endl;
             storeItemForParsing(i, line, Ship);
         }
         else if (std::regex_match(line, matchSubstitutions)) {
-            QString qLine = QString::fromStdString(line);
-            qDebug("\tSUBSTITUTION FOUND: %s", qUtf8Printable(qLine));
+            std::cout << "\tSUBSTITUTION FOUND: " << line << std::endl;
             storeItemForParsing(i, line, Substitutions);
         }
 

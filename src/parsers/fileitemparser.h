@@ -11,9 +11,9 @@
 #include <string>
 #include <vector>
 
-#include <QDebug>
-#include <QString>
+#include <iostream>
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 #include <boost/tokenizer.hpp>
 #include "nlohmann/json.hpp"
 

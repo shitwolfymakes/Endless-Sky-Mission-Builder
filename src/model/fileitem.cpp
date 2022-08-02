@@ -37,9 +37,9 @@ std::string FileItem::toString() {
 }
 
 void FileItem::printLines() {
-    qDebug() << "Item Data:";
+    std::cout << "Item Data:" << std::endl;
     for (const std::string &line: lines) {
-        QString qLine = QString::fromStdString(line);
-        qDebug("\t%s", qUtf8Printable(qLine));
+        std::cout << line << std::endl;
+        //std::cout << "\t" << line << std::endl;
     }
 }

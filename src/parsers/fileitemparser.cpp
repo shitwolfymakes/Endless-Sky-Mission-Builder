@@ -60,7 +60,7 @@ bool FileItemParser::isOneOf(std::string token, std::vector<std::string> options
 
 int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int startingIndex, json *nodeLines) {
     int index = startingIndex;
-    qDebug("\tCollecting lines in node: %s", qUtf8Printable(QString::fromStdString(lines->at(index))));
+    std::cout << "\tCollecting lines in node: " << lines->at(index) << std::endl;
 
     // collect the first line in the node
     (*nodeLines).emplace_back(lines->at(index));
@@ -82,6 +82,6 @@ int FileItemParser::collectNodeLines(std::vector<std::string> *lines, int starti
             break;
         }
     }
-    //qDebug("\tNode Lines: %s", qUtf8Printable(QString::fromStdString(nodeLines->dump(4))));
+    //std::cout << "\tNode Lines: " << nodeLines->dump(4) << std::endl;
     return index;
 }

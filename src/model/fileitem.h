@@ -11,8 +11,7 @@
 #include <string>
 #include <vector>
 
-#include <QDebug>
-#include <QString>
+#include <iostream>
 
 #include "nlohmann/json.hpp"
 

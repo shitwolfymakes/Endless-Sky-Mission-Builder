@@ -15,6 +15,6 @@ ItemSubstitutions::ItemSubstitutions()
 json ItemSubstitutions::parse() {
     FileSubstitutionsItemParser parser = FileSubstitutionsItemParser(lines);
     json substitutions = parser.run();
-    qDebug() << "finished parsing substitutions";
+    std::cout << "finished parsing substitutions" << std::endl;
     return substitutions;
 }

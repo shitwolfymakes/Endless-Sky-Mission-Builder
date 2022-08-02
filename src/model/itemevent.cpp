@@ -13,7 +13,7 @@ ItemEvent::ItemEvent()
 }
 
 json ItemEvent::parse() {
-    qDebug() << "Event parsing not yet implemented";
+    std::cout << "Event parsing not yet implemented" << std::endl;
     json event;
     return event;
 }

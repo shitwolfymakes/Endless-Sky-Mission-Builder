@@ -13,9 +13,9 @@ ItemMission::ItemMission()
 }
 
 json ItemMission::parse() {
-    qDebug() << "parsing mission item to JSON";
+    std::cout << "parsing mission item to JSON" << std::endl;
     FileMissionItemParser parser = FileMissionItemParser(lines);
     json mission = parser.run();
-    qDebug() << "finished parsing mission";
+    std::cout << "finished parsing mission" << std::endl;
     return mission;
 }

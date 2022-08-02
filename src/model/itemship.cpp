@@ -13,7 +13,7 @@ ItemShip::ItemShip()
 }
 
 json ItemShip::parse() {
-    qDebug() << "Ship parsing not yet implemented";
+    std::cout << "Ship parsing not yet implemented" << std::endl;
     json ship;
     return ship;
 }

@@ -8,11 +8,11 @@
 #ifndef DATAFILEPARSER_H
 #define DATAFILEPARSER_H
 
+#include <iostream>
 #include <regex>
 #include <string>
 #include <vector>
 
-#include <QDebug>
 #include <QString>
 #include <QStringList>
 #include "boost/algorithm/string/join.hpp"

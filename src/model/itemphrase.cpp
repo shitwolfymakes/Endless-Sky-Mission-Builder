@@ -13,7 +13,7 @@ ItemPhrase::ItemPhrase()
 }
 
 json ItemPhrase::parse() {
-    qDebug() << "Phrase parsing not yet implemented";
+    std::cout << "Phrase parsing not yet implemented" << std::endl;
     json phrase;
     return phrase;
 }
