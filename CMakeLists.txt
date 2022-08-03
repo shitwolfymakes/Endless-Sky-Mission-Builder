@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 
 project(ESMB VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   message(
@@ -15,7 +18,6 @@ include(CheckCXXCompilerFlag)
 set(ESMB_BUILD_TESTS ON)
 
 # QT
-#set(QT_MIN_VERSION 5.15.0)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Test)
 
 set(QT_LIBRARIES Qt6::Core Qt6::Gui Qt6::Widgets)

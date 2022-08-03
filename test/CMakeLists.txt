@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.16s)
+cmake_minimum_required(VERSION 3.16)
 
 project (ESMB_Tests)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -Wno-c++11-narrowing")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 
 # Thanks to clementine-player for having a clear and concise CMakeLists for this
 

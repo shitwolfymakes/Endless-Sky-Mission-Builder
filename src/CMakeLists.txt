@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 
 option(BUILD_WERROR "Build with -Werror" ON)
@@ -64,11 +61,10 @@ set(RESOURCES resources.qrc)
 link_directories(${Boost_LIBRARY_DIRS})
 
 find_package(Threads)
-find_package(Boost 1.71 REQUIRED)
+find_package(Boost 1.79 REQUIRED)
 
 # Executable
 add_executable(esmb main.cpp)
-target_compile_features(esmb PRIVATE cxx_std_17)
 set_target_properties(esmb PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
