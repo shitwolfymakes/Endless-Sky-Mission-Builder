@@ -2,13 +2,14 @@
 /*
  * itemphrase.h
  *
- * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ * Copyright (c) 2021-2022, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
 #ifndef ITEMPHRASE_H
 #define ITEMPHRASE_H
 
 #include "fileitem.h"
+#include "parsers/filephraseitemparser.h"
 
 class ItemPhrase : public FileItem
 {
