@@ -30,6 +30,7 @@ set(SOURCES
     parsers/datafileparser.cpp
     parsers/fileitemparser.cpp
     parsers/filemissionitemparser.cpp
+    parsers/filephraseitemparser.cpp
     parsers/filesubstitutionsitemparser.cpp
 )
 
@@ -49,6 +50,7 @@ set(HEADERS
     parsers/datafileparser.h
     parsers/fileitemparser.h
     parsers/filemissionitemparser.h
+    parsers/filephraseitemparser.h
     parsers/filesubstitutionsitemparser.h
 )
 
