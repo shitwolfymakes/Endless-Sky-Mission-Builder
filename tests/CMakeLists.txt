@@ -42,7 +42,8 @@ macro(add_test_file file_path test_source gui_required)
     get_filename_component(TEST_NAME ${test_source} NAME_WE)
     add_executable(${TEST_NAME}
         #EXCLUDE_FROM_ALL # this prevents the test from being built (when targeting ALL)
-        "${file_path}/${test_source}"
+        "${file_path}/${test_source}.cpp"
+        "${file_path}/${test_source}.h"
     )
 
     target_link_libraries(${TEST_NAME} gtest gtest_main gmock esjsonlib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt6::Test)
@@ -64,6 +65,6 @@ macro(add_test_file file_path test_source gui_required)
 endmacro (add_test_file)
 
 
-add_test_file(parsers fileitemparser_tests.cpp false)
-add_test_file(parsers filemissionitemparser_tests.cpp false)
-add_test_file(parsers filesubstitutionsitemparser_tests.cpp false)
+add_test_file(parsers fileitemparser_tests false)
+add_test_file(parsers filemissionitemparser_tests false)
+add_test_file(parsers filesubstitutionsitemparser_tests false)
