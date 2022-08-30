@@ -35,5 +35,5 @@ add_subdirectory(src/esjsonlib)
 
 # add the test subproject
 if (ESMB_BUILD_TESTS)
-    add_subdirectory(test)
+    add_subdirectory(tests)
 endif()
