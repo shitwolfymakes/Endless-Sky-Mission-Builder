@@ -12,6 +12,8 @@
 
 #include "nlohmann/json.hpp"
 
+#include "parsers/datafileparser.h"
+
 using json = nlohmann::json;
 
 class ESMBApplication
@@ -36,6 +38,8 @@ public:
     static ESMBApplication& getInstance();
 
     // public methods
+    void parseFileData(std::string);
+
     void setNames(QStringList);
     QStringList getNames();
     void updateItemNames();

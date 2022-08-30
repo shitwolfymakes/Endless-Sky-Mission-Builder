@@ -6,8 +6,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 
 # Thanks to clementine-player for having a clear and concise CMakeLists for this
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${CMAKE_BINARY_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/src/esmb)
+include_directories(${CMAKE_BINARY_DIR}/src/esmb)
+include_directories(${CMAKE_SOURCE_DIR}/src/esjsonlib)
+include_directories(${CMAKE_BINARY_DIR}/src/esjsonlib)
 
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
@@ -27,21 +29,23 @@ add_custom_target(build_tests
 add_dependencies(esmb_test build_tests)
 
 add_library(test_gui_main STATIC EXCLUDE_FROM_ALL main.cpp ${HEADERS})
-target_link_libraries(test_gui_main esmb_lib gtest gtest_main gmock)
+target_link_libraries(test_gui_main esjsonlib gtest gtest_main gmock)
+target_include_directories(test_gui_main PRIVATE ${CMAKE_SOURCE_DIR}/src/esmb ${CMAKE_SOURCE_DIR}/src/esjsonlib)
 set_target_properties(test_gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
 
 add_library(test_main STATIC EXCLUDE_FROM_ALL main.cpp ${HEADERS})
-target_link_libraries(test_main esmb_lib gtest gtest_main gmock)
+target_link_libraries(test_main esjsonlib gtest gtest_main gmock)
+target_include_directories(test_main PRIVATE ${CMAKE_SOURCE_DIR}/src/esmb ${CMAKE_SOURCE_DIR}/src/esjsonlib)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
 macro(add_test_file file_path test_source gui_required)
     get_filename_component(TEST_NAME ${test_source} NAME_WE)
     add_executable(${TEST_NAME}
         #EXCLUDE_FROM_ALL # this prevents the test from being built (when targeting ALL)
-        ${file_path}/${test_source}
+        "${file_path}/${test_source}"
     )
 
-    target_link_libraries(${TEST_NAME} gtest gtest_main gmock esmb_lib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt6::Test)
+    target_link_libraries(${TEST_NAME} gtest gtest_main gmock esjsonlib ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} Qt6::Test)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
         target_link_libraries(${TEST_NAME} test_gui_main)

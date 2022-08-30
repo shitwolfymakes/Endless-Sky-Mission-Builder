@@ -19,6 +19,7 @@ set(ESMB_BUILD_TESTS ON)
 
 # QT
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Test)
+qt_standard_project_setup()
 
 set(QT_LIBRARIES Qt6::Core Qt6::Gui Qt6::Widgets)
 
@@ -29,7 +30,8 @@ set(CPM_LOCAL_PACKAGES_ONLY OFF)
 
 # add the src subproject
 set(ESMB_EXTERNAL_DIR ${ESMB_SOURCE_DIR}/external)
-add_subdirectory(src)
+add_subdirectory(src/esmb)
+add_subdirectory(src/esjsonlib)
 
 # add the test subproject
 if (ESMB_BUILD_TESTS)

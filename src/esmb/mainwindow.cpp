@@ -9,7 +9,6 @@
 #include "./ui_mainwindow.h"
 
 #include "esmbapplication.h"
-#include "parsers/datafileparser.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,11 +38,9 @@ void MainWindow::on_actionOpen_triggered()
     }
     QTextStream in(&file);
     QString text = in.readAll();
-    DataFileParser parser = DataFileParser(text.toStdString());
-    parser.run();
 
     ESMBApplication& esmb = ESMBApplication::getInstance();
-    esmb.setJsonItems(parser.getJsonItems());
+    esmb.parseFileData(text.toStdString());
 
     updateComboBoxData();
 

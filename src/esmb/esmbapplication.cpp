@@ -13,6 +13,12 @@ ESMBApplication& ESMBApplication::getInstance() {
     return esmb;
 }
 
+void ESMBApplication::parseFileData(std::string fileData) {
+    DataFileParser parser = DataFileParser(fileData);
+    parser.run();
+    setJsonItems(parser.getJsonItems());
+}
+
 void ESMBApplication::setNames(QStringList itemNames) {
     this->itemNames = itemNames;
 }
