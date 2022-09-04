@@ -22,7 +22,10 @@ add_executable(esmb
 target_link_libraries(esmb PRIVATE
     esjsonlib
     ${QT_LIBRARIES})
-target_include_directories(esmb PRIVATE ${CMAKE_SOURCE_DIR}/src/esmb ${CMAKE_SOURCE_DIR}/src/esjsonlib)
+target_include_directories(esmb PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/esmb
+    ${CMAKE_SOURCE_DIR}/src/esjsonlib
+)
 
 
 set_target_properties(esmb PROPERTIES

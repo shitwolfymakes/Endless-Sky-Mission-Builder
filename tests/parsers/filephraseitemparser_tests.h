@@ -15,7 +15,17 @@
 
 namespace parsertests {
 
-std::vector<std::string> sample_phrase_node;
+std::vector<std::string> sample_phrase_node = {"\tphrase \"Harambe 1\"",
+                                               "\t\tword",
+                                               "\t\t\t\"Silverback\"",
+                                               "\t\t\t`Harambe died for you` 10",
+                                               "\t\t\t\"Never forget. ${placeholder}\"",
+                                               "\t\t\t\"Always remember. ${placeholder}\" 20",
+                                               "\t\tphrase",
+                                               "\t\t\t\"Don't fall in!\"",
+                                               "\t\t\t\"Watch out for armed zookeepers\" 30",
+                                               "\t\treplace",
+                                               "\t\t\t\"Harambe\" \"King\""};
 
 // Fixture for testing a substitution node
 class FilePhraseItemParserTest : public ::testing::Test {
