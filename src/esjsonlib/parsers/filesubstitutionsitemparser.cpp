@@ -25,7 +25,7 @@ json FileSubstitutionsItemParser::run() {
 
         i = parseSubstitution(&lines, i);
     }
-
+    //std::cout << "Substitution data: " << substitutions.dump(4) << std::endl;
     return substitutions;
 }
 
