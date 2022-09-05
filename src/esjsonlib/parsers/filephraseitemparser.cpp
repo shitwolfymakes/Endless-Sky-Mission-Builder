@@ -21,9 +21,13 @@ json FilePhraseItemParser::run() {
         std::cout << "LINE: " << tokens.at(0) << std::endl;
         if (tokens.at(0).compare("word") == 0) {
             i = parseWords(&lines, i);
-            std::cout << "i is: " << i << std::endl;
+        } else if (tokens.at(0).compare("phrase") == 0) {
+            i = parseSubPhrase(&lines, i);
+        } else if (tokens.at(0).compare("replace") == 0) {
+            i = parseReplace(&lines, i);
+        } else {
+            std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
         }
-
     }
     //std::cout << "Phrase data: " << phrase.dump(4) << std::endl;
     return phrase;
