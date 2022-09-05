@@ -102,8 +102,36 @@ int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, in
 }
 
 int FilePhraseItemParser::parseReplace(std::vector<std::string> *nodeLines, int startingIndex) {
+    std::cout << "Parsing subPhrase node" << std::endl;
+    std::vector<std::string> lines = *nodeLines;
+    int index = startingIndex;
 
-    return -1;
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        if (tokens.size() != 2) {
+            std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(index) << std::endl;
+        }
+
+        json replace;
+        replace["text"] = tokens.at(0);
+        replace["replacement"] = tokens.at(1);
+        phrase["replace"].emplace_back(replace);
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    return index;
 }
 
 json FilePhraseItemParser::get_data() {
