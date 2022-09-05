@@ -33,7 +33,6 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
     std::cout << "Parsing word node" << std::endl;
     std::vector<std::string> lines = *nodeLines;
     int index = startingIndex;
-    json word;
 
     int cur = getIndentLevel(lines.at(index));
     int nxt = getIndentLevel(lines.at(index + 1));
