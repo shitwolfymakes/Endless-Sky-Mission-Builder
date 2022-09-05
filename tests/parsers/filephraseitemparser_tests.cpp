@@ -169,6 +169,7 @@ TEST_F(FilePhraseItemParserTest, StoreMulipleWordNodes) {
     int index = parser.parseWords(&lines, 1);
     index++; // Simulate loop incrementation
     index = parser.parseWords(&lines, index);
+    ASSERT_EQ(index, 6);
     ASSERT_EQ(parser.get_data(), expected);
 }
 
