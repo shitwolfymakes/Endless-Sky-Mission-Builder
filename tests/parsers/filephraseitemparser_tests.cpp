@@ -163,7 +163,7 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
      *         "Don't fall in!"
      *      ],
      *      "phrases_weighted": [
-     *          { "text": "Watch out for armed zookeepers", "weight": 30 }
+     *          { "phrase": "Watch out for armed zookeepers", "weight": 30 }
      *      ]
      *  }
      */
@@ -172,10 +172,10 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
     json phrases;
     phrases.emplace_back("Don't fall in!");
     expected["phrases"] = phrases;
-    json weighted_word;
-    weighted_word["text"] = "Watch out for armed zookeepers";
-    weighted_word["weight"] = 30;
-    expected["phrases_weighted"].emplace_back(weighted_word);
+    json weighted_phrase;
+    weighted_phrase["phrase"] = "Watch out for armed zookeepers";
+    weighted_phrase["weight"] = 30;
+    expected["phrases_weighted"].emplace_back(weighted_phrase);
 
     int index = 0;
     std::vector<std::string> lines = empty_subPhrase_node;
