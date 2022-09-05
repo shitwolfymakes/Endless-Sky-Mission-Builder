@@ -143,10 +143,10 @@ phrase "Harambe 1"
 	word
 		"Silverback"
 		`Harambe died for you` 10
-		"Never forget. "
-		"Always remember. " 20
-        phrase
-                "Don't fall in!"
-                "Watch out for armed zookeepers" 30
+		"Never forget. ${placeholder}"
+		"Always remember. ${placeholder}" 20
+	phrase
+		"Don't fall in!"
+		"Watch out for armed zookeepers" 30
 	replace
-                "Harambe" "King"
+		"Harambe" "King"
