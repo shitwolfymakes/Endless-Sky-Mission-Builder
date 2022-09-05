@@ -99,8 +99,35 @@ TEST_F(FilePhraseItemParserTest, StoreHomogenousWordNode) {
 }
 
 TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
+    /** JSON representation:
+     *  {
+     *     "words": [
+     *         "Silverback"
+     *      ],
+     *      "words_weighted": [
+     *          { "text": "Harambe died for you", "weight": 10 }
+     *      ]
+     *  }
+     */
 
-    ASSERT_EQ(0,1);
+    json expected;
+    json words;
+    words.emplace_back("Silverback");
+    expected["words"] = words;
+    json weighted_word;
+    weighted_word["text"] = "Harambe died for you";
+    weighted_word["weight"] = 10;
+    expected["words_weighted"].emplace_back(weighted_word);
+
+    int index = 0;
+    std::vector<std::string> lines = empty_word_node;
+    lines.emplace_back("\t\t\"Silverback\"");
+    lines.emplace_back("\t\t`Harambe died for you` 10");
+    parser = FilePhraseItemParser(lines);
+
+    index = parser.parseWords(&lines, 1);
+    ASSERT_EQ(index, 3);
+    ASSERT_EQ(parser.get_data(), expected);
 }
 
 } // namespace parsertests

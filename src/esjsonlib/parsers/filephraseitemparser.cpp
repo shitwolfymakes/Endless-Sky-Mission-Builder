@@ -49,7 +49,9 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
         } else if (tokens.size() == 2) {
             json weighted_word;
             weighted_word["text"] = tokens.at(0);
-            weighted_word["weight"] = std::stoi(tokens.at(0));
+            int weight = std::stoi(tokens.at(1));
+            weighted_word["weight"] = weight;
+            phrase["words_weighted"].emplace_back(weighted_word);
         } else {
             std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(index) << std::endl;
         }
