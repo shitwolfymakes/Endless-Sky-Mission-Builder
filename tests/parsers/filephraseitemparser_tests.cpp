@@ -143,7 +143,7 @@ TEST_F(FilePhraseItemParserTest, StoreHomogenousSubPhraseNode) {
     json expected;
     json phrases;
     phrases.emplace_back("Don't fall in!");
-    phrases.emplace_back("Don't you fall in! 2");
+    phrases.emplace_back("Don't you fall in!");
     expected["phrases"] = phrases;
 
     int index = 0;

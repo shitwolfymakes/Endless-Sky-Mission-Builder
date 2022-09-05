@@ -67,7 +67,39 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
 }
 
 int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, int startingIndex) {
-    return -1;
+    std::cout << "Parsing subPhrase node" << std::endl;
+    std::vector<std::string> lines = *nodeLines;
+    int index = startingIndex;
+
+    int cur = getIndentLevel(lines.at(index));
+    int nxt = getIndentLevel(lines.at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        if (tokens.size() == 1) {
+            phrase["phrases"].emplace_back(tokens.at(0));
+        } else if (tokens.size() == 2) {
+            json weighted_phrase;
+            weighted_phrase["text"] = tokens.at(0);
+            int weight = std::stoi(tokens.at(1));
+            weighted_phrase["weight"] = weight;
+            phrase["phrases_weighted"].emplace_back(weighted_phrase);
+        } else {
+            std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(index) << std::endl;
+        }
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines.at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    return index;
 }
 
 json FilePhraseItemParser::get_data() {
