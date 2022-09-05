@@ -15,23 +15,23 @@
 
 namespace parsertests {
 
-std::vector<std::string> sample_phrase_node = {"\tphrase \"Harambe 1\"",
-                                               "\t\tword",
-                                               "\t\t\t\"Silverback\"",
-                                               "\t\t\t`Harambe died for you` 10",
-                                               "\t\t\t\"Never forget. ${placeholder}\"",
-                                               "\t\t\t\"Always remember. ${placeholder}\" 20",
-                                               "\t\tphrase",
-                                               "\t\t\t\"Don't fall in!\"",
-                                               "\t\t\t\"Watch out for armed zookeepers\" 30",
-                                               "\t\treplace",
-                                               "\t\t\t\"Harambe\" \"King\""};
-std::vector<std::string> empty_word_node = {"\tphrase \"Harambe 1\"",
-                                            "\t\tword"};
-std::vector<std::string> empty_subPhrase_node = {"\tphrase \"Harambe 1\"",
-                                                 "\t\tphrase"};
-std::vector<std::string> empty_replace_node = {"\tphrase \"Harambe 1\"",
-                                               "\t\treplace"};
+std::vector<std::string> sample_phrase_node = {"phrase \"Harambe 1\"",
+                                               "\tword",
+                                               "\t\t\"Silverback\"",
+                                               "\t\t`Harambe died for you` 10",
+                                               "\t\t\"Never forget. ${placeholder}\"",
+                                               "\t\t\"Always remember. ${placeholder}\" 20",
+                                               "\tphrase",
+                                               "\t\t\"Don't fall in!\"",
+                                               "\t\t\"Watch out for armed zookeepers\" 30",
+                                               "\treplace",
+                                               "\t\t\"Harambe\" \"King\""};
+std::vector<std::string> empty_word_node = {"phrase \"Harambe 1\"",
+                                            "\tword"};
+std::vector<std::string> empty_subPhrase_node = {"phrase \"Harambe 1\"",
+                                                 "\tphrase"};
+std::vector<std::string> empty_replace_node = {"phrase \"Harambe 1\"",
+                                               "\treplace"};
 
 // Fixture for testing a substitution node
 class FilePhraseItemParserTest : public ::testing::Test {

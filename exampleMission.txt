@@ -141,6 +141,12 @@ event "Giga Bitch"
 
 phrase "Harambe 1"
 	word
-		`Harambe died for you`
-
-
+		"Silverback"
+		`Harambe died for you` 10
+		"Never forget. "
+		"Always remember. " 20
+	phrase
+		"Don't fall in\!"
+		"Watch out for armed zookeepers" 30
+	replace
+		"Harambe" "King"
