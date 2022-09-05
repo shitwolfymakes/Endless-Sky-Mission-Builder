@@ -146,7 +146,7 @@ phrase "Harambe 1"
 		"Never forget. "
 		"Always remember. " 20
 	phrase
-		"Don't fall in\!"
+                "Don't fall in!"
 		"Watch out for armed zookeepers" 30
 	replace
 		"Harambe" "King"
