@@ -26,6 +26,12 @@ std::vector<std::string> sample_phrase_node = {"\tphrase \"Harambe 1\"",
                                                "\t\t\t\"Watch out for armed zookeepers\" 30",
                                                "\t\treplace",
                                                "\t\t\t\"Harambe\" \"King\""};
+std::vector<std::string> empty_word_node = {"\tphrase \"Harambe 1\"",
+                                            "\t\tword"};
+std::vector<std::string> empty_subPhrase_node = {"\tphrase \"Harambe 1\"",
+                                                 "\t\tphrase"};
+std::vector<std::string> empty_replace_node = {"\tphrase \"Harambe 1\"",
+                                               "\t\treplace"};
 
 // Fixture for testing a substitution node
 class FilePhraseItemParserTest : public ::testing::Test {
