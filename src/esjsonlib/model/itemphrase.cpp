@@ -13,7 +13,6 @@ ItemPhrase::ItemPhrase()
 }
 
 json ItemPhrase::parse() {
-    std::cout << "parsing Phrase item to JSON" << std::endl;
     FilePhraseItemParser parser = FilePhraseItemParser(lines);
     json phrase = parser.run();
     std::cout << "finished parsing phrase" << std::endl;
