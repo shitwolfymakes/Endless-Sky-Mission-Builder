@@ -71,4 +71,36 @@ TEST_F(FilePhraseItemParserTest, TestPhraseParsing) {
     ASSERT_EQ(0,1);
 }
 
+TEST_F(FilePhraseItemParserTest, StoreHomogenousWordNode) {
+    /** JSON representation:
+     *  {
+     *     "words": [
+     *         "Silverback",
+     *         "Never forget. ${placeholder}",
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json words;
+    words.emplace_back("Silverback");
+    words.emplace_back("Never forget. ${placeholder}");
+    expected["words"] = words;
+
+    int index = 0;
+    std::vector<std::string> lines = empty_word_node;
+    lines.emplace_back("\t\t\"Silverback\"");
+    lines.emplace_back("\t\t\"Never forget. ${placeholder}\"");
+    parser = FilePhraseItemParser(lines);
+
+    index = parser.parseWords(&lines, 1);
+    ASSERT_EQ(index, 3);
+    ASSERT_EQ((parser.get_data()), expected);
+}
+
+TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
+
+    ASSERT_EQ(0,1);
+}
+
 } // namespace parsertests
