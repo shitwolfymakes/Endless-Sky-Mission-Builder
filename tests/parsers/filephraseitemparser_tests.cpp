@@ -129,6 +129,49 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
     ASSERT_EQ(parser.get_data(), expected);
 }
 
+TEST_F(FilePhraseItemParserTest, StoreMulipleWordNodes) {
+    /** JSON representation:
+     *  {
+     *     "words": [
+     *         "Silverback",
+     *         "another Silverback"
+     *      ],
+     *      "words_weighted": [
+     *          { "text": "Harambe died for you", "weight": 10 },
+     *          { "text": "Harambe died for you too", "weight": 15 }
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json words;
+    words.emplace_back("Silverback");
+    words.emplace_back("another Silverback");
+    expected["words"] = words;
+
+    json weighted_word, weighted_word2;
+    weighted_word["text"] = "Harambe died for you";
+    weighted_word["weight"] = 10;
+    weighted_word2["text"] = "Harambe died for you too";
+    weighted_word2["weight"] = 15;
+    expected["words_weighted"].emplace_back(weighted_word);
+    expected["words_weighted"].emplace_back(weighted_word2);
+
+    std::vector<std::string> lines = empty_word_node;
+    lines.emplace_back("\t\t\"Silverback\"");
+    lines.emplace_back("\t\t`Harambe died for you` 10");
+    lines.emplace_back("\tword");
+    lines.emplace_back("\t\t\"another Silverback\"");
+    lines.emplace_back("\t\t`Harambe died for you too` 15");
+
+    parser = FilePhraseItemParser(lines);
+
+    int index = parser.parseWords(&lines, 1);
+    index++; // Simulate loop incrementation
+    index = parser.parseWords(&lines, index);
+    ASSERT_EQ(parser.get_data(), expected);
+}
+
 TEST_F(FilePhraseItemParserTest, StoreHomogenousSubPhraseNode) {
     /** JSON representation:
      *  {
