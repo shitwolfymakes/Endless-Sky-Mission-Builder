@@ -95,7 +95,7 @@ TEST_F(FilePhraseItemParserTest, StoreHomogenousWordNode) {
 
     index = parser.parseWords(&lines, 1);
     ASSERT_EQ(index, 3);
-    ASSERT_EQ((parser.get_data()), expected);
+    ASSERT_EQ(parser.get_data(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
