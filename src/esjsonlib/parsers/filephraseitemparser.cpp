@@ -35,16 +35,6 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
     int index = startingIndex;
     json word;
 
-    std::vector<std::string> tokens = tokenize(lines.at(index));
-
-    // check if next line exists
-    try {
-        getIndentLevel(lines.at(index + 1));
-    }  catch (const std::out_of_range& ex) {
-        //substitutions.emplace_back(substitution);
-        return index;
-    }
-
     int cur = getIndentLevel(lines.at(index));
     int nxt = getIndentLevel(lines.at(index + 1));
     while (true) {
@@ -53,10 +43,16 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
         }
         index++;
 
-        //std::string conditionSet = lines.at(index);
-        //boost::trim(conditionSet);
-        //std::cout << "\tFound condition set: " << conditionSet << std::endl;
-        //substitution["condition_sets"].emplace_back(conditionSet);
+        std::vector<std::string> tokens = tokenize(lines.at(index));
+        if (tokens.size() == 1) {
+            phrase["words"].emplace_back(tokens.at(0));
+        } else if (tokens.size() == 2) {
+            json weighted_word;
+            weighted_word["text"] = tokens.at(0);
+            weighted_word["weight"] = std::stoi(tokens.at(0));
+        } else {
+            std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(index) << std::endl;
+        }
 
         // handle getting the depth of the next line
         try {
@@ -65,7 +61,6 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
             break;
         }
     }
-    //substitutions.emplace_back(substitution);
     return index;
 }
 
