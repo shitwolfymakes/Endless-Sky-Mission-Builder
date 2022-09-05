@@ -70,6 +70,67 @@ TEST_F(FilePhraseItemParserTest, TestPhraseParsing) {
     ASSERT_EQ(phrases, expected);
 }
 
+TEST_F(FilePhraseItemParserTest, TestPhraseAsChildParsing) {
+    /** JSON representation:
+     *  {
+     *      "words": [
+     *          "Silverback",
+     *          "Never forget. ${placeholder}",
+     *      ],
+     *      "words_weighted": [
+     *          { "text": "Harambe died for you", "weight": 10 },
+     *          { "text": "Always remember. ${placeholder}", "weight": 20 }
+     *      ],
+     *      "phrases": [
+     *          "Don't fall in!"
+     *      ],
+     *      "phrases_weighted": [
+     *          { "phrase": "Watch out for armed zookeepers", "weight": 30 }
+     *      ],
+     *      "replace": [
+     *          { "text": "Harambe", "replacement": "King" }
+     *      ]
+     *  }
+     */
+    json expected;
+
+    // Setup words
+    expected["words"].emplace_back("Silverback");
+    expected["words"].emplace_back("Never forget. ${placeholder}");
+
+    // Setup words with weights
+    json weighted_word, weighted_word_2;
+    weighted_word["text"] = "Harambe died for you";
+    weighted_word["weight"] = 10;
+    weighted_word_2["text"] = "Always remember. ${placeholder}";
+    weighted_word_2["weight"] = 20;
+
+    expected["words_weighted"].emplace_back(weighted_word);
+    expected["words_weighted"].emplace_back(weighted_word_2);
+
+    // Setup phrases
+    expected["phrases"].emplace_back("Don't fall in!");
+
+    // Setup phrases with weights
+    json weighted_phrase;
+    weighted_phrase["phrase"] = "Watch out for armed zookeepers";
+    weighted_phrase["weight"] = 30;
+
+    expected["phrases_weighted"].emplace_back(weighted_phrase);
+
+    // Setup replaces
+    json replace;
+    replace["text"] = "Harambe";
+    replace["replacement"] = "King";
+
+    expected["replace"].emplace_back(replace);
+
+    parser = FilePhraseItemParser(sample_phrase_child_node);
+
+    json phrases = parser.run();
+    ASSERT_EQ(phrases, expected);
+}
+
 TEST_F(FilePhraseItemParserTest, StoreHomogenousWordNode) {
     /** JSON representation:
      *  {
