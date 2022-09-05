@@ -66,9 +66,8 @@ TEST_F(FilePhraseItemParserTest, TestPhraseParsing) {
 
     expected["replace"].emplace_back(replace);
 
-    std::cout << "Expected data: " << expected.dump(4) << std::endl;
-
-    ASSERT_EQ(0,1);
+    json phrases = parser.run();
+    ASSERT_EQ(phrases, expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreHomogenousWordNode) {
