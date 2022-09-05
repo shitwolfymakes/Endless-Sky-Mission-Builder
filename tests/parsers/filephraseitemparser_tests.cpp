@@ -232,6 +232,50 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
     ASSERT_EQ(parser.get_data(), expected);
 }
 
+TEST_F(FilePhraseItemParserTest, StoreMultipleSubPhraseNodes) {
+    /** JSON representation:
+     *  {
+     *     "phrases": [
+     *         "Don't fall in!",
+     *         "Don't you fall in!"
+     *      ],
+     *      "phrases_weighted": [
+     *          { "phrase": "Watch out for armed zookeepers", "weight": 30 }
+     *          { "phrase": "Watch out for unarmed zookeepers", "weight": 35 }
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json phrases;
+    phrases.emplace_back("Don't fall in!");
+    phrases.emplace_back("Don't you fall in!");
+    expected["phrases"] = phrases;
+
+    json weighted_phrase, weighted_phrase2;
+    weighted_phrase["phrase"] = "Watch out for armed zookeepers";
+    weighted_phrase["weight"] = 30;
+    weighted_phrase2["phrase"] = "Watch out for unarmed zookeepers";
+    weighted_phrase2["weight"] = 35;
+    expected["phrases_weighted"].emplace_back(weighted_phrase);
+    expected["phrases_weighted"].emplace_back(weighted_phrase2);
+
+    std::vector<std::string> lines = empty_subPhrase_node;
+    lines.emplace_back("\t\t\"Don't fall in!\"");
+    lines.emplace_back("\t\t\"Watch out for armed zookeepers\" 30");
+    lines.emplace_back("\tphrase");
+    lines.emplace_back("\t\t\"Don't you fall in!\"");
+    lines.emplace_back("\t\t\"Watch out for unarmed zookeepers\" 35");
+
+    parser = FilePhraseItemParser(lines);
+
+    int index = parser.parseSubPhrase(&lines, 1);
+    index++; // Simulate loop incrementation
+    index = parser.parseSubPhrase(&lines, index);
+    ASSERT_EQ(index, 6);
+    ASSERT_EQ(parser.get_data(), expected);
+}
+
 TEST_F(FilePhraseItemParserTest, StoreReplaceNode) {
     /** JSON representation:
      *  {
@@ -260,6 +304,40 @@ TEST_F(FilePhraseItemParserTest, StoreReplaceNode) {
 
     index = parser.parseReplace(&lines, 1);
     ASSERT_EQ(index, 3);
+    ASSERT_EQ(parser.get_data(), expected);
+}
+
+TEST_F(FilePhraseItemParserTest, StoreMultipleReplaceNode) {
+    /** JSON representation:
+     *  {
+     *      "replace": [
+     *          { "text": "Harambe", "replacement": "King" },
+     *          { "text": "Harambe", "replacement": "Chad" }
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json replace, replace2;
+    replace["text"] = "Harambe";
+    replace["replacement"] = "King";
+    replace2["text"] = "Harambe";
+    replace2["replacement"] = "Chad";
+
+    expected["replace"].emplace_back(replace);
+    expected["replace"].emplace_back(replace2);
+
+    std::vector<std::string> lines = empty_subPhrase_node;
+    lines.emplace_back("\t\t\"Harambe\" \"King\"");
+    lines.emplace_back("\treplace");
+    lines.emplace_back("\t\t\"Harambe\" \"Chad\"");
+
+    parser = FilePhraseItemParser(lines);
+
+    int index = parser.parseReplace(&lines, 1);
+    index++; // Simulate loop incrementation
+    index = parser.parseReplace(&lines, index);
+    ASSERT_EQ(index, 4);
     ASSERT_EQ(parser.get_data(), expected);
 }
 
