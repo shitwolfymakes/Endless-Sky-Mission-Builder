@@ -16,10 +16,14 @@ private:
     json phrase;
 
 public:
+    // CONSTRUCTORS
     FilePhraseItemParser(std::vector<std::string>);
 
+    // MANIPULATORS
     json run();
+    int parseWords(std::vector<std::string> *, int);
 
+    // ACCESSORS
     json get_data();
 };
 
