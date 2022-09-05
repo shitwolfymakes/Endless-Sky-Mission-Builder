@@ -18,7 +18,7 @@ json FilePhraseItemParser::run() {
     std::vector<std::string> tokens;
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         tokens = tokenize(lines.at(i));
-        std::cout << "LINE: " << tokens.at(0) << std::endl;
+        //std::cout << "LINE: " << tokens.at(0) << std::endl;
         if (tokens.at(0).compare("word") == 0) {
             i = parseWords(&lines, i);
         } else if (tokens.at(0).compare("phrase") == 0) {
@@ -34,7 +34,7 @@ json FilePhraseItemParser::run() {
 }
 
 int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int startingIndex) {
-    std::cout << "Parsing word node" << std::endl;
+    std::cout << "\tParsing word node" << std::endl;
     std::vector<std::string> lines = *nodeLines;
     int index = startingIndex;
 
@@ -69,7 +69,7 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
 }
 
 int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, int startingIndex) {
-    std::cout << "Parsing subPhrase node" << std::endl;
+    std::cout << "\tParsing sub-phrase node" << std::endl;
     std::vector<std::string> lines = *nodeLines;
     int index = startingIndex;
 
@@ -86,7 +86,7 @@ int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, in
             phrase["phrases"].emplace_back(tokens.at(0));
         } else if (tokens.size() == 2) {
             json weighted_phrase;
-            weighted_phrase["text"] = tokens.at(0);
+            weighted_phrase["phrase"] = tokens.at(0);
             weighted_phrase["weight"] = std::stoi(tokens.at(1));
             phrase["phrases_weighted"].emplace_back(weighted_phrase);
         } else {
@@ -104,7 +104,7 @@ int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, in
 }
 
 int FilePhraseItemParser::parseReplace(std::vector<std::string> *nodeLines, int startingIndex) {
-    std::cout << "Parsing subPhrase node" << std::endl;
+    std::cout << "\tParsing replace node" << std::endl;
     std::vector<std::string> lines = *nodeLines;
     int index = startingIndex;
 
