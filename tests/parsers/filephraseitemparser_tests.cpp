@@ -189,4 +189,36 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
     ASSERT_EQ(parser.get_data(), expected);
 }
 
+TEST_F(FilePhraseItemParserTest, StoreReplaceNode) {
+    /** JSON representation:
+     *  {
+     *      "replace": [
+     *          { "text": "Harambe", "replacement": "King" },
+     *          { "text": "Harambe", "replacement": "Chad" }
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json replace, replace2;
+    replace["text"] = "Harambe";
+    replace["replacement"] = "King";
+    replace2["text"] = "Harambe";
+    replace2["replacement"] = "Chad";
+
+    expected["replace"].emplace_back(replace);
+    expected["replace"].emplace_back(replace2);
+
+    int index = 0;
+    std::vector<std::string> lines = empty_subPhrase_node;
+    lines.emplace_back("\t\t\"Harambe\" \"King\"");
+    lines.emplace_back("\t\t\"Harambe\" \"Chad\"");
+    parser = FilePhraseItemParser(lines);
+
+    index = parser.parseReplace(&lines, 1);
+    ASSERT_EQ(index, 3);
+    ASSERT_EQ(parser.get_data(), expected);
+}
+
+
 } // namespace parsertests

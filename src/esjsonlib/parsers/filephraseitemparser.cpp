@@ -101,6 +101,11 @@ int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, in
     return index;
 }
 
+int FilePhraseItemParser::parseReplace(std::vector<std::string> *nodeLines, int startingIndex) {
+
+    return -1;
+}
+
 json FilePhraseItemParser::get_data() {
     return phrase;
 }
