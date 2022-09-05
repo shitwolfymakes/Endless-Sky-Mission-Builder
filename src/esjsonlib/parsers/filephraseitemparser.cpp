@@ -66,6 +66,10 @@ int FilePhraseItemParser::parseWords(std::vector<std::string> *nodeLines, int st
     return index;
 }
 
+int FilePhraseItemParser::parseSubPhrase(std::vector<std::string> *nodeLines, int startingIndex) {
+    return -1;
+}
+
 json FilePhraseItemParser::get_data() {
     return phrase;
 }

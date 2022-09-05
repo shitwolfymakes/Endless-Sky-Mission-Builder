@@ -130,4 +130,63 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
     ASSERT_EQ(parser.get_data(), expected);
 }
 
+TEST_F(FilePhraseItemParserTest, StoreHomogenousSubPhraseNode) {
+    /** JSON representation:
+     *  {
+     *     "phrases": [
+     *         "Don't fall in!",
+     *         "Don't you fall in!"
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json phrases;
+    phrases.emplace_back("Don't fall in!");
+    phrases.emplace_back("Don't you fall in! 2");
+    expected["phrases"] = phrases;
+
+    int index = 0;
+    std::vector<std::string> lines = empty_subPhrase_node;
+    lines.emplace_back("\t\t\"Don't fall in!\"");
+    lines.emplace_back("\t\t\"Don't you fall in!\"");
+    parser = FilePhraseItemParser(lines);
+
+    index = parser.parseSubPhrase(&lines, 1);
+    ASSERT_EQ(index, 3);
+    ASSERT_EQ(parser.get_data(), expected);
+}
+
+TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
+    /** JSON representation:
+     *  {
+     *     "phrases": [
+     *         "Don't fall in!"
+     *      ],
+     *      "phrases_weighted": [
+     *          { "text": "Watch out for armed zookeepers", "weight": 30 }
+     *      ]
+     *  }
+     */
+
+    json expected;
+    json phrases;
+    phrases.emplace_back("Don't fall in!");
+    expected["phrases"] = phrases;
+    json weighted_word;
+    weighted_word["text"] = "Watch out for armed zookeepers";
+    weighted_word["weight"] = 30;
+    expected["phrases_weighted"].emplace_back(weighted_word);
+
+    int index = 0;
+    std::vector<std::string> lines = empty_subPhrase_node;
+    lines.emplace_back("\t\t\"Don't fall in!\"");
+    lines.emplace_back("\t\t\"Watch out for armed zookeepers\" 30");
+    parser = FilePhraseItemParser(lines);
+
+    index = parser.parseSubPhrase(&lines, 1);
+    ASSERT_EQ(index, 3);
+    ASSERT_EQ(parser.get_data(), expected);
+}
+
 } // namespace parsertests

@@ -22,6 +22,7 @@ public:
     // MANIPULATORS
     json run();
     int parseWords(std::vector<std::string> *, int);
+    int parseSubPhrase(std::vector<std::string> *, int);
 
     // ACCESSORS
     json get_data();
