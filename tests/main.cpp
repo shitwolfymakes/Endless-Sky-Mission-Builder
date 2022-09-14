@@ -5,8 +5,6 @@
  * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#include "testing/tst_testcasename.h"
-
 #include <gtest/gtest.h>
 
 int main(int argc, char *argv[])
