@@ -4,19 +4,19 @@ cmake_minimum_required(VERSION 3.16)
 add_library(esjsonlib STATIC
     model/fileitem.cpp
     model/fileitem.h
-    model/itemevent.cpp
-    model/itemevent.h
-    model/itemgovernment.cpp
-    model/itemgovernment.h
-    model/itemship.cpp
-    model/itemship.h
-
-    model/fileitemconstants.h
 
     parsers/datafileparser.cpp
     parsers/datafileparser.h
     parsers/fileitemparser.cpp
     parsers/fileitemparser.h
+
+    model/fileitemconstants.h
+
+    event/itemevent.h
+    event/itemevent.cpp
+
+    government/itemgovernment.h
+    government/itemgovernment.cpp
 
     mission/itemmission.h
     mission/itemmission.cpp
@@ -27,6 +27,9 @@ add_library(esjsonlib STATIC
     phrase/itemphrase.cpp
     phrase/filephraseitemparser.h
     phrase/filephraseitemparser.cpp
+
+    ship/itemship.h
+    ship/itemship.cpp
 
     substitutions/itemsubstitutions.h
     substitutions/itemsubstitutions.cpp

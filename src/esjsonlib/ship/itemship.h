@@ -8,7 +8,7 @@
 #ifndef ITEMSHIP_H
 #define ITEMSHIP_H
 
-#include "fileitem.h"
+#include "model/fileitem.h"
 
 class ItemShip : public FileItem
 {

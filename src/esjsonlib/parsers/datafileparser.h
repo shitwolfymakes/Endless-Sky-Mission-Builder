@@ -16,13 +16,13 @@
 #include "boost/algorithm/string/join.hpp"
 
 #include "model/fileitem.h"
-#include "model/itemevent.h"
-#include "model/itemgovernment.h"
-#include "model/itemship.h"
 #include "model/fileitemconstants.h"
 
+#include "event/itemevent.h"
+#include "government/itemgovernment.h"
 #include "mission/itemmission.h"
 #include "phrase/itemphrase.h"
+#include "ship/itemship.h"
 #include "substitutions/itemsubstitutions.h"
 
 class DataFileParser
