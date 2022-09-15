@@ -67,5 +67,6 @@ endmacro (add_test_file)
 
 add_test_file(parsers fileitemparser_tests false)
 add_test_file(parsers filemissionitemparser_tests false)
-add_test_file(parsers filephraseitemparser_tests false)
 add_test_file(parsers filesubstitutionsitemparser_tests false)
+
+add_test_file(phrase filephraseitemparser_tests false)

@@ -10,8 +10,6 @@ add_library(esjsonlib STATIC
     model/itemgovernment.h
     model/itemmission.cpp
     model/itemmission.h
-    model/itemphrase.cpp
-    model/itemphrase.h
     model/itemship.cpp
     model/itemship.h
     model/itemsubstitutions.cpp
@@ -25,10 +23,13 @@ add_library(esjsonlib STATIC
     parsers/fileitemparser.h
     parsers/filemissionitemparser.cpp
     parsers/filemissionitemparser.h
-    parsers/filephraseitemparser.cpp
-    parsers/filephraseitemparser.h
     parsers/filesubstitutionsitemparser.cpp
     parsers/filesubstitutionsitemparser.h
+
+    phrase/itemphrase.h
+    phrase/itemphrase.cpp
+    phrase/filephraseitemparser.h
+    phrase/filephraseitemparser.cpp
 )
 
 add_subdirectory(${ESMB_EXTERNAL_DIR} ${ESMB_BINARY_DIR}/external)

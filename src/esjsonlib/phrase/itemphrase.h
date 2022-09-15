@@ -8,8 +8,8 @@
 #ifndef ITEMPHRASE_H
 #define ITEMPHRASE_H
 
-#include "fileitem.h"
-#include "parsers/filephraseitemparser.h"
+#include "model/fileitem.h"
+#include "phrase/filephraseitemparser.h"
 
 class ItemPhrase : public FileItem
 {
