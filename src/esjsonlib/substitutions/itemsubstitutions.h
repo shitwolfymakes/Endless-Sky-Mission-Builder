@@ -8,8 +8,8 @@
 #ifndef ITEMSUBSTITUTIONS_H
 #define ITEMSUBSTITUTIONS_H
 
-#include "fileitem.h"
-#include "parsers/filesubstitutionsitemparser.h"
+#include "model/fileitem.h"
+#include "substitutions/filesubstitutionsitemparser.h"
 
 class ItemSubstitutions : public FileItem
 {

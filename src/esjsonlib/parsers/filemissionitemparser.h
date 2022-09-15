@@ -9,7 +9,7 @@
 #define FILEMISSIONITEMPARSER_H
 
 #include "parsers/fileitemparser.h"
-#include "parsers/filesubstitutionsitemparser.h"
+#include "substitutions/filesubstitutionsitemparser.h"
 
 class FileMissionItemParser : public FileItemParser
 {

@@ -11,7 +11,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "parsers/filesubstitutionsitemparser.h"
+#include "substitutions/filesubstitutionsitemparser.h"
 
 namespace parsertests {
 

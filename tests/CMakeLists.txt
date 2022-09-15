@@ -16,7 +16,9 @@ include_directories(${QT_QTTEST_INCLUDE_DIR})
 set(HEADERS
     parsers/fileitemparser_tests.h
     parsers/filemissionitemparser_tests.h
-    parsers/filesubstitutionsitemparser_tests.h
+
+    phrase/filephraseitemparser_tests.h
+    substitutions/filesubstitutionsitemparser_tests.h
 )
 
 add_custom_target(esmb_test
@@ -67,6 +69,6 @@ endmacro (add_test_file)
 
 add_test_file(parsers fileitemparser_tests false)
 add_test_file(parsers filemissionitemparser_tests false)
-add_test_file(parsers filesubstitutionsitemparser_tests false)
 
 add_test_file(phrase filephraseitemparser_tests false)
+add_test_file(substitutions filesubstitutionsitemparser_tests false)
