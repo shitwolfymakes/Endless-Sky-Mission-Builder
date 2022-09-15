@@ -11,7 +11,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "parsers/filemissionitemparser.h"
+#include "mission/filemissionitemparser.h"
 
 namespace parsertests {
 

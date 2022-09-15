@@ -8,8 +8,6 @@ add_library(esjsonlib STATIC
     model/itemevent.h
     model/itemgovernment.cpp
     model/itemgovernment.h
-    model/itemmission.cpp
-    model/itemmission.h
     model/itemship.cpp
     model/itemship.h
 
@@ -19,8 +17,11 @@ add_library(esjsonlib STATIC
     parsers/datafileparser.h
     parsers/fileitemparser.cpp
     parsers/fileitemparser.h
-    parsers/filemissionitemparser.cpp
-    parsers/filemissionitemparser.h
+
+    mission/itemmission.h
+    mission/itemmission.cpp
+    mission/filemissionitemparser.h
+    mission/filemissionitemparser.cpp
 
     phrase/itemphrase.h
     phrase/itemphrase.cpp

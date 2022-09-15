@@ -18,10 +18,10 @@
 #include "model/fileitem.h"
 #include "model/itemevent.h"
 #include "model/itemgovernment.h"
-#include "model/itemmission.h"
 #include "model/itemship.h"
 #include "model/fileitemconstants.h"
 
+#include "mission/itemmission.h"
 #include "phrase/itemphrase.h"
 #include "substitutions/itemsubstitutions.h"
 
