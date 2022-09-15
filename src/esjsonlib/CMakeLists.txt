@@ -2,15 +2,13 @@ cmake_minimum_required(VERSION 3.16)
 
 # Executable
 add_library(esjsonlib STATIC
-    model/fileitem.cpp
-    model/fileitem.h
-
-    parsers/datafileparser.cpp
-    parsers/datafileparser.h
-    parsers/fileitemparser.cpp
-    parsers/fileitemparser.h
-
-    model/fileitemconstants.h
+    common/fileitemconstants.h
+    common/fileitem.h
+    common/fileitem.cpp
+    common/datafileparser.h
+    common/datafileparser.cpp
+    common/fileitemparser.h
+    common/fileitemparser.cpp
 
     event/itemevent.h
     event/itemevent.cpp

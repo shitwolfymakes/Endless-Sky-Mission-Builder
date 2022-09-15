@@ -8,7 +8,7 @@
 #ifndef FILEMISSIONITEMPARSER_H
 #define FILEMISSIONITEMPARSER_H
 
-#include "parsers/fileitemparser.h"
+#include "common/fileitemparser.h"
 #include "substitutions/filesubstitutionsitemparser.h"
 
 class FileMissionItemParser : public FileItemParser

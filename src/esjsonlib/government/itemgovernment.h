@@ -8,7 +8,7 @@
 #ifndef ITEMGOVERNMENT_H
 #define ITEMGOVERNMENT_H
 
-#include "model/fileitem.h"
+#include "common/fileitem.h"
 
 class ItemGovernment : public FileItem
 {

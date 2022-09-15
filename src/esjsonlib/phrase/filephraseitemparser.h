@@ -8,7 +8,7 @@
 #ifndef FILEPHRASEITEMPARSER_H
 #define FILEPHRASEITEMPARSER_H
 
-#include "parsers/fileitemparser.h"
+#include "common/fileitemparser.h"
 
 class FilePhraseItemParser : public FileItemParser
 {

@@ -14,8 +14,7 @@ include_directories(${CMAKE_BINARY_DIR}/src/esjsonlib)
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
 set(HEADERS
-    parsers/fileitemparser_tests.h
-
+    common/fileitemparser_tests.h
     mission/filemissionitemparser_tests.h
     phrase/filephraseitemparser_tests.h
     substitutions/filesubstitutionsitemparser_tests.h
@@ -67,8 +66,7 @@ macro(add_test_file file_path test_source gui_required)
 endmacro (add_test_file)
 
 
-add_test_file(parsers fileitemparser_tests false)
-
+add_test_file(common fileitemparser_tests false)
 add_test_file(mission filemissionitemparser_tests false)
 add_test_file(phrase filephraseitemparser_tests false)
 add_test_file(substitutions filesubstitutionsitemparser_tests false)

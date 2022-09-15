@@ -8,7 +8,7 @@
 #ifndef ITEMMISSION_H
 #define ITEMMISSION_H
 
-#include "model/fileitem.h"
+#include "common/fileitem.h"
 #include "mission/filemissionitemparser.h"
 
 class ItemMission : public FileItem

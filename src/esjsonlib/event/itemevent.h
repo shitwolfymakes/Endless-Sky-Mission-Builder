@@ -8,7 +8,7 @@
 #ifndef ITEMEVENT_H
 #define ITEMEVENT_H
 
-#include "model/fileitem.h"
+#include "common/fileitem.h"
 
 class ItemEvent : public FileItem
 {

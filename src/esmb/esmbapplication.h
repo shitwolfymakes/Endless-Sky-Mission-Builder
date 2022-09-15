@@ -12,7 +12,7 @@
 
 #include "nlohmann/json.hpp"
 
-#include "parsers/datafileparser.h"
+#include "common/datafileparser.h"
 
 using json = nlohmann::json;
 

@@ -17,7 +17,7 @@
 #include <boost/tokenizer.hpp>
 #include "nlohmann/json.hpp"
 
-#include "model/fileitemconstants.h"
+#include "common/fileitemconstants.h"
 
 // for convenience
 using json = nlohmann::json;

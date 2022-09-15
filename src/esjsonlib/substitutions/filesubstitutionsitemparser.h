@@ -8,7 +8,7 @@
 #ifndef FILESUBSTITUTIONSITEMPARSER_H
 #define FILESUBSTITUTIONSITEMPARSER_H
 
-#include "parsers/fileitemparser.h"
+#include "common/fileitemparser.h"
 
 class FileSubstitutionsItemParser : public FileItemParser
 {

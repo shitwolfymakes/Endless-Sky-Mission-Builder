@@ -8,7 +8,7 @@
 #ifndef ITEMSUBSTITUTIONS_H
 #define ITEMSUBSTITUTIONS_H
 
-#include "model/fileitem.h"
+#include "common/fileitem.h"
 #include "substitutions/filesubstitutionsitemparser.h"
 
 class ItemSubstitutions : public FileItem

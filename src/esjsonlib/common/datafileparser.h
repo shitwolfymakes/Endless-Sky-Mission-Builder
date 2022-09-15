@@ -15,8 +15,8 @@
 
 #include "boost/algorithm/string/join.hpp"
 
-#include "model/fileitem.h"
-#include "model/fileitemconstants.h"
+#include "common//fileitem.h"
+#include "common/fileitemconstants.h"
 
 #include "event/itemevent.h"
 #include "government/itemgovernment.h"
