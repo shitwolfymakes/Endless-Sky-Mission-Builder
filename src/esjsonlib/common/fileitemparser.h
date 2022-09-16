@@ -36,7 +36,7 @@ protected:
 
 public:
     virtual json run() = 0;
-    virtual json get_data() = 0;
+    virtual json get_data() const = 0;
 
     static int getIndentLevel(std::string);
     static int collectNodeLines(std::vector<std::string> *, int, json *);

@@ -13,15 +13,20 @@
 class FileSubstitutionsItemParser : public FileItemParser
 {
 private:
-    json substitutions;
+    // DATA
+    json substitutions;\
+
+public:
+    // CREATORS
+    FileSubstitutionsItemParser(std::vector<std::string>);
+
+    // MANIPULATORS
+    json run();
 
     int parseSubstitution(std::vector<std::string> *, int);
 
-public:
-    FileSubstitutionsItemParser(std::vector<std::string>);
-
-    json run();
-    json get_data();
+    // ACCESSORS
+    json get_data() const;
 };
 
 #endif // FILESUBSTITUTIONSITEMPARSER_H

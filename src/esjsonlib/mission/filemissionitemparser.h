@@ -14,11 +14,14 @@
 class FileMissionItemParser : public FileItemParser
 {
 private:
+    // DATA
     json mission;
 
 public:
+    // CREATORS
     FileMissionItemParser(std::vector<std::string>);
 
+    // MANIPULATORS
     json run();
 
     void parseId(std::vector<std::string>);
@@ -59,9 +62,11 @@ public:
     int parseCondition(std::vector<std::string> *, int);
     int parseNpc(std::vector<std::string> *, int);
 
-    json get_data();
     void set_mission_id(std::string);
-    std::string get_mission_id();
+
+    // ACCESSORS
+    json get_data() const;
+    std::string get_mission_id() const;
 };
 
 #endif // FILEMISSIONITEMPARSER_H

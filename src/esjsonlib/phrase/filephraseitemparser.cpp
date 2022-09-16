@@ -136,6 +136,6 @@ int FilePhraseItemParser::parseReplace(std::vector<std::string> *nodeLines, int 
     return index;
 }
 
-json FilePhraseItemParser::get_data() {
+json FilePhraseItemParser::get_data() const {
     return phrase;
 }

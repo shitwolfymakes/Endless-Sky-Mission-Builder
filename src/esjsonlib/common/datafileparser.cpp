@@ -14,16 +14,6 @@ DataFileParser::DataFileParser(std::string rawData)
     std::vector<std::string> result;
     boost::split(result, rawData, boost::is_any_of("\n"));
     this->lines = result;
-
-    //printRawData();
-}
-
-void DataFileParser::printRawData() {
-    std::cout << "BEGIN RAW DATA" << std::endl;
-    for(const std::string &line: lines){
-        std::cout << line << std::endl;
-    }
-    std::cout << "END RAW DATA" << std::endl;
 }
 
 void DataFileParser::run() {
@@ -122,7 +112,15 @@ void DataFileParser::storeItemForParsing(int i, std::string line, ItemType itemT
     }
 }
 
-bool DataFileParser::isFileItemStartLine(std::string line) {
+void DataFileParser::printRawData() const {
+    std::cout << "BEGIN RAW DATA" << std::endl;
+    for(const std::string &line: lines){
+        std::cout << line << std::endl;
+    }
+    std::cout << "END RAW DATA" << std::endl;
+}
+
+bool DataFileParser::isFileItemStartLine(std::string line) const {
     // search for lines starting file items
     if (std::regex_match(line, matchEvent)) {
         return true;
@@ -140,6 +138,6 @@ bool DataFileParser::isFileItemStartLine(std::string line) {
     return false;
 }
 
-json DataFileParser::getJsonItems() {
+json DataFileParser::getJsonItems() const {
     return jsonItems;
 }

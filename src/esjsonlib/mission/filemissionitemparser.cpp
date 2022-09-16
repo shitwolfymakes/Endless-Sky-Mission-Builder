@@ -533,7 +533,6 @@ void FileMissionItemParser::parsePayment(std::vector<std::string> tokens, json *
     (*trigger)["payment"] = payment;
 }
 
-
 void FileMissionItemParser::parseFine(std::string token, json *trigger) {
     std::cout << "\tFound fine: " << token << std::endl;
     (*trigger)["fine"] = std::stoi(token);
@@ -677,14 +676,14 @@ int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int 
     return index;
 }
 
-json FileMissionItemParser::get_data() {
-    return mission;
-}
-
 void FileMissionItemParser::set_mission_id(std::string id) {
     mission["id"] = id;
 }
 
-std::string FileMissionItemParser::get_mission_id() {
+json FileMissionItemParser::get_data() const {
+    return mission;
+}
+
+std::string FileMissionItemParser::get_mission_id() const {
     return mission["id"];
 }

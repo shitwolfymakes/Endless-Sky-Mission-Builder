@@ -19,23 +19,25 @@ using json = nlohmann::json;
 
 class FileItem
 {
-public:
+protected:
     std::string name;
     std::vector<std::string> lines;
 
+public:
+    // CREATORS
     FileItem();
 
-    std::string getName();
+    // MANIPULATORS
     void setName(std::string);
-
-    void appendLine(std::string);
-    std::vector<std::string> getLines();
     void setLines(std::vector<std::string>);
-
-    std::string toString();
-    void printLines();
-
+    void appendLine(std::string);
     virtual json parse() = 0;
+
+    //ACCESSORS
+    std::string getName() const;
+    std::vector<std::string> getLines() const;
+    std::string toString() const;
+    void printLines() const;
 };
 
 #endif // FILEITEM_H

@@ -73,6 +73,6 @@ int FileSubstitutionsItemParser::parseSubstitution(std::vector<std::string> *nod
     return index;
 }
 
-json FileSubstitutionsItemParser::get_data() {
+json FileSubstitutionsItemParser::get_data() const {
     return substitutions;
 }

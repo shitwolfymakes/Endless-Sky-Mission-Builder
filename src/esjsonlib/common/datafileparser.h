@@ -28,24 +28,23 @@
 class DataFileParser
 {
 private:
-    // store the file data in different formats
     std::string rawData;
     std::vector<std::string> lines;
-
     std::vector<std::unique_ptr<FileItem>> fileItems;
     json jsonItems;
 
 public:
+    // CREATORS
     DataFileParser(std::string);
 
-    //const QStringList toList();
-    std::vector<std::string> toStdStringVector();
-    void printRawData();
+    // MANIPULATORS
     void run();
     void storeItemForParsing(int, std::string, ItemType);
-    bool isFileItemStartLine(std::string);
 
-    json getJsonItems();
+    // ACCESSORS
+    void printRawData() const;
+    bool isFileItemStartLine(std::string) const;
+    json getJsonItems() const;
 };
 
 #endif // DATAFILEPARSER_H
