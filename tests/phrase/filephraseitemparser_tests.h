@@ -5,8 +5,8 @@
  * Copyright (c) 2022, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
-#ifndef FILEPHRASEITEMPARSERTEST_H
-#define FILEPHRASEITEMPARSERTEST_H
+#ifndef FILEPHRASEITEMPARSER_TESTS_H
+#define FILEPHRASEITEMPARSER_TESTS_H
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -52,4 +52,4 @@ protected:
 
 } // namespace parsertests
 
-#endif // FILEPHRASEITEMPARSERTEST_H
+#endif // FILEPHRASEITEMPARSER_TESTS_H
