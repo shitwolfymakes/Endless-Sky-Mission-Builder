@@ -13,6 +13,9 @@ add_library(esjsonlib STATIC
     event/itemevent.h
     event/itemevent.cpp
 
+    filter/itemfilter.h
+    filter/itemfilter.cpp
+
     government/itemgovernment.h
     government/itemgovernment.cpp
 
