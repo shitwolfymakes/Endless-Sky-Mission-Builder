@@ -14,7 +14,7 @@ class FileSubstitutionsItemParser : public FileItemParser
 {
 private:
     // DATA
-    json substitutions;\
+    json substitutions;
 
 public:
     // CREATORS
