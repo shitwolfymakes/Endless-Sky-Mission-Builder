@@ -8,9 +8,8 @@
 #include "filemissionitemparser.h"
 
 FileMissionItemParser::FileMissionItemParser(std::vector<std::string> lines)
-    : FileItemParser(lines)
 {
-
+    this->lines = lines;
 }
 
 json FileMissionItemParser::run() {
