@@ -8,9 +8,8 @@
 #include "filephraseitemparser.h"
 
 FilePhraseItemParser::FilePhraseItemParser(std::vector<std::string> lines)
-    : FileItemParser(lines)
 {
-
+    this->lines = lines;
 }
 
 json FilePhraseItemParser::run() {
