@@ -8,9 +8,8 @@
 #include "filesubstitutionsitemparser.h"
 
 FileSubstitutionsItemParser::FileSubstitutionsItemParser(std::vector<std::string> lines)
-    : FileItemParser(lines)
 {
-
+    this->lines = lines;
 }
 
 json FileSubstitutionsItemParser::run() {
