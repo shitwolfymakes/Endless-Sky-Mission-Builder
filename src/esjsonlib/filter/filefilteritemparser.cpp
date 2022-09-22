@@ -8,9 +8,8 @@
 #include "filefilteritemparser.h"
 
 FileFilterItemParser::FileFilterItemParser(std::vector<std::string> lines)
-    : FileItemParser(lines)
 {
-
+    this->lines = lines;
 }
 
 json FileFilterItemParser::run() {
