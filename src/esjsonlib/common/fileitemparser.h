@@ -2,7 +2,7 @@
 /*
  * fileitemparser.h
  *
- * Copyright (c) 2021, Andrew Sneed <wolfy@shitwolfymakes.com>
+ * Copyright (c) 2021-2022, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
 #ifndef FILEITEMPARSER_H
@@ -15,9 +15,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/tokenizer.hpp>
-#include "nlohmann/json.hpp"
 
-#include "common/fileitemconstants.h"
+#include "nlohmann/json.hpp"
 
 // for convenience
 using json = nlohmann::json;
@@ -25,19 +24,22 @@ using json = nlohmann::json;
 class FileItemParser
 {
 protected:
+    // DATA
     std::vector<std::string> lines;
-    json data;
 
-    FileItemParser(std::vector<std::string>);
-
-    std::vector<std::string> tokenize(std::string);
-    bool isOneOf(std::string, std::vector<std::string>);
-    // TODO: Implement parseFilter here
+protected:
+    // CREATORS
+    FileItemParser();
 
 public:
+    // MANIPULATORS
     virtual json run() = 0;
+
+    // ACCESSORS
     virtual json get_data() const = 0;
 
+    static std::vector<std::string> tokenize(std::string);
+    static bool isOneOf(std::string, std::vector<std::string>);
     static int getIndentLevel(std::string);
     static int collectNodeLines(std::vector<std::string> *, int, json *);
 };

@@ -2,16 +2,12 @@
 /*
  * fileitemparser.cpp
  *
- * Copyright (c) 2022, Andrew Sneed <wolfy@shitwolfymakes.com>
+ * Copyright (c) 2021-2022, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
 
 #include "fileitemparser.h"
 
-FileItemParser::FileItemParser(std::vector<std::string> lines)
-    : lines(lines)
-{
-
-}
+FileItemParser::FileItemParser() {}
 
 std::vector<std::string> FileItemParser::tokenize(std::string line) {
     // strip whitespace/tabs from line
@@ -22,9 +18,9 @@ std::vector<std::string> FileItemParser::tokenize(std::string line) {
     std::string token;
 
     // define the separators
-    std::string separator1("");//dont let quoted arguments escape themselves
-    std::string separator2(" ");//split on spaces
-    std::string separator3("`\"");//let it have quoted arguments
+    std::string separator1("");    //dont let quoted arguments escape themselves
+    std::string separator2(" ");   //split on spaces
+    std::string separator3("`\""); //let it have quoted arguments
 
     boost::escaped_list_separator<char> els(separator1,separator2,separator3);
     boost::tokenizer<boost::escaped_list_separator<char>> tok(line, els);
