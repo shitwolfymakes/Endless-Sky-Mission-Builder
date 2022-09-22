@@ -9,6 +9,8 @@ add_library(esjsonlib STATIC
     common/datafileparser.cpp
     common/fileitemparser.h
     common/fileitemparser.cpp
+    common/fileitemparserutils.h
+    common/fileitemparserutils.cpp
 
     event/itemevent.h
     event/itemevent.cpp
