@@ -6,9 +6,9 @@
 #include <string>
 #include <vector>
 
-class FileItemParserImpl : public FileItemParser
-{
+class FileItemParserImpl : public FileItemParser {
     std::vector<std::string> lines;
+
 public:
     // CREATORS
     FileItemParserImpl();
