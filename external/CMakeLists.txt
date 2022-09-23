@@ -9,7 +9,7 @@ endif()
 CPMAddPackage(
     NAME nlohmann_json
     GITHUB_REPOSITORY nlohmann/json
-    VERSION 3.11.0
+    VERSION 3.11.2
     DOWNLOAD_ONLY YES
     GIT_SHALLOW ON
 )
