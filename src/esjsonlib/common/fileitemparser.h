@@ -8,40 +8,26 @@
 #ifndef FILEITEMPARSER_H
 #define FILEITEMPARSER_H
 
-#include <iostream>
 #include <string>
 #include <vector>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/tokenizer.hpp>
-
-#include "nlohmann/json.hpp"
-
-// for convenience
+#include "nlohmann/json_fwd.hpp"
 using json = nlohmann::json;
 
-class FileItemParser
-{
-protected:
-    // DATA
+class FileItemParser {
     std::vector<std::string> lines;
 
 protected:
     // CREATORS
     FileItemParser();
 
-public:
     // MANIPULATORS
     virtual json run() = 0;
+    void setLines(std::vector<std::string>);
 
     // ACCESSORS
-    virtual json get_data() const = 0;
-
-    static std::vector<std::string> tokenize(std::string);
-    static bool isOneOf(std::string, std::vector<std::string>);
-    static int getIndentLevel(std::string);
-    static int collectNodeLines(std::vector<std::string> *, int, json *);
+    std::vector<std::string> getLines() const;
+    virtual json getData() const = 0;
 };
 
 #endif // FILEITEMPARSER_H
