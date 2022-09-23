@@ -15,8 +15,7 @@
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
-class FileFilterItemParser : public FileItemParserImpl
-{
+class FileFilterItemParser : public FileItemParserImpl {
     json filter;
 public:
     // CREATORS

@@ -10,8 +10,7 @@
 
 #include "common/fileitemparser.h"
 
-class FilePhraseItemParser : public FileItemParser
-{
+class FilePhraseItemParser : public FileItemParser {
 private:
     // DATA
     json phrase;

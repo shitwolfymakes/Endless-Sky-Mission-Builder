@@ -9,8 +9,7 @@
 
 #include <iostream>
 
-FileFilterItemParser::FileFilterItemParser(std::vector<std::string> lines)
-{
+FileFilterItemParser::FileFilterItemParser(std::vector<std::string> lines) {
     setLines(lines);
 }
 
