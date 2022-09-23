@@ -27,6 +27,7 @@ public:
     int parseFilter(std::vector<std::string> *, int);
 
     // ACCESSORS
+    bool isModifier(std::string) const;
     json getData() const;
 };
 
