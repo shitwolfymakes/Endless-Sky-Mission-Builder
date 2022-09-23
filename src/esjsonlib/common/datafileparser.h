@@ -15,9 +15,8 @@
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
+#include "common/fileitem.h"
 #include "common/fileitemconstants.h"
-
-class FileItem;
 
 class DataFileParser {
     std::string rawData;

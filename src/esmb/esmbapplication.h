@@ -8,12 +8,11 @@
 #ifndef ESMBAPPLICATION_H
 #define ESMBAPPLICATION_H
 
+#include "common/datafileparser.h"
+
 #include <QStringList>
 
 #include "nlohmann/json.hpp"
-
-#include "common/datafileparser.h"
-
 using json = nlohmann::json;
 
 class ESMBApplication
