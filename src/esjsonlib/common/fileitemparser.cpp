@@ -7,12 +7,4 @@
 
 #include "fileitemparser.h"
 
-FileItemParser::FileItemParser() {}
-
-void FileItemParser::setLines(std::vector<std::string> lines) {
-    this->lines = lines;
-}
-
-std::vector<std::string> FileItemParser::getLines() const {
-    return lines;
-}
+FileItemParser::~FileItemParser() {}
