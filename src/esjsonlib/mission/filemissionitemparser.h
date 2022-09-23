@@ -8,13 +8,12 @@
 #ifndef FILEMISSIONITEMPARSER_H
 #define FILEMISSIONITEMPARSER_H
 
-#include "common/fileitemparser.h"
-#include "substitutions/filesubstitutionsitemparser.h"
+#include "common/fileitemparserimpl.h"
 
-class FileMissionItemParser : public FileItemParser
-{
-private:
-    // DATA
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
+
+class FileMissionItemParser : public FileItemParserImpl {
     json mission;
 
 public:
@@ -65,8 +64,8 @@ public:
     void set_mission_id(std::string);
 
     // ACCESSORS
-    json get_data() const;
-    std::string get_mission_id() const;
+    json getData() const;
+    std::string getMissionId() const;
 };
 
 #endif // FILEMISSIONITEMPARSER_H

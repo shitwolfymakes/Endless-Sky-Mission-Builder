@@ -7,18 +7,28 @@
 
 #include "filemissionitemparser.h"
 
-FileMissionItemParser::FileMissionItemParser(std::vector<std::string> lines)
-{
-    this->lines = lines;
+#include <iostream>
+
+#include <boost/algorithm/string.hpp>
+
+#include "common/fileitemparserutils.h"
+using utils = FileItemParserUtils;
+#include "substitutions/filesubstitutionsitemparserutil.h"
+#include "substitutions/filesubstitutionsitemparser.h"
+
+FileMissionItemParser::FileMissionItemParser(std::vector<std::string> lines) {
+    setLines(lines);
 }
 
 json FileMissionItemParser::run() {
     // for self.i, self.line in self.enum_lines:
     // for line in ItemMission->lines
     std::vector<std::string> tokens;
+
+    std::vector<std::string> lines = getLines();
     for (int i = 0; i < static_cast<int>(lines.size()); i++) {
         // start by tokenizing each line
-        tokens = tokenize(lines.at(i));
+        tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
 
         if (tokens.size() == 0) {
@@ -54,10 +64,10 @@ json FileMissionItemParser::run() {
         else if (tokens.at(0).compare("invisible") == 0) {
             parseInvisible();
         }
-        else if (isOneOf(tokens.at(0), {"priority", "minor"})) {
+        else if (utils::isOneOf(tokens.at(0), {"priority", "minor"})) {
             parsePriorityLevel(tokens.at(0));
         }
-        else if (isOneOf(tokens.at(0), {"job", "landing", "assisting", "boarding"})) {
+        else if (utils::isOneOf(tokens.at(0), {"job", "landing", "assisting", "boarding"})) {
             parseWhereShown(tokens.at(0));
         }
         else if (tokens.at(0).compare("repeat") == 0) {
@@ -261,11 +271,11 @@ int FileMissionItemParser::parseSubstitutions(std::vector<std::string> *missionL
     std::cout << "\tFound substitution: " << index << std::endl;
 
     // pass the missionLines, index, and address to a json object that will store the parsed JSON data
-    index = collectNodeLines(missionLines, index, &nodeLines);
+    index = utils::collectNodeLines(missionLines, index, &nodeLines);
 
     // instantiate and run the substitution parser
-    FileSubstitutionsItemParser parser = FileSubstitutionsItemParser(nodeLines);
-    substitutions = parser.run();
+    FileSubstitutionsItemParser *parser = FileSubstitutionsItemParserUtil::create(nodeLines);
+    substitutions = parser->run();
 
     // store the json data
     mission["substitutions"] = substitutions;
@@ -288,7 +298,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
     int index = startingIndex;
     json trigger; // create a json obect to store trigger data, pass ref to this when necessary
 
-    std::string triggerType = tokenize(lines.at(index)).at(1);
+    std::string triggerType = utils::tokenize(lines.at(index)).at(1);
     std::cout << "\tFound trigger: " << triggerType << std::endl;
 
     // check to prevent multiple triggers of the same type (except for on enter)
@@ -297,8 +307,8 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             break;
         } else if (triggerType.compare(t["type"]) == 0) {
             std::cout << "\tERROR: second trigger using: " << triggerType << ", skipping..." << std::endl;
-            int cur = getIndentLevel(lines.at(index));
-            int nxt = getIndentLevel(lines.at(index + 1));
+            int cur = utils::getIndentLevel(lines.at(index));
+            int nxt = utils::getIndentLevel(lines.at(index + 1));
             while (true) {
                 if (nxt <= cur) {
                     break;
@@ -306,7 +316,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
                 index++;
                 // handle getting the depth of the next line
                 try {
-                    nxt = getIndentLevel(lines.at(index + 1));
+                    nxt = utils::getIndentLevel(lines.at(index + 1));
                 }  catch (const std::out_of_range& ex) {
                     break;
                 }
@@ -316,15 +326,15 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
     }
 
     trigger["type"] = triggerType;
-    int cur = getIndentLevel(lines.at(index));
-    int nxt = getIndentLevel(lines.at(index + 1));
+    int cur = utils::getIndentLevel(lines.at(index));
+    int nxt = utils::getIndentLevel(lines.at(index + 1));
     while (true) {
         if (nxt <= cur) {
             break;
         }
 
         index++;
-        std::vector<std::string> tokens = tokenize(lines.at(index));
+        std::vector<std::string> tokens = utils::tokenize(lines.at(index));
         // parse the content of this line in the trigger
         if (tokens.at(0).compare("log") == 0) {
             std::cout << "\tFound log: " << lines.at(index) << std::endl;
@@ -350,11 +360,11 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         }
         // TODO: Add support for Value Expressions
         // https://github.com/endless-sky/endless-sky/wiki/Player-Conditions#value-expressions
-        else if (isOneOf(tokens.at(1), {"=", "+=", "-="})) {
+        else if (utils::isOneOf(tokens.at(1), {"=", "+=", "-="})) {
             parseTriggerConditionType1(tokens, &trigger);
-        } else if (isOneOf(tokens.at(1), {"++", "--"})) {
+        } else if (utils::isOneOf(tokens.at(1), {"++", "--"})) {
             parseTriggerConditionType2(tokens, &trigger);
-        } else if (isOneOf(tokens.at(0), {"set", "clear"})) {
+        } else if (utils::isOneOf(tokens.at(0), {"set", "clear"})) {
             parseTriggerConditionType3(tokens, &trigger);
         } else if (tokens.at(0).compare("event") == 0) {
             parseEvent(tokens, &trigger);
@@ -366,7 +376,7 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
 
         // handle getting the depth of the next line
         try {
-            nxt = getIndentLevel(lines.at(index + 1));
+            nxt = utils::getIndentLevel(lines.at(index + 1));
         }  catch (const std::out_of_range& ex) {
             break;
         }
@@ -398,22 +408,22 @@ int FileMissionItemParser::parseConversation(std::vector<std::string> *missionLi
     json convo;
 
     std::cout << "\tParsing conversation: " << lines.at(index) << std::endl;
-    int cur = getIndentLevel(lines.at(index));
-    int nxt = getIndentLevel(lines.at(index + 1));
+    int cur = utils::getIndentLevel(lines.at(index));
+    int nxt = utils::getIndentLevel(lines.at(index + 1));
     while (true) {
         if (nxt <= cur) {
             break;
         }
         index++;
 
-        std::vector<std::string> tokens = tokenize(lines.at(index));
+        std::vector<std::string> tokens = utils::tokenize(lines.at(index));
         std::cout << "\tLine in conversation: " << lines.at(index) << std::endl;
         // TODO: add parsing for conversations
         convo.emplace_back(lines.at(index));
 
         // handle getting the depth of the next line
         try {
-            nxt = getIndentLevel(lines.at(index + 1));
+            nxt = utils::getIndentLevel(lines.at(index + 1));
         }  catch (const std::out_of_range& ex) {
             break;
         }
@@ -429,7 +439,7 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
     json dialog;
 
     // Check if dialog is phrase
-    std::vector<std::string> tokens = tokenize(lines.at(index));
+    std::vector<std::string> tokens = utils::tokenize(lines.at(index));
     if (tokens.size() == 3) {
         std::cout << "\tFound dialog phrase: " << lines.at(index) << std::endl;
         (*trigger)["dialog_phrase"].emplace_back(tokens.at(2));
@@ -440,14 +450,14 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
 
         // check if next line exists
         try {
-            getIndentLevel(lines.at(index + 1));
+            utils::getIndentLevel(lines.at(index + 1));
         }  catch (const std::out_of_range& ex) {
             (*trigger)["dialog"].emplace_back(dialog);
             return index;
         }
 
-        int cur = getIndentLevel(lines.at(index));
-        int nxt = getIndentLevel(lines.at(index + 1));
+        int cur = utils::getIndentLevel(lines.at(index));
+        int nxt = utils::getIndentLevel(lines.at(index + 1));
         while (true) {
             if (nxt <= cur) {
                 break;
@@ -455,7 +465,7 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
             index++;
             std::cout << "\tParsing complex dialog node..." << std::endl;
 
-            std::vector<std::string> tokens = tokenize(lines.at(index));
+            std::vector<std::string> tokens = utils::tokenize(lines.at(index));
             std::cout << "\tLine in dialog node: " << lines.at(index) << std::endl;
             // TODO: handle inline phrase declarations
             //  dialog
@@ -468,7 +478,7 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
 
             // handle getting the depth of the next line
             try {
-                nxt = getIndentLevel(lines.at(index + 1));
+                nxt = utils::getIndentLevel(lines.at(index + 1));
             }  catch (const std::out_of_range& ex) {
                 break;
             }
@@ -584,7 +594,7 @@ void FileMissionItemParser::parseFail(std::vector<std::string> tokens, json *tri
     if (tokens.size() == 2) {
         (*trigger)["fails"].emplace_back(tokens.at(1));
     } else {
-        (*trigger)["fails"].emplace_back(get_mission_id());
+        (*trigger)["fails"].emplace_back(getMissionId());
     }
 }
 
@@ -593,15 +603,15 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
     int index = startingIndex;
     json condition;
 
-    std::string conditionType = tokenize(lines.at(index)).at(1);
+    std::string conditionType = utils::tokenize(lines.at(index)).at(1);
     std::cout << "\tParsing condition: " << lines.at(index) << std::endl;
 
     // check to prevent multiple conditions of the same type
     for (auto& t: mission["conditions"]) {
         if (conditionType.compare(t["type"]) == 0) {
             std::cout << "\tERROR: second condition using: " << conditionType << ", skipping..." << std::endl;
-            int cur = getIndentLevel(lines.at(index));
-            int nxt = getIndentLevel(lines.at(index + 1));
+            int cur = utils::getIndentLevel(lines.at(index));
+            int nxt = utils::getIndentLevel(lines.at(index + 1));
             while (true) {
                 if (nxt <= cur) {
                     break;
@@ -609,7 +619,7 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
                 index++;
                 // handle getting the depth of the next line
                 try {
-                    nxt = getIndentLevel(lines.at(index + 1));
+                    nxt = utils::getIndentLevel(lines.at(index + 1));
                 }  catch (const std::out_of_range& ex) {
                     break;
                 }
@@ -619,21 +629,21 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
     }
 
     condition["type"] = conditionType;
-    int cur = getIndentLevel(lines.at(index));
-    int nxt = getIndentLevel(lines.at(index + 1));
+    int cur = utils::getIndentLevel(lines.at(index));
+    int nxt = utils::getIndentLevel(lines.at(index + 1));
     while (true) {
         if (nxt <= cur) {
             break;
         }
         index++;
 
-        std::vector<std::string> tokens = tokenize(lines.at(index));
+        std::vector<std::string> tokens = utils::tokenize(lines.at(index));
         std::cout << "\tLine in condition: " << lines.at(index) << std::endl;
         condition["data"].emplace_back(lines.at(index));
 
         // handle getting the depth of the next line
         try {
-            nxt = getIndentLevel(lines.at(index + 1));
+            nxt = utils::getIndentLevel(lines.at(index + 1));
         }  catch (const std::out_of_range& ex) {
             break;
         }
@@ -651,21 +661,21 @@ int FileMissionItemParser::parseNpc(std::vector<std::string> *missionLines, int 
     std::cout << "\tParsing NPC: " << lines.at(index) << std::endl;
     // TODO: store the npc tags without storing duplicates
 
-    int cur = getIndentLevel(lines.at(index));
-    int nxt = getIndentLevel(lines.at(index + 1));
+    int cur = utils::getIndentLevel(lines.at(index));
+    int nxt = utils::getIndentLevel(lines.at(index + 1));
     while (true) {
         if (nxt <= cur) {
             break;
         }
         index++;
 
-        std::vector<std::string> tokens = tokenize(lines.at(index));
+        std::vector<std::string> tokens = utils::tokenize(lines.at(index));
         std::cout << "\tLine in npc: " << lines.at(index) << std::endl;
         npc["data"].emplace_back(lines.at(index));
 
         // handle getting the depth of the next line
         try {
-            nxt = getIndentLevel(lines.at(index + 1));
+            nxt = utils::getIndentLevel(lines.at(index + 1));
         }  catch (const std::out_of_range& ex) {
             break;
         }
@@ -679,10 +689,10 @@ void FileMissionItemParser::set_mission_id(std::string id) {
     mission["id"] = id;
 }
 
-json FileMissionItemParser::get_data() const {
+json FileMissionItemParser::getData() const {
     return mission;
 }
 
-std::string FileMissionItemParser::get_mission_id() const {
+std::string FileMissionItemParser::getMissionId() const {
     return mission["id"];
 }
