@@ -155,7 +155,7 @@ TEST_F(FilePhraseItemParserTest, StoreHomogenousWordNode) {
 
     index = parser.parseWords(&lines, 1);
     ASSERT_EQ(index, 3);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
@@ -187,7 +187,7 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousWordNode) {
 
     index = parser.parseWords(&lines, 1);
     ASSERT_EQ(index, 3);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreMulipleWordNodes) {
@@ -231,7 +231,7 @@ TEST_F(FilePhraseItemParserTest, StoreMulipleWordNodes) {
     index++; // Simulate loop incrementation
     index = parser.parseWords(&lines, index);
     ASSERT_EQ(index, 6);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreHomogenousSubPhraseNode) {
@@ -258,7 +258,7 @@ TEST_F(FilePhraseItemParserTest, StoreHomogenousSubPhraseNode) {
 
     index = parser.parseSubPhrase(&lines, 1);
     ASSERT_EQ(index, 3);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
@@ -290,7 +290,7 @@ TEST_F(FilePhraseItemParserTest, StoreHeterogenousSubPhraseNode) {
 
     index = parser.parseSubPhrase(&lines, 1);
     ASSERT_EQ(index, 3);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreMultipleSubPhraseNodes) {
@@ -334,7 +334,7 @@ TEST_F(FilePhraseItemParserTest, StoreMultipleSubPhraseNodes) {
     index++; // Simulate loop incrementation
     index = parser.parseSubPhrase(&lines, index);
     ASSERT_EQ(index, 6);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreReplaceNode) {
@@ -365,7 +365,7 @@ TEST_F(FilePhraseItemParserTest, StoreReplaceNode) {
 
     index = parser.parseReplace(&lines, 1);
     ASSERT_EQ(index, 3);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 TEST_F(FilePhraseItemParserTest, StoreMultipleReplaceNode) {
@@ -399,7 +399,7 @@ TEST_F(FilePhraseItemParserTest, StoreMultipleReplaceNode) {
     index++; // Simulate loop incrementation
     index = parser.parseReplace(&lines, index);
     ASSERT_EQ(index, 4);
-    ASSERT_EQ(parser.get_data(), expected);
+    ASSERT_EQ(parser.getData(), expected);
 }
 
 
