@@ -8,14 +8,18 @@
 #ifndef FILEFILTERITEMPARSER_H
 #define FILEFILTERITEMPARSER_H
 
-#include <common/fileitemparser.h>
+#include "common/fileitemparserimpl.h"
 
-class FileFilterItemParser : public FileItemParser
+#include <iosfwd>
+
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
+
+#include "common/fileitemparserutils.h"
+
+class FileFilterItemParser : public FileItemParserImpl
 {
-private:
-    // DATA
     json filter;
-
 public:
     // CREATORS
     FileFilterItemParser(std::vector<std::string>);
@@ -26,7 +30,7 @@ public:
     int parseFilter(std::vector<std::string> *, int);
 
     // ACCESSORS
-    json get_data() const;
+    json getData() const;
 };
 
 #endif // FILEFILTERITEMPARSER_H

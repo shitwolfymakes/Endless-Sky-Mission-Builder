@@ -7,9 +7,11 @@
 
 #include "filefilteritemparser.h"
 
+#include <iostream>
+
 FileFilterItemParser::FileFilterItemParser(std::vector<std::string> lines)
 {
-    this->lines = lines;
+    setLines(lines);
 }
 
 json FileFilterItemParser::run() {
@@ -21,6 +23,6 @@ int FileFilterItemParser::parseFilter(std::vector<std::string> *nodeLines, int s
     return -1;
 }
 
-json FileFilterItemParser::get_data() const {
+json FileFilterItemParser::getData() const {
     return filter;
 }
