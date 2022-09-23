@@ -8,9 +8,12 @@
 #ifndef FILESUBSTITUTIONSITEMPARSER_H
 #define FILESUBSTITUTIONSITEMPARSER_H
 
-#include "common/fileitemparser.h"
+#include "common/fileitemparserimpl.h"
 
-class FileSubstitutionsItemParser : public FileItemParser
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
+
+class FileSubstitutionsItemParser : public FileItemParserImpl
 {
 private:
     // DATA
@@ -26,7 +29,7 @@ public:
     int parseSubstitution(std::vector<std::string> *, int);
 
     // ACCESSORS
-    json get_data() const;
+    json getData() const;
 };
 
 #endif // FILESUBSTITUTIONSITEMPARSER_H
