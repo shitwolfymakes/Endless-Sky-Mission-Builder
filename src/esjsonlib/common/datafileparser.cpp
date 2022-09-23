@@ -7,6 +7,17 @@
 
 #include "datafileparser.h"
 
+#include <iostream>
+
+#include <boost/algorithm/string.hpp>
+
+#include "event/itemevent.h"
+#include "government/itemgovernment.h"
+#include "mission/itemmission.h"
+#include "phrase/itemphrase.h"
+#include "ship/itemship.h"
+#include "substitutions/itemsubstitutions.h"
+
 DataFileParser::DataFileParser(std::string rawData)
 {
     this->rawData = rawData;

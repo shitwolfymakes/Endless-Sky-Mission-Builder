@@ -8,26 +8,18 @@
 #ifndef DATAFILEPARSER_H
 #define DATAFILEPARSER_H
 
-#include <iostream>
-#include <regex>
+#include <iosfwd>
 #include <string>
 #include <vector>
 
-#include "boost/algorithm/string/join.hpp"
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
 
-#include "common//fileitem.h"
 #include "common/fileitemconstants.h"
 
-#include "event/itemevent.h"
-#include "government/itemgovernment.h"
-#include "mission/itemmission.h"
-#include "phrase/itemphrase.h"
-#include "ship/itemship.h"
-#include "substitutions/itemsubstitutions.h"
+class FileItem;
 
-class DataFileParser
-{
-private:
+class DataFileParser {
     std::string rawData;
     std::vector<std::string> lines;
     std::vector<std::unique_ptr<FileItem>> fileItems;
