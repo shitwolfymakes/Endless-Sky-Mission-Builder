@@ -19,6 +19,7 @@ add_library(esjsonlib STATIC
 
     mission/itemmission.h mission/itemmission.cpp
     mission/filemissionitemparser.h mission/filemissionitemparser.cpp
+    mission/filemissionitemparserutil.h mission/filemissionitemparserutil.cpp
 
     phrase/itemphrase.h phrase/itemphrase.cpp
     phrase/filephraseitemparser.h phrase/filephraseitemparser.cpp
