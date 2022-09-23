@@ -3,43 +3,29 @@ cmake_minimum_required(VERSION 3.16)
 # Executable
 add_library(esjsonlib STATIC
     common/fileitemconstants.h
-    common/fileitem.h
-    common/fileitem.cpp
-    common/datafileparser.h
-    common/datafileparser.cpp
-    common/fileitemparser.h
-    common/fileitemparser.cpp
-    common/fileitemparserutils.h
-    common/fileitemparserutils.cpp
+    common/fileitem.h common/fileitem.cpp
+    common/datafileparser.h common/datafileparser.cpp
+    common/fileitemparser.h common/fileitemparser.cpp
+    common/fileitemparserutils.h common/fileitemparserutils.cpp
+    common/fileitemparserimpl.h common/fileitemparserimpl.cpp
 
-    event/itemevent.h
-    event/itemevent.cpp
+    event/itemevent.h event/itemevent.cpp
 
-    filter/itemfilter.h
-    filter/itemfilter.cpp
-    filter/filefilteritemparser.h
-    filter/filefilteritemparser.cpp
+    filter/itemfilter.h filter/itemfilter.cpp
+    filter/filefilteritemparser.h filter/filefilteritemparser.cpp
 
-    government/itemgovernment.h
-    government/itemgovernment.cpp
+    government/itemgovernment.h government/itemgovernment.cpp
 
-    mission/itemmission.h
-    mission/itemmission.cpp
-    mission/filemissionitemparser.h
-    mission/filemissionitemparser.cpp
+    mission/itemmission.h mission/itemmission.cpp
+    mission/filemissionitemparser.h mission/filemissionitemparser.cpp
 
-    phrase/itemphrase.h
-    phrase/itemphrase.cpp
-    phrase/filephraseitemparser.h
-    phrase/filephraseitemparser.cpp
+    phrase/itemphrase.h phrase/itemphrase.cpp
+    phrase/filephraseitemparser.h phrase/filephraseitemparser.cpp
 
-    ship/itemship.h
-    ship/itemship.cpp
+    ship/itemship.h ship/itemship.cpp
 
-    substitutions/itemsubstitutions.h
-    substitutions/itemsubstitutions.cpp
-    substitutions/filesubstitutionsitemparser.h
-    substitutions/filesubstitutionsitemparser.cpp
+    substitutions/itemsubstitutions.h substitutions/itemsubstitutions.cpp
+    substitutions/filesubstitutionsitemparser.h substitutions/filesubstitutionsitemparser.cpp
 )
 
 add_subdirectory(${ESMB_EXTERNAL_DIR} ${ESMB_BINARY_DIR}/external)
