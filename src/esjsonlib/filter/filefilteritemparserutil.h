@@ -14,7 +14,7 @@
 class FileFilterItemParser;
 
 struct FileFilterItemParserUtil {
-    FileFilterItemParser* create(std::vector<std::string> lines);
+    static FileFilterItemParser* create(std::vector<std::string> lines);
 };
 
 #endif // FILEFILTERITEMPARSERUTIL_H

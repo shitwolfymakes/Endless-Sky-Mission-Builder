@@ -14,7 +14,7 @@
 class FilePhraseItemParser;
 
 struct FilePhraseItemParserUtil {
-    FilePhraseItemParser* create(std::vector<std::string> lines);
+    static FilePhraseItemParser* create(std::vector<std::string> lines);
 };
 
 #endif // FILEPHRASEITEMPARSERUTIL_H

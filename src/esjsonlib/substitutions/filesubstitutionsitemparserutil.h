@@ -14,7 +14,7 @@
 class FileSubstitutionsItemParser;
 
 struct FileSubstitutionsItemParserUtil {
-    FileSubstitutionsItemParser* create(std::vector<std::string> lines);
+    static FileSubstitutionsItemParser* create(std::vector<std::string> lines);
 };
 
 #endif // FILESUBSTITUTIONSITEMPARSERUTIL_H
