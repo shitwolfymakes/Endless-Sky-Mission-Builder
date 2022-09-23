@@ -27,6 +27,7 @@ add_library(esjsonlib STATIC
 
     substitutions/itemsubstitutions.h substitutions/itemsubstitutions.cpp
     substitutions/filesubstitutionsitemparser.h substitutions/filesubstitutionsitemparser.cpp
+    substitutions/filesubstitutionsitemparserutil.h substitutions/filesubstitutionsitemparserutil.cpp
 )
 
 add_subdirectory(${ESMB_EXTERNAL_DIR} ${ESMB_BINARY_DIR}/external)
