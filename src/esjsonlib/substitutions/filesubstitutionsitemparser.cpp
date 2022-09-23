@@ -14,8 +14,7 @@
 #include "common/fileitemparserutils.h"
 using utils = FileItemParserUtils;
 
-FileSubstitutionsItemParser::FileSubstitutionsItemParser(std::vector<std::string> lines)
-{
+FileSubstitutionsItemParser::FileSubstitutionsItemParser(std::vector<std::string> lines) {
     setLines(lines);
 }
 

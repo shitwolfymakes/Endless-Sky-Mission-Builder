@@ -13,10 +13,7 @@
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
-class FileSubstitutionsItemParser : public FileItemParserImpl
-{
-private:
-    // DATA
+class FileSubstitutionsItemParser : public FileItemParserImpl {
     json substitutions;
 
 public:
