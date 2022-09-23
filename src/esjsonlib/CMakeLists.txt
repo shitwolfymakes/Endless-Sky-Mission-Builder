@@ -22,6 +22,7 @@ add_library(esjsonlib STATIC
 
     phrase/itemphrase.h phrase/itemphrase.cpp
     phrase/filephraseitemparser.h phrase/filephraseitemparser.cpp
+    phrase/filephraseitemparserutil.h phrase/filephraseitemparserutil.cpp
 
     ship/itemship.h ship/itemship.cpp
 
