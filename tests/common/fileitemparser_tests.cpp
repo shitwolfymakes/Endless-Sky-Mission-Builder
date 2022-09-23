@@ -7,6 +7,11 @@
 
 #include "fileitemparser_tests.h"
 
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
+
+#include "common/fileitemparserutils.h"
+
 using namespace testing;
 
 namespace parsertests {
@@ -32,7 +37,7 @@ TEST_F(FileItemParserTest, TestCollectNodeLines) {
                 "\t\t\"<name>\" \"Anderson Dawes\""};
 
     json nodeLines;
-    index = FileItemParser::collectNodeLines(&fileLines, index, &nodeLines);
+    index = FileItemParserUtils::collectNodeLines(&fileLines, index, &nodeLines);
 
 
     ASSERT_EQ(index, 6);
