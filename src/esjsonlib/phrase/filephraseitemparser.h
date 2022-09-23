@@ -8,11 +8,14 @@
 #ifndef FILEPHRASEITEMPARSER_H
 #define FILEPHRASEITEMPARSER_H
 
-#include "common/fileitemparser.h"
+#include "common/fileitemparserimpl.h"
 
-class FilePhraseItemParser : public FileItemParser {
-private:
-    // DATA
+#include <iosfwd>
+
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
+
+class FilePhraseItemParser : public FileItemParserImpl {
     json phrase;
 
 public:
@@ -27,7 +30,7 @@ public:
     int parseReplace(std::vector<std::string> *, int);
 
     // ACCESSORS
-    json get_data() const;
+    json getData() const;
 };
 
 #endif // FILEPHRASEITEMPARSER_H
