@@ -96,6 +96,19 @@ void FileFilterItemParser::parseSystems(std::vector<std::string> tokens, int ind
     }
 }
 
+void FileFilterItemParser::parseGovernments(std::vector<std::string> tokens, int index, std::string modifier) {
+    json systems;
+    for (int i = index; i < tokens.size(); i++) {
+        systems["government"].emplace_back(tokens.at(i));
+    }
+
+    if (modifier.compare("") == 0) {
+        filter["governments"].emplace_back(systems);
+    } else {
+        filter[modifier]["governments"].emplace_back(systems);
+    }
+}
+
 // Determine whether or not the string passed is a valid filter modifier
 bool FileFilterItemParser::isModifier(std::string token) {
     bool result = false;
