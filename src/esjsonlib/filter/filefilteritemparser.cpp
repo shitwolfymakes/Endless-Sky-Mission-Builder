@@ -24,38 +24,37 @@ json FileFilterItemParser::run() {
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
-        // ES Logic:
-        // if not or neighbor
-        //    add empty filter obj to not or not neighbors
-        //    if num tokens is 1
-        //        recurse, storing in last filter in list
-        //    else
-        //        save value of in last filter in list
-        // else
-        //    save value in this filter
 
-        // ESMB logic
-        // if not or neighbor
-        if (isModifier(tokens[0])) {
-            // if num tokens is 1
+        if (isModifier(tokens.at(0))) {
+            // if not or neighbor
             if (tokens.size() == 1) {
-                // i = collectNodeLines
-                // create new parser
+                // parse recursively
+                std::vector<std::string> nodeLines;
+                i = utils::collectNodeLines(&lines, i, &nodeLines);
+                FileFilterItemParser p = FileFilterItemParser(nodeLines);
+                json f;
+                f = p.run();
+
                 // add parsed json to list
+                if (tokens.at(0).compare("not") == 0) {
+                    filter["not_nodes"].emplace_back(f);
+                } else if (tokens.at(0).compare("neighbor") == 0) {
+                    filter["neigbor_nodes"].emplace_back(f);
+                }
             } else {
-                // else
                 // save constraint to the list of nots or neighbors
+                parseFilter(tokens);
             }
         } else {
-            // else
             // save constraint to the list
+            parseFilter(tokens);
         }
     }
     //std::cout << "Filter data: " << substitutions.dump(4) << std::endl;
     return filter;
 }
 
-void FileFilterItemParser::parseFilter(std::string line) {
+void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
     std::cout << "FILTER PARSING NOT IMPLEMENTED YET" << std::endl;
 }
 
