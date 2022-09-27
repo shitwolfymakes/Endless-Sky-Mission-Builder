@@ -108,6 +108,55 @@ TEST_F(FileFilterItemParserTest, TestParseSystems) {
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseGovernments) {
+    std::vector<std::string> tokens;
+    std::string modifier = "";
+
+    json expected, expected2, expected3;
+    parser = FileFilterItemParser(minimum_filter_lines);
+    expected2["government"].emplace_back("Republic");
+    expected2["government"].emplace_back("Syndicate");
+    expected3["government"].emplace_back("Pirate");
+    expected["governments"].emplace_back(expected2);
+    expected["governments"].emplace_back(expected3);
+
+    tokens = { "government", "Republic", "Syndicate" };
+    parser.parseGovernments(tokens, 1, modifier);
+    tokens = { "government", "Pirate" };
+    parser.parseGovernments(tokens, 1, modifier);
+    ASSERT_EQ(parser.getData(), expected);
+
+    modifier = "not";
+    json expectedNot, expectedNot2, expectedNot3;
+    parser = FileFilterItemParser(minimum_filter_lines);
+    expectedNot2["government"].emplace_back("Republic");
+    expectedNot2["government"].emplace_back("Syndicate");
+    expectedNot3["government"].emplace_back("Pirate");
+    expectedNot[modifier]["governments"].emplace_back(expectedNot2);
+    expectedNot[modifier]["governments"].emplace_back(expectedNot3);
+
+    tokens = { modifier, "government", "Republic", "Syndicate" };
+    parser.parseGovernments(tokens, 2, modifier);
+    tokens = { modifier, "government", "Pirate" };
+    parser.parseGovernments(tokens, 2, modifier);
+    ASSERT_EQ(parser.getData(), expectedNot);
+
+    modifier = "neighbor";
+    json expectedNeighbor, expectedNeighbor2, expectedNeighbor3;
+    parser = FileFilterItemParser(minimum_filter_lines);
+    expectedNeighbor2["government"].emplace_back("Republic");
+    expectedNeighbor2["government"].emplace_back("Syndicate");
+    expectedNeighbor3["government"].emplace_back("Pirate");
+    expectedNeighbor[modifier]["governments"].emplace_back(expectedNeighbor2);
+    expectedNeighbor[modifier]["governments"].emplace_back(expectedNeighbor3);
+
+    tokens = { modifier, "government", "Republic", "Syndicate" };
+    parser.parseGovernments(tokens, 2, modifier);
+    tokens = { modifier, "government", "Pirate" };
+    parser.parseGovernments(tokens, 2, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighbor);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
