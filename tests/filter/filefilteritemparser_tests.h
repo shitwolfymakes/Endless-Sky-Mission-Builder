@@ -15,12 +15,12 @@
 
 namespace parsertests {
 
-std::vector<std::string> sample_filter_node = { "" };
+std::vector<std::string> minimum_filter_lines = {"<parent node>"};
 
 // Fixture for testing a filter node
 class FileFilterItemParserTest : public ::testing::Test {
 protected:
-    FileFilterItemParser parser = FileFilterItemParser(sample_filter_node);
+    FileFilterItemParser parser = FileFilterItemParser(minimum_filter_lines);
 };
 
 } // namespace parsertests

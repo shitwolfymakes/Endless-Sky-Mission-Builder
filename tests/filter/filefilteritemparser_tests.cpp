@@ -10,9 +10,15 @@ using namespace testing;
 
 namespace parsertests {
 
-// Test top level field parsing
-TEST_F(FileFilterItemParserTest, TestFilterParsing) {
-    ASSERT_EQ(0, 1);
+TEST_F(FileFilterItemParserTest, TestIsModifier) {
+    bool result = FileFilterItemParser::isModifier("not");
+    ASSERT_EQ(result, true);
+
+    result = FileFilterItemParser::isModifier("neighbor");
+    ASSERT_EQ(result, true);
+
+    result = FileFilterItemParser::isModifier("asdf");
+    ASSERT_EQ(result, false);
 }
 
 } // namespace parsertests
