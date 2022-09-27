@@ -29,6 +29,7 @@ public:
     // return the index of the last line of the filter
     void parseFilter(std::vector<std::string>);
     void parsePlanets(std::vector<std::string>, int, std::string);
+    void parseSystems(std::vector<std::string>, int, std::string);
 
     // ACCESSORS
     // Returns true if the string is a valid filter modifier.

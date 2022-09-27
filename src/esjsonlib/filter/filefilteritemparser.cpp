@@ -65,6 +65,8 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
     const std::string key = tokens.at(i);
     if (key.compare("planet") == 0) {
         parsePlanets(tokens, i, modifier);
+    } else if (key.compare("system") == 0) {
+        parseSystems(tokens, i, modifier);
     }
 }
 
@@ -74,6 +76,16 @@ void FileFilterItemParser::parsePlanets(std::vector<std::string> tokens, int ind
             filter["planets"]["planet"].emplace_back(tokens.at(i));
         } else {
             filter[modifier]["planets"]["planet"].emplace_back(tokens.at(i));
+        }
+    }
+}
+
+void FileFilterItemParser::parseSystems(std::vector<std::string> tokens, int index, std::string modifier) {
+    for (int i = index; i < tokens.size(); i++) {
+        if (modifier.compare("") == 0) {
+            filter["systems"]["system"].emplace_back(tokens.at(i));
+        } else {
+            filter[modifier]["systems"]["system"].emplace_back(tokens.at(i));
         }
     }
 }
