@@ -24,21 +24,33 @@ json FileFilterItemParser::run() {
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
-        if (tokens.size() == 0) {
-            std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        } else {
-            std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        }
+        // ES Logic:
+        // if not or neighbor
+        //    add empty filter obj to not or not neighbors
+        //    if num tokens is 1
+        //        recurse, storing in last filter in list
+        //    else
+        //        save value of in last filter in list
+        // else
+        //    save value in this filter
 
-        //i = parseFilter(&lines, i);
+        // ESMB logic
+        // if not or neighbor
+        //    if num tokens is 1
+        //        i = collectNodeLines
+        //        create new parser
+        //        add parsed json to list
+        //    else
+        //        save constraint to the list of nots or neighbors
+        // else
+        //     save constraint to the list
     }
     //std::cout << "Filter data: " << substitutions.dump(4) << std::endl;
     return filter;
 }
 
-int FileFilterItemParser::parseFilter(std::vector<std::string> *nodeLines, int startingIndex) {
+void FileFilterItemParser::parseFilter(std::vector<std::string> *nodeLines, int startingIndex) {
     std::cout << "FILTER PARSING NOT IMPLEMENTED YET" << std::endl;
-    return -1;
 }
 
 // Determine whether or not the string passed is a valid filter modifier
