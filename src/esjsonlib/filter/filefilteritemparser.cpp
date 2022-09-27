@@ -41,8 +41,14 @@ int FileFilterItemParser::parseFilter(std::vector<std::string> *nodeLines, int s
     return -1;
 }
 
-bool FileFilterItemParser::isModifier(std::string token) const {
+// Determine whether or not the string passed is a valid filter modifier
+bool FileFilterItemParser::isModifier(std::string token) {
     bool result = false;
+    if (token.compare("not") == 0) {
+        result = true;
+    } else if (token.compare("neighbor") == 0) {
+        result = true;
+    }
     return result;
 }
 

@@ -17,6 +17,7 @@ using json = nlohmann::json;
 
 class FileFilterItemParser : public FileItemParserImpl {
     json filter;
+
 public:
     // CREATORS
     FileFilterItemParser(std::vector<std::string>);
@@ -24,10 +25,14 @@ public:
     // MANIPULATORS
     json run();
 
+    // Take the lines and the starting index of a filter node, and
+    // return the index of the last line of the filter
     int parseFilter(std::vector<std::string> *, int);
 
     // ACCESSORS
-    bool isModifier(std::string) const;
+    // Returns true if the string is a valid filter modifier.
+    // If not, false is returned
+    static bool isModifier(std::string);
     json getData() const;
 };
 
