@@ -84,12 +84,15 @@ void FileFilterItemParser::parsePlanets(std::vector<std::string> tokens, int ind
 }
 
 void FileFilterItemParser::parseSystems(std::vector<std::string> tokens, int index, std::string modifier) {
+    json systems;
     for (int i = index; i < tokens.size(); i++) {
-        if (modifier.compare("") == 0) {
-            filter["systems"]["system"].emplace_back(tokens.at(i));
-        } else {
-            filter[modifier]["systems"]["system"].emplace_back(tokens.at(i));
-        }
+        systems["system"].emplace_back(tokens.at(i));
+    }
+
+    if (modifier.compare("") == 0) {
+        filter["systems"].emplace_back(systems);
+    } else {
+        filter[modifier]["systems"].emplace_back(systems);
     }
 }
 
