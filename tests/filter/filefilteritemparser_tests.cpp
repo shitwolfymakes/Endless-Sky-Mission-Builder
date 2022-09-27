@@ -11,8 +11,8 @@ using namespace testing;
 namespace parsertests {
 
 TEST_F(FileFilterItemParserTest, TestParsePlanets) {
-    std::string modifier = "";
     std::vector<std::string> tokens;
+    std::string modifier = "";
 
     json expected, expected2, expected3;
     parser = FileFilterItemParser(minimum_filter_lines);
@@ -28,33 +28,33 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     parser.parsePlanets(tokens, 1, modifier);
     ASSERT_EQ(parser.getData(), expected);
 
+    modifier = "not";
     json expectedNot, expectedNot2, expectedNot3;
     parser = FileFilterItemParser(minimum_filter_lines);
     expectedNot2["planet"].emplace_back("Earth");
     expectedNot2["planet"].emplace_back("Luna");
     expectedNot3["planet"].emplace_back("Mars");
-    expectedNot["not"]["planets"].emplace_back(expectedNot2);
-    expectedNot["not"]["planets"].emplace_back(expectedNot3);
+    expectedNot[modifier]["planets"].emplace_back(expectedNot2);
+    expectedNot[modifier]["planets"].emplace_back(expectedNot3);
 
-    modifier = "not";
-    tokens = { "not", "planet", "Earth", "Luna" };
+    tokens = { modifier, "planet", "Earth", "Luna" };
     parser.parsePlanets(tokens, 2, modifier);
-    tokens = { "not", "planet", "Mars" };
+    tokens = { modifier, "planet", "Mars" };
     parser.parsePlanets(tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
+    modifier = "neighbor";
     json expectedNeighbor, expectedNeighbor2, expectedNeighbor3;
     parser = FileFilterItemParser(minimum_filter_lines);
     expectedNeighbor2["planet"].emplace_back("Earth");
     expectedNeighbor2["planet"].emplace_back("Luna");
     expectedNeighbor3["planet"].emplace_back("Mars");
-    expectedNeighbor["neighbor"]["planets"].emplace_back(expectedNeighbor2);
-    expectedNeighbor["neighbor"]["planets"].emplace_back(expectedNeighbor3);
+    expectedNeighbor[modifier]["planets"].emplace_back(expectedNeighbor2);
+    expectedNeighbor[modifier]["planets"].emplace_back(expectedNeighbor3);
 
-    modifier = "neighbor";
-    tokens = { "neighbor", "planet", "Earth", "Luna" };
+    tokens = { modifier, "planet", "Earth", "Luna" };
     parser.parsePlanets(tokens, 2, modifier);
-    tokens = { "neighbor", "planet", "Mars" };
+    tokens = { modifier, "planet", "Mars" };
     parser.parsePlanets(tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
