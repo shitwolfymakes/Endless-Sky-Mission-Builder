@@ -36,20 +36,26 @@ json FileFilterItemParser::run() {
 
         // ESMB logic
         // if not or neighbor
-        //    if num tokens is 1
-        //        i = collectNodeLines
-        //        create new parser
-        //        add parsed json to list
-        //    else
-        //        save constraint to the list of nots or neighbors
-        // else
-        //     save constraint to the list
+        if (isModifier(tokens[0])) {
+            // if num tokens is 1
+            if (tokens.size() == 1) {
+                // i = collectNodeLines
+                // create new parser
+                // add parsed json to list
+            } else {
+                // else
+                // save constraint to the list of nots or neighbors
+            }
+        } else {
+            // else
+            // save constraint to the list
+        }
     }
     //std::cout << "Filter data: " << substitutions.dump(4) << std::endl;
     return filter;
 }
 
-void FileFilterItemParser::parseFilter(std::vector<std::string> *nodeLines, int startingIndex) {
+void FileFilterItemParser::parseFilter(std::string line) {
     std::cout << "FILTER PARSING NOT IMPLEMENTED YET" << std::endl;
 }
 

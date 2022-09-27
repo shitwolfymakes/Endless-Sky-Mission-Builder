@@ -27,7 +27,7 @@ public:
 
     // Take the lines and the starting index of a filter node, and
     // return the index of the last line of the filter
-    void parseFilter(std::vector<std::string> *, int);
+    void parseFilter(std::string);
 
     // ACCESSORS
     // Returns true if the string is a valid filter modifier.
