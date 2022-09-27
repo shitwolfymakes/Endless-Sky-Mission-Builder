@@ -55,7 +55,27 @@ json FileFilterItemParser::run() {
 }
 
 void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
-    std::cout << "FILTER PARSING NOT IMPLEMENTED YET" << std::endl;
+    std::string modifier = "";
+    int i = 1;
+    if (isModifier(tokens.at(0))) {
+        modifier = tokens.at(0);
+        i += 1;
+    }
+
+    const std::string key = tokens.at(i);
+    if (key.compare("planet") == 0) {
+        parsePlanets(tokens, i, modifier);
+    }
+}
+
+void FileFilterItemParser::parsePlanets(std::vector<std::string> tokens, int index, std::string modifier) {
+    for (int i = index; i < tokens.size(); i++) {
+        if (modifier.compare("") == 0) {
+            filter["planets"]["planet"].emplace_back(tokens.at(i));
+        } else {
+            filter[modifier]["planets"]["planet"].emplace_back(tokens.at(i));
+        }
+    }
 }
 
 // Determine whether or not the string passed is a valid filter modifier
