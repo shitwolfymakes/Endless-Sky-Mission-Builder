@@ -88,3 +88,31 @@ int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int s
     //std::cout << "\tNode Lines: " << nodeLines->dump(4) << std::endl;
     return index;
 }
+
+int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int startingIndex, std::vector<std::string> *nodeLines) {
+    int index = startingIndex;
+    std::cout << "\tCollecting lines in node: " << lines->at(index) << std::endl;
+
+    // collect the first line in the node
+    (*nodeLines).emplace_back(lines->at(index));
+
+    int cur = getIndentLevel(lines->at(index));
+    int nxt = getIndentLevel(lines->at(index + 1));
+    while (true) {
+        if (nxt <= cur) {
+            break;
+        }
+        index++;
+
+        (*nodeLines).emplace_back(lines->at(index));
+
+        // handle getting the depth of the next line
+        try {
+            nxt = getIndentLevel(lines->at(index + 1));
+        }  catch (const std::out_of_range& ex) {
+            break;
+        }
+    }
+    //std::cout << "\tNode Lines: " << nodeLines->dump(4) << std::endl;
+    return index;
+}

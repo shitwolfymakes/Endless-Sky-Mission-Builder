@@ -266,11 +266,11 @@ int FileMissionItemParser::parseSubstitutions(std::vector<std::string> *missionL
     std::vector<std::string> lines = *missionLines;
     int index = startingIndex;
     json substitutions;
-    json nodeLines;
+    std::vector<std::string> nodeLines;
 
     std::cout << "\tFound substitution: " << index << std::endl;
 
-    // pass the missionLines, index, and address to a json object that will store the parsed JSON data
+    // pass the missionLines, index, and address to a string vector that will store the parsed JSON data
     index = utils::collectNodeLines(missionLines, index, &nodeLines);
 
     // instantiate and run the substitution parser

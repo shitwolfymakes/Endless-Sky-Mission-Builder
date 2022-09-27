@@ -20,6 +20,7 @@ struct FileItemParserUtils {
     static bool isOneOf(std::string, std::vector<std::string>);
     static int getIndentLevel(std::string);
     static int collectNodeLines(std::vector<std::string> *, int, json *);
+    static int collectNodeLines(std::vector<std::string> *, int, std::vector<std::string> *);
 };
 
 #endif // FILEITEMPARSERUTILS_H
