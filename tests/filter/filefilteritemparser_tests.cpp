@@ -43,6 +43,36 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseSystems) {
+    std::string modifier = "";
+
+    json expected;
+    parser = FileFilterItemParser(minimum_filter_lines);
+    expected["systems"]["system"].emplace_back("Sol");
+    expected["systems"]["system"].emplace_back("Alpha Centauri");
+    std::vector<std::string> tokens = { "system", "Sol", "Alpha Centauri" };
+    parser.parseSystems(tokens, 1, modifier);
+    ASSERT_EQ(parser.getData(), expected);
+
+    json expectedNot;
+    parser = FileFilterItemParser(minimum_filter_lines);
+    modifier = "not";
+    expectedNot["not"]["systems"]["system"].emplace_back("Sol");
+    expectedNot["not"]["systems"]["system"].emplace_back("Alpha Centauri");
+    std::vector<std::string> tokensNot = { "not", "system", "Sol", "Alpha Centauri" };
+    parser.parseSystems(tokensNot, 2, modifier);
+    ASSERT_EQ(parser.getData(), expectedNot);
+
+    json expectedNeighbor;
+    parser = FileFilterItemParser(minimum_filter_lines);
+    modifier = "neighbor";
+    expectedNeighbor["neighbor"]["systems"]["system"].emplace_back("Sol");
+    expectedNeighbor["neighbor"]["systems"]["system"].emplace_back("Alpha Centauri");
+    std::vector<std::string> tokensNeighbor = { "neighbor", "system", "Sol", "Alpha Centauri" };
+    parser.parseSystems(tokensNeighbor, 2, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighbor);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
