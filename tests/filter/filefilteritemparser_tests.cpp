@@ -12,34 +12,50 @@ namespace parsertests {
 
 TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     std::string modifier = "";
+    std::vector<std::string> tokens;
 
-    json expected;
+    json expected, expected2, expected3;
     parser = FileFilterItemParser(minimum_filter_lines);
-    expected["planets"]["planet"].emplace_back("Earth");
-    expected["planets"]["planet"].emplace_back("Luna");
-    expected["planets"]["planet"].emplace_back("Mars");
-    std::vector<std::string> tokens = { "planet", "Earth", "Luna", "Mars" };
+    expected2["planet"].emplace_back("Earth");
+    expected2["planet"].emplace_back("Luna");
+    expected3["planet"].emplace_back("Mars");
+    expected["planets"].emplace_back(expected2);
+    expected["planets"].emplace_back(expected3);
+
+    tokens = { "planet", "Earth", "Luna" };
+    parser.parsePlanets(tokens, 1, modifier);
+    tokens = { "planet", "Mars" };
     parser.parsePlanets(tokens, 1, modifier);
     ASSERT_EQ(parser.getData(), expected);
 
-    json expectedNot;
+    json expectedNot, expectedNot2, expectedNot3;
     parser = FileFilterItemParser(minimum_filter_lines);
+    expectedNot2["planet"].emplace_back("Earth");
+    expectedNot2["planet"].emplace_back("Luna");
+    expectedNot3["planet"].emplace_back("Mars");
+    expectedNot["not"]["planets"].emplace_back(expectedNot2);
+    expectedNot["not"]["planets"].emplace_back(expectedNot3);
+
     modifier = "not";
-    expectedNot["not"]["planets"]["planet"].emplace_back("Earth");
-    expectedNot["not"]["planets"]["planet"].emplace_back("Luna");
-    expectedNot["not"]["planets"]["planet"].emplace_back("Mars");
-    std::vector<std::string> tokensNot = { "not", "planet", "Earth", "Luna", "Mars" };
-    parser.parsePlanets(tokensNot, 2, modifier);
+    tokens = { "not", "planet", "Earth", "Luna" };
+    parser.parsePlanets(tokens, 2, modifier);
+    tokens = { "not", "planet", "Mars" };
+    parser.parsePlanets(tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    json expectedNeighbor;
+    json expectedNeighbor, expectedNeighbor2, expectedNeighbor3;
     parser = FileFilterItemParser(minimum_filter_lines);
+    expectedNeighbor2["planet"].emplace_back("Earth");
+    expectedNeighbor2["planet"].emplace_back("Luna");
+    expectedNeighbor3["planet"].emplace_back("Mars");
+    expectedNeighbor["neighbor"]["planets"].emplace_back(expectedNeighbor2);
+    expectedNeighbor["neighbor"]["planets"].emplace_back(expectedNeighbor3);
+
     modifier = "neighbor";
-    expectedNeighbor["neighbor"]["planets"]["planet"].emplace_back("Earth");
-    expectedNeighbor["neighbor"]["planets"]["planet"].emplace_back("Luna");
-    expectedNeighbor["neighbor"]["planets"]["planet"].emplace_back("Mars");
-    std::vector<std::string> tokensNeighbor = { "neighbor", "planet", "Earth", "Luna", "Mars" };
-    parser.parsePlanets(tokensNeighbor, 2, modifier);
+    tokens = { "neighbor", "planet", "Earth", "Luna" };
+    parser.parsePlanets(tokens, 2, modifier);
+    tokens = { "neighbor", "planet", "Mars" };
+    parser.parsePlanets(tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
