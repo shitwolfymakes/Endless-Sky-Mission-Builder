@@ -39,7 +39,7 @@ json FileFilterItemParser::run() {
                 if (tokens.at(0).compare("not") == 0) {
                     filter["not_nodes"].emplace_back(f);
                 } else if (tokens.at(0).compare("neighbor") == 0) {
-                    filter["neigbor_nodes"].emplace_back(f);
+                    filter["neighbor_nodes"].emplace_back(f);
                 }
             } else {
                 // save constraint to the list of nots or neighbors
@@ -106,6 +106,21 @@ void FileFilterItemParser::parseGovernments(std::vector<std::string> tokens, int
         filter["governments"].emplace_back(systems);
     } else {
         filter[modifier]["governments"].emplace_back(systems);
+    }
+}
+
+void FileFilterItemParser::parseAttributes(std::vector<std::string> *tokens, int index, std::string modifier) {
+    std::string group      = "attributes";
+    std::string constraint = "attributes";
+    json constraint_list;
+    for (int i = index; i < tokens->size(); i++) {
+        constraint_list[constraint].emplace_back(tokens->at(i));
+    }
+
+    if (modifier.compare("") == 0) {
+        filter[group].emplace_back(constraint_list);
+    } else {
+        filter[modifier][group].emplace_back(constraint_list);
     }
 }
 
