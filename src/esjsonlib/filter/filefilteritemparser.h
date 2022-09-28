@@ -30,7 +30,7 @@ public:
     void parseFilter(std::vector<std::string>);
     void parsePlanets(std::vector<std::string>, int, std::string);
     void parseSystems(std::vector<std::string>, int, std::string);
-    void parseGovernments(std::vector<std::string>, int, std::string);
+    void parseGovernments(std::vector<std::string> *, int, std::string);
     void parseAttributes(std::vector<std::string> *, int, std::string);
 
     // ACCESSORS

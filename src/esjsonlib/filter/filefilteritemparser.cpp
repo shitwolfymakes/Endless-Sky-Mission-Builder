@@ -96,16 +96,18 @@ void FileFilterItemParser::parseSystems(std::vector<std::string> tokens, int ind
     }
 }
 
-void FileFilterItemParser::parseGovernments(std::vector<std::string> tokens, int index, std::string modifier) {
-    json systems;
-    for (int i = index; i < tokens.size(); i++) {
-        systems["government"].emplace_back(tokens.at(i));
+void FileFilterItemParser::parseGovernments(std::vector<std::string> *tokens, int index, std::string modifier) {
+    std::string group      = "governments";
+    std::string constraint = "government";
+    json constraint_list;
+    for (int i = index; i < tokens->size(); i++) {
+        constraint_list[constraint].emplace_back(tokens->at(i));
     }
 
     if (modifier.compare("") == 0) {
-        filter["governments"].emplace_back(systems);
+        filter[group].emplace_back(constraint_list);
     } else {
-        filter[modifier]["governments"].emplace_back(systems);
+        filter[modifier][group].emplace_back(constraint_list);
     }
 }
 
