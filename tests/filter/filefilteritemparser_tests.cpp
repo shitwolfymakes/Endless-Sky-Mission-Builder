@@ -113,53 +113,54 @@ TEST_F(FileFilterItemParserTest, TestParseSystems) {
 }
 
 TEST_F(FileFilterItemParserTest, TestParseGovernments) {
+    // define common data
     std::vector<std::string> tokens;
-    std::string parent = "governments";
+    std::string modifier   = "";
+    std::string group      = "governments";
     std::string constraint = "government";
-    std::string modifier = "";
+    std::string elem1      = "Republic";
+    std::string elem2      = "Syndicate";
+    std::string elem3      = "Pirate";
 
-    json expected, expected2, expected3;
-    parser = FileFilterItemParser(minimum_filter_lines);
-    expected2[constraint].emplace_back("Republic");
-    expected2[constraint].emplace_back("Syndicate");
-    expected3[constraint].emplace_back("Pirate");
-    expected[parent].emplace_back(expected2);
-    expected[parent].emplace_back(expected3);
+    json parent, constraint1, constraint2;
+    constraint1[constraint] = { elem1, elem2 };
+    constraint2[constraint] = { elem3 };
+    parent                  = { constraint1, constraint2 };
 
-    tokens = { constraint, "Republic", "Syndicate" };
-    parser.parseGovernments(tokens, 1, modifier);
-    tokens = { constraint, "Pirate" };
-    parser.parseGovernments(tokens, 1, modifier);
+    // test handling for no modifier
+    json expected;
+    expected[group] = parent;
+
+    tokens = { constraint, elem1, elem2 };
+    parser.parseAttributes(&tokens, 1, modifier);
+    tokens = { constraint, elem3 };
+    parser.parseAttributes(&tokens, 1, modifier);
     ASSERT_EQ(parser.getData(), expected);
 
+    // test handling for "not" modifier
     modifier = "not";
-    json expectedNot, expectedNot2, expectedNot3;
-    parser = FileFilterItemParser(minimum_filter_lines);
-    expectedNot2[constraint].emplace_back("Republic");
-    expectedNot2[constraint].emplace_back("Syndicate");
-    expectedNot3[constraint].emplace_back("Pirate");
-    expectedNot[modifier][parent].emplace_back(expectedNot2);
-    expectedNot[modifier][parent].emplace_back(expectedNot3);
+    json expectedNot;
+    expectedNot[modifier][group] = parent;
 
-    tokens = { modifier, constraint, "Republic", "Syndicate" };
-    parser.parseGovernments(tokens, 2, modifier);
-    tokens = { modifier, constraint, "Pirate" };
-    parser.parseGovernments(tokens, 2, modifier);
+    // reset parser before testing
+    parser = FileFilterItemParser(minimum_filter_lines);
+    tokens = { modifier, constraint, elem1, elem2 };
+    parser.parseAttributes(&tokens, 2, modifier);
+    tokens = { modifier, constraint, elem3 };
+    parser.parseAttributes(&tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
+    // test handling for "neighbor" modifier
     modifier = "neighbor";
-    json expectedNeighbor, expectedNeighbor2, expectedNeighbor3;
-    parser = FileFilterItemParser(minimum_filter_lines);
-    expectedNeighbor2[constraint].emplace_back("Republic");
-    expectedNeighbor2[constraint].emplace_back("Syndicate");
-    expectedNeighbor3[constraint].emplace_back("Pirate");
-    expectedNeighbor[modifier]["governments"].emplace_back(expectedNeighbor2);
-    expectedNeighbor[modifier]["governments"].emplace_back(expectedNeighbor3);
+    json expectedNeighbor;
+    expectedNeighbor[modifier][group] = parent;
 
-    tokens = { modifier, constraint, "Republic", "Syndicate" };
-    parser.parseGovernments(tokens, 2, modifier);
-    tokens = { modifier, constraint, "Pirate" };
-    parser.parseGovernments(tokens, 2, modifier);
+    // reset parser before testing
+    parser = FileFilterItemParser(minimum_filter_lines);
+    tokens = { modifier, constraint, elem1, elem2 };
+    parser.parseAttributes(&tokens, 2, modifier);
+    tokens = { modifier, constraint, elem3 };
+    parser.parseAttributes(&tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
