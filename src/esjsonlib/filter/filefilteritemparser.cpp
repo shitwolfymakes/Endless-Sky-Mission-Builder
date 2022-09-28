@@ -70,16 +70,18 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
     }
 }
 
-void FileFilterItemParser::parsePlanets(std::vector<std::string> tokens, int index, std::string modifier) {
-    json planets;
-    for (int i = index; i < tokens.size(); i++) {
-        planets["planet"].emplace_back(tokens.at(i));
+void FileFilterItemParser::parsePlanets(std::vector<std::string> *tokens, int index, std::string modifier) {
+    std::string group      = "planets";
+    std::string constraint = "planet";
+    json constraint_list;
+    for (int i = index; i < tokens->size(); i++) {
+        constraint_list[constraint].emplace_back(tokens->at(i));
     }
 
     if (modifier.compare("") == 0) {
-        filter["planets"].emplace_back(planets);
+        filter[group].emplace_back(constraint_list);
     } else {
-        filter[modifier]["planets"].emplace_back(planets);
+        filter[modifier][group].emplace_back(constraint_list);
     }
 }
 
