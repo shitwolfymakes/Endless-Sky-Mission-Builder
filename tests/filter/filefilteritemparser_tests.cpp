@@ -11,53 +11,54 @@ using namespace testing;
 namespace parsertests {
 
 TEST_F(FileFilterItemParserTest, TestParsePlanets) {
+    // define common data
     std::vector<std::string> tokens;
-    std::string parent = "planets";
+    std::string modifier   = "";
+    std::string group      = "planets";
     std::string constraint = "planet";
-    std::string modifier = "";
+    std::string elem1      = "Earth";
+    std::string elem2      = "Luna";
+    std::string elem3      = "Mars";
 
-    json expected, expected2, expected3;
-    parser = FileFilterItemParser(minimum_filter_lines);
-    expected2[constraint].emplace_back("Earth");
-    expected2[constraint].emplace_back("Luna");
-    expected3[constraint].emplace_back("Mars");
-    expected[parent].emplace_back(expected2);
-    expected[parent].emplace_back(expected3);
+    json parent, constraint1, constraint2;
+    constraint1[constraint] = { elem1, elem2 };
+    constraint2[constraint] = { elem3 };
+    parent                  = { constraint1, constraint2 };
 
-    tokens = { constraint, "Earth", "Luna" };
-    parser.parsePlanets(tokens, 1, modifier);
-    tokens = { constraint, "Mars" };
-    parser.parsePlanets(tokens, 1, modifier);
+    // test handling for no modifier
+    json expected;
+    expected[group] = parent;
+
+    tokens = { constraint, elem1, elem2 };
+    parser.parseAttributes(&tokens, 1, modifier);
+    tokens = { constraint, elem3 };
+    parser.parseAttributes(&tokens, 1, modifier);
     ASSERT_EQ(parser.getData(), expected);
 
+    // test handling for "not" modifier
     modifier = "not";
-    json expectedNot, expectedNot2, expectedNot3;
-    parser = FileFilterItemParser(minimum_filter_lines);
-    expectedNot2[constraint].emplace_back("Earth");
-    expectedNot2[constraint].emplace_back("Luna");
-    expectedNot3[constraint].emplace_back("Mars");
-    expectedNot[modifier][parent].emplace_back(expectedNot2);
-    expectedNot[modifier][parent].emplace_back(expectedNot3);
+    json expectedNot;
+    expectedNot[modifier][group] = parent;
 
-    tokens = { modifier, constraint, "Earth", "Luna" };
-    parser.parsePlanets(tokens, 2, modifier);
-    tokens = { modifier, constraint, "Mars" };
-    parser.parsePlanets(tokens, 2, modifier);
+    // reset parser before testing
+    parser = FileFilterItemParser(minimum_filter_lines);
+    tokens = { modifier, constraint, elem1, elem2 };
+    parser.parseAttributes(&tokens, 2, modifier);
+    tokens = { modifier, constraint, elem3 };
+    parser.parseAttributes(&tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
+    // test handling for "neighbor" modifier
     modifier = "neighbor";
-    json expectedNeighbor, expectedNeighbor2, expectedNeighbor3;
-    parser = FileFilterItemParser(minimum_filter_lines);
-    expectedNeighbor2[constraint].emplace_back("Earth");
-    expectedNeighbor2[constraint].emplace_back("Luna");
-    expectedNeighbor3[constraint].emplace_back("Mars");
-    expectedNeighbor[modifier]["planets"].emplace_back(expectedNeighbor2);
-    expectedNeighbor[modifier]["planets"].emplace_back(expectedNeighbor3);
+    json expectedNeighbor;
+    expectedNeighbor[modifier][group] = parent;
 
-    tokens = { modifier, constraint, "Earth", "Luna" };
-    parser.parsePlanets(tokens, 2, modifier);
-    tokens = { modifier, constraint, "Mars" };
-    parser.parsePlanets(tokens, 2, modifier);
+    // reset parser before testing
+    parser = FileFilterItemParser(minimum_filter_lines);
+    tokens = { modifier, constraint, elem1, elem2 };
+    parser.parseAttributes(&tokens, 2, modifier);
+    tokens = { modifier, constraint, elem3 };
+    parser.parseAttributes(&tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
