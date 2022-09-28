@@ -64,9 +64,9 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
 
     const std::string key = tokens.at(i);
     if (key.compare("planet") == 0) {
-        parsePlanets(tokens, i, modifier);
+        parsePlanets(&tokens, i, modifier);
     } else if (key.compare("system") == 0) {
-        parseSystems(tokens, i, modifier);
+        parseSystems(&tokens, i, modifier);
     }
 }
 
