@@ -30,9 +30,9 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     expected[group] = parent;
 
     tokens = { constraint, elem1, elem2 };
-    parser.parseAttributes(&tokens, 1, modifier);
+    parser.parsePlanets(&tokens, 1, modifier);
     tokens = { constraint, elem3 };
-    parser.parseAttributes(&tokens, 1, modifier);
+    parser.parsePlanets(&tokens, 1, modifier);
     ASSERT_EQ(parser.getData(), expected);
 
     // test handling for "not" modifier
@@ -43,9 +43,9 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     // reset parser before testing
     parser = FileFilterItemParser(minimum_filter_lines);
     tokens = { modifier, constraint, elem1, elem2 };
-    parser.parseAttributes(&tokens, 2, modifier);
+    parser.parsePlanets(&tokens, 2, modifier);
     tokens = { modifier, constraint, elem3 };
-    parser.parseAttributes(&tokens, 2, modifier);
+    parser.parsePlanets(&tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
     // test handling for "neighbor" modifier
@@ -56,9 +56,9 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     // reset parser before testing
     parser = FileFilterItemParser(minimum_filter_lines);
     tokens = { modifier, constraint, elem1, elem2 };
-    parser.parseAttributes(&tokens, 2, modifier);
+    parser.parsePlanets(&tokens, 2, modifier);
     tokens = { modifier, constraint, elem3 };
-    parser.parseAttributes(&tokens, 2, modifier);
+    parser.parsePlanets(&tokens, 2, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
