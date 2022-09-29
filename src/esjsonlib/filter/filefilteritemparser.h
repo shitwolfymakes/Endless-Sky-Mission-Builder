@@ -33,6 +33,7 @@ public:
     void parseGovernments(std::vector<std::string> *, std::string);
     void parseAttributes(std::vector<std::string> *, int, std::string);
     void parseOutfits(std::vector<std::string> *, int, std::string);
+    void parseCategories(std::vector<std::string> *, std::string);
 
     // ACCESSORS
     // Returns true if the string is a valid filter modifier.

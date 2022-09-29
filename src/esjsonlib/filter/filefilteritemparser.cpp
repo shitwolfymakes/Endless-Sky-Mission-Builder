@@ -168,6 +168,27 @@ void FileFilterItemParser::parseOutfits(std::vector<std::string> *tokens, int in
     }
 }
 
+void FileFilterItemParser::parseCategories(std::vector<std::string> *lines, std::string modifier) {
+    // The list of names can either be all on one line, or split between
+    // multiple lines if it is particularly long; the subsequent lines
+    // must be indented so that they are "children"
+    std::string constraint = "category";
+    for (int i = 0; i < lines->size(); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines->at(i));
+        int index = 0;
+        if (i == 0) { index = 1 + isModifier(modifier); }
+
+        // store all name tokens
+        for (int j = index; j < tokens.size(); j++) {
+            if (modifier.compare("") == 0) {
+                filter[constraint].emplace_back(tokens.at(j));
+            } else {
+                filter[modifier][constraint].emplace_back(tokens.at(j));
+            }
+        }
+    }
+}
+
 // Determine whether or not the string passed is a valid filter modifier
 bool FileFilterItemParser::isModifier(std::string token) {
     bool result = false;
