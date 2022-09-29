@@ -71,6 +71,10 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
 }
 
 void FileFilterItemParser::parsePlanets(std::vector<std::string> *tokens, int index, std::string modifier) {
+    // TODO: refactor to combine into one list of all discovered options
+    // The list of names can either be all on one line, or split between
+    // multiple lines if it is particularly long; the subsequent lines
+    // must be indented so that they are "children"
     std::string group      = "planets";
     std::string constraint = "planet";
     json constraint_list;
@@ -86,6 +90,10 @@ void FileFilterItemParser::parsePlanets(std::vector<std::string> *tokens, int in
 }
 
 void FileFilterItemParser::parseSystems(std::vector<std::string> *tokens, int index, std::string modifier) {
+    // TODO: refactor to combine into one list of all discovered options
+    // The list of names can either be all on one line, or split between
+    // multiple lines if it is particularly long; the subsequent lines
+    // must be indented so that they are "children"
     std::string group      = "systems";
     std::string constraint = "system";
     json constraint_list;
@@ -101,6 +109,10 @@ void FileFilterItemParser::parseSystems(std::vector<std::string> *tokens, int in
 }
 
 void FileFilterItemParser::parseGovernments(std::vector<std::string> *tokens, int index, std::string modifier) {
+    // TODO: refactor to combine into one list of all discovered options
+    // The list of names can either be all on one line, or split between
+    // multiple lines if it is particularly long; the subsequent lines
+    // must be indented so that they are "children"
     std::string group      = "governments";
     std::string constraint = "government";
     json constraint_list;
@@ -116,6 +128,7 @@ void FileFilterItemParser::parseGovernments(std::vector<std::string> *tokens, in
 }
 
 void FileFilterItemParser::parseAttributes(std::vector<std::string> *tokens, int index, std::string modifier) {
+    // Each instance of this constraint must be stored as a separate list of options
     std::string group      = "attributes";
     std::string constraint = "attributes";
     json constraint_list;
@@ -131,6 +144,7 @@ void FileFilterItemParser::parseAttributes(std::vector<std::string> *tokens, int
 }
 
 void FileFilterItemParser::parseOutfits(std::vector<std::string> *tokens, int index, std::string modifier) {
+    // Each instance of this constraint must be stored as a separate list of options
     std::string group      = "outfits";
     std::string constraint = "outfits";
     json constraint_list;
