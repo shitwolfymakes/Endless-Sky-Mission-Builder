@@ -262,6 +262,55 @@ TEST_F(FileFilterItemParserTest, TestParseOutfits) {
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseCategories) {
+    // define common variables
+    std::string modifier   = "";
+    std::string constraint = "category";
+
+    std::string elem1      = "Heavy Freighter";
+    std::string elem2      = "Light Warship";
+    std::string elem3      = "Medium Freighter";
+    json constraints = { elem1, elem2, elem3 };
+
+    std::string line1      = constraint + " \"" + elem1 + "\"";
+    std::string line2      = "\t\"" + elem2 + "\"";
+    std::string line3      = constraint + " \"" + elem3 + "\"";
+    std::vector<std::string> lines;
+
+    // test handling for no modifier
+    json expected;
+    expected[constraint] = constraints;
+    lines = { line1, line2 };
+    parser.parseCategories(&lines, modifier);
+    lines = { line3 };
+    parser.parseCategories(&lines, modifier);
+    ASSERT_EQ(parser.getData(), expected);
+
+    // test handling for "not" modifier
+    modifier = "not";
+    parser = FileFilterItemParser(minimum_filter_lines);
+
+    json expectedNot;
+    expectedNot[modifier][constraint] = constraints;
+    lines = { modifier + " " + line1, line2 };
+    parser.parseCategories(&lines, modifier);
+    lines = { modifier + " " + line3 };
+    parser.parseCategories(&lines, modifier);
+    ASSERT_EQ(parser.getData(), expectedNot);
+
+    // test handling for "not" modifier
+    modifier = "not";
+    parser = FileFilterItemParser(minimum_filter_lines);
+
+    json expectedNeighbor;
+    expectedNeighbor[modifier][constraint] = constraints;
+    lines = { modifier + " " + line1, line2 };
+    parser.parseCategories(&lines, modifier);
+    lines = { modifier + " " + line3 };
+    parser.parseCategories(&lines, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighbor);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
