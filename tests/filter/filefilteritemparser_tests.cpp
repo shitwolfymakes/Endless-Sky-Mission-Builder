@@ -218,6 +218,58 @@ TEST_F(FileFilterItemParserTest, TestParseAttributes) {
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseOutfits) {
+    // define common data
+    std::vector<std::string> tokens;
+    std::string modifier   = "";
+    std::string group      = "outfits";
+    std::string constraint = "outfits";
+    std::string elem1      = "Hyperdrive";
+    std::string elem2      = "Jump Drive";
+    std::string elem3      = "Ramscoop";
+
+    json parent, constraint1, constraint2;
+    constraint1[constraint] = { elem1, elem2 };
+    constraint2[constraint] = { elem3 };
+    parent                  = { constraint1, constraint2 };
+
+    // test handling for no modifier
+    json expected;
+    expected[group] = parent;
+
+    tokens = { constraint, elem1, elem2 };
+    parser.parseOutfits(&tokens, 1, modifier);
+    tokens = { constraint, elem3 };
+    parser.parseOutfits(&tokens, 1, modifier);
+    ASSERT_EQ(parser.getData(), expected);
+
+    // test handling for "not" modifier
+    modifier = "not";
+    json expectedNot;
+    expectedNot[modifier][group] = parent;
+
+    // reset parser before testing
+    parser = FileFilterItemParser(minimum_filter_lines);
+    tokens = { modifier, constraint, elem1, elem2 };
+    parser.parseOutfits(&tokens, 2, modifier);
+    tokens = { modifier, constraint, elem3 };
+    parser.parseOutfits(&tokens, 2, modifier);
+    ASSERT_EQ(parser.getData(), expectedNot);
+
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
+    json expectedNeighbor;
+    expectedNeighbor[modifier][group] = parent;
+
+    // reset parser before testing
+    parser = FileFilterItemParser(minimum_filter_lines);
+    tokens = { modifier, constraint, elem1, elem2 };
+    parser.parseOutfits(&tokens, 2, modifier);
+    tokens = { modifier, constraint, elem3 };
+    parser.parseOutfits(&tokens, 2, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighbor);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
