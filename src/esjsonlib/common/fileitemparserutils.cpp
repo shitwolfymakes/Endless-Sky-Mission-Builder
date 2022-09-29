@@ -68,6 +68,9 @@ int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int s
     // collect the first line in the node
     (*nodeLines).emplace_back(lines->at(index));
 
+    // return early to avoid exception if there is only one line in the node
+    if (startingIndex + 1 == lines->size()) { return startingIndex; }
+
     int cur = getIndentLevel(lines->at(index));
     int nxt = getIndentLevel(lines->at(index + 1));
     while (true) {
@@ -95,6 +98,9 @@ int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int s
 
     // collect the first line in the node
     (*nodeLines).emplace_back(lines->at(index));
+
+    // return early to avoid exception if there is only one line in the node
+    if (startingIndex + 1 == lines->size()) { return startingIndex; }
 
     int cur = getIndentLevel(lines->at(index));
     int nxt = getIndentLevel(lines->at(index + 1));
