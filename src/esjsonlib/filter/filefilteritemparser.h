@@ -28,7 +28,8 @@ public:
     // Take the lines and the starting index of a filter node, and
     // return the index of the last line of the filter
     void parseFilter(std::vector<std::string>);
-    void parsePlanets(std::vector<std::string> *, int, std::string);
+    void parseFilter(std::vector<std::string> *, std::vector<std::string>);
+    void parsePlanets(std::vector<std::string> *, std::string);
     void parseSystems(std::vector<std::string> *, int, std::string);
     void parseGovernments(std::vector<std::string> *, int, std::string);
     void parseAttributes(std::vector<std::string> *, int, std::string);

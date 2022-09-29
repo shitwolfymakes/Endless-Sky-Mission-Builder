@@ -22,6 +22,7 @@ json FileFilterItemParser::run() {
 
     std::vector<std::string> lines = getLines();
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
+        std::vector<std::string> nodeLines;
         tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
 
@@ -29,7 +30,6 @@ json FileFilterItemParser::run() {
             // if not or neighbor
             if (tokens.size() == 1) {
                 // parse recursively
-                std::vector<std::string> nodeLines;
                 i = utils::collectNodeLines(&lines, i, &nodeLines);
                 FileFilterItemParser p = FileFilterItemParser(nodeLines);
                 json f;
@@ -43,6 +43,8 @@ json FileFilterItemParser::run() {
                 }
             } else {
                 // save constraint to the list of nots or neighbors
+                // TODO: collectNodeLines and pass to ParseFilter
+                //i = utils::collectNodeLines(&lines, i, &nodeLines);
                 parseFilter(tokens);
             }
         } else {
@@ -64,28 +66,31 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
 
     const std::string key = tokens.at(i);
     if (key.compare("planet") == 0) {
-        parsePlanets(&tokens, i, modifier);
+        //parsePlanets(&tokens, i, modifier);
     } else if (key.compare("system") == 0) {
         parseSystems(&tokens, i, modifier);
     }
 }
 
-void FileFilterItemParser::parsePlanets(std::vector<std::string> *tokens, int index, std::string modifier) {
-    // TODO: refactor to combine into one list of all discovered options
+void FileFilterItemParser::parsePlanets(std::vector<std::string> *lines, std::string modifier) {
     // The list of names can either be all on one line, or split between
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
-    std::string group      = "planets";
     std::string constraint = "planet";
-    json constraint_list;
-    for (int i = index; i < tokens->size(); i++) {
-        constraint_list[constraint].emplace_back(tokens->at(i));
-    }
 
-    if (modifier.compare("") == 0) {
-        filter[group].emplace_back(constraint_list);
-    } else {
-        filter[modifier][group].emplace_back(constraint_list);
+    for (int i = 0; i < lines->size(); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines->at(i));
+        int index = 0;
+        if (i == 0) { index = 1 + isModifier(modifier); }
+
+        // store all name tokens
+        for (int j = index; j < tokens.size(); j++) {
+            if (modifier.compare("") == 0) {
+                filter[constraint].emplace_back(tokens.at(j));
+            } else {
+                filter[modifier][constraint].emplace_back(tokens.at(j));
+            }
+        }
     }
 }
 
