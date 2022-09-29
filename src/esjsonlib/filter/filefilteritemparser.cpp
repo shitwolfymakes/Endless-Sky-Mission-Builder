@@ -68,6 +68,8 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
         parsePlanets(lines, modifier);
     } else if (key.compare("system") == 0) {
         parseSystems(lines, modifier);
+    } else if (key.compare("government") == 0) {
+        parseSystems(lines, modifier);
     }
 }
 
