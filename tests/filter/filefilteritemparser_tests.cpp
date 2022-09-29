@@ -19,7 +19,7 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     std::string elem1      = "Earth";
     std::string elem2      = "Luna";
     std::string elem3      = "Mars";
-    json constraint_list = { elem1, elem2, elem3 };
+    json constraints = { elem1, elem2, elem3 };
 
     std::string line1      = constraint + " \"" + elem1 + "\"";
     std::string line2      = "\t\"" + elem2 + "\"";
@@ -28,7 +28,7 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
 
     // test handling for no modifier
     json expected;
-    expected[constraint] = constraint_list;
+    expected[constraint] = constraints;
     lines = { line1, line2 };
     parser.parsePlanets(&lines, modifier);
     lines = { line3 };
@@ -40,7 +40,7 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNot;
-    expectedNot[modifier][constraint] = constraint_list;
+    expectedNot[modifier][constraint] = constraints;
     lines = { modifier + " " + line1, line2 };
     parser.parsePlanets(&lines, modifier);
     lines = { modifier + " " + line3 };
@@ -52,7 +52,7 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
-    expectedNeighbor[modifier][constraint] = constraint_list;
+    expectedNeighbor[modifier][constraint] = constraints;
     lines = { modifier + " " + line1, line2 };
     parser.parsePlanets(&lines, modifier);
     lines = { modifier + " " + line3 };
