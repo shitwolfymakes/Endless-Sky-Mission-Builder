@@ -130,6 +130,21 @@ void FileFilterItemParser::parseAttributes(std::vector<std::string> *tokens, int
     }
 }
 
+void FileFilterItemParser::parseOutfits(std::vector<std::string> *tokens, int index, std::string modifier) {
+    std::string group      = "outfits";
+    std::string constraint = "outfits";
+    json constraint_list;
+    for (int i = index; i < tokens->size(); i++) {
+        constraint_list[constraint].emplace_back(tokens->at(i));
+    }
+
+    if (modifier.compare("") == 0) {
+        filter[group].emplace_back(constraint_list);
+    } else {
+        filter[modifier][group].emplace_back(constraint_list);
+    }
+}
+
 // Determine whether or not the string passed is a valid filter modifier
 bool FileFilterItemParser::isModifier(std::string token) {
     bool result = false;
