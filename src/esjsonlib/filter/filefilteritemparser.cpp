@@ -26,11 +26,11 @@ json FileFilterItemParser::run() {
         tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
 
+        i = utils::collectNodeLines(&lines, i, &nodeLines);
         if (isModifier(tokens.at(0))) {
             // if not or neighbor
             if (tokens.size() == 1) {
                 // parse recursively
-                i = utils::collectNodeLines(&lines, i, &nodeLines);
                 FileFilterItemParser p = FileFilterItemParser(nodeLines);
                 json f;
                 f = p.run();
@@ -43,32 +43,31 @@ json FileFilterItemParser::run() {
                 }
             } else {
                 // save constraint to the list of nots or neighbors
-                // TODO: collectNodeLines and pass to ParseFilter
-                //i = utils::collectNodeLines(&lines, i, &nodeLines);
-                parseFilter(tokens);
+                parseFilter(&nodeLines);
             }
         } else {
             // save constraint to the list
-            parseFilter(tokens);
+            parseFilter(&nodeLines);
         }
     }
     //std::cout << "Filter data: " << substitutions.dump(4) << std::endl;
     return filter;
 }
 
-void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
+void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
     std::string modifier = "";
+    std::vector<std::string> tokens = utils::tokenize(lines->at(0));
     int i = 1;
     if (isModifier(tokens.at(0))) {
         modifier = tokens.at(0);
         i += 1;
     }
-
     const std::string key = tokens.at(i);
+
     if (key.compare("planet") == 0) {
-        //parsePlanets(&tokens, i, modifier);
+        parsePlanets(lines, modifier);
     } else if (key.compare("system") == 0) {
-        //parseSystems(&tokens, i, modifier);
+        parseSystems(lines, modifier);
     }
 }
 
