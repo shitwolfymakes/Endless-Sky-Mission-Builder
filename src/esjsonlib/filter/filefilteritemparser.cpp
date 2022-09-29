@@ -68,7 +68,7 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> tokens) {
     if (key.compare("planet") == 0) {
         //parsePlanets(&tokens, i, modifier);
     } else if (key.compare("system") == 0) {
-        parseSystems(&tokens, i, modifier);
+        //parseSystems(&tokens, i, modifier);
     }
 }
 
@@ -77,7 +77,6 @@ void FileFilterItemParser::parsePlanets(std::vector<std::string> *lines, std::st
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
     std::string constraint = "planet";
-
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
         int index = 0;
@@ -94,22 +93,24 @@ void FileFilterItemParser::parsePlanets(std::vector<std::string> *lines, std::st
     }
 }
 
-void FileFilterItemParser::parseSystems(std::vector<std::string> *tokens, int index, std::string modifier) {
-    // TODO: refactor to combine into one list of all discovered options
+void FileFilterItemParser::parseSystems(std::vector<std::string> *lines, std::string modifier) {
     // The list of names can either be all on one line, or split between
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
-    std::string group      = "systems";
     std::string constraint = "system";
-    json constraint_list;
-    for (int i = index; i < tokens->size(); i++) {
-        constraint_list[constraint].emplace_back(tokens->at(i));
-    }
+    for (int i = 0; i < lines->size(); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines->at(i));
+        int index = 0;
+        if (i == 0) { index = 1 + isModifier(modifier); }
 
-    if (modifier.compare("") == 0) {
-        filter[group].emplace_back(constraint_list);
-    } else {
-        filter[modifier][group].emplace_back(constraint_list);
+        // store all name tokens
+        for (int j = index; j < tokens.size(); j++) {
+            if (modifier.compare("") == 0) {
+                filter[constraint].emplace_back(tokens.at(j));
+            } else {
+                filter[modifier][constraint].emplace_back(tokens.at(j));
+            }
+        }
     }
 }
 
