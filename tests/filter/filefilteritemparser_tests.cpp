@@ -160,7 +160,6 @@ TEST_F(FileFilterItemParserTest, TestParseGovernments) {
 
 TEST_F(FileFilterItemParserTest, TestParseAttributes) {
     // define common variables
-    std::vector<std::string> tokens;
     std::string modifier   = "";
     std::string group      = "attribute_set";
     std::string constraint = "attributes";
@@ -214,11 +213,11 @@ TEST_F(FileFilterItemParserTest, TestParseAttributes) {
 }
 
 TEST_F(FileFilterItemParserTest, TestParseOutfits) {
-    // define common data
-    std::vector<std::string> tokens;
+    // define common variables
     std::string modifier   = "";
-    std::string group      = "outfits";
+    std::string group      = "outfit_set";
     std::string constraint = "outfits";
+
     std::string elem1      = "Hyperdrive";
     std::string elem2      = "Jump Drive";
     std::string elem3      = "Ramscoop";
@@ -228,40 +227,42 @@ TEST_F(FileFilterItemParserTest, TestParseOutfits) {
     constraint2[constraint] = { elem3 };
     parent                  = { constraint1, constraint2 };
 
+    std::string line1      = constraint + " \"" + elem1 + "\"";
+    std::string line2      = "\t\"" + elem2 + "\"";
+    std::string line3      = constraint + " \"" + elem3 + "\"";
+    std::vector<std::string> lines;
+
     // test handling for no modifier
     json expected;
     expected[group] = parent;
-
-    tokens = { constraint, elem1, elem2 };
-    parser.parseOutfits(&tokens, 1, modifier);
-    tokens = { constraint, elem3 };
-    parser.parseOutfits(&tokens, 1, modifier);
+    lines = { line1, line2 };
+    parser.parseOutfits(&lines, modifier);
+    lines = { line3 };
+    parser.parseOutfits(&lines, modifier);
     ASSERT_EQ(parser.getData(), expected);
 
     // test handling for "not" modifier
     modifier = "not";
+    parser = FileFilterItemParser(minimum_filter_lines);
+
     json expectedNot;
     expectedNot[modifier][group] = parent;
-
-    // reset parser before testing
-    parser = FileFilterItemParser(minimum_filter_lines);
-    tokens = { modifier, constraint, elem1, elem2 };
-    parser.parseOutfits(&tokens, 2, modifier);
-    tokens = { modifier, constraint, elem3 };
-    parser.parseOutfits(&tokens, 2, modifier);
+    lines = { modifier + " " + line1, line2 };
+    parser.parseOutfits(&lines, modifier);
+    lines = { modifier + " " + line3 };
+    parser.parseOutfits(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "neighbor" modifier
-    modifier = "neighbor";
+    // test handling for "not" modifier
+    modifier = "not";
+    parser = FileFilterItemParser(minimum_filter_lines);
+
     json expectedNeighbor;
     expectedNeighbor[modifier][group] = parent;
-
-    // reset parser before testing
-    parser = FileFilterItemParser(minimum_filter_lines);
-    tokens = { modifier, constraint, elem1, elem2 };
-    parser.parseOutfits(&tokens, 2, modifier);
-    tokens = { modifier, constraint, elem3 };
-    parser.parseOutfits(&tokens, 2, modifier);
+    lines = { modifier + " " + line1, line2 };
+    parser.parseOutfits(&lines, modifier);
+    lines = { modifier + " " + line3 };
+    parser.parseOutfits(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
