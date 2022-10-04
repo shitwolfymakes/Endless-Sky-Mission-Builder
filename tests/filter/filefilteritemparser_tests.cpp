@@ -50,6 +50,9 @@ TEST_F(FileFilterItemParserTest, TestParseFilter) {
      *     "outfit_set": [
      *         { "outfits": [ "Hyberdrive" ]  }
      *     ],
+     *     "category": [
+     *         "Heavy Freighter"
+     *     ],
      *     near: {
      *         "system": "Sol",
      *         "min": 10,
@@ -71,6 +74,7 @@ TEST_F(FileFilterItemParserTest, TestParseFilter) {
     json outfits;
     outfits["outfits"].emplace_back("Hyperdrive");
     expected["outfit_set"].emplace_back(outfits);
+    expected["category"].emplace_back("Heavy Freighter");
     json near;
     near["system"] = "Sol";
     near["min"] = 10;
@@ -83,8 +87,6 @@ TEST_F(FileFilterItemParserTest, TestParseFilter) {
 
     // Run it twice to ensure nodes are stored as a list
     parser.parseFilter(&lines);
-    parser.parseFilter(&lines);
-
     ASSERT_EQ(parser.getData(), expected);
 }
 
