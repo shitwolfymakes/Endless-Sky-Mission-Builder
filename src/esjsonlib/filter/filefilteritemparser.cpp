@@ -39,9 +39,9 @@ json FileFilterItemParser::run() {
 
                 // add parsed json to list
                 if (tokens.at(0).compare("not") == 0) {
-                    filter["not_nodes"].emplace_back(f);
+                    filter["not_filters"].emplace_back(f);
                 } else if (tokens.at(0).compare("neighbor") == 0) {
-                    filter["neighbor_nodes"].emplace_back(f);
+                    filter["neighbor_filters"].emplace_back(f);
                 }
             } else {
                 // save constraint to the list of nots or neighbors
@@ -64,9 +64,13 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
     //  - collect the line(s) in the constraint, if multiple is an option
     //  - pass the collected lines to a function that parses that specific constraint
     for (int i = 0; i < lines->size(); i++) {
-        std::string modifier = "";
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
-        int j = 0 + isModifier(tokens.at(0));
+        std::string modifier = "";
+        int j = 0;
+        if (isModifier(tokens.at(0))) {
+            modifier = tokens.at(0);
+            j += 1;
+        }
         const std::string key = tokens.at(j);
 
         std::vector<std::string> nodeLines;
