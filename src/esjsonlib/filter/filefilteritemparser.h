@@ -35,6 +35,7 @@ public:
     void parseOutfits(std::vector<std::string> *, std::string);
     void parseCategories(std::vector<std::string> *, std::string);
     void parseNear(std::string, std::string);
+    void parseDistance(std::string, std::string);
 
     // ACCESSORS
     // Returns true if the string is a valid filter modifier.
