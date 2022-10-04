@@ -47,8 +47,8 @@ TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     parser.parsePlanets(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "not" modifier
-    modifier = "not";
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
@@ -96,8 +96,8 @@ TEST_F(FileFilterItemParserTest, TestParseSystems) {
     parser.parseSystems(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "not" modifier
-    modifier = "not";
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
@@ -145,8 +145,8 @@ TEST_F(FileFilterItemParserTest, TestParseGovernments) {
     parser.parseGovernments(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "not" modifier
-    modifier = "not";
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
@@ -199,8 +199,8 @@ TEST_F(FileFilterItemParserTest, TestParseAttributes) {
     parser.parseAttributes(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "not" modifier
-    modifier = "not";
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
@@ -253,8 +253,8 @@ TEST_F(FileFilterItemParserTest, TestParseOutfits) {
     parser.parseOutfits(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "not" modifier
-    modifier = "not";
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
@@ -302,8 +302,8 @@ TEST_F(FileFilterItemParserTest, TestParseCategories) {
     parser.parseCategories(&lines, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
-    // test handling for "not" modifier
-    modifier = "not";
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
     parser = FileFilterItemParser(minimum_filter_lines);
 
     json expectedNeighbor;
