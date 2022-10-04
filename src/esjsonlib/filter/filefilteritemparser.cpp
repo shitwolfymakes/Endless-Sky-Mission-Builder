@@ -203,6 +203,36 @@ void FileFilterItemParser::parseCategories(std::vector<std::string> *lines, std:
     }
 }
 
+void FileFilterItemParser::parseNear(std::string line, std::string modifier) {
+    // This node is a single line, containing multiple tokens, some potentially optional
+    std::string constraint = "near";
+    std::vector<std::string> tokens = utils::tokenize(line);
+
+    // shift index based on presence of modifiers
+    int i = 0 + isModifier(modifier);
+        // tokens.at(i) now equals "near"
+
+    json constraint_data;
+    // store the system name from tokens[1], or 2 if isModifier returns true
+    constraint_data["system"] = tokens.at(1 + i);
+
+    if (tokens.size() == 3 + i) {
+        // if the line contains only one optional token
+        constraint_data["max"] = std::stoi(tokens.at(2 + i));
+    } else if (tokens.size() == 4 + i) {
+        // if the line contains both optional tokens
+        constraint_data["min"] = std::stoi(tokens.at(2 + i));
+        constraint_data["max"] = std::stoi(tokens.at(3 + i));
+    }
+
+    // store based on modifier
+    if (modifier.compare("") == 0) {
+        filter[constraint] = constraint_data;
+    } else {
+        filter[modifier][constraint] = constraint_data;
+    }
+}
+
 // Determine whether or not the string passed is a valid filter modifier
 bool FileFilterItemParser::isModifier(std::string token) {
     bool result = false;
