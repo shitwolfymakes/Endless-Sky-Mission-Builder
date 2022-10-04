@@ -9,6 +9,8 @@
 
 #include <iostream>
 
+#include <boost/algorithm/string.hpp>
+
 #include "common/fileitemparserutils.h"
 using utils = FileItemParserUtils;
 
@@ -55,22 +57,39 @@ json FileFilterItemParser::run() {
 }
 
 void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
-    std::string modifier = "";
-    std::vector<std::string> tokens = utils::tokenize(lines->at(0));
-    int i = 1;
-    if (isModifier(tokens.at(0))) {
-        modifier = tokens.at(0);
-        i += 1;
-    }
-    const std::string key = tokens.at(i);
+    // Take in the lines that make up a filter - be it normal, a not child node, or a neighbor child node
+    // for each line:
+    //  - calculate if there is a modifier
+    //  - determine the type of constraint
+    //  - collect the line(s) in the constraint, if multiple is an option
+    //  - pass the collected lines to a function that parses that specific constraint
+    for (int i = 0; i < lines->size(); i++) {
+        std::string modifier = "";
+        std::vector<std::string> tokens = utils::tokenize(lines->at(i));
+        int j = 0 + isModifier(tokens.at(0));
+        const std::string key = tokens.at(j);
 
-    if (key.compare("planet") == 0) {
-        parsePlanets(lines, modifier);
-    } else if (key.compare("system") == 0) {
-        parseSystems(lines, modifier);
-    } else if (key.compare("government") == 0) {
-        parseSystems(lines, modifier);
+        std::vector<std::string> nodeLines;
+        i = utils::collectNodeLines(lines, i, &nodeLines);
+        if (key.compare("planet") == 0) {
+            parsePlanets(&nodeLines, modifier);
+        } else if (key.compare("system") == 0) {
+            parseSystems(&nodeLines, modifier);
+        } else if (key.compare("government") == 0) {
+            parseGovernments(&nodeLines, modifier);
+        } else if (key.compare("attributes") == 0) {
+            parseAttributes(&nodeLines, modifier);
+        } else if (key.compare("outfits") == 0) {
+            parseOutfits(&nodeLines, modifier);
+        } else if (key.compare("category") == 0) {
+            parseCategories(&nodeLines, modifier);
+        } else if (key.compare("near") == 0) {
+            parseNear(lines->at(i), modifier);
+        } else if (key.compare("distance") == 0) {
+            parseDistance(lines->at(i), modifier);
+        }
     }
+    //std::cout << "Filter data: " << filter.dump(4) << std::endl;
 }
 
 void FileFilterItemParser::parsePlanets(std::vector<std::string> *lines, std::string modifier) {
@@ -78,6 +97,7 @@ void FileFilterItemParser::parsePlanets(std::vector<std::string> *lines, std::st
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
     std::string constraint = "planet";
+    std::cout << "\tFound " << constraint << ": " << boost::join(*lines, " ") << std::endl;
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
         int index = 0;
@@ -99,6 +119,7 @@ void FileFilterItemParser::parseSystems(std::vector<std::string> *lines, std::st
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
     std::string constraint = "system";
+    std::cout << "\tFound " << constraint << ": " << boost::join(*lines, " ") << std::endl;
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
         int index = 0;
@@ -120,6 +141,7 @@ void FileFilterItemParser::parseGovernments(std::vector<std::string> *lines, std
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
     std::string constraint = "government";
+    std::cout << "\tFound " << constraint << ": " << boost::join(*lines, " ") << std::endl;
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
         int index = 0;
@@ -140,6 +162,7 @@ void FileFilterItemParser::parseAttributes(std::vector<std::string> *lines, std:
     // Each instance of this constraint must be stored as a separate list of options
     std::string group      = "attribute_set";
     std::string constraint = "attributes";
+    std::cout << "\tFound " << constraint << ": " << boost::join(*lines, " ") << std::endl;
     json constraint_list;
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
@@ -163,6 +186,7 @@ void FileFilterItemParser::parseOutfits(std::vector<std::string> *lines, std::st
     // Each instance of this constraint must be stored as a separate list of options
     std::string group      = "outfit_set";
     std::string constraint = "outfits";
+    std::cout << "\tFound " << constraint << ": " << boost::join(*lines, " ") << std::endl;
     json constraint_list;
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
@@ -187,6 +211,7 @@ void FileFilterItemParser::parseCategories(std::vector<std::string> *lines, std:
     // multiple lines if it is particularly long; the subsequent lines
     // must be indented so that they are "children"
     std::string constraint = "category";
+    std::cout << "\tFound " << constraint << ": " << boost::join(*lines, " ") << std::endl;
     for (int i = 0; i < lines->size(); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines->at(i));
         int index = 0;
@@ -206,6 +231,7 @@ void FileFilterItemParser::parseCategories(std::vector<std::string> *lines, std:
 void FileFilterItemParser::parseNear(std::string line, std::string modifier) {
     // This node is a single line, containing multiple tokens, some potentially optional
     std::string constraint = "near";
+    std::cout << "\tFound " << constraint << ": " << line << std::endl;
     std::vector<std::string> tokens = utils::tokenize(line);
 
     // shift index based on presence of modifiers
@@ -236,6 +262,7 @@ void FileFilterItemParser::parseNear(std::string line, std::string modifier) {
 void FileFilterItemParser::parseDistance(std::string line, std::string modifier) {
     // This node is a single line, containing multiple tokens, some potentially optional
     std::string constraint = "distance";
+    std::cout << "\tFound " << constraint << ": " << line << std::endl;
     std::vector<std::string> tokens = utils::tokenize(line);
 
     // shift index based on presence of modifiers
