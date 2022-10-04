@@ -315,6 +315,96 @@ TEST_F(FileFilterItemParserTest, TestParseCategories) {
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseNear) {
+    // define common variables
+    std::string modifier   = "";
+    std::string constraint = "near";
+    std::string system     = "Republic";
+    int min                = 10;
+    int max                = 20;
+
+    json constraints;
+    constraints["system"]    = system;
+
+    json constraintsMax      = constraints;
+    constraintsMax["max"]    = max;
+
+    json constraintsMinMax   = constraintsMax;
+    constraintsMinMax["min"] = min;
+
+
+    std::string line       = constraint + " \"" + system + "\"";
+    std::string lineMax    = line + " " + std::to_string(max);
+    std::string lineMinMax = line + " " + std::to_string(min) + " " + std::to_string(max);
+
+    // test handling for no modifier
+    json expected, expectedMax, expectedMinMax;
+    expected[constraint]       = constraints;
+    expectedMax[constraint]    = constraintsMax;
+    expectedMinMax[constraint] = constraintsMinMax;
+
+    // vanilla
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(line, modifier);
+    ASSERT_EQ(parser.getData(), expected);
+
+    // max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(lineMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedMax);
+
+    // min and max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(lineMinMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedMinMax);
+
+
+    // test handling for "not" modifier
+    modifier = "not";
+    json expectedNot, expectedNotMax, expectedNotMinMax;
+    expectedNot[modifier][constraint]       = constraints;
+    expectedNotMax[modifier][constraint]    = constraintsMax;
+    expectedNotMinMax[modifier][constraint] = constraintsMinMax;
+
+    // vanilla
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(modifier + " " + line, modifier);
+    ASSERT_EQ(parser.getData(), expectedNot);
+
+    // max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(modifier + " " + lineMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNotMax);
+
+    // min and max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(modifier + " " + lineMinMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNotMinMax);
+
+
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
+    json expectedNeighbor, expectedNeighborMax, expectedNeighborMinMax;
+    expectedNeighbor[modifier][constraint]       = constraints;
+    expectedNeighborMax[modifier][constraint]    = constraintsMax;
+    expectedNeighborMinMax[modifier][constraint] = constraintsMinMax;
+
+    // vanilla
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(modifier + " " + line, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighbor);
+
+    // max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(modifier + " " + lineMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighborMax);
+
+    // min and max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseNear(modifier + " " + lineMinMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighborMinMax);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
