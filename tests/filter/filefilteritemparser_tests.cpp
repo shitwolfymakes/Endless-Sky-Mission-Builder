@@ -405,6 +405,72 @@ TEST_F(FileFilterItemParserTest, TestParseNear) {
     ASSERT_EQ(parser.getData(), expectedNeighborMinMax);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseDistance) {
+    // define common variables
+    std::string modifier   = "";
+    std::string constraint = "distance";
+    int min                = 10;
+    int max                = 20;
+
+    json constraintsMax;
+    constraintsMax["max"]    = max;
+
+    json constraintsMinMax   = constraintsMax;
+    constraintsMinMax["min"] = min;
+
+    std::string lineMax    = constraint + " " + std::to_string(max);
+    std::string lineMinMax = constraint + " " + std::to_string(min) + " " + std::to_string(max);
+
+    // test handling for no modifier
+    json expectedMax, expectedMinMax;
+    expectedMax[constraint]    = constraintsMax;
+    expectedMinMax[constraint] = constraintsMinMax;
+
+    // max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseDistance(lineMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedMax);
+
+    // min and max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseDistance(lineMinMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedMinMax);
+
+
+    // test handling for "not" modifier
+    modifier = "not";
+    json expectedNotMax, expectedNotMinMax;
+    expectedNotMax[modifier][constraint]    = constraintsMax;
+    expectedNotMinMax[modifier][constraint] = constraintsMinMax;
+
+    // max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseDistance(modifier + " " + lineMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNotMax);
+
+    // min and max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseDistance(modifier + " " + lineMinMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNotMinMax);
+
+
+    // test handling for "neighbor" modifier
+    modifier = "neighbor";
+    json expectedNeighborMax, expectedNeighborMinMax;
+    expectedNeighborMax[modifier][constraint]    = constraintsMax;
+    expectedNeighborMinMax[modifier][constraint] = constraintsMinMax;
+
+    // max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseDistance(modifier + " " + lineMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighborMax);
+
+    // min and max included
+    parser = FileFilterItemParser(minimum_filter_lines);
+    parser.parseDistance(modifier + " " + lineMinMax, modifier);
+    ASSERT_EQ(parser.getData(), expectedNeighborMinMax);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
