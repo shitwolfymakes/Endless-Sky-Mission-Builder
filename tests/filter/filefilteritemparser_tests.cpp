@@ -90,6 +90,110 @@ TEST_F(FileFilterItemParserTest, TestParseFilter) {
     ASSERT_EQ(parser.getData(), expected);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseFilterWithModifiedConstraints) {
+    /** Text representation:
+     * planet "Earth"
+     * system "Sol"
+     * not government "Republic"
+     * not government "Free Worlds"
+     * not attributes "urban"
+     * not attributes "rich"
+     * neighbor outfits "Hyperdrive"
+     * neighbor outfits "Ramscoop"
+     * neighbor category "Light Warship"
+     * near "Sol" 10 20
+     * distance 10 20
+     */
+    std::vector<std::string> lines = {
+        "planet \"Earth\"",
+        "system \"Sol\"",
+        "not government \"Republic\"",
+        "not government \"Free Worlds\"",
+        "not attributes \"urban\"",
+        "not attributes \"rich\"",
+        "neighbor outfits \"Hyperdrive\"",
+        "neighbor outfits \"Ramscoop\"",
+        "neighbor category \"Heavy Freighter\"",
+        "neighbor category \"Light Warship\"",
+        "near \"Sol\" 10 20",
+        "distance 10 20"
+    };
+
+    /** JSON representation:
+     * {
+     *     "planet": [
+     *         "Earth"
+     *     ],
+     *     "system": [
+     *         "Sol"
+     *     ],
+     *     "near": {
+     *         "system": "Sol",
+     *         "min": 10,
+     *         "max": 20
+     *     },
+     *     "distance": {
+     *         "min": 10,
+     *         "max": 20
+     *     },
+     *     "not": [
+     *         {
+     *             "government": [
+     *                 "Republic",
+     *                 "Free Worlds"
+     *             ],
+     *             "attribute_set": [
+     *                 { "attributes": [ "urban" ]  },
+     *                 { "attributes": [ "rich" ]  }
+     *             ]
+     *         }
+     *     ],
+     *     "neighbor": [
+     *         {
+     *             "category": [
+     *                 "Heavy Freighter",
+     *                 "Light Warship"
+     *             ],
+     *             "outfit_set": [
+     *                 { "outfits": [ "Hyberdrive" ]  },
+     *                 { "outfits": [ "Ramscoop" ]  }
+     *             ],
+     *         }
+     *     }
+     * }
+     */
+    json expected;
+    expected["planet"].emplace_back("Earth");
+    expected["system"].emplace_back("Sol");
+    expected["not"]["government"].emplace_back("Republic");
+    expected["not"]["government"].emplace_back("Free Worlds");
+    json attributes, attributes2;
+    attributes["attributes"].emplace_back("urban");
+    attributes2["attributes"].emplace_back("rich");
+    expected["not"]["attribute_set"].emplace_back(attributes);
+    expected["not"]["attribute_set"].emplace_back(attributes2);
+    json outfits, outfits2;
+    outfits["outfits"].emplace_back("Hyperdrive");
+    outfits2["outfits"].emplace_back("Ramscoop");
+    expected["neighbor"]["outfit_set"].emplace_back(outfits);
+    expected["neighbor"]["outfit_set"].emplace_back(outfits2);
+    expected["neighbor"]["category"].emplace_back("Heavy Freighter");
+    expected["neighbor"]["category"].emplace_back("Light Warship");
+    json near;
+    near["system"] = "Sol";
+    near["min"] = 10;
+    near["max"] = 20;
+    expected["near"] = near;
+    json distance;
+    distance["min"] = 10;
+    distance["max"] = 20;
+    expected["distance"] = distance;
+
+    // Run it twice to ensure nodes are stored as a list
+    parser.parseFilter(&lines);
+    ASSERT_EQ(parser.getData(), expected);
+}
+
 TEST_F(FileFilterItemParserTest, TestParsePlanets) {
     // define common variables
     std::string modifier   = "";
