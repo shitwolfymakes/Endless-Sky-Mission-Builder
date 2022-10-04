@@ -159,14 +159,20 @@ void FileFilterItemParser::parseAttributes(std::vector<std::string> *lines, std:
     }
 }
 
-// TODO: REFACTOR THIS
-void FileFilterItemParser::parseOutfits(std::vector<std::string> *tokens, int index, std::string modifier) {
+void FileFilterItemParser::parseOutfits(std::vector<std::string> *lines, std::string modifier) {
     // Each instance of this constraint must be stored as a separate list of options
-    std::string group      = "outfits";
+    std::string group      = "outfit_set";
     std::string constraint = "outfits";
     json constraint_list;
-    for (int i = index; i < tokens->size(); i++) {
-        constraint_list[constraint].emplace_back(tokens->at(i));
+    for (int i = 0; i < lines->size(); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines->at(i));
+        int index = 0;
+        if (i == 0) { index = 1 + isModifier(modifier); }
+
+        // store all name tokens
+        for (int j = index; j < tokens.size(); j++) {
+            constraint_list[constraint].emplace_back(tokens.at(j));
+        }
     }
 
     if (modifier.compare("") == 0) {
