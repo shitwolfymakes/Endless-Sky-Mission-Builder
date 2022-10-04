@@ -471,6 +471,90 @@ TEST_F(FileFilterItemParserTest, TestParseDistance) {
     ASSERT_EQ(parser.getData(), expectedNeighborMinMax);
 }
 
+TEST_F(FileFilterItemParserTest, TestChildNotNode) {
+    /** Text representation:
+     * source
+     *     not
+     *         planet "Earth"
+     *         system "Sol"
+     *         government "Republic"
+     *         attributes "urban"
+     *         outfits "Hyperdrive"
+     *         category "Heavy Freighter"
+     *         near "Sol" 10 20
+     *         distance 10 20
+     */
+    std::vector<std::string> lines = {
+        "source",
+        "\tnot",
+        "\t\tplanet \"Earth\"",
+        "\t\tsystem \"Sol\"",
+        "\t\tgovernment \"Republic\"",
+        "\t\tattributes \"urban\"",
+        "\t\toutfits \"Hyperdrive\"",
+        "\t\tcategory \"Heavy Freighter\"",
+        "\t\tnear \"Sol\" 10 20",
+        "\t\tdistance 10 20"
+    };
+    /** JSON representation:
+     *  {
+     *      "not_nodes" : [
+     *          {
+     *              "planet": [
+     *                  "Earth"
+     *              ],
+     *              "system": [
+     *                  "Sol"
+     *              ],
+     *              "government": [
+     *                  "Republic"
+     *              ],
+     *              "attribute_set": [
+     *                  { "attributes": [ "urban" ]  }
+     *              ],
+     *              "outfit_set": [
+     *                  { "outfits": [ "Hyberdrive" ]  }
+     *              ],
+     *              near: {
+     *                  "system": "Sol",
+     *                  "min": 10,
+     *                  "max": 20
+     *              },
+     *              distance: {
+     *                  "min": 10,
+     *                  "max": 20
+     *              }
+     *          }
+     *      ]
+     *  }
+     */
+    json expected;
+    expected["planet"].emplace_back("Earth");
+    expected["system"].emplace_back("Sol");
+    expected["government"].emplace_back("Republic");
+    json attributes;
+    attributes["attributes"].emplace_back("urban");
+    expected["attribute_set"].emplace_back(attributes);
+    json outfits;
+    outfits["outfits"].emplace_back("Hyperdrive");
+    expected["outfit_set"].emplace_back(outfits);
+    json near;
+    near["system"] = "Sol";
+    near["min"] = 10;
+    near["max"] = 20;
+    expected["near"] = near;
+    json distance;
+    distance["min"] = 10;
+    distance["max"] = 20;
+    expected["distance"] = distance;
+
+    json expectedOverall;
+    expectedOverall["not_nodes"].emplace_back(expected);
+    expectedOverall["not_nodes"].emplace_back(expected);
+
+    ASSERT_EQ(parser.getData(), expectedOverall);
+}
+
 TEST_F(FileFilterItemParserTest, TestIsModifier) {
     bool result = FileFilterItemParser::isModifier("not");
     ASSERT_EQ(result, true);
