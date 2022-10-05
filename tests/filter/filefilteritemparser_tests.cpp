@@ -11,6 +11,122 @@ using namespace testing;
 
 namespace parsertests {
 
+TEST_F(FileFilterItemParserTest, TestRun) {
+    /** Text representation
+     * source
+     *     <lines>
+     *     not
+     *         <lines>
+     *     not
+     *         <lines>
+     *     neighbor
+     *         <lines>
+     *     neighbor
+     *         <lines>
+     */
+    std::vector<std::string> lines = {
+        "planet \"Earth\"",
+        "system \"Sol\"",
+        "government \"Republic\"",
+        "attributes \"urban\"",
+        "outfits \"Hyperdrive\"",
+        "category \"Heavy Freighter\"",
+        "near \"Sol\" 10 20",
+        "distance 10 20"
+    };
+    std::vector<std::string> filter_lines;
+    filter_lines.emplace_back("source");
+    for (auto const &line : lines) {
+        filter_lines.emplace_back("\t" + line);
+    }
+    filter_lines.emplace_back("\tnot");
+    for (auto const &line : lines) {
+        filter_lines.emplace_back("\t\t" + line);
+    }
+    filter_lines.emplace_back("\tnot");
+    for (auto const &line : lines) {
+        filter_lines.emplace_back("\t\t" + line);
+    }
+    filter_lines.emplace_back("\tneighbor");
+    for (auto const &line : lines) {
+        filter_lines.emplace_back("\t\t" + line);
+    }
+    filter_lines.emplace_back("\tneighbor");
+    for (auto const &line : lines) {
+        filter_lines.emplace_back("\t\t" + line);
+    }
+
+    /** JSON representation:
+     * {
+     *     "planet": [
+     *         "Earth"
+     *     ],
+     *     "system": [
+     *         "Sol"
+     *     ],
+     *     "government": [
+     *         "Republic"
+     *     ],
+     *     "attribute_set": [
+     *         { "attributes": [ "urban" ]  }
+     *     ],
+     *     "outfit_set": [
+     *         { "outfits": [ "Hyberdrive" ]  }
+     *     ],
+     *     "category": [
+     *         "Heavy Freighter"
+     *     ],
+     *     near: {
+     *         "system": "Sol",
+     *         "min": 10,
+     *         "max": 20
+     *     },
+     *     distance: {
+     *         "min": 10,
+     *         "max": 20
+     *     },
+     *     "not_filters": [
+     *         <expected>,
+     *         <expected>
+     *     ],
+     *     "neighbor_filters": [
+     *         <expected>,
+     *         <expected>
+     *     ]
+     * }
+     */
+    json expected, expected_filter;
+    expected["planet"].emplace_back("Earth");
+    expected["system"].emplace_back("Sol");
+    expected["government"].emplace_back("Republic");
+    json attributes;
+    attributes["attributes"].emplace_back("urban");
+    expected["attribute_set"].emplace_back(attributes);
+    json outfits;
+    outfits["outfits"].emplace_back("Hyperdrive");
+    expected["outfit_set"].emplace_back(outfits);
+    expected["category"].emplace_back("Heavy Freighter");
+    json near;
+    near["system"] = "Sol";
+    near["min"] = 10;
+    near["max"] = 20;
+    expected["near"] = near;
+    json distance;
+    distance["min"] = 10;
+    distance["max"] = 20;
+    expected["distance"] = distance;
+
+    expected_filter = expected;
+    expected_filter["not_filters"].emplace_back(expected);
+    expected_filter["not_filters"].emplace_back(expected);
+    expected_filter["neighbor_filters"].emplace_back(expected);
+    expected_filter["neighbor_filters"].emplace_back(expected);
+
+    parser = FileFilterItemParser(filter_lines);
+    parser.run();
+    ASSERT_EQ(parser.getData(), expected_filter);
+}
+
 TEST_F(FileFilterItemParserTest, TestParseFilter) {
     /** Text representation:
      * planet "Earth"
@@ -85,7 +201,6 @@ TEST_F(FileFilterItemParserTest, TestParseFilter) {
     distance["max"] = 20;
     expected["distance"] = distance;
 
-    // Run it twice to ensure nodes are stored as a list
     parser.parseFilter(&lines);
     ASSERT_EQ(parser.getData(), expected);
 }
@@ -159,7 +274,7 @@ TEST_F(FileFilterItemParserTest, TestParseFilterWithModifiedConstraints) {
      *                 { "outfits": [ "Ramscoop" ]  }
      *             ],
      *         }
-     *     }
+     *     ]
      * }
      */
     json expected;
@@ -189,7 +304,6 @@ TEST_F(FileFilterItemParserTest, TestParseFilterWithModifiedConstraints) {
     distance["max"] = 20;
     expected["distance"] = distance;
 
-    // Run it twice to ensure nodes are stored as a list
     parser.parseFilter(&lines);
     ASSERT_EQ(parser.getData(), expected);
 }
