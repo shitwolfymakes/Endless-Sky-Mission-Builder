@@ -21,38 +21,30 @@ FileFilterItemParser::FileFilterItemParser(std::vector<std::string> lines) {
 json FileFilterItemParser::run() {
     std::cout << "Parsing filter node to JSON" << std::endl;
     std::vector<std::string> tokens;
-
     std::vector<std::string> lines = getLines();
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
-        std::vector<std::string> nodeLines;
         tokens = utils::tokenize(lines.at(i));
-        //std::cout << "LINE: " << tokens.at(0) << std::endl;
 
+        std::vector<std::string> nodeLines;
         i = utils::collectNodeLines(&lines, i, &nodeLines);
-        if (isModifier(tokens.at(0))) {
-            // if not or neighbor
-            if (tokens.size() == 1) {
-                // parse recursively
-                FileFilterItemParser p = FileFilterItemParser(nodeLines);
-                json f;
-                f = p.run();
+        if (tokens.size() == 1 && isModifier(tokens.at(0))) {
+            // parse recursively
+            std::cout << "\tParsing recursive node: " << tokens.at(0) << std::endl;
+            FileFilterItemParser p = FileFilterItemParser(nodeLines);
+            json child_filter = p.run();
 
-                // add parsed json to list
-                if (tokens.at(0).compare("not") == 0) {
-                    filter["not_filters"].emplace_back(f);
-                } else if (tokens.at(0).compare("neighbor") == 0) {
-                    filter["neighbor_filters"].emplace_back(f);
-                }
-            } else {
-                // save constraint to the list of nots or neighbors
-                parseFilter(&nodeLines);
+            // add parsed filiter to the appropriate list of child filters
+            if (tokens.at(0).compare("not") == 0) {
+                filter["not_filters"].emplace_back(child_filter);
+            } else if (tokens.at(0).compare("neighbor") == 0) {
+                filter["neighbor_filters"].emplace_back(child_filter);
             }
         } else {
-            // save constraint to the list
+            // parse the constriants
             parseFilter(&nodeLines);
         }
     }
-    //std::cout << "Filter data: " << substitutions.dump(4) << std::endl;
+    std::cout << "Filter data: " << filter.dump(4) << std::endl;
     return filter;
 }
 
@@ -93,7 +85,6 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
             parseDistance(lines->at(i), modifier);
         }
     }
-    //std::cout << "Filter data: " << filter.dump(4) << std::endl;
 }
 
 void FileFilterItemParser::parsePlanets(std::vector<std::string> *lines, std::string modifier) {
@@ -240,7 +231,6 @@ void FileFilterItemParser::parseNear(std::string line, std::string modifier) {
 
     // shift index based on presence of modifiers
     int i = 0 + isModifier(modifier);
-        // tokens.at(i) now equals "near"
 
     json constraint_data;
     // store the system name from tokens[1], or 2 if isModifier returns true
@@ -271,7 +261,6 @@ void FileFilterItemParser::parseDistance(std::string line, std::string modifier)
 
     // shift index based on presence of modifiers
     int i = 0 + isModifier(modifier);
-        // tokens.at(i) now equals "near"
 
     json constraint_data;
     if (tokens.size() == 2 + i) {
