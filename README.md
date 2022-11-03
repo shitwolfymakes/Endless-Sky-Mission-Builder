@@ -1,5 +1,7 @@
 # Endless Sky Mission Builder
 
+NOTE: Previous versions of ESMB are still available in the Releases page. ESMB is currently undergoing a rewrite in C++
+
 ![GitHub All Releases](https://img.shields.io/github/downloads/shitwolfymakes/Endless-Sky-Mission-Builder/total?color=dark%20green&style=plastic)
 ![GitHub](https://img.shields.io/github/license/shitwolfymakes/Endless-Sky-Mission-Builder?style=plastic)
 
@@ -9,18 +11,12 @@ Want to know how to use ESMB? Check [the Wiki](https://github.com/shitwolfymakes
 
 To run, extract the archive and double-click on ESMB
 
-Current supported mission options:
+Currently, the rewrite includes parsing support for:
   - Basic mission characteristics
-  - source (specific planet)
-  - destination (specific planet)
+  - Filters
   - Triggers
-
-Future supported mission options:
-  - filters
-  - conditions
-  - NPCs
-  - Events
   - Phrases
+  - Substitutions
 
 ## System requirements
 - If you can run [the game itself](https://github.com/endless-sky/endless-sky), you can run this 
