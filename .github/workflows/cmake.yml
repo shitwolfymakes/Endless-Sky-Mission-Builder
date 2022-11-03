@@ -26,6 +26,7 @@ jobs:
       with:
           version: '6.3.1'
           host: 'linux'
+          cache: 'true'
 
     - name: Download and install Boost
       uses: MarkusJx/install-boost@v2.4.0
