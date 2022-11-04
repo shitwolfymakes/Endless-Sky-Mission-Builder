@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-20.04
         env:
             ARCH: x86_64
-            OUTPUT: ESMB-x86_64-continuous.tar.gz
+            OUTPUT: ESMB-Ubuntu-20.04-x86_64-continuous.tar.gz
             CCACHE_DIR: ${{ github.workspace }}/ccache
         
         steps:
@@ -82,7 +82,7 @@ jobs:
             - ubuntu_x86_64
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            OUTPUT_UBUNTU: ESMB-x86_64-continuous.tar.gz
+            OUTPUT_UBUNTU: ESMB-Ubuntu-20.04-x86_64-continuous.tar.gz
         
         steps:
             - uses: actions/checkout@v3
