@@ -81,6 +81,7 @@ jobs:
         needs:
             - ubuntu_x86_64
         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OUTPUT_UBUNTU: ESMB-x86_64-continuous.tar.gz
         
         steps:
