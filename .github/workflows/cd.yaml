@@ -66,7 +66,7 @@ jobs:
               # TODO: write a packager script
               run: tar -czf ${{ env.OUTPUT }} \
                   ${{github.workspace}}/build/src/esmb \
-                  ${{github.workspace}}/build/tests/"*_tests"
+                  "${{github.workspace}}/build/tests/file*_tests"
             
             - name: Upload build artifacts
               uses: actions/upload-artifact@v3.1.1
