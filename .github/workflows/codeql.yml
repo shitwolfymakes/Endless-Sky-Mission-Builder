@@ -15,8 +15,10 @@ on:
   push:
     branches: [ "cicd-buildout" ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "cicd-buildout" ]
+    types:
+      - synchronize
+      - open
+  workflow_dispatch:
 
 jobs:
   analyze:
