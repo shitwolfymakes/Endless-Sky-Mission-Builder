@@ -62,7 +62,9 @@ jobs:
               # Build your program with the given configuration
               run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
             
-            - run: ls -l ${{github.workspace}}/build
+            - run: |
+                ls -l ${{github.workspace}}/build/src
+                ls -l ${{github.workspace}}/build/build
             - name: Package Application
               # TODO: write a packager script
               run: tar -czf ${{ env.OUTPUT }} \
