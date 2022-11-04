@@ -2,7 +2,7 @@ name: CD
 
 on:
     push: 
-        branches: [ "cpp-conversion" ]
+        branches: [ "cicd-buildout" ]
 
 jobs:
     ubuntu_x86_64:
