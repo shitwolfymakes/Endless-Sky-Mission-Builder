@@ -28,7 +28,7 @@ jobs:
             
             - name: Install dependencies
               uses: ./.github/dependencies
-            
+
             - uses: lukka/get-cmake@latest
             
             - name: Configure CMake
