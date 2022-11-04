@@ -6,7 +6,7 @@ on:
 
 env:
     # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-    BUILD_TYPE: Release
+    BUILD_TYPE: Debug
 
 jobs:
     ubuntu_x86_64:
@@ -66,11 +66,7 @@ jobs:
               # TODO: write a packager script
               run: tar -czf ${{ env.OUTPUT }} \
                   ${{github.workspace}}/build/src/esmb \
-                  ${{github.workspace}}/build/tests/filefilteritemparser_tests \
-                  ${{github.workspace}}/build/tests/fileitemparser_tests \
-                  ${{github.workspace}}/build/tests/filemissionitemparser_tests \
-                  ${{github.workspace}}/build/tests/filephraseitemparser_tests \
-                  ${{github.workspace}}/build/tests/filesubstitutionsitemparser_tests
+                  ${{github.workspace}}/build/tests/*_tests
             
             - name: Upload build artifacts
               uses: actions/upload-artifact@v3.1.1
