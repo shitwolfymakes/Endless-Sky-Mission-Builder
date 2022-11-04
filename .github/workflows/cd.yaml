@@ -64,7 +64,7 @@ jobs:
             
             - run: |
                 ls -l ${{github.workspace}}/build/src/esmb
-                ls -l ${{github.workspace}}/build
+                ls -l ${{github.workspace}}/build/tests
             - name: Package Application
               # TODO: write a packager script
               run: tar -czf ${{ env.OUTPUT }} \
