@@ -5,6 +5,7 @@ NOTE: Previous versions of ESMB are still available in the Releases page. ESMB i
 ![GitHub All Releases](https://img.shields.io/github/downloads/shitwolfymakes/Endless-Sky-Mission-Builder/total?color=dark%20green)
 ![GitHub](https://img.shields.io/github/license/shitwolfymakes/Endless-Sky-Mission-Builder)
 
+[![Continuous Build](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/cd.yaml/badge.svg?branch=cicd-buildout)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/cd.yaml)
 [![CodeQL](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/codeql.yml/badge.svg?branch=cicd-buildout)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/codeql.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522b1ac34f664beb82772c886b51c357)](https://www.codacy.com/gh/shitwolfymakes/Endless-Sky-Mission-Builder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shitwolfymakes/Endless-Sky-Mission-Builder&amp;utm_campaign=Badge_Grade)
 
