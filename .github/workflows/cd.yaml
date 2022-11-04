@@ -12,7 +12,6 @@ jobs:
             ARCH: x86_64
             OUTPUT: ESMB-x86_64-continuous.tar.gz
             CCACHE_DIR: ${{ github.workspace }}/ccache
-            #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         steps:
             - uses: actions/checkout@v3
