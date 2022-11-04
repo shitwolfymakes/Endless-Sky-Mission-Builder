@@ -1,12 +1,13 @@
 name: CD
 
 on:
-    push: [ "cpp-conversion" ]
+    push: 
+        branches: [ "cpp-conversion" ]
 
 jobs:
     ubuntu_x86_64:
         name: Ubuntu 20.04 x64 Continuous
-        runs_on: ubuntu-20.04
+        runs-on: ubuntu-20.04
         env:
             ARCH: x86_64
             OUTPUT: ESMB-x86_64-continuous.tar.gz
