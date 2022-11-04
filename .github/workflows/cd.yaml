@@ -1,0 +1,112 @@
+name: CD
+
+on:
+    push: [ "cpp-conversion" ]
+
+jobs:
+    ubuntu_x86_64:
+        name: Ubuntu 20.04 x64 Continuous
+        runs_on: ubuntu-20.04
+        env:
+            ARCH: x86_64
+            OUTPUT: ESMB-x86_64-continuous.tar.gz
+            CCACHE_DIR: ${{ github.workspace }}/ccache
+            #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+        steps:
+            - uses: actions/checkout@v3
+            
+            - name: Cache ccache results
+              uses: actions/cache@v3
+              with:
+                  path: ${{ env.CCACHE_DIR }}
+                  key: ubuntu-20.04-desktop-ccache-${{ github.repository }}-${{ github.ref }}-${{ github.sha }}
+                  restore-keys: |
+                      ubuntu-20.04-desktop-ccache-${{ github.repository }}-${{ github.ref }}-
+                      ubuntu-20.04-desktop-ccache-${{ github.repository }}-
+                      ubuntu-20.04-desktop-ccache-
+            
+            - name: Install dependencies
+              uses: ./.github/dependencies
+            
+            - uses: lukka/get-cmake@latest
+            
+            - name: Configure CMake
+              # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+              # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+              run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            
+            - name: Build
+              # Build your program with the given configuration
+              run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+            
+            - name: Package Application
+              # TODO: write a packager script
+              run: tar -czf ${{ env.OUTPUT }} \
+                  ${{github.workspace}}/build/src/esmb \
+                  "${{github.workspace}}/build/tests/*_tests"
+            
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v3.1.1
+              with:
+                  name: ${{ env.OUTPUT }}
+                  path: ${{ env.OUTPUT }}
+
+    release_continuous_build:
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        needs:
+            - ubuntu_x86_64
+        env:
+            OUTPUT_UBUNTU: ESMB-x86_64-continuous.tar.gz
+        
+        steps:
+            - uses: actions/checkout@v3
+            
+            - name: Install github-release
+              run: |
+                  go get github.com/github-release/github-release
+                  echo "GOPATH=$(go env GOPATH)" >> $GITHUB_ENV
+                  echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+            
+            - name: Set environment variables
+              run: |
+                  echo "GITHUB_USER=$( echo ${{ github.repository }} | cut -d/ -f1 )" >> $GITHUB_ENV
+                  echo "GITHUB_REPO=$( echo ${{ github.repository }} | cut -d/ -f2 )" >> $GITHUB_ENV
+            
+            - name: Move/Create continuous tag
+              run: |
+                  git tag --force continuous ${{ github.sha }}
+                  git push --tags --force
+            
+            - name: Setup continuous release
+              run: |
+                  DESCRIPTION="Triggered on $(date -u '+%Y/%m/%d, %H:%M') UTC by commit ${{ github.sha }} (@${{ github.actor }})
+                  This is an automated build of the latest source. It includes ESMB and all the unit test binaries. It may be unstable or even crash, corrupt your save or eat your kitten. Use with caution!
+                  https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  if ! github-release info -t continuous > /dev/null 2>&1; then
+                      github-release release \
+                          --tag continuous \
+                          --name "Continuous Build" \
+                          --description "$DESCRIPTION" \
+                          --pre-release
+                  else
+                      github-release edit \
+                          --tag continuous \
+                          --name "Continuous Build" \
+                          --description "$DESCRIPTION" \
+                          --pre-release
+                  fi
+            
+            - name: Download Artifacts
+              uses: actions/download-artifact@v3
+              with:
+                  path: ${{ github.workspace }}
+            
+            - name: Add ${{ env.OUTPUT_UBUNTU }} to release tag
+              run: |
+                  github-release upload \
+                      --tag continuous \
+                      --replace \
+                      --name ${{ env.OUTPUT_UBUNTU }} \
+                      --file ${{ env.OUTPUT_UBUNTU }}/${{ env.OUTPUT_UBUNTU }}
