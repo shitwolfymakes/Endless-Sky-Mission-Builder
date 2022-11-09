@@ -6,7 +6,7 @@ concurrency:
 
 on:
     push:
-        branches: [ "cicd-buildout" ]
+        branches: [ "cpp-conversion" ]
     pull_request:
         types:
             - synchronize
