@@ -20,7 +20,7 @@ env:
 jobs:
     build:
         runs-on: ubuntu-latest
-        container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.0
+        container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.1
         steps:
         - uses: actions/checkout@v3
 
