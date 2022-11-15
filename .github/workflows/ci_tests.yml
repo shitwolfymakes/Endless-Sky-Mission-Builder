@@ -38,7 +38,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Run CMake
-              run: CXX="g++ -fprofile-arcs -ftest-coverage" cmake -S . -B build_coverage -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
+              run: CXX="g++ --coverage -fprofile-arcs -ftest-coverage" cmake -S . -B build_coverage -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
             - name: Build
               run: cmake --build build_coverage --config ${{env.BUILD_TYPE}}
             - run: lcov --directory . --capture --output-file coverage.info --rc lcov_branch_coverage=1
