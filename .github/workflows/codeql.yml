@@ -13,7 +13,6 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "cpp-conversion", "cicd-buildout" ]
   pull_request:
   workflow_dispatch:
 
