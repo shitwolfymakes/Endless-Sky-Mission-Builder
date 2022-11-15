@@ -50,7 +50,7 @@ jobs:
             - run: ls -al . ./build_coverage ./build_coverage/tests
               
             - run: lcov --directory . --capture --output-file coverage.info --rc lcov_branch_coverage=1
-            - run: genhtml coverage.info --output-directory lcov_out
+            - run: genhtml --title "Endless Sky Mission Builder" coverage.info --output-directory lcov_out
             - run: ls -al . ./build_coverage ./lcov_out
             
             - name: Archive coverage report
@@ -58,3 +58,9 @@ jobs:
               with:
                   name: code-coverage-report
                   path: ./lcov_out
+            
+            - name: Publish report to Coveralls
+              uses: coverallsapp/github-action@1.1.3
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  path-to-lcov: ./coverage.info
