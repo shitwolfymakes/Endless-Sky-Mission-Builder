@@ -38,7 +38,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Run CMake
-              run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_FLAGS="--coverage;-fprofile-arcs;-ftest-coverage"
+              run: cmake -DCMAKE_CXX_FLAGS="--coverage;-fprofile-arcs;-ftest-coverage" -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
             - name: Build
               run: cmake --build build --config ${{env.BUILD_TYPE}}
             - run: ls -al ./build
