@@ -5,10 +5,10 @@ NOTE: Previous versions of ESMB are still available in the Releases page. ESMB i
 ![GitHub All Releases](https://img.shields.io/github/downloads/shitwolfymakes/Endless-Sky-Mission-Builder/total?color=dark%20green)
 ![GitHub](https://img.shields.io/github/license/shitwolfymakes/Endless-Sky-Mission-Builder)
 
-[![Continuous Build](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/cd.yaml/badge.svg?branch=cicd-buildout)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/cd.yaml)
+[![Continuous Build](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/cd.yaml/badge.svg?branch=cpp-conversion)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/cd.yaml)
 [![CI Tests](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/ci_tests.yml/badge.svg)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/ci_tests.yml)
-[![CodeQL](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/codeql.yml/badge.svg?branch=cicd-buildout)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/codeql.yml)
-[![Coverage Status](https://coveralls.io/repos/github/shitwolfymakes/Endless-Sky-Mission-Builder/badge.svg?branch=cicd-buildout)](https://coveralls.io/github/shitwolfymakes/Endless-Sky-Mission-Builder?branch=cicd-buildout)
+[![CodeQL](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/codeql.yml/badge.svg?branch=cpp-conversion)](https://github.com/shitwolfymakes/Endless-Sky-Mission-Builder/actions/workflows/codeql.yml)
+[![Coverage Status](https://coveralls.io/repos/github/shitwolfymakes/Endless-Sky-Mission-Builder/badge.svg?branch=cpp-conversion)](https://coveralls.io/github/shitwolfymakes/Endless-Sky-Mission-Builder?cpp-conversion)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522b1ac34f664beb82772c886b51c357)](https://www.codacy.com/gh/shitwolfymakes/Endless-Sky-Mission-Builder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shitwolfymakes/Endless-Sky-Mission-Builder&amp;utm_campaign=Badge_Grade)
 
 Endless Sky Mission Builder, or ESMB, is a multiplatform RAD tool to help decrease the time it takes to create missions for Endless Sky.
