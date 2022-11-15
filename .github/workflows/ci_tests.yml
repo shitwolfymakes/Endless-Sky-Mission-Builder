@@ -8,9 +8,6 @@ on:
     push:
         branches: [ "cpp-conversion", "cicd-buildout" ]
     pull_request:
-        types:
-            - synchronize
-            - open
     workflow_dispatch:
 
 env:
@@ -18,20 +15,39 @@ env:
     BUILD_TYPE: Debug
 
 jobs:
-    build:
+    ci_build_tests:
         runs-on: ubuntu-latest
         container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.3
         steps:
-        - uses: actions/checkout@v3
+            - uses: actions/checkout@v3
 
-        - name: Configure CMake
-          run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            - name: Configure CMake
+              run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-        - name: Build
-          # Build your program with the given configuration
-          run: cmake --build build --config ${{env.BUILD_TYPE}}
+            - name: Build
+              # Build your program with the given configuration
+              run: cmake --build build --config ${{env.BUILD_TYPE}}
 
-        - name: Test
-          working-directory: ./build/tests
-          run: for f in ./*_tests; do ./$f; done
+            - name: Test
+              working-directory: ./build/tests
+              run: for f in ./*_tests; do ./$f; done
       
+    ci_test_coverage:
+        runs-on: ubuntu-latest
+        container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.3
+        steps:
+            - uses: actions/checkout@v3
+            - name: Run CMake
+              run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            - name: Build
+              run: cmake --build build --config ${{env.BUILD_TYPE}}
+            - name: Archive coverage report
+              uses: actions/upload-artifact@v3
+              with:
+                  name: code-coverage-report
+                  path: ./build/html
+            - name: Publish report to Coveralls
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  path-to-lcov: ./build/json.info.filtered.noexcept
