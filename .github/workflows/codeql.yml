@@ -15,9 +15,6 @@ on:
   push:
     branches: [ "cpp-conversion", "cicd-buildout" ]
   pull_request:
-    types:
-      - synchronize
-      - open
   workflow_dispatch:
 
 jobs:
