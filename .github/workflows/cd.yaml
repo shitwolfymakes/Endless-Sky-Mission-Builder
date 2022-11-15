@@ -6,11 +6,8 @@ concurrency:
 
 on:
     push: 
-        branches: [ "cpp-conversion", "cicd-buildout" ]
+        branches: [ "cpp-conversion" ]
     pull_request:
-        types:
-            - synchronize
-            - opened
     workflow_dispatch:
 
 env:
