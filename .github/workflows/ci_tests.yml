@@ -6,7 +6,6 @@ concurrency:
 
 on:
     push:
-        branches: [ "cpp-conversion", "cicd-buildout" ]
     pull_request:
     workflow_dispatch:
 
@@ -15,23 +14,6 @@ env:
     BUILD_TYPE: Debug
 
 jobs:
-    ci_build_tests:
-        runs-on: ubuntu-latest
-        container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.3
-        steps:
-            - uses: actions/checkout@v3
-
-            - name: Configure CMake
-              run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
-            - name: Build
-              # Build your program with the given configuration
-              run: cmake --build build --config ${{env.BUILD_TYPE}}
-
-            - name: Test
-              working-directory: ./build/tests
-              run: for f in ./*_tests; do ./$f; done
-      
     ci_test_coverage:
         runs-on: ubuntu-latest
         container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.3
