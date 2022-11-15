@@ -38,17 +38,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Run CMake
-              run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+              run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_FLAGS="--coverage;-fprofile-arcs;-ftest-coverage"
             - name: Build
               run: cmake --build build --config ${{env.BUILD_TYPE}}
             - run: ls -al ./build
-            - name: Archive coverage report
-              uses: actions/upload-artifact@v3
-              with:
-                  name: code-coverage-report
-                  path: ./build/html
-            - name: Publish report to Coveralls
-              uses: coverallsapp/github-action@master
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  path-to-lcov: ./build/json.info.filtered.noexcept
