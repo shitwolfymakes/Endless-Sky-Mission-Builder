@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
 project(ESMB VERSION 0.1 LANGUAGES CXX)
 
@@ -16,6 +16,8 @@ endif()
 # includes and top level flags
 include(CheckCXXCompilerFlag)
 set(ESMB_BUILD_TESTS ON)
+
+find_package(Boost 1.71.0 REQUIRED)
 
 # QT
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Test)
