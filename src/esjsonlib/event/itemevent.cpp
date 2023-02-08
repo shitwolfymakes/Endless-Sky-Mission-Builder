@@ -13,7 +13,8 @@ ItemEvent::ItemEvent()
 }
 
 json ItemEvent::parse() {
-    std::cout << "Event parsing not yet implemented" << std::endl;
-    json event;
+    FileEventItemParser parser = FileEventItemParser(lines);
+    json event = parser.run();
+    std::cout << "finished parsing event" << std::endl;
     return event;
 }
