@@ -16,6 +16,7 @@ include_directories(${QT_QTTEST_INCLUDE_DIR})
 set(HEADERS
     common/fileitemparser_tests.h
 
+    event/fileeventitemparser_tests.h
     filter/filefilteritemparser_tests.h
     mission/filemissionitemparser_tests.h
     phrase/filephraseitemparser_tests.h
@@ -70,6 +71,7 @@ endmacro (add_test_file)
 
 add_test_file(common fileitemparser_tests false)
 
+add_test_file(event fileeventitemparser_tests false)
 add_test_file(filter filefilteritemparser_tests false)
 add_test_file(mission filemissionitemparser_tests false)
 add_test_file(phrase filephraseitemparser_tests false)
