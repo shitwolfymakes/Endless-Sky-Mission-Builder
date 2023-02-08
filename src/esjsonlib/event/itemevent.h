@@ -9,6 +9,7 @@
 #define ITEMEVENT_H
 
 #include "common/fileitem.h"
+#include "event/fileeventitemparser.h"
 
 class ItemEvent : public FileItem
 {

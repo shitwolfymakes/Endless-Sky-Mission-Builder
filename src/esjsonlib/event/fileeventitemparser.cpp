@@ -20,3 +20,7 @@ json FileEventItemParser::run() {
 
     return event;
 }
+
+json FileEventItemParser::getData() const {
+    return event;
+}
