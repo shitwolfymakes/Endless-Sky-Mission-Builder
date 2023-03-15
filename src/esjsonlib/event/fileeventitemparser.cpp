@@ -51,6 +51,11 @@ void FileEventItemParser::parseVisitSystem(std::string token) {
     event["visit"].emplace_back(token);
 }
 
+void FileEventItemParser::parseUnvisitSystem(std::string token) {
+    std::cout << "\tFound unvisit (system): " << token << std::endl;
+    event["unvisit"].emplace_back(token);
+}
+
 json FileEventItemParser::getData() const {
     return event;
 }

@@ -71,12 +71,12 @@ TEST_F(FileEventItemParserTest, TestEventUnvisitSystemParsing) {
 
     // test single instance
     unvisit.emplace_back("Heaven");
-    parser.parseVisitSystem("Heaven");
-    ASSERT_EQ(parser.getData()["visit"], unvisit);
+    parser.parseUnvisitSystem("Heaven");
+    ASSERT_EQ(parser.getData()["unvisit"], unvisit);
 
     // test multiple instance
     unvisit.emplace_back("Valhalla");
-    parser.parseVisitSystem("Valhalla");
+    parser.parseUnvisitSystem("Valhalla");
     ASSERT_EQ(parser.getData()["unvisit"], unvisit);
 }
 
