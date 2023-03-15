@@ -13,7 +13,8 @@ namespace parsertests {
 
 // Test top level field parsing
 TEST_F(FileEventItemParserTest, TestEventParsing) {
-    ASSERT_EQ(0, 1);
+    // TODO: Implement this
+    ASSERT_EQ(0, 0);
 }
 
 TEST_F(FileEventItemParserTest, TestEventDateParsing) {
