@@ -23,6 +23,8 @@ public:
     // MANIPULATORS
     json run();
 
+    void parseDate(std::vector<std::string>);
+
     // ACCESSORS
     json getData() const;
 };

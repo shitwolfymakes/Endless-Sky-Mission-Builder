@@ -27,9 +27,23 @@ json FileEventItemParser::run() {
         // start by tokenizing each line
         tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
+
+        if (tokens.size() == 0) {
+            std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
+        }
+        else if (tokens.at(0).compare("date") == 0) {
+            parseDate(tokens);
+        }
     }
     //std::cout << "Mission data: " << mission.dump(4) << std::endl;
     return event;
+}
+
+void FileEventItemParser::parseDate(std::vector<std::string> tokens) {
+    std::cout << "\tFound date: " << boost::join(tokens, " ") << std::endl;
+    event["date"]["date"] = std::stoi(tokens.at(1));
+    event["date"]["month"] = std::stoi(tokens.at(2));
+    event["date"]["year"] = std::stoi(tokens.at(3));
 }
 
 json FileEventItemParser::getData() const {
