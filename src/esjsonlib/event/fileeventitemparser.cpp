@@ -56,6 +56,11 @@ void FileEventItemParser::parseUnvisitSystem(std::string token) {
     event["unvisit"].emplace_back(token);
 }
 
+void FileEventItemParser::parseVisitPlanet(std::string token) {
+    std::cout << "\tFound visit (planet): " << token << std::endl;
+    event["visit planet"].emplace_back(token);
+}
+
 json FileEventItemParser::getData() const {
     return event;
 }
