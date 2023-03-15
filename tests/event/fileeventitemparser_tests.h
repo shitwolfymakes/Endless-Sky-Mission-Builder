@@ -15,6 +15,10 @@
 
 namespace parsertests {
 
+std::vector<std::string> empty_event_node = {
+    "event \"The Savior's Return\""
+};
+
 std::vector<std::string> sample_event_node = {
     "event \"The Savior's Return\"",
     "\tdate 4 20 69",
