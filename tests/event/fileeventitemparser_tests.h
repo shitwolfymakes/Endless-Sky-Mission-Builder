@@ -15,9 +15,26 @@
 
 namespace parsertests {
 
-std::vector<std::string> sample_event_node = {};
+std::vector<std::string> sample_event_node = {
+    "event \"The Savior's Return\"",
+    "\tdate 4 20 69",
+    "\tvisit \"Heaven\"",
+    "\tunvisit \"Big Chungus\"",
+    "\t\"visit planet\" Harambe",
+    "\t\"unvisit planet\" \"Absolute Unit\"",
+    "\tgalaxy \"My Ass\"",
+    "\tsystem \"Eat It\"",
+    "\tlink Heaven Sol",
+    "\tunlink \"Big Chungus\" \"Beta Capriconi\"",
+    "\tgovernment \"Apes Together Strong\"",
+    "\tfleet \"Harambe's Bois\"",
+    "\tplanet \"Heaven 2\"",
+    "\tnews \"Harambe Alive\"",
+    "\tshipyard \"Bog Standard\"",
+    "\toutfitter \"Marcus Munitions\""
+};
 
-// Fixture for testing an event node
+// Fixture for testing a node
 class FileEventItemParserTest : public ::testing::Test {
 protected:
     FileEventItemParser parser = FileEventItemParser(sample_event_node);
