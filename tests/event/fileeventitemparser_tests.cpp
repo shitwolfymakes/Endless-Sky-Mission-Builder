@@ -45,14 +45,17 @@ TEST_F(FileEventItemParserTest, TestEventVisitSystemParsing) {
      *     ]
      *  }
      */
-    std::string token = "Heaven";
     json visit;
-    visit.emplace_back("Heaven");
 
     // test single instance
-    parser.parseVisitSystem(token);
+    visit.emplace_back("Heaven");
+    parser.parseVisitSystem("Heaven");
     ASSERT_EQ(parser.getData()["visit"], visit);
 
+    // test multiple instance
+    visit.emplace_back("Valhalla");
+    parser.parseVisitSystem("Valhalla");
+    ASSERT_EQ(parser.getData()["visit"], visit);
 }
 
 } // namespace parsertests
