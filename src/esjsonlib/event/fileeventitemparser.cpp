@@ -41,7 +41,7 @@ json FileEventItemParser::run() {
 
 void FileEventItemParser::parseDate(std::vector<std::string> tokens) {
     std::cout << "\tFound date: " << boost::join(tokens, " ") << std::endl;
-    event["date"]["date"] = std::stoi(tokens.at(1));
+    event["date"]["day"] = std::stoi(tokens.at(1));
     event["date"]["month"] = std::stoi(tokens.at(2));
     event["date"]["year"] = std::stoi(tokens.at(3));
 }

@@ -41,7 +41,7 @@ std::vector<std::string> sample_event_node = {
 // Fixture for testing a node
 class FileEventItemParserTest : public ::testing::Test {
 protected:
-    FileEventItemParser parser = FileEventItemParser(sample_event_node);
+    FileEventItemParser parser = FileEventItemParser(empty_event_node);
 };
 
 } // namespace parsertests
