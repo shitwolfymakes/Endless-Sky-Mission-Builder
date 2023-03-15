@@ -27,6 +27,7 @@ public:
     void parseVisitSystem(std::string);
     void parseUnvisitSystem(std::string);
     void parseVisitPlanet(std::string);
+    void parseUnvisitPlanet(std::string);
 
     // ACCESSORS
     json getData() const;
