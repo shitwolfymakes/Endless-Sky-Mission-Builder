@@ -58,4 +58,26 @@ TEST_F(FileEventItemParserTest, TestEventVisitSystemParsing) {
     ASSERT_EQ(parser.getData()["visit"], visit);
 }
 
+TEST_F(FileEventItemParserTest, TestEventUnvisitSystemParsing) {
+    /** JSON representation:
+     *  {
+     *     "unvisit": [
+     *         "Heaven",
+     *         "Valhalla"
+     *     ]
+     *  }
+     */
+    json unvisit;
+
+    // test single instance
+    unvisit.emplace_back("Heaven");
+    parser.parseVisitSystem("Heaven");
+    ASSERT_EQ(parser.getData()["visit"], unvisit);
+
+    // test multiple instance
+    unvisit.emplace_back("Valhalla");
+    parser.parseVisitSystem("Valhalla");
+    ASSERT_EQ(parser.getData()["unvisit"], unvisit);
+}
+
 } // namespace parsertests
