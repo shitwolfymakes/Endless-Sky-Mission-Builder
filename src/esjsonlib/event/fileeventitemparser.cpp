@@ -46,6 +46,11 @@ void FileEventItemParser::parseDate(std::vector<std::string> tokens) {
     event["date"]["year"] = std::stoi(tokens.at(3));
 }
 
+void FileEventItemParser::parseVisitSystem(std::string token) {
+    std::cout << "\tFound visit (system): " << token << std::endl;
+    event["visit"].emplace_back(token);
+}
+
 json FileEventItemParser::getData() const {
     return event;
 }

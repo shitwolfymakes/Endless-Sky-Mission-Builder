@@ -24,6 +24,7 @@ public:
     json run();
 
     void parseDate(std::vector<std::string>);
+    void parseVisitSystem(std::string);
 
     // ACCESSORS
     json getData() const;

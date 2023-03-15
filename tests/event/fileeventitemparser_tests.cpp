@@ -36,4 +36,23 @@ TEST_F(FileEventItemParserTest, TestEventDateParsing) {
     ASSERT_EQ(parser.getData()["date"], date);
 }
 
+TEST_F(FileEventItemParserTest, TestEventVisitSystemParsing) {
+    /** JSON representation:
+     *  {
+     *     "visit": [
+     *         "Heaven",
+     *         "Valhalla"
+     *     ]
+     *  }
+     */
+    std::string token = "Heaven";
+    json visit;
+    visit.emplace_back("Heaven");
+
+    // test single instance
+    parser.parseVisitSystem(token);
+    ASSERT_EQ(parser.getData()["visit"], visit);
+
+}
+
 } // namespace parsertests
