@@ -29,7 +29,7 @@ jobs:
             - name: Run Tests
               working-directory: ./build_coverage/tests
               run: for f in ./*_tests; do ./$f; done
-            - run: find ./ -type f
+            - run: find ./ -type f -name "*.g*"
               
             - run: lcov --directory ./build_coverage/src --output-file coverage.info
             - run: genhtml --title "Endless Sky Mission Builder" coverage.info --output-directory lcov_out
