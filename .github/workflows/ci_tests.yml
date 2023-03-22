@@ -32,7 +32,7 @@ jobs:
             - run: find ./ -type f -name "*.g*"
               
               # useful notes: https://qiaomuf.wordpress.com/2011/05/26/use-gcov-and-lcov-to-know-your-test-coverage/
-            - run: lcov --no-external --base-directory ./build_coverage/src --capture --output-file coverage.info
+            - run: lcov --no-external --base-directory ./build_coverage/src --directory ./build_coverage/src --capture --output-file coverage.info
             #- run: lcov --remove coverage.info "/usr*" --output-file coverage.info
             - run: genhtml --title "Endless Sky Mission Builder" coverage.info --output-directory lcov_out
             - run: ls -al . ./build_coverage ./lcov_out
