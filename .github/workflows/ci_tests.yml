@@ -29,9 +29,9 @@ jobs:
             - name: Run Tests
               working-directory: ./build_coverage/tests
               run: for f in ./*_tests; do ./$f; done
-            - run: find ./ -type f -name "*.g*"
+            - run: find ./ -type f -name "*.gc*"
               
-            - run: find . -type f -name "*_deps*"
+            - run: find . -type f -name "./build_coverage/_deps/*.gc*"
               # useful notes: https://qiaomuf.wordpress.com/2011/05/26/use-gcov-and-lcov-to-know-your-test-coverage/
             - run: lcov --no-external --base-directory . --exclude "./build_coverage/_deps*" --directory ./build_coverage/src --capture --output-file coverage.info
             #- run: lcov --remove coverage.info "/usr*" --output-file coverage.info
