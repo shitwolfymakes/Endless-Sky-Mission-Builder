@@ -38,10 +38,11 @@ jobs:
                 PATHS=$(find . -type f -path "*build_coverage/_deps/**/*.gc*")
 
                 # build a string with all of the files and concatenate each to a separate `--exclude` flag
-                EXCLUSIONS=""
-                for PATH in $PATHS; do
-                    EXCLUSIONS+=" --exclude $PATH"
-                done
+                EXCLUSIONS=$(
+                    for PATH in $PATHS; do
+                        echo -n " --exclude $PATH"
+                    done
+                )
                 
                 lcov --no-external --base-directory . "$EXCLUSIONS" --directory ./build_coverage/src --capture --output-file coverage.info
             #- run: lcov --remove coverage.info "/usr*" --output-file coverage.info
