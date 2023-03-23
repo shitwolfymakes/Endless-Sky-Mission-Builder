@@ -46,7 +46,7 @@ jobs:
                 lcov --no-external --base-directory . --directory ./build_coverage/src --capture --output-file coverage.info
             
             # remove dependency headers from coverage before running genhtml
-            - run: lcov --remove coverage.info "./build_coverage/_deps*" --output-file coverage.info
+            - run: lcov --remove coverage.info "*build_coverage/_deps*" --output-file coverage.info
             - run: genhtml --title "Endless Sky Mission Builder" coverage.info --output-directory lcov_out
             - run: ls -al . ./build_coverage ./lcov_out
             
