@@ -38,7 +38,6 @@ jobs:
                 PATHS=$(find . -type f -path "*build_coverage/_deps/**/*.gc*")
 
                 # build a string with all of the files and concatenate each to a separate `--exclude` flag
-                EXCLUSIONS=
                 for PATH in $PATHS; do
                     EXCLUSIONS+="--exclude $PATH "
                 done
