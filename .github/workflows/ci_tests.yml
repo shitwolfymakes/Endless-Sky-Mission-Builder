@@ -34,8 +34,8 @@ jobs:
             - run: find . -type f -path "*build_coverage/_deps/**/*.*"
               # useful notes: https://qiaomuf.wordpress.com/2011/05/26/use-gcov-and-lcov-to-know-your-test-coverage/
             - run: |
-                # collect all the filepaths
-                PATHS=$(find . -type f -path "*build_coverage/_deps/**/*.gc*")
+                # collect paths of all fines
+                PATHS=$(find . -type f -path "*build_coverage/_deps/**/*.*")
 
                 # build a string with all of the files and concatenate each to a separate `--exclude` flag
                 EXCLUSIONS=$(
