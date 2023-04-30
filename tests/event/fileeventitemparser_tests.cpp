@@ -125,4 +125,31 @@ TEST_F(FileEventItemParserTest, TestEventUnvisitPlanetParsing) {
     ASSERT_EQ(parser.getData()["unvisit planet"], unvisit);
 }
 
+TEST_F(FileEventItemParserTest, TestEventLinkSystemParsing) {
+    /** JSON representation:
+     *  {
+     *     "link": [
+     *         {
+     *             "system": "Sol",
+     *             "other": "Heaven"
+     *         }
+     *     ]
+     *  }
+     */
+    std::vector<std::string> tokens = {"link", "Sol", "Heaven"};
+    json event, link;
+
+    // test single instance
+    link["system"] = "Sol";
+    link["other"] = "Heaven";
+    event.emplace_back(link);
+    parser.parseLink(tokens);
+    ASSERT_EQ(parser.getData()["link"], event);
+
+    // test multiple instances
+    event.emplace_back(link);
+    parser.parseLink(tokens);
+    ASSERT_EQ(parser.getData()["link"], event);
+}
+
 } // namespace parsertests
