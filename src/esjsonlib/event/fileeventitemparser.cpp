@@ -74,6 +74,14 @@ void FileEventItemParser::parseLink(std::vector<std::string> tokens) {
     event["link"].emplace_back(link);
 }
 
+void FileEventItemParser::parseUnlink(std::vector<std::string> tokens) {
+    std::cout << "\tFound unlink: " << boost::join(tokens, " ") << std::endl;
+    json unlink;
+    unlink["system"] = tokens.at(1);
+    unlink["other"] = tokens.at(2);
+    event["unlink"].emplace_back(unlink);
+}
+
 json FileEventItemParser::getData() const {
     return event;
 }
