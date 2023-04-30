@@ -152,4 +152,31 @@ TEST_F(FileEventItemParserTest, TestEventLinkSystemParsing) {
     ASSERT_EQ(parser.getData()["link"], event);
 }
 
+TEST_F(FileEventItemParserTest, TestEventUnlinkSystemParsing) {
+    /** JSON representation:
+     *  {
+     *     "unlink": [
+     *         {
+     *             "system": "Heaven",
+     *             "other": "Sol"
+     *         }
+     *     ]
+     *  }
+     */
+    std::vector<std::string> tokens = {"link", "Heaven", "Sol"};
+    json event, unlink;
+
+    // test single instance
+    unlink["system"] = "Heaven";
+    unlink["other"] = "Sol";
+    event.emplace_back(unlink);
+    parser.parseUnlink(tokens);
+    ASSERT_EQ(parser.getData()["unlink"], event);
+
+    // test multiple instances
+    event.emplace_back(unlink);
+    parser.parseUnlink(tokens);
+    ASSERT_EQ(parser.getData()["unlink"], event);
+}
+
 } // namespace parsertests
