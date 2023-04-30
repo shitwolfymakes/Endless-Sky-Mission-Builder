@@ -66,6 +66,14 @@ void FileEventItemParser::parseUnvisitPlanet(std::string token) {
     event["unvisit planet"].emplace_back(token);
 }
 
+void FileEventItemParser::parseLink(std::vector<std::string> tokens) {
+    std::cout << "\tFound link: " << boost::join(tokens, " ") << std::endl;
+    json link;
+    link["system"] = tokens.at(1);
+    link["other"] = tokens.at(2);
+    event["link"].emplace_back(link);
+}
+
 json FileEventItemParser::getData() const {
     return event;
 }
