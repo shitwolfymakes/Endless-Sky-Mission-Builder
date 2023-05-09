@@ -15,14 +15,14 @@
 
 namespace parsertests {
 
-std::vector<std::string> empty_event_node = {
-    "event \"The Savior's Return\""
+std::vector<std::string> empty_government_node = {
+    "government \"Galactic Federation\""
 };
 
 // Fixture for testing a node
 class FileGovernmentItemParserTest : public ::testing::Test {
 protected:
-    FileGovernmentItemParser parser = FileGovernmentItemParser(empty_event_node);
+    FileGovernmentItemParser parser = FileGovernmentItemParser(empty_government_node);
 };
 
 } // namespace parsertests
