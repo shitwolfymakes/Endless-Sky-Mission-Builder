@@ -31,6 +31,7 @@ public:
     void parseReputation(std::vector<std::string>);
     void parseCrewAttack(std::string);
     void parseCrewDefense(std::string);
+    void parseAttitudeToward(std::vector<std::string>);
 
     // ACCESSORS
     json getData() const;

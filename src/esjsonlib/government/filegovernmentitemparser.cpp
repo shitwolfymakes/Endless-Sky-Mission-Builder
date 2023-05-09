@@ -41,13 +41,16 @@ json FileGovernmentItemParser::run() {
             parseColor(tokens);
         } else if (tokens.at(0).compare("player reputation") == 0) {
             parsePlayerRep(tokens.at(1));
-        }
-        else if (tokens.at(0).compare("reputation") == 0) {
+        } else if (tokens.at(0).compare("reputation") == 0) {
             json nodeLines;
             i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
             parseReputation(nodeLines);
         } else if (tokens.at(0).compare("crew attack") == 0) {
             parseCrewAttack(tokens.at(1));
+        } else if (tokens.at(0).compare("reputation") == 0) {
+            json nodeLines;
+            i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+            parseAttitudeToward(nodeLines);
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -106,6 +109,18 @@ void FileGovernmentItemParser::parseCrewAttack(std::string token) {
 void FileGovernmentItemParser::parseCrewDefense(std::string token) {
     std::cout << "\tGovernment crew defnse is: " << token << std::endl;
     govt["crew_defense"] = std::stoi(token);
+}
+
+void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> lines) {
+    std::cout << "\tGovernment attitude towards is: \n" << boost::join(lines, "\n") << std::endl;
+
+    for (std::string &line : lines) {
+        std::vector<std::string> tokens = utils::tokenize(line);
+        json attitude;
+        attitude["government"] = tokens.at(0);
+        attitude["rep-modifier"] = std::stoi(tokens.at(1));
+        govt["attitude_toward"].emplace_back(attitude);
+    }
 }
 
 json FileGovernmentItemParser::getData() const {
