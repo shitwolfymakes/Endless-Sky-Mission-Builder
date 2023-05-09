@@ -25,6 +25,7 @@ public:
 
     void parseId(std::string);
     void parseDisplayName(std::string);
+    void parseSwizzle(std::string);
 
     // ACCESSORS
     json getData() const;

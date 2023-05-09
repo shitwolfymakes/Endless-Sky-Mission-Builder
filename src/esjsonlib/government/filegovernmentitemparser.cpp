@@ -47,8 +47,13 @@ void FileGovernmentItemParser::parseId(std::string token) {
 }
 
 void FileGovernmentItemParser::parseDisplayName(std::string token) {
-    std::cout << "\tGovernment ID is: " << token << std::endl;
+    std::cout << "\tGovernment display name is: " << token << std::endl;
     govt["display_name"] = token;
+}
+
+void FileGovernmentItemParser::parseSwizzle(std::string token) {
+    std::cout << "\tGovernment swizzle is: " << token << std::endl;
+    govt["swizzle"] = std::stoi(token);
 }
 
 json FileGovernmentItemParser::getData() const {
