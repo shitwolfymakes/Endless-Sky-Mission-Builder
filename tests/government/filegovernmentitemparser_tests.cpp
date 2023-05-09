@@ -18,8 +18,14 @@ TEST_F(FileGovernmentItemParserTest, TestEventParsing) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseId) {
-    std::string token = "Galactic Federation";
+    std::string token = "GalacticFederation";
     parser.parseId(token);
+    ASSERT_EQ(parser.getData()["id"], "GalacticFederation");
+}
+
+TEST_F(FileGovernmentItemParserTest, TestParseDisplayName) {
+    std::string token = "Galactic Federation";
+    parser.parseDisplayName(token);
     ASSERT_EQ(parser.getData()["display_name"], "Galactic Federation");
 }
 
