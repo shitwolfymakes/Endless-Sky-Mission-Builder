@@ -41,6 +41,7 @@ json FileGovernmentItemParser::run() {
             parseColor(tokens);
         } else if (tokens.at(0).compare("player reputation") == 0) {
             parsePlayerRep(tokens.at(1));
+        }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
     return govt;
