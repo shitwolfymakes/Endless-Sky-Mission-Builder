@@ -46,6 +46,8 @@ json FileGovernmentItemParser::run() {
             json nodeLines;
             i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
             parseReputation(nodeLines);
+        } else if (tokens.at(0).compare("crew attack") == 0) {
+            parseCrewAttack(tokens.at(1));
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -94,6 +96,11 @@ void FileGovernmentItemParser::parseReputation(std::vector<std::string> lines) {
 
     tokens = utils::tokenize(lines.at(2));
     govt["reputation"]["max"] = std::stoi(tokens.at(1));
+}
+
+void FileGovernmentItemParser::parseCrewAttack(std::string token) {
+    std::cout << "\tGovernment crew attack is: " << token << std::endl;
+    govt["crew_attack"] = std::stoi(token);
 }
 
 json FileGovernmentItemParser::getData() const {
