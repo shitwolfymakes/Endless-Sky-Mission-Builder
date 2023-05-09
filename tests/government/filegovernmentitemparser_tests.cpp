@@ -59,4 +59,16 @@ TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
     ASSERT_EQ(parser.getData()["player_reputation"], 100);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
+    std::vector<std::string> nodeLine = {"\t\t\"player reputation\" 50\n",
+                                         "\t\tmin 0\n",
+                                         "\t\tmax 100\n"};
+    json reputation;
+    reputation["player_reputation"] = 50;
+    reputation["min"] = 0;
+    reputation["max"] = 100;
+    parser.parseReputation(nodeLine);
+    ASSERT_EQ(parser.getData()["reputation"], reputation);
+}
+
 } // namespace parsertests
