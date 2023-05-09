@@ -53,4 +53,10 @@ TEST_F(FileGovernmentItemParserTest, TestParseColorName) {
     ASSERT_EQ(parser.getData()["color"], "Red");
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
+    std::string token = "100";
+    parser.parsePlayerRep(token);
+    ASSERT_EQ(parser.getData()["player_reputation"], 100);
+}
+
 } // namespace parsertests
