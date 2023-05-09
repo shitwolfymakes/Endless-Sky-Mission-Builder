@@ -100,4 +100,21 @@ TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
     ASSERT_EQ(parser.getData()["attitude_toward"], attitude_toward);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
+    std::vector<std::string> nodeLines = {"\t\tassist -0.1\n",
+                                          "\t\tdestroy 1\n"};
+    json penalty_for, penalty;
+
+    penalty["action"] = "assist";
+    penalty["rep-modifier"] = -0.1;
+    penalty_for.emplace_back(penalty);
+
+    penalty["action"] = "destroy";
+    penalty["rep-modifier"] = 1.0;
+    penalty_for.emplace_back(penalty);
+
+    parser.parsePenaltyFor(nodeLines);
+    ASSERT_EQ(parser.getData()["penalty_for"], penalty_for);
+}
+
 } // namespace parsertests
