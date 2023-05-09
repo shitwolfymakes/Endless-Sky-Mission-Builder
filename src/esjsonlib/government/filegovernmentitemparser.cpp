@@ -33,6 +33,8 @@ json FileGovernmentItemParser::run() {
         }
         else if (tokens.at(0).compare("government") == 0) {
             parseId(tokens.at(1));
+        } else if (tokens.at(0).compare("display name") == 0) {
+            parseId(tokens.at(1));
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -40,6 +42,11 @@ json FileGovernmentItemParser::run() {
 }
 
 void FileGovernmentItemParser::parseId(std::string token) {
+    std::cout << "\tGovernment ID is: " << token << std::endl;
+    govt["id"] = token;
+}
+
+void FileGovernmentItemParser::parseDisplayName(std::string token) {
     std::cout << "\tGovernment ID is: " << token << std::endl;
     govt["display_name"] = token;
 }

@@ -24,6 +24,7 @@ public:
     json run();
 
     void parseId(std::string);
+    void parseDisplayName(std::string);
 
     // ACCESSORS
     json getData() const;
