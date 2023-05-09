@@ -35,4 +35,22 @@ TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
     ASSERT_EQ(parser.getData()["swizzle"], 6);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseColorRGB) {
+    std::vector<std::string> tokens = {"color", "128", "128", "128"};
+    json color;
+    color["R"] = 128;
+    color["G"] = 128;
+    color["B"] = 128;
+    parser.parseColor(tokens);
+    ASSERT_EQ(parser.getData()["color"], color);
+}
+
+TEST_F(FileGovernmentItemParserTest, TestParseColorName) {
+    std::vector<std::string> tokens = {"color", "Red"};
+    json color;
+    color = "Red";
+    parser.parseColor(tokens);
+    ASSERT_EQ(parser.getData()["color"], "Red");
+}
+
 } // namespace parsertests
