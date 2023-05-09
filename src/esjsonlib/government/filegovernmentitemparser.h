@@ -10,10 +10,21 @@
 
 #include <common/fileitemparserimpl.h>
 
-class FileGovernmentItemParser : public FileItemParserImpl
-{
+#include "nlohmann/json.hpp"
+using json = nlohmann::json;
+
+class FileGovernmentItemParser : public FileItemParserImpl {
+    json govt;
+
 public:
-    FileGovernmentItemParser();
+    // CREATORS
+    FileGovernmentItemParser(std::vector<std::string>);
+
+    // MANIPULATORS
+    json run();
+
+    // ACCESSORS
+    json getData() const;
 };
 
 #endif // FILEGOVERNMENTITEMPARSER_H

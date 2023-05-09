@@ -7,7 +7,21 @@
 
 #include "filegovernmentitemparser.h"
 
-FileGovernmentItemParser::FileGovernmentItemParser()
-{
+#include <iostream>
 
+#include <boost/algorithm/string.hpp>
+
+#include "common/fileitemparserutils.h"
+using utils = FileItemParserUtils;
+
+FileGovernmentItemParser::FileGovernmentItemParser(std::vector<std::string> lines) {
+    setLines(lines);
+}
+
+json FileGovernmentItemParser::run() {
+    return govt;
+}
+
+json FileGovernmentItemParser::getData() const {
+    return govt;
 }
