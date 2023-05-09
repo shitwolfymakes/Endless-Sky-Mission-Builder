@@ -31,6 +31,18 @@ public:
     void parseLink(std::vector<std::string>);
     void parseUnlink(std::vector<std::string>);
 
+    // TODO: Add support for the following nodes
+    /*
+     * government
+     * fleet
+     * planet
+     * news
+     * shipyard
+     * outfitter
+     * substitutions
+     * conditions
+     */
+
     // ACCESSORS
     json getData() const;
 };
