@@ -13,7 +13,8 @@ ItemGovernment::ItemGovernment()
 }
 
 json ItemGovernment::parse() {
-    std::cout << "Government parsing not yet implemented" << std::endl;
-    json govt;
+    FileGovernmentItemParser parser = FileGovernmentItemParser(lines);
+    json govt = parser.run();
+    std::cout << "finished parsing government" << std::endl;
     return govt;
 }

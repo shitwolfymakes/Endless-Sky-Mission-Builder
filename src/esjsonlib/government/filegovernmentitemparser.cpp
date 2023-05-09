@@ -19,7 +19,29 @@ FileGovernmentItemParser::FileGovernmentItemParser(std::vector<std::string> line
 }
 
 json FileGovernmentItemParser::run() {
+    std::cout << "Parsing government node to JSON" << std::endl;
+    std::vector<std::string> tokens;
+
+    std::vector<std::string> lines = getLines();
+    for (int i = 0; i < static_cast<int>(lines.size()); i++) {
+        // start by tokenizing each line
+        tokens = utils::tokenize(lines.at(i));
+        //std::cout << "LINE: " << tokens.at(0) << std::endl;
+
+        if (tokens.size() == 0) {
+            std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
+        }
+        else if (tokens.at(0).compare("government") == 0) {
+            parseId(tokens.at(1));
+        }
+    }
+    //std::cout << "Government data: " << govt.dump(4) << std::endl;
     return govt;
+}
+
+void FileGovernmentItemParser::parseId(std::string token) {
+    std::cout << "\tGovernment ID is: " << token << std::endl;
+    govt["display_name"] = token;
 }
 
 json FileGovernmentItemParser::getData() const {

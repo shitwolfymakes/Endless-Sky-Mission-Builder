@@ -17,6 +17,7 @@ add_library(esjsonlib STATIC
     filter/filefilteritemparserutil.h filter/filefilteritemparserutil.cpp
 
     government/itemgovernment.h government/itemgovernment.cpp
+    government/filegovernmentitemparser.h government/filegovernmentitemparser.cpp
 
     mission/itemmission.h mission/itemmission.cpp
     mission/filemissionitemparser.h mission/filemissionitemparser.cpp

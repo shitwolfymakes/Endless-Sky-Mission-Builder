@@ -9,6 +9,7 @@
 #define ITEMGOVERNMENT_H
 
 #include "common/fileitem.h"
+#include "government/filegovernmentitemparser.h"
 
 class ItemGovernment : public FileItem
 {

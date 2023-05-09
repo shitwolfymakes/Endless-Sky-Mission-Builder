@@ -23,6 +23,8 @@ public:
     // MANIPULATORS
     json run();
 
+    void parseId(std::string);
+
     // ACCESSORS
     json getData() const;
 };
