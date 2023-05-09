@@ -42,6 +42,12 @@ json FileGovernmentItemParser::run() {
         } else if (tokens.at(0).compare("player reputation") == 0) {
             parsePlayerRep(tokens.at(1));
         }
+        // elif "npc" in tokens
+        else if (tokens.at(0).compare("reputation") == 0) {
+            json nodeLines;
+            i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+            parseReputation(nodeLines);
+        }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
     return govt;
@@ -76,6 +82,19 @@ void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
 void FileGovernmentItemParser::parsePlayerRep(std::string token) {
     std::cout << "\tGovernment player reputation is: " << token << std::endl;
     govt["player_reputation"] = std::stoi(token);
+}
+
+void FileGovernmentItemParser::parseReputation(std::vector<std::string> lines) {
+    std::cout << "\tGovernment reputation is: \n" << boost::join(lines, "\n") << std::endl;
+
+    std::vector<std::string> tokens = utils::tokenize(lines.at(0));
+    govt["reputation"]["player_reputation"] = std::stoi(tokens.at(1));
+
+    tokens = utils::tokenize(lines.at(1));
+    govt["reputation"]["min"] = std::stoi(tokens.at(1));
+
+    tokens = utils::tokenize(lines.at(2));
+    govt["reputation"]["max"] = std::stoi(tokens.at(1));
 }
 
 json FileGovernmentItemParser::getData() const {

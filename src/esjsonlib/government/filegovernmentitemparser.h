@@ -28,6 +28,7 @@ public:
     void parseSwizzle(std::string);
     void parseColor(std::vector<std::string>);
     void parsePlayerRep(std::string);
+    void parseReputation(std::vector<std::string>);
 
     // ACCESSORS
     json getData() const;
