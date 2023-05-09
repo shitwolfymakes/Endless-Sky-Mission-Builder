@@ -35,7 +35,7 @@ json FileEventItemParser::run() {
             parseDate(tokens);
         }
     }
-    //std::cout << "Mission data: " << mission.dump(4) << std::endl;
+    //std::cout << "Event data: " << event.dump(4) << std::endl;
     return event;
 }
 
