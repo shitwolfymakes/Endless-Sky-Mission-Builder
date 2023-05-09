@@ -18,6 +18,7 @@ set(HEADERS
 
     event/fileeventitemparser_tests.h
     filter/filefilteritemparser_tests.h
+    government/filegovernmentitemparser_tests.h
     mission/filemissionitemparser_tests.h
     phrase/filephraseitemparser_tests.h
     substitutions/filesubstitutionsitemparser_tests.h
@@ -73,6 +74,7 @@ add_test_file(common fileitemparser_tests false)
 
 add_test_file(event fileeventitemparser_tests false)
 add_test_file(filter filefilteritemparser_tests false)
+add_test_file(government filegovernmentitemparser_tests false)
 add_test_file(mission filemissionitemparser_tests false)
 add_test_file(phrase filephraseitemparser_tests false)
 add_test_file(substitutions filesubstitutionsitemparser_tests false)
