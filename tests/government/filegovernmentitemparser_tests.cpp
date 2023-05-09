@@ -60,14 +60,14 @@ TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
-    std::vector<std::string> nodeLine = {"\t\t\"player reputation\" 50\n",
-                                         "\t\tmin 0\n",
-                                         "\t\tmax 100\n"};
+    std::vector<std::string> nodeLines = {"\t\t\"player reputation\" 50\n",
+                                          "\t\tmin 0\n",
+                                          "\t\tmax 100\n"};
     json reputation;
     reputation["player_reputation"] = 50;
     reputation["min"] = 0;
     reputation["max"] = 100;
-    parser.parseReputation(nodeLine);
+    parser.parseReputation(nodeLines);
     ASSERT_EQ(parser.getData()["reputation"], reputation);
 }
 
@@ -81,6 +81,23 @@ TEST_F(FileGovernmentItemParserTest, TestParseCrewDefense) {
     std::string token = "5";
     parser.parseCrewDefense(token);
     ASSERT_EQ(parser.getData()["crew_defense"], 5);
+}
+
+TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
+    std::vector<std::string> nodeLines = {"\t\t\"Klingon Empire\" 85\n",
+                                          "\t\t\"Cardassian Union\" -100\n"};
+    json attitude_toward, attitude;
+
+    attitude["government"] = "Klingon Empire";
+    attitude["rep-modifier"] = 85;
+    attitude_toward.emplace_back(attitude);
+
+    attitude["government"] = "Cardassian Union";
+    attitude["rep-modifier"] = -100;
+    attitude_toward.emplace_back(attitude);
+
+    parser.parseAttitudeToward(nodeLines);
+    ASSERT_EQ(parser.getData()["attitude_toward"], attitude_toward);
 }
 
 } // namespace parsertests
