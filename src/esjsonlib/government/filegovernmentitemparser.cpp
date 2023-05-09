@@ -34,7 +34,11 @@ json FileGovernmentItemParser::run() {
         else if (tokens.at(0).compare("government") == 0) {
             parseId(tokens.at(1));
         } else if (tokens.at(0).compare("display name") == 0) {
-            parseId(tokens.at(1));
+            parseDisplayName(tokens.at(1));
+        } else if (tokens.at(0).compare("swizzle") == 0) {
+            parseSwizzle(tokens.at(1));
+        } else if (tokens.at(0).compare("color") == 0) {
+            parseColor(tokens);
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -54,6 +58,17 @@ void FileGovernmentItemParser::parseDisplayName(std::string token) {
 void FileGovernmentItemParser::parseSwizzle(std::string token) {
     std::cout << "\tGovernment swizzle is: " << token << std::endl;
     govt["swizzle"] = std::stoi(token);
+}
+
+void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
+    std::cout << "\tGovernment color is: " << boost::join(tokens, " ") << std::endl;
+    if (tokens.size() == 4) {
+        govt["color"]["R"] = std::stoi(tokens.at(1));
+        govt["color"]["G"] = std::stoi(tokens.at(2));
+        govt["color"]["B"] = std::stoi(tokens.at(3));
+    } else {
+        govt["color"] = tokens.at(1);
+    }
 }
 
 json FileGovernmentItemParser::getData() const {

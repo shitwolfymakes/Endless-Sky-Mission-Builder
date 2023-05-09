@@ -26,6 +26,7 @@ public:
     void parseId(std::string);
     void parseDisplayName(std::string);
     void parseSwizzle(std::string);
+    void parseColor(std::vector<std::string>);
 
     // ACCESSORS
     json getData() const;
