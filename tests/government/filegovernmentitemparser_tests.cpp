@@ -29,4 +29,10 @@ TEST_F(FileGovernmentItemParserTest, TestParseDisplayName) {
     ASSERT_EQ(parser.getData()["display_name"], "Galactic Federation");
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
+    std::string token = "6";
+    parser.parseSwizzle(token);
+    ASSERT_EQ(parser.getData()["swizzle"], 6);
+}
+
 } // namespace parsertests
