@@ -42,7 +42,6 @@ json FileGovernmentItemParser::run() {
         } else if (tokens.at(0).compare("player reputation") == 0) {
             parsePlayerRep(tokens.at(1));
         }
-        // elif "npc" in tokens
         else if (tokens.at(0).compare("reputation") == 0) {
             json nodeLines;
             i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
