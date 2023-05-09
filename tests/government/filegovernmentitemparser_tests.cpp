@@ -71,4 +71,10 @@ TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
     ASSERT_EQ(parser.getData()["reputation"], reputation);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseCrewAttack) {
+    std::string token = "5";
+    parser.parseCrewAttack(token);
+    ASSERT_EQ(parser.getData()["crew_attack"], 5);
+}
+
 } // namespace parsertests
