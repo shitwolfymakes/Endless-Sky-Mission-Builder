@@ -30,6 +30,7 @@ public:
     void parsePlayerRep(std::string);
     void parseReputation(std::vector<std::string>);
     void parseCrewAttack(std::string);
+    void parseCrewDefense(std::string);
 
     // ACCESSORS
     json getData() const;

@@ -103,6 +103,11 @@ void FileGovernmentItemParser::parseCrewAttack(std::string token) {
     govt["crew_attack"] = std::stoi(token);
 }
 
+void FileGovernmentItemParser::parseCrewDefense(std::string token) {
+    std::cout << "\tGovernment crew defnse is: " << token << std::endl;
+    govt["crew_defense"] = std::stoi(token);
+}
+
 json FileGovernmentItemParser::getData() const {
     return govt;
 }
