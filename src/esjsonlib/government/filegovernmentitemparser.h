@@ -33,6 +33,7 @@ public:
     void parseCrewDefense(std::string);
     void parseAttitudeToward(std::vector<std::string>);
     void parsePenaltyFor(std::vector<std::string>);
+    void parseForeignPenaltiesFor(std::vector<std::string>);
 
     // ACCESSORS
     json getData() const;
