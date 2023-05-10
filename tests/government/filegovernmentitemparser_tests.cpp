@@ -117,4 +117,15 @@ TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
     ASSERT_EQ(parser.getData()["penalty_for"], penalty_for);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseForeignPenalties) {
+    std::vector<std::string> nodeLines = {"\t\t\"Klingon Empire\"\n",
+                                          "\t\t\"Cardassian Union\"\n"};
+    json foreign_penalties;
+    foreign_penalties.emplace_back("Klingon Empire");
+    foreign_penalties.emplace_back("Cardassian Union");
+
+    parser.parseForeignPenaltiesFor(nodeLines);
+    ASSERT_EQ(parser.getData()["foreign_penalties_for"], foreign_penalties);
+}
+
 } // namespace parsertests
