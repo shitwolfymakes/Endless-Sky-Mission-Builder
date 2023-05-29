@@ -85,9 +85,9 @@ void FileGovernmentItemParser::parseSwizzle(std::string token) {
 void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
     std::cout << "\tGovernment color is: " << boost::join(tokens, " ") << std::endl;
     if (tokens.size() == 4) {
-        govt["color"]["R"] = std::stoi(tokens.at(1));
-        govt["color"]["G"] = std::stoi(tokens.at(2));
-        govt["color"]["B"] = std::stoi(tokens.at(3));
+        govt["color"]["R"] = std::stod(tokens.at(1));
+        govt["color"]["G"] = std::stod(tokens.at(2));
+        govt["color"]["B"] = std::stod(tokens.at(3));
     } else {
         govt["color"] = tokens.at(1);
     }
@@ -95,30 +95,30 @@ void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
 
 void FileGovernmentItemParser::parsePlayerRep(std::string token) {
     std::cout << "\tGovernment player reputation is: " << token << std::endl;
-    govt["player_reputation"] = std::stoi(token);
+    govt["player_reputation"] = std::stod(token);
 }
 
 void FileGovernmentItemParser::parseReputation(std::vector<std::string> lines) {
     std::cout << "\tGovernment reputation is: \n" << boost::join(lines, "\n") << std::endl;
 
     std::vector<std::string> tokens = utils::tokenize(lines.at(0));
-    govt["reputation"]["player_reputation"] = std::stoi(tokens.at(1));
+    govt["reputation"]["player_reputation"] = std::stod(tokens.at(1));
 
     tokens = utils::tokenize(lines.at(1));
-    govt["reputation"]["min"] = std::stoi(tokens.at(1));
+    govt["reputation"]["min"] = std::stod(tokens.at(1));
 
     tokens = utils::tokenize(lines.at(2));
-    govt["reputation"]["max"] = std::stoi(tokens.at(1));
+    govt["reputation"]["max"] = std::stod(tokens.at(1));
 }
 
 void FileGovernmentItemParser::parseCrewAttack(std::string token) {
     std::cout << "\tGovernment crew attack is: " << token << std::endl;
-    govt["crew_attack"] = std::stoi(token);
+    govt["crew_attack"] = std::stod(token);
 }
 
 void FileGovernmentItemParser::parseCrewDefense(std::string token) {
     std::cout << "\tGovernment crew defnse is: " << token << std::endl;
-    govt["crew_defense"] = std::stoi(token);
+    govt["crew_defense"] = std::stod(token);
 }
 
 void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> lines) {
@@ -128,7 +128,7 @@ void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> line
         std::vector<std::string> tokens = utils::tokenize(line);
         json attitude;
         attitude["government"] = tokens.at(0);
-        attitude["rep-modifier"] = std::stoi(tokens.at(1));
+        attitude["rep-modifier"] = std::stod(tokens.at(1));
         govt["attitude_toward"].emplace_back(attitude);
     }
 }

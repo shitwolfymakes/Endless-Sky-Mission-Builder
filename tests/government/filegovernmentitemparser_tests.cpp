@@ -36,11 +36,11 @@ TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseColorRGB) {
-    std::vector<std::string> tokens = {"color", "128", "128", "128"};
+    std::vector<std::string> tokens = {"color", ".11", ".22", ".33"};
     json color;
-    color["R"] = 128;
-    color["G"] = 128;
-    color["B"] = 128;
+    color["R"] = 0.11;
+    color["G"] = 0.22;
+    color["B"] = 0.33;
     parser.parseColor(tokens);
     ASSERT_EQ(parser.getData()["color"], color);
 }
