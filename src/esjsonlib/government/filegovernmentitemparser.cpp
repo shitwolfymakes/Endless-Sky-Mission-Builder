@@ -26,6 +26,7 @@ json FileGovernmentItemParser::run() {
     for (int i = 0; i < static_cast<int>(lines.size()); i++) {
         // start by tokenizing each line
         tokens = utils::tokenize(lines.at(i));
+        std::vector<std::string> nodeLines;
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
 
         if (tokens.size() == 0) {
@@ -42,25 +43,24 @@ json FileGovernmentItemParser::run() {
         } else if (tokens.at(0).compare("player reputation") == 0) {
             parsePlayerRep(tokens.at(1));
         } else if (tokens.at(0).compare("reputation") == 0) {
-            json nodeLines;
-            i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseReputation(nodeLines);
         } else if (tokens.at(0).compare("crew attack") == 0) {
             parseCrewAttack(tokens.at(1));
         } else if (tokens.at(0).compare("crew defense") == 0) {
             parseCrewDefense(tokens.at(1));
         } else if (tokens.at(0).compare("attitude toward") == 0) {
-            json nodeLines;
-            i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseAttitudeToward(nodeLines);
         } else if (tokens.at(0).compare("penalty for") == 0) {
-            json nodeLines;
-            i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
             parsePenaltyFor(nodeLines);
         } else if (tokens.at(0).compare("foreign penalties for") == 0) {
-            json nodeLines;
-            i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseForeignPenaltiesFor(nodeLines);
+        } else if (tokens.at(0).compare("custom penalties for") == 0) {
+            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+            parseCustomPenaltiesFor(nodeLines);
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -135,8 +135,9 @@ void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> line
 
 json FileGovernmentItemParser::parseActionsAndModifiers(std::vector<std::string> lines) {
     json list;
-    for (std::string &line : lines) {
-        std::vector<std::string> tokens = utils::tokenize(line);
+    for (int i = 1; i < static_cast<int>(lines.size()); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines.at(i));
+
         json penalty;
         penalty["action"] = tokens.at(0);
         penalty["rep-modifier"] = std::stod(tokens.at(1));
@@ -156,6 +157,22 @@ void FileGovernmentItemParser::parseForeignPenaltiesFor(std::vector<std::string>
     for (std::string &line : lines) {
         std::vector<std::string> tokens = utils::tokenize(line);
         govt["foreign_penalties_for"].emplace_back(tokens.at(0));
+    }
+}
+
+void FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> lines) {
+    std::cout << "\tGovernment custom penalties for is: \n" << boost::join(lines, "\n") << std::endl;
+
+    for (int i = 1; i < static_cast<int>(lines.size()); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines.at(i));
+        std::string govt_name = tokens.at(0);
+        std::vector<std::string> nodeLines;
+        json govt_penalties;
+
+        i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+        govt_penalties["government"] = govt_name;
+        govt_penalties["penalties"] = parseActionsAndModifiers(nodeLines);
+        govt["custom_penalties_for"].emplace_back(govt_penalties);
     }
 }
 

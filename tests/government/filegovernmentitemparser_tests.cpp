@@ -101,7 +101,8 @@ TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
-    std::vector<std::string> nodeLines = {"\t\tassist -0.1\n",
+    std::vector<std::string> nodeLines = {"\t\"penalty for\"",
+                                          "\t\tassist -0.1\n",
                                           "\t\tdestroy 1\n"};
     json penalty_for, penalty;
 
@@ -117,7 +118,7 @@ TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
     ASSERT_EQ(parser.getData()["penalty_for"], penalty_for);
 }
 
-TEST_F(FileGovernmentItemParserTest, TestParseForeignPenalties) {
+TEST_F(FileGovernmentItemParserTest, TestParseForeignPenaltiesFor) {
     std::vector<std::string> nodeLines = {"\t\t\"Klingon Empire\"\n",
                                           "\t\t\"Cardassian Union\"\n"};
     json foreign_penalties;
@@ -126,6 +127,34 @@ TEST_F(FileGovernmentItemParserTest, TestParseForeignPenalties) {
 
     parser.parseForeignPenaltiesFor(nodeLines);
     ASSERT_EQ(parser.getData()["foreign_penalties_for"], foreign_penalties);
+}
+
+TEST_F(FileGovernmentItemParserTest, TestParseCustomPenaltiesFor) {
+    std::vector<std::string> nodeLines = {"\tcustom penalties for",
+                                          "\t\t\"Klingon Empire\"\n",
+                                          "\t\t\tassist -0.1\n",
+                                          "\t\t\"Cardassian Union\"\n",
+                                          "\t\t\tdestroy 1\n"};
+    json custom_penalties;
+    json penalty, penalty_for_a, penalty_for_b;
+    json govt_penalties_a, govt_penalties_b;
+
+    penalty["action"] = "assist";
+    penalty["rep-modifier"] = -0.1;
+    penalty_for_a.emplace_back(penalty);
+    govt_penalties_a["government"] = "Klingon Empire";
+    govt_penalties_a["penalties"] = penalty_for_a;
+
+    penalty["action"] = "destroy";
+    penalty["rep-modifier"] = 1.0;
+    penalty_for_b.emplace_back(penalty);
+    govt_penalties_b["government"] = "Cardassian Union";
+    govt_penalties_b["penalties"] = penalty_for_b;
+
+    custom_penalties.emplace_back(govt_penalties_a);
+    custom_penalties.emplace_back(govt_penalties_b);
+    parser.parseCustomPenaltiesFor(nodeLines);
+    ASSERT_EQ(parser.getData()["custom_penalties_for"], custom_penalties);
 }
 
 } // namespace parsertests
