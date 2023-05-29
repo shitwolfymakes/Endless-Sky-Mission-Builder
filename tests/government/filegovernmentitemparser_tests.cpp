@@ -85,7 +85,8 @@ TEST_F(FileGovernmentItemParserTest, TestParseCrewDefense) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
-    std::vector<std::string> nodeLines = {"\t\t\"Klingon Empire\" 85\n",
+    std::vector<std::string> nodeLines = {"\t\"attitude toward\"",
+                                          "\t\t\"Klingon Empire\" 85\n",
                                           "\t\t\"Cardassian Union\" -100\n"};
     json attitude_toward, attitude;
 

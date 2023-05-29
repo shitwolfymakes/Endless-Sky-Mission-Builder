@@ -124,8 +124,8 @@ void FileGovernmentItemParser::parseCrewDefense(std::string token) {
 void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> lines) {
     std::cout << "\tGovernment attitude towards is: \n" << boost::join(lines, "\n") << std::endl;
 
-    for (std::string &line : lines) {
-        std::vector<std::string> tokens = utils::tokenize(line);
+    for (int i = 1; i < static_cast<int>(lines.size()); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines.at(i));
         json attitude;
         attitude["government"] = tokens.at(0);
         attitude["rep-modifier"] = std::stod(tokens.at(1));
