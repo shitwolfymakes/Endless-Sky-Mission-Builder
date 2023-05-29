@@ -23,7 +23,8 @@ json FileGovernmentItemParser::run() {
     std::vector<std::string> tokens;
 
     // set flags that appear only if true to false to ensure they don't persist
-    govt["provoked on scan"] = false;
+    govt["provoked_on_scan"] = false;
+    govt["send_untranslated_hails"] = false;
     std::vector<std::string> lines = getLines();
     for (int i = 0; i < static_cast<int>(lines.size()); i++) {
         // start by tokenizing each line
@@ -71,6 +72,8 @@ json FileGovernmentItemParser::run() {
             parseFine(tokens.at(1));
         } else if (tokens.at(0).compare("death sentence") == 0) {
             parseDeathSentence(tokens.at(1));
+        } else if (tokens.at(0).compare("send untranslated hails") == 0) {
+            govt["send_untranslated_hails"] = true;
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
