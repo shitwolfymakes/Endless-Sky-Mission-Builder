@@ -32,6 +32,7 @@ public:
     void parseCrewAttack(std::string);
     void parseCrewDefense(std::string);
     void parseAttitudeToward(std::vector<std::string>);
+    json parseActionsAndModifiers(std::vector<std::string>);
     void parsePenaltyFor(std::vector<std::string>);
     void parseForeignPenaltiesFor(std::vector<std::string>);
 

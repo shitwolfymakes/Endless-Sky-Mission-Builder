@@ -133,16 +133,21 @@ void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> line
     }
 }
 
-void FileGovernmentItemParser::parsePenaltyFor(std::vector<std::string> lines) {
-    std::cout << "\tGovernment penalty for is: \n" << boost::join(lines, "\n") << std::endl;
-
+json FileGovernmentItemParser::parseActionsAndModifiers(std::vector<std::string> lines) {
+    json list;
     for (std::string &line : lines) {
         std::vector<std::string> tokens = utils::tokenize(line);
         json penalty;
         penalty["action"] = tokens.at(0);
         penalty["rep-modifier"] = std::stod(tokens.at(1));
-        govt["penalty_for"].emplace_back(penalty);
+        list.emplace_back(penalty);
     }
+    return list;
+}
+
+void FileGovernmentItemParser::parsePenaltyFor(std::vector<std::string> lines) {
+    std::cout << "\tGovernment penalty for is: \n" << boost::join(lines, "\n") << std::endl;
+    govt["penalty_for"] = parseActionsAndModifiers(lines);
 }
 
 void FileGovernmentItemParser::parseForeignPenaltiesFor(std::vector<std::string> lines) {
