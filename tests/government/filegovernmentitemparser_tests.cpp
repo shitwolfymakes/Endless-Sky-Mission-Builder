@@ -169,4 +169,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseBribe) {
     ASSERT_EQ(parser.getData()["bribe"], bribe);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParsePercentage) {
+    std::string token = "0.1";
+    json fine;
+    fine = 0.1;
+
+    parser.parseFine(token);
+    ASSERT_EQ(parser.getData()["fine"], fine);
+}
+
 } // namespace parsertests

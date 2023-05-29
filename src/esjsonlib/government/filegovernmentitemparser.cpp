@@ -183,8 +183,13 @@ void FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> 
 }
 
 void FileGovernmentItemParser::parseBribe(std::string token) {
-    std::cout << "\tGovernment swizzle is: " << token << std::endl;
+    std::cout << "\tGovernment bribe is: " << token << std::endl;
     govt["bribe"] = std::stod(token);
+}
+
+void FileGovernmentItemParser::parseFine(std::string token) {
+    std::cout << "\tGovernment fine is: " << token << std::endl;
+    govt["fine"] = std::stod(token);
 }
 
 json FileGovernmentItemParser::getData() const {
