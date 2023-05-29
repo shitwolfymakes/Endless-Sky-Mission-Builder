@@ -38,6 +38,7 @@ public:
     void parseCustomPenaltiesFor(std::vector<std::string>);
     void parseBribe(std::string);
     void parseFine(std::string);
+    void parseDeathSentence(std::string);
 
     // ACCESSORS
     json getData() const;

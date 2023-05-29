@@ -178,4 +178,13 @@ TEST_F(FileGovernmentItemParserTest, TestParsePercentage) {
     ASSERT_EQ(parser.getData()["fine"], fine);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseDeathSentence) {
+    std::string token = "caught red-handed";
+    json death_sentence;
+    death_sentence = "caught red-handed";
+
+    parser.parseDeathSentence(token);
+    ASSERT_EQ(parser.getData()["death_sentence"], death_sentence);
+}
+
 } // namespace parsertests
