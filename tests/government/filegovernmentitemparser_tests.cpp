@@ -60,7 +60,8 @@ TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
-    std::vector<std::string> nodeLines = {"\t\t\"player reputation\" 50\n",
+    std::vector<std::string> nodeLines = {"\treputation",
+                                          "\t\t\"player reputation\" 50\n",
                                           "\t\tmin 0\n",
                                           "\t\tmax 100\n"};
     json reputation;

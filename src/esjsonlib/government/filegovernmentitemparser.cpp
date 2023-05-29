@@ -101,13 +101,13 @@ void FileGovernmentItemParser::parsePlayerRep(std::string token) {
 void FileGovernmentItemParser::parseReputation(std::vector<std::string> lines) {
     std::cout << "\tGovernment reputation is: \n" << boost::join(lines, "\n") << std::endl;
 
-    std::vector<std::string> tokens = utils::tokenize(lines.at(0));
+    std::vector<std::string> tokens = utils::tokenize(lines.at(1));
     govt["reputation"]["player_reputation"] = std::stod(tokens.at(1));
 
-    tokens = utils::tokenize(lines.at(1));
+    tokens = utils::tokenize(lines.at(2));
     govt["reputation"]["min"] = std::stod(tokens.at(1));
 
-    tokens = utils::tokenize(lines.at(2));
+    tokens = utils::tokenize(lines.at(3));
     govt["reputation"]["max"] = std::stod(tokens.at(1));
 }
 
