@@ -154,8 +154,8 @@ void FileGovernmentItemParser::parsePenaltyFor(std::vector<std::string> lines) {
 void FileGovernmentItemParser::parseForeignPenaltiesFor(std::vector<std::string> lines) {
     std::cout << "\tGovernment foreign penalties for is: \n" << boost::join(lines, "\n") << std::endl;
 
-    for (std::string &line : lines) {
-        std::vector<std::string> tokens = utils::tokenize(line);
+    for (int i = 1; i < static_cast<int>(lines.size()); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines.at(i));
         govt["foreign_penalties_for"].emplace_back(tokens.at(0));
     }
 }

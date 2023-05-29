@@ -121,7 +121,8 @@ TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseForeignPenaltiesFor) {
-    std::vector<std::string> nodeLines = {"\t\t\"Klingon Empire\"\n",
+    std::vector<std::string> nodeLines = {"\t\"foreign penalties for\"",
+                                          "\t\t\"Klingon Empire\"\n",
                                           "\t\t\"Cardassian Union\"\n"};
     json foreign_penalties;
     foreign_penalties.emplace_back("Klingon Empire");
