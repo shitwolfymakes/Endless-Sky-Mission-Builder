@@ -22,6 +22,8 @@ json FileGovernmentItemParser::run() {
     std::cout << "Parsing government node to JSON" << std::endl;
     std::vector<std::string> tokens;
 
+    // set flags that appear only if true to false to ensure they don't persist
+    govt["provoked on scan"] = false;
     std::vector<std::string> lines = getLines();
     for (int i = 0; i < static_cast<int>(lines.size()); i++) {
         // start by tokenizing each line
@@ -61,6 +63,10 @@ json FileGovernmentItemParser::run() {
         } else if (tokens.at(0).compare("custom penalties for") == 0) {
             i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseCustomPenaltiesFor(nodeLines);
+        } else if (tokens.at(0).compare("provoked on scan") == 0) {
+            govt["provoked on scan"] = true;
+        } else if (tokens.at(0).compare("provoked on scan") == 0) {
+            parseBribe(tokens.at(1));
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -174,6 +180,11 @@ void FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> 
         govt_penalties["penalties"] = parseActionsAndModifiers(nodeLines);
         govt["custom_penalties_for"].emplace_back(govt_penalties);
     }
+}
+
+void FileGovernmentItemParser::parseBribe(std::string token) {
+    std::cout << "\tGovernment swizzle is: " << token << std::endl;
+    govt["bribe"] = std::stod(token);
 }
 
 json FileGovernmentItemParser::getData() const {

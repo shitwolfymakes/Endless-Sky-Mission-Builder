@@ -36,6 +36,7 @@ public:
     void parsePenaltyFor(std::vector<std::string>);
     void parseForeignPenaltiesFor(std::vector<std::string>);
     void parseCustomPenaltiesFor(std::vector<std::string>);
+    void parseBribe(std::string);
 
     // ACCESSORS
     json getData() const;

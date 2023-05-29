@@ -160,4 +160,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseCustomPenaltiesFor) {
     ASSERT_EQ(parser.getData()["custom_penalties_for"], custom_penalties);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseBribe) {
+    std::string token = "0.1";
+    json bribe;
+    bribe = 0.1;
+
+    parser.parseBribe(token);
+    ASSERT_EQ(parser.getData()["bribe"], bribe);
+}
+
 } // namespace parsertests
