@@ -40,6 +40,7 @@ public:
     void parseFine(std::string);
     void parseDeathSentence(std::string);
     void parseFriendlyHail(std::string);
+    void parseFriendlyDisabledHail(std::string);
 
     // ACCESSORS
     json getData() const;
