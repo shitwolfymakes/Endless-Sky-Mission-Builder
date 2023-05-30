@@ -74,8 +74,14 @@ json FileGovernmentItemParser::run() {
             parseDeathSentence(tokens.at(1));
         } else if (tokens.at(0).compare("send untranslated hails") == 0) {
             govt["send_untranslated_hails"] = true;
-        } else if (tokens.at(0).compare("frindly hail") == 0) {
+        } else if (tokens.at(0).compare("friendly hail") == 0) {
             parseFriendlyHail(tokens.at(1));
+        } else if (tokens.at(0).compare("friendly disabled hail") == 0) {
+            parseFriendlyDisabledHail(tokens.at(1));
+        } else if (tokens.at(0).compare("hostile hail") == 0) {
+            parseHostileHail(tokens.at(1));
+        } else if (tokens.at(0).compare("hostile disabled hail") == 0) {
+            parseHostileDisabledHail(tokens.at(1));
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
