@@ -41,6 +41,7 @@ public:
     void parseDeathSentence(std::string);
     void parseFriendlyHail(std::string);
     void parseFriendlyDisabledHail(std::string);
+    void parseHostileHail(std::string);
 
     // ACCESSORS
     json getData() const;

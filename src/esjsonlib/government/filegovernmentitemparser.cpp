@@ -216,6 +216,11 @@ void FileGovernmentItemParser::parseFriendlyDisabledHail(std::string token) {
     govt["friendly_disabled_hail"] = token;
 }
 
+void FileGovernmentItemParser::parseHostileHail(std::string token) {
+    std::cout << "\tGovernment hostile hail is: " << token << std::endl;
+    govt["hostile_hail"] = token;
+}
+
 json FileGovernmentItemParser::getData() const {
     return govt;
 }

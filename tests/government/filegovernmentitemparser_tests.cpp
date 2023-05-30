@@ -205,4 +205,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseFriendlyDisabledHail) {
     ASSERT_EQ(parser.getData()["friendly_disabled_hail"], friendly_disabled_hail);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseHostileHail) {
+    std::string token = "screw you";
+    json hostile_hail;
+    hostile_hail = "screw you";
+
+    parser.parseHostileHail(token);
+    ASSERT_EQ(parser.getData()["hostile_hail"], hostile_hail);
+}
+
 } // namespace parsertests
