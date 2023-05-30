@@ -43,6 +43,7 @@ public:
     void parseFriendlyDisabledHail(std::string);
     void parseHostileHail(std::string);
     void parseHostileDisabledHail(std::string);
+    void parseLanguage(std::string);
 
     // ACCESSORS
     json getData() const;

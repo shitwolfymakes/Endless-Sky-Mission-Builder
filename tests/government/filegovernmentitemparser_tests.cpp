@@ -223,4 +223,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseHostileDisabledHail) {
     ASSERT_EQ(parser.getData()["hostile_disabled_hail"], hostile_disabled_hail);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestLanguage) {
+    std::string token = "metaphorical allegory";
+    json language;
+    language = "metaphorical allegory";
+
+    parser.parseLanguage(token);
+    ASSERT_EQ(parser.getData()["language"], language);
+}
+
 } // namespace parsertests
