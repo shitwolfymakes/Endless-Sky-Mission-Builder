@@ -239,6 +239,19 @@ void FileGovernmentItemParser::parseLanguage(std::string token) {
     govt["language"] = token;
 }
 
+void FileGovernmentItemParser::parseRaid(std::vector<std::string> tokens) {
+    std::cout << "\tGovernment raid is: " << boost::join(tokens, " ") << std::endl;
+    json raid;
+    raid["fleet"] = tokens.at(1);
+    if (tokens.size() >= 3) {
+        raid["min-attraction"] = std::stod(tokens.at(2));
+        if (tokens.size() == 4) {
+            raid["max-attraction"] = std::stod(tokens.at(3));
+        }
+    }
+    govt["raid"] = raid;
+}
+
 json FileGovernmentItemParser::getData() const {
     return govt;
 }

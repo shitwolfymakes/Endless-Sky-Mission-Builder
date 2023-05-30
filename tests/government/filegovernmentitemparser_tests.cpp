@@ -232,4 +232,15 @@ TEST_F(FileGovernmentItemParserTest, TestLanguage) {
     ASSERT_EQ(parser.getData()["language"], language);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestRaid) {
+    std::vector<std::string> tokens = {"raid", "pirate raid", "5", "10"};
+    json raid;
+    raid["fleet"] = "pirate raid";
+    raid["min-attraction"] = 5;
+    raid["max-attraction"] = 10;
+
+    parser.parseRaid(tokens);
+    ASSERT_EQ(parser.getData()["raid"], raid);
+}
+
 } // namespace parsertests

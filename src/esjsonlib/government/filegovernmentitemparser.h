@@ -44,6 +44,7 @@ public:
     void parseHostileHail(std::string);
     void parseHostileDisabledHail(std::string);
     void parseLanguage(std::string);
+    void parseRaid(std::vector<std::string>);
 
     // ACCESSORS
     json getData() const;
