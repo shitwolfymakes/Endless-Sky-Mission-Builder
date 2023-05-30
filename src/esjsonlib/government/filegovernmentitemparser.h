@@ -39,6 +39,7 @@ public:
     void parseBribe(std::string);
     void parseFine(std::string);
     void parseDeathSentence(std::string);
+    void parseFriendlyHail(std::string);
 
     // ACCESSORS
     json getData() const;
