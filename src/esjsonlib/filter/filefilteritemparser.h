@@ -36,7 +36,7 @@ public:
     void parseCategories(std::vector<std::string> *, std::string);
     json parseDistanceCalculationSettings(std::vector<std::string>);
     void parseNear(std::vector<std::string>, std::string);
-    void parseDistance(std::string, std::string);
+    void parseDistance(std::vector<std::string>, std::string);
 
     // ACCESSORS
     // Returns true if the string is a valid filter modifier.

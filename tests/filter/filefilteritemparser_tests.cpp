@@ -733,8 +733,8 @@ TEST_F(FileFilterItemParserTest, TestParseDistance) {
     json constraintsMinMax   = constraintsMax;
     constraintsMinMax["min"] = min;
 
-    std::string lineMax    = constraint + " " + std::to_string(max);
-    std::string lineMinMax = constraint + " " + std::to_string(min) + " " + std::to_string(max);
+    std::vector<std::string> lineMax    = { constraint + " " + std::to_string(max) };
+    std::vector<std::string> lineMinMax = { constraint + " " + std::to_string(min) + " " + std::to_string(max) };
 
     // test handling for no modifier
     json expectedMax, expectedMinMax;
@@ -760,12 +760,14 @@ TEST_F(FileFilterItemParserTest, TestParseDistance) {
 
     // max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseDistance(modifier + " " + lineMax, modifier);
+    std::vector<std::string> input = {modifier + " " + lineMax.at(0)};
+    parser.parseDistance(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNotMax);
 
     // min and max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseDistance(modifier + " " + lineMinMax, modifier);
+    input.at(0) = modifier + " " + lineMinMax.at(0);
+    parser.parseDistance(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNotMinMax);
 
 
@@ -777,12 +779,14 @@ TEST_F(FileFilterItemParserTest, TestParseDistance) {
 
     // max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseDistance(modifier + " " + lineMax, modifier);
+    input.at(0) = modifier + " " + lineMax.at(0);
+    parser.parseDistance(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighborMax);
 
     // min and max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseDistance(modifier + " " + lineMinMax, modifier);
+    input.at(0) = modifier + " " + lineMinMax.at(0);
+    parser.parseDistance(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighborMinMax);
 }
 
