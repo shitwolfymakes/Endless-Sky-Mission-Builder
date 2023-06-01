@@ -34,7 +34,8 @@ public:
     void parseAttributes(std::vector<std::string> *, std::string);
     void parseOutfits(std::vector<std::string> *, std::string);
     void parseCategories(std::vector<std::string> *, std::string);
-    void parseNear(std::string, std::string);
+    json parseDistanceCalculationSettings(std::vector<std::string>);
+    void parseNear(std::vector<std::string>, std::string);
     void parseDistance(std::string, std::string);
 
     // ACCESSORS

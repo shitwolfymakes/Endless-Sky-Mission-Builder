@@ -80,7 +80,7 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
         } else if (key.compare("category") == 0) {
             parseCategories(&nodeLines, modifier);
         } else if (key.compare("near") == 0) {
-            parseNear(lines->at(i), modifier);
+            parseNear(nodeLines, modifier);
         } else if (key.compare("distance") == 0) {
             parseDistance(lines->at(i), modifier);
         }
@@ -223,11 +223,31 @@ void FileFilterItemParser::parseCategories(std::vector<std::string> *lines, std:
     }
 }
 
-void FileFilterItemParser::parseNear(std::string line, std::string modifier) {
-    // This node is a single line, containing multiple tokens, some potentially optional
+json FileFilterItemParser::parseDistanceCalculationSettings(std::vector<std::string> lines) {
+    std::cout << "\t\tparsing distance calculation settings" << std::endl;
+    json settings;
+    std::vector<std::string> wormhole_opts = {"all wormholes", "only restricted wormholes", "no wormholes"};
+
+    // set flags that appear only if true to false to ensure they don't persist
+    settings["assumes_jump_drive"] = false;
+    for (int i = 1; i < lines.size(); i++) {
+        std::vector<std::string> tokens = utils::tokenize(lines.at(i));
+        std::cout << "\t\t\ttokens: " << boost::join(tokens, ", ")  << std::endl;
+        if (tokens.at(0).compare("distance calculation settings") == 0) {
+            continue;
+        } else if (utils::isOneOf(tokens.at(0), wormhole_opts) == true) {
+            settings["wormholes_used"] = tokens.at(0);
+        } else if (tokens.at(0).compare("assumes jump drive") == 0) {
+            settings["assumes_jump_drive"] = true;
+        }
+    }
+    return settings;
+}
+
+void FileFilterItemParser::parseNear(std::vector<std::string> lines, std::string modifier) {
     std::string constraint = "near";
-    std::cout << "\tFound " << constraint << ": " << line << std::endl;
-    std::vector<std::string> tokens = utils::tokenize(line);
+    std::cout << "\tFound " << constraint << ": \n" << boost::join(lines, "\n") << std::endl;
+    std::vector<std::string> tokens = utils::tokenize(lines.at(0));
 
     // shift index based on presence of modifiers
     int i = 0 + isModifier(modifier);
@@ -243,6 +263,11 @@ void FileFilterItemParser::parseNear(std::string line, std::string modifier) {
         // if the line contains both optional tokens
         constraint_data["min"] = std::stoi(tokens.at(2 + i));
         constraint_data["max"] = std::stoi(tokens.at(3 + i));
+    }
+
+    // handle any calculation settings
+    if (lines.size() >= 2) {
+        constraint_data["distance_calculation_settings"] = parseDistanceCalculationSettings(lines);
     }
 
     // store based on modifier

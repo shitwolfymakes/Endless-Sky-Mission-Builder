@@ -612,6 +612,18 @@ TEST_F(FileFilterItemParserTest, TestParseCategories) {
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 }
 
+TEST_F(FileFilterItemParserTest, TestParseDistanceCalculationSettings) {
+    std::vector<std::string> lines = {"\tnear Sol\n",
+                                      "\t\t\"all wormholes\"\n",
+                                      "\t\t\"assumes jump drive\"\n"};
+    json expected, result;
+    expected["wormholes_used"] = "all wormholes";
+    expected["assumes_jump_drive"] = true;
+
+    result = parser.parseDistanceCalculationSettings(lines);
+    ASSERT_EQ(result, expected);
+}
+
 TEST_F(FileFilterItemParserTest, TestParseNear) {
     // define common variables
     std::string modifier   = "";
@@ -630,9 +642,9 @@ TEST_F(FileFilterItemParserTest, TestParseNear) {
     constraintsMinMax["min"] = min;
 
 
-    std::string line       = constraint + " \"" + system + "\"";
-    std::string lineMax    = line + " " + std::to_string(max);
-    std::string lineMinMax = line + " " + std::to_string(min) + " " + std::to_string(max);
+    std::vector<std::string> line       = { constraint + " \"" + system + "\"" };
+    std::vector<std::string> lineMax    = { line.at(0) + " " + std::to_string(max) };
+    std::vector<std::string> lineMinMax = { line.at(0) + " " + std::to_string(min) + " " + std::to_string(max) };
 
     // test handling for no modifier
     json expected, expectedMax, expectedMinMax;
@@ -665,17 +677,20 @@ TEST_F(FileFilterItemParserTest, TestParseNear) {
 
     // vanilla
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseNear(modifier + " " + line, modifier);
+    std::vector<std::string> input = {modifier + " " + line.at(0)};
+    parser.parseNear(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNot);
 
     // max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseNear(modifier + " " + lineMax, modifier);
+    input.at(0) = modifier + " " + lineMax.at(0);
+    parser.parseNear(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNotMax);
 
     // min and max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseNear(modifier + " " + lineMinMax, modifier);
+    input.at(0) = modifier + " " + lineMinMax.at(0);
+    parser.parseNear(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNotMinMax);
 
 
@@ -688,17 +703,20 @@ TEST_F(FileFilterItemParserTest, TestParseNear) {
 
     // vanilla
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseNear(modifier + " " + line, modifier);
+    input.at(0) = modifier + " " + line.at(0);
+    parser.parseNear(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighbor);
 
     // max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseNear(modifier + " " + lineMax, modifier);
+    input.at(0) = modifier + " " + lineMax.at(0);
+    parser.parseNear(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighborMax);
 
     // min and max included
     parser = FileFilterItemParser(minimum_filter_lines);
-    parser.parseNear(modifier + " " + lineMinMax, modifier);
+    input.at(0) = modifier + " " + lineMinMax.at(0);
+    parser.parseNear(input, modifier);
     ASSERT_EQ(parser.getData(), expectedNeighborMinMax);
 }
 
