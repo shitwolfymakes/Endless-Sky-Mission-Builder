@@ -17,6 +17,7 @@ using json = nlohmann::json;
 
 namespace FileItemParserUtils {
     std::vector<std::string> tokenize(std::string);
+    bool is(std::string, std::string);
     bool isOneOf(std::string, std::vector<std::string>);
     int getIndentLevel(std::string);
 

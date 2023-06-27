@@ -54,6 +54,13 @@ int getIndentLevel(std::string line) {
     return level;
 }
 
+bool is(std::string token, std::string expected) {
+    if (token.compare(expected) == 0) {
+        return true;
+    }
+    return false;
+}
+
 bool isOneOf(std::string token, std::vector<std::string> options) {
     for (std::string &option: options) {
         if (token.compare(option) == 0) {

@@ -44,5 +44,12 @@ TEST_F(FileItemParserTest, TestCollectNodeLines) {
     ASSERT_EQ(nodeLines, expected);
 }
 
+TEST_F(FileItemParserTest, TestIs) {
+    bool result = FileItemParserUtils::is("Hello", "Hello");
+    ASSERT_TRUE(result);
+
+    result = FileItemParserUtils::is("Hello", "World");
+    ASSERT_FALSE(result);
+}
 
 } // namespace parsertests
