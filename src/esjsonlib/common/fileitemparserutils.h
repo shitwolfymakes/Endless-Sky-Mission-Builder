@@ -15,10 +15,10 @@
 #include "nlohmann/json_fwd.hpp"
 using json = nlohmann::json;
 
-struct FileItemParserUtils {
-    static std::vector<std::string> tokenize(std::string);
-    static bool isOneOf(std::string, std::vector<std::string>);
-    static int getIndentLevel(std::string);
+namespace FileItemParserUtils {
+    std::vector<std::string> tokenize(std::string);
+    bool isOneOf(std::string, std::vector<std::string>);
+    int getIndentLevel(std::string);
 
     // Takes in a pointer to a list of strings and the index of the first
     // line in that lis, and pass a pointer to either a json or string list
@@ -26,8 +26,8 @@ struct FileItemParserUtils {
     // Returns the index of the last line stored. If the list of strings it
     // collects from contains only 1 element, or the string it starts from
     // is the last in the list, returns the integer that was passed in
-    static int collectNodeLines(std::vector<std::string> *, int, json *);
-    static int collectNodeLines(std::vector<std::string> *, int, std::vector<std::string> *);
-};
+    int collectNodeLines(std::vector<std::string> *, int, json *);
+    int collectNodeLines(std::vector<std::string> *, int, std::vector<std::string> *);
+}
 
 #endif // FILEITEMPARSERUTILS_H

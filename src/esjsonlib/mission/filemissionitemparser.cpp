@@ -12,7 +12,8 @@
 #include <boost/algorithm/string.hpp>
 
 #include "common/fileitemparserutils.h"
-using utils = FileItemParserUtils;
+namespace utils = FileItemParserUtils;
+
 #include "substitutions/filesubstitutionsitemparserutil.h"
 #include "substitutions/filesubstitutionsitemparser.h"
 

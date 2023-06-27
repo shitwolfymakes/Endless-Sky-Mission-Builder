@@ -10,7 +10,7 @@
 #include <iostream>
 
 #include "common/fileitemparserutils.h"
-using utils = FileItemParserUtils;
+namespace utils = FileItemParserUtils;
 
 FilePhraseItemParser::FilePhraseItemParser(std::vector<std::string> lines)
 {

@@ -12,7 +12,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "common/fileitemparserutils.h"
-using utils = FileItemParserUtils;
+namespace utils = FileItemParserUtils;
 
 FileFilterItemParser::FileFilterItemParser(std::vector<std::string> lines) {
     setLines(lines);

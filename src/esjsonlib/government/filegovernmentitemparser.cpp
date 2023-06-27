@@ -12,7 +12,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "common/fileitemparserutils.h"
-using utils = FileItemParserUtils;
+namespace utils = FileItemParserUtils;
 
 FileGovernmentItemParser::FileGovernmentItemParser(std::vector<std::string> lines) {
     setLines(lines);
@@ -84,6 +84,9 @@ json FileGovernmentItemParser::run() {
             parseHostileDisabledHail(tokens.at(1));
         } else if (tokens.at(0).compare("language") == 0) {
             parseHostileDisabledHail(tokens.at(1));
+        } else if (tokens.at(0).compare("enforces") == 0) {
+            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+            parseCustomPenaltiesFor(nodeLines);
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
@@ -250,6 +253,10 @@ void FileGovernmentItemParser::parseRaid(std::vector<std::string> tokens) {
         }
     }
     govt["raid"] = raid;
+}
+
+void FileGovernmentItemParser::parseEnforces(std::vector<std::string>) {
+
 }
 
 json FileGovernmentItemParser::getData() const {

@@ -16,7 +16,9 @@
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
-std::vector<std::string> FileItemParserUtils::tokenize(std::string line) {
+namespace FileItemParserUtils {
+
+std::vector<std::string> tokenize(std::string line) {
     // strip whitespace/tabs from line
     boost::trim(line);
     boost::trim_if(line, boost::is_any_of("\t"));
@@ -40,7 +42,7 @@ std::vector<std::string> FileItemParserUtils::tokenize(std::string line) {
     return tokens;
 }
 
-int FileItemParserUtils::getIndentLevel(std::string line) {
+int getIndentLevel(std::string line) {
     int level = 0;
     for (char c: line) {
         if (c == '\t') {
@@ -52,7 +54,7 @@ int FileItemParserUtils::getIndentLevel(std::string line) {
     return level;
 }
 
-bool FileItemParserUtils::isOneOf(std::string token, std::vector<std::string> options) {
+bool isOneOf(std::string token, std::vector<std::string> options) {
     for (std::string &option: options) {
         if (token.compare(option) == 0) {
             return true;
@@ -61,7 +63,7 @@ bool FileItemParserUtils::isOneOf(std::string token, std::vector<std::string> op
     return false;
 }
 
-int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int startingIndex, json *nodeLines) {
+int collectNodeLines(std::vector<std::string> *lines, int startingIndex, json *nodeLines) {
     int index = startingIndex;
     std::cout << "\tCollecting lines in node: " << lines->at(index) << std::endl;
 
@@ -92,7 +94,7 @@ int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int s
     return index;
 }
 
-int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int startingIndex, std::vector<std::string> *nodeLines) {
+int collectNodeLines(std::vector<std::string> *lines, int startingIndex, std::vector<std::string> *nodeLines) {
     int index = startingIndex;
     std::cout << "\tCollecting lines in node: " << lines->at(index) << std::endl;
 
@@ -121,4 +123,6 @@ int FileItemParserUtils::collectNodeLines(std::vector<std::string> *lines, int s
     }
     //std::cout << "\tNode Lines: " << nodeLines->dump(4) << std::endl;
     return index;
+}
+
 }
