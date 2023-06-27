@@ -44,6 +44,17 @@ TEST_F(FileItemParserTest, TestCollectNodeLines) {
     ASSERT_EQ(nodeLines, expected);
 }
 
+TEST_F(FileItemParserTest, TestGetIndentLevel) {
+    int result = FileItemParserUtils::getIndentLevel("Hello");
+    ASSERT_EQ(result, 0);
+
+    result = FileItemParserUtils::getIndentLevel("\tHello");
+    ASSERT_EQ(result, 1);
+
+    result = FileItemParserUtils::getIndentLevel("\t\tHello");
+    ASSERT_EQ(result, 2);
+}
+
 TEST_F(FileItemParserTest, TestIs) {
     bool result = FileItemParserUtils::is("Hello", "Hello");
     ASSERT_TRUE(result);
