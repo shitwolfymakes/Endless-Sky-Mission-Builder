@@ -16,7 +16,40 @@ using namespace testing;
 
 namespace parsertests {
 
-// Test top level field parsing
+TEST_F(FileItemParserTest, TestTokenize) {
+    std::vector<std::string> result;
+    result = FileItemParserUtils::tokenize("Hello");
+    ASSERT_THAT(result, ElementsAre("Hello"));
+
+    result = FileItemParserUtils::tokenize("\tHello World");
+    ASSERT_THAT(result, ElementsAre("Hello", "World"));
+
+    result = FileItemParserUtils::tokenize("Test \"Hello World\"");
+    ASSERT_THAT(result, ElementsAre("Test", "Hello World"));
+
+    result = FileItemParserUtils::tokenize("Test `Hello World`");
+    ASSERT_THAT(result, ElementsAre("Test", "Hello World"));
+}
+
+TEST_F(FileItemParserTest, TestGetIndentLevel) {
+    int result = FileItemParserUtils::getIndentLevel("Hello");
+    ASSERT_EQ(result, 0);
+
+    result = FileItemParserUtils::getIndentLevel("\tHello");
+    ASSERT_EQ(result, 1);
+
+    result = FileItemParserUtils::getIndentLevel("\t\tHello");
+    ASSERT_EQ(result, 2);
+}
+
+TEST_F(FileItemParserTest, TestIs) {
+    bool result = FileItemParserUtils::is("Hello", "Hello");
+    ASSERT_TRUE(result);
+
+    result = FileItemParserUtils::is("Hello", "World");
+    ASSERT_FALSE(result);
+}
+
 TEST_F(FileItemParserTest, TestCollectNodeLines) {
     int index = 1;
     std::vector<std::string> fileLines = {"mission \"TestCollectNodeLines\"",
@@ -42,25 +75,6 @@ TEST_F(FileItemParserTest, TestCollectNodeLines) {
 
     ASSERT_EQ(index, 6);
     ASSERT_EQ(nodeLines, expected);
-}
-
-TEST_F(FileItemParserTest, TestGetIndentLevel) {
-    int result = FileItemParserUtils::getIndentLevel("Hello");
-    ASSERT_EQ(result, 0);
-
-    result = FileItemParserUtils::getIndentLevel("\tHello");
-    ASSERT_EQ(result, 1);
-
-    result = FileItemParserUtils::getIndentLevel("\t\tHello");
-    ASSERT_EQ(result, 2);
-}
-
-TEST_F(FileItemParserTest, TestIs) {
-    bool result = FileItemParserUtils::is("Hello", "Hello");
-    ASSERT_TRUE(result);
-
-    result = FileItemParserUtils::is("Hello", "World");
-    ASSERT_FALSE(result);
 }
 
 } // namespace parsertests
