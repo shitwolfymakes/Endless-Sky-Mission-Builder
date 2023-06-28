@@ -42,20 +42,40 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-20.04
-    container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.5
     env:
       BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: install deps
-        run: apt install unzip
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        id: install-qt
+        with:
+            version: '6.3.1'
+            host: 'linux'
+            cache: 'true'
+
+      - name: Download and install Boost
+        uses: MarkusJx/install-boost@v2.4.0
+        id: install-boost
+        with:
+            boost_version: 1.73.0
+
+      - uses: lukka/get-cmake@latest
+
+      - name: Configure CMake
+        # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+        # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        env:
+            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+            
       - name: Install sonar-scanner and build-wrapper
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build ${{github.workspace}}/build --config Debug
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
