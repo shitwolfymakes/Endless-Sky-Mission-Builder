@@ -20,7 +20,7 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.4
+    container: ghcr.io/shitwolfymakes/esmb-ci:v1.2.5
     permissions:
       actions: read
       contents: read
