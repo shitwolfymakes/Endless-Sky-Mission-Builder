@@ -65,12 +65,8 @@ jobs:
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Debug
       - name: Run tests to generate coverage statistics
         working-directory: ./build/tests
-        run: |
-          for f in ./*_tests; do ./$f; done
-          ls -al .
-          ls -al ../../
-          ls -al ../../build
-          ls -al ../../build_wrapper_output_directory
+        run: for f in ./*_tests; do ./$f; done
+      - run: find . -type f -name "*.gc*"
       - name: Collect coverage into one XML report
         run: |
           gcovr --sonarqube > coverage.xml
