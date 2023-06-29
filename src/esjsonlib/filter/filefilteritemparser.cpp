@@ -34,9 +34,9 @@ json FileFilterItemParser::run() {
             json child_filter = p.run();
 
             // add parsed filiter to the appropriate list of child filters
-            if (tokens.at(0).compare("not") == 0) {
+            if (utils::is(tokens.at(0), "not")) {
                 filter["not_filters"].emplace_back(child_filter);
-            } else if (tokens.at(0).compare("neighbor") == 0) {
+            } else if (utils::is(tokens.at(0), "neighbor")) {
                 filter["neighbor_filters"].emplace_back(child_filter);
             }
         } else {
@@ -67,21 +67,21 @@ void FileFilterItemParser::parseFilter(std::vector<std::string> *lines) {
 
         std::vector<std::string> nodeLines;
         i = utils::collectNodeLines(lines, i, &nodeLines);
-        if (key.compare("planet") == 0) {
+        if (utils::is(key, "planet")) {
             parsePlanets(&nodeLines, modifier);
-        } else if (key.compare("system") == 0) {
+        } else if (utils::is(key, "system")) {
             parseSystems(&nodeLines, modifier);
-        } else if (key.compare("government") == 0) {
+        } else if (utils::is(key, "government")) {
             parseGovernments(&nodeLines, modifier);
-        } else if (key.compare("attributes") == 0) {
+        } else if (utils::is(key, "attributes")) {
             parseAttributes(&nodeLines, modifier);
-        } else if (key.compare("outfits") == 0) {
+        } else if (utils::is(key, "outfits")) {
             parseOutfits(&nodeLines, modifier);
-        } else if (key.compare("category") == 0) {
+        } else if (utils::is(key, "category")) {
             parseCategories(&nodeLines, modifier);
-        } else if (key.compare("near") == 0) {
+        } else if (utils::is(key, "near")) {
             parseNear(nodeLines, modifier);
-        } else if (key.compare("distance") == 0) {
+        } else if (utils::is(key, "distance")) {
             parseDistance(nodeLines, modifier);
         }
     }
