@@ -38,6 +38,9 @@ on:
 permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
 
+env:
+  BUILD_TYPE: Debug
+
 jobs:
   build:
     name: Build and analyze
@@ -61,12 +64,14 @@ jobs:
       - name: Run build-wrapper
         run: |
           mkdir build
-          cmake -S . -B build
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Debug
+          CXX="g++ --coverage -fprofile-arcs -ftest-coverage" cmake -S . -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config ${{env.BUILD_TYPE}}
       - name: Run tests to generate coverage statistics
         working-directory: ./build/tests
         run: for f in ./*_tests; do ./$f; done
-      - run: ls -al .; ls -al ./build/src/
+      - run: |
+          ls -al .
+          ls -al ./build/tests
       - name: Collect coverage into one XML report
         run: |
           gcovr --sonarqube > coverage.xml
