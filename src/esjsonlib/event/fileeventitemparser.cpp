@@ -30,10 +30,22 @@ json FileEventItemParser::run() {
 
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        }
-        else if (tokens.at(0).compare("date") == 0) {
+        } else if (utils::is(tokens.at(0), "date")) {
             parseDate(tokens);
+        } else if (utils::is(tokens.at(0), "visit")) {
+            parseVisitSystem(tokens.at(1));
+        } else if (utils::is(tokens.at(0), "unvisit")) {
+            parseUnvisitSystem(tokens.at(1));
+        } else if (utils::is(tokens.at(0), "visit planet")) {
+            parseVisitPlanet(tokens.at(1));
+        } else if (utils::is(tokens.at(0), "unvisit planet")) {
+            parseUnvisitPlanet(tokens.at(1));
+        } else if (utils::is(tokens.at(0), "link")) {
+            parseLink(tokens);
+        } else if (utils::is(tokens.at(0), "link")) {
+            parseUnlink(tokens);
         }
+        // TODO: complete implementation
     }
     //std::cout << "Event data: " << event.dump(4) << std::endl;
     return event;
