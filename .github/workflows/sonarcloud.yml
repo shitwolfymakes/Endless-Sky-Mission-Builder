@@ -62,6 +62,9 @@ jobs:
           ls -al .
           for f in ./*_tests; do ./$f; done
           find . -type f -name "*.gc*"
+      - name: Collect coverage into one XML report
+        run: |
+          gcovr --sonarqube > coverage.xml
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
