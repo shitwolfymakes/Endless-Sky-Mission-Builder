@@ -34,58 +34,57 @@ json FileGovernmentItemParser::run() {
 
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        }
-        else if (tokens.at(0).compare("government") == 0) {
+        } else if (utils::is(tokens.at(0), "government")) {
             parseId(tokens.at(1));
-        } else if (tokens.at(0).compare("display name") == 0) {
+        } else if (utils::is(tokens.at(0), "display name")) {
             parseDisplayName(tokens.at(1));
-        } else if (tokens.at(0).compare("swizzle") == 0) {
+        } else if (utils::is(tokens.at(0), "swizzle")) {
             parseSwizzle(tokens.at(1));
-        } else if (tokens.at(0).compare("color") == 0) {
+        } else if (utils::is(tokens.at(0), "color")) {
             parseColor(tokens);
-        } else if (tokens.at(0).compare("player reputation") == 0) {
+        } else if (utils::is(tokens.at(0), "player reputation") == 0) {
             parsePlayerRep(tokens.at(1));
-        } else if (tokens.at(0).compare("reputation") == 0) {
-            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+        } else if (utils::is(tokens.at(0), "reputation")) {
+            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseReputation(nodeLines);
-        } else if (tokens.at(0).compare("crew attack") == 0) {
+        } else if (utils::is(tokens.at(0), "crew attack")) {
             parseCrewAttack(tokens.at(1));
-        } else if (tokens.at(0).compare("crew defense") == 0) {
+        } else if (utils::is(tokens.at(0), "crew defense")) {
             parseCrewDefense(tokens.at(1));
-        } else if (tokens.at(0).compare("attitude toward") == 0) {
-            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+        } else if (utils::is(tokens.at(0), "attitude toward")) {
+            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseAttitudeToward(nodeLines);
-        } else if (tokens.at(0).compare("penalty for") == 0) {
-            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+        } else if (utils::is(tokens.at(0), "penalty for")) {
+            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parsePenaltyFor(nodeLines);
-        } else if (tokens.at(0).compare("foreign penalties for") == 0) {
-            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+        } else if (utils::is(tokens.at(0), "foreign penalties for")) {
+            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseForeignPenaltiesFor(nodeLines);
-        } else if (tokens.at(0).compare("custom penalties for") == 0) {
-            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+        } else if (utils::is(tokens.at(0), "custom penalties for")) {
+            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseCustomPenaltiesFor(nodeLines);
-        } else if (tokens.at(0).compare("provoked on scan") == 0) {
+        } else if (utils::is(tokens.at(0), "provoked on scan")) {
             govt["provoked on scan"] = true;
-        } else if (tokens.at(0).compare("bribe") == 0) {
+        } else if (utils::is(tokens.at(0), "bribe")) {
             parseBribe(tokens.at(1));
-        } else if (tokens.at(0).compare("fine") == 0) {
+        } else if (utils::is(tokens.at(0), "fine")) {
             parseFine(tokens.at(1));
-        } else if (tokens.at(0).compare("death sentence") == 0) {
+        } else if (utils::is(tokens.at(0), "death sentence")) {
             parseDeathSentence(tokens.at(1));
-        } else if (tokens.at(0).compare("send untranslated hails") == 0) {
+        } else if (utils::is(tokens.at(0), "send untranslated hails")) {
             govt["send_untranslated_hails"] = true;
-        } else if (tokens.at(0).compare("friendly hail") == 0) {
+        } else if (utils::is(tokens.at(0), "friendly hail")) {
             parseFriendlyHail(tokens.at(1));
-        } else if (tokens.at(0).compare("friendly disabled hail") == 0) {
+        } else if (utils::is(tokens.at(0), "friendly disabled hail")) {
             parseFriendlyDisabledHail(tokens.at(1));
-        } else if (tokens.at(0).compare("hostile hail") == 0) {
+        } else if (utils::is(tokens.at(0), "hostile hail")) {
             parseHostileHail(tokens.at(1));
-        } else if (tokens.at(0).compare("hostile disabled hail") == 0) {
+        } else if (utils::is(tokens.at(0), "hostile disabled hail")) {
             parseHostileDisabledHail(tokens.at(1));
-        } else if (tokens.at(0).compare("language") == 0) {
+        } else if (utils::is(tokens.at(0), "language")) {
             parseHostileDisabledHail(tokens.at(1));
-        } else if (tokens.at(0).compare("enforces") == 0) {
-            i = FileItemParserUtils::collectNodeLines(&nodeLines, i, &nodeLines);
+        } else if (utils::is(tokens.at(0), "enforces")) {
+            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseCustomPenaltiesFor(nodeLines);
         }
     }
@@ -195,7 +194,7 @@ void FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> 
         std::vector<std::string> nodeLines;
         json govt_penalties;
 
-        i = FileItemParserUtils::collectNodeLines(&lines, i, &nodeLines);
+        i = utils::collectNodeLines(&lines, i, &nodeLines);
         govt_penalties["government"] = govt_name;
         govt_penalties["penalties"] = parseActionsAndModifiers(nodeLines);
         govt["custom_penalties_for"].emplace_back(govt_penalties);
