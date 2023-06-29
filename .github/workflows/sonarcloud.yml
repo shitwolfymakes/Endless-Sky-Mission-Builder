@@ -58,10 +58,7 @@ jobs:
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Debug
       - name: Run tests to generate coverage statistics
         working-directory: ./build/tests
-        run: |
-          ls -al .
-          for f in ./*_tests; do ./$f; done
-          find . -type f -name "*.gc*"
+        run: for f in ./*_tests; do ./$f; done
       - name: Collect coverage into one XML report
         run: |
           gcovr --sonarqube > coverage.xml
@@ -70,4 +67,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
+          sonar-scanner \
+            --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}" \
+            --define sonar.coverageReportPaths=coverage.xml
