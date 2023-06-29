@@ -14,15 +14,28 @@ namespace parsertests {
 // Test top level field parsing
 TEST_F(FileGovernmentItemParserTest, TestEventParsing) {
     // TODO: Implement this
-    ASSERT_EQ(0, 0);
-}
+    // declare a fully populated govt node
+    std::vector<std::string> full_government_node = {
+        "\tgovernment \"Galactic Federation\""
+    };
+    parser.setLines(full_government_node);
+    json govt = parser.run();
 
+    json expected;
+    // set flags that appear only if true to false to ensure they don't persist
+    expected["provoked_on_scan"] = false;
+    expected["send_untranslated_hails"] = false;
+    expected["id"] = "Galactic Federation";
+
+    ASSERT_EQ(govt, expected);
+}
+/*
 TEST_F(FileGovernmentItemParserTest, TestParseId) {
     std::string token = "GalacticFederation";
-    //parser.parseId(token);
+    parser.parseId(token);
     ASSERT_EQ(parser.getData()["id"], "GalacticFederation");
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseDisplayName) {
     std::string token = "Galactic Federation";
     parser.parseDisplayName(token);

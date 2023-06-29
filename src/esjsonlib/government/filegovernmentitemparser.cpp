@@ -35,7 +35,8 @@ json FileGovernmentItemParser::run() {
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
         } else if (utils::is(tokens.at(0), "government")) {
-            parseId(&govt, tokens.at(1));
+            std::cout << "\tGovernment ID is: " << tokens.at(1) << std::endl;
+            govt["id"] = tokens.at(1);
         } else if (utils::is(tokens.at(0), "display name")) {
             parseDisplayName(tokens.at(1));
         } else if (utils::is(tokens.at(0), "swizzle")) {
@@ -91,12 +92,12 @@ json FileGovernmentItemParser::run() {
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
     return govt;
 }
-
-void FileGovernmentItemParser::parseId(json *parent, std::string token) const {
+/*
+void FileGovernmentItemParser::parseId(std::string token) {
     std::cout << "\tGovernment ID is: " << token << std::endl;
-    (*parent)["id"] = token;
+    govt["id"] = token;
 }
-
+*/
 void FileGovernmentItemParser::parseDisplayName(std::string token) {
     std::cout << "\tGovernment display name is: " << token << std::endl;
     govt["display_name"] = token;
@@ -158,7 +159,7 @@ void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> line
     }
 }
 
-json FileGovernmentItemParser::parseActionsAndModifiers(std::vector<std::string> lines) {
+json FileGovernmentItemParser::parseActionsAndModifiers(std::vector<std::string> lines) const {
     json list;
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines.at(i));

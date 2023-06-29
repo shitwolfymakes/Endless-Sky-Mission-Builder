@@ -23,7 +23,7 @@ public:
     // MANIPULATORS
     json run();
 
-    void parseId(json *, std::string) const;
+    //void parseId(std::string);
     void parseDisplayName(std::string);
     void parseSwizzle(std::string);
     void parseColor(std::vector<std::string>);
@@ -32,7 +32,7 @@ public:
     void parseCrewAttack(std::string);
     void parseCrewDefense(std::string);
     void parseAttitudeToward(std::vector<std::string>);
-    json parseActionsAndModifiers(std::vector<std::string>);
+    json parseActionsAndModifiers(std::vector<std::string>) const;
     void parsePenaltyFor(std::vector<std::string>);
     void parseForeignPenaltiesFor(std::vector<std::string>);
     void parseCustomPenaltiesFor(std::vector<std::string>);
