@@ -57,8 +57,11 @@ jobs:
           cmake -S . -B build
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Debug
       - name: Run tests to generate coverage statistics
+        working-directory: ./build/tests
         run: |
-          ls -al build/tests/
+          ls -al .
+          for f in ./*_tests; do ./*; done
+          find . -type f -name "*.gc*"
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
