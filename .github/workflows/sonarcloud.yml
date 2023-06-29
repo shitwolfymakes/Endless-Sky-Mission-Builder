@@ -60,7 +60,7 @@ jobs:
         working-directory: ./build/tests
         run: |
           ls -al .
-          for f in ./*_tests; do ./*; done
+          for f in ./*_tests; do ./$f; done
           find . -type f -name "*.gc*"
       - name: Run sonar-scanner
         env:
