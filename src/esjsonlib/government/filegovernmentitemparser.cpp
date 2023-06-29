@@ -35,7 +35,7 @@ json FileGovernmentItemParser::run() {
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
         } else if (utils::is(tokens.at(0), "government")) {
-            parseId(tokens.at(1));
+            parseId(&govt, tokens.at(1));
         } else if (utils::is(tokens.at(0), "display name")) {
             parseDisplayName(tokens.at(1));
         } else if (utils::is(tokens.at(0), "swizzle")) {
@@ -92,9 +92,9 @@ json FileGovernmentItemParser::run() {
     return govt;
 }
 
-void FileGovernmentItemParser::parseId(std::string token) {
+void FileGovernmentItemParser::parseId(json *parent, std::string token) const {
     std::cout << "\tGovernment ID is: " << token << std::endl;
-    govt["id"] = token;
+    (*parent)["id"] = token;
 }
 
 void FileGovernmentItemParser::parseDisplayName(std::string token) {

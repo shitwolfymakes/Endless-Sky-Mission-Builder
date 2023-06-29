@@ -23,7 +23,7 @@ public:
     // MANIPULATORS
     json run();
 
-    void parseId(std::string);
+    void parseId(json *, std::string) const;
     void parseDisplayName(std::string);
     void parseSwizzle(std::string);
     void parseColor(std::vector<std::string>);
