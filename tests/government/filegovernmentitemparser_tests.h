@@ -16,7 +16,7 @@
 namespace parsertests {
 
 std::vector<std::string> empty_government_node = {
-    "government \"Galactic Federation\""
+    "government GalacticFederation\n"
 };
 
 // Fixture for testing a node

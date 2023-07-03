@@ -30,13 +30,14 @@ json FileGovernmentItemParser::run() {
         // start by tokenizing each line
         tokens = utils::tokenize(lines.at(i));
         std::vector<std::string> nodeLines;
-        //std::cout << "LINE: " << tokens.at(0) << std::endl;
 
-        if (tokens.size() == 0) {
+        if (tokens.empty()) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
         } else if (tokens.size() == 1) {
             if (utils::is(tokens.at(0), "provoked on scan")) {
-                govt["provoked on scan"] = true;
+                govt["provoked_on_scan"] = true;
+            } else if (utils::is(tokens.at(0), "send untranslated hails")) {
+                govt["send_untranslated_hails"] = true;
             }
         } else if (tokens.size() == 2) {
             if (utils::is(tokens.at(0), "government")) {
@@ -78,8 +79,6 @@ json FileGovernmentItemParser::run() {
                 parseFine(tokens.at(1));
             } else if (utils::is(tokens.at(0), "death sentence")) {
                 parseDeathSentence(tokens.at(1));
-            } else if (utils::is(tokens.at(0), "send untranslated hails")) {
-                govt["send_untranslated_hails"] = true;
             } else if (utils::is(tokens.at(0), "friendly hail")) {
                 parseFriendlyHail(tokens.at(1));
             } else if (utils::is(tokens.at(0), "friendly disabled hail")) {
@@ -96,7 +95,6 @@ json FileGovernmentItemParser::run() {
             }
         }
     }
-    //std::cout << "Government data: " << govt.dump(4) << std::endl;
     return govt;
 }
 /*

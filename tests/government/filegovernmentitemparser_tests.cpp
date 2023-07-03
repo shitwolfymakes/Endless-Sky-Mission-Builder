@@ -12,22 +12,38 @@ using namespace testing;
 namespace parsertests {
 
 // Test top level field parsing
-TEST_F(FileGovernmentItemParserTest, TestEventParsing) {
+TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     // TODO: Implement this
     // declare a fully populated govt node
     std::vector<std::string> full_government_node = {
-        "\tgovernment GalacticFederation",
-        "\t\t\"display name\" \"Galactic Federation\""
+        "\tgovernment GalacticFederation\n",
+        "\t\t\"display name\" \"Galactic Federation\"\n",
+        "\t\t\"provoked on scan\"\n",
+        "\t\t\"send untranslated hails\"\n"
     };
     parser.setLines(full_government_node);
     json govt = parser.run();
 
     json expected;
-    // set flags that appear only if true to false to ensure they don't persist
-    expected["provoked_on_scan"] = false;
-    expected["send_untranslated_hails"] = false;
     expected["id"] = "GalacticFederation";
     expected["display_name"] = "Galactic Federation";
+    expected["provoked_on_scan"] = true;
+    expected["send_untranslated_hails"] = true;
+
+    ASSERT_EQ(govt, expected);
+}
+
+TEST_F(FileGovernmentItemParserTest, TestEmptyGovernmentParsing) {
+    // declare an empty govt node
+    parser.setLines(empty_government_node);
+    json govt = parser.run();
+
+    json expected;
+    // set flags that appear only if true to false to ensure they don't persist
+
+    expected["id"] = "GalacticFederation";
+    expected["provoked_on_scan"] = false;
+    expected["send_untranslated_hails"] = false;
 
     ASSERT_EQ(govt, expected);
 }
