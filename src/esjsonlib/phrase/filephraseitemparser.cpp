@@ -25,11 +25,11 @@ json FilePhraseItemParser::run() {
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         tokens = utils::tokenize(lines.at(i));
         //std::cout << "LINE: " << tokens.at(0) << std::endl;
-        if (tokens.at(0).compare("word") == 0) {
+        if (utils::is(tokens.at(0), "word")) {
             i = parseWords(&lines, i);
-        } else if (tokens.at(0).compare("phrase") == 0) {
+        } else if (utils::is(tokens.at(0), "phrase")) {
             i = parseSubPhrase(&lines, i);
-        } else if (tokens.at(0).compare("replace") == 0) {
+        } else if (utils::is(tokens.at(0), "replace")) {
             i = parseReplace(&lines, i);
         } else {
             std::cout << "\tERROR: INCORRECT NUMBER OF TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
