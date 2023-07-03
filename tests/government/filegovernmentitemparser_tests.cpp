@@ -18,6 +18,7 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     std::vector<std::string> full_government_node = {
         "\tgovernment GalacticFederation\n",
         "\t\t\"display name\" \"Galactic Federation\"\n",
+        "\t\tswizzle 6\n",
         "\t\t\"provoked on scan\"\n",
         "\t\t\"send untranslated hails\"\n"
     };
@@ -27,6 +28,7 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     json expected;
     expected["id"] = "GalacticFederation";
     expected["display_name"] = "Galactic Federation";
+    expected["swizzle"] = 6;
     expected["provoked_on_scan"] = true;
     expected["send_untranslated_hails"] = true;
 
@@ -59,13 +61,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseDisplayName) {
     parser.parseDisplayName(token);
     ASSERT_EQ(parser.getData()["display_name"], "Galactic Federation");
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
     std::string token = "6";
     parser.parseSwizzle(token);
     ASSERT_EQ(parser.getData()["swizzle"], 6);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseColorRGB) {
     std::vector<std::string> tokens = {"color", ".11", ".22", ".33"};
     json color;

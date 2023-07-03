@@ -49,10 +49,12 @@ json FileGovernmentItemParser::run() {
                 govt["display_name"] = tokens.at(1);
             }
             else if (utils::is(tokens.at(0), "swizzle")) {
-                parseSwizzle(tokens.at(1));
-            } else if (utils::is(tokens.at(0), "color")) {
+                std::cout << "\tGovernment swizzle is: " << tokens.at(1) << std::endl;
+                govt["swizzle"] = std::stoi(tokens.at(1));
+            }
+            else if (utils::is(tokens.at(0), "color")) {
                 parseColor(tokens);
-            } else if (utils::is(tokens.at(0), "player reputation") == 0) {
+            } else if (utils::is(tokens.at(0), "player reputation")) {
                 parsePlayerRep(tokens.at(1));
             } else if (utils::is(tokens.at(0), "reputation")) {
                 i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
@@ -107,12 +109,12 @@ void FileGovernmentItemParser::parseDisplayName(std::string token) {
     std::cout << "\tGovernment display name is: " << token << std::endl;
     govt["display_name"] = token;
 }
-*/
+
 void FileGovernmentItemParser::parseSwizzle(std::string token) {
     std::cout << "\tGovernment swizzle is: " << token << std::endl;
     govt["swizzle"] = std::stoi(token);
 }
-
+*/
 void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
     std::cout << "\tGovernment color is: " << boost::join(tokens, " ") << std::endl;
     if (tokens.size() == 4) {
