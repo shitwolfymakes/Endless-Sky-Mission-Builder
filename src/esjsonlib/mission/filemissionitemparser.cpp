@@ -35,34 +35,34 @@ json FileMissionItemParser::run() {
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
         }
-        else if (tokens.at(0).compare("mission") == 0) {
+        else if (utils::is(tokens.at(0), "mission")) {
             parseId(tokens);
         }
-        else if (tokens.at(0).compare("name") == 0) {
+        else if (utils::is(tokens.at(0), "name")) {
             parseName(tokens);
         }
-        else if (tokens.at(0).compare("description") == 0) {
+        else if (utils::is(tokens.at(0), "description")) {
             parseDescription(tokens);
         }
-        else if (tokens.at(0).compare("blocked") == 0) {
+        else if (utils::is(tokens.at(0), "blocked")) {
             parseBlocked(tokens);
         }
-        else if (tokens.at(0).compare("deadline") == 0) {
+        else if (utils::is(tokens.at(0), "deadline")) {
             parseDeadline(tokens);
         }
-        else if (tokens.at(0).compare("cargo") == 0) {
+        else if (utils::is(tokens.at(0), "cargo")) {
             parseCargo(tokens);
         }
-        else if (tokens.at(0).compare("passengers") == 0) {
+        else if (utils::is(tokens.at(0), "passengers")) {
             parsePassengers(tokens);
         }
-        else if (tokens.at(0).compare("illegal") == 0) {
+        else if (utils::is(tokens.at(0), "illegal")) {
             parseIllegal(tokens);
         }
-        else if (tokens.at(0).compare("stealth") == 0) {
+        else if (utils::is(tokens.at(0), "stealth")) {
             parseStealth();
         }
-        else if (tokens.at(0).compare("invisible") == 0) {
+        else if (utils::is(tokens.at(0), "invisible")) {
             parseInvisible();
         }
         else if (utils::isOneOf(tokens.at(0), {"priority", "minor"})) {
@@ -71,18 +71,18 @@ json FileMissionItemParser::run() {
         else if (utils::isOneOf(tokens.at(0), {"job", "landing", "assisting", "boarding"})) {
             parseWhereShown(tokens.at(0));
         }
-        else if (tokens.at(0).compare("repeat") == 0) {
+        else if (utils::is(tokens.at(0), "repeat")) {
             parseRepeat(tokens);
         }
-        else if (tokens.at(0).compare("clearance") == 0) {
+        else if (utils::is(tokens.at(0), "clearance")) {
             // TODO: convert this to handle filters the same way parseTrigger works
             // e.g. i = parseNodeWithFilter(&lines, i);
             parseClearance(tokens);
         }
-        else if (tokens.at(0).compare("infiltrating") == 0) {
+        else if (utils::is(tokens.at(0), "infiltrating")) {
             parseInfiltrating();
         }
-        else if (tokens.at(0).compare("waypoint") == 0) {
+        else if (utils::is(tokens.at(0), "waypoint")) {
             if (tokens.size() == 2) {
                 parseWaypoint(tokens.at(1));
             } else {
@@ -92,7 +92,7 @@ json FileMissionItemParser::run() {
                 continue;
             }
         }
-        else if (tokens.at(0).compare("stopover") == 0) {
+        else if (utils::is(tokens.at(0), "stopover")) {
             if (tokens.size() == 2) {
                 parseStopover(tokens.at(1));
             } else {
@@ -102,10 +102,10 @@ json FileMissionItemParser::run() {
                 continue;
             }
         }
-        else if (tokens.at(0).compare("substitutions") == 0) {
+        else if (utils::is(tokens.at(0), "substitutions")) {
             i = parseSubstitutions(&lines, i);
         }
-        else if (tokens.at(0).compare("source") == 0) {
+        else if (utils::is(tokens.at(0), "source")) {
             if (tokens.size() == 2) {
                 parseSource(tokens.at(1));
             } else {
@@ -115,7 +115,7 @@ json FileMissionItemParser::run() {
                 continue;
             }
         }
-        else if (tokens.at(0).compare("destination") == 0) {
+        else if (utils::is(tokens.at(0), "destination")) {
             if (tokens.size() == 2) {
                 parseDestination(tokens.at(1));
             } else {
@@ -126,15 +126,15 @@ json FileMissionItemParser::run() {
             }
         }
         // elif "on" in tokens (Trigger)
-        else if (tokens.at(0).compare("on") == 0) {
+        else if (utils::is(tokens.at(0), "on")) {
             i = parseTrigger(&lines, i);
         }
         // elif "to" in tokens (Conditions)
-        else if (tokens.at(0).compare("to") == 0) {
+        else if (utils::is(tokens.at(0), "to")) {
             i = parseCondition(&lines, i);
         }
         // elif "npc" in tokens
-        else if (tokens.at(0).compare("npc") == 0) {
+        else if (utils::is(tokens.at(0), "npc")) {
             i = parseNpc(&lines, i);
         }
         // else error
@@ -304,9 +304,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
 
     // check to prevent multiple triggers of the same type (except for on enter)
     for (auto& t: mission["triggers"]) {
-        if (triggerType.compare("enter") == 0) {
+        if (utils::is(triggerType, "enter")) {
             break;
-        } else if (triggerType.compare(t["type"]) == 0) {
+        } else if (triggerType.compare(t["type"]) == 0) { // TODO: use is() helper
             std::cout << "\tERROR: second trigger using: " << triggerType << ", skipping..." << std::endl;
             int cur = utils::getIndentLevel(lines.at(index));
             int nxt = utils::getIndentLevel(lines.at(index + 1));
@@ -337,26 +337,26 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
         index++;
         std::vector<std::string> tokens = utils::tokenize(lines.at(index));
         // parse the content of this line in the trigger
-        if (tokens.at(0).compare("log") == 0) {
+        if (utils::is(tokens.at(0), "log")) {
             std::cout << "\tFound log: " << lines.at(index) << std::endl;
             if (tokens.size() == 4) {
                 parseLog(tokens, &trigger);
             } else {
                 parseLog(tokens.at(1), &trigger);
             }
-        } else if (tokens.at(0).compare("dialog") == 0) {
+        } else if (utils::is(tokens.at(0), "dialog")) {
             index = parseDialog(missionLines, index, &trigger);
-        } else if (tokens.at(0).compare("conversation") == 0) {
+        } else if (utils::is(tokens.at(0), "conversation")) {
             index = parseConversation(missionLines, index, &trigger);
-        } else if (tokens.at(0).compare("outfit") == 0) {
+        } else if (utils::is(tokens.at(0), "outfit")) {
             parseOutfit(tokens, &trigger);
-        } else if (tokens.at(0).compare("require") == 0) {
+        } else if (utils::is(tokens.at(0), "require")) {
             parseRequire(tokens, &trigger);
-        } else if (tokens.at(0).compare("give") == 0 && tokens.at(1).compare("ship") == 0) {
+        } else if (utils::is(tokens.at(0), "give") && utils::is(tokens.at(1), "ship")) {
             parseGiveShip(tokens, &trigger);
-        } else if (tokens.at(0).compare("payment") == 0) {
+        } else if (utils::is(tokens.at(0), "payment")) {
             parsePayment(tokens, &trigger);
-        } else if (tokens.at(0).compare("fine") == 0) {
+        } else if (utils::is(tokens.at(0), "fine")) {
             parseFine(tokens.at(1), &trigger);
         }
         // TODO: Add support for Value Expressions
@@ -367,9 +367,9 @@ int FileMissionItemParser::parseTrigger(std::vector<std::string> *missionLines, 
             parseTriggerConditionType2(tokens, &trigger);
         } else if (utils::isOneOf(tokens.at(0), {"set", "clear"})) {
             parseTriggerConditionType3(tokens, &trigger);
-        } else if (tokens.at(0).compare("event") == 0) {
+        } else if (utils::is(tokens.at(0), "event")) {
             parseEvent(tokens, &trigger);
-        } else if (tokens.at(0).compare("fail") == 0) {
+        } else if (utils::is(tokens.at(0), "fail")) {
             parseFail(tokens, &trigger);
         } else {
             std::cout << "\tTrigger component not found: " << lines.at(index) << std::endl;
@@ -472,7 +472,7 @@ int FileMissionItemParser::parseDialog(std::vector<std::string> *missionLines, i
             //  dialog
             //      phrase
             //          ...
-            if (tokens.at(0).compare("phrase") == 0) {
+            if (utils::is(tokens.at(0), "phrase")) {
                 break;
             }
             dialog.emplace_back(tokens.at(0));
@@ -609,7 +609,7 @@ int FileMissionItemParser::parseCondition(std::vector<std::string> *missionLines
 
     // check to prevent multiple conditions of the same type
     for (auto& t: mission["conditions"]) {
-        if (conditionType.compare(t["type"]) == 0) {
+        if (conditionType.compare(t["type"]) == 0) { // TODO: use is() helper
             std::cout << "\tERROR: second condition using: " << conditionType << ", skipping..." << std::endl;
             int cur = utils::getIndentLevel(lines.at(index));
             int nxt = utils::getIndentLevel(lines.at(index + 1));
