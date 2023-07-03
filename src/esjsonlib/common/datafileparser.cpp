@@ -18,10 +18,8 @@
 #include "ship/itemship.h"
 #include "substitutions/itemsubstitutions.h"
 
-DataFileParser::DataFileParser(std::string rawData)
+DataFileParser::DataFileParser(std::string rawData) : rawData(rawData)
 {
-    this->rawData = rawData;
-
     std::vector<std::string> result;
     boost::split(result, rawData, boost::is_any_of("\n"));
     this->lines = result;
