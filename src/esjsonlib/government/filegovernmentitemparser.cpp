@@ -34,63 +34,66 @@ json FileGovernmentItemParser::run() {
 
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        }
-        else if (utils::is(tokens.at(0), "government")) {
-            std::cout << "\tGovernment ID is: " << tokens.at(1) << std::endl;
-            govt["id"] = tokens.at(1);
-        }
-        else if (utils::is(tokens.at(0), "display name")) {
-            std::cout << "\tGovernment display name is: " << tokens.at(1) << std::endl;
-            govt["display_name"] = tokens.at(1);
-        }
-        else if (utils::is(tokens.at(0), "swizzle")) {
-            parseSwizzle(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "color")) {
-            parseColor(tokens);
-        } else if (utils::is(tokens.at(0), "player reputation") == 0) {
-            parsePlayerRep(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "reputation")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseReputation(nodeLines);
-        } else if (utils::is(tokens.at(0), "crew attack")) {
-            parseCrewAttack(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "crew defense")) {
-            parseCrewDefense(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "attitude toward")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseAttitudeToward(nodeLines);
-        } else if (utils::is(tokens.at(0), "penalty for")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parsePenaltyFor(nodeLines);
-        } else if (utils::is(tokens.at(0), "foreign penalties for")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseForeignPenaltiesFor(nodeLines);
-        } else if (utils::is(tokens.at(0), "custom penalties for")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseCustomPenaltiesFor(nodeLines);
-        } else if (utils::is(tokens.at(0), "provoked on scan")) {
-            govt["provoked on scan"] = true;
-        } else if (utils::is(tokens.at(0), "bribe")) {
-            parseBribe(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "fine")) {
-            parseFine(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "death sentence")) {
-            parseDeathSentence(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "send untranslated hails")) {
-            govt["send_untranslated_hails"] = true;
-        } else if (utils::is(tokens.at(0), "friendly hail")) {
-            parseFriendlyHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "friendly disabled hail")) {
-            parseFriendlyDisabledHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "hostile hail")) {
-            parseHostileHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "hostile disabled hail")) {
-            parseHostileDisabledHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "language")) {
-            parseHostileDisabledHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "enforces")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseCustomPenaltiesFor(nodeLines);
+        } else if (tokens.size() == 1) {
+            if (utils::is(tokens.at(0), "provoked on scan")) {
+                govt["provoked on scan"] = true;
+            }
+        } else if (tokens.size() == 2) {
+            if (utils::is(tokens.at(0), "government")) {
+                std::cout << "\tGovernment ID is: " << tokens.at(1) << std::endl;
+                govt["id"] = tokens.at(1);
+            }
+            else if (utils::is(tokens.at(0), "display name")) {
+                std::cout << "\tGovernment display name is: " << tokens.at(1) << std::endl;
+                govt["display_name"] = tokens.at(1);
+            }
+            else if (utils::is(tokens.at(0), "swizzle")) {
+                parseSwizzle(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "color")) {
+                parseColor(tokens);
+            } else if (utils::is(tokens.at(0), "player reputation") == 0) {
+                parsePlayerRep(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "reputation")) {
+                i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+                parseReputation(nodeLines);
+            } else if (utils::is(tokens.at(0), "crew attack")) {
+                parseCrewAttack(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "crew defense")) {
+                parseCrewDefense(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "attitude toward")) {
+                i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+                parseAttitudeToward(nodeLines);
+            } else if (utils::is(tokens.at(0), "penalty for")) {
+                i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+                parsePenaltyFor(nodeLines);
+            } else if (utils::is(tokens.at(0), "foreign penalties for")) {
+                i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+                parseForeignPenaltiesFor(nodeLines);
+            } else if (utils::is(tokens.at(0), "custom penalties for")) {
+                i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+                parseCustomPenaltiesFor(nodeLines);
+            } else if (utils::is(tokens.at(0), "bribe")) {
+                parseBribe(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "fine")) {
+                parseFine(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "death sentence")) {
+                parseDeathSentence(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "send untranslated hails")) {
+                govt["send_untranslated_hails"] = true;
+            } else if (utils::is(tokens.at(0), "friendly hail")) {
+                parseFriendlyHail(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "friendly disabled hail")) {
+                parseFriendlyDisabledHail(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "hostile hail")) {
+                parseHostileHail(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "hostile disabled hail")) {
+                parseHostileDisabledHail(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "language")) {
+                parseHostileDisabledHail(tokens.at(1));
+            } else if (utils::is(tokens.at(0), "enforces")) {
+                i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+                parseCustomPenaltiesFor(nodeLines);
+            }
         }
     }
     //std::cout << "Government data: " << govt.dump(4) << std::endl;
