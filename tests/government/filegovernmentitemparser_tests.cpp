@@ -16,7 +16,8 @@ TEST_F(FileGovernmentItemParserTest, TestEventParsing) {
     // TODO: Implement this
     // declare a fully populated govt node
     std::vector<std::string> full_government_node = {
-        "\tgovernment \"Galactic Federation\""
+        "\tgovernment GalacticFederation",
+        "\t\t\"display name\" \"Galactic Federation\""
     };
     parser.setLines(full_government_node);
     json govt = parser.run();
@@ -25,7 +26,8 @@ TEST_F(FileGovernmentItemParserTest, TestEventParsing) {
     // set flags that appear only if true to false to ensure they don't persist
     expected["provoked_on_scan"] = false;
     expected["send_untranslated_hails"] = false;
-    expected["id"] = "Galactic Federation";
+    expected["id"] = "GalacticFederation";
+    expected["display_name"] = "Galactic Federation";
 
     ASSERT_EQ(govt, expected);
 }
@@ -35,13 +37,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseId) {
     parser.parseId(token);
     ASSERT_EQ(parser.getData()["id"], "GalacticFederation");
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseDisplayName) {
     std::string token = "Galactic Federation";
     parser.parseDisplayName(token);
     ASSERT_EQ(parser.getData()["display_name"], "Galactic Federation");
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
     std::string token = "6";
     parser.parseSwizzle(token);

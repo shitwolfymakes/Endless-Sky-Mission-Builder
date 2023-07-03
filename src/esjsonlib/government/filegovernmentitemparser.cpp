@@ -34,12 +34,16 @@ json FileGovernmentItemParser::run() {
 
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        } else if (utils::is(tokens.at(0), "government")) {
+        }
+        else if (utils::is(tokens.at(0), "government")) {
             std::cout << "\tGovernment ID is: " << tokens.at(1) << std::endl;
             govt["id"] = tokens.at(1);
-        } else if (utils::is(tokens.at(0), "display name")) {
-            parseDisplayName(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "swizzle")) {
+        }
+        else if (utils::is(tokens.at(0), "display name")) {
+            std::cout << "\tGovernment display name is: " << tokens.at(1) << std::endl;
+            govt["display_name"] = tokens.at(1);
+        }
+        else if (utils::is(tokens.at(0), "swizzle")) {
             parseSwizzle(tokens.at(1));
         } else if (utils::is(tokens.at(0), "color")) {
             parseColor(tokens);
@@ -97,12 +101,12 @@ void FileGovernmentItemParser::parseId(std::string token) {
     std::cout << "\tGovernment ID is: " << token << std::endl;
     govt["id"] = token;
 }
-*/
+
 void FileGovernmentItemParser::parseDisplayName(std::string token) {
     std::cout << "\tGovernment display name is: " << token << std::endl;
     govt["display_name"] = token;
 }
-
+*/
 void FileGovernmentItemParser::parseSwizzle(std::string token) {
     std::cout << "\tGovernment swizzle is: " << token << std::endl;
     govt["swizzle"] = std::stoi(token);
