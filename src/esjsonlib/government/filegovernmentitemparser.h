@@ -28,7 +28,7 @@ public:
     //void parseSwizzle(std::string);
     //void parseColor(std::vector<std::string>);
     //void parsePlayerRep(std::string);
-    void parseReputation(std::vector<std::string>);
+    //void parseReputation(std::vector<std::string>);
     void parseCrewAttack(std::string);
     void parseCrewDefense(std::string);
     void parseAttitudeToward(std::vector<std::string>);

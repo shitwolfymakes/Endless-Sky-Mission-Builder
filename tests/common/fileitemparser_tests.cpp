@@ -52,24 +52,50 @@ TEST_F(FileItemParserTest, TestIs) {
 
 TEST_F(FileItemParserTest, TestCollectNodeLines) {
     int index = 1;
-    std::vector<std::string> fileLines = {"mission \"TestCollectNodeLines\"",
-                                          "\tsubstitutions",
-                                          "\t\t\"<title>\" \"Bossmang\"",
-                                          "\t\t\"<title>\" \"Inner\"",
-                                          "\t\t\t\"reputation: Inyalowda\" > 100",
-                                          "\t\t\t\"reputation: Beltalowda\" < 100",
-                                          "\t\t\"<name>\" \"Anderson Dawes\"",
-                                          "\tinfiltrating"};
+    std::vector<std::string> fileLines = {"mission \"TestCollectNodeLines\"\n",
+                                          "\tsubstitutions\n",
+                                          "\t\t\"<title>\" \"Bossmang\"\n",
+                                          "\t\t\"<title>\" \"Inner\"\n",
+                                          "\t\t\t\"reputation: Inyalowda\" > 100\n",
+                                          "\t\t\t\"reputation: Beltalowda\" < 100\n",
+                                          "\t\t\"<name>\" \"Anderson Dawes\"\n",
+                                          "\tinfiltrating\n"};
 
     json expected;
-    expected = {"\tsubstitutions",
-                "\t\t\"<title>\" \"Bossmang\"",
-                "\t\t\"<title>\" \"Inner\"",
-                "\t\t\t\"reputation: Inyalowda\" > 100",
-                "\t\t\t\"reputation: Beltalowda\" < 100",
-                "\t\t\"<name>\" \"Anderson Dawes\""};
+    expected = {"\tsubstitutions\n",
+                "\t\t\"<title>\" \"Bossmang\"\n",
+                "\t\t\"<title>\" \"Inner\"\n",
+                "\t\t\t\"reputation: Inyalowda\" > 100\n",
+                "\t\t\t\"reputation: Beltalowda\" < 100\n",
+                "\t\t\"<name>\" \"Anderson Dawes\"\n"};
 
     json nodeLines;
+    index = FileItemParserUtils::collectNodeLines(&fileLines, index, &nodeLines);
+
+
+    ASSERT_EQ(index, 6);
+    ASSERT_EQ(nodeLines, expected);
+}
+
+TEST_F(FileItemParserTest, TestCollectNodeLinesStrList) {
+    int index = 1;
+    std::vector<std::string> fileLines = {"mission \"TestCollectNodeLines\"\n",
+                                          "\tsubstitutions\n",
+                                          "\t\t\"<title>\" \"Bossmang\"\n",
+                                          "\t\t\"<title>\" \"Inner\"\n",
+                                          "\t\t\t\"reputation: Inyalowda\" > 100\n",
+                                          "\t\t\t\"reputation: Beltalowda\" < 100\n",
+                                          "\t\t\"<name>\" \"Anderson Dawes\"\n"};
+
+    std::vector<std::string> expected;
+    expected = {"\tsubstitutions\n",
+                "\t\t\"<title>\" \"Bossmang\"\n",
+                "\t\t\"<title>\" \"Inner\"\n",
+                "\t\t\t\"reputation: Inyalowda\" > 100\n",
+                "\t\t\t\"reputation: Beltalowda\" < 100\n",
+                "\t\t\"<name>\" \"Anderson Dawes\"\n"};
+
+    std::vector<std::string> nodeLines;
     index = FileItemParserUtils::collectNodeLines(&fileLines, index, &nodeLines);
 
 

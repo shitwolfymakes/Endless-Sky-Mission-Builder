@@ -22,7 +22,11 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
         "\t\t\"provoked on scan\"\n",
         "\t\t\"send untranslated hails\"\n",
         "\t\tcolor Red\n",
-        "\t\t\"player reputation\" 100\n"
+        "\t\t\"player reputation\" 100\n",
+        "\t\treputation\n",
+        "\t\t\t\"player reputation\" 50\n",
+        "\t\t\tmin 0\n",
+        "\t\t\tmax 100\n"
     };
     parser.setLines(full_government_node);
     json govt = parser.run();
@@ -35,6 +39,9 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     expected["send_untranslated_hails"] = true;
     expected["color"] = "Red";
     expected["player_reputation"] = 100;
+    expected["reputation"]["player_reputation"] = 50;
+    expected["reputation"]["min"] = 0;
+    expected["reputation"]["max"] = 100;
 
     ASSERT_EQ(govt, expected);
 }
@@ -95,7 +102,7 @@ TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
     parser.parsePlayerRep(token);
     ASSERT_EQ(parser.getData()["player_reputation"], 100);
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
     std::vector<std::string> nodeLines = {"\treputation",
                                           "\t\t\"player reputation\" 50\n",
@@ -108,7 +115,7 @@ TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
     parser.parseReputation(nodeLines);
     ASSERT_EQ(parser.getData()["reputation"], reputation);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseCrewAttack) {
     std::string token = "5";
     parser.parseCrewAttack(token);
