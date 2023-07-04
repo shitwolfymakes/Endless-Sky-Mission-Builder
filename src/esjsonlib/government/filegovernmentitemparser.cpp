@@ -85,12 +85,23 @@ json FileGovernmentItemParser::run() {
             govt["crew_defense"] = std::stod(tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "attitude toward")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseAttitudeToward(nodeLines);
-        } else if (utils::is(tokens.at(0), "penalty for")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parsePenaltyFor(nodeLines);
-        } else if (utils::is(tokens.at(0), "foreign penalties for")) {
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
+            std::cout << "\tGovernment attitude towards is: \n" << boost::join(nodeLines, "") << std::endl;
+
+            for (int i = 1; i < static_cast<int>(nodeLines.size()); i++) {
+                std::vector<std::string> tokens = utils::tokenize(nodeLines.at(i));
+                json attitude;
+                attitude["government"] = tokens.at(0);
+                attitude["rep-modifier"] = std::stod(tokens.at(1));
+                govt["attitude_toward"].emplace_back(attitude);
+            }
+        }
+        else if (utils::is(tokens.at(0), "penalty for")) {
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
+            std::cout << "\tGovernment penalty for is: \n" << boost::join(lines, "") << std::endl;
+            govt["penalty_for"] = parseActionsAndModifiers(nodeLines);
+        }
+        else if (utils::is(tokens.at(0), "foreign penalties for")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseForeignPenaltiesFor(nodeLines);
         } else if (utils::is(tokens.at(0), "custom penalties for")) {
@@ -177,7 +188,7 @@ void FileGovernmentItemParser::parseCrewDefense(std::string token) {
     std::cout << "\tGovernment crew defnse is: " << token << std::endl;
     govt["crew_defense"] = std::stod(token);
 }
-*/
+
 void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> lines) {
     std::cout << "\tGovernment attitude towards is: \n" << boost::join(lines, "\n") << std::endl;
 
@@ -189,7 +200,7 @@ void FileGovernmentItemParser::parseAttitudeToward(std::vector<std::string> line
         govt["attitude_toward"].emplace_back(attitude);
     }
 }
-
+*/
 json FileGovernmentItemParser::parseActionsAndModifiers(std::vector<std::string> lines) const {
     json list;
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
@@ -202,12 +213,12 @@ json FileGovernmentItemParser::parseActionsAndModifiers(std::vector<std::string>
     }
     return list;
 }
-
+/*
 void FileGovernmentItemParser::parsePenaltyFor(std::vector<std::string> lines) {
     std::cout << "\tGovernment penalty for is: \n" << boost::join(lines, "\n") << std::endl;
     govt["penalty_for"] = parseActionsAndModifiers(lines);
 }
-
+*/
 void FileGovernmentItemParser::parseForeignPenaltiesFor(std::vector<std::string> lines) {
     std::cout << "\tGovernment foreign penalties for is: \n" << boost::join(lines, "\n") << std::endl;
 

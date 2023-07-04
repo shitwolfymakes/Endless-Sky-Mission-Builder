@@ -131,7 +131,7 @@ TEST_F(FileGovernmentItemParserTest, TestParseCrewDefense) {
     parser.parseCrewDefense(token);
     ASSERT_EQ(parser.getData()["crew_defense"], 5);
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
     std::vector<std::string> nodeLines = {"\t\"attitude toward\"",
                                           "\t\t\"Klingon Empire\" 85\n",
@@ -151,7 +151,7 @@ TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
-    std::vector<std::string> nodeLines = {"\t\"penalty for\"",
+    std::vector<std::string> nodeLines = {"\t\"penalty for\"\n",
                                           "\t\tassist -0.1\n",
                                           "\t\tdestroy 1\n"};
     json penalty_for, penalty;
@@ -167,7 +167,7 @@ TEST_F(FileGovernmentItemParserTest, TestParsePenaltyFor) {
     parser.parsePenaltyFor(nodeLines);
     ASSERT_EQ(parser.getData()["penalty_for"], penalty_for);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseForeignPenaltiesFor) {
     std::vector<std::string> nodeLines = {"\t\"foreign penalties for\"",
                                           "\t\t\"Klingon Empire\"\n",
