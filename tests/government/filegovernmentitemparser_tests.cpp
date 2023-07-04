@@ -21,7 +21,8 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
         "\t\tswizzle 6\n",
         "\t\t\"provoked on scan\"\n",
         "\t\t\"send untranslated hails\"\n",
-        "\t\tcolor Red\n"
+        "\t\tcolor Red\n",
+        "\t\t\"player reputation\" 100\n"
     };
     parser.setLines(full_government_node);
     json govt = parser.run();
@@ -33,6 +34,7 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     expected["provoked_on_scan"] = true;
     expected["send_untranslated_hails"] = true;
     expected["color"] = "Red";
+    expected["player_reputation"] = 100;
 
     ASSERT_EQ(govt, expected);
 }
@@ -87,13 +89,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseColorName) {
     parser.parseColor(tokens);
     ASSERT_EQ(parser.getData()["color"], "Red");
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
     std::string token = "100";
     parser.parsePlayerRep(token);
     ASSERT_EQ(parser.getData()["player_reputation"], 100);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
     std::vector<std::string> nodeLines = {"\treputation",
                                           "\t\t\"player reputation\" 50\n",

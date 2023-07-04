@@ -60,8 +60,10 @@ json FileGovernmentItemParser::run() {
             }
         }
         else if (utils::is(tokens.at(0), "player reputation")) {
-            parsePlayerRep(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "reputation")) {
+            std::cout << "\tGovernment player reputation is: " << tokens.at(1) << std::endl;
+            govt["player_reputation"] = std::stod(tokens.at(1));
+        }
+        else if (utils::is(tokens.at(0), "reputation")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseReputation(nodeLines);
         } else if (utils::is(tokens.at(0), "crew attack")) {
@@ -134,12 +136,12 @@ void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
         govt["color"] = tokens.at(1);
     }
 }
-*/
+
 void FileGovernmentItemParser::parsePlayerRep(std::string token) {
     std::cout << "\tGovernment player reputation is: " << token << std::endl;
     govt["player_reputation"] = std::stod(token);
 }
-
+*/
 void FileGovernmentItemParser::parseReputation(std::vector<std::string> lines) {
     std::cout << "\tGovernment reputation is: \n" << boost::join(lines, "\n") << std::endl;
 
