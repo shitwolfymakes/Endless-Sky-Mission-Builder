@@ -27,7 +27,8 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
         "\t\t\t\"player reputation\" 50\n",
         "\t\t\tmin 0\n",
         "\t\t\tmax 100\n",
-        "\t\t\"crew attack\" 5\n"
+        "\t\t\"crew attack\" 5\n",
+        "\t\t\"crew defense\" 5\n"
     };
     parser.setLines(full_government_node);
     json govt = parser.run();
@@ -44,6 +45,7 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     expected["reputation"]["min"] = 0;
     expected["reputation"]["max"] = 100;
     expected["crew_attack"] = 5;
+    expected["crew_defense"] = 5;
 
     ASSERT_EQ(govt, expected);
 }
@@ -123,13 +125,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseCrewAttack) {
     parser.parseCrewAttack(token);
     ASSERT_EQ(parser.getData()["crew_attack"], 5);
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseCrewDefense) {
     std::string token = "5";
     parser.parseCrewDefense(token);
     ASSERT_EQ(parser.getData()["crew_defense"], 5);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
     std::vector<std::string> nodeLines = {"\t\"attitude toward\"",
                                           "\t\t\"Klingon Empire\" 85\n",
