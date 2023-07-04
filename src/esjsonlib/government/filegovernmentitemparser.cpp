@@ -33,13 +33,10 @@ json FileGovernmentItemParser::run() {
 
         if (tokens.empty()) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        } //else if (tokens.size() == 1) {
-        else if (utils::is(tokens.at(0), "provoked on scan")) {
-            govt["provoked_on_scan"] = true;
-        } else if (utils::is(tokens.at(0), "send untranslated hails")) {
+        }
+        else if (utils::is(tokens.at(0), "send untranslated hails")) {
             govt["send_untranslated_hails"] = true;
         }
-        //} else if (tokens.size() == 2) {
         else if (utils::is(tokens.at(0), "government")) {
             std::cout << "\tGovernment ID is: " << tokens.at(1) << std::endl;
             govt["id"] = tokens.at(1);
@@ -53,8 +50,16 @@ json FileGovernmentItemParser::run() {
             govt["swizzle"] = std::stoi(tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "color")) {
-            parseColor(tokens);
-        } else if (utils::is(tokens.at(0), "player reputation")) {
+            std::cout << "\tGovernment color is: " << boost::join(tokens, " ") << std::endl;
+            if (tokens.size() == 4) {
+                govt["color"]["R"] = std::stod(tokens.at(1));
+                govt["color"]["G"] = std::stod(tokens.at(2));
+                govt["color"]["B"] = std::stod(tokens.at(3));
+            } else {
+                govt["color"] = tokens.at(1);
+            }
+        }
+        else if (utils::is(tokens.at(0), "player reputation")) {
             parsePlayerRep(tokens.at(1));
         } else if (utils::is(tokens.at(0), "reputation")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
@@ -75,12 +80,16 @@ json FileGovernmentItemParser::run() {
         } else if (utils::is(tokens.at(0), "custom penalties for")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseCustomPenaltiesFor(nodeLines);
+        }  else if (utils::is(tokens.at(0), "provoked on scan")) {
+            govt["provoked_on_scan"] = true;
         } else if (utils::is(tokens.at(0), "bribe")) {
             parseBribe(tokens.at(1));
         } else if (utils::is(tokens.at(0), "fine")) {
             parseFine(tokens.at(1));
         } else if (utils::is(tokens.at(0), "death sentence")) {
             parseDeathSentence(tokens.at(1));
+        } else if (utils::is(tokens.at(0), "provoked on scan")) {
+            govt["provoked_on_scan"] = true;
         } else if (utils::is(tokens.at(0), "friendly hail")) {
             parseFriendlyHail(tokens.at(1));
         } else if (utils::is(tokens.at(0), "friendly disabled hail")) {
@@ -114,7 +123,7 @@ void FileGovernmentItemParser::parseSwizzle(std::string token) {
     std::cout << "\tGovernment swizzle is: " << token << std::endl;
     govt["swizzle"] = std::stoi(token);
 }
-*/
+
 void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
     std::cout << "\tGovernment color is: " << boost::join(tokens, " ") << std::endl;
     if (tokens.size() == 4) {
@@ -125,7 +134,7 @@ void FileGovernmentItemParser::parseColor(std::vector<std::string> tokens) {
         govt["color"] = tokens.at(1);
     }
 }
-
+*/
 void FileGovernmentItemParser::parsePlayerRep(std::string token) {
     std::cout << "\tGovernment player reputation is: " << token << std::endl;
     govt["player_reputation"] = std::stod(token);
