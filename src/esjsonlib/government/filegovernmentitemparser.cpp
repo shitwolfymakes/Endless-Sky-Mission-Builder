@@ -77,8 +77,10 @@ json FileGovernmentItemParser::run() {
             govt["reputation"]["max"] = std::stod(tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "crew attack")) {
-            parseCrewAttack(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "crew defense")) {
+            std::cout << "\tGovernment crew attack is: " << tokens.at(1) << std::endl;
+            govt["crew_attack"] = std::stod(tokens.at(1));
+        }
+        else if (utils::is(tokens.at(0), "crew defense")) {
             parseCrewDefense(tokens.at(1));
         } else if (utils::is(tokens.at(0), "attitude toward")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
@@ -164,12 +166,12 @@ void FileGovernmentItemParser::parseReputation(std::vector<std::string> lines) {
     tokens = utils::tokenize(lines.at(3));
     govt["reputation"]["max"] = std::stod(tokens.at(1));
 }
-*/
+
 void FileGovernmentItemParser::parseCrewAttack(std::string token) {
     std::cout << "\tGovernment crew attack is: " << token << std::endl;
     govt["crew_attack"] = std::stod(token);
 }
-
+*/
 void FileGovernmentItemParser::parseCrewDefense(std::string token) {
     std::cout << "\tGovernment crew defnse is: " << token << std::endl;
     govt["crew_defense"] = std::stod(token);
