@@ -111,7 +111,7 @@ json FileGovernmentItemParser::run() {
             }
         }
         else if (utils::is(tokens.at(0), "custom penalties for")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
             govt["custom_penalties_for"] = parseCustomPenaltiesFor(nodeLines);
         }
         else if (utils::is(tokens.at(0), "provoked on scan")) {

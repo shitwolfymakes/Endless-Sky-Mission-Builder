@@ -15,14 +15,12 @@
 
 namespace parsertests {
 
-std::vector<std::string> empty_government_node = {
-    "government GalacticFederation\n"
-};
+std::string GOVT_NODE_HEADER = "government GalacticFederation\n";
 
 // Fixture for testing a node
 class FileGovernmentItemParserTest : public ::testing::Test {
 protected:
-    FileGovernmentItemParser parser = FileGovernmentItemParser(empty_government_node);
+    FileGovernmentItemParser parser = FileGovernmentItemParser({GOVT_NODE_HEADER});
 };
 
 } // namespace parsertests
