@@ -135,9 +135,9 @@ TEST_F(FileGovernmentItemParserTest, TestParseCrewDefense) {
 }
 */
 TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
-    std::vector<std::string> nodeLines = {"\t\t\"attitude toward\"\n",
-                                          "\t\t\t\"Klingon Empire\" 85\n",
-                                          "\t\t\t\"Cardassian Union\" -100\n"};
+    std::vector<std::string> nodeLines = {"\t\"attitude toward\"\n",
+                                          "\t\t\"Klingon Empire\" 85\n",
+                                          "\t\t\"Cardassian Union\" -100\n"};
     empty_government_node.insert(empty_government_node.end(),
                                  nodeLines.begin(),
                                  nodeLines.end());
@@ -200,6 +200,10 @@ TEST_F(FileGovernmentItemParserTest, TestParseCustomPenaltiesFor) {
                                           "\t\t\tassist -0.1\n",
                                           "\t\t\"Cardassian Union\"\n",
                                           "\t\t\tdestroy 1\n"};
+    empty_government_node.insert(empty_government_node.end(),
+                                 nodeLines.begin(),
+                                 nodeLines.end());
+    parser.setLines(empty_government_node);
     json custom_penalties;
     json penalty, penalty_for_a, penalty_for_b;
     json govt_penalties_a, govt_penalties_b;
@@ -218,8 +222,9 @@ TEST_F(FileGovernmentItemParserTest, TestParseCustomPenaltiesFor) {
 
     custom_penalties.emplace_back(govt_penalties_a);
     custom_penalties.emplace_back(govt_penalties_b);
-    parser.parseCustomPenaltiesFor(nodeLines);
-    ASSERT_EQ(parser.getData()["custom_penalties_for"], custom_penalties);
+    json expected;
+    expected = parser.parseCustomPenaltiesFor(nodeLines);
+    ASSERT_EQ(expected, custom_penalties);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseBribe) {

@@ -112,8 +112,9 @@ json FileGovernmentItemParser::run() {
         }
         else if (utils::is(tokens.at(0), "custom penalties for")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseCustomPenaltiesFor(nodeLines);
-        }  else if (utils::is(tokens.at(0), "provoked on scan")) {
+            govt["custom_penalties_for"] = parseCustomPenaltiesFor(nodeLines);
+        }
+        else if (utils::is(tokens.at(0), "provoked on scan")) {
             govt["provoked_on_scan"] = true;
         } else if (utils::is(tokens.at(0), "bribe")) {
             parseBribe(tokens.at(1));
@@ -234,9 +235,9 @@ void FileGovernmentItemParser::parseForeignPenaltiesFor(std::vector<std::string>
     }
 }
 */
-void FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> lines) {
+json FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> lines) const {
     std::cout << "\tGovernment custom penalties for is: \n" << boost::join(lines, "\n") << std::endl;
-
+    json custom_penalties_for;
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines.at(i));
         std::string govt_name = tokens.at(0);
@@ -246,8 +247,10 @@ void FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> 
         i = utils::collectNodeLines(&lines, i, &nodeLines);
         govt_penalties["government"] = govt_name;
         govt_penalties["penalties"] = parseActionsAndModifiers(nodeLines);
-        govt["custom_penalties_for"].emplace_back(govt_penalties);
+        //govt["custom_penalties_for"].emplace_back(govt_penalties);
+        custom_penalties_for.emplace_back(govt_penalties);
     }
+    return custom_penalties_for;
 }
 
 void FileGovernmentItemParser::parseBribe(std::string token) {

@@ -35,7 +35,7 @@ public:
     json parseActionsAndModifiers(std::vector<std::string>) const;
     //void parsePenaltyFor(std::vector<std::string>);
     //void parseForeignPenaltiesFor(std::vector<std::string>);
-    void parseCustomPenaltiesFor(std::vector<std::string>);
+    json parseCustomPenaltiesFor(std::vector<std::string>) const;
     void parseBribe(std::string);
     void parseFine(std::string);
     void parseDeathSentence(std::string);
