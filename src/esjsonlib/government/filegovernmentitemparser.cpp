@@ -131,9 +131,12 @@ json FileGovernmentItemParser::run() {
         }
         else if (utils::is(tokens.at(0), "provoked on scan")) {
             govt["provoked_on_scan"] = true;
-        } else if (utils::is(tokens.at(0), "friendly hail")) {
-            parseFriendlyHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "friendly disabled hail")) {
+        }
+        else if (utils::is(tokens.at(0), "friendly hail")) {
+            std::cout << "\tGovernment friendly hail is: " << tokens.at(1) << std::endl;
+            govt["friendly_hail"] = tokens.at(1);
+        }
+        else if (utils::is(tokens.at(0), "friendly disabled hail")) {
             parseFriendlyDisabledHail(tokens.at(1));
         } else if (utils::is(tokens.at(0), "hostile hail")) {
             parseHostileHail(tokens.at(1));
@@ -273,12 +276,12 @@ void FileGovernmentItemParser::parseDeathSentence(std::string token) {
     std::cout << "\tGovernment death sentence is: " << token << std::endl;
     govt["death_sentence"] = token;
 }
-*/
+
 void FileGovernmentItemParser::parseFriendlyHail(std::string token) {
     std::cout << "\tGovernment friendly hail is: " << token << std::endl;
     govt["friendly_hail"] = token;
 }
-
+*/
 void FileGovernmentItemParser::parseFriendlyDisabledHail(std::string token) {
     std::cout << "\tGovernment friendly disabled hail is: " << token << std::endl;
     govt["friendly_disabled_hail"] = token;
