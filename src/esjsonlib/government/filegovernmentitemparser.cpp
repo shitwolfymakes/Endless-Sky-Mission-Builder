@@ -145,9 +145,11 @@ json FileGovernmentItemParser::run() {
             govt["hostile_hail"] = tokens.at(1);
         }
         else if (utils::is(tokens.at(0), "hostile disabled hail")) {
-            parseHostileDisabledHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "language")) {
-            parseHostileDisabledHail(tokens.at(1));
+            std::cout << "\tGovernment hostile disabled hail is: " << tokens.at(1) << std::endl;
+            govt["hostile_disabled_hail"] = tokens.at(1);
+        }
+        else if (utils::is(tokens.at(0), "language")) {
+            parseLanguage(tokens.at(1));
         } else if (utils::is(tokens.at(0), "enforces")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseCustomPenaltiesFor(nodeLines);
@@ -295,12 +297,12 @@ void FileGovernmentItemParser::parseHostileHail(std::string token) {
     std::cout << "\tGovernment hostile hail is: " << token << std::endl;
     govt["hostile_hail"] = token;
 }
-*/
+
 void FileGovernmentItemParser::parseHostileDisabledHail(std::string token) {
     std::cout << "\tGovernment hostile disabled hail is: " << token << std::endl;
     govt["hostile_disabled_hail"] = token;
 }
-
+*/
 void FileGovernmentItemParser::parseLanguage(std::string token) {
     std::cout << "\tGovernment language is: " << token << std::endl;
     govt["language"] = token;

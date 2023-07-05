@@ -285,12 +285,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseHostileHail) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseHostileDisabledHail) {
-    std::string token = "just let me die";
-    json hostile_disabled_hail;
-    hostile_disabled_hail = "just let me die";
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\t\"hostile disabled hail\" \"just let me die\"\n"};
+    parser.setLines(nodeLines);
+    json hostile_disabled_hail = "just let me die";
 
-    parser.parseHostileDisabledHail(token);
-    ASSERT_EQ(parser.getData()["hostile_disabled_hail"], hostile_disabled_hail);
+    json govt = parser.run();
+    ASSERT_EQ(govt["hostile_disabled_hail"], hostile_disabled_hail);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestLanguage) {

@@ -42,7 +42,7 @@ public:
     //void parseFriendlyHail(std::string);
     //void parseFriendlyDisabledHail(std::string);
     //void parseHostileHail(std::string);
-    void parseHostileDisabledHail(std::string);
+    //void parseHostileDisabledHail(std::string);
     void parseLanguage(std::string);
     void parseRaid(std::vector<std::string>);
     void parseEnforces(std::vector<std::string>);
