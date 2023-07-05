@@ -137,8 +137,10 @@ json FileGovernmentItemParser::run() {
             govt["friendly_hail"] = tokens.at(1);
         }
         else if (utils::is(tokens.at(0), "friendly disabled hail")) {
-            parseFriendlyDisabledHail(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "hostile hail")) {
+            std::cout << "\tGovernment friendly disabled hail is: " << tokens.at(1) << std::endl;
+            govt["friendly_disabled_hail"] = tokens.at(1);
+        }
+        else if (utils::is(tokens.at(0), "hostile hail")) {
             parseHostileHail(tokens.at(1));
         } else if (utils::is(tokens.at(0), "hostile disabled hail")) {
             parseHostileDisabledHail(tokens.at(1));
@@ -281,12 +283,12 @@ void FileGovernmentItemParser::parseFriendlyHail(std::string token) {
     std::cout << "\tGovernment friendly hail is: " << token << std::endl;
     govt["friendly_hail"] = token;
 }
-*/
+
 void FileGovernmentItemParser::parseFriendlyDisabledHail(std::string token) {
     std::cout << "\tGovernment friendly disabled hail is: " << token << std::endl;
     govt["friendly_disabled_hail"] = token;
 }
-
+*/
 void FileGovernmentItemParser::parseHostileHail(std::string token) {
     std::cout << "\tGovernment hostile hail is: " << token << std::endl;
     govt["hostile_hail"] = token;

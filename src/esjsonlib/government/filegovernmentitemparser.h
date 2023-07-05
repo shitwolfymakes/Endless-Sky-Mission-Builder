@@ -39,8 +39,8 @@ public:
     //void parseBribe(std::string);
     //void parseFine(std::string);
     //void parseDeathSentence(std::string);
-    void parseFriendlyHail(std::string);
-    void parseFriendlyDisabledHail(std::string);
+    //void parseFriendlyHail(std::string);
+    //void parseFriendlyDisabledHail(std::string);
     void parseHostileHail(std::string);
     void parseHostileDisabledHail(std::string);
     void parseLanguage(std::string);
