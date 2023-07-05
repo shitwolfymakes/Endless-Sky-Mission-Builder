@@ -122,8 +122,10 @@ json FileGovernmentItemParser::run() {
             govt["bribe"] = std::stod(tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "fine")) {
-            parseFine(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "death sentence")) {
+            std::cout << "\tGovernment fine is: " << tokens.at(1) << std::endl;
+            govt["fine"] = std::stod(tokens.at(1));
+        }
+        else if (utils::is(tokens.at(0), "death sentence")) {
             parseDeathSentence(tokens.at(1));
         } else if (utils::is(tokens.at(0), "provoked on scan")) {
             govt["provoked_on_scan"] = true;
@@ -259,12 +261,12 @@ void FileGovernmentItemParser::parseBribe(std::string token) {
     std::cout << "\tGovernment bribe is: " << token << std::endl;
     govt["bribe"] = std::stod(token);
 }
-*/
+
 void FileGovernmentItemParser::parseFine(std::string token) {
     std::cout << "\tGovernment fine is: " << token << std::endl;
     govt["fine"] = std::stod(token);
 }
-
+*/
 void FileGovernmentItemParser::parseDeathSentence(std::string token) {
     std::cout << "\tGovernment death sentence is: " << token << std::endl;
     govt["death_sentence"] = token;

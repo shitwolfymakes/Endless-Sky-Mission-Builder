@@ -234,12 +234,14 @@ TEST_F(FileGovernmentItemParserTest, TestParseBribe) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParsePercentage) {
-    std::string token = "0.1";
-    json fine;
-    fine = 0.1;
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tfine 0.1\n"};
+    parser.setLines(nodeLines);
 
-    parser.parseFine(token);
-    ASSERT_EQ(parser.getData()["fine"], fine);
+    json fine = 0.1;
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["fine"], fine);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseDeathSentence) {

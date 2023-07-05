@@ -37,7 +37,7 @@ public:
     //void parseForeignPenaltiesFor(std::vector<std::string>);
     json parseCustomPenaltiesFor(std::vector<std::string>) const;
     //void parseBribe(std::string);
-    void parseFine(std::string);
+    //void parseFine(std::string);
     void parseDeathSentence(std::string);
     void parseFriendlyHail(std::string);
     void parseFriendlyDisabledHail(std::string);
