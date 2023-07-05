@@ -223,12 +223,14 @@ TEST_F(FileGovernmentItemParserTest, TestParseCustomPenaltiesFor) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseBribe) {
-    std::string token = "0.1";
-    json bribe;
-    bribe = 0.1;
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tbribe 0.1\n"};
+    parser.setLines(nodeLines);
 
-    parser.parseBribe(token);
-    ASSERT_EQ(parser.getData()["bribe"], bribe);
+    json bribe = 0.1;
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["bribe"], bribe);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParsePercentage) {

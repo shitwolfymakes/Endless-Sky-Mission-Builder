@@ -116,9 +116,12 @@ json FileGovernmentItemParser::run() {
         }
         else if (utils::is(tokens.at(0), "provoked on scan")) {
             govt["provoked_on_scan"] = true;
-        } else if (utils::is(tokens.at(0), "bribe")) {
-            parseBribe(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "fine")) {
+        }
+        else if (utils::is(tokens.at(0), "bribe")) {
+            std::cout << "\tGovernment bribe is: " << tokens.at(1) << std::endl;
+            govt["bribe"] = std::stod(tokens.at(1));
+        }
+        else if (utils::is(tokens.at(0), "fine")) {
             parseFine(tokens.at(1));
         } else if (utils::is(tokens.at(0), "death sentence")) {
             parseDeathSentence(tokens.at(1));
@@ -236,7 +239,7 @@ void FileGovernmentItemParser::parseForeignPenaltiesFor(std::vector<std::string>
 }
 */
 json FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> lines) const {
-    std::cout << "\tGovernment custom penalties for is: \n" << boost::join(lines, "\n") << std::endl;
+    std::cout << "\tGovernment custom penalties for is: \n" << boost::join(lines, "") << std::endl;
     json custom_penalties_for;
     for (int i = 1; i < static_cast<int>(lines.size()); i++) {
         std::vector<std::string> tokens = utils::tokenize(lines.at(i));
@@ -247,17 +250,16 @@ json FileGovernmentItemParser::parseCustomPenaltiesFor(std::vector<std::string> 
         i = utils::collectNodeLines(&lines, i, &nodeLines);
         govt_penalties["government"] = govt_name;
         govt_penalties["penalties"] = parseActionsAndModifiers(nodeLines);
-        //govt["custom_penalties_for"].emplace_back(govt_penalties);
         custom_penalties_for.emplace_back(govt_penalties);
     }
     return custom_penalties_for;
 }
-
+/*
 void FileGovernmentItemParser::parseBribe(std::string token) {
     std::cout << "\tGovernment bribe is: " << token << std::endl;
     govt["bribe"] = std::stod(token);
 }
-
+*/
 void FileGovernmentItemParser::parseFine(std::string token) {
     std::cout << "\tGovernment fine is: " << token << std::endl;
     govt["fine"] = std::stod(token);
