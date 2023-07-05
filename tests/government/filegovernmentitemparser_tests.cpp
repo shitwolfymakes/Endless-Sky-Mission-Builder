@@ -245,12 +245,13 @@ TEST_F(FileGovernmentItemParserTest, TestParsePercentage) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseDeathSentence) {
-    std::string token = "caught red-handed";
-    json death_sentence;
-    death_sentence = "caught red-handed";
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\t\"death sentence\" \"caught red-handed\"\n"};
+    parser.setLines(nodeLines);
+    json death_sentence = "caught red-handed";
 
-    parser.parseDeathSentence(token);
-    ASSERT_EQ(parser.getData()["death_sentence"], death_sentence);
+    json govt = parser.run();
+    ASSERT_EQ(govt["death_sentence"], death_sentence);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseFriendlyHail) {
