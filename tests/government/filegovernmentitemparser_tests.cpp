@@ -107,20 +107,23 @@ TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
     parser.parsePlayerRep(token);
     ASSERT_EQ(parser.getData()["player_reputation"], 100);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
-    std::vector<std::string> nodeLines = {"\treputation",
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\treputation",
                                           "\t\t\"player reputation\" 50\n",
                                           "\t\tmin 0\n",
                                           "\t\tmax 100\n"};
+    parser.setLines(nodeLines);
     json reputation;
     reputation["player_reputation"] = 50;
     reputation["min"] = 0;
     reputation["max"] = 100;
-    parser.parseReputation(nodeLines);
+
+    json govt = parser.run();
     ASSERT_EQ(parser.getData()["reputation"], reputation);
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseCrewAttack) {
     std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
                                           "\t\"crew attack\" 5\n"};
