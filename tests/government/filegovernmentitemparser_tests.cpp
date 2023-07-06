@@ -295,12 +295,13 @@ TEST_F(FileGovernmentItemParserTest, TestParseHostileDisabledHail) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestLanguage) {
-    std::string token = "metaphorical allegory";
-    json language;
-    language = "metaphorical allegory";
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tlanguage \"metaphorical allegory\"\n"};
+    parser.setLines(nodeLines);
+    json language = "metaphorical allegory";
 
-    parser.parseLanguage(token);
-    ASSERT_EQ(parser.getData()["language"], language);
+    json govt = parser.run();
+    ASSERT_EQ(govt["language"], language);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestRaid) {
