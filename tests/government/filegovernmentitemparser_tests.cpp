@@ -120,19 +120,25 @@ TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
     parser.parseReputation(nodeLines);
     ASSERT_EQ(parser.getData()["reputation"], reputation);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseCrewAttack) {
-    std::string token = "5";
-    parser.parseCrewAttack(token);
-    ASSERT_EQ(parser.getData()["crew_attack"], 5);
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\t\"crew attack\" 5\n"};
+    parser.setLines(nodeLines);
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["crew_attack"], 5.0);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseCrewDefense) {
-    std::string token = "5";
-    parser.parseCrewDefense(token);
-    ASSERT_EQ(parser.getData()["crew_defense"], 5);
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\t\"crew defense\" 5\n"};
+    parser.setLines(nodeLines);
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["crew_defense"], 5.0);
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseAttitudeToward) {
     std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
                                           "\t\"attitude toward\"\n",
