@@ -152,6 +152,9 @@ json FileGovernmentItemParser::run() {
             std::cout << "\tGovernment language is: " << tokens.at(1) << std::endl;
             govt["language"] = tokens.at(1);
         }
+        else if (utils::is(tokens.at(0), "raid")) {
+            govt["raid"] = parseRaid(tokens);
+        }
         else if (utils::is(tokens.at(0), "enforces")) {
             i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
             parseCustomPenaltiesFor(nodeLines);
@@ -310,7 +313,7 @@ void FileGovernmentItemParser::parseLanguage(std::string token) {
     govt["language"] = token;
 }
 */
-void FileGovernmentItemParser::parseRaid(std::vector<std::string> tokens) {
+json FileGovernmentItemParser::parseRaid(std::vector<std::string> tokens) const {
     std::cout << "\tGovernment raid is: " << boost::join(tokens, " ") << std::endl;
     json raid;
     raid["fleet"] = tokens.at(1);
@@ -320,7 +323,7 @@ void FileGovernmentItemParser::parseRaid(std::vector<std::string> tokens) {
             raid["max-attraction"] = std::stod(tokens.at(3));
         }
     }
-    govt["raid"] = raid;
+    return raid;
 }
 
 void FileGovernmentItemParser::parseEnforces(std::vector<std::string>) {

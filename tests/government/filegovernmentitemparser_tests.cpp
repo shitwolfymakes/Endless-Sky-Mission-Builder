@@ -305,14 +305,16 @@ TEST_F(FileGovernmentItemParserTest, TestLanguage) {
 }
 
 TEST_F(FileGovernmentItemParserTest, TestRaid) {
-    std::vector<std::string> tokens = {"raid", "pirate raid", "5", "10"};
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\traid \"pirate raid\" 5 10\n"};
+    parser.setLines(nodeLines);
     json raid;
     raid["fleet"] = "pirate raid";
     raid["min-attraction"] = 5;
     raid["max-attraction"] = 10;
 
-    parser.parseRaid(tokens);
-    ASSERT_EQ(parser.getData()["raid"], raid);
+    json govt = parser.run();
+    ASSERT_EQ(govt["raid"], raid);
 }
 
 } // namespace parsertests
