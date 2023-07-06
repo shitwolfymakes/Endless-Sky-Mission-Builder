@@ -101,13 +101,16 @@ TEST_F(FileGovernmentItemParserTest, TestParseColorName) {
     parser.parseColor(tokens);
     ASSERT_EQ(parser.getData()["color"], "Red");
 }
-
-TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
-    std::string token = "100";
-    parser.parsePlayerRep(token);
-    ASSERT_EQ(parser.getData()["player_reputation"], 100);
-}
 */
+TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\t\"player reputation\" 100\n"};
+    parser.setLines(nodeLines);
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["player_reputation"], 100);
+}
+
 TEST_F(FileGovernmentItemParserTest, TestParseReputationNode) {
     std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
                                           "\treputation",
