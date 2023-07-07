@@ -20,15 +20,7 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
         "\t\t\"display name\" \"Galactic Federation\"\n",
         "\t\tswizzle 6\n",
         "\t\t\"provoked on scan\"\n",
-        "\t\t\"send untranslated hails\"\n",
-        "\t\tcolor Red\n",
-        "\t\t\"player reputation\" 100\n",
-        "\t\treputation\n",
-        "\t\t\t\"player reputation\" 50\n",
-        "\t\t\tmin 0\n",
-        "\t\t\tmax 100\n",
-        "\t\t\"crew attack\" 5\n",
-        "\t\t\"crew defense\" 5\n",
+        "\t\t\"send untranslated hails\"\n"
     };
     parser.setLines(full_government_node);
     json govt = parser.run();
@@ -39,13 +31,6 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
     expected["swizzle"] = 6;
     expected["provoked_on_scan"] = true;
     expected["send_untranslated_hails"] = true;
-    expected["color"] = "Red";
-    expected["player_reputation"] = 100;
-    expected["reputation"]["player_reputation"] = 50;
-    expected["reputation"]["min"] = 0;
-    expected["reputation"]["max"] = 100;
-    expected["crew_attack"] = 5;
-    expected["crew_defense"] = 5;
 
 
 
@@ -83,25 +68,31 @@ TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
     parser.parseSwizzle(token);
     ASSERT_EQ(parser.getData()["swizzle"], 6);
 }
-
+*/
 TEST_F(FileGovernmentItemParserTest, TestParseColorRGB) {
-    std::vector<std::string> tokens = {"color", ".11", ".22", ".33"};
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tcolor .11 .22 .33\n"};
+    parser.setLines(nodeLines);
     json color;
     color["R"] = 0.11;
     color["G"] = 0.22;
     color["B"] = 0.33;
-    parser.parseColor(tokens);
-    ASSERT_EQ(parser.getData()["color"], color);
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["color"], color);
 }
 
 TEST_F(FileGovernmentItemParserTest, TestParseColorName) {
-    std::vector<std::string> tokens = {"color", "Red"};
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tcolor Red\n"};
+    parser.setLines(nodeLines);
     json color;
     color = "Red";
-    parser.parseColor(tokens);
-    ASSERT_EQ(parser.getData()["color"], "Red");
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["color"], "Red");
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParsePlayerRep) {
     std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
                                           "\t\"player reputation\" 100\n"};
