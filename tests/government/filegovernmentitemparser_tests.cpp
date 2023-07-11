@@ -314,4 +314,15 @@ TEST_F(FileGovernmentItemParserTest, TestRaid) {
     ASSERT_EQ(govt["raid"], raid);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestEnforcesAll) {
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tenforces [all]\n"};
+    parser.setLines(nodeLines);
+    json expected;
+    expected["enforces"].emplace_back("ALL");
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["enforces"], expected["enforces"]);
+}
+
 } // namespace parsertests

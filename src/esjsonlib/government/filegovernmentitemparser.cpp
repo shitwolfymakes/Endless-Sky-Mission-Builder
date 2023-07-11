@@ -156,8 +156,15 @@ json FileGovernmentItemParser::run() {
             govt["raid"] = parseRaid(tokens);
         }
         else if (utils::is(tokens.at(0), "enforces")) {
-            i = utils::collectNodeLines(&nodeLines, i, &nodeLines);
-            parseCustomPenaltiesFor(nodeLines);
+            std::cout << "\tGovernment enforces is: " << lines.at(i) << std::endl;
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
+            if (nodeLines.size() == 1) {
+                // parse without filter
+                govt["enforces"].emplace_back("ALL");
+            } else {
+                // TODO: implement parse with filter
+                std::cout << "\t\tNOT IMPLEMENTED YET" << std::endl;
+            }
         }
     }
     return govt;
