@@ -42,11 +42,13 @@ TEST_F(FileItemParserTest, TestGetIndentLevel) {
     ASSERT_EQ(result, 2);
 }
 
-TEST_F(FileItemParserTest, TestIs) {
+TEST_F(FileItemParserTest, TestIsTrue) {
     bool result = FileItemParserUtils::is("Hello", "Hello");
     ASSERT_TRUE(result);
+}
 
-    result = FileItemParserUtils::is("Hello", "World");
+TEST_F(FileItemParserTest, TestIsFalse) {
+    bool result = FileItemParserUtils::is("Hello", "World");
     ASSERT_FALSE(result);
 }
 
