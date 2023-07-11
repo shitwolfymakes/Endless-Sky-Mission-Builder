@@ -67,14 +67,14 @@ json FileGovernmentItemParser::run() {
             i = utils::collectNodeLines(&lines, i, &nodeLines);
             std::cout << "\tGovernment reputation is: \n" << boost::join(nodeLines, "") << std::endl;
 
-            std::vector<std::string> tokens = utils::tokenize(nodeLines.at(1));
-            govt["reputation"]["player_reputation"] = std::stod(tokens.at(1));
+            std::vector<std::string> rep_tokens = utils::tokenize(nodeLines.at(1));
+            govt["reputation"]["player_reputation"] = std::stod(rep_tokens.at(1));
 
-            tokens = utils::tokenize(nodeLines.at(2));
-            govt["reputation"]["min"] = std::stod(tokens.at(1));
+            rep_tokens = utils::tokenize(nodeLines.at(2));
+            govt["reputation"]["min"] = std::stod(rep_tokens.at(1));
 
-            tokens = utils::tokenize(nodeLines.at(3));
-            govt["reputation"]["max"] = std::stod(tokens.at(1));
+            rep_tokens = utils::tokenize(nodeLines.at(3));
+            govt["reputation"]["max"] = std::stod(rep_tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "crew attack")) {
             std::cout << "\tGovernment crew attack is: " << tokens.at(1) << std::endl;
@@ -88,11 +88,11 @@ json FileGovernmentItemParser::run() {
             i = utils::collectNodeLines(&lines, i, &nodeLines);
             std::cout << "\tGovernment attitude towards is: \n" << boost::join(nodeLines, "") << std::endl;
 
-            for (int i = 1; i < static_cast<int>(nodeLines.size()); i++) {
-                std::vector<std::string> tokens = utils::tokenize(nodeLines.at(i));
+            for (int j = 1; j < static_cast<int>(nodeLines.size()); j++) {
+                std::vector<std::string> attitude_tokens = utils::tokenize(nodeLines.at(j));
                 json attitude;
-                attitude["government"] = tokens.at(0);
-                attitude["rep-modifier"] = std::stod(tokens.at(1));
+                attitude["government"] = attitude_tokens.at(0);
+                attitude["rep-modifier"] = std::stod(attitude_tokens.at(1));
                 govt["attitude_toward"].emplace_back(attitude);
             }
         }
@@ -105,9 +105,9 @@ json FileGovernmentItemParser::run() {
             i = utils::collectNodeLines(&lines, i, &nodeLines);
             std::cout << "\tGovernment foreign penalties for is: \n" << boost::join(nodeLines, "") << std::endl;
 
-            for (int i = 1; i < static_cast<int>(nodeLines.size()); i++) {
-                std::vector<std::string> tokens = utils::tokenize(nodeLines.at(i));
-                govt["foreign_penalties_for"].emplace_back(tokens.at(0));
+            for (int j = 1; j < static_cast<int>(nodeLines.size()); j++) {
+                std::vector<std::string> penalties_tokens = utils::tokenize(nodeLines.at(j));
+                govt["foreign_penalties_for"].emplace_back(penalties_tokens.at(0));
             }
         }
         else if (utils::is(tokens.at(0), "custom penalties for")) {
