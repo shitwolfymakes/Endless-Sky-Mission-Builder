@@ -27,14 +27,17 @@ TEST_F(FileEventItemParserTest, TestEventDateParsing) {
      *     }
      *  }
      */
-    std::vector<std::string> tokens = {"date", "4", "20", "69"};
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\tdate 4 20 69\n"};
+    parser.setLines(nodeLines);
+
     json date;
     date["day"] = 4;
     date["month"] = 20;
     date["year"] = 69;
 
-    parser.parseDate(tokens);
-    ASSERT_EQ(parser.getData()["date"], date);
+    json event = parser.run();
+    ASSERT_EQ(event["date"], date);
 }
 
 TEST_F(FileEventItemParserTest, TestEventVisitSystemParsing) {

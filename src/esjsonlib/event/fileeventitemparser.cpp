@@ -30,9 +30,11 @@ json FileEventItemParser::run() {
 
         if (tokens.size() == 0) {
             std::cout << "\tERROR: NO TOKENS FOUND ON LINE: " << lines.at(i) << std::endl;
-        } else if (utils::is(tokens.at(0), "date")) {
-            parseDate(tokens);
-        } else if (utils::is(tokens.at(0), "visit")) {
+        }
+        else if (utils::is(tokens.at(0), "date")) {
+            event["date"] = parseDate(tokens);
+        }
+        else if (utils::is(tokens.at(0), "visit")) {
             parseVisitSystem(tokens.at(1));
         } else if (utils::is(tokens.at(0), "unvisit")) {
             parseUnvisitSystem(tokens.at(1));
@@ -51,11 +53,13 @@ json FileEventItemParser::run() {
     return event;
 }
 
-void FileEventItemParser::parseDate(std::vector<std::string> tokens) {
+json FileEventItemParser::parseDate(std::vector<std::string> tokens) const {
     std::cout << "\tFound date: " << boost::join(tokens, " ") << std::endl;
-    event["date"]["day"] = std::stoi(tokens.at(1));
-    event["date"]["month"] = std::stoi(tokens.at(2));
-    event["date"]["year"] = std::stoi(tokens.at(3));
+    json date;
+    date["day"] = std::stoi(tokens.at(1));
+    date["month"] = std::stoi(tokens.at(2));
+    date["year"] = std::stoi(tokens.at(3));
+    return date;
 }
 
 void FileEventItemParser::parseVisitSystem(std::string token) {

@@ -23,7 +23,6 @@ public:
     // MANIPULATORS
     json run();
 
-    void parseDate(std::vector<std::string>);
     void parseVisitSystem(std::string);
     void parseUnvisitSystem(std::string);
     void parseVisitPlanet(std::string);
@@ -45,6 +44,10 @@ public:
 
     // ACCESSORS
     json getData() const;
+
+private:
+    // MANIPULATORS
+    json parseDate(std::vector<std::string>) const;
 };
 
 #endif // FILEEVENTITEMPARSER_H
