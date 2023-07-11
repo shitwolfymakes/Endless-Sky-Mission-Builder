@@ -346,4 +346,19 @@ TEST_F(FileGovernmentItemParserTest, TestParseIllegals) {
     ASSERT_EQ(govt["illegals"], illegals);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseAtrocities) {
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tatrocities\n",
+                                          "\t\t\"Jump Drive\"\n",
+                                          "\t\t\"Ion Cannon\"\n"};
+    parser.setLines(nodeLines);
+
+    json atrocities;
+    atrocities.emplace_back("Jump Drive");
+    atrocities.emplace_back("Ion Cannon");
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["atrocities"], atrocities);
+}
+
 } // namespace parsertests

@@ -178,6 +178,15 @@ json FileGovernmentItemParser::run() {
                 govt["illegals"].emplace_back(illegal);
             }
         }
+        else if (utils::is(tokens.at(0), "atrocities")) {
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
+            std::cout << "\tGovernment atrocities is: \n" << boost::join(nodeLines, "") << std::endl;
+
+            for (int j = 1; j < static_cast<int>(nodeLines.size()); j++) {
+                std::vector<std::string> outfit_tokens = utils::tokenize(nodeLines.at(j));
+                govt["atrocities"].emplace_back(outfit_tokens.at(0));
+            }
+        }
     }
     return govt;
 }
