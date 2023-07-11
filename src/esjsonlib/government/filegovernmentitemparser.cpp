@@ -166,6 +166,18 @@ json FileGovernmentItemParser::run() {
                 std::cout << "\t\tNOT IMPLEMENTED YET" << std::endl;
             }
         }
+        else if (utils::is(tokens.at(0), "illegals")) {
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
+            std::cout << "\tGovernment illegals is: \n" << boost::join(nodeLines, "") << std::endl;
+
+            for (int j = 1; j < static_cast<int>(nodeLines.size()); j++) {
+                std::vector<std::string> illegal_tokens = utils::tokenize(nodeLines.at(j));
+                json illegal;
+                illegal["outfit"] = illegal_tokens.at(0);
+                illegal["fine"] = std::stod(illegal_tokens.at(1));
+                govt["illegals"].emplace_back(illegal);
+            }
+        }
     }
     return govt;
 }
@@ -332,11 +344,11 @@ json FileGovernmentItemParser::parseRaid(std::vector<std::string> tokens) const 
     }
     return raid;
 }
-
+/*
 void FileGovernmentItemParser::parseEnforces(std::vector<std::string>) {
 
 }
-
+*/
 json FileGovernmentItemParser::getData() const {
     return govt;
 }

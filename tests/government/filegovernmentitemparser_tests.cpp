@@ -325,4 +325,25 @@ TEST_F(FileGovernmentItemParserTest, TestEnforcesAll) {
     ASSERT_EQ(govt["enforces"], expected["enforces"]);
 }
 
+TEST_F(FileGovernmentItemParserTest, TestParseIllegals) {
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\tillegals\n",
+                                          "\t\t\"Jump Drive\" 85\n",
+                                          "\t\t\"Ion Cannon\" 100\n"};
+    parser.setLines(nodeLines);
+
+    json illegals, illegal;
+
+    illegal["outfit"] = "Jump Drive";
+    illegal["fine"] = 85;
+    illegals.emplace_back(illegal);
+
+    illegal["outfit"] = "Ion Cannon";
+    illegal["fine"] = 100;
+    illegals.emplace_back(illegal);
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["illegals"], illegals);
+}
+
 } // namespace parsertests
