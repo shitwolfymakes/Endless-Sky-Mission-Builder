@@ -50,19 +50,16 @@ TEST_F(FileGovernmentItemParserTest, TestEmptyGovernmentParsing) {
 
     ASSERT_EQ(govt, expected);
 }
-/*
-TEST_F(FileGovernmentItemParserTest, TestParseId) {
-    std::string token = "GalacticFederation";
-    parser.parseId(token);
-    ASSERT_EQ(parser.getData()["id"], "GalacticFederation");
-}
 
 TEST_F(FileGovernmentItemParserTest, TestParseDisplayName) {
-    std::string token = "Galactic Federation";
-    parser.parseDisplayName(token);
-    ASSERT_EQ(parser.getData()["display_name"], "Galactic Federation");
+    std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
+                                          "\t\"display name\" \"Galactic Federation\"\n"};
+    parser.setLines(nodeLines);
+
+    json govt = parser.run();
+    ASSERT_EQ(govt["display_name"], "Galactic Federation");
 }
-*/
+
 TEST_F(FileGovernmentItemParserTest, TestParseSwizzle) {
     std::vector<std::string> nodeLines = {GOVT_NODE_HEADER,
                                           "\tswizzle 6\n"};
