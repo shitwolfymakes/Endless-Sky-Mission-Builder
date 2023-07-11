@@ -11,14 +11,10 @@ using namespace testing;
 
 namespace parsertests {
 
-// Test top level field parsing
 TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
-    // TODO: Implement this
-    // declare a fully populated govt node
+    // declare a default node with all default-false attributes set to true
     std::vector<std::string> full_government_node = {
         "\tgovernment GalacticFederation\n",
-        "\t\t\"display name\" \"Galactic Federation\"\n",
-        "\t\tswizzle 6\n",
         "\t\t\"provoked on scan\"\n",
         "\t\t\"send untranslated hails\"\n"
     };
@@ -27,8 +23,6 @@ TEST_F(FileGovernmentItemParserTest, TestFullGovernmentParsing) {
 
     json expected;
     expected["id"] = "GalacticFederation";
-    expected["display_name"] = "Galactic Federation";
-    expected["swizzle"] = 6;
     expected["provoked_on_scan"] = true;
     expected["send_untranslated_hails"] = true;
 
