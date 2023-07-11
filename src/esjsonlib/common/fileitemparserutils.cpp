@@ -54,14 +54,14 @@ int getIndentLevel(std::string line) {
     return level;
 }
 
-bool is(const std::string &token, const std::string &expected) {
+bool is(std::string_view token, std::string_view expected) {
     if (token.compare(expected) == 0) {
         return true;
     }
     return false;
 }
 
-bool isOneOf(const std::string &token, std::vector<std::string> options) {
+bool isOneOf(std::string_view token, std::vector<std::string> options) {
     for (std::string &option: options) {
         if (token.compare(option) == 0) {
             return true;
