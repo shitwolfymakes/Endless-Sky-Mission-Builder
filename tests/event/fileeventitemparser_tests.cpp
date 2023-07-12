@@ -49,17 +49,16 @@ TEST_F(FileEventItemParserTest, TestEventVisitSystemParsing) {
      *     ]
      *  }
      */
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\tvisit Heaven\n",
+                                          "\tvisit Valhalla\n"};
+    parser.setLines(nodeLines);
+
     json visit;
-
-    // test single instance
     visit.emplace_back("Heaven");
-    parser.parseVisitSystem("Heaven");
-    ASSERT_EQ(parser.getData()["visit"], visit);
-
-    // test multiple instance
     visit.emplace_back("Valhalla");
-    parser.parseVisitSystem("Valhalla");
-    ASSERT_EQ(parser.getData()["visit"], visit);
+    json event = parser.run();
+    ASSERT_EQ(event["visit"], visit);
 }
 
 TEST_F(FileEventItemParserTest, TestEventUnvisitSystemParsing) {

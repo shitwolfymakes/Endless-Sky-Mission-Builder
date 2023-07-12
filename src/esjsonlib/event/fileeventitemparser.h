@@ -23,7 +23,7 @@ public:
     // MANIPULATORS
     json run();
 
-    void parseVisitSystem(std::string);
+    //void parseVisitSystem(std::string);
     void parseUnvisitSystem(std::string);
     void parseVisitPlanet(std::string);
     void parseUnvisitPlanet(std::string);

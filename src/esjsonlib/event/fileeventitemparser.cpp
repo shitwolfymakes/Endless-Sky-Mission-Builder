@@ -35,8 +35,10 @@ json FileEventItemParser::run() {
             event["date"] = parseDate(tokens);
         }
         else if (utils::is(tokens.at(0), "visit")) {
-            parseVisitSystem(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "unvisit")) {
+            std::cout << "\tFound visit (system): " << tokens.at(1) << std::endl;
+            event["visit"].emplace_back(tokens.at(1));
+        }
+        else if (utils::is(tokens.at(0), "unvisit")) {
             parseUnvisitSystem(tokens.at(1));
         } else if (utils::is(tokens.at(0), "visit planet")) {
             parseVisitPlanet(tokens.at(1));
@@ -61,12 +63,12 @@ json FileEventItemParser::parseDate(std::vector<std::string> tokens) const {
     date["year"] = std::stoi(tokens.at(3));
     return date;
 }
-
+/*
 void FileEventItemParser::parseVisitSystem(std::string token) {
     std::cout << "\tFound visit (system): " << token << std::endl;
     event["visit"].emplace_back(token);
 }
-
+*/
 void FileEventItemParser::parseUnvisitSystem(std::string token) {
     std::cout << "\tFound unvisit (system): " << token << std::endl;
     event["unvisit"].emplace_back(token);
