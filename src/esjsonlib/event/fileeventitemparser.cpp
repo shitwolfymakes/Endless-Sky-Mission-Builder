@@ -39,8 +39,10 @@ json FileEventItemParser::run() {
             event["visit"].emplace_back(tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "unvisit")) {
-            parseUnvisitSystem(tokens.at(1));
-        } else if (utils::is(tokens.at(0), "visit planet")) {
+            std::cout << "\tFound unvisit (system): " << tokens.at(1) << std::endl;
+            event["unvisit"].emplace_back(tokens.at(1));
+        }
+        else if (utils::is(tokens.at(0), "visit planet")) {
             parseVisitPlanet(tokens.at(1));
         } else if (utils::is(tokens.at(0), "unvisit planet")) {
             parseUnvisitPlanet(tokens.at(1));
@@ -68,12 +70,12 @@ void FileEventItemParser::parseVisitSystem(std::string token) {
     std::cout << "\tFound visit (system): " << token << std::endl;
     event["visit"].emplace_back(token);
 }
-*/
+
 void FileEventItemParser::parseUnvisitSystem(std::string token) {
     std::cout << "\tFound unvisit (system): " << token << std::endl;
     event["unvisit"].emplace_back(token);
 }
-
+*/
 void FileEventItemParser::parseVisitPlanet(std::string token) {
     std::cout << "\tFound visit (planet): " << token << std::endl;
     event["visit planet"].emplace_back(token);

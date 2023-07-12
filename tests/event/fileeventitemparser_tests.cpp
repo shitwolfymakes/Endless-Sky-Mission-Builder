@@ -70,17 +70,16 @@ TEST_F(FileEventItemParserTest, TestEventUnvisitSystemParsing) {
      *     ]
      *  }
      */
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\tunvisit Heaven\n",
+                                          "\tunvisit Valhalla\n"};
+    parser.setLines(nodeLines);
+
     json unvisit;
-
-    // test single instance
     unvisit.emplace_back("Heaven");
-    parser.parseUnvisitSystem("Heaven");
-    ASSERT_EQ(parser.getData()["unvisit"], unvisit);
-
-    // test multiple instance
     unvisit.emplace_back("Valhalla");
-    parser.parseUnvisitSystem("Valhalla");
-    ASSERT_EQ(parser.getData()["unvisit"], unvisit);
+    json event = parser.run();
+    ASSERT_EQ(event["unvisit"], unvisit);
 }
 
 TEST_F(FileEventItemParserTest, TestEventVisitPlanetParsing) {
