@@ -25,8 +25,8 @@ public:
 
     //void parseVisitSystem(std::string);
     //void parseUnvisitSystem(std::string);
-    void parseVisitPlanet(std::string);
-    void parseUnvisitPlanet(std::string);
+    //void parseVisitPlanet(std::string);
+    //void parseUnvisitPlanet(std::string);
     void parseLink(std::vector<std::string>);
     void parseUnlink(std::vector<std::string>);
 

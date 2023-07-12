@@ -91,39 +91,39 @@ TEST_F(FileEventItemParserTest, TestEventVisitPlanetParsing) {
      *     ]
      *  }
      */
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\t\"visit planet\" Harambe\n",
+                                          "\t\"visit planet\" Uranus\n"};
+    parser.setLines(nodeLines);
+
     json visit;
 
-    // test single instance
     visit.emplace_back("Harambe");
-    parser.parseVisitPlanet("Harambe");
-    ASSERT_EQ(parser.getData()["visit planet"], visit);
-
-    // test multiple instance
     visit.emplace_back("Uranus");
-    parser.parseVisitPlanet("Uranus");
-    ASSERT_EQ(parser.getData()["visit planet"], visit);
+    json event = parser.run();
+    ASSERT_EQ(event["visit planet"], visit);
 }
 
 TEST_F(FileEventItemParserTest, TestEventUnvisitPlanetParsing) {
     /** JSON representation:
      *  {
-     *     "unvisit planet": [
+     *     "visunvisitit planet": [
      *         "Harambe",
      *         "Uranus"
      *     ]
      *  }
      */
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\t\"unvisit planet\" Harambe\n",
+                                          "\t\"unvisit planet\" Uranus\n"};
+    parser.setLines(nodeLines);
+
     json unvisit;
 
-    // test single instance
     unvisit.emplace_back("Harambe");
-    parser.parseUnvisitPlanet("Harambe");
-    ASSERT_EQ(parser.getData()["unvisit planet"], unvisit);
-
-    // test multiple instance
     unvisit.emplace_back("Uranus");
-    parser.parseUnvisitPlanet("Uranus");
-    ASSERT_EQ(parser.getData()["unvisit planet"], unvisit);
+    json event = parser.run();
+    ASSERT_EQ(event["unvisit planet"], unvisit);
 }
 
 TEST_F(FileEventItemParserTest, TestEventLinkSystemParsing) {
