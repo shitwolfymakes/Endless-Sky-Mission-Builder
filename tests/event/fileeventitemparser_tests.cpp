@@ -97,7 +97,6 @@ TEST_F(FileEventItemParserTest, TestEventVisitPlanetParsing) {
     parser.setLines(nodeLines);
 
     json visit;
-
     visit.emplace_back("Harambe");
     visit.emplace_back("Uranus");
     json event = parser.run();
@@ -119,7 +118,6 @@ TEST_F(FileEventItemParserTest, TestEventUnvisitPlanetParsing) {
     parser.setLines(nodeLines);
 
     json unvisit;
-
     unvisit.emplace_back("Harambe");
     unvisit.emplace_back("Uranus");
     json event = parser.run();
@@ -137,20 +135,19 @@ TEST_F(FileEventItemParserTest, TestEventLinkSystemParsing) {
      *     ]
      *  }
      */
-    std::vector<std::string> tokens = {"link", "Sol", "Heaven"};
-    json event, link;
 
-    // test single instance
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\tlink Sol Heaven\n",
+                                          "\tlink Sol Heaven\n"};
+    parser.setLines(nodeLines);
+
+    json expected, link;
     link["system"] = "Sol";
     link["other"] = "Heaven";
-    event.emplace_back(link);
-    parser.parseLink(tokens);
-    ASSERT_EQ(parser.getData()["link"], event);
-
-    // test multiple instances
-    event.emplace_back(link);
-    parser.parseLink(tokens);
-    ASSERT_EQ(parser.getData()["link"], event);
+    expected.emplace_back(link);
+    expected.emplace_back(link);
+    json event = parser.run();
+    ASSERT_EQ(event["link"], expected);
 }
 
 TEST_F(FileEventItemParserTest, TestEventUnlinkSystemParsing) {
@@ -158,26 +155,25 @@ TEST_F(FileEventItemParserTest, TestEventUnlinkSystemParsing) {
      *  {
      *     "unlink": [
      *         {
-     *             "system": "Heaven",
-     *             "other": "Sol"
+     *             "system": "Sol",
+     *             "other": "Heaven"
      *         }
      *     ]
      *  }
      */
-    std::vector<std::string> tokens = {"link", "Heaven", "Sol"};
-    json event, unlink;
 
-    // test single instance
-    unlink["system"] = "Heaven";
-    unlink["other"] = "Sol";
-    event.emplace_back(unlink);
-    parser.parseUnlink(tokens);
-    ASSERT_EQ(parser.getData()["unlink"], event);
+    std::vector<std::string> nodeLines = {EVENT_NODE_HEADER,
+                                          "\tunlink Sol Heaven\n",
+                                          "\tunlink Sol Heaven\n"};
+    parser.setLines(nodeLines);
 
-    // test multiple instances
-    event.emplace_back(unlink);
-    parser.parseUnlink(tokens);
-    ASSERT_EQ(parser.getData()["unlink"], event);
+    json expected, unlink;
+    unlink["system"] = "Sol";
+    unlink["other"] = "Heaven";
+    expected.emplace_back(unlink);
+    expected.emplace_back(unlink);
+    json event = parser.run();
+    ASSERT_EQ(event["unlink"], expected);
 }
 
 } // namespace parsertests

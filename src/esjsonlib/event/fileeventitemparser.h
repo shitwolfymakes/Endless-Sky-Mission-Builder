@@ -27,8 +27,6 @@ public:
     //void parseUnvisitSystem(std::string);
     //void parseVisitPlanet(std::string);
     //void parseUnvisitPlanet(std::string);
-    void parseLink(std::vector<std::string>);
-    void parseUnlink(std::vector<std::string>);
 
     // TODO: Add support for the following nodes
     /*
@@ -48,6 +46,8 @@ public:
 private:
     // MANIPULATORS
     json parseDate(std::vector<std::string>) const;
+    json parseLink(std::vector<std::string>) const;
+    json parseUnlink(std::vector<std::string>) const;
 };
 
 #endif // FILEEVENTITEMPARSER_H

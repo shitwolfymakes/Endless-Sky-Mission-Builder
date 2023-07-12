@@ -51,9 +51,10 @@ json FileEventItemParser::run() {
             event["unvisit planet"].emplace_back(tokens.at(1));
         }
         else if (utils::is(tokens.at(0), "link")) {
-            parseLink(tokens);
-        } else if (utils::is(tokens.at(0), "link")) {
-            parseUnlink(tokens);
+            event["link"].emplace_back(parseLink(tokens));
+        }
+        else if (utils::is(tokens.at(0), "unlink")) {
+            event["unlink"].emplace_back(parseUnlink(tokens));
         }
         // TODO: complete implementation
     }
@@ -90,20 +91,20 @@ void FileEventItemParser::parseUnvisitPlanet(std::string token) {
     event["unvisit planet"].emplace_back(token);
 }
 */
-void FileEventItemParser::parseLink(std::vector<std::string> tokens) {
+json FileEventItemParser::parseLink(std::vector<std::string> tokens) const {
     std::cout << "\tFound link: " << boost::join(tokens, " ") << std::endl;
     json link;
     link["system"] = tokens.at(1);
     link["other"] = tokens.at(2);
-    event["link"].emplace_back(link);
+    return link;
 }
 
-void FileEventItemParser::parseUnlink(std::vector<std::string> tokens) {
+json FileEventItemParser::parseUnlink(std::vector<std::string> tokens) const {
     std::cout << "\tFound unlink: " << boost::join(tokens, " ") << std::endl;
     json unlink;
     unlink["system"] = tokens.at(1);
     unlink["other"] = tokens.at(2);
-    event["unlink"].emplace_back(unlink);
+    return unlink;
 }
 
 json FileEventItemParser::getData() const {
