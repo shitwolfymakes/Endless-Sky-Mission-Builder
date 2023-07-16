@@ -74,6 +74,7 @@ add_test_file(common fileitemparser_tests false)
 
 add_test_file(event fileeventitemparser_tests false)
 add_test_file(filter filefilteritemparser_tests false)
+add_test_file(fleet filefleetitemparser_tests false)
 add_test_file(government filegovernmentitemparser_tests false)
 add_test_file(mission filemissionitemparser_tests false)
 add_test_file(phrase filephraseitemparser_tests false)
