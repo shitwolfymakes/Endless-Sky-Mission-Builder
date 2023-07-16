@@ -15,12 +15,12 @@
 
 namespace parsertests {
 
-std::string GOVT_NODE_HEADER = "fleet \"Black Swan\"\n";
+std::string FLEET_NODE_HEADER = "fleet \"Black Swan\"\n";
 
-// Fixture for testing a filter node
+// Fixture for testing a node
 class FileFleetItemParserTest : public ::testing::Test {
 protected:
-    FileFleetItemParser parser = FileFleetItemParser({GOVT_NODE_HEADER});
+    FileFleetItemParser parser = FileFleetItemParser({FLEET_NODE_HEADER});
 };
 
 } // namespace parsertests

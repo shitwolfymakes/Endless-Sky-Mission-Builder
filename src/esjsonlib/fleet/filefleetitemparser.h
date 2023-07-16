@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- * fileleetitemparser.h
+ * filefleetitemparser.h
  *
  * Copyright (c) 2023, Andrew Sneed <wolfy@shitwolfymakes.com>
  */

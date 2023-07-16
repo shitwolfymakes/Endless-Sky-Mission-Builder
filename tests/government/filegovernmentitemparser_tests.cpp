@@ -4,8 +4,8 @@
  *
  * Copyright (c) 2023, Andrew Sneed <wolfy@shitwolfymakes.com>
  */
-
 #include "filegovernmentitemparser_tests.h"
+#include "common/fileitemparserutils.h"
 
 using namespace testing;
 
