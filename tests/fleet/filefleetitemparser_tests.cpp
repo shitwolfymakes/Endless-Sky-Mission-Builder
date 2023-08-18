@@ -30,4 +30,13 @@ TEST_F(FileFleetItemParserTest, TestParseGovernment) {
     ASSERT_EQ(fleet["government"], "Free Worlds");
 }
 
+TEST_F(FileFleetItemParserTest, TestParseNames) {
+    std::vector<std::string> nodeLines = {FLEET_NODE_HEADER,
+                                          "\tnames fleet_names\n"};
+    parser.setLines(nodeLines);
+
+    json fleet = parser.run();
+    ASSERT_EQ(fleet["names"], "fleet_names");
+}
+
 } // namespace parsertests

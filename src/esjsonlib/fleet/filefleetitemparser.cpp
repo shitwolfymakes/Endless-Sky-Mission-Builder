@@ -34,6 +34,9 @@ json FileFleetItemParser::run() {
         if (utils::is(tokens.at(0), "government")) {
             std::cout << "\tFleet government is: " << tokens.at(1) << std::endl;
             fleet["government"] = tokens.at(1);
+        } else if (utils::is(tokens.at(0), "names")) {
+            std::cout << "\tFleet names is: " << tokens.at(1) << std::endl;
+            fleet["names"] = tokens.at(1);
         }
     }
 
