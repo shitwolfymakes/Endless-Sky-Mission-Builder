@@ -37,6 +37,18 @@ json FileFleetItemParser::run() {
         } else if (utils::is(tokens.at(0), "names")) {
             std::cout << "\tFleet names is: " << tokens.at(1) << std::endl;
             fleet["names"] = tokens.at(1);
+        } else if (utils::is(tokens.at(0), "fighters")) {
+            i = utils::collectNodeLines(&lines, i, &nodeLines);
+            std::cout << "\tFleet fighters is: \n" << boost::join(nodeLines, "") << std::endl;
+
+            json fighters;
+            for (int j = 1; j < static_cast<int>(nodeLines.size()); j++) {
+                std::vector<std::string> fighters_tokens = utils::tokenize(nodeLines.at(j));
+                if (utils::is(fighters_tokens.at(0), "names")) {
+                    fighters["names"] = fighters_tokens.at(1);
+                }
+            }
+            fleet["fighters"] = fighters;
         }
     }
 

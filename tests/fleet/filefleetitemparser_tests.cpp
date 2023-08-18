@@ -39,4 +39,16 @@ TEST_F(FileFleetItemParserTest, TestParseNames) {
     ASSERT_EQ(fleet["names"], "fleet_names");
 }
 
+TEST_F(FileFleetItemParserTest, TestParseFighters) {
+    std::vector<std::string> nodeLines = {FLEET_NODE_HEADER,
+                                          "\tfighters\n",
+                                          "\t\tnames fighters_names\n"};
+    parser.setLines(nodeLines);
+    json fighters;
+    fighters["names"] = "fighters_names";
+
+    json fleet = parser.run();
+    ASSERT_EQ(fleet["fighters"], fighters);
+}
+
 } // namespace parsertests
