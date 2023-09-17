@@ -38,6 +38,7 @@ json FileFleetItemParser::run() {
             std::cout << "\tFleet names is: " << tokens.at(1) << std::endl;
             fleet["names"] = tokens.at(1);
         } else if (utils::is(tokens.at(0), "fighters")) {
+            // TODO: add personality parsing
             i = utils::collectNodeLines(&lines, i, &nodeLines);
             std::cout << "\tFleet fighters is: \n" << boost::join(nodeLines, "") << std::endl;
 
