@@ -7,6 +7,11 @@
 
 #include "filepersonalityitemparser.h"
 
+#include <iostream>
+
+#include "common/fileitemparserutils.h"
+namespace utils = FileItemParserUtils;
+
 FilePersonalityItemParser::FilePersonalityItemParser(std::vector<std::string> lines)
 {
     setLines(lines);
