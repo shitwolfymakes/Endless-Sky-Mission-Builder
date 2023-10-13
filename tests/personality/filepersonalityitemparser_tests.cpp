@@ -48,4 +48,17 @@ TEST_F(FilePersonalityItemParserTest, TestParsePersonalityTypesWithDuplicates) {
     ASSERT_EQ(personality, expected);
 }
 
+TEST_F(FilePersonalityItemParserTest, TestParseConfusion) {
+    std::vector<std::string> nodeLines = {"personality \n",
+                                          "\tconfusion 24\n"};
+    parser.setLines(nodeLines);
+
+    json personality = parser.run();
+
+    json expected;
+    expected["confusion"] = 24;
+
+    ASSERT_EQ(personality, expected);
+}
+
 } // namespace parsertests

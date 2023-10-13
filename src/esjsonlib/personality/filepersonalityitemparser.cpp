@@ -38,8 +38,8 @@ json FilePersonalityItemParser::run() {
             for (int i = 1; i < static_cast<int>(tokens.size()); i++) {
                 addPersonalityType(&personality, tokens.at(i));
             }
-        //} else if (utils::is(tokens.at(0), "confusion")) {
-            //personality["confusion"] =
+        } else if (utils::is(tokens.at(0), "confusion")) {
+            personality["confusion"] = std::stoi(tokens.at(1));
         } else {
             for (std::string &token: tokens) {
                 addPersonalityType(&personality, token);
