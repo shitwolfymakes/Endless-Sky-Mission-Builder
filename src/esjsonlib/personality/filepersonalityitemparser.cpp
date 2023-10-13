@@ -39,6 +39,7 @@ json FilePersonalityItemParser::run() {
                 addPersonalityType(&personality, tokens.at(i));
             }
         //} else if (utils::is(tokens.at(0), "confusion")) {
+            //personality["confusion"] =
         } else {
             for (std::string &token: tokens) {
                 addPersonalityType(&personality, token);
@@ -50,10 +51,20 @@ json FilePersonalityItemParser::run() {
 }
 
 void FilePersonalityItemParser::addPersonalityType(json *personality, std::string type) {
-    if ((*personality)["types"].contains(type)) {
-        std::cout << "\tPersonality type already exists, skipping..." << std::endl;
-        return;
+    std::cout << (*personality).dump() << " | " << (*personality)["types"].contains(type) << std::endl;
+    if ((*personality)["types"].size() == 0) {
+        std::cout << "\tPersonality type found: " << type << std::endl;
+        (*personality)["types"].emplace_back(type);
     } else {
+        // this is absurdly involved to be able to loop through a json array
+        for (int i = 0; i < (*personality)["types"].size(); i++) {
+            std::vector<std::string> tokens = utils::tokenize((*personality)["types"].at(i).dump());
+            std::cout << tokens.at(0) << " | " << type << std::endl;
+            if (utils::is(tokens.at(0), type)) {
+                std::cout << "\tPersonality type already exists, skipping..." << std::endl;
+                return;
+            }
+        }
         std::cout << "\tPersonality type found: " << type << std::endl;
         (*personality)["types"].emplace_back(type);
     }
