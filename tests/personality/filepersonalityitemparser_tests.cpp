@@ -20,7 +20,7 @@ TEST_F(FilePersonalityItemParserTest, TestEmptyPersonalityParsing) {
     ASSERT_EQ(personality, expected);
 }
 
-TEST_F(FilePersonalityItemParserTest, TestParseGovernment) {
+TEST_F(FilePersonalityItemParserTest, TestParsePersonalityTypes) {
     std::vector<std::string> nodeLines = {"personality forbearing \n",
                                           "\ttimid\n"};
     parser.setLines(nodeLines);
