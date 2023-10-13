@@ -20,4 +20,18 @@ TEST_F(FilePersonalityItemParserTest, TestEmptyPersonalityParsing) {
     ASSERT_EQ(personality, expected);
 }
 
+TEST_F(FilePersonalityItemParserTest, TestParseGovernment) {
+    std::vector<std::string> nodeLines = {"personality forbearing \n",
+                                          "\ttimid\n"};
+    parser.setLines(nodeLines);
+
+    json personality = parser.run();
+
+    json expected;
+    expected["types"].emplace_back("forbearing");
+    expected["types"].emplace_back("timid");
+
+    ASSERT_EQ(personality, expected);
+}
+
 } // namespace parsertests

@@ -31,12 +31,32 @@ json FilePersonalityItemParser::run() {
         if (utils::is(tokens.at(0), "personality")) {
             if (lines.size() == 1) {
                 // empty node was passed, return the empty object
+                std::cout << "\tPersonality is declaration only" << std::endl;
+
                 return personality;
+            }
+            for (int i = 1; i < static_cast<int>(tokens.size()); i++) {
+                addPersonalityType(&personality, tokens.at(i));
+            }
+        //} else if (utils::is(tokens.at(0), "confusion")) {
+        } else {
+            for (std::string &token: tokens) {
+                addPersonalityType(&personality, token);
             }
         }
     }
 
     return personality;
+}
+
+void FilePersonalityItemParser::addPersonalityType(json *personality, std::string type) {
+    if ((*personality)["types"].contains(type)) {
+        std::cout << "\tPersonality type already exists, skipping..." << std::endl;
+        return;
+    } else {
+        std::cout << "\tPersonality type found: " << type << std::endl;
+        (*personality)["types"].emplace_back(type);
+    }
 }
 
 json FilePersonalityItemParser::getData() const {
