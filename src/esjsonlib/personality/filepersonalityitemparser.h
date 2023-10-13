@@ -20,12 +20,13 @@ class FilePersonalityItemParser : public FileItemParserImpl {
 
 public:
     // CREATORS
-    FilePersonalityItemParser();
+    FilePersonalityItemParser(std::vector<std::string>);
 
     // MANIPULATORS
     json run();
 
     // ACCESSORS
+    json getData() const;
 };
 
 #endif // FILEPERSONALITYITEMPARSER_H

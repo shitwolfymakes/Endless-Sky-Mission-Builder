@@ -20,3 +20,7 @@ FilePersonalityItemParser::FilePersonalityItemParser(std::vector<std::string> li
 json FilePersonalityItemParser::run() {
     return personality;
 }
+
+json FilePersonalityItemParser::getData() const {
+    return personality;
+}
