@@ -24,7 +24,7 @@ public:
 
     // MANIPULATORS
     json run();
-    void addPersonalityType(json *, std::string);
+    void addPersonalityType(json *, std::string) const;
 
     // ACCESSORS
     json getData() const;

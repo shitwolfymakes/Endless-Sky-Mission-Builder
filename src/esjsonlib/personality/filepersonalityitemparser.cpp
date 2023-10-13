@@ -50,7 +50,7 @@ json FilePersonalityItemParser::run() {
     return personality;
 }
 
-void FilePersonalityItemParser::addPersonalityType(json *personality, std::string type) {
+void FilePersonalityItemParser::addPersonalityType(json *personality, std::string type) const {
     std::cout << (*personality).dump() << " | " << (*personality)["types"].contains(type) << std::endl;
     if ((*personality)["types"].size() == 0) {
         std::cout << "\tPersonality type found: " << type << std::endl;
