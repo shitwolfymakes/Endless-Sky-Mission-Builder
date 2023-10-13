@@ -16,7 +16,7 @@
 using json = nlohmann::json;
 
 class FilePersonalityItemParser : public FileItemParserImpl {
-    json personality;
+    //json personality;
 
 public:
     // CREATORS

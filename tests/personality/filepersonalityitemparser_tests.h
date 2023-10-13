@@ -15,7 +15,7 @@
 
 namespace parsertests {
 
-std::string PERSONALITY_NODE_HEADER = "fleet \"Black Swan\"\n";
+std::string PERSONALITY_NODE_HEADER = "personality";
 
 // Fixture for testing a node
 class FilePersonalityItemParserTest : public ::testing::Test {

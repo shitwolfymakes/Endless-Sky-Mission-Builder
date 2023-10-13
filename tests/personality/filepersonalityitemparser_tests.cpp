@@ -11,5 +11,13 @@ using namespace testing;
 
 namespace parsertests {
 
+TEST_F(FilePersonalityItemParserTest, TestEmptyPersonalityParsing) {
+    // declare an empty personality node
+    json personality = parser.run();
+
+    json expected;
+
+    ASSERT_EQ(personality, expected);
+}
 
 } // namespace parsertests
