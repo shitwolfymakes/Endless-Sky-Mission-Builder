@@ -61,4 +61,22 @@ TEST_F(FilePersonalityItemParserTest, TestParseConfusion) {
     ASSERT_EQ(personality, expected);
 }
 
+TEST_F(FilePersonalityItemParserTest, TestParseFullPersonalityNode) {
+    std::vector<std::string> nodeLines = {"personality forbearing forbearing heroic\n",
+                                          "\ttimid timid daring\n",
+                                          "\tconfusion 24"};
+    parser.setLines(nodeLines);
+
+    json personality = parser.run();
+
+    json expected;
+    expected["types"].emplace_back("forbearing");
+    expected["types"].emplace_back("heroic");
+    expected["types"].emplace_back("timid");
+    expected["types"].emplace_back("daring");
+    expected["confusion"] = 24;
+
+    ASSERT_EQ(personality, expected);
+}
+
 } // namespace parsertests
