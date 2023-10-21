@@ -20,6 +20,7 @@ set(ESMB_BUILD_TESTS ON)
 find_package(Boost 1.71.0 REQUIRED)
 
 # QT
+list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.5.3/gcc_64")
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Test)
 qt_standard_project_setup()
 
